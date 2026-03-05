@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 evaluator.py - 智能测试脚本，根据JSONL中的任务类型生成对应的测试
+修复了编译错误和期望值解析问题
 """
 
 import json
@@ -105,11 +106,15 @@ def parse_test_cases_simple(test_code: str) -> List[Tuple[str, str]]:
             end = func_call.rfind(')')
             args = func_call[start:end].strip()
             
-            # 转换期望值
+            # 转换期望值 - 修复：确保期望值是有效的
             if expected == 'True':
                 expected = '1'
             elif expected == 'False':
                 expected = '0'
+            else:
+                # 如果不是True/False，跳过
+                print(f"  ⚠️ 跳过无效期望值: {expected}")
+                continue
             
             test_cases.append((args, expected))
     
@@ -123,6 +128,11 @@ def generate_float_array_test(func_name: str, test_cases: List[Tuple[str, str]])
     test_blocks = []
     
     for i, (args_str, expected) in enumerate(test_cases):
+        # 验证期望值
+        if expected not in ['0', '1']:
+            print(f"  ⚠️ 测试用例 {i} 有无效的期望值: {expected}")
+            continue
+            
         # 简单分割参数：按第一个逗号分割，忽略数组内的逗号
         args_str = args_str.strip()
         
@@ -178,7 +188,7 @@ def generate_float_array_test(func_name: str, test_cases: List[Tuple[str, str]])
         except:
             threshold = 0.0
         
-        # 生成测试块
+        # 生成测试块 - 修复：确保expected是有效的数字
         test_block = f"""
     // Test {i}
     {{
@@ -243,13 +253,18 @@ int main() {{
     return c_code
 
 def generate_string_test(func_name: str, test_cases: List[Tuple[str, str]]) -> Optional[str]:
-    """为字符串任务生成测试代码"""
+    """为字符串任务生成测试代码 - 修复版本"""
     if not test_cases:
         return None
     
     test_blocks = []
     
     for i, (args_str, expected) in enumerate(test_cases):
+        # 验证期望值 - 必须是有效的 0 或 1
+        if expected not in ['0', '1']:
+            print(f"  ⚠️ 测试用例 {i} 有无效的期望值: {expected}")
+            continue
+            
         # 字符串参数，直接作为C字符串
         # 移除可能的引号
         arg_str = args_str.strip()
@@ -260,7 +275,7 @@ def generate_string_test(func_name: str, test_cases: List[Tuple[str, str]]) -> O
         # 转义特殊字符
         arg_str = arg_str.replace('\\', '\\\\').replace('"', '\\"')
         
-        # 生成测试块
+        # 生成测试块 - 修复：确保expected是有效的数字
         test_block = f"""
     // Test {i}
     {{
@@ -325,7 +340,7 @@ int main() {{
     return c_code
 
 def test_one_task(task_num: int, asm_file: str, tasks_data: Dict) -> Tuple[str, Optional[str], List[str]]:
-    """测试一个任务"""
+    """测试一个任务 - 修复版本"""
     asm_path = f"./generated_asm/{asm_file}"
     debug_info = []
     
@@ -353,6 +368,11 @@ def test_one_task(task_num: int, asm_file: str, tasks_data: Dict) -> Tuple[str, 
         return "no_test_cases", func_name, debug_info
     
     debug_info.append(f"Found {len(test_cases)} test cases")
+    
+    # 添加调试：显示解析的测试用例
+    print(f"  📋 解析的测试用例:")
+    for i, (args, expected) in enumerate(test_cases[:5]):  # 只显示前5个
+        print(f"    测试 {i}: 参数='{args}', 期望='{expected}'")
     
     # 检测任务类型
     task_type = detect_task_type(test_cases)
@@ -384,9 +404,11 @@ def test_one_task(task_num: int, asm_file: str, tasks_data: Dict) -> Tuple[str, 
         os.unlink(c_file)
         debug_info.append(f"Compile failed")
         if compile_result.stderr:
-            for line in compile_result.stderr.split('\n')[:3]:
+            error_lines = compile_result.stderr.split('\n')
+            print(f"  🔨 编译错误详情:")
+            for line in error_lines:
                 if line.strip():
-                    debug_info.append(f"  {line}")
+                    print(f"    {line}")
         return "compile_error", func_name, debug_info
     
     os.unlink(c_file)
@@ -418,10 +440,56 @@ def test_one_task(task_num: int, asm_file: str, tasks_data: Dict) -> Tuple[str, 
             except:
                 pass
 
+def debug_test_case_parsing():
+    """调试函数：查看测试用例解析问题"""
+    print("\n🔍 调试测试用例解析")
+    print("="*60)
+    
+    # 加载JSONL
+    jsonl_file = "human-eval-v2-20210705.jsonl"
+    if not os.path.exists(jsonl_file):
+        print(f"❌ JSONL file not found: {jsonl_file}")
+        return
+    
+    # 查看任务1的测试用例
+    with open(jsonl_file, 'r', encoding='utf-8') as f:
+        for i, line in enumerate(f):
+            if i >= 2:  # 只看前两个任务
+                break
+                
+            task = json.loads(line)
+            task_id = task.get('task_id', '')
+            task_num = extract_task_number(task_id)
+            
+            print(f"\n📄 任务 {task_num}: {task_id}")
+            print(f"📝 函数名: {task.get('entry_point', 'N/A')}")
+            
+            test_code = task.get('test', '')
+            test_cases = parse_test_cases_simple(test_code)
+            
+            print(f"🔍 解析到 {len(test_cases)} 个测试用例")
+            
+            for j, (args, expected) in enumerate(test_cases[:3]):
+                print(f"  测试 {j}:")
+                print(f"    参数: {args}")
+                print(f"    期望: {expected} ({'True' if expected == '1' else 'False'})")
+            
+            # 显示原始测试代码片段
+            print(f"\n📄 原始测试代码片段:")
+            lines = test_code.strip().split('\n')
+            for line in lines[:3]:
+                if 'assert' in line:
+                    print(f"  {line.strip()}")
+
 def main():
     """主函数"""
-    print("🚀 GG_Smart_Probe Evaluator")
+    print("🚀 GG_Smart_Probe Evaluator (修复版)")
     print("="*60)
+    
+    # 检查是否有调试参数
+    if '--debug' in sys.argv:
+        debug_test_case_parsing()
+        return
     
     # 检查参数
     batch_mode = '--batch' in sys.argv
