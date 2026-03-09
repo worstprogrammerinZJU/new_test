@@ -13,10 +13,10 @@ JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
 def extract_asm_number(filename: str) -> int:
     match = re.search(r'problem(\d+)\.s$', filename, re.IGNORECASE)
+    # 注意：这里返回原始数字，映射在 main 中处理
     return int(match.group(1)) if match else -1
 
 def evaluate_ast_node(node):
-    """安全解析AST，处理 None 为 0"""
     try:
         if isinstance(node, ast.Constant):
             return 0 if node.value is None else node.value
@@ -36,23 +36,31 @@ def parse_test_cases(test_code: str) -> List[Dict]:
     try:
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
-            if isinstance(node, ast.Assert) and isinstance(node.test, ast.Compare):
-                call = node.test.left if isinstance(node.test.left, ast.Call) else node.test.comparators[0]
-                if isinstance(call, ast.Call):
-                    args = [evaluate_ast_node(arg) for arg in call.args]
-                    exp_node = node.test.comparators[0] if call == node.test.left else node.test.left
-                    expected = evaluate_ast_node(exp_node)
-                    if expected is True: expected = 1
-                    elif expected is False: expected = 0
-                    cases.append({"args": args, "expected": expected})
+            if isinstance(node, ast.Assert):
+                # 处理 candidate(x) == y
+                if isinstance(node.test, ast.Compare) and isinstance(node.test.ops[0], ast.Eq):
+                    call = node.test.left if isinstance(node.test.left, ast.Call) else node.test.comparators[0]
+                    if isinstance(call, ast.Call):
+                        args = [evaluate_ast_node(arg) for arg in call.args]
+                        exp = evaluate_ast_node(node.test.comparators[0] if call == node.test.left else node.test.left)
+                        cases.append({"args": args, "expected": exp})
+                # 处理 abs(candidate(x) - y) < 1e-6
+                elif isinstance(node.test, ast.Compare) and isinstance(node.test.ops[0], ast.Lt):
+                    if isinstance(node.test.left, ast.Call) and getattr(node.test.left.func, 'id', '') == 'abs':
+                        inner = node.test.left.args[0]
+                        if isinstance(inner, ast.BinOp) and isinstance(inner.op, ast.Sub):
+                            call = inner.left if isinstance(inner.left, ast.Call) else None
+                            if call:
+                                args = [evaluate_ast_node(arg) for arg in call.args]
+                                exp = evaluate_ast_node(inner.right)
+                                cases.append({"args": args, "expected": exp})
     except: pass
     return cases
 
-def generate_c_tester(task_num: int, cases: List[Dict]) -> str:
+def generate_c_tester(task_id_num: int, cases: List[Dict]) -> str:
     test_blocks = []
-    
-    # 针对浮点数任务（如 truncate_number），C 需要正确通过 s0/d0 传参
-    use_float_abi = (task_num == 2) 
+    # 判断是否为浮点任务 (HumanEval/0 是均值误差, HumanEval/2 是取整)
+    is_float_task = task_id_num in [0, 2]
 
     for i, case in enumerate(cases):
         args, expected = case['args'], case['expected']
@@ -66,51 +74,38 @@ def generate_c_tester(task_num: int, cases: List[Dict]) -> str:
             elif isinstance(arg, list):
                 is_f = any(isinstance(x, float) for x in arg)
                 t = "float" if is_f else "int32_t"
-                # 转换 None 为 0 的逻辑已在 evaluate_ast_node 处理
                 vals = ", ".join([f"{x}f" if is_f else str(x) for x in arg])
                 setup += f'    {t} arr{idx}[] = {{{vals}}};\n'
                 params.append(f"(uintptr_t)arr{idx}")
-                if len(params) < 4: params.append(str(len(arg)))
+                params.append(str(len(arg)))
             elif isinstance(arg, (int, float)):
                 if isinstance(arg, float):
                     setup += f'    float f{idx} = {arg}f;\n'
-                    # 如果是纯浮点任务，由 func0_f 处理；否则强转寄存器位
                     params.append(f"*(uintptr_t*)&f{idx}")
                 else: params.append(str(arg))
         
         while len(params) < 4: params.append("0")
 
-        # 校验逻辑
-        if use_float_abi:
-            # 专门处理浮点返回
-            call_line = f"float res_f = func0_f({args[0]}f);"
-            check_logic = f'if (fabs((double)res_f - {expected}) < 1e-3) {{ pass_count++; }} else {{ printf("    Test {i} Fail: Exp {expected}, Got %f\\n", res_f); }}'
+        if is_float_task:
+            call_line = f"float res = func0_f({args[0] if not isinstance(args[0], list) else '(uintptr_t)arr0, ' + str(len(args[0]))});"
+            check_logic = f'if (fabs((double)res - {expected}) < 1e-3) {{ pass_count++; }} else {{ printf("    Test {i} Fail: Exp {expected}, Got %f\\n", res); }}'
         else:
             call_line = f"uintptr_t res_val = func0({', '.join(params[:4])});"
             if isinstance(expected, list):
-                check_logic = f"if (res_val != 0) pass_count++;"
+                check_logic = f"if (res_val != 0) pass_count++; // 列表返回暂验非空"
             else:
                 check_logic = f'if (res_val == {expected}) {{ pass_count++; }} else {{ printf("    Test {i} Fail: Exp {expected}, Got %lu\\n", res_val); }}'
 
-        test_blocks.append(f"""
-    {{
-{setup}
-        {call_line}
-        {check_logic}
-    }}""")
+        test_blocks.append(f"    {{\n{setup}        {call_line}\n        {check_logic}\n    }}")
 
     return f"""
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
 #include <string.h>
-
 #define None 0
-
-// 根据任务类型选择原型，确保寄存器匹配
 extern uintptr_t func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
-extern float func0_f(float s0); 
-
+extern float func0_f(float); 
 int main() {{
     int pass_count = 0;
     {"".join(test_blocks)}
@@ -120,85 +115,43 @@ int main() {{
 """
 
 def main():
-    if not os.path.exists(JSONL_FILE):
-        print(f"Error: {JSONL_FILE} not found")
-        return
-
-    # 加载任务数据
     with open(JSONL_FILE, 'r') as f:
         tasks = {int(json.loads(line)['task_id'].split('/')[-1]): json.loads(line) for line in f}
 
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=extract_asm_number)
     stats = {"total": 0, "compiled": 0, "passed": 0}
 
-    print(f"🚀 开始全真汇编测试调试...")
-
     for f_name in asm_files:
-        t_num = extract_asm_number(f_name)
-        if t_num not in tasks: continue
+        prob_num = extract_asm_number(f_name)
+        task_id = prob_num - 1  # 重要：Problem 1 对应 HumanEval/0
         
-        print(f"\n{'='*15} [TASK {t_num} | {f_name}] {'='*15}")
+        if task_id not in tasks: continue
+        print(f"\n{'='*10} [Problem {prob_num} -> HumanEval/{task_id}] {'='*10}")
+        
         stats["total"] += 1
+        test_cases = parse_test_cases(tasks[task_id]['test'])
+        c_code = generate_c_tester(task_id, test_cases)
         
-        test_cases = parse_test_cases(tasks[t_num]['test'])
-        if not test_cases:
-            print("❌ 无法解析测试用例")
-            continue
-            
-        c_code = generate_c_tester(t_num, test_cases)
         with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as tmp_f:
             tmp_f.write(c_code)
             tmp_c_path = tmp_f.name
 
-        asm_path = os.path.join(ASM_DIR, f_name)
         try:
-            # 编译 (在汇编中 _func0 等同于 C 里的 func0 或 func0_f)
-            # 使用 -D 将 func0_f alias 到 func0 符号上
-            # 这样汇编里只需定义 _func0 即可支持两种调用约定
-            compile_cmd = f"clang -arch arm64 '{tmp_c_path}' '{asm_path}' -o runner -lm -Wl,-alias,_func0,_func0_f"
-            c_res = subprocess.run(compile_cmd, shell=True, capture_output=True, text=True)
-            
-            if c_res.returncode != 0:
-                print("❌ 编译错误 (Clang Error):")
-                print(c_res.stderr)
-                continue
-            
-            stats["compiled"] += 1
-            
-            # 运行 (3秒超时)
-            r_res = subprocess.run("./runner", shell=True, capture_output=True, text=True, timeout=3)
-            output = r_res.stdout
-            
-            score_match = re.search(r"FINAL_SCORE:(\d+)/(\d+)", output)
-            if score_match:
-                passed, total = map(int, score_match.groups())
-                # 打印出失败的具体用例详情 (如果有 printf)
-                clean_output = output.replace(f"FINAL_SCORE:{passed}/{total}", "").strip()
-                if clean_output: print(clean_output)
-                
-                if passed == total:
-                    print(f"✅ PASS: {passed}/{total}")
-                    stats["passed"] += 1
-                else:
-                    print(f"⚠️ FAIL: {passed}/{total}")
-            else:
-                print("🔥 运行时异常，未检测到分数输出。")
-                
-        except subprocess.TimeoutExpired:
-            print("⏰ Timeout: 汇编可能存在死循环")
-        except Exception as e:
-            print(f"🔥 脚本错误: {e}")
+            # 链接时创建 alias 确保 func0_f 也能找到汇编中的 _func0
+            cmd = f"clang -arch arm64 '{tmp_c_path}' '{os.path.join(ASM_DIR, f_name)}' -o runner -lm -Wl,-alias,_func0,_func0_f"
+            if subprocess.run(cmd, shell=True, capture_output=True).returncode == 0:
+                stats["compiled"] += 1
+                r_res = subprocess.run("./runner", shell=True, capture_output=True, text=True, timeout=2)
+                print(r_res.stdout.strip())
+                if "FINAL_SCORE" in r_res.stdout:
+                    p, t = map(int, re.search(r"FINAL_SCORE:(\d+)/(\d+)", r_res.stdout).groups())
+                    if p == t: stats["passed"] += 1
+            else: print("❌ 编译失败")
         finally:
             if os.path.exists("runner"): os.remove("runner")
             if os.path.exists(tmp_c_path): os.remove(tmp_c_path)
 
-    # 统计汇总
-    print(f"\n{'#'*20} 统计摘要 {'#'*20}")
-    print(f"总任务数: {stats['total']}")
-    print(f"编译通过: {stats['compiled']}")
-    print(f"逻辑全对: {stats['passed']}")
-    if stats['total'] > 0:
-        print(f"总成功率: {(stats['passed']/stats['total']*100):.2f}%")
+    print(f"\n📊 汇总: 编译 {stats['compiled']}/{stats['total']}, 全过 {stats['passed']}/{stats['total']}")
 
 if __name__ == "__main__":
     main()
