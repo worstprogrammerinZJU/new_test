@@ -8,7 +8,7 @@ from typing import List, Dict, Any
 
 # ================= 配置区 =================
 ASM_DIR = "./generated_asm"
-JSONL_FILE = "output.jsonl"
+JSONL_FILE = "human-eval-v2-20210705.jsonl"
 # ==========================================
 
 def extract_asm_number(filename: str) -> int:
@@ -16,7 +16,7 @@ def extract_asm_number(filename: str) -> int:
     return int(match.group(1)) if match else -1
 
 def evaluate_ast_node(node):
-    """安全地解析AST节点"""
+    """安全解析AST节点，支持常量、列表和基础运算"""
     try:
         if isinstance(node, ast.Constant):
             return node.value
@@ -25,17 +25,16 @@ def evaluate_ast_node(node):
         elif isinstance(node, ast.BinOp):
             left = evaluate_ast_node(node.left)
             right = evaluate_ast_node(node.right)
-            # 只有当左右都是数字时才尝试计算
             if isinstance(left, (int, float)) and isinstance(right, (int, float)):
                 if isinstance(node.op, ast.Add): return left + right
                 if isinstance(node.op, ast.Sub): return left - right
                 if isinstance(node.op, ast.Mult): return left * right
                 if isinstance(node.op, ast.Div): return left / right
-            return 0 # 无法计算则回退
+            return 0
         elif isinstance(node, ast.Name):
             return node.id
     except:
-        return 0
+        return None
     return None
 
 def parse_test_cases_robust(test_code: str) -> List[Dict]:
@@ -44,16 +43,14 @@ def parse_test_cases_robust(test_code: str) -> List[Dict]:
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
             if isinstance(node, ast.Assert) and isinstance(node.test, ast.Compare):
-                # 提取左侧调用
-                call_node = node.test.left
                 # 兼容 candidate(...) == x 和 x == candidate(...)
-                if not isinstance(call_node, ast.Call):
-                    if isinstance(node.test.comparators[0], ast.Call):
-                        call_node = node.test.comparators[0]
+                call_node = node.test.left if isinstance(node.test.left, ast.Call) else None
+                if not call_node and isinstance(node.test.comparators[0], ast.Call):
+                    call_node = node.test.comparators[0]
                 
-                if isinstance(call_node, ast.Call):
+                if call_node:
                     args = [evaluate_ast_node(arg) for arg in call_node.args]
-                    expected_raw = evaluate_ast_node(node.test.comparators[0])
+                    expected_raw = evaluate_ast_node(node.test.comparators[0] if call_node == node.test.left else node.test.left)
                     
                     if expected_raw is True: expected = 1
                     elif expected_raw is False: expected = 0
@@ -71,89 +68,98 @@ def generate_c_tester(task_num: int, cases: List[Dict]) -> str:
         args = case['args']
         expected = case['expected']
         
-        # 针对你提供的汇编代码（Task 0 为例）: 
-        # x0 = 数组地址, w1 = 长度, s0 = 阈值
         setup_code = ""
         call_params = []
         
-        # 简单的参数分配逻辑
         for idx, arg in enumerate(args):
-            if isinstance(arg, list):
+            # 关键修复：处理字符串类型，必须包裹在双引号内
+            if isinstance(arg, str):
+                safe_str = arg.replace('"', '\\"')
+                setup_code += f'    const char* s{idx} = "{safe_str}";\n'
+                call_params.append(f"(uintptr_t)s{idx}")
+            
+            # 处理列表（数组）
+            elif isinstance(arg, list):
                 is_float = any(isinstance(x, float) for x in arg)
                 type_name = "float" if is_float else "int32_t"
+                # 列表内容也需要处理
                 vals = ", ".join([f"{x}f" if is_float else str(x) for x in arg])
-                setup_code += f"    {type_name} arr{idx}[] = {{{vals}}};\n"
+                setup_code += f'    {type_name} arr{idx}[] = {{{vals}}};\n'
                 call_params.append(f"(uintptr_t)arr{idx}")
-                # 自动传入长度到下一个寄存器 (w1)
-                call_params.append(str(len(arg)))
-            elif isinstance(arg, float):
-                # C 传递 float 到汇编的 s0 需要特殊处理，这里简便起见传给 uintptr_t
-                # 如果汇编用 s0 接收，建议在汇编中确认调用约定
-                call_params.append(f"(uintptr_t){arg}") 
+                # 传入长度作为下一个参数
+                if len(call_params) < 4:
+                    call_params.append(str(len(arg)))
+            
+            # 处理普通数值
+            elif isinstance(arg, (int, float)):
+                # 如果是浮点数，直接强转地址（这里建议看汇编是否用了s0，如果是则需特殊处理）
+                call_params.append(f"(uintptr_t){arg}")
             else:
-                call_params.append(str(arg) if arg is not None else "0")
+                call_params.append("0")
 
+        # 补足 4 个寄存器传参
         while len(call_params) < 4:
             call_params.append("0")
 
         test_blocks.append(f"""
     {{
-    {setup_code}
+{setup_code}
         uintptr_t res = func0({", ".join(call_params[:4])});
-        printf("  [Test {i}] Got: %lu | Expected: {expected}\\n", res);
+        printf("  [Test {i}] Task {task_num} -> Result: %lu (Expected: {expected})\\n", res);
     }}""")
 
     return f"""
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
-// 修正：C声明不带下划线，链接器会自动去找汇编里的 _func0
 extern uintptr_t func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 
 int main() {{
-    printf("--- Testing Problem {task_num} ---\\n");
+    printf("--- Running tests for Task {task_num} ---\\n");
     {"".join(test_blocks)}
     return 0;
 }}
 """
 
 def main():
-    if not os.path.exists(JSONL_FILE):
-        print("Missing JSONL file")
-        return
+    if not os.path.exists(JSONL_FILE): return
     
+    # 建立任务索引
     tasks = {}
     with open(JSONL_FILE, 'r') as f:
         for line in f:
             item = json.loads(line)
             tasks[int(item['task_id'].split('/')[-1])] = item
 
+    # 扫描汇编文件
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=extract_asm_number)
 
     for f_name in asm_files:
         t_num = extract_asm_number(f_name)
         if t_num not in tasks: continue
 
-        print(f"\n任务编号: {t_num} | 文件: {f_name}")
+        print(f"\n[Problem {t_num}] Checking: {f_name}")
         test_cases = parse_test_cases_robust(tasks[t_num]['test'])
         
         if not test_cases:
-            print("  ❌ 无法解析测试点")
+            print("  ❌ No valid test cases parsed.")
             continue
             
-        c_code = generate_c_tester(t_num, test_cases)
+        c_content = generate_c_tester(t_num, test_cases)
+        
         with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as f:
-            f.write(c_code)
+            f.write(c_content)
             c_path = f.name
 
         asm_path = os.path.join(ASM_DIR, f_name)
         try:
-            # 编译命令
-            cmd = f"clang -arch arm64 '{c_path}' '{asm_path}' -o runner"
-            cp = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            if cp.returncode != 0:
-                print(f"  🔥 编译失败:\n{cp.stderr}")
+            # 编译并运行
+            res = subprocess.run(f"clang -arch arm64 '{c_path}' '{asm_path}' -o runner", 
+                                 shell=True, capture_output=True, text=True)
+            if res.returncode != 0:
+                print(f"  🔥 编译失败:\n{res.stderr}")
             else:
                 subprocess.run("./runner", shell=True)
         finally:
