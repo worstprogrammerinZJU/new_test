@@ -7,135 +7,139 @@ import ast
 from typing import List, Dict, Any
 
 # ================= 配置区 =================
-ASM_DIR = "./generated_asm"           # 你的汇编文件所在目录
-JSONL_FILE = "human-eval-v2-20210705.jsonl" # 原始数据文件
+ASM_DIR = "./generated_asm"
+JSONL_FILE = "human-eval-v2-20210705.jsonl"
 # ==========================================
 
 def extract_asm_number(filename: str) -> int:
-    """提取文件名中的数字: problem1.s -> 1"""
     match = re.search(r'problem(\d+)\.s$', filename, re.IGNORECASE)
     return int(match.group(1)) if match else -1
 
-def parse_test_cases_ast(test_code: str) -> List[Dict]:
-    """
-    使用 AST 解析测试用例，精准提取参数和期望值。
-    能够处理字符串列表、布尔值、嵌套括号等复杂数据。
-    """
+def evaluate_ast_node(node):
+    """递归处理AST节点，支持常量、列表、算术运算等"""
+    if isinstance(node, ast.Constant):
+        return node.value
+    elif isinstance(node, ast.List):
+        return [evaluate_ast_node(e) for e in node.elts]
+    elif isinstance(node, ast.BinOp):
+        left = evaluate_ast_node(node.left)
+        right = evaluate_ast_node(node.right)
+        if isinstance(node.op, ast.Add): return left + right
+        if isinstance(node.op, ast.Sub): return left - right
+        if isinstance(node.op, ast.Mult): return left * right
+        if isinstance(node.op, ast.Div): return left / right
+    elif isinstance(node, ast.Name):
+        return node.id
+    elif isinstance(node, ast.Call):
+        # 简单处理嵌套函数调用，仅返回函数名
+        return f"{node.func.id}(...)"
+    return None
+
+def parse_test_cases_advanced(test_code: str) -> List[Dict]:
     cases = []
     try:
-        # 将 test 字段中的字符串解析为 Python 语法树
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
-            # 寻找 assert 语句，且包含 == 比较
             if isinstance(node, ast.Assert) and isinstance(node.test, ast.Compare):
-                # 提取左侧的函数调用: candidate(arg1, arg2...)
                 call_node = node.test.left
                 if isinstance(call_node, ast.Call):
-                    # 提取所有参数并转为 Python 原生对象
-                    args = [ast.literal_eval(arg) for arg in call_node.args]
+                    # 提取参数
+                    args = [evaluate_ast_node(arg) for arg in call_node.args]
+                    # 提取期望结果
+                    expected_raw = evaluate_ast_node(node.test.comparators[0])
                     
-                    # 提取右侧的期望值并转为 Python 原生对象
-                    expected_val = ast.literal_eval(node.test.comparators[0])
+                    # 结果转换
+                    if expected_raw is True: expected = 1
+                    elif expected_raw is False: expected = 0
+                    else: expected = expected_raw
                     
-                    # 自动转换布尔值为整数，方便汇编对比 (True->1, False->0)
-                    if expected_val is True: expected_val = 1
-                    elif expected_val is False: expected_val = 0
-                    
-                    cases.append({"args": args, "expected": expected_val})
+                    cases.append({"args": args, "expected": expected})
     except Exception as e:
-        print(f"  ⚠️ AST 解析出错: {e}")
+        print(f"  ⚠️ 解析异常: {e}")
     return cases
 
 def generate_c_tester(task_num: int, cases: List[Dict]) -> str:
-    """
-    生成 C 语言测试代码。
-    所有的汇编函数统一调用 _func0。
-    """
     test_blocks = []
     
     for i, case in enumerate(cases):
         args = case['args']
         expected = case['expected']
         
-        # 针对 Task 1 (字符串输入) 的处理逻辑
-        if isinstance(args[0], str):
-            clean_input = args[0].replace('"', '\\"')
-            block = f"""
-    {{
-        const char* input = "{clean_input}";
-        // 调用汇编 _func0
-        uintptr_t res = _func0((uintptr_t)input, 0, 0, 0);
-        printf("  [Test {i}] Input: \\"%s\\", Result: %lu\\n", input, res);
-    }}"""
+        # 准备参数传递逻辑 (x0, x1, x2, x3)
+        c_params = []
+        setup_code = ""
         
-        # 针对 Task 0 (浮点数组输入) 的处理逻辑
-        elif isinstance(args[0], list) and task_num == 0:
-            arr_str = ", ".join(map(str, args[0]))
-            threshold = args[1] if len(args) > 1 else 0.0
-            block = f"""
+        for idx, arg in enumerate(args[:4]): # 最多取前4个参数
+            if isinstance(arg, str):
+                setup_code += f'    const char* arg{idx} = "{arg.replace("\"", "\\\"")}";\n'
+                c_params.append(f"(uintptr_t)arg{idx}")
+            elif isinstance(arg, list):
+                # 检查是否为浮点数组
+                is_float = any(isinstance(x, float) for x in arg)
+                type_str = "double" if is_float else "int64_t"
+                vals = ", ".join(map(str, arg)) if arg else ""
+                setup_code += f'    {type_str} arr{idx}[] = {{{vals}}};\n'
+                c_params.append(f"(uintptr_t)arr{idx}")
+                # 增加一个隐藏参数：数组长度 (通常紧跟在数组指针后面)
+                if len(c_params) < 4:
+                    c_params.append(str(len(arg)))
+            elif isinstance(arg, (int, float)):
+                c_params.append(f"(uintptr_t){arg}")
+            else:
+                c_params.append("0")
+
+        # 补齐 4 个参数
+        while len(c_params) < 4:
+            c_params.append("0")
+
+        call_args = ", ".join(c_params)
+        
+        # 预期值打印逻辑
+        print_fmt = "%ld" if isinstance(expected, int) else "%f"
+        
+        test_blocks.append(f"""
     {{
-        double arr[] = {{{arr_str}}};
-        uintptr_t res = _func0((uintptr_t)arr, {len(args[0])}, (uintptr_t){threshold}, 0);
-        printf("  [Test {i}] Expected: {expected}, Got: %lu\\n", res);
-    }}"""
-            
-        # 其他通用处理
-        else:
-            block = f"    // Task {task_num} 的参数类型暂未适配，跳过生成\\n"
-            
-        test_blocks.append(block)
+    {setup_code}
+        uintptr_t res = _func0({call_args});
+        printf("  [Test {i}] Result: %lu (Expected: {expected})\\n", res);
+    }}""")
 
     return f"""
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
+#include <math.h>
 
-// 声明汇编中的函数名
 extern uintptr_t _func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 
 int main() {{
-    printf(">>> 开始测试 Task {task_num} <<<\\n");
+    printf(">>> Testing Problem {task_num} <<<\\n");
     {"".join(test_blocks)}
     return 0;
 }}
 """
 
 def main():
-    # 1. 预加载 JSONL 数据
-    if not os.path.exists(JSONL_FILE):
-        print(f"错误: 找不到文件 {JSONL_FILE}")
-        return
-        
-    tasks_data = {}
-    with open(JSONL_FILE, 'r', encoding='utf-8') as f:
-        for line in f:
-            item = json.loads(line)
-            num = int(item['task_id'].split('/')[-1])
-            tasks_data[num] = item
+    if not os.path.exists(JSONL_FILE): return
+    
+    with open(JSONL_FILE, 'r') as f:
+        tasks = {int(json.loads(line)['task_id'].split('/')[-1]): json.loads(line) for line in f}
 
-    # 2. 扫描并测试汇编文件
-    if not os.path.exists(ASM_DIR):
-        print(f"错误: 找不到目录 {ASM_DIR}")
-        return
-
-    asm_files = [f for f in os.listdir(ASM_DIR) if f.endswith('.s')]
-    asm_files.sort(key=extract_asm_number)
+    asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=extract_asm_number)
 
     for f_name in asm_files:
         t_num = extract_asm_number(f_name)
-        if t_num not in tasks_data:
-            continue
+        if t_num not in tasks: continue
 
         print(f"\n任务编号: {t_num} | 文件: {f_name}")
+        test_cases = parse_test_cases_advanced(tasks[t_num]['test'])
         
-        # 3. 解析测试用例 (核心修复点)
-        test_cases = parse_test_cases_ast(tasks_data[t_num]['test'])
         if not test_cases:
-            print("  ❌ 无法解析任何测试用例")
+            print("  ❌ 无法解析测试用例")
             continue
             
         print(f"  ✅ 成功提取 {len(test_cases)} 个测试点")
 
-        # 4. 生成并编译测试驱动
         c_content = generate_c_tester(t_num, test_cases)
         with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as tmp_c:
             tmp_c.write(c_content)
@@ -143,12 +147,14 @@ def main():
 
         asm_path = os.path.join(ASM_DIR, f_name)
         try:
-            # 编译 (确保针对 ARM64)
-            subprocess.run(f"clang -arch arm64 {tmp_c_path} {asm_path} -o runner", shell=True, check=True)
-            # 运行
+            # 尝试编译，如果失败则打印错误信息
+            cp = subprocess.run(f"clang -arch arm64 {tmp_c_path} {asm_path} -o runner", 
+                                shell=True, capture_output=True, text=True)
+            if cp.returncode != 0:
+                print(f"  🔥 编译失败详情:\n{cp.stderr}")
+                continue
+                
             subprocess.run("./runner", shell=True)
-        except Exception as e:
-            print(f"  🔥 编译或执行失败: {e}")
         finally:
             if os.path.exists("runner"): os.remove("runner")
             if os.path.exists(tmp_c_path): os.remove(tmp_c_path)
