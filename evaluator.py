@@ -8,7 +8,7 @@ from typing import List, Dict, Any
 
 # ================= 配置区 =================
 ASM_DIR = "./generated_asm"
-JSONL_FILE = "human-eval-v2-20210705.jsonl"
+JSONL_FILE = "output.jsonl"
 # ==========================================
 
 def extract_asm_number(filename: str) -> int:
@@ -16,39 +16,45 @@ def extract_asm_number(filename: str) -> int:
     return int(match.group(1)) if match else -1
 
 def evaluate_ast_node(node):
-    """递归处理AST节点，支持常量、列表、算术运算等"""
-    if isinstance(node, ast.Constant):
-        return node.value
-    elif isinstance(node, ast.List):
-        return [evaluate_ast_node(e) for e in node.elts]
-    elif isinstance(node, ast.BinOp):
-        left = evaluate_ast_node(node.left)
-        right = evaluate_ast_node(node.right)
-        if isinstance(node.op, ast.Add): return left + right
-        if isinstance(node.op, ast.Sub): return left - right
-        if isinstance(node.op, ast.Mult): return left * right
-        if isinstance(node.op, ast.Div): return left / right
-    elif isinstance(node, ast.Name):
-        return node.id
-    elif isinstance(node, ast.Call):
-        # 简单处理嵌套函数调用，仅返回函数名
-        return f"{node.func.id}(...)"
+    """安全地解析AST节点"""
+    try:
+        if isinstance(node, ast.Constant):
+            return node.value
+        elif isinstance(node, ast.List):
+            return [evaluate_ast_node(e) for e in node.elts]
+        elif isinstance(node, ast.BinOp):
+            left = evaluate_ast_node(node.left)
+            right = evaluate_ast_node(node.right)
+            # 只有当左右都是数字时才尝试计算
+            if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+                if isinstance(node.op, ast.Add): return left + right
+                if isinstance(node.op, ast.Sub): return left - right
+                if isinstance(node.op, ast.Mult): return left * right
+                if isinstance(node.op, ast.Div): return left / right
+            return 0 # 无法计算则回退
+        elif isinstance(node, ast.Name):
+            return node.id
+    except:
+        return 0
     return None
 
-def parse_test_cases_advanced(test_code: str) -> List[Dict]:
+def parse_test_cases_robust(test_code: str) -> List[Dict]:
     cases = []
     try:
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
             if isinstance(node, ast.Assert) and isinstance(node.test, ast.Compare):
+                # 提取左侧调用
                 call_node = node.test.left
+                # 兼容 candidate(...) == x 和 x == candidate(...)
+                if not isinstance(call_node, ast.Call):
+                    if isinstance(node.test.comparators[0], ast.Call):
+                        call_node = node.test.comparators[0]
+                
                 if isinstance(call_node, ast.Call):
-                    # 提取参数
                     args = [evaluate_ast_node(arg) for arg in call_node.args]
-                    # 提取期望结果
                     expected_raw = evaluate_ast_node(node.test.comparators[0])
                     
-                    # 结果转换
                     if expected_raw is True: expected = 1
                     elif expected_raw is False: expected = 0
                     else: expected = expected_raw
@@ -65,65 +71,63 @@ def generate_c_tester(task_num: int, cases: List[Dict]) -> str:
         args = case['args']
         expected = case['expected']
         
-        # 准备参数传递逻辑 (x0, x1, x2, x3)
-        c_params = []
+        # 针对你提供的汇编代码（Task 0 为例）: 
+        # x0 = 数组地址, w1 = 长度, s0 = 阈值
         setup_code = ""
+        call_params = []
         
-        for idx, arg in enumerate(args[:4]): # 最多取前4个参数
-            if isinstance(arg, str):
-                setup_code += f'    const char* arg{idx} = "{arg.replace("\"", "\\\"")}";\n'
-                c_params.append(f"(uintptr_t)arg{idx}")
-            elif isinstance(arg, list):
-                # 检查是否为浮点数组
+        # 简单的参数分配逻辑
+        for idx, arg in enumerate(args):
+            if isinstance(arg, list):
                 is_float = any(isinstance(x, float) for x in arg)
-                type_str = "double" if is_float else "int64_t"
-                vals = ", ".join(map(str, arg)) if arg else ""
-                setup_code += f'    {type_str} arr{idx}[] = {{{vals}}};\n'
-                c_params.append(f"(uintptr_t)arr{idx}")
-                # 增加一个隐藏参数：数组长度 (通常紧跟在数组指针后面)
-                if len(c_params) < 4:
-                    c_params.append(str(len(arg)))
-            elif isinstance(arg, (int, float)):
-                c_params.append(f"(uintptr_t){arg}")
+                type_name = "float" if is_float else "int32_t"
+                vals = ", ".join([f"{x}f" if is_float else str(x) for x in arg])
+                setup_code += f"    {type_name} arr{idx}[] = {{{vals}}};\n"
+                call_params.append(f"(uintptr_t)arr{idx}")
+                # 自动传入长度到下一个寄存器 (w1)
+                call_params.append(str(len(arg)))
+            elif isinstance(arg, float):
+                # C 传递 float 到汇编的 s0 需要特殊处理，这里简便起见传给 uintptr_t
+                # 如果汇编用 s0 接收，建议在汇编中确认调用约定
+                call_params.append(f"(uintptr_t){arg}") 
             else:
-                c_params.append("0")
+                call_params.append(str(arg) if arg is not None else "0")
 
-        # 补齐 4 个参数
-        while len(c_params) < 4:
-            c_params.append("0")
+        while len(call_params) < 4:
+            call_params.append("0")
 
-        call_args = ", ".join(c_params)
-        
-        # 预期值打印逻辑
-        print_fmt = "%ld" if isinstance(expected, int) else "%f"
-        
         test_blocks.append(f"""
     {{
     {setup_code}
-        uintptr_t res = _func0({call_args});
-        printf("  [Test {i}] Result: %lu (Expected: {expected})\\n", res);
+        uintptr_t res = func0({", ".join(call_params[:4])});
+        printf("  [Test {i}] Got: %lu | Expected: {expected}\\n", res);
     }}""")
 
     return f"""
 #include <stdio.h>
 #include <stdint.h>
-#include <string.h>
-#include <math.h>
+#include <stdbool.h>
 
-extern uintptr_t _func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+// 修正：C声明不带下划线，链接器会自动去找汇编里的 _func0
+extern uintptr_t func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 
 int main() {{
-    printf(">>> Testing Problem {task_num} <<<\\n");
+    printf("--- Testing Problem {task_num} ---\\n");
     {"".join(test_blocks)}
     return 0;
 }}
 """
 
 def main():
-    if not os.path.exists(JSONL_FILE): return
+    if not os.path.exists(JSONL_FILE):
+        print("Missing JSONL file")
+        return
     
+    tasks = {}
     with open(JSONL_FILE, 'r') as f:
-        tasks = {int(json.loads(line)['task_id'].split('/')[-1]): json.loads(line) for line in f}
+        for line in f:
+            item = json.loads(line)
+            tasks[int(item['task_id'].split('/')[-1])] = item
 
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=extract_asm_number)
 
@@ -132,32 +136,29 @@ def main():
         if t_num not in tasks: continue
 
         print(f"\n任务编号: {t_num} | 文件: {f_name}")
-        test_cases = parse_test_cases_advanced(tasks[t_num]['test'])
+        test_cases = parse_test_cases_robust(tasks[t_num]['test'])
         
         if not test_cases:
-            print("  ❌ 无法解析测试用例")
+            print("  ❌ 无法解析测试点")
             continue
             
-        print(f"  ✅ 成功提取 {len(test_cases)} 个测试点")
-
-        c_content = generate_c_tester(t_num, test_cases)
-        with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as tmp_c:
-            tmp_c.write(c_content)
-            tmp_c_path = tmp_c.name
+        c_code = generate_c_tester(t_num, test_cases)
+        with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as f:
+            f.write(c_code)
+            c_path = f.name
 
         asm_path = os.path.join(ASM_DIR, f_name)
         try:
-            # 尝试编译，如果失败则打印错误信息
-            cp = subprocess.run(f"clang -arch arm64 {tmp_c_path} {asm_path} -o runner", 
-                                shell=True, capture_output=True, text=True)
+            # 编译命令
+            cmd = f"clang -arch arm64 '{c_path}' '{asm_path}' -o runner"
+            cp = subprocess.run(cmd, shell=True, capture_output=True, text=True)
             if cp.returncode != 0:
-                print(f"  🔥 编译失败详情:\n{cp.stderr}")
-                continue
-                
-            subprocess.run("./runner", shell=True)
+                print(f"  🔥 编译失败:\n{cp.stderr}")
+            else:
+                subprocess.run("./runner", shell=True)
         finally:
             if os.path.exists("runner"): os.remove("runner")
-            if os.path.exists(tmp_c_path): os.remove(tmp_c_path)
+            if os.path.exists(c_path): os.remove(c_path)
 
 if __name__ == "__main__":
     main()
