@@ -13,10 +13,10 @@ JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
 def extract_asm_number(filename: str) -> int:
     match = re.search(r'problem(\d+)\.s$', filename, re.IGNORECASE)
-    # 注意：这里返回原始数字，映射在 main 中处理
     return int(match.group(1)) if match else -1
 
 def evaluate_ast_node(node):
+    """解析 Python AST 节点并处理 None"""
     try:
         if isinstance(node, ast.Constant):
             return 0 if node.value is None else node.value
@@ -27,7 +27,6 @@ def evaluate_ast_node(node):
             if isinstance(l, (int, float)) and isinstance(r, (int, float)):
                 ops = {ast.Add: l+r, ast.Sub: l-r, ast.Mult: l*r, ast.Div: l/r}
                 return ops.get(type(node.op), 0)
-        if isinstance(node, ast.Name): return node.id
     except: return 0
     return 0
 
@@ -37,35 +36,35 @@ def parse_test_cases(test_code: str) -> List[Dict]:
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
             if isinstance(node, ast.Assert):
-                # 处理 candidate(x) == y
-                if isinstance(node.test, ast.Compare) and isinstance(node.test.ops[0], ast.Eq):
-                    call = node.test.left if isinstance(node.test.left, ast.Call) else node.test.comparators[0]
-                    if isinstance(call, ast.Call):
-                        args = [evaluate_ast_node(arg) for arg in call.args]
-                        exp = evaluate_ast_node(node.test.comparators[0] if call == node.test.left else node.test.left)
-                        cases.append({"args": args, "expected": exp})
-                # 处理 abs(candidate(x) - y) < 1e-6
-                elif isinstance(node.test, ast.Compare) and isinstance(node.test.ops[0], ast.Lt):
-                    if isinstance(node.test.left, ast.Call) and getattr(node.test.left.func, 'id', '') == 'abs':
-                        inner = node.test.left.args[0]
-                        if isinstance(inner, ast.BinOp) and isinstance(inner.op, ast.Sub):
-                            call = inner.left if isinstance(inner.left, ast.Call) else None
-                            if call:
-                                args = [evaluate_ast_node(arg) for arg in call.args]
-                                exp = evaluate_ast_node(inner.right)
-                                cases.append({"args": args, "expected": exp})
+                if isinstance(node.test, ast.Compare):
+                    # 情况 1: candidate(x) == y
+                    if isinstance(node.test.ops[0], ast.Eq):
+                        call = node.test.left if isinstance(node.test.left, ast.Call) else node.test.comparators[0]
+                        if isinstance(call, ast.Call):
+                            args = [evaluate_ast_node(arg) for arg in call.args]
+                            exp = evaluate_ast_node(node.test.comparators[0] if call == node.test.left else node.test.left)
+                            cases.append({"args": args, "expected": exp})
+                    # 情况 2: abs(candidate(x) - y) < 1e-6
+                    elif isinstance(node.test.ops[0], ast.Lt):
+                        if isinstance(node.test.left, ast.Call) and getattr(node.test.left.func, 'id', '') == 'abs':
+                            inner = node.test.left.args[0]
+                            if isinstance(inner, ast.BinOp) and isinstance(inner.op, ast.Sub):
+                                call = inner.left if isinstance(inner.left, ast.Call) else None
+                                if call:
+                                    args = [evaluate_ast_node(arg) for arg in call.args]
+                                    exp = evaluate_ast_node(inner.right)
+                                    cases.append({"args": args, "expected": exp})
     except: pass
     return cases
 
-def generate_c_tester(task_id_num: int, cases: List[Dict]) -> str:
+def generate_c_tester(task_id: int, cases: List[Dict]) -> str:
     test_blocks = []
-    # 判断是否为浮点任务 (HumanEval/0 是均值误差, HumanEval/2 是取整)
-    is_float_task = task_id_num in [0, 2]
-
+    
     for i, case in enumerate(cases):
         args, expected = case['args'], case['expected']
         setup, params = "", []
         
+        # 构造参数局部变量
         for idx, arg in enumerate(args):
             if isinstance(arg, str):
                 s = arg.replace('"', '\\"').replace('\n', '\\n')
@@ -76,25 +75,33 @@ def generate_c_tester(task_id_num: int, cases: List[Dict]) -> str:
                 t = "float" if is_f else "int32_t"
                 vals = ", ".join([f"{x}f" if is_f else str(x) for x in arg])
                 setup += f'    {t} arr{idx}[] = {{{vals}}};\n'
-                params.append(f"(uintptr_t)arr{idx}")
-                params.append(str(len(arg)))
+                params.append(f"arr{idx}") # 注意这里传变量名
             elif isinstance(arg, (int, float)):
                 if isinstance(arg, float):
                     setup += f'    float f{idx} = {arg}f;\n'
-                    params.append(f"*(uintptr_t*)&f{idx}")
+                    params.append(f"f{idx}")
                 else: params.append(str(arg))
-        
-        while len(params) < 4: params.append("0")
 
-        if is_float_task:
-            call_line = f"float res = func0_f({args[0] if not isinstance(args[0], list) else '(uintptr_t)arr0, ' + str(len(args[0]))});"
-            check_logic = f'if (fabs((double)res - {expected}) < 1e-3) {{ pass_count++; }} else {{ printf("    Test {i} Fail: Exp {expected}, Got %f\\n", res); }}'
+        # 根据 HumanEval 任务类型，强制转换汇编函数指针以匹配寄存器规则
+        # ARM64 调用约定：x0-x7 传整数/指针，s0-s7 传浮点
+        
+        if task_id == 3: # problem4.s -> has_close_elements(float*, int, float)
+            call_line = f"int res = ((int (*)(float*, int, float))func0)({params[0]}, {len(args[0])}, {params[1]});"
+            check_logic = f'if (res == {expected}) pass_count++; else printf("  T{i} Fail: Exp {expected}, Got %d\\n", res);'
+        elif task_id == 2: # problem3.s -> truncate_number(float)
+            call_line = f"float res = ((float (*)(float))func0)({params[0]});"
+            check_logic = f'if (fabs((double)res - {expected}) < 1e-3) pass_count++; else printf("  T{i} Fail: Exp {expected}, Got %f\\n", res);'
+        elif task_id == 0: # problem1.s -> mean_absolute_deviation(float*, int)
+            call_line = f"float res = ((float (*)(float*, int))func0)({params[0]}, {len(args[0])});"
+            check_logic = f'if (fabs((double)res - {expected}) < 1e-3) pass_count++; else printf("  T{i} Fail: Exp {expected}, Got %f\\n", res);'
         else:
-            call_line = f"uintptr_t res_val = func0({', '.join(params[:4])});"
+            # 默认通用调用逻辑
+            while len(params) < 4: params.append("0")
+            call_line = f"uintptr_t res = func0({', '.join([str(p) for p in params[:4]])});"
             if isinstance(expected, list):
-                check_logic = f"if (res_val != 0) pass_count++; // 列表返回暂验非空"
+                check_logic = f"if (res != 0) pass_count++;"
             else:
-                check_logic = f'if (res_val == {expected}) {{ pass_count++; }} else {{ printf("    Test {i} Fail: Exp {expected}, Got %lu\\n", res_val); }}'
+                check_logic = f'if (res == {int(expected)}) pass_count++; else printf("  T{i} Fail: Exp {int(expected)}, Got %lu\\n", res);'
 
         test_blocks.append(f"    {{\n{setup}        {call_line}\n        {check_logic}\n    }}")
 
@@ -104,8 +111,7 @@ def generate_c_tester(task_id_num: int, cases: List[Dict]) -> str:
 #include <math.h>
 #include <string.h>
 #define None 0
-extern uintptr_t func0(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
-extern float func0_f(float); 
+extern uintptr_t func0();
 int main() {{
     int pass_count = 0;
     {"".join(test_blocks)}
@@ -115,6 +121,7 @@ int main() {{
 """
 
 def main():
+    if not os.path.exists(JSONL_FILE): return
     with open(JSONL_FILE, 'r') as f:
         tasks = {int(json.loads(line)['task_id'].split('/')[-1]): json.loads(line) for line in f}
 
@@ -123,12 +130,12 @@ def main():
 
     for f_name in asm_files:
         prob_num = extract_asm_number(f_name)
-        task_id = prob_num - 1  # 重要：Problem 1 对应 HumanEval/0
-        
+        task_id = prob_num - 1
         if task_id not in tasks: continue
-        print(f"\n{'='*10} [Problem {prob_num} -> HumanEval/{task_id}] {'='*10}")
         
+        print(f"\n[Problem {prob_num} -> HumanEval/{task_id}]")
         stats["total"] += 1
+        
         test_cases = parse_test_cases(tasks[task_id]['test'])
         c_code = generate_c_tester(task_id, test_cases)
         
@@ -137,16 +144,20 @@ def main():
             tmp_c_path = tmp_f.name
 
         try:
-            # 链接时创建 alias 确保 func0_f 也能找到汇编中的 _func0
-            cmd = f"clang -arch arm64 '{tmp_c_path}' '{os.path.join(ASM_DIR, f_name)}' -o runner -lm -Wl,-alias,_func0,_func0_f"
-            if subprocess.run(cmd, shell=True, capture_output=True).returncode == 0:
+            # 编译命令：链接汇编并开启数学库
+            cmd = f"clang -arch arm64 '{tmp_c_path}' '{os.path.join(ASM_DIR, f_name)}' -o runner -lm"
+            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            
+            if res.returncode == 0:
                 stats["compiled"] += 1
                 r_res = subprocess.run("./runner", shell=True, capture_output=True, text=True, timeout=2)
                 print(r_res.stdout.strip())
                 if "FINAL_SCORE" in r_res.stdout:
                     p, t = map(int, re.search(r"FINAL_SCORE:(\d+)/(\d+)", r_res.stdout).groups())
                     if p == t: stats["passed"] += 1
-            else: print("❌ 编译失败")
+            else:
+                print("❌ 编译报错:")
+                print(res.stderr)
         finally:
             if os.path.exists("runner"): os.remove("runner")
             if os.path.exists(tmp_c_path): os.remove(tmp_c_path)
