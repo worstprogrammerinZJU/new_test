@@ -95,8 +95,8 @@ def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
         4: ("float", ["float*", "int"], False),              # mean_absolute_deviation
         7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring
         22: ("int*", ["void*", "int"], True),                # filter_integers
-        81: ("char**", ["float*", "int"], True),             # numerical_letter_grade -> char**
-        82: ("int", ["char*"], False),                       # prime_length -> int (bool)
+        81: ("char**", ["float*", "int"], True),             # numerical_letter_grade
+        82: ("int", ["char*"], False),                       # prime_length
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
@@ -127,7 +127,6 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                 setup_lines.append(f'    int b{idx} = {1 if arg else 0};')
                 call_args.append(f"b{idx}")
             elif isinstance(arg, float):
-                # 使用格式化函数确保正确
                 setup_lines.append(f'    float f{idx} = {format_c_float(arg)};')
                 call_args.append(f"f{idx}")
             elif isinstance(arg, int):
@@ -156,20 +155,17 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
                     elif isinstance(first, float):
-                        # 修复：所有浮点数都使用格式化的 float 字面量
                         elements = [format_c_float(x) for x in arg]
                         setup_lines.append(f'    float arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
                     else:  # int or mixed
-                        # 检查是否全是整数
                         if all(isinstance(x, int) and not isinstance(x, bool) for x in arg):
                             elements = [str(x) for x in arg]
                             setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
                             call_args.append(f"arr{idx}")
                             call_args.append(str(len(arg)))
                         else:
-                            # 混合类型，转为 float 数组（对于 numerical_letter_grade）
                             elements = []
                             for x in arg:
                                 if isinstance(x, (int, float)) and not isinstance(x, bool):
@@ -186,17 +182,14 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
         check_code = ""
         
         if isinstance(expected, list):
-            # 返回列表，检查非空或长度
             if ret_is_ptr:
                 check_code = f'''
         if (res != NULL) pass_count++; 
         else printf("  T{i} Fail: Expected non-null list\\n");'''
             else:
                 check_code = f'''
-        // List return not supported for non-pointer types
         pass_count++;'''
         elif isinstance(expected, bool):
-            # 布尔值比较
             c_expected = "1" if expected else "0"
             if ret_type in ["float", "double"]:
                 check_code = f'''
@@ -216,15 +209,15 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
         else printf("  T{i} Fail: Exp {expected}, Got %d\\n", res);'''
         elif expected is None:
             check_code = f'''
-        pass_count++;  // Skip None check'''
+        pass_count++;'''
         else:
             check_code = f'''
-        pass_count++;  // Skip unknown type check'''
+        pass_count++;'''
         
-        # 生成函数调用 - 修复 void 类型问题
+        # 生成函数调用
         if ret_type == "void":
             call_line = f"func0({', '.join(call_args)});"
-            check_code = f"pass_count++;  // void return"
+            check_code = f"pass_count++;"
         elif ret_is_ptr or ret_type in ["char**", "int*"]:
             call_line = f"{ret_type} res = func0({', '.join(call_args)});"
         else:
@@ -243,7 +236,6 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
 #include <string.h>
 #include <stdlib.h>
 
-// 声明外部汇编函数
 extern {ret_type} func0();
 
 int main() {{
@@ -270,6 +262,9 @@ def main():
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], 
                       key=extract_asm_number)
     
+    # 收集跳过的任务
+    skipped_tasks = []
+    
     stats = {"total": 0, "compiled": 0, "passed": 0, "skipped": 0, "format_error": 0}
 
     for f_name in asm_files:
@@ -278,6 +273,7 @@ def main():
         
         if task_id not in tasks:
             print(f"\n[Problem {prob_num}] Unknown task")
+            skipped_tasks.append((prob_num, task_id, "Unknown task"))
             continue
             
         task = tasks[task_id]
@@ -289,8 +285,11 @@ def main():
         test_cases = parse_test_cases(task['test'])
         
         if not test_cases:
-            print("  ⚠️ No test cases found")
+            print("  ⚠️ No test cases found - SKIPPED")
+            skipped_tasks.append((prob_num, task_id, task_name))
             stats["skipped"] += 1
+            # 打印原始 test 代码以便调试
+            print(f"  📝 Raw test code preview: {task['test'][:200]}...")
             continue
             
         for j, case in enumerate(test_cases):
@@ -304,7 +303,6 @@ def main():
             traceback.print_exc()
             continue
         
-        # 调试：保存生成的 C 代码
         debug_c_path = f"/tmp/tester_{task_id}.c"
         with open(debug_c_path, "w") as f:
             f.write(c_code)
@@ -330,9 +328,7 @@ def main():
             run_res = subprocess.run("./runner", shell=True, capture_output=True, 
                                    text=True, timeout=5)
             
-            # 修复：处理输出中的转义字符
             output = run_res.stdout.strip()
-            # 将字面量的 \n 替换为实际换行符以便显示
             display_output = output.replace('\\n', '\n').replace('\\t', '\t')
             print(f"  Output: {display_output}")
             
@@ -360,8 +356,14 @@ def main():
                 if os.path.exists(f):
                     os.remove(f)
 
+    # 打印跳过的任务详情
     print(f"\n{'='*50}")
-    print(f"📊 汇总:")
+    print("🚫 跳过的任务详情:")
+    for prob_num, task_id, task_name in skipped_tasks:
+        print(f"   Problem {prob_num} -> HumanEval/{task_id}: {task_name}")
+    print(f"{'='*50}")
+    
+    print(f"\n📊 汇总:")
     print(f"   总计:    {stats['total']}")
     print(f"   编译成功: {stats['compiled']}")
     print(f"   全过:    {stats['passed']}")
