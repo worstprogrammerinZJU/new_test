@@ -7,84 +7,118 @@ _func0:                                 ; @func0
 ; %bb.0:
 	sub	sp, sp, #80
 	.cfi_def_cfa_offset 80
-	stp	x24, x23, [sp, #16]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #32]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
 	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
 	add	x29, sp, #64
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x19, x0
-	cmp	w0, #1
-	b.lt	LBB0_4
-; %bb.1:
-	mov	w22, #0
-	mov	w21, #2
-Lloh0:
-	adrp	x20, l_.str@PAGE
-Lloh1:
-	add	x20, x20, l_.str@PAGEOFF
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	add	w22, w22, #1
-	str	x22, [sp]
+	stur	w0, [x29, #-12]
+	mov	w8, #2
+	stur	w8, [x29, #-16]
+	mov	w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-20]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w9, [x29, #-20]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x8, [x9]
 	mov	x0, #0
 	mov	x1, #0
-	mov	x2, x20
-	bl	_snprintf
-	add	w21, w0, w21
-	cmp	w19, w22
-	b.ne	LBB0_2
-; %bb.3:
-	sxtw	x0, w21
-	b	LBB0_5
+	mov	w2, #0
+	mov	x3, #-1
+	adrp	x4, l_.str@PAGE
+	add	x4, x4, l_.str@PAGEOFF
+	bl	___snprintf_chk
+	ldur	w8, [x29, #-16]
+	add	w8, w8, w0
+	stur	w8, [x29, #-16]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	add	w8, w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_1
 LBB0_4:
-	mov	w0, #2
-LBB0_5:
+	ldursw	x0, [x29, #-16]
 	bl	_malloc
-	mov	x20, x0
-	cbz	x0, LBB0_9
-; %bb.6:
-	mov	w8, #48
-	strh	w8, [x20]
-	cmp	w19, #1
-	b.lt	LBB0_9
-; %bb.7:
-	mov	w23, #0
-	add	x21, x20, #1
-Lloh2:
-	adrp	x22, l_.str@PAGE
-Lloh3:
-	add	x22, x22, l_.str@PAGEOFF
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	add	w23, w23, #1
-	str	x23, [sp]
-	mov	x0, x21
-	mov	x1, x22
-	bl	_sprintf
-	add	x21, x21, w0, sxtw
-	cmp	w19, w23
-	b.ne	LBB0_8
-LBB0_9:
-	mov	x0, x20
+	str	x0, [sp, #32]
+	ldr	x8, [sp, #32]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_11
+LBB0_6:
+	ldr	x8, [sp, #32]
+	str	x8, [sp, #24]
+	ldr	x0, [sp, #24]
+	mov	w1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str.1@PAGE
+	add	x3, x3, l_.str.1@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x8, [sp, #24]
+	add	x8, x8, w0, sxtw
+	str	x8, [sp, #24]
+	mov	w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_7
+LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	x0, [sp, #24]
+	ldr	w9, [sp, #20]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x8, [x9]
+	mov	w1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x8, [sp, #24]
+	add	x8, x8, w0, sxtw
+	str	x8, [sp, #24]
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_7
+LBB0_10:
+	ldr	x8, [sp, #32]
+	stur	x8, [x29, #-8]
+	b	LBB0_11
+LBB0_11:
+	ldur	x0, [x29, #-8]
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #80
 	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.loh AdrpAdd	Lloh2, Lloh3
 	.cfi_endproc
                                         ; -- End function
 	.section	__TEXT,__cstring,cstring_literals
 l_.str:                                 ; @.str
 	.asciz	" %d"
+
+l_.str.1:                               ; @.str.1
+	.asciz	"0"
 
 .subsections_via_symbols

@@ -1,157 +1,97 @@
 	.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI0_0:
+	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w9, w1
-	cmp	w1, #8
-	b.hs	LBB0_4
-; %bb.2:
-	mov	x10, #0
-	mov	x8, #0
-	b	LBB0_8
-LBB0_3:
-	mov	x0, #0
-	ret
-LBB0_4:
-	and	x10, x9, #0xfffffff8
-	add	x8, x0, #16
-	mov	x11, #17197
-	movk	x11, #60188, lsl #16
-	movk	x11, #14050, lsl #32
-	movk	x11, #16154, lsl #48
-	dup.2d	v0, x11
-	mov	w11, #-2147483647
-	dup.2s	v2, w11
-	movi.2d	v1, #0000000000000000
-	movi.2s	v3, #1
-	mov	x11, x10
-	movi.2d	v4, #0000000000000000
-	movi.2d	v5, #0000000000000000
-	movi.2d	v6, #0000000000000000
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	d7, d16, [x8, #-16]
-	ldp	d17, d18, [x8], #32
-	fcvtl	v19.2d, v7.2s
-	fcvtl	v20.2d, v16.2s
-	fcvtl	v21.2d, v17.2s
-	fcvtl	v22.2d, v18.2s
-	frinta.2d	v23, v19
-	frinta.2d	v24, v20
-	frinta.2d	v25, v21
-	frinta.2d	v26, v22
-	fabd.2d	v19, v19, v23
-	fabd.2d	v20, v20, v24
-	fabd.2d	v21, v21, v25
-	fabd.2d	v22, v22, v26
-	fcmgt.2d	v19, v0, v19
-	xtn.2s	v19, v19
-	fcmgt.2d	v20, v0, v20
-	xtn.2s	v20, v20
-	fcmgt.2d	v21, v0, v21
-	xtn.2s	v21, v21
-	fcmgt.2d	v22, v0, v22
-	xtn.2s	v22, v22
-	fcmgt.2s	v7, v7, #0.0
-	fcmgt.2s	v16, v16, #0.0
-	fcmgt.2s	v17, v17, #0.0
-	fcmgt.2s	v18, v18, #0.0
-	and.8b	v7, v19, v7
-	and.8b	v16, v20, v16
-	and.8b	v17, v21, v17
-	and.8b	v18, v22, v18
-	fcvtzs.2d	v19, v23
-	xtn.2s	v19, v19
-	fcvtzs.2d	v20, v24
-	xtn.2s	v20, v20
-	fcvtzs.2d	v21, v25
-	xtn.2s	v21, v21
-	fcvtzs.2d	v22, v26
-	xtn.2s	v22, v22
-	and.8b	v23, v19, v2
-	and.8b	v24, v20, v2
-	and.8b	v25, v21, v2
-	and.8b	v26, v22, v2
-	cmeq.2s	v23, v23, v3
-	cmeq.2s	v24, v24, v3
-	cmeq.2s	v25, v25, v3
-	cmeq.2s	v26, v26, v3
-	mul.2s	v19, v19, v19
-	mul.2s	v20, v20, v20
-	mul.2s	v21, v21, v21
-	mul.2s	v22, v22, v22
-	ushll.2d	v19, v19, #0
-	ushll.2d	v20, v20, #0
-	ushll.2d	v21, v21, #0
-	ushll.2d	v22, v22, #0
-	bic.8b	v23, v7, v23
-	bic.8b	v24, v16, v24
-	bic.8b	v25, v17, v25
-	bic.8b	v26, v18, v26
-	orn.8b	v7, v23, v7
-	sshll.2d	v7, v7, #0
-	bic.16b	v7, v19, v7
-	add.2d	v1, v1, v7
-	orn.8b	v7, v24, v16
-	sshll.2d	v7, v7, #0
-	bic.16b	v7, v20, v7
-	add.2d	v4, v4, v7
-	orn.8b	v7, v25, v17
-	sshll.2d	v7, v7, #0
-	bic.16b	v7, v21, v7
-	add.2d	v5, v5, v7
-	orn.8b	v7, v26, v18
-	sshll.2d	v7, v7, #0
-	bic.16b	v7, v22, v7
-	add.2d	v6, v6, v7
-	subs	x11, x11, #8
-	b.ne	LBB0_5
-; %bb.6:
-	add.2d	v0, v4, v1
-	add.2d	v0, v5, v0
-	add.2d	v0, v6, v0
-	addp.2d	d0, v0
-	fmov	x8, d0
-	cmp	x10, x9
-	b.ne	LBB0_8
-LBB0_7:
-	mov	x0, x8
-	ret
-LBB0_8:
-	add	x11, x0, x10, lsl #2
-	sub	x9, x9, x10
-	mov	x10, #17197
-	movk	x10, #60188, lsl #16
-	movk	x10, #14050, lsl #32
-	movk	x10, #16154, lsl #48
-	b	LBB0_10
-LBB0_9:                                 ;   in Loop: Header=BB0_10 Depth=1
-	add	x11, x11, #4
-	subs	x9, x9, #1
-	b.eq	LBB0_7
-LBB0_10:                                ; =>This Inner Loop Header: Depth=1
-	ldr	s0, [x11]
-	fcvt	d2, s0
-	frinta	d1, d2
-	fabd	d2, d2, d1
-	fmov	d3, x10
-	fcmp	d2, d3
-	b.pl	LBB0_9
-; %bb.11:                               ;   in Loop: Header=BB0_10 Depth=1
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	xzr, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s1, [x8, x9, lsl #2]
+	fcvt	d1, s1
+	frinta	d1, d1
+	fabd	d0, d0, d1
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, pl
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
 	fcmp	s0, #0.0
-	fcvtzs	w12, d1
-	and	w13, w12, #0x80000001
-	ccmp	w13, #1, #0, gt
-	b.ne	LBB0_9
-; %bb.12:                               ;   in Loop: Header=BB0_10 Depth=1
-	mul	w12, w12, w12
-	add	x8, x8, x12
-	b	LBB0_9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	fcvtas	w8, d0
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	fcvtas	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #4]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	fcvtas	w9, d0
+	mul	w9, w8, w9
+	ldr	x8, [sp, #8]
+	add	x8, x8, w9, sxtw
+	str	x8, [sp, #8]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_9:
+	ldr	x0, [sp, #8]
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols

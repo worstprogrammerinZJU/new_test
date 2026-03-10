@@ -5,84 +5,77 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x22, x21, [sp, #-48]!           ; 16-byte Folded Spill
+	sub	sp, sp, #48
 	.cfi_def_cfa_offset 48
-	stp	x20, x19, [sp, #16]             ; 16-byte Folded Spill
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x19, x0
+	str	x0, [sp, #16]
+	ldr	x0, [sp, #16]
 	bl	_strlen
-	mov	x20, x0
-	cbz	w20, LBB0_3
-; %bb.1:
-	lsl	x21, x20, #32
-	mov	x8, #-4294967296
-	add	x8, x21, x8
-	asr	x8, x8, #32
-	ldrsb	w8, [x19, x8]
-	and	x0, x8, #0xff
-	tbnz	w8, #31, LBB0_4
-; %bb.2:
-Lloh0:
-	adrp	x8, __DefaultRuneLocale@GOTPAGE
-Lloh1:
-	ldr	x8, [x8, __DefaultRuneLocale@GOTPAGEOFF]
-	add	x8, x8, x0, lsl #2
-	ldr	w8, [x8, #60]
-	and	w0, w8, #0x100
-	cbnz	w0, LBB0_5
-	b	LBB0_11
+	mov	x8, x0
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
+LBB0_2:
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #1
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldrb	w0, [sp, #11]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
 LBB0_3:
-	mov	w0, #0
-	b	LBB0_11
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
 LBB0_4:
-                                        ; kill: def $w0 killed $w0 killed $x0
-	mov	w1, #256
-	bl	___maskrune
-	cbz	w0, LBB0_11
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
 LBB0_5:
-	cmp	w20, #1
-	b.ne	LBB0_7
-; %bb.6:
-	mov	w0, #1
-	b	LBB0_11
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_9
+LBB0_6:
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #2
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
+	strb	w8, [sp, #10]
+	ldrb	w0, [sp, #10]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
 LBB0_7:
-	mov	x8, #-8589934592
-	add	x8, x21, x8
-	asr	x8, x8, #32
-	ldrsb	w8, [x19, x8]
-	and	x0, x8, #0xff
-	tbnz	w8, #31, LBB0_9
-; %bb.8:
-Lloh2:
-	adrp	x8, __DefaultRuneLocale@GOTPAGE
-Lloh3:
-	ldr	x8, [x8, __DefaultRuneLocale@GOTPAGEOFF]
-	add	x8, x8, x0, lsl #2
-	ldr	w8, [x8, #60]
-	and	w0, w8, #0x100
-	b	LBB0_10
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
+LBB0_8:
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_9
 LBB0_9:
-                                        ; kill: def $w0 killed $w0 killed $x0
-	mov	w1, #256
-	bl	___maskrune
-LBB0_10:
-	cmp	w0, #0
-	cset	w0, eq
-LBB0_11:
+	ldur	w0, [x29, #-4]
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp], #48             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
-	.loh AdrpLdrGot	Lloh0, Lloh1
-	.loh AdrpLdrGot	Lloh2, Lloh3
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols

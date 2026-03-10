@@ -5,10 +5,16 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	madd	w8, w0, w0, w0
-	cmp	w8, #0
-	cinc	w8, w8, lt
-	asr	w0, w8, #1
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #12]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #12]
+	add	w9, w9, #1
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w0, w8, w9
+	add	sp, sp, #16
 	ret
 	.cfi_endproc
                                         ; -- End function

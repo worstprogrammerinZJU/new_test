@@ -5,47 +5,57 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x22, x21, [sp, #-48]!           ; 16-byte Folded Spill
+	sub	sp, sp, #48
 	.cfi_def_cfa_offset 48
-	stp	x20, x19, [sp, #16]             ; 16-byte Folded Spill
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x19, x0
+	stur	x0, [x29, #-8]
+	adrp	x8, l_.str@PAGE
+	add	x8, x8, l_.str@PAGEOFF
+	str	x8, [sp, #16]
+	str	wzr, [sp, #12]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldrsw	x8, [sp, #8]
+	str	x8, [sp]                        ; 8-byte Folded Spill
+	ldur	x0, [x29, #-8]
 	bl	_strlen
-	cbz	x0, LBB0_3
-; %bb.1:
-	mov	x21, x0
-	mov	w20, #0
-Lloh0:
-	adrp	x22, l_.str@PAGE
-Lloh1:
-	add	x22, x22, l_.str@PAGEOFF
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsb	w1, [x19], #1
-	mov	x0, x22
-	mov	w2, #7
-	bl	_memchr
-	cmp	x0, #0
-	cinc	w20, w20, ne
-	subs	x21, x21, #1
-	b.ne	LBB0_2
+	ldr	x8, [sp]                        ; 8-byte Folded Reload
+	subs	x8, x8, x0
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #16]
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w1, [x8, x9]
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
 	b	LBB0_4
-LBB0_3:
-	mov	w20, #0
-LBB0_4:
-	mov	x0, x20
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_6:
+	ldr	w0, [sp, #12]
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp], #48             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
-	.loh AdrpAdd	Lloh0, Lloh1
 	.cfi_endproc
                                         ; -- End function
 	.section	__TEXT,__cstring,cstring_literals

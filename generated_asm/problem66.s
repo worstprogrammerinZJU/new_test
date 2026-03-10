@@ -5,108 +5,136 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #128
-	.cfi_def_cfa_offset 128
-	stp	x22, x21, [sp, #80]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #96]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #112]            ; 16-byte Folded Spill
-	add	x29, sp, #112
+	sub	sp, sp, #144
+	.cfi_def_cfa_offset 144
+	stp	x29, x30, [sp, #128]            ; 16-byte Folded Spill
+	add	x29, sp, #128
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x20, x1
-                                        ; kill: def $w0 killed $w0 def $x0
-Lloh0:
 	adrp	x8, ___stack_chk_guard@GOTPAGE
-Lloh1:
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-Lloh2:
 	ldr	x8, [x8]
-	stur	x8, [x29, #-40]
-	str	x0, [sp]
-Lloh3:
-	adrp	x19, _func0.xs@PAGE
-Lloh4:
-	add	x19, x19, _func0.xs@PAGEOFF
-Lloh5:
-	adrp	x3, l_.str@PAGE
-Lloh6:
-	add	x3, x3, l_.str@PAGEOFF
-	mov	x0, x19
-	mov	w1, #0
-	mov	w2, #50
-	bl	___sprintf_chk
-	mov	x0, x19
-	bl	_strlen
-	subs	w21, w0, w20
-	b.ge	LBB0_4
-; %bb.1:
-	cmp	w0, #2
-	b.lt	LBB0_5
-; %bb.2:
-	ubfx	x8, x0, #1, #31
-	mov	x9, #-4294967296
-	add	x10, x9, x0, lsl #32
-	mov	x11, x19
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldrb	w12, [x11]
-	asr	x13, x10, #32
-	ldrb	w14, [x19, x13]
-	strb	w14, [x11], #1
-	strb	w12, [x19, x13]
-	add	x10, x10, x9
-	subs	x8, x8, #1
-	b.ne	LBB0_3
-	b	LBB0_5
-LBB0_4:
-	add	x8, x19, w0, sxtw
-	sxtw	x20, w20
-	sub	x1, x8, x20
-	add	x22, sp, #22
-	add	x0, sp, #22
-	mov	w2, #50
-	bl	___strcpy_chk
-	strb	wzr, [x22, x20]
-	sxtw	x2, w21
-	add	x0, sp, #22
-	mov	x1, x19
-	mov	w3, #50
-	bl	___strncat_chk
-	add	x1, sp, #22
-	mov	x0, x19
-	mov	w2, #50
-	bl	___strcpy_chk
-LBB0_5:
-	ldur	x8, [x29, #-40]
-Lloh7:
-	adrp	x9, ___stack_chk_guard@GOTPAGE
-Lloh8:
-	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
-Lloh9:
-	ldr	x9, [x9]
-	cmp	x9, x8
-	b.ne	LBB0_7
-; %bb.6:
-Lloh10:
+	stur	x8, [x29, #-8]
+	str	w0, [sp, #64]
+	str	w1, [sp, #60]
+	ldr	w9, [sp, #64]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x8, [x9]
 	adrp	x0, _func0.xs@PAGE
-Lloh11:
 	add	x0, x0, _func0.xs@PAGEOFF
-	ldp	x29, x30, [sp, #112]            ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #96]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #80]             ; 16-byte Folded Reload
-	add	sp, sp, #128
-	ret
+	str	x0, [sp, #40]                   ; 8-byte Folded Spill
+	mov	w1, #0
+	mov	x2, #50
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x0, [sp, #40]                   ; 8-byte Folded Reload
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #56]
+	ldr	w8, [sp, #56]
+	ldr	w9, [sp, #60]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_1
+LBB0_1:
+	str	wzr, [sp, #52]
+	b	LBB0_2
+LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #52]
+	ldr	w9, [sp, #56]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldrsw	x10, [sp, #52]
+	adrp	x9, _func0.xs@PAGE
+	add	x9, x9, _func0.xs@PAGEOFF
+	mov	x8, x9
+	add	x8, x8, x10
+	ldrb	w8, [x8]
+	strb	w8, [sp, #51]
+	ldr	w8, [sp, #56]
+	subs	w8, w8, #1
+	ldr	w10, [sp, #52]
+	subs	w8, w8, w10
+	add	x8, x9, w8, sxtw
+	ldrb	w8, [x8]
+	ldrsw	x11, [sp, #52]
+	mov	x10, x9
+	add	x10, x10, x11
+	strb	w8, [x10]
+	ldrb	w8, [sp, #51]
+	ldr	w10, [sp, #56]
+	subs	w10, w10, #1
+	ldr	w11, [sp, #52]
+	subs	w10, w10, w11
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #52]
+	add	w8, w8, #1
+	str	w8, [sp, #52]
+	b	LBB0_2
+LBB0_5:
+	b	LBB0_7
+LBB0_6:
+	ldrsw	x9, [sp, #56]
+	adrp	x8, _func0.xs@PAGE
+	add	x8, x8, _func0.xs@PAGEOFF
+	str	x8, [sp, #32]                   ; 8-byte Folded Spill
+	add	x8, x8, x9
+	ldrsw	x9, [sp, #60]
+	subs	x1, x8, x9
+	sub	x0, x29, #58
+	str	x0, [sp, #16]                   ; 8-byte Folded Spill
+	mov	x2, #50
+	str	x2, [sp, #24]                   ; 8-byte Folded Spill
+	bl	___strcpy_chk
+	ldr	x1, [sp, #32]                   ; 8-byte Folded Reload
+	ldr	x3, [sp, #24]                   ; 8-byte Folded Reload
+	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
+	ldrsw	x9, [sp, #60]
+	mov	x8, x0
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	ldr	w8, [sp, #56]
+	ldr	w9, [sp, #60]
+	subs	w9, w8, w9
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x2, w8
+	bl	___strncat_chk
+	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
+	ldr	x2, [sp, #24]                   ; 8-byte Folded Reload
+	ldr	x0, [sp, #32]                   ; 8-byte Folded Reload
+	bl	___strcpy_chk
+	b	LBB0_7
 LBB0_7:
+	ldur	x9, [x29, #-8]
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	subs	x8, x8, x9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:
 	bl	___stack_chk_fail
-	.loh AdrpAdd	Lloh5, Lloh6
-	.loh AdrpAdd	Lloh3, Lloh4
-	.loh AdrpLdrGotLdr	Lloh0, Lloh1, Lloh2
-	.loh AdrpLdrGotLdr	Lloh7, Lloh8, Lloh9
-	.loh AdrpAdd	Lloh10, Lloh11
+LBB0_9:
+	adrp	x0, _func0.xs@PAGE
+	add	x0, x0, _func0.xs@PAGEOFF
+	ldp	x29, x30, [sp, #128]            ; 16-byte Folded Reload
+	add	sp, sp, #144
+	ret
 	.cfi_endproc
                                         ; -- End function
 .zerofill __DATA,__bss,_func0.xs,50,0   ; @func0.xs

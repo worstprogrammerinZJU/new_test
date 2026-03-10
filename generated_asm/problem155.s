@@ -5,75 +5,103 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x26, x25, [sp, #-80]!           ; 16-byte Folded Spill
+	sub	sp, sp, #80
 	.cfi_def_cfa_offset 80
-	stp	x24, x23, [sp, #16]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #32]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
 	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
 	add	x29, sp, #64
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	.cfi_offset w25, -72
-	.cfi_offset w26, -80
-	mov	x19, x1
-	mov	x20, x0
-	mov	x0, x1
+	stur	x0, [x29, #-16]
+	stur	x1, [x29, #-24]
+	ldur	x0, [x29, #-16]
 	bl	_strlen
-	mov	x23, x0
-	mov	w8, #1
-	bfi	w8, w23, #1, #31
+	mov	x8, x0
+	stur	w8, [x29, #-28]
+	ldur	x0, [x29, #-24]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #32]
+	ldr	w9, [sp, #32]
+	mov	w8, #2
+	mul	w8, w8, w9
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
 	sxtw	x0, w8
 	bl	_malloc
-	mov	x21, x0
-	cmp	w23, #1
-	b.lt	LBB0_4
-; %bb.1:
-	mov	x22, #0
-	sxtw	x25, w23
-	and	x26, x23, #0xffffffff
-	mov	w24, #1
-	mov	x23, x25
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	add	x1, x19, x22
-	mov	x0, x21
-	mov	x2, x23
-	bl	_strncpy
-	add	x0, x21, x23
-	mov	x1, x19
-	mov	x2, x22
-	bl	_strncpy
-	strb	wzr, [x21, x25]
-	mov	x0, x20
-	mov	x1, x21
+	str	x0, [sp, #24]
+	str	wzr, [sp, #20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #32]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #24]
+	ldur	x8, [x29, #-24]
+	ldrsw	x9, [sp, #20]
+	add	x1, x8, x9
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #20]
+	subs	w9, w8, w9
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x2, w8
+	mov	x3, #-1
+	str	x3, [sp, #8]                    ; 8-byte Folded Spill
+	bl	___strncpy_chk
+	ldr	x3, [sp, #8]                    ; 8-byte Folded Reload
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #32]
+	add	x8, x8, x9
+	ldrsw	x9, [sp, #20]
+	subs	x0, x8, x9
+	ldur	x1, [x29, #-24]
+	ldrsw	x2, [sp, #20]
+	bl	___strncpy_chk
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #32]
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	ldur	x0, [x29, #-16]
+	ldr	x1, [sp, #24]
 	bl	_strstr
-	cbnz	x0, LBB0_5
-; %bb.3:                                ;   in Loop: Header=BB0_2 Depth=1
-	add	x22, x22, #1
-	cmp	x22, x25
-	cset	w24, lt
-	sub	x23, x23, #1
-	cmp	x26, x22
-	b.ne	LBB0_2
-	b	LBB0_5
-LBB0_4:
-	mov	w24, #0
-LBB0_5:
-	mov	x0, x21
+	subs	x8, x0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	ldr	x0, [sp, #24]
 	bl	_free
-	and	w0, w24, #0x1
+	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	sturb	w8, [x29, #-1]
+	b	LBB0_7
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_6:
+	ldr	x0, [sp, #24]
+	bl	_free
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	sturb	w8, [x29, #-1]
+	b	LBB0_7
+LBB0_7:
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x26, x25, [sp], #80             ; 16-byte Folded Reload
+	add	sp, sp, #80
 	ret
 	.cfi_endproc
                                         ; -- End function

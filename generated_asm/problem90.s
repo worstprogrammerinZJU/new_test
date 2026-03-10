@@ -5,32 +5,48 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	ldrb	w12, [x0]
-	cbz	w12, LBB0_4
-; %bb.1:
-	mov	x9, #0
-	add	x8, x0, #1
-	mov	w10, #20165
-	mov	w11, #26
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	sxtb	w12, w12
-	sub	w12, w12, #93
-	mul	w13, w12, w10
-	lsr	w14, w13, #19
-	add	w13, w14, w13, lsr #31
-	msub	w12, w13, w11, w12
-	add	w12, w12, #97
-	strb	w12, [x1, x9]
-	add	x13, x9, #1
-	ldrb	w12, [x8, x9]
-	mov	x9, x13
-	cbnz	w12, LBB0_2
-; %bb.3:
-	and	x8, x13, #0xffffffff
-	strb	wzr, [x1, x8]
-	ret
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	x1, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #97
+	add	w8, w8, #4
+	mov	w10, #26
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	add	w8, w8, #97
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #8]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #12]
+	strb	w8, [x9, x10]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_4:
-	strb	wzr, [x1, xzr]
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function

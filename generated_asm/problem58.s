@@ -5,126 +5,85 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	cmp	w1, #2
-	b.lt	LBB0_3
-; %bb.1:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	.cfi_remember_state
-	mov	w8, w1
-	ldr	s0, [x0]
-	sub	x10, x8, #1
-	cmp	x10, #16
-	b.hs	LBB0_4
-; %bb.2:
-	mov	w13, #0
-	mov	w12, #0
-	mov	w9, #1
-	b	LBB0_8
-LBB0_3:
-	.cfi_def_cfa wsp, 0
-	mov	w0, #1
-	ret
-LBB0_4:
-	.cfi_restore_state
-	dup.4s	v0, v0[0]
-	movi.2d	v1, #0000000000000000
-	and	x11, x10, #0xfffffffffffffff0
-	movi.4s	v5, #1
-	orr	x9, x11, #0x1
-	movi.2d	v4, #0000000000000000
-	add	x12, x0, #36
-	mov	x13, x11
-	movi.2d	v3, #0000000000000000
-	movi.2d	v2, #0000000000000000
-	movi.2d	v7, #0000000000000000
-	movi.2d	v17, #0000000000000000
-	movi.2d	v16, #0000000000000000
-	movi.2d	v6, #0000000000000000
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q18, q19, [x12, #-32]
-	ext.16b	v20, v0, v18, #12
-	ldp	q21, q0, [x12], #64
-	ext.16b	v22, v18, v19, #12
-	ext.16b	v23, v19, v21, #12
-	ext.16b	v24, v21, v0, #12
-	fcmgt.4s	v25, v18, v20
-	fcmgt.4s	v26, v19, v22
-	fcmgt.4s	v27, v21, v23
-	fcmgt.4s	v28, v0, v24
-	bit.16b	v7, v5, v25
-	bit.16b	v17, v5, v26
-	bit.16b	v16, v5, v27
-	bit.16b	v6, v5, v28
-	fcmgt.4s	v18, v20, v18
-	fcmgt.4s	v19, v22, v19
-	fcmgt.4s	v20, v23, v21
-	fcmgt.4s	v21, v24, v0
-	bit.16b	v1, v5, v18
-	bit.16b	v4, v5, v19
-	bit.16b	v3, v5, v20
-	bit.16b	v2, v5, v21
-	subs	x13, x13, #16
-	b.ne	LBB0_5
-; %bb.6:
-	cmeq.4s	v5, v7, #0
-	bsl.16b	v5, v17, v7
-	cmeq.4s	v7, v5, #0
-	bit.16b	v5, v16, v7
-	cmeq.4s	v7, v5, #0
-	bit.16b	v5, v6, v7
-	cmtst.4s	v5, v5, v5
-	xtn.4h	v5, v5
-	umov.h	w12, v5[0]
-	umov.h	w13, v5[1]
-	and	w13, w13, #0x1
-	bfi	w12, w13, #1, #1
-	umov.h	w13, v5[2]
-	and	w13, w13, #0x1
-	bfi	w12, w13, #2, #1
-	umov.h	w13, v5[3]
-	bfi	w12, w13, #3, #29
-	tst	w12, #0xf
-	cset	w12, ne
-	cmeq.4s	v5, v1, #0
-	bit.16b	v1, v4, v5
-	cmeq.4s	v4, v1, #0
-	bit.16b	v1, v3, v4
-	cmeq.4s	v3, v1, #0
-	bit.16b	v1, v2, v3
-	cmtst.4s	v1, v1, v1
-	xtn.4h	v1, v1
-	umov.h	w13, v1[0]
-	umov.h	w14, v1[1]
-	and	w14, w14, #0x1
-	bfi	w13, w14, #1, #1
-	umov.h	w14, v1[2]
-	and	w14, w14, #0x1
-	bfi	w13, w14, #2, #1
-	umov.h	w14, v1[3]
-	bfi	w13, w14, #3, #29
-	tst	w13, #0xf
-	cset	w13, ne
-	cmp	x10, x11
-	b.eq	LBB0_10
-; %bb.7:
-	mov	s0, v0[3]
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	str	wzr, [sp, #4]
+	str	wzr, [sp, #8]
+	mov	w8, #1
+	str	w8, [sp]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp]
+	subs	w9, w9, #1
+	ldr	s1, [x8, w9, sxtw #2]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp]
+	subs	w9, w9, #1
+	ldr	s1, [x8, w9, sxtw #2]
+	fcmp	s0, s1
+	cset	w8, pl
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_1
 LBB0_8:
-	add	x10, x0, x9, lsl #2
-	sub	x8, x8, x9
-LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	s1, [x10], #4
-	fcmp	s1, s0
-	csinc	w12, w12, wzr, le
-	csinc	w13, w13, wzr, pl
-	fmov	s0, s1
-	subs	x8, x8, #1
-	b.ne	LBB0_9
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	add	w8, w8, w9
+	subs	w8, w8, #2
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_11
 LBB0_10:
-	add	w8, w13, w12
-	cmp	w8, #2
-	cset	w0, ne
-	add	sp, sp, #16
+	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_11
+LBB0_11:
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function

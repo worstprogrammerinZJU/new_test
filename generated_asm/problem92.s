@@ -5,123 +5,133 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x26, x25, [sp, #-80]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 80
-	stp	x24, x23, [sp, #16]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #32]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	.cfi_offset w25, -72
-	.cfi_offset w26, -80
-	ldrb	w8, [x0]
-	cbz	w8, LBB0_14
-; %bb.1:
-	mov	x20, x0
-	mov	w19, #0
-	mov	w22, #0
-	mov	w21, #1
-Lloh0:
-	adrp	x23, __DefaultRuneLocale@GOTPAGE
-Lloh1:
-	ldr	x23, [x23, __DefaultRuneLocale@GOTPAGEOFF]
-	mov	x24, #70377334112256
-	movk	x24, #32768, lsl #48
-	mov	w25, #1
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	sxtb	w0, w8
-	tbnz	w8, #7, LBB0_4
-; %bb.3:                                ;   in Loop: Header=BB0_2 Depth=1
-	add	x9, x23, w0, uxtw #2
-	ldr	w9, [x9, #60]
-	and	w0, w9, #0x4000
-	b	LBB0_5
-LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
-	mov	w1, #16384
-	bl	___maskrune
-	ldrb	w8, [x20]
-LBB0_5:                                 ;   in Loop: Header=BB0_2 Depth=1
-	cmp	w0, #0
-	ccmp	w22, #0, #4, ne
-	cset	w26, ne
-	cinc	w19, w19, ne
-	and	w9, w8, #0xff
-	cmp	w9, #73
-	ccmp	w25, #0, #4, eq
-	b.ne	LBB0_8
-; %bb.6:                                ;   in Loop: Header=BB0_2 Depth=1
-	sxtb	w0, w8
-	tbnz	w8, #7, LBB0_11
-; %bb.7:                                ;   in Loop: Header=BB0_2 Depth=1
-	add	x9, x23, w0, uxtw #2
-	ldr	w9, [x9, #60]
-	tst	w9, #0x4000
-	cset	w9, eq
-	orr	w9, w9, w26
-	cmp	w9, #0
-	csel	w22, wzr, w22, ne
-	and	w0, w8, #0xff
-	b	LBB0_9
-LBB0_8:                                 ;   in Loop: Header=BB0_2 Depth=1
-	mov	w0, #73
-	mov	w22, #1
-	mov	w8, #73
-LBB0_9:                                 ;   in Loop: Header=BB0_2 Depth=1
-	add	x9, x23, w0, uxtw #2
-	ldr	w9, [x9, #60]
-	and	w0, w9, #0x4000
-LBB0_10:                                ;   in Loop: Header=BB0_2 Depth=1
-	cmp	w0, #0
-	csel	w9, wzr, w25, eq
-	and	w10, w8, #0xff
-	and	x8, x8, #0xff
-	lsl	x8, x21, x8
-	tst	x8, x24
-	csel	w8, w21, w9, ne
-	cmp	w10, #63
-	csel	w25, w9, w8, hi
-	ldrb	w8, [x20, #1]!
-	cbnz	w8, LBB0_2
-	b	LBB0_15
-LBB0_11:                                ;   in Loop: Header=BB0_2 Depth=1
-	mov	w1, #16384
-	bl	___maskrune
-	mov	x8, x0
-	ldrsb	w0, [x20]
-	cmp	w8, #0
+	stur	x0, [x29, #-8]
+	mov	w8, #1
+	stur	w8, [x29, #-12]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
 	cset	w8, eq
-	orr	w8, w8, w26
-	cmp	w8, #0
-	csel	w22, wzr, w22, ne
-	tbnz	w0, #31, LBB0_13
-; %bb.12:                               ;   in Loop: Header=BB0_2 Depth=1
-	mov	x8, x0
+	tbnz	w8, #0, LBB0_19
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #16]
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #73
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_11
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
-LBB0_13:                                ;   in Loop: Header=BB0_2 Depth=1
-	mov	w1, #16384
-	bl	___maskrune
-	ldrb	w8, [x20]
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #16]
 	b	LBB0_10
-LBB0_14:
-	mov	w19, #0
-LBB0_15:
-	mov	x0, x19
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x26, x25, [sp], #80             ; 16-byte Folded Reload
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	stur	wzr, [x29, #-12]
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #46
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #63
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #33
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_16
+LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	stur	w8, [x29, #-12]
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_18
+LBB0_18:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_19:
+	ldr	w0, [sp, #12]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
-	.loh AdrpLdrGot	Lloh0, Lloh1
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols

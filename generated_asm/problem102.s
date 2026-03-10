@@ -5,25 +5,63 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	cmp	w1, w0
-	b.ge	LBB0_2
-; %bb.1:
-	mov	w0, #-1
-	ret
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #8]
+	str	w1, [sp, #4]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #-1
+	str	w8, [sp, #12]
+	b	LBB0_8
 LBB0_2:
-	and	w8, w1, #0x80000001
-	cmp	w1, w0
-	b.ne	LBB0_5
-; %bb.3:
-	cmp	w8, #1
-	b.ne	LBB0_5
-; %bb.4:
-	mov	w0, #-1
-	ret
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:
+	ldr	w8, [sp, #4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:
+	mov	w8, #-1
+	str	w8, [sp, #12]
+	b	LBB0_8
 LBB0_5:
-	cmp	w8, #1
-	cset	w8, eq
-	sub	w0, w1, w8
+	ldr	w8, [sp, #4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_8
+LBB0_7:
+	ldr	w8, [sp, #4]
+	str	w8, [sp, #12]
+	b	LBB0_8
+LBB0_8:
+	ldr	w0, [sp, #12]
+	add	sp, sp, #16
 	ret
 	.cfi_endproc
                                         ; -- End function

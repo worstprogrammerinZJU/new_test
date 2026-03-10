@@ -5,28 +5,80 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	frinta	s3, s0
-	frinta	s4, s1
-	frinta	s5, s2
-	fcmp	s3, s0
-	fccmp	s4, s1, #0, eq
-	fccmp	s5, s2, #0, eq
-	b.eq	LBB0_2
-; %bb.1:
-	mov	w0, #0
-	ret
-LBB0_2:
-	fadd	s3, s0, s1
-	fcmp	s3, s2
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	s0, [sp, #8]
+	str	s1, [sp, #4]
+	str	s2, [sp]
+	ldr	s0, [sp, #8]
+	frinta	s0, s0
+	ldr	s1, [sp, #8]
+	fcmp	s0, s1
 	cset	w8, eq
-	fadd	s3, s0, s2
-	fcmp	s3, s1
-	cset	w9, eq
-	orr	w8, w8, w9
-	fadd	s1, s1, s2
-	fcmp	s1, s0
-	cset	w9, eq
-	orr	w0, w9, w8
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	str	wzr, [sp, #12]
+	b	LBB0_11
+LBB0_2:
+	ldr	s0, [sp, #4]
+	frinta	s0, s0
+	ldr	s1, [sp, #4]
+	fcmp	s0, s1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	str	wzr, [sp, #12]
+	b	LBB0_11
+LBB0_4:
+	ldr	s0, [sp]
+	frinta	s0, s0
+	ldr	s1, [sp]
+	fcmp	s0, s1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	str	wzr, [sp, #12]
+	b	LBB0_11
+LBB0_6:
+	ldr	s0, [sp, #8]
+	ldr	s1, [sp, #4]
+	fadd	s0, s0, s1
+	ldr	s1, [sp]
+	fcmp	s0, s1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_7
+LBB0_7:
+	ldr	s0, [sp, #8]
+	ldr	s1, [sp]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #4]
+	fcmp	s0, s1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:
+	ldr	s0, [sp, #4]
+	ldr	s1, [sp]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #8]
+	fcmp	s0, s1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:
+	mov	w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_11
+LBB0_10:
+	str	wzr, [sp, #12]
+	b	LBB0_11
+LBB0_11:
+	ldr	w0, [sp, #12]
+	add	sp, sp, #16
 	ret
 	.cfi_endproc
                                         ; -- End function

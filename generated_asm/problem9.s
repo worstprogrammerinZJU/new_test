@@ -5,73 +5,50 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w8, w1
-	cmp	w1, #16
-	b.hs	LBB0_4
-; %bb.2:
-	mov	x9, #0
-	mov	w10, #0
-	mov	w11, #1
-	b	LBB0_7
-LBB0_3:
-	mov	w10, #0
-	mov	w11, #1
-	b	LBB0_9
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #40]
+	str	w1, [sp, #36]
+	str	x2, [sp, #24]
+	str	wzr, [sp, #20]
+	mov	w8, #1
+	str	w8, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	w8, [sp, #20]
+	add	w8, w8, w9
+	str	w8, [sp, #20]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	w8, [sp, #16]
+	mul	w8, w8, w9
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_4:
-	movi.2d	v4, #0000000000000000
-	and	x9, x8, #0xfffffff0
-	movi.4s	v0, #1
-	add	x10, x0, #32
-	mov	x11, x9
-	movi.4s	v1, #1
-	movi.4s	v2, #1
-	movi.4s	v3, #1
-	movi.2d	v5, #0000000000000000
-	movi.2d	v6, #0000000000000000
-	movi.2d	v7, #0000000000000000
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q16, q17, [x10, #-32]
-	ldp	q18, q19, [x10], #64
-	add.4s	v4, v16, v4
-	add.4s	v5, v17, v5
-	add.4s	v6, v18, v6
-	add.4s	v7, v19, v7
-	mul.4s	v0, v16, v0
-	mul.4s	v1, v17, v1
-	mul.4s	v2, v18, v2
-	mul.4s	v3, v19, v3
-	subs	x11, x11, #16
-	b.ne	LBB0_5
-; %bb.6:
-	add.4s	v4, v5, v4
-	add.4s	v4, v6, v4
-	add.4s	v4, v7, v4
-	addv.4s	s4, v4
-	fmov	w10, s4
-	mul.4s	v0, v1, v0
-	mul.4s	v0, v2, v0
-	mul.4s	v0, v3, v0
-	ext.16b	v1, v0, v0, #8
-	mul.2s	v0, v0, v1
-	mov.s	w11, v0[1]
-	fmov	w12, s0
-	mul	w11, w12, w11
-	cmp	x9, x8
-	b.eq	LBB0_9
-LBB0_7:
-	add	x12, x0, x9, lsl #2
-	sub	x8, x8, x9
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w9, [x12], #4
-	add	w10, w9, w10
-	mul	w11, w9, w11
-	subs	x8, x8, #1
-	b.ne	LBB0_8
-LBB0_9:
-	stp	w10, w11, [x2]
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	str	w8, [x9]
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	str	w8, [x9, #4]
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function

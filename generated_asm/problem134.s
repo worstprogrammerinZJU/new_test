@@ -5,63 +5,44 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w9, w1
-	cmp	w1, #16
-	b.hs	LBB0_4
-; %bb.2:
-	mov	x10, #0
-	mov	w8, #0
-	b	LBB0_7
-LBB0_3:
-	mov	w0, #0
-	ret
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	fcvtps	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	fcvtps	w9, d0
+	mul	w9, w8, w9
+	ldr	w8, [sp, #16]
+	add	w8, w8, w9
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_4:
-	and	x10, x9, #0xfffffff0
-	add	x8, x0, #32
-	movi.2d	v0, #0000000000000000
-	mov	x11, x10
-	movi.2d	v1, #0000000000000000
-	movi.2d	v2, #0000000000000000
-	movi.2d	v3, #0000000000000000
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q4, q5, [x8, #-32]
-	ldp	q6, q7, [x8], #64
-	frintp.4s	v4, v4
-	frintp.4s	v5, v5
-	frintp.4s	v6, v6
-	frintp.4s	v7, v7
-	fcvtzs.4s	v4, v4
-	fcvtzs.4s	v5, v5
-	fcvtzs.4s	v6, v6
-	fcvtzs.4s	v7, v7
-	mla.4s	v0, v4, v4
-	mla.4s	v1, v5, v5
-	mla.4s	v2, v6, v6
-	mla.4s	v3, v7, v7
-	subs	x11, x11, #16
-	b.ne	LBB0_5
-; %bb.6:
-	add.4s	v0, v1, v0
-	add.4s	v0, v2, v0
-	add.4s	v0, v3, v0
-	addv.4s	s0, v0
-	fmov	w8, s0
-	cmp	x10, x9
-	b.eq	LBB0_9
-LBB0_7:
-	add	x11, x0, x10, lsl #2
-	sub	x9, x9, x10
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	s0, [x11], #4
-	fcvtps	w10, s0
-	madd	w8, w10, w10, w8
-	subs	x9, x9, #1
-	b.ne	LBB0_8
-LBB0_9:
-	mov	x0, x8
+	ldr	w0, [sp, #16]
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
