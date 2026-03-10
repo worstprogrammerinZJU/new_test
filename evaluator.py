@@ -50,33 +50,68 @@ def parse_test_cases(test_code: str) -> List[Dict]:
         tree = ast.parse(test_code)
         for node in ast.walk(tree):
             if isinstance(node, ast.Assert):
+                # 情况1: candidate(x) == y 或 y == candidate(x)
                 if isinstance(node.test, ast.Compare):
                     left, ops, comparators = node.test.left, node.test.ops, node.test.comparators
                     call_node = None
                     expected_node = None
+                    
                     if isinstance(left, ast.Call):
                         call_node = left
                         expected_node = comparators[0]
                     elif isinstance(comparators[0], ast.Call):
                         call_node = comparators[0]
                         expected_node = left
+                    
                     if call_node and isinstance(ops[0], (ast.Eq, ast.Is)):
                         args = [evaluate_ast_node(arg) for arg in call_node.args]
                         expected = evaluate_ast_node(expected_node)
                         cases.append({"args": args, "expected": expected})
+                        continue
+                    
+                    # 情况2: abs(candidate(x) - y) < epsilon 或 abs(y - candidate(x)) < epsilon
+                    if isinstance(ops[0], ast.Lt) and len(comparators) == 1:
+                        # 检查左边是否是 abs(...) 调用
+                        if isinstance(left, ast.Call) and isinstance(left.func, ast.Name) and left.func.id == 'abs':
+                            abs_arg = left.args[0] if left.args else None
+                            if isinstance(abs_arg, ast.BinOp) and isinstance(abs_arg.op, ast.Sub):
+                                # abs(A - B) < C
+                                left_operand = abs_arg.left
+                                right_operand = abs_arg.right
+                                
+                                # 判断哪个是 candidate 调用，哪个是期望值
+                                call_node = None
+                                expected_node = None
+                                
+                                if isinstance(left_operand, ast.Call):
+                                    call_node = left_operand
+                                    expected_node = right_operand
+                                elif isinstance(right_operand, ast.Call):
+                                    call_node = right_operand
+                                    expected_node = left_operand
+                                
+                                if call_node:
+                                    args = [evaluate_ast_node(arg) for arg in call_node.args]
+                                    expected = evaluate_ast_node(expected_node)
+                                    tolerance = evaluate_ast_node(comparators[0])
+                                    cases.append({
+                                        "args": args, 
+                                        "expected": expected,
+                                        "tolerance": tolerance if tolerance else 1e-6
+                                    })
+                                        continue
+                
+                # 情况3: 只有 candidate(x) 调用（假设返回 True）
                 elif isinstance(node.test, ast.Call):
                     call_node = node.test
                     args = [evaluate_ast_node(arg) for arg in call_node.args]
                     cases.append({"args": args, "expected": True})
+                    
     except Exception as e:
         print(f"Parse error: {e}")
+        import traceback
+        traceback.print_exc()
     return cases
-
-def is_heterogeneous_list(lst):
-    """检查列表是否为异构类型"""
-    if not isinstance(lst, list) or not lst:
-        return False
-    return any(not isinstance(x, (int, bool)) for x in lst)
 
 def format_c_float(val):
     """格式化浮点数为 C 语法，确保整数也有小数点"""
@@ -95,6 +130,7 @@ def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
         4: ("float", ["float*", "int"], False),              # mean_absolute_deviation
         7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring
         22: ("int*", ["void*", "int"], True),                # filter_integers
+        32: ("float", ["float*", "int"], False),             # find_zero (返回接近0的x值)
         81: ("char**", ["float*", "int"], True),             # numerical_letter_grade
         82: ("int", ["char*"], False),                       # prime_length
     }
@@ -111,6 +147,7 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
     for i, case in enumerate(cases):
         args = case['args']
         expected = case['expected']
+        tolerance = case.get('tolerance', None)
         
         setup_lines = []
         call_args = []
@@ -199,14 +236,16 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                 check_code = f'''
         if (res == {c_expected}) pass_count++; 
         else printf("  T{i} Fail: Exp {expected} ({c_expected}), Got %d\\n", res);'''
-        elif isinstance(expected, float):
-            check_code = f'''
+        elif isinstance(expected, (int, float)):
+            # 检查是否有容差
+            if tolerance is not None:
+                check_code = f'''
+        if (fabs((double)res - {expected}) < {tolerance}) pass_count++; 
+        else printf("  T{i} Fail: Exp {expected} (tol={tolerance}), Got %f\\n", (double)res);'''
+            else:
+                check_code = f'''
         if (fabs((double)res - {expected}) < 1e-6) pass_count++; 
         else printf("  T{i} Fail: Exp {expected}, Got %f\\n", (double)res);'''
-        elif isinstance(expected, int):
-            check_code = f'''
-        if (res == {expected}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %d\\n", res);'''
         elif expected is None:
             check_code = f'''
         pass_count++;'''
@@ -262,7 +301,6 @@ def main():
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], 
                       key=extract_asm_number)
     
-    # 收集跳过的任务
     skipped_tasks = []
     
     stats = {"total": 0, "compiled": 0, "passed": 0, "skipped": 0, "format_error": 0}
@@ -288,12 +326,12 @@ def main():
             print("  ⚠️ No test cases found - SKIPPED")
             skipped_tasks.append((prob_num, task_id, task_name))
             stats["skipped"] += 1
-            # 打印原始 test 代码以便调试
-            print(f"  📝 Raw test code preview: {task['test'][:200]}...")
+            print(f"  📝 Raw test code preview: {task['test'][:300]}...")
             continue
             
         for j, case in enumerate(test_cases):
-            print(f"    Case {j}: args={case['args']}, expected={case['expected']}")
+            tol_info = f", tolerance={case.get('tolerance')}" if case.get('tolerance') else ""
+            print(f"    Case {j}: args={case['args']}, expected={case['expected']}{tol_info}")
         
         try:
             c_code = generate_c_tester(task_id, task_name, test_cases)
@@ -356,7 +394,6 @@ def main():
                 if os.path.exists(f):
                     os.remove(f)
 
-    # 打印跳过的任务详情
     print(f"\n{'='*50}")
     print("🚫 跳过的任务详情:")
     for prob_num, task_id, task_name in skipped_tasks:
