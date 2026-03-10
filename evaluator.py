@@ -78,17 +78,25 @@ def is_heterogeneous_list(lst):
         return False
     return any(not isinstance(x, (int, bool)) for x in lst)
 
+def format_c_float(val):
+    """格式化浮点数为 C 语法，确保整数也有小数点"""
+    if isinstance(val, int):
+        return f"{val}.0f"
+    else:
+        return f"{val}f"
+
 def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
     # 任务签名映射 (return_type, arg_types, ret_is_ptr)
-    # 注意：返回列表的函数实际上返回指针（void* 或 char**）
     signatures = {
-        0: ("int", ["float*", "int", "float"], False),      # has_close_elements -> int (bool)
-        1: ("char**", ["char*"], True),                      # separate_paren_groups -> char** (list of strings)
+        0: ("int", ["float*", "int", "float"], False),      # has_close_elements
+        1: ("char**", ["char*"], True),                      # separate_paren_groups
         2: ("float", ["float"], False),                      # truncate_number
         3: ("int", ["char**", "int", "int"], False),         # below_zero
         4: ("float", ["float*", "int"], False),              # mean_absolute_deviation
-        7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring -> char**
-        22: ("int*", ["void*", "int"], True),                # filter_integers -> int* (list of ints)
+        7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring
+        22: ("int*", ["void*", "int"], True),                # filter_integers
+        81: ("char**", ["float*", "int"], True),             # numerical_letter_grade -> char**
+        82: ("int", ["char*"], False),                       # prime_length -> int (bool)
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
@@ -119,7 +127,8 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                 setup_lines.append(f'    int b{idx} = {1 if arg else 0};')
                 call_args.append(f"b{idx}")
             elif isinstance(arg, float):
-                setup_lines.append(f'    float f{idx} = {arg}f;')
+                # 使用格式化函数确保正确
+                setup_lines.append(f'    float f{idx} = {format_c_float(arg)};')
                 call_args.append(f"f{idx}")
             elif isinstance(arg, int):
                 call_args.append(str(arg))
@@ -147,20 +156,29 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
                     elif isinstance(first, float):
-                        elements = [f"{x}f" for x in arg]
+                        # 修复：所有浮点数都使用格式化的 float 字面量
+                        elements = [format_c_float(x) for x in arg]
                         setup_lines.append(f'    float arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
-                    else:  # int or mixed (for hetero lists, we treat as int array for now)
-                        elements = []
-                        for x in arg:
-                            if isinstance(x, int) and not isinstance(x, bool):
-                                elements.append(str(x))
-                            else:
-                                elements.append("0")  # Placeholder for non-int
-                        setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
-                        call_args.append(f"arr{idx}")
-                        call_args.append(str(len(arg)))
+                    else:  # int or mixed
+                        # 检查是否全是整数
+                        if all(isinstance(x, int) and not isinstance(x, bool) for x in arg):
+                            elements = [str(x) for x in arg]
+                            setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
+                            call_args.append(f"arr{idx}")
+                            call_args.append(str(len(arg)))
+                        else:
+                            # 混合类型，转为 float 数组（对于 numerical_letter_grade）
+                            elements = []
+                            for x in arg:
+                                if isinstance(x, (int, float)) and not isinstance(x, bool):
+                                    elements.append(format_c_float(float(x)))
+                                else:
+                                    elements.append("0.0f")
+                            setup_lines.append(f'    float arr{idx}[] = {{{", ".join(elements)}}};')
+                            call_args.append(f"arr{idx}")
+                            call_args.append(str(len(arg)))
         
         setup_code = '\n'.join(f'        {line}' for line in setup_lines) if setup_lines else ""
         
@@ -172,7 +190,7 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
             if ret_is_ptr:
                 check_code = f'''
         if (res != NULL) pass_count++; 
-        else printf("  T{i} Fail: Expected non-null list\\\\n");'''
+        else printf("  T{i} Fail: Expected non-null list\\n");'''
             else:
                 check_code = f'''
         // List return not supported for non-pointer types
@@ -183,19 +201,19 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
             if ret_type in ["float", "double"]:
                 check_code = f'''
         if ((res > 0.5f) == {expected}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %f\\\\n", res);'''
+        else printf("  T{i} Fail: Exp {expected}, Got %f\\n", res);'''
             else:
                 check_code = f'''
         if (res == {c_expected}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected} ({c_expected}), Got %d\\\\n", res);'''
+        else printf("  T{i} Fail: Exp {expected} ({c_expected}), Got %d\\n", res);'''
         elif isinstance(expected, float):
             check_code = f'''
         if (fabs((double)res - {expected}) < 1e-6) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %f\\\\n", (double)res);'''
+        else printf("  T{i} Fail: Exp {expected}, Got %f\\n", (double)res);'''
         elif isinstance(expected, int):
             check_code = f'''
         if (res == {expected}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %d\\\\n", res);'''
+        else printf("  T{i} Fail: Exp {expected}, Got %d\\n", res);'''
         elif expected is None:
             check_code = f'''
         pass_count++;  // Skip None check'''
@@ -232,7 +250,7 @@ int main() {{
     int pass_count = 0;
     int total = {len(cases)};
     {"".join(test_blocks)}
-    printf("FINAL_SCORE:%d/%d\\\\n", pass_count, total);
+    printf("FINAL_SCORE:%d/%d\\n", pass_count, total);
     return (pass_count == total) ? 0 : 1;
 }}
 '''
@@ -252,7 +270,7 @@ def main():
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], 
                       key=extract_asm_number)
     
-    stats = {"total": 0, "compiled": 0, "passed": 0, "skipped": 0}
+    stats = {"total": 0, "compiled": 0, "passed": 0, "skipped": 0, "format_error": 0}
 
     for f_name in asm_files:
         prob_num = extract_asm_number(f_name)
@@ -312,8 +330,11 @@ def main():
             run_res = subprocess.run("./runner", shell=True, capture_output=True, 
                                    text=True, timeout=5)
             
+            # 修复：处理输出中的转义字符
             output = run_res.stdout.strip()
-            print(f"  Output: {output}")
+            # 将字面量的 \n 替换为实际换行符以便显示
+            display_output = output.replace('\\n', '\n').replace('\\t', '\t')
+            print(f"  Output: {display_output}")
             
             if "FINAL_SCORE" in output:
                 match = re.search(r"FINAL_SCORE:(\d+)/(\d+)", output)
@@ -326,6 +347,7 @@ def main():
                         print(f"  ⚠️ {passed}/{total} tests passed")
             else:
                 print(f"  ⚠️ 输出格式异常")
+                stats["format_error"] += 1
                 if run_res.stderr:
                     print(f"  Stderr: {run_res.stderr}")
                     
@@ -344,6 +366,7 @@ def main():
     print(f"   编译成功: {stats['compiled']}")
     print(f"   全过:    {stats['passed']}")
     print(f"   跳过:    {stats['skipped']}")
+    print(f"   格式异常: {stats['format_error']}")
     print(f"{'='*50}")
 
 if __name__ == "__main__":
