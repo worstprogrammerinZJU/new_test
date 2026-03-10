@@ -99,7 +99,7 @@ def parse_test_cases(test_code: str) -> List[Dict]:
                                         "expected": expected,
                                         "tolerance": tolerance if tolerance else 1e-6
                                     })
-                                        continue
+                                    continue
                 
                 # 情况3: 只有 candidate(x) 调用（假设返回 True）
                 elif isinstance(node.test, ast.Call):
@@ -130,7 +130,7 @@ def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
         4: ("float", ["float*", "int"], False),              # mean_absolute_deviation
         7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring
         22: ("int*", ["void*", "int"], True),                # filter_integers
-        32: ("float", ["float*", "int"], False),             # find_zero (返回接近0的x值)
+        32: ("float", ["float*", "int"], False),             # find_zero
         81: ("char**", ["float*", "int"], True),             # numerical_letter_grade
         82: ("int", ["char*"], False),                       # prime_length
     }
