@@ -123,25 +123,44 @@ def parse_test_cases(test_code: str, task_id: int) -> List[Dict]:
 def format_c_float(val):
     """格式化浮点数为 C 语法"""
     if val is None:
-        return "0.0f"  # None 转为 0.0
+        return "0.0f"
     if isinstance(val, bool):
         return "1.0f" if val else "0.0f"
     if isinstance(val, int):
         return f"{val}.0f"
     return f"{val}f"
 
+def is_nested_list(lst):
+    """检查是否为嵌套列表（2D 数组）"""
+    if not isinstance(lst, list) or not lst:
+        return False
+    return any(isinstance(x, list) for x in lst)
+
+def flatten_2d_list(lst):
+    """将 2D 列表扁平化并返回 (扁平化数组, 行数, 列数)"""
+    if not lst:
+        return [], 0, 0
+    rows = len(lst)
+    cols = len(lst[0]) if lst else 0
+    flat = []
+    for row in lst:
+        for item in row:
+            flat.append(item)
+    return flat, rows, cols
+
 def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
     signatures = {
         0: ("int", ["float*", "int", "float"], False),
         1: ("char**", ["char*"], True),
         2: ("float", ["float"], False),
-        3: ("int", ["void*", "int"], False),  # below_zero - 异构列表，使用 void*
+        3: ("int", ["void*", "int"], False),
         4: ("float", ["float*", "int"], False),
         7: ("char**", ["char**", "int", "char*"], True),
         22: ("int*", ["void*", "int"], True),
         32: ("double", ["double*", "int"], False),
         81: ("char**", ["float*", "int"], True),
         82: ("int", ["char*"], False),
+        129: ("int*", ["int*", "int", "int", "int"], True),  # minPath: returns int*, takes matrix, rows, cols, k
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
@@ -189,20 +208,23 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                     setup_lines.append(f'    void* arr{idx} = NULL;')
                     call_args.append(f"arr{idx}")
                     call_args.append("0")
+                elif is_nested_list(arg):
+                    # 处理 2D 数组（嵌套列表）
+                    flat, rows, cols = flatten_2d_list(arg)
+                    elements = [str(x) for x in flat]
+                    setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
+                    call_args.append(f"arr{idx}")
+                    call_args.append(str(rows))
+                    call_args.append(str(cols))
                 else:
-                    # 检查列表类型
+                    # 1D 列表
                     has_none = any(x is None for x in arg)
                     has_string = any(isinstance(x, str) for x in arg)
                     has_bool = any(isinstance(x, bool) for x in arg)
                     has_float = any(isinstance(x, float) for x in arg)
-                    has_int = any(isinstance(x, int) and not isinstance(x, bool) for x in arg)
                     
-                    # 处理异构列表（如 below_zero 的操作列表）
-                    if task_id == 3 or has_none or (has_string and has_float):
-                        # 使用结构体数组或简化处理 - 这里简化为只传递非 None 的浮点数
-                        # 或者使用 tagged union 结构
-                        # 对于 below_zero，我们假设它处理的是操作列表，需要特殊格式
-                        # 简化：将列表序列化为字符串表示
+                    if task_id == 3 or has_none:
+                        # 异构列表，序列化为 JSON
                         json_str = json.dumps(arg)
                         escaped = json_str.replace('"', '\\"')
                         setup_lines.append(f'    char json_{idx}[] = "{escaped}";')
@@ -218,25 +240,12 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                         setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
-                    elif task_id == 32 or has_float:
-                        # double 数组
-                        elements = []
-                        for x in arg:
-                            if x is None:
-                                elements.append("0.0")
-                            elif isinstance(x, bool):
-                                elements.append("1.0" if x else "0.0")
-                            elif isinstance(x, int):
-                                elements.append(f"{x}.0")
-                            else:
-                                elements.append(str(x))
-                        if task_id == 32:
-                            setup_lines.append(f'    double arr{idx}[] = {{{", ".join(elements)}}};')
-                        else:
-                            setup_lines.append(f'    float arr{idx}[] = {{{", ".join([e+"f" for e in elements])}}};')
+                    elif has_float:
+                        elements = [format_c_float(x) for x in arg]
+                        setup_lines.append(f'    float arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
-                    else:  # 纯整数
+                    else:
                         elements = [str(x) for x in arg]
                         setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
