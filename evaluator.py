@@ -134,6 +134,7 @@ def is_nested_list(lst):
     """检查是否为嵌套列表（2D 数组）"""
     if not isinstance(lst, list) or not lst:
         return False
+    # 确保至少有一个元素是列表
     return any(isinstance(x, list) for x in lst)
 
 def flatten_2d_list(lst):
@@ -144,8 +145,13 @@ def flatten_2d_list(lst):
     cols = len(lst[0]) if lst else 0
     flat = []
     for row in lst:
-        for item in row:
-            flat.append(item)
+        # 确保 row 是列表
+        if isinstance(row, list):
+            for item in row:
+                flat.append(item)
+        else:
+            # 如果不是列表，直接添加
+            flat.append(row)
     return flat, rows, cols
 
 def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
@@ -156,11 +162,11 @@ def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
         3: ("int", ["void*", "int"], False),
         4: ("float", ["float*", "int"], False),
         7: ("char**", ["char**", "int", "char*"], True),
-        22: ("int*", ["void*", "int"], True),
+        22: ("int*", ["void*", "int"], True),  # filter_integers: returns int*, takes hetero list
         32: ("double", ["double*", "int"], False),
         81: ("char**", ["float*", "int"], True),
         82: ("int", ["char*"], False),
-        129: ("int*", ["int*", "int", "int", "int"], True),  # minPath: returns int*, takes matrix, rows, cols, k
+        129: ("int*", ["int*", "int", "int", "int"], True),
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
@@ -217,21 +223,29 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                     call_args.append(str(rows))
                     call_args.append(str(cols))
                 else:
-                    # 1D 列表
+                    # 1D 列表 - 处理异构类型
                     has_none = any(x is None for x in arg)
+                    has_list = any(isinstance(x, list) for x in arg)  # 检查嵌套列表
                     has_string = any(isinstance(x, str) for x in arg)
                     has_bool = any(isinstance(x, bool) for x in arg)
                     has_float = any(isinstance(x, float) for x in arg)
+                    has_int = any(isinstance(x, int) and not isinstance(x, bool) for x in arg)
                     
-                    if task_id == 3 or has_none:
-                        # 异构列表，序列化为 JSON
+                    # 对于包含嵌套列表的情况（如 [4, None, [], 23.2, ...]）
+                    if has_list or task_id == 22:
+                        # 序列化为 JSON 字符串
                         json_str = json.dumps(arg)
                         escaped = json_str.replace('"', '\\"')
                         setup_lines.append(f'    char json_{idx}[] = "{escaped}";')
                         call_args.append(f"json_{idx}")
                         call_args.append(str(len(escaped)))
                     elif has_string:
-                        elements = [f'"{x.replace(chr(34), chr(92)+chr(34))}"' if isinstance(x, str) else '""' for x in arg]
+                        elements = []
+                        for x in arg:
+                            if isinstance(x, str):
+                                elements.append(f'"{x.replace(chr(34), chr(92)+chr(34))}"')
+                            else:
+                                elements.append('""')
                         setup_lines.append(f'    char* arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
