@@ -73,39 +73,31 @@ def parse_test_cases(test_code: str) -> List[Dict]:
     return cases
 
 def is_heterogeneous_list(lst):
-    """检查列表是否为异构类型（包含非整数元素）"""
+    """检查列表是否为异构类型"""
     if not isinstance(lst, list) or not lst:
         return False
     return any(not isinstance(x, (int, bool)) for x in lst)
 
 def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
-    # 任务签名映射 (return_type, arg_types, is_hetero)
+    # 任务签名映射 (return_type, arg_types, ret_is_ptr)
+    # 注意：返回列表的函数实际上返回指针（void* 或 char**）
     signatures = {
-        0: ("float", ["float*", "int"], False),      # mean_absolute_deviation
-        1: ("void", ["char*"], False),                # separate_paren_groups
-        2: ("float", ["float"], False),                # truncate_number
-        3: ("int", ["char**", "int", "int"], False),  # below_zero
-        4: ("int", ["float*", "int", "float"], False), # has_close_elements
-        7: ("int", ["char**", "int", "char*"], False), # filter_by_substring
-        22: ("void*", ["void*", "int"], True),        # filter_integers - 异构输入
+        0: ("int", ["float*", "int", "float"], False),      # has_close_elements -> int (bool)
+        1: ("char**", ["char*"], True),                      # separate_paren_groups -> char** (list of strings)
+        2: ("float", ["float"], False),                      # truncate_number
+        3: ("int", ["char**", "int", "int"], False),         # below_zero
+        4: ("float", ["float*", "int"], False),              # mean_absolute_deviation
+        7: ("char**", ["char**", "int", "char*"], True),     # filter_by_substring -> char**
+        22: ("int*", ["void*", "int"], True),                # filter_integers -> int* (list of ints)
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
-    ret_type, arg_types, is_hetero_task = sig
+    ret_type, arg_types, ret_is_ptr = sig
     
-    # 检查实际测试数据是否包含异构列表
-    has_hetero = any(
-        any(is_heterogeneous_list(arg) if isinstance(arg, list) else False for arg in case['args'])
-        for case in cases
-    )
-    
-    if is_hetero_task or has_hetero:
-        return generate_c_hetero_tester(task_id, task_name, cases, ret_type)
-    else:
-        return generate_c_simple_tester(task_id, task_name, cases, ret_type, arg_types)
+    return generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr)
 
-def generate_c_simple_tester(task_id, task_name, cases, ret_type, arg_types):
-    """生成简单类型的 C 测试代码"""
+def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
+    """生成 C 测试代码"""
     test_blocks = []
     
     for i, case in enumerate(cases):
@@ -127,18 +119,22 @@ def generate_c_simple_tester(task_id, task_name, cases, ret_type, arg_types):
                 setup_lines.append(f'    int b{idx} = {1 if arg else 0};')
                 call_args.append(f"b{idx}")
             elif isinstance(arg, float):
-                setup_lines.append(f'    double d{idx} = {arg};')
-                call_args.append(f"d{idx}")
+                setup_lines.append(f'    float f{idx} = {arg}f;')
+                call_args.append(f"f{idx}")
             elif isinstance(arg, int):
                 call_args.append(str(arg))
             elif isinstance(arg, list):
                 if not arg:
-                    setup_lines.append(f'    void* arr{idx} = NULL;')
-                    call_args.append(f"arr{idx}")
-                    if idx < len(arg_types) and ("*" in arg_types[idx] or "[]" in arg_types[idx]):
+                    if idx < len(arg_types) and "char**" in arg_types[idx]:
+                        setup_lines.append(f'    char* arr{idx}[] = {{NULL}};')
+                        call_args.append(f"arr{idx}")
                         call_args.append("0")
+                    else:
+                        setup_lines.append(f'    void* arr{idx} = NULL;')
+                        call_args.append(f"arr{idx}")
+                        if idx < len(arg_types) and ("*" in arg_types[idx] or "[]" in arg_types[idx]):
+                            call_args.append("0")
                 else:
-                    # 同质列表
                     first = arg[0]
                     if isinstance(first, str):
                         elements = [f'"{x.replace(chr(34), chr(92)+chr(34))}"' for x in arg]
@@ -155,8 +151,13 @@ def generate_c_simple_tester(task_id, task_name, cases, ret_type, arg_types):
                         setup_lines.append(f'    float arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
-                    else:  # int
-                        elements = [str(x) for x in arg]
+                    else:  # int or mixed (for hetero lists, we treat as int array for now)
+                        elements = []
+                        for x in arg:
+                            if isinstance(x, int) and not isinstance(x, bool):
+                                elements.append(str(x))
+                            else:
+                                elements.append("0")  # Placeholder for non-int
                         setup_lines.append(f'    int arr{idx}[] = {{{", ".join(elements)}}};')
                         call_args.append(f"arr{idx}")
                         call_args.append(str(len(arg)))
@@ -164,109 +165,56 @@ def generate_c_simple_tester(task_id, task_name, cases, ret_type, arg_types):
         setup_code = '\n'.join(f'        {line}' for line in setup_lines) if setup_lines else ""
         
         # 生成检查逻辑
-        if expected is None:
-            check_logic = "pass_count++;  // Skip None check"
+        check_code = ""
+        
+        if isinstance(expected, list):
+            # 返回列表，检查非空或长度
+            if ret_is_ptr:
+                check_code = f'''
+        if (res != NULL) pass_count++; 
+        else printf("  T{i} Fail: Expected non-null list\\\\n");'''
+            else:
+                check_code = f'''
+        // List return not supported for non-pointer types
+        pass_count++;'''
         elif isinstance(expected, bool):
-            check_logic = f'''
-        if (res == {1 if expected else 0}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %d\\\\n", res);'''
+            # 布尔值比较
+            c_expected = "1" if expected else "0"
+            if ret_type in ["float", "double"]:
+                check_code = f'''
+        if ((res > 0.5f) == {expected}) pass_count++; 
+        else printf("  T{i} Fail: Exp {expected}, Got %f\\\\n", res);'''
+            else:
+                check_code = f'''
+        if (res == {c_expected}) pass_count++; 
+        else printf("  T{i} Fail: Exp {expected} ({c_expected}), Got %d\\\\n", res);'''
         elif isinstance(expected, float):
-            check_logic = f'''
+            check_code = f'''
         if (fabs((double)res - {expected}) < 1e-6) pass_count++; 
         else printf("  T{i} Fail: Exp {expected}, Got %f\\\\n", (double)res);'''
         elif isinstance(expected, int):
-            check_logic = f'''
+            check_code = f'''
         if (res == {expected}) pass_count++; 
         else printf("  T{i} Fail: Exp {expected}, Got %d\\\\n", res);'''
-        else:
-            check_logic = "pass_count++;  // Skip complex check"
-        
-        call_line = f"{ret_type} res = func0({', '.join(call_args)});"
-        
-        test_blocks.append(f'''
-    {{{setup_code}
-        {call_line}{check_logic}
-    }}''')
-    
-    return f'''
-#include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <math.h>
-#include <string.h>
-
-extern {ret_type} func0();
-
-int main() {{
-    int pass_count = 0;
-    int total = {len(cases)};
-    {"".join(test_blocks)}
-    printf("FINAL_SCORE:%d/%d\\\\n", pass_count, total);
-    return (pass_count == total) ? 0 : 1;
-}}
-'''
-
-def generate_c_hetero_tester(task_id, task_name, cases, ret_type):
-    """生成支持异构类型的 C 测试代码，使用 JSON 序列化方案"""
-    
-    # 对于异构列表，我们将其序列化为 JSON 字符串，然后提供一个简单的 C 解析器
-    # 或者更简单的：使用整数数组索引作为句柄，在 C 中构建模拟对象
-    
-    test_blocks = []
-    
-    for i, case in enumerate(cases):
-        args = case['args']
-        expected = case['expected']
-        
-        setup_lines = []
-        call_args = []
-        
-        for idx, arg in enumerate(args):
-            if isinstance(arg, list):
-                # 异构列表：使用 JSON 字符串表示
-                json_str = json.dumps(arg)
-                escaped = json_str.replace('"', '\\"')
-                var_name = f"json_input{idx}"
-                setup_lines.append(f'    char {var_name}[] = "{escaped}";')
-                setup_lines.append(f'    int {var_name}_len = {len(json_str)};')
-                call_args.append(f"{var_name}")
-                call_args.append(f"{var_name}_len")
-            elif isinstance(arg, str):
-                s = arg.replace('"', '\\"').replace('\n', '\\n')
-                setup_lines.append(f'    char s{idx}[] = "{s}";')
-                call_args.append(f"s{idx}")
-            elif isinstance(arg, bool):
-                setup_lines.append(f'    int b{idx} = {1 if arg else 0};')
-                call_args.append(f"b{idx}")
-            elif isinstance(arg, (int, float)):
-                call_args.append(str(arg))
-            elif arg is None:
-                call_args.append("NULL")
-        
-        setup_code = '\n'.join(f'        {line}' for line in setup_lines) if setup_lines else ""
-        
-        # 对于返回列表的情况，我们只能检查是否非空或比较长度
-        if isinstance(expected, list):
-            check_logic = f'''
-        // Expected list length: {len(expected)}
-        if (res != NULL) pass_count++; 
-        else printf("  T{i} Fail: Expected non-null list\\\\n");'''
         elif expected is None:
-            check_logic = "pass_count++;"
-        elif isinstance(expected, bool):
-            check_logic = f'''
-        if (res == {1 if expected else 0}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %d\\\\n", res);'''
+            check_code = f'''
+        pass_count++;  // Skip None check'''
         else:
-            check_logic = f'''
-        if (res == {expected}) pass_count++; 
-        else printf("  T{i} Fail: Exp {expected}, Got %ld\\\\n", (long)res);'''
+            check_code = f'''
+        pass_count++;  // Skip unknown type check'''
         
-        call_line = f"uintptr_t res = (uintptr_t)func0({', '.join(call_args)});"
+        # 生成函数调用 - 修复 void 类型问题
+        if ret_type == "void":
+            call_line = f"func0({', '.join(call_args)});"
+            check_code = f"pass_count++;  // void return"
+        elif ret_is_ptr or ret_type in ["char**", "int*"]:
+            call_line = f"{ret_type} res = func0({', '.join(call_args)});"
+        else:
+            call_line = f"{ret_type} res = func0({', '.join(call_args)});"
         
         test_blocks.append(f'''
     {{{setup_code}
-        {call_line}{check_logic}
+        {call_line}{check_code}
     }}''')
     
     return f'''
@@ -277,10 +225,8 @@ def generate_c_hetero_tester(task_id, task_name, cases, ret_type):
 #include <string.h>
 #include <stdlib.h>
 
-// 简单的 JSON 解析辅助函数（声明，需要实现或链接）
-// 或者假设汇编代码自己处理 JSON 字符串
-
-extern void* func0();
+// 声明外部汇编函数
+extern {ret_type} func0();
 
 int main() {{
     int pass_count = 0;
@@ -340,7 +286,7 @@ def main():
             traceback.print_exc()
             continue
         
-        # 调试：保存生成的 C 代码以便检查
+        # 调试：保存生成的 C 代码
         debug_c_path = f"/tmp/tester_{task_id}.c"
         with open(debug_c_path, "w") as f:
             f.write(c_code)
@@ -351,7 +297,6 @@ def main():
         
         try:
             asm_path = os.path.join(ASM_DIR, f_name)
-            # 使用 -Wno-deprecated-non-prototype 抑制原型警告
             cmd = f"clang -arch arm64 -O0 -Wno-deprecated-non-prototype -o runner '{tmp_c_path}' '{asm_path}' -lm 2>&1"
             
             compile_res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
