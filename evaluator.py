@@ -134,7 +134,6 @@ def is_nested_list(lst):
     """检查是否为嵌套列表（2D 数组）"""
     if not isinstance(lst, list) or not lst:
         return False
-    # 检查第一个元素是否为列表
     first = lst[0]
     return isinstance(first, list)
 
@@ -227,12 +226,9 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                     has_string = any(isinstance(x, str) for x in arg)
                     has_bool = any(isinstance(x, bool) for x in arg)
                     has_float = any(isinstance(x, float) for x in arg)
-                    
-                    # 检查是否包含嵌套列表（如 [4, None, [], 23.2, 9, 'adasd'] 中的 []）
                     has_nested = any(isinstance(x, list) for x in arg)
                     
                     if has_nested or has_none or (has_string and has_float):
-                        # 异构列表，序列化为 JSON
                         json_str = json.dumps(arg)
                         escaped = json_str.replace('"', '\\"')
                         setup_lines.append(f'    char json_{idx}[] = "{escaped}";')
@@ -408,13 +404,19 @@ def main():
                 
             stats["compiled"] += 1
             
+            # 运行测试并捕获详细输出
             run_res = subprocess.run("./runner", shell=True, capture_output=True, 
                                    text=True, timeout=5)
             
             output = run_res.stdout.strip()
-            display_output = output.replace('\\n', '\n').replace('\\t', '\t')
-            print(f"  Output: {display_output}")
+            stderr_output = run_res.stderr.strip()
             
+            # 打印原始输出用于调试
+            print(f"  Raw stdout: [{repr(output)}]")
+            if stderr_output:
+                print(f"  Raw stderr: [{repr(stderr_output)}]")
+            
+            # 检查是否有 FINAL_SCORE
             if "FINAL_SCORE" in output:
                 match = re.search(r"FINAL_SCORE:(\d+)/(\d+)", output)
                 if match:
@@ -424,11 +426,15 @@ def main():
                         print(f"  ✅ All {total} tests passed")
                     else:
                         print(f"  ⚠️ {passed}/{total} tests passed")
+                else:
+                    print(f"  ⚠️ FINAL_SCORE format mismatch: {output}")
+                    stats["format_error"] += 1
             else:
-                print(f"  ⚠️ 输出格式异常")
+                print(f"  ⚠️ 输出格式异常 (no FINAL_SCORE)")
                 stats["format_error"] += 1
-                if run_res.stderr:
-                    print(f"  Stderr: {run_res.stderr}")
+                # 如果程序返回码非0，可能是崩溃
+                if run_res.returncode != 0:
+                    print(f"  ⚠️ 程序返回码: {run_res.returncode}")
                     
         except subprocess.TimeoutExpired:
             print(f"  ⏱️ 执行超时")
