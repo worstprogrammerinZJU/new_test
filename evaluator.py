@@ -134,18 +134,23 @@ def is_nested_list(lst):
     """检查是否为嵌套列表（2D 数组）"""
     if not isinstance(lst, list) or not lst:
         return False
-    return any(isinstance(x, list) for x in lst)
+    # 检查第一个元素是否为列表
+    first = lst[0]
+    return isinstance(first, list)
 
 def flatten_2d_list(lst):
     """将 2D 列表扁平化并返回 (扁平化数组, 行数, 列数)"""
     if not lst:
         return [], 0, 0
     rows = len(lst)
-    cols = len(lst[0]) if lst else 0
+    cols = len(lst[0]) if lst and isinstance(lst[0], list) else 0
     flat = []
     for row in lst:
-        for item in row:
-            flat.append(item)
+        if isinstance(row, list):
+            for item in row:
+                flat.append(item)
+        else:
+            flat.append(row)
     return flat, rows, cols
 
 def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
@@ -160,7 +165,7 @@ def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
         32: ("double", ["double*", "int"], False),
         81: ("char**", ["float*", "int"], True),
         82: ("int", ["char*"], False),
-        129: ("int*", ["int*", "int", "int", "int"], True),  # minPath: returns int*, takes matrix, rows, cols, k
+        129: ("int*", ["int*", "int", "int", "int"], True),
     }
     
     sig = signatures.get(task_id, ("uintptr_t", ["..."], False))
@@ -223,7 +228,10 @@ def generate_c_code(task_id, task_name, cases, ret_type, arg_types, ret_is_ptr):
                     has_bool = any(isinstance(x, bool) for x in arg)
                     has_float = any(isinstance(x, float) for x in arg)
                     
-                    if task_id == 3 or has_none:
+                    # 检查是否包含嵌套列表（如 [4, None, [], 23.2, 9, 'adasd'] 中的 []）
+                    has_nested = any(isinstance(x, list) for x in arg)
+                    
+                    if has_nested or has_none or (has_string and has_float):
                         # 异构列表，序列化为 JSON
                         json_str = json.dumps(arg)
                         escaped = json_str.replace('"', '\\"')
