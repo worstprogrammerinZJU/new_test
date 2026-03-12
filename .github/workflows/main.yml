@@ -3,23 +3,20 @@ name: ARM64 Assembly macOS Test
 on: [push, workflow_dispatch]
 
 jobs:
-  evaluation:
-    runs-on: macos-latest  # 必须使用 macOS 运行原生 ARM64 汇编
-
+  test-asm:
+    runs-on: macos-latest  # 必须在 macOS 上原生测试 ARM64 汇编
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Execute Evaluation
+      - name: Run Evaluator
         run: |
-          # 1. 确保 generated_asm 文件夹存在
-          if [ ! -d "generated_asm" ]; then echo "ASM folder missing"; exit 1; fi
-          
-          # 2. 运行评估脚本。该脚本会自动读取 .s 并在 C 层进行动态链接适配。
-          # 它会根据每个 task 的参数动态生成 temp_tester.c。
+          # 确保汇编文件夹存在
+          if [ ! -d "generated_asm" ]; then echo "Folder not found"; exit 1; fi
+          # 执行评估逻辑
           python eval_asm.py
