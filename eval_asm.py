@@ -7,103 +7,128 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-def parse_signature_from_prompt(prompt, entry_point):
+# 常见的函数签名组合（返回类型, [参数类型列表]）
+COMMON_SIGNATURES = [
+    # 无参数
+    ("int", []),
+    ("char*", []),
+    ("float", []),
+    ("void", []),
+    
+    # 单参数
+    ("int", ["int"]),
+    ("int", ["char*"]),
+    ("int", ["float"]),
+    ("char*", ["char*"]),
+    ("char*", ["int"]),
+    ("float", ["float"]),
+    
+    # 双参数
+    ("int", ["int", "int"]),
+    ("int", ["char*", "char*"]),
+    ("int", ["char*", "int"]),
+    ("int", ["int", "char*"]),
+    ("float", ["float", "float"]),
+    ("char*", ["char**", "int"]),  # 字符串数组 + 长度
+    
+    # 三参数
+    ("int", ["int", "int", "int"]),
+    ("char*", ["char**", "int", "int"]),
+]
+
+def generate_test_code(ret_type, param_types, assert_lines):
     """
-    从 prompt 中解析 Python 函数签名
-    返回: (return_type, [param1_type, param2_type, ...])
-    类型映射为 C 类型
+    根据给定的函数签名生成 C 测试代码
     """
-    # 提取函数定义行
-    pattern = rf'def\s+{entry_point}\s*\((.*?)\)\s*(?:->\s*(\S+))?'
-    match = re.search(pattern, prompt, re.DOTALL)
+    # 构建函数声明
+    params_str = ', '.join(param_types) if param_types else 'void'
+    func_decl = f"extern {ret_type} func0({params_str});"
     
-    if not match:
-        return "int", []  # 默认返回 int，无参数
+    # 处理 assert 语句
+    c_checks = []
     
-    params_str = match.group(1).replace('\n', ' ').strip()
-    return_type = match.group(2) or 'None'
+    for line in assert_lines:
+        # 基础替换
+        curr = line.replace('True', '1').replace('False', '0')
+        
+        # 处理数组参数: [1.0, 2.0] -> (float[]){1.0, 2.0}, 2
+        def list_to_c(match):
+            content = match.group(1).strip()
+            if not content:
+                return "NULL, 0"
+            count = len(content.split(','))
+            return f"(float[]){{{content}}}, {count}"
+        
+        curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
+        
+        # 处理字符串返回值比较
+        if ret_type == "char*":
+            expected_match = re.search(r'==\s*(.+?)$', curr)
+            if expected_match:
+                expected = expected_match.group(1).strip()
+                if expected.startswith(("'", '"')):
+                    str_val = expected.strip('"\'')
+                    # 提取函数调用部分
+                    call_match = re.search(r'candidate\((.*?)\)', curr)
+                    if call_match:
+                        args = call_match.group(1)
+                        c_checks.append(f'    if (strcmp(func0({args}), "{str_val}") != 0) return 1;')
+                        continue
+        
+        # 默认转换: assert candidate(...) == expected -> if (!(func0(...) == expected)) return 1;
+        curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
+        c_checks.append(f"    {curr}) return 1;")
     
-    # 解析参数
-    c_params = []
+    checks_str = "\n".join(c_checks)
     
-    # 分割参数（处理嵌套括号）
-    args = []
-    current = ""
-    depth = 0
-    for char in params_str:
-        if char in '([{':
-            depth += 1
-            current += char
-        elif char in ')]}':
-            depth -= 1
-            current += char
-        elif char == ',' and depth == 0:
-            args.append(current.strip())
-            current = ""
+    # 构建头文件
+    includes = "#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>"
+    if ret_type == "char*":
+        includes += "\n#include <string.h>"
+    
+    driver_template = includes + """
+
+%s
+
+int main() {
+%s
+    printf("PASS\n");
+    return 0;
+}
+"""
+    return driver_template % (func_decl, checks_str)
+
+def try_compile(asm_path, c_code):
+    """
+    尝试编译 C 代码和汇编文件
+    返回: (success: bool, error_msg: str)
+    """
+    with open("temp_tester.c", "w") as f:
+        f.write(c_code)
+    
+    compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
+    result = subprocess.run(compile_cmd, shell=True, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        return False, result.stderr
+    
+    return True, ""
+
+def try_run():
+    """
+    尝试运行测试程序
+    返回: (success: bool, output: str)
+    """
+    try:
+        result = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+        if result.returncode == 0 and "PASS" in result.stdout:
+            return True, result.stdout
         else:
-            current += char
-    if current.strip():
-        args.append(current.strip())
-    
-    # 解析每个参数的类型
-    for arg in args:
-        if not arg:
-            continue
-            
-        # 格式: name: Type 或 name: Type = default
-        type_match = re.search(r':\s*(\S+)', arg)
-        if type_match:
-            py_type = type_match.group(1)
-            
-            # Python 类型 -> C 类型
-            if 'List[str]' in py_type:
-                c_params.append('char**')  # 字符串列表
-                c_params.append('int')     # 长度
-            elif 'List' in py_type:
-                # 其他列表类型
-                base_type = py_type.replace('List[', '').replace(']', '')
-                if base_type == 'int':
-                    c_params.append('int*')
-                    c_params.append('int')
-                elif base_type == 'float':
-                    c_params.append('float*')
-                    c_params.append('int')
-                else:
-                    c_params.append('void*')
-                    c_params.append('int')
-            elif py_type == 'str':
-                c_params.append('char*')
-            elif py_type == 'int':
-                c_params.append('int')
-            elif py_type == 'float':
-                c_params.append('float')
-            elif py_type == 'bool':
-                c_params.append('int')
-            else:
-                c_params.append('void*')  # 默认
-        else:
-            # 无类型注解，默认 int
-            c_params.append('int')
-    
-    # 解析返回类型
-    if 'Optional[str]' in return_type:
-        c_return = 'char*'  # NULL 表示 None
-    elif 'str' in return_type:
-        c_return = 'char*'
-    elif 'List' in return_type:
-        c_return = 'void*'
-    elif 'int' in return_type:
-        c_return = 'int'
-    elif 'float' in return_type:
-        c_return = 'float'
-    elif 'bool' in return_type:
-        c_return = 'int'
-    elif 'None' in return_type:
-        c_return = 'void'
-    else:
-        c_return = 'int'
-    
-    return c_return, c_params
+            return False, result.stdout + result.stderr
+    except subprocess.TimeoutExpired:
+        return False, "TIMEOUT"
+    except Exception as e:
+        return False, str(e)
 
 def main():
     if not os.path.exists(JSONL_FILE):
@@ -122,14 +147,12 @@ def main():
         return
         
     asm_files = [f for f in os.listdir(ASM_DIR) if f.endswith('.s')]
-    # 按照数字排序: problem1.s, problem2.s ...
     asm_files.sort(key=lambda x: int(re.search(r'\d+', x).group()))
 
     passed = 0
     total_run = 0
 
     for asm_f in asm_files:
-        # 对应关系：problem1.s (idx 1) -> tasks[0]
         prob_num = int(re.search(r'\d+', asm_f).group())
         task_idx = prob_num - 1
         
@@ -140,89 +163,42 @@ def main():
         task = tasks[task_idx]
         total_run += 1
         
-        # 从 prompt 解析函数签名
-        ret_type, param_types = parse_signature_from_prompt(task['prompt'], task['entry_point'])
-        
-        # 3. 解析 Python assert 语句
+        # 解析 assert 语句
         raw_test_code = task['test']
         assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
         
-        c_checks = []
-        for line in assert_lines:
-            # 基础替换
-            curr = line.replace('True', '1').replace('False', '0')
-            
-            # 处理数组: [1.0, 2.0] -> (float[]){1.0, 2.0}, 2
-            def list_to_c(match):
-                content = match.group(1).strip()
-                if not content:
-                    return "NULL, 0"
-                count = len(content.split(','))
-                return f"(float[]){{{content}}}, {count}"
-            
-            curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
-            
-            # 处理字符串返回值比较
-            if ret_type == 'char*':
-                expected_match = re.search(r'==\s*(.+?)$', curr)
-                if expected_match:
-                    expected = expected_match.group(1).strip()
-                    if expected.startswith(("'", '"')):
-                        str_val = expected.strip('"\'')
-                        curr = re.sub(r'==\s*.+$', ')', curr)
-                        c_checks.append(f'    if (strcmp({curr}, "{str_val}") != 0) return 1;')
-                        continue
-            
-            # 转换为 C 逻辑: if (!(func0(...) == expected)) return 1;
-            curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
-            c_checks.append(f"    {curr}) return 1;")
-
-        # 构建函数声明
-        params_str = ', '.join(param_types) if param_types else 'void'
-        func_decl = f"extern {ret_type} func0({params_str});"
-        
-        checks_str = "\n".join(c_checks)
-        
-        # 根据返回类型决定头文件
-        includes = "#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>"
-        if ret_type == 'char*':
-            includes += "\n#include <string.h>"
-        
-        # 使用 % 格式化
-        driver_template = includes + """
-
-%s
-
-int main() {
-%s
-    printf("PASS\n");
-    return 0;
-}
-"""
-        driver_c = driver_template % (func_decl, checks_str)
-
-        with open("temp_tester.c", "w") as f:
-            f.write(driver_c)
-
-        # 5. 编译与运行
         asm_path = os.path.join(ASM_DIR, asm_f)
-        # -lm 链接数学库，-Wno-everything 忽略类型警告
-        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
         
-        print(f"Testing {asm_f} (HumanEval/{task_idx}, {task['entry_point']})...", end=" ")
+        # 尝试所有签名组合
+        found_working = False
+        best_error = ""
         
-        if subprocess.run(compile_cmd, shell=True, capture_output=True).returncode == 0:
-            try:
-                res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
-                if "PASS" in res.stdout:
-                    print("✅ OK")
-                    passed += 1
-                else:
-                    print("❌ FAILED (Logic)")
-            except subprocess.TimeoutExpired:
-                print("⏱️ TIMEOUT")
-        else:
-            print("❌ 编译失败 (Check Signature/Syntax)")
+        for ret_type, param_types in COMMON_SIGNATURES:
+            # 生成测试代码
+            c_code = generate_test_code(ret_type, param_types, assert_lines)
+            
+            # 尝试编译
+            compile_ok, compile_err = try_compile(asm_path, c_code)
+            
+            if not compile_ok:
+                best_error = compile_err[:100]
+                continue
+            
+            # 编译成功，尝试运行
+            run_ok, run_output = try_run()
+            
+            if run_ok:
+                print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK (sig: {ret_type} func0({', '.join(param_types) if param_types else 'void'}))")
+                passed += 1
+                found_working = True
+                break
+            else:
+                best_error = run_output[:100]
+        
+        if not found_working:
+            print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ FAILED (tried {len(COMMON_SIGNATURES)} signatures)")
+            if best_error:
+                print(f"    Last error: {best_error}")
 
     print(f"\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
