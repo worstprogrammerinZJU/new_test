@@ -7,6 +7,36 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
+def infer_return_type(assert_lines):
+    """
+    通过分析 assert 语句的期望值推断返回类型
+    """
+    if not assert_lines:
+        return "int"
+    
+    # 获取 assert 的期望值
+    for line in reversed(assert_lines):
+        # 提取 == 后面的部分
+        match = re.search(r'==\\s*(.+?)$', line.strip())
+        if match:
+            expected = match.group(1).strip()
+            
+            # 判断类型
+            if expected == 'None':
+                return "void*"  # 或者 char*
+            elif expected.startswith(("'", '"')):
+                return "char*"
+            elif expected.startswith('['):
+                return "void*"  # 数组类型
+            elif expected in ['True', 'False']:
+                return "int"
+            elif '.' in expected and expected.replace('.', '').replace('-', '').isdigit():
+                return "float"
+            elif expected.isdigit() or (expected.startswith('-') and expected[1:].isdigit()):
+                return "int"
+    
+    return "int"
+
 def main():
     if not os.path.exists(JSONL_FILE):
         print(f"Error: {JSONL_FILE} not found")
@@ -25,14 +55,14 @@ def main():
         
     asm_files = [f for f in os.listdir(ASM_DIR) if f.endswith('.s')]
     # 按照数字排序: problem1.s, problem2.s ...
-    asm_files.sort(key=lambda x: int(re.search(r'\d+', x).group()))
+    asm_files.sort(key=lambda x: int(re.search(r'\\d+', x).group()))
 
     passed = 0
     total_run = 0
 
     for asm_f in asm_files:
         # 对应关系：problem1.s (idx 1) -> tasks[0]
-        prob_num = int(re.search(r'\d+', asm_f).group())
+        prob_num = int(re.search(r'\\d+', asm_f).group())
         task_idx = prob_num - 1
         
         if task_idx < 0 or task_idx >= len(tasks):
@@ -44,7 +74,10 @@ def main():
         
         # 3. 解析 Python assert 语句
         raw_test_code = task['test']
-        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
+        assert_lines = re.findall(r'assert candidate\\(.*?\\)\\s*==\\s*.+', raw_test_code)
+        
+        # 推断返回类型
+        ret_type = infer_return_type(assert_lines)
         
         c_checks = []
         for line in assert_lines:
@@ -59,30 +92,37 @@ def main():
                 count = len(content.split(','))
                 return f"(float[]){{{content}}}, {count}"
             
-            curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
+            curr = re.sub(r'\\[(.*?)\\]', list_to_c, curr)
+            
+            # 处理字符串返回值比较
+            # 如果返回类型是 char*，需要使用 strcmp
+            if ret_type == "char*":
+                # 提取期望值
+                expected_match = re.search(r'==\\s*(.+?)$', curr)
+                if expected_match:
+                    expected = expected_match.group(1).strip()
+                    if expected.startswith(("'", '"')):
+                        str_val = expected.strip('"\'')
+                        # 改写为 strcmp 比较
+                        curr = re.sub(r'==\\s*.+$', ')', curr)
+                        c_checks.append(f'    if (strcmp({curr}, "{str_val}") != 0) return 1;')
+                        continue
             
             # 转换为 C 逻辑: if (!(func0(...) == expected)) return 1;
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
             c_checks.append(f"    {curr}) return 1;")
 
-        # --- 修复区域：避开 f-string 报错 ---
-        checks_str = "\n".join(c_checks)
+        # 构建代码
+        checks_str = "\\n".join(c_checks)
         
-        # 使用 % 格式化或简单的字符串相加，不使用 f-string 处理带反斜杠的内容
-        driver_template = """#include <stdio.h>
-#include <stdbool.h>
-#include <math.h>
-
-extern int func0();
-
-int main() {
-%s
-    printf("PASS\\n");
-    return 0;
-}
-"""
-        driver_c = driver_template % checks_str
-        # -----------------------------------
+        # 根据返回类型决定是否需要 string.h
+        includes = "#include <stdio.h>\\n#include <stdbool.h>\\n#include <math.h>"
+        if ret_type == "char*":
+            includes += "\\n#include <string.h>"
+        
+        # 使用 % 格式化
+        driver_template = includes + """\\n\\nextern %s func0();\\n\\nint main() {\\n%s\\n    printf("PASS\\\\n");\\n    return 0;\\n}\\n"""
+        driver_c = driver_template % (ret_type, checks_str)
 
         with open("temp_tester.c", "w") as f:
             f.write(driver_c)
@@ -92,7 +132,7 @@ int main() {
         # -lm 链接数学库，-Wno-everything 忽略类型警告
         compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
         
-        print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ")
+        print(f"Testing {asm_f} (HumanEval/{task_idx}, ret={ret_type})...", end=" ")
         
         if subprocess.run(compile_cmd, shell=True, capture_output=True).returncode == 0:
             try:
@@ -107,7 +147,7 @@ int main() {
         else:
             print("❌ 编译失败 (Check Signature/Syntax)")
 
-    print(f"\n{'='*30}")
+    print(f"\\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
     print(f"{'='*30}")
 
