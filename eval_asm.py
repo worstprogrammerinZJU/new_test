@@ -5,104 +5,107 @@ import subprocess
 
 # 配置
 ASM_DIR = "./generated_asm"
-JSONL_FILE = "human-eval-v2-20210705.jsonl" # 你的原始 JSONL 文件名
-
-def parse_python_assert_to_c(py_test_code):
-    """
-    极简转换：将 assert candidate([1.0, 2.0], 0.3) == True 
-    转换为 if (!(func0((float[]){1.0, 2.0}, 2, 0.3) == 1)) return 1;
-    """
-    c_statements = []
-    # 提取所有 assert 语句
-    lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', py_test_code)
-    
-    for line in lines:
-        # 1. 替换布尔值
-        line = line.replace('True', '1').replace('False', '0')
-        # 2. 转换列表语法并自动计算长度
-        # 匹配 [1.0, 2.0, ...]
-        def replace_list(match):
-            content = match.group(1).strip()
-            if not content:
-                return "NULL, 0"
-            count = len(content.split(','))
-            # 转换为 C 风格复合字面量数组: (float[]){1.0, 2.0}, 2
-            return f"(float[]){{{content}}}, {count}"
-        
-        processed = re.sub(r'\[(.*?)\]', replace_list, line)
-        # 3. 替换函数名并格式化为 C 语句
-        processed = processed.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
-        c_statements.append(f"    {processed}) {{ printf(\"FAILED: {line}\\n\"); return 1; }}")
-        
-    return "\n".join(c_checks)
+JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
 def main():
     if not os.path.exists(JSONL_FILE):
-        print("JSONL not found")
+        print(f"Error: {JSONL_FILE} not found")
         return
 
-    # 加载 JSONL 题目
+    # 1. 加载 JSONL 题目到列表
     tasks = []
     with open(JSONL_FILE, 'r') as f:
         for line in f:
             tasks.append(json.loads(line))
 
-    # 获取所有 .s 文件
-    asm_files = [f for f in os.listdir(ASM_DIR) if f.endswith('.s')]
-    
-    # 结果统计
-    passed = 0
-    total = 0
-
-    for asm_f in sorted(asm_files, key=lambda x: int(re.search(r'\d+', x).group())):
-        # 对应关系：problem1.s -> tasks[0]
-        prob_idx = int(re.search(r'\d+', asm_f).group())
-        task_idx = prob_idx - 1
+    # 2. 获取并排序汇编文件
+    if not os.path.exists(ASM_DIR):
+        print(f"Error: Directory {ASM_DIR} not found")
+        return
         
-        if task_idx >= len(tasks): continue
+    asm_files = [f for f in os.listdir(ASM_DIR) if f.endswith('.s')]
+    # 按照数字排序: problem1.s, problem2.s ...
+    asm_files.sort(key=lambda x: int(re.search(r'\d+', x).group()))
+
+    passed = 0
+    total_run = 0
+
+    for asm_f in asm_files:
+        # 对应关系：problem1.s (idx 1) -> tasks[0]
+        prob_num = int(re.search(r'\d+', asm_f).group())
+        task_idx = prob_num - 1
+        
+        if task_idx < 0 or task_idx >= len(tasks):
+            print(f"Skipping {asm_f}: No corresponding task index {task_idx}")
+            continue
         
         task = tasks[task_idx]
-        total += 1
+        total_run += 1
         
-        # 转换测试用例
+        # 3. 解析 Python assert 语句
+        # 匹配格式: assert candidate(args) == expected
+        raw_test_code = task['test']
+        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
+        
         c_checks = []
-        raw_asserts = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', task['test'])
-        for a in raw_asserts:
-            # 基础转换逻辑
-            curr = a.replace('True', '1').replace('False', '0')
-            curr = re.sub(r'\[(.*?)\]', lambda m: f"(float[]){{{m.group(1)}}}, {len(m.group(1).split(',')) if m.group(1).strip() else 0}", curr)
+        for line in assert_lines:
+            # 基础替换
+            curr = line.replace('True', '1').replace('False', '0')
+            
+            # 处理数组: [1.0, 2.0] -> (float[]){1.0, 2.0}, 2
+            def list_to_c(match):
+                content = match.group(1).strip()
+                if not content:
+                    return "NULL, 0"
+                count = len(content.split(','))
+                return f"(float[]){{{content}}}, {count}"
+            
+            curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
+            
+            # 转换为 C 逻辑: if (!(func0(...) == expected)) return 1;
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
             c_checks.append(f"    {curr}) return 1;")
 
-        # 生成驱动 C 代码
-        driver_c = f"""
-#include <stdio.h>
-#include <stdbool.h>
-extern int func0(); 
-int main() {{
-{"\n".join(c_checks)}
-    printf("PASS\\n");
-    return 0;
-}}
-"""
+        # 4. 生成驱动代码 (解决 f-string backslash 问题)
+        checks_str = "\n".join(c_checks)
+        driver_c = (
+            "#include <stdio.h>\n"
+            "#include <stdbool.h>\n"
+            "#include <math.h>\n\n"
+            "extern int func0();\n\n"
+            "int main() {\n"
+            f"{checks_str}\n"
+            "    printf(\"PASS\\n\");\n"
+            "    return 0;\n"
+            "}\n"
+        )
+
         with open("temp_tester.c", "w") as f:
             f.write(driver_c)
 
-        # 编译并运行
+        # 5. 编译与运行
         asm_path = os.path.join(ASM_DIR, asm_f)
-        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm"
+        # -lm 链接数学库，-Wno-everything 忽略类型警告
+        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
         
-        if subprocess.run(compile_cmd, shell=True).returncode == 0:
-            res = subprocess.run("./tester", shell=True, capture_output=True, text=True)
-            if "PASS" in res.stdout:
-                print(f"[{asm_f}] OK")
-                passed += 1
-            else:
-                print(f"[{asm_f}] FAILED (Logic)")
+        print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ")
+        
+        if subprocess.run(compile_cmd, shell=True, capture_output=True).returncode == 0:
+            try:
+                res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+                if "PASS" in res.stdout:
+                    print("✅ OK")
+                    passed += 1
+                else:
+                    print("❌ FAILED (Logic)")
+            except subprocess.TimeoutExpired:
+                print("⏱️ TIMEOUT")
         else:
-            print(f"[{asm_f}] COMPILE ERROR")
+            print("联 编译失败 (Check Signature/Syntax)")
 
-    print(f"\nFinal Score: {passed}/{total}")
+    print(f"\n{'='*30}")
+    print(f"Final Score: {passed}/{total_run}")
+    print(f"{'='*30}")
 
 if __name__ == "__main__":
     main()
