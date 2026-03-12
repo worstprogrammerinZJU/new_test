@@ -1,18 +1,70 @@
-name: GG_Smart_Probe
-on: [push]
+name: ARM64 Assembly Evaluation
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  test:
+  evaluate-humaneval:
+    # 必须使用 macos-latest，因为它运行在 Apple Silicon (M1/M2/M3) 上
+    # 只有这样才能原生运行和测试你的 ARM64 汇编代码
     runs-on: macos-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Run Smart Evaluator
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install System Dependencies
         run: |
-          python3 evaluator.py
-          # 在日志里直接显示 CSV 摘要
-          column -t -s "," detailed_report.csv | head -n 20 
-      - name: Upload Report
+          # 虽然你目前是纯 C，但预装这些库可以防止部分题目引用了标准扩展
+          brew install boost openssl@3
+
+      - name: Extract Source and Prepare Workspace
+        run: |
+          # 假设你的提取脚本叫 extract.py，将 JSON 中的 func 提取为 .s 文件
+          # 存放在 ./generated_asm 目录下
+          python extract.py
+          mkdir -p generated_asm
+          
+          # 验证提取是否成功
+          if [ -d "generated_asm" ] && [ "$(ls -A generated_asm)" ]; then
+            echo "Assembly files ready."
+          else
+            echo "Error: No assembly files found!"
+            exit 1
+          fi
+
+      - name: Run Assembly Evaluation
+        run: |
+          # 运行我们之前讨论的评估脚本 eval_asm.py
+          # 该脚本会生成 C 驱动程序，调用 clang 链接 .s 文件并运行测试
+          python eval_asm.py > full_report.log 2>&1
+          cat full_report.log
+
+      - name: Parse Results and Summary
+        if: always()
+        run: |
+          echo "### Evaluation Summary 📊" >> $GITHUB_STEP_SUMMARY
+          # 从日志中提取通过率（假设你的脚本会输出统计信息）
+          PASS_COUNT=$(grep -c "PASS" full_report.log || true)
+          FAIL_COUNT=$(grep -c "FAIL" full_report.log || true)
+          TOTAL=$((PASS_COUNT + FAIL_COUNT))
+          echo "- **Total Tasks:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+          echo "- **Passed ✅:** $PASS_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- **Failed ❌:** $FAIL_COUNT" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: smart-results
-          path: detailed_report.csv
+          name: eval-results
+          path: |
+            full_report.log
+            generated_asm/*.s
+            test_results.txt
