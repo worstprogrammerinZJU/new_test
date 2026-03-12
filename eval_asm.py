@@ -7,23 +7,22 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-# 精简的常见签名（只保留最可能的几种）
-COMMON_SIGNATURES = [
-    ("int", []),           # 无参数，返回int
-    ("int", ["int"]),      # 单int参数
-    ("int", ["int", "int"]), # 双int参数
-    ("char*", ["char**", "int"]),  # 字符串数组+长度，返回字符串
+# 编译失败时才尝试的备选签名（精简版）
+FALLBACK_SIGNATURES = [
+    ("int", ["int"]),
+    ("int", ["int", "int"]),
+    ("char*", ["char**", "int"]),
 ]
 
-def try_compile_and_run(asm_path, ret_type, param_types, assert_lines):
+def try_compile_run(asm_path, ret_type, param_types, assert_lines):
     """
-    尝试编译和运行，返回是否成功
+    尝试特定签名，返回 (success, output)
     """
     # 构建函数声明
     params_str = ', '.join(param_types) if param_types else 'void'
     func_decl = f"extern {ret_type} func0({params_str});"
     
-    # 处理 assert 语句（保持原有逻辑）
+    # 保持原版的 assert 处理逻辑
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
@@ -41,7 +40,7 @@ def try_compile_and_run(asm_path, ret_type, param_types, assert_lines):
     
     checks_str = "\n".join(c_checks)
     
-    # 构建C代码
+    # 构建C代码（保持原版格式）
     driver_template = """#include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
@@ -56,32 +55,40 @@ int main() {
 """
     driver_c = driver_template % (func_decl, checks_str)
     
-    # 写入文件
     with open("temp_tester.c", "w") as f:
         f.write(driver_c)
     
     # 编译
     compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-    if subprocess.run(compile_cmd, shell=True, capture_output=True).returncode != 0:
-        return False
+    result = subprocess.run(compile_cmd, shell=True, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        return False, "compile failed"
     
     # 运行
     try:
         res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
-        return "PASS" in res.stdout
-    except:
-        return False
+        if "PASS" in res.stdout:
+            return True, "PASS"
+        else:
+            return False, res.stdout + res.stderr
+    except subprocess.TimeoutExpired:
+        return False, "TIMEOUT"
+    except Exception as e:
+        return False, str(e)
 
 def main():
     if not os.path.exists(JSONL_FILE):
         print(f"Error: {JSONL_FILE} not found")
         return
 
+    # 1. 加载 JSONL 题目到列表
     tasks = []
     with open(JSONL_FILE, 'r') as f:
         for line in f:
             tasks.append(json.loads(line))
 
+    # 2. 获取并排序汇编文件
     if not os.path.exists(ASM_DIR):
         print(f"Error: Directory {ASM_DIR} not found")
         return
@@ -103,29 +110,39 @@ def main():
         task = tasks[task_idx]
         total_run += 1
         
-        # 解析 assert 语句
+        # 3. 解析 Python assert 语句
         raw_test_code = task['test']
         assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
         
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # 尝试每种签名
+        # 先尝试默认的 int func0()
+        success, msg = try_compile_run(asm_path, "int", [], assert_lines)
+        
+        if success:
+            print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK")
+            passed += 1
+            continue
+        
+        # 默认失败，尝试备选签名
         found = False
-        for ret_type, param_types in COMMON_SIGNATURES:
-            if try_compile_and_run(asm_path, ret_type, param_types, assert_lines):
-                sig_str = f"{ret_type} func0({', '.join(param_types) if param_types else 'void'})"
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK ({sig_str})")
+        for ret_type, param_types in FALLBACK_SIGNATURES:
+            success, msg = try_compile_run(asm_path, ret_type, param_types, assert_lines)
+            if success:
+                sig = f"{ret_type} func0({', '.join(param_types) if param_types else 'void'})"
+                print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK ({sig})")
                 passed += 1
                 found = True
                 break
         
         if not found:
-            # 最后尝试默认的 int func0()
-            if try_compile_and_run(asm_path, "int", [], assert_lines):
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK (default int func0())")
-                passed += 1
+            # 输出原版的失败信息
+            if "compile failed" in msg:
+                print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ 编译失败 (Check Signature/Syntax)")
+            elif "TIMEOUT" in msg:
+                print(f"Testing {asm_f} (HumanEval/{task_idx})... ⏱️ TIMEOUT")
             else:
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ FAILED")
+                print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ FAILED (Logic)")
 
     print(f"\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
