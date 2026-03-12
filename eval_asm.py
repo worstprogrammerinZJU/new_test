@@ -12,7 +12,6 @@ JSONL_FILE = "human-eval-v2-20210705.jsonl"
 def analyze_assembly_signature(asm_content):
     """
     分析 ARM64 汇编代码，推断函数签名
-    关键：通过数据流分析判断指针类型
     """
     lines = asm_content.split('\n')
     
@@ -25,17 +24,15 @@ def analyze_assembly_signature(asm_content):
     for i, line in enumerate(lines):
         line = line.strip()
         
-        # 检测数组访问模式: ldr x0, [x8, x9, lsl #3]
+        # 检测数组访问模式
         if re.search(r'ldr\tx\d+,\s*\[x\d+,\s*x\d+,\s*lsl\s+#3\]', line):
             array_access = True
             
         # 检测 strlen 调用
         if 'bl\t_strlen' in line:
             calls_strlen = True
-            # 查找前几条指令，看 x0 是怎么加载的
             for j in range(max(0, i-5), i):
                 prev_line = lines[j].strip()
-                # 如果从数组加载 x0，说明原始参数是 char**
                 if re.search(r'ldr\tx0,\s*\[x\d+,\s*x\d+,\s*lsl', prev_line):
                     uses_x0 = 'char**'
         
@@ -50,10 +47,8 @@ def analyze_assembly_signature(asm_content):
         if re.search(r'ldr\tx0,\s*\[sp', line) and i > len(lines) - 10:
             returns_x0 = True
     
-    # 构建参数列表
     params = []
     
-    # 如果通过数组访问且调用 strlen，第一个参数是 char**
     if uses_x0 == 'char**' or (array_access and calls_strlen):
         params.append('char**')
     elif uses_x0:
@@ -62,7 +57,6 @@ def analyze_assembly_signature(asm_content):
     if uses_w1:
         params.append('int')
     
-    # 返回值
     if returns_x0:
         ret_type = 'char*' if calls_strlen else 'int64_t'
     else:
@@ -101,7 +95,6 @@ def parse_python_signature(prompt, entry_point):
         else:
             c_params.append(('void*', name))
     
-    # 返回值类型
     if 'Optional[str]' in return_type or 'str' in return_type:
         c_return = 'char*'
     elif 'List' in return_type:
@@ -117,8 +110,44 @@ def parse_python_signature(prompt, entry_point):
     
     return c_return, c_params
 
+def split_args_smart(args_str):
+    """
+    智能分割参数，处理列表、字符串等嵌套结构
+    """
+    args = []
+    current = ""
+    depth = 0
+    in_str = False
+    str_char = None
+    
+    for char in args_str:
+        if char in '"\'':
+            if not in_str:
+                in_str = True
+                str_char = char
+            elif char == str_char:
+                in_str = False
+                str_char = None
+            current += char
+        elif char in '[({':
+            depth += 1
+            current += char
+        elif char in '])}':
+            depth -= 1
+            current += char
+        elif char == ',' and depth == 0 and not in_str:
+            args.append(current.strip())
+            current = ""
+        else:
+            current += char
+    
+    if current.strip():
+        args.append(current.strip())
+    
+    return args
+
 def generate_test_code(task, asm_ret, asm_params):
-    """生成 C 测试代码"""
+    """生成 C 测试代码 - 修复版，避免 f-string 中的反斜杠"""
     test_code = task['test']
     asserts = re.findall(r'assert\s+candidate\((.*?)\)\s*==\s*(.*?)(?:\n|$)', test_code)
     
@@ -132,8 +161,7 @@ def generate_test_code(task, asm_ret, asm_params):
         arg_vars = []
         
         if args_str:
-            # 简单参数解析（可根据需要增强）
-            args = [a.strip() for a in args_str.split(',')]
+            args = split_args_smart(args_str)
             
             for j, arg in enumerate(args):
                 var_name = f'arg{j}'
@@ -155,11 +183,20 @@ def generate_test_code(task, asm_ret, asm_params):
                     str_val = arg.strip('"\'')
                     setup_lines.append(f'char* {var_name} = "{str_val}";')
                     arg_vars.append(var_name)
-                elif arg.isdigit():
+                elif arg.isdigit() or (arg.startswith('-') and arg[1:].isdigit()):
                     setup_lines.append(f'int {var_name} = {arg};')
+                    arg_vars.append(var_name)
+                elif re.match(r'^-?\d+\.\d+$', arg):
+                    setup_lines.append(f'float {var_name} = {arg}f;')
                     arg_vars.append(var_name)
                 elif arg == 'None':
                     setup_lines.append(f'void* {var_name} = NULL;')
+                    arg_vars.append(var_name)
+                elif arg == 'True':
+                    setup_lines.append(f'int {var_name} = 1;')
+                    arg_vars.append(var_name)
+                elif arg == 'False':
+                    setup_lines.append(f'int {var_name} = 0;')
                     arg_vars.append(var_name)
         
         func_call = f'func0({", ".join(arg_vars)})'
@@ -172,18 +209,29 @@ def generate_test_code(task, asm_ret, asm_params):
             check_lines.append(f'char* result = {func_call};')
             check_lines.append(f'if (strcmp(result, "{exp_str}") != 0) return 1;')
         elif expected == '[]':
-            check_lines.append(f'// TODO: check empty list')
+            check_lines.append('// TODO: check empty list')
         elif expected.startswith('['):
-            check_lines.append(f'// TODO: check list equality')
+            check_lines.append('// TODO: check list equality')
+        elif expected.isdigit():
+            check_lines.append(f'if ({func_call} != {expected}) return 1;')
+        elif expected == 'True':
+            check_lines.append(f'if ({func_call} != 1) return 1;')
+        elif expected == 'False':
+            check_lines.append(f'if ({func_call} != 0) return 1;')
         else:
             check_lines.append(f'if ({func_call} != {expected}) return 1;')
         
-        test_func = f'''
-int test_{i}() {{
-    {"\n    ".join(setup_lines)}
-    {"\n    ".join(check_lines)}
+        # 修复：不使用 f-string 包含大段代码，使用 format 方法
+        setup_str = "\n    ".join(setup_lines) if setup_lines else ""
+        check_str = "\n    ".join(check_lines) if check_lines else ""
+        
+        test_func_template = """int test_{i}() {{
+    {setup}
+    {check}
     return 0;
-}}'''
+}}"""
+        
+        test_func = test_func_template.format(i=i, setup=setup_str, check=check_str)
         c_tests.append(test_func)
     
     return c_tests
@@ -239,19 +287,23 @@ def main():
                 print(f"  ❌ FAILED (No test cases generated)")
                 continue
             
-            c_code = f'''#include <stdio.h>
+            # 修复：避免在 f-string 中使用反斜杠
+            test_funcs_str = "\n\n".join(test_funcs)
+            main_checks = "\n    ".join([f'if (test_{i}() != 0) {{ printf("Test {i} failed\\n"); failures++; }}' for i in range(len(test_funcs))])
+            
+            c_code_template = """#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
 // 声明汇编函数（使用推断的签名）
-extern {asm_ret} func0({', '.join(asm_params)});
+extern {asm_ret} func0({asm_params});
 
-{chr(10).join(test_funcs)}
+{test_funcs}
 
 int main() {{
     int failures = 0;
-    {"\n    ".join([f'if (test_{i}() != 0) {{ printf("Test {i} failed\\n"); failures++; }}' for i in range(len(test_funcs))])}
+    {main_checks}
     
     if (failures == 0) {{
         printf("PASS\\n");
@@ -261,7 +313,14 @@ int main() {{
         return 1;
     }}
 }}
-'''
+"""
+            
+            c_code = c_code_template.format(
+                asm_ret=asm_ret,
+                asm_params=', '.join(asm_params),
+                test_funcs=test_funcs_str,
+                main_checks=main_checks
+            )
             
             temp_c = os.path.join(temp_dir, "test.c")
             with open(temp_c, "w") as f:
