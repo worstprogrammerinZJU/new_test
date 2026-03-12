@@ -147,7 +147,7 @@ def split_args_smart(args_str):
     return args
 
 def generate_test_code(task, asm_ret, asm_params):
-    """生成 C 测试代码 - 修复版，避免 f-string 中的反斜杠"""
+    """生成 C 测试代码"""
     test_code = task['test']
     asserts = re.findall(r'assert\s+candidate\((.*?)\)\s*==\s*(.*?)(?:\n|$)', test_code)
     
@@ -178,7 +178,7 @@ def generate_test_code(task, asm_ret, asm_params):
                         setup_lines.append(f'char* {var_name}[] = {{{elements}}};')
                         setup_lines.append(f'int {var_name}_len = {len(strings)};')
                         arg_vars.append(var_name)
-                        arg_vars.append(f'{var_name}_len')
+                    arg_vars.append(f'{var_name}_len')
                 elif arg.startswith(("'", '"')):
                     str_val = arg.strip('"\'')
                     setup_lines.append(f'char* {var_name} = "{str_val}";')
@@ -221,20 +221,56 @@ def generate_test_code(task, asm_ret, asm_params):
         else:
             check_lines.append(f'if ({func_call} != {expected}) return 1;')
         
-        # 修复：不使用 f-string 包含大段代码，使用 format 方法
         setup_str = "\n    ".join(setup_lines) if setup_lines else ""
         check_str = "\n    ".join(check_lines) if check_lines else ""
         
-        test_func_template = """int test_{i}() {{
-    {setup}
-    {check}
-    return 0;
-}}"""
-        
-        test_func = test_func_template.format(i=i, setup=setup_str, check=check_str)
+        # 使用 % 格式化或简单拼接，避免 {} 模板
+        test_func = "int test_%d() {\n    %s\n    %s\n    return 0;\n}" % (i, setup_str, check_str)
         c_tests.append(test_func)
     
     return c_tests
+
+def build_c_file(asm_ret, asm_params, test_funcs):
+    """
+    构建完整的 C 文件 - 使用字符串拼接避免模板问题
+    """
+    lines = []
+    lines.append('#include <stdio.h>')
+    lines.append('#include <stdlib.h>')
+    lines.append('#include <string.h>')
+    lines.append('#include <stdbool.h>')
+    lines.append('')
+    lines.append('// 声明汇编函数')
+    params_str = ', '.join(asm_params)
+    lines.append(f'extern {asm_ret} func0({params_str});')
+    lines.append('')
+    
+    # 添加测试函数
+    for func in test_funcs:
+        lines.append(func)
+        lines.append('')
+    
+    # 构建 main 函数
+    lines.append('int main() {')
+    lines.append('    int failures = 0;')
+    
+    for i in range(len(test_funcs)):
+        lines.append(f'    if (test_{i}() != 0) {{')
+        lines.append(f'        printf("Test %d failed\\n", {i});')
+        lines.append('        failures++;')
+        lines.append('    }')
+    
+    lines.append('')
+    lines.append('    if (failures == 0) {')
+    lines.append('        printf("PASS\\n");')
+    lines.append('        return 0;')
+    lines.append('    } else {')
+    lines.append('        printf("FAILED: %d tests\\n", failures);')
+    lines.append('        return 1;')
+    lines.append('    }')
+    lines.append('}')
+    
+    return '\n'.join(lines)
 
 def main():
     if not os.path.exists(JSONL_FILE):
@@ -287,40 +323,8 @@ def main():
                 print(f"  ❌ FAILED (No test cases generated)")
                 continue
             
-            # 修复：避免在 f-string 中使用反斜杠
-            test_funcs_str = "\n\n".join(test_funcs)
-            main_checks = "\n    ".join([f'if (test_{i}() != 0) {{ printf("Test {i} failed\\n"); failures++; }}' for i in range(len(test_funcs))])
-            
-            c_code_template = """#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-
-// 声明汇编函数（使用推断的签名）
-extern {asm_ret} func0({asm_params});
-
-{test_funcs}
-
-int main() {{
-    int failures = 0;
-    {main_checks}
-    
-    if (failures == 0) {{
-        printf("PASS\\n");
-        return 0;
-    }} else {{
-        printf("FAILED: %d tests\\n", failures);
-        return 1;
-    }}
-}}
-"""
-            
-            c_code = c_code_template.format(
-                asm_ret=asm_ret,
-                asm_params=', '.join(asm_params),
-                test_funcs=test_funcs_str,
-                main_checks=main_checks
-            )
+            # 使用安全的字符串拼接构建 C 文件
+            c_code = build_c_file(asm_ret, asm_params, test_funcs)
             
             temp_c = os.path.join(temp_dir, "test.c")
             with open(temp_c, "w") as f:
