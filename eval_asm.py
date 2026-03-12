@@ -7,22 +7,17 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-# 编译失败时才尝试的备选签名（精简版）
+# 编译失败时才尝试的备选签名
 FALLBACK_SIGNATURES = [
-    ("int", ["int"]),
-    ("int", ["int", "int"]),
-    ("char*", ["char**", "int"]),
+    "extern int func0(int);",
+    "extern int func0(int, int);",
+    "extern char* func0(char**, int);",
 ]
 
-def try_compile_run(asm_path, ret_type, param_types, assert_lines):
+def build_test_code(func_decl, assert_lines):
     """
-    尝试特定签名，返回 (success, output)
+    完全按照原版逻辑构建测试代码
     """
-    # 构建函数声明
-    params_str = ', '.join(param_types) if param_types else 'void'
-    func_decl = f"extern {ret_type} func0({params_str});"
-    
-    # 保持原版的 assert 处理逻辑
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
@@ -37,10 +32,9 @@ def try_compile_run(asm_path, ret_type, param_types, assert_lines):
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
         c_checks.append(f"    {curr}) return 1;")
-    
+
     checks_str = "\n".join(c_checks)
     
-    # 构建C代码（保持原版格式）
     driver_template = """#include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
@@ -53,42 +47,42 @@ int main() {
     return 0;
 }
 """
-    driver_c = driver_template % (func_decl, checks_str)
-    
+    return driver_template % (func_decl, checks_str)
+
+def try_compile_run(asm_path, driver_c):
+    """
+    尝试编译和运行给定的C代码
+    """
     with open("temp_tester.c", "w") as f:
         f.write(driver_c)
     
-    # 编译
     compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-    result = subprocess.run(compile_cmd, shell=True, capture_output=True, text=True)
+    result = subprocess.run(compile_cmd, shell=True, capture_output=True)
     
     if result.returncode != 0:
-        return False, "compile failed"
+        return False, "compile"
     
-    # 运行
     try:
         res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
         if "PASS" in res.stdout:
-            return True, "PASS"
+            return True, "pass"
         else:
-            return False, res.stdout + res.stderr
+            return False, "logic"
     except subprocess.TimeoutExpired:
-        return False, "TIMEOUT"
-    except Exception as e:
-        return False, str(e)
+        return False, "timeout"
+    except Exception:
+        return False, "error"
 
 def main():
     if not os.path.exists(JSONL_FILE):
         print(f"Error: {JSONL_FILE} not found")
         return
 
-    # 1. 加载 JSONL 题目到列表
     tasks = []
     with open(JSONL_FILE, 'r') as f:
         for line in f:
             tasks.append(json.loads(line))
 
-    # 2. 获取并排序汇编文件
     if not os.path.exists(ASM_DIR):
         print(f"Error: Directory {ASM_DIR} not found")
         return
@@ -110,39 +104,51 @@ def main():
         task = tasks[task_idx]
         total_run += 1
         
-        # 3. 解析 Python assert 语句
         raw_test_code = task['test']
         assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
         
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # 先尝试默认的 int func0()
-        success, msg = try_compile_run(asm_path, "int", [], assert_lines)
+        # === 原版逻辑：先尝试默认签名 ===
+        default_decl = "extern int func0();"
+        driver_c = build_test_code(default_decl, assert_lines)
         
-        if success:
-            print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK")
-            passed += 1
-            continue
+        with open("temp_tester.c", "w") as f:
+            f.write(driver_c)
+
+        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
         
-        # 默认失败，尝试备选签名
+        print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ")
+        
+        compile_result = subprocess.run(compile_cmd, shell=True, capture_output=True)
+        
+        if compile_result.returncode == 0:
+            # 原版编译成功，按原版逻辑运行
+            try:
+                res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+                if "PASS" in res.stdout:
+                    print("✅ OK")
+                    passed += 1
+                else:
+                    print("❌ FAILED (Logic)")
+            except subprocess.TimeoutExpired:
+                print("⏱️ TIMEOUT")
+            continue  # 原版成功，跳过备选
+        
+        # === 原版编译失败，尝试备选签名 ===
         found = False
-        for ret_type, param_types in FALLBACK_SIGNATURES:
-            success, msg = try_compile_run(asm_path, ret_type, param_types, assert_lines)
+        for fallback_decl in FALLBACK_SIGNATURES:
+            driver_c = build_test_code(fallback_decl, assert_lines)
+            success, status = try_compile_run(asm_path, driver_c)
             if success:
-                sig = f"{ret_type} func0({', '.join(param_types) if param_types else 'void'})"
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ✅ OK ({sig})")
+                sig = fallback_decl.replace("extern ", "").replace(";", "")
+                print(f"✅ OK ({sig})")
                 passed += 1
                 found = True
                 break
         
         if not found:
-            # 输出原版的失败信息
-            if "compile failed" in msg:
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ 编译失败 (Check Signature/Syntax)")
-            elif "TIMEOUT" in msg:
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ⏱️ TIMEOUT")
-            else:
-                print(f"Testing {asm_f} (HumanEval/{task_idx})... ❌ FAILED (Logic)")
+            print("❌ 编译失败 (Check Signature/Syntax)")
 
     print(f"\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
