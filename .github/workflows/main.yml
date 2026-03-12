@@ -1,21 +1,50 @@
-name: Pure C ASM Test
+name: ARM64 Assembly Dynamic Evaluation
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  test-asm:
-    runs-on: macos-latest  # 必须用 macOS 跑 arm64 汇编
+  evaluate:
+    runs-on: macos-latest  # 必须使用 macOS 运行 Apple Silicon (M1/M2) 架构测试
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Run Evaluator
+      - name: Pre-process Assembly Symbols
         run: |
-          # 运行评估脚本
-          # 它会自动寻找 generated_asm 文件夹并链接其中的 .s 文件
-          python eval_asm.py
+          # macOS 链接器要求汇编符号以下划线开头
+          # 将所有生成的 .s 文件中的 func0 替换为 _func0
+          find ./generated_asm -name "*.s" -exec sed -i '' 's/func0/_func0/g' {} +
+          echo "Assembly symbols prefixed with underscore for macOS compatibility."
+
+      - name: Run Dynamic Evaluator
+        run: |
+          # 运行下方的 Python 脚本进行自动化编译和测试
+          python eval_asm.py > full_eval.log 2>&1
+          cat full_report.log || true
+
+      - name: Summary of Results
+        if: always()
+        run: |
+          echo "### 🚀 Evaluation Results" >> $GITHUB_STEP_SUMMARY
+          PASS=$(grep -c "✅ PASS" full_eval.log || echo "0")
+          FAIL=$(grep -c "❌" full_eval.log || echo "0")
+          echo "- **Passed:** $PASS" >> $GITHUB_STEP_SUMMARY
+          echo "- **Failed/Error:** $FAIL" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: assembly-test-logs
+          path: |
+            full_eval.log
+            temp_tester.c
