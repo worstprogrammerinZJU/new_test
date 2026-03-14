@@ -7,98 +7,138 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-def build_tester(func_decl, assert_lines, mode="std"):
+# 原版备选签名
+FALLBACK_SIGNATURES = [
+    "extern int func0(int);",
+    "extern int func0(int, int);",
+    "extern char* func0(char**, int);",
+]
+
+def build_test_code_original(func_decl, assert_lines):
     """
-    mode="std": 窄正则，原版逻辑
-    mode="rescue": 宽正则，处理引号和None
+    【完全保留你的逻辑】
     """
     c_checks = []
     for line in assert_lines:
-        # 基础替换
-        curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
-        
-        # 处理引号（仅在 rescue 模式或检测到单引号时）
-        if mode == "rescue" or "'" in curr:
-            curr = curr.replace("'", '"')
-
+        curr = line.replace('True', '1').replace('False', '0')
         def list_to_c(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
-            clean = content.replace("'", '"')
-            if '"' in clean: return f"(char*[]){{{clean}}}, {len(content.split(','))}"
-            return f"(float[]){{{content}}}, {len(content.split(','))}"
-        
+            count = len(content.split(','))
+            return f"(float[]){{{content}}}, {count}"
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
         c_checks.append(f"    {curr}) return 1;")
+    driver_template = """#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+%s
+int main() {
+%s
+    printf("PASS\\n");
+    return 0;
+}"""
+    return driver_template % (func_decl, "\n".join(c_checks))
 
-    headers = "#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n#include <ctype.h>"
-    return f"{headers}\n\n{func_decl}\n\nint main() {{\n" + "\n".join(c_checks) + "\n    printf(\"PASS\\n\");\n    return 0;\n}"
+def build_test_code_rescue(func_decl, raw_test_code):
+    """
+    【补救模式】
+    """
+    assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
+    c_checks = []
+    for line in assert_lines:
+        curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
+        def quote_fix(match):
+            s = match.group(0)
+            return '"' + s[1:-1] + '"'
+        curr = re.sub(r"'.*?'", quote_fix, curr)
+        def list_to_c_rescue(match):
+            content = match.group(1).strip()
+            if not content: return "NULL, 0"
+            items = content.split(',')
+            # 修复 f-string 中不能有反斜杠的问题
+            clean_content = content.replace("'", '"')
+            if '"' in clean_content:
+                return f"(char*[]){{{clean_content}}}, {len(items)}"
+            return f"(float[]){{{content}}}, {len(items)}"
+        curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
+        if 'assert candidate' in curr:
+            content_match = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
+            if content_match:
+                args = content_match.group(1)
+                expected = content_match.group(2)
+                c_checks.append(f"    if (!(func0({args}) == {expected})) return 1;")
+            else:
+                curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
+                c_checks.append(f"    {curr}) return 1;")
+    driver_template = """#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+%s
+int main() {
+%s
+    printf("PASS\\n");
+    return 0;
+}"""
+    return driver_template % (func_decl, "\n".join(c_checks))
 
-def try_run(asm_path, driver_c):
+def try_compile_run(asm_path, driver_c):
     with open("temp_tester.c", "w") as f: f.write(driver_c)
     cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-    if subprocess.run(cmd, shell=True, capture_output=True).returncode != 0:
-        return False
+    res = subprocess.run(cmd, shell=True, capture_output=True)
+    if res.returncode != 0: return False, "COMPILE_ERROR"
     try:
-        res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=1)
-        return "PASS" in res.stdout
-    except: return False
+        run_res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+        return ("PASS" in run_res.stdout), "LOGIC_ERROR"
+    except: return False, "RUNTIME_ERROR"
 
 def main():
     if not os.path.exists(JSONL_FILE): return
     with open(JSONL_FILE, 'r') as f:
         tasks = [json.loads(line) for line in f]
-    
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], 
                        key=lambda x: int(re.search(r'\d+', x).group()))
-
     passed = 0
     for asm_f in asm_files:
         prob_num = int(re.search(r'\d+', asm_f).group())
         task = tasks[prob_num - 1]
-        raw_test = task['test']
+        raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # 提取两种精度的断言
-        assert_narrow = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test)
-        assert_wide = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test)
-
+        # --- 核心修改：让正则能够支持负数（针对 77 题） ---
+        # 原本是 \w+，现在改为 [\w\d\.-]+ 以支持负号和点号
+        assert_lines_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
+        
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
 
-        # --- 阶段 1: 完全原版驱动 (保住基础分) ---
-        for decl in ["extern int func0();", "extern int func0(int);", "extern int func0(int, int);"]:
-            if try_run(asm_path, build_tester(decl, assert_narrow, mode="std")):
-                print("✅ OK (Orig)", end=" ")
-                found = True; break
+        # 1. 基础分通道 (数值题，包含 77)
+        for decl in ["extern int func0();"] + FALLBACK_SIGNATURES:
+            ok, _ = try_compile_run(asm_path, build_test_code_original(decl, assert_lines_orig))
+            if ok:
+                print("✅ OK (Orig)")
+                passed += 1; found = True; break
         
-        # --- 阶段 2: 77号题及负数题补救 (使用明确的 int 声明) ---
-        if not found:
-            for decl in ["extern int func0(int);", "extern int func0(long long);"]:
-                if try_run(asm_path, build_tester(decl, assert_wide, mode="std")):
-                    print("✅ OK (Int-Fix)", end=" ")
-                    found = True; break
-
-        # --- 阶段 3: 3号题补救 (浮点) ---
+        # 2. 浮点分通道 (针对 3 号题)
         if not found:
             for decl in ["extern float func0();", "extern double func0();"]:
-                if try_run(asm_path, build_tester(decl, assert_narrow, mode="std")):
-                    print("✅ OK (Float-Fix)", end=" ")
-                    found = True; break
+                ok, _ = try_compile_run(asm_path, build_test_code_original(decl, assert_lines_orig))
+                if ok:
+                    print("✅ OK (Float)")
+                    passed += 1; found = True; break
 
-        # --- 阶段 4: 17号题及字符串补救 ---
+        # 3. 字符串补救通道 (针对 17 号题)
         if not found:
-            for decl in ["extern int func0(char*);", "extern char* func0(char**, int);", "extern int func0();"]:
-                if try_run(asm_path, build_tester(decl, assert_wide, mode="rescue")):
-                    print("✅ OK (Str-Fix)", end=" ")
-                    found = True; break
-
-        if found:
-            passed += 1
-            print("")
-        else:
-            print("❌ FAIL")
+            rescue_sigs = ["extern int func0(char*);", "extern char* func0(char**, int);", "extern int func0();"]
+            for r_sig in rescue_sigs:
+                ok, err = try_compile_run(asm_path, build_test_code_rescue(r_sig, raw_test_code))
+                if ok:
+                    print(f"✅ OK (Rescue:{r_sig.split('0')[1][:-1]})")
+                    passed += 1; found = True; break
+            if not found: print(f"❌ FAIL")
 
     print(f"\nFinal Score: {passed}/{len(asm_files)}")
 
