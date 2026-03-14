@@ -7,34 +7,23 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-# 编译失败时才尝试的备选签名 - 扩充部分
+# 编译失败时才尝试的备选签名
 FALLBACK_SIGNATURES = [
     "extern int func0(int);",
     "extern int func0(int, int);",
     "extern int func0(int, int, int);",
-    "extern char* func0(char**, int);",
-    # 针对你代码中 list_to_c 生成的 (float[]){...}, count 结构的签名
+    "extern char* func0(char**, int);",  # 关键：支持 HumanEval/12
     "extern int func0(float*, int);",
     "extern float func0(float*, int);",
     "extern double func0(float*, int);",
     "extern bool func0(float*, int);",
-    # 针对字符串参数
     "extern int func0(char*);",
     "extern bool func0(char*);",
     "extern char* func0(char*);",
-    # 针对浮点数返回或参数
     "extern float func0(float);",
     "extern float func0(float, float);",
     "extern double func0(double);",
     "extern double func0(double, double);",
-    "extern int func0(int, float*, int);",
-
-    "extern char* func0(char**, int);", # 针对 HumanEval/12
-    "extern int func0(int);",
-    "extern int func0(int, int);",
-    "extern int func0(float*, int);",
-    "extern float func0(float*, int);",
-    "extern double func0(float*, int);",
 ]
 
 def build_test_code(func_decl, assert_lines):
@@ -43,16 +32,34 @@ def build_test_code(func_decl, assert_lines):
     """
     c_checks = []
     for line in assert_lines:
+        # 1. 处理 Python 布尔值转换
         curr = line.replace('True', '1').replace('False', '0')
         
+        # 2. 列表转换逻辑（增强兼容性，适配字符串）
         def list_to_c(match):
             content = match.group(1).strip()
             if not content:
                 return "NULL, 0"
-            count = len(content.split(','))
-            return f"(float[]){{{content}}}, {count}"
+            
+            # 分割元素
+            items = [i.strip() for i in content.split(',')]
+            count = len(items)
+            
+            # 如果内容包含引号，说明是字符串列表 List[str]
+            if "'" in content or '"' in content:
+                # 将 Python 单引号替换为 C 双引号
+                c_content = content.replace("'", '"')
+                return f"(char*[]){{{c_content}}}, {count}"
+            else:
+                # 否则按原逻辑作为 float 数组处理
+                return f"(float[]){{{content}}}, {count}"
         
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
+        
+        # 3. 处理 None 转换为 NULL (针对 longest([]) == None)
+        curr = curr.replace(' == None', ' == NULL')
+        
+        # 4. 转换 assert candidate 结构
         curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
         c_checks.append(f"    {curr}) return 1;")
 
@@ -61,6 +68,7 @@ def build_test_code(func_decl, assert_lines):
     driver_template = """#include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 
 %s
 
@@ -128,37 +136,23 @@ def main():
         total_run += 1
         
         raw_test_code = task['test']
-        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
+        # 修正正则，确保能匹配到末尾带引号的字符串或 NULL
+        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
         
         asm_path = os.path.join(ASM_DIR, asm_f)
-        
-        # === 原版逻辑：先尝试默认签名 ===
-        default_decl = "extern int func0();"
-        driver_c = build_test_code(default_decl, assert_lines)
-        
-        with open("temp_tester.c", "w") as f:
-            f.write(driver_c)
-
-        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-        
         print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ")
         
-        compile_result = subprocess.run(compile_cmd, shell=True, capture_output=True)
+        # === 1. 先尝试默认签名 ===
+        default_decl = "extern int func0();"
+        driver_c = build_test_code(default_decl, assert_lines)
+        success, status = try_compile_run(asm_path, driver_c)
+
+        if success:
+            print("✅ OK")
+            passed += 1
+            continue
         
-        if compile_result.returncode == 0:
-            # 原版编译成功，按原版逻辑运行
-            try:
-                res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
-                if "PASS" in res.stdout:
-                    print("✅ OK")
-                    passed += 1
-                else:
-                    print("❌ FAILED (Logic)")
-            except subprocess.TimeoutExpired:
-                print("⏱️ TIMEOUT")
-            continue  # 原版成功，跳过备选
-        
-        # === 原版编译失败，尝试备选签名 ===
+        # === 2. 尝试备选签名 ===
         found = False
         for fallback_decl in FALLBACK_SIGNATURES:
             driver_c = build_test_code(fallback_decl, assert_lines)
@@ -171,7 +165,10 @@ def main():
                 break
         
         if not found:
-            print("❌ 编译失败 (Check Signature/Syntax)")
+            if status == "logic":
+                print("❌ FAILED (Logic)")
+            else:
+                print("❌ 编译失败 (Check Signature/Syntax)")
 
     print(f"\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
