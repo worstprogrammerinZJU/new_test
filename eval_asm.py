@@ -42,33 +42,46 @@ int main() {
 
 def build_test_code_rescue(func_decl, raw_test_code):
     """
-    补救模式：修复 f-string 语法错误并处理字符串逻辑
+    补救模式：处理 HumanEval/17 等字符串带空格的题目
     """
+    # 这里的正则修改为匹配到行尾，确保抓取完整断言
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
+        # 处理 None 和布尔
         curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
         
-        # 将单引号替换为双引号，移出 f-string 内部以避免 SyntaxError
+        # 将 Python 单引号转为 C 双引号
         def quote_fix(match):
             s = match.group(0)
             return '"' + s[1:-1] + '"'
         curr = re.sub(r"'.*?'", quote_fix, curr)
 
+        # 处理列表逻辑
         def list_to_c_rescue(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
             items = content.split(',')
-            # 处理字符串列表内容替换
             if '"' in content:
-                # 预先处理好字符串，避免在 f-string {} 中使用反斜杠
                 clean_content = content.replace("'", '"')
                 return f"(char*[]){{{clean_content}}}, {len(items)}"
             return f"(float[]){{{content}}}, {len(items)}"
         
         curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
-        curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
-        c_checks.append(f"    {curr}) return 1;")
+        
+        # 补救模式下更安全的替换：确保括号对齐
+        # 寻找 assert candidate(...) == XXX，转化为 if (!(func0(...) == XXX))
+        if 'assert candidate' in curr:
+            # 提取括号内的内容
+            content_match = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
+            if content_match:
+                args = content_match.group(1)
+                expected = content_match.group(2)
+                c_checks.append(f"    if (!(func0({args}) == {expected})) return 1;")
+            else:
+                # 备选简单替换
+                curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
+                c_checks.append(f"    {curr}) return 1;")
 
     driver_template = """#include <stdio.h>
 #include <stdbool.h>
@@ -113,7 +126,7 @@ def main():
         task = tasks[task_idx]
         raw_test_code = task['test']
         
-        # 第一阶段断言正则
+        # 第一阶段断言正则 (完全保持你的原始 regex)
         assert_lines_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
         asm_path = os.path.join(ASM_DIR, asm_f)
         
@@ -129,11 +142,12 @@ def main():
                 found = True
                 break
         
-        # --- 第二阶段：补救逻辑 ---
+        # --- 第二阶段：补救逻辑 (针对 17 这种字符串输入题) ---
         if not found:
+            # 针对 17 号汇编，把 int func0(char*) 放在第一优先级
             rescue_sigs = [
-                "extern int func0(char*);", 
-                "extern char* func0(char**, int);",
+                "extern int func0(char*);",
+                "extern int func0(char**, int);",
                 "extern int func0();"
             ]
             last_err = "NONE"
