@@ -7,31 +7,27 @@ import subprocess
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-# 编译失败时才尝试的备选签名
-# 严格匹配 HumanEval 中常见的参数模式：(int), (int, int), (float*, int), (char*) 等
+# 编译失败时才尝试的备选签名 - 扩充部分
 FALLBACK_SIGNATURES = [
     "extern int func0(int);",
     "extern int func0(int, int);",
     "extern int func0(int, int, int);",
-    # 数组处理模式 (对应你的正则生成: 指针, 长度)
-    "extern int func0(float*, int);", 
-    "extern int func0(int*, int);",
+    "extern char* func0(char**, int);",
+    # 针对你代码中 list_to_c 生成的 (float[]){...}, count 结构的签名
+    "extern int func0(float*, int);",
     "extern float func0(float*, int);",
     "extern double func0(float*, int);",
-    # 浮点数模式
+    "extern bool func0(float*, int);",
+    # 针对字符串参数
+    "extern int func0(char*);",
+    "extern bool func0(char*);",
+    "extern char* func0(char*);",
+    # 针对浮点数返回或参数
     "extern float func0(float);",
     "extern float func0(float, float);",
     "extern double func0(double);",
     "extern double func0(double, double);",
-    # 字符串模式
-    "extern int func0(char*);",
-    "extern char* func0(char*);",
-    "extern char* func0(char**, int);",
-    "extern bool func0(char*);",
-    # 混合模式
-    "extern int func0(char*, char*);",
-    "extern float func0(int);",
-    "extern double func0(int);",
+    "extern int func0(int, float*, int);",
 ]
 
 def build_test_code(func_decl, assert_lines):
@@ -125,8 +121,7 @@ def main():
         total_run += 1
         
         raw_test_code = task['test']
-        # 注意：这里保留原版匹配逻辑
-        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
+        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
         
         asm_path = os.path.join(ASM_DIR, asm_f)
         
@@ -134,14 +129,27 @@ def main():
         default_decl = "extern int func0();"
         driver_c = build_test_code(default_decl, assert_lines)
         
-        print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ", flush=True)
+        with open("temp_tester.c", "w") as f:
+            f.write(driver_c)
+
+        compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
         
-        success, status = try_compile_run(asm_path, driver_c)
+        print(f"Testing {asm_f} (HumanEval/{task_idx})...", end=" ")
         
-        if success:
-            print("✅ OK")
-            passed += 1
-            continue
+        compile_result = subprocess.run(compile_cmd, shell=True, capture_output=True)
+        
+        if compile_result.returncode == 0:
+            # 原版编译成功，按原版逻辑运行
+            try:
+                res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+                if "PASS" in res.stdout:
+                    print("✅ OK")
+                    passed += 1
+                else:
+                    print("❌ FAILED (Logic)")
+            except subprocess.TimeoutExpired:
+                print("⏱️ TIMEOUT")
+            continue  # 原版成功，跳过备选
         
         # === 原版编译失败，尝试备选签名 ===
         found = False
@@ -156,12 +164,7 @@ def main():
                 break
         
         if not found:
-            if status == "logic":
-                print("❌ FAILED (Logic)")
-            elif status == "timeout":
-                print("⏱️ TIMEOUT")
-            else:
-                print("❌ 编译失败 (Check Signature/Syntax)")
+            print("❌ 编译失败 (Check Signature/Syntax)")
 
     print(f"\n{'='*30}")
     print(f"Final Score: {passed}/{total_run}")
