@@ -14,45 +14,8 @@ FALLBACK_SIGNATURES = [
     "extern char* func0(char**, int);",
 ]
 
-def build_test_code_enhanced(func_decl, raw_test_code):
-    """
-    补救模式：处理 None 和 字符串数组
-    """
-    assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
-    c_checks = []
-    for line in assert_lines:
-        curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
-        
-        def list_to_c_enhanced(match):
-            content = match.group(1).strip()
-            if not content: return "NULL, 0"
-            count = len(content.split(','))
-            if "'" in content or '"' in content:
-                c_content = content.replace("'", '"')
-                return f"(char*[]){{{c_content}}}, {count}"
-            return f"(float[]){{{content}}}, {count}"
-        
-        curr = re.sub(r'\[(.*?)\]', list_to_c_enhanced, curr)
-        curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
-        c_checks.append(f"    {curr}) return 1;")
-
-    driver_template = """#include <stdio.h>
-#include <stdbool.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-%s
-int main() {
-%s
-    printf("PASS\\n");
-    return 0;
-}"""
-    return driver_template % (func_decl, "\n".join(c_checks))
-
 def build_test_code_original(func_decl, assert_lines):
-    """
-    完全是你给出的原版逻辑
-    """
+    # 完全维持你给出的原版逻辑
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
@@ -75,22 +38,70 @@ int main() {
 }"""
     return driver_template % (func_decl, "\n".join(c_checks))
 
+def build_test_code_rescue(func_decl, raw_test_code):
+    """
+    专门修复补救模式下的编译错误：
+    1. 彻底处理引号
+    2. 补全缺失头文件
+    3. 处理 None
+    """
+    # 宽正则获取断言
+    assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
+    c_checks = []
+    for line in assert_lines:
+        # 处理基础关键字
+        curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
+        
+        # 处理字符串：将 Python 的单引号字符串转为 C 的双引号
+        # 例如: 'abc' -> "abc"
+        def quote_fix(match):
+            s = match.group(0)
+            if (s.startswith("'") and s.endswith("'")):
+                return '"' + s[1:-1] + '"'
+            return s
+        curr = re.sub(r"'.*?'", quote_fix, curr)
+
+        def list_to_c_rescue(match):
+            content = match.group(1).strip()
+            if not content: return "NULL, 0"
+            items = content.split(',')
+            # 如果是字符串列表
+            if '"' in content:
+                return f"(char*[]){{{content.replace(\"'\", '\"')}}}, {len(items)}"
+            return f"(float[]){{{content}}}, {len(items)}"
+        
+        curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
+        curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
+        c_checks.append(f"    {curr}) return 1;")
+
+    driver_template = """#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+%s
+
+int main() {
+%s
+    printf("PASS\\n");
+    return 0;
+}"""
+    return driver_template % (func_decl, "\n".join(c_checks))
+
 def try_compile_run(asm_path, driver_c):
     with open("temp_tester.c", "w") as f: f.write(driver_c)
-    compile_cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-    result = subprocess.run(compile_cmd, shell=True, capture_output=True)
-    if result.returncode != 0: 
+    # 核心：使用 -lm 链接数学库，-Wno-everything 忽略警告
+    cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
+    res = subprocess.run(cmd, shell=True, capture_output=True)
+    if res.returncode != 0:
         return False, "COMPILE_ERROR"
     try:
-        res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
-        if "PASS" in res.stdout:
-            return True, "PASS"
-        else:
-            return False, "LOGIC_ERROR"
-    except subprocess.TimeoutExpired:
-        return False, "TIMEOUT"
-    except Exception:
-        return False, "EXEC_ERROR"
+        run_res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=2)
+        return ("PASS" in run_res.stdout), "LOGIC_ERROR"
+    except:
+        return False, "RUNTIME_ERROR"
 
 def main():
     if not os.path.exists(JSONL_FILE): return
@@ -101,54 +112,46 @@ def main():
                        key=lambda x: int(re.search(r'\d+', x).group()))
 
     passed = 0
-    total = len(asm_files)
-
     for asm_f in asm_files:
         prob_num = int(re.search(r'\d+', asm_f).group())
-        task_idx = prob_num - 1
-        task = tasks[task_idx]
-        raw_test_code = task['test']
-        # 原版断言正则
-        assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', raw_test_code)
+        task = tasks[prob_num - 1]
         asm_path = os.path.join(ASM_DIR, asm_f)
+        
+        # 提取原版断言
+        assert_lines_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\w+', task['test'])
         
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
-        last_error = ""
 
-        # --- 阶段 1: 原始逻辑尝试 ---
+        # --- 第一阶段：原版逻辑 (基础分) ---
         for decl in ["extern int func0();"] + FALLBACK_SIGNATURES:
-            driver_c = build_test_code_original(decl, assert_lines)
-            success, err_code = try_compile_run(asm_path, driver_c)
-            if success:
-                print(f"✅ OK (Original:{decl.split('0')[1][:-1]})")
+            ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_lines_orig))
+            if ok:
+                print("✅ OK (Orig)")
                 passed += 1
                 found = True
                 break
-            last_error = err_code
-
-        # --- 阶段 2: 补救逻辑尝试 ---
+        
+        # --- 第二阶段：补救逻辑 (针对单参数字符串和 None) ---
         if not found:
-            rescue_sigs = ["extern char* func0(char**, int);", "extern char* func0(char*);", "extern int func0();"]
+            # 针对你给出的汇编例子，重点尝试 int func0(char*)
+            rescue_sigs = [
+                "extern int func0(char*);", 
+                "extern char* func0(char**, int);",
+                "extern int func0();"
+            ]
             for r_sig in rescue_sigs:
-                driver_c_res = build_test_code_enhanced(r_sig, raw_test_code)
-                success, err_code = try_compile_run(asm_path, driver_c_res)
-                if success:
-                    print(f"✅ OK (Rescued:{r_sig.split('0')[1][:-1]})")
+                ok, err = try_compile_run(asm_path, build_test_code_rescue(r_sig, task['test']))
+                if ok:
+                    print(f"✅ OK (Rescue:{r_sig.split('0')[1][:-1]})")
                     passed += 1
                     found = True
                     break
-                last_error = err_code # 记录最后一次失败的原因
+                last_err = err
+            
+            if not found: print(f"❌ {last_err}")
 
-        if not found:
-            print(f"❌ FAIL ({last_error})")
-            # 如果彻底失败，可以打印出此时生成的 temp_tester.c 供分析 (可选)
-            # with open("temp_tester.c", "r") as f:
-            #     print("--- Failed C Code ---")
-            #     print(f.read())
-            #     print("---------------------")
-
-    print(f"\n{'='*20}\nFinal Result: {passed}/{total}\n{'='*20}")
+    print(f"\nScore: {passed}/{len(asm_files)}")
 
 if __name__ == "__main__":
     main()
