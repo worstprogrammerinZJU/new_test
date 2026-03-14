@@ -28,6 +28,10 @@ FALLBACK_SIGNATURES = [
     "extern double func0(double);",
     "extern double func0(double, double);",
     "extern int func0(int, float*, int);",
+
+    "extern char* func0(char**, int);",  # 最标准匹配 HumanEval/12
+    "extern char* func0(char**, long);", # 部分 64 位汇编可能将长度视为 long
+    "extern const char* func0(char**, int);",
 ]
 
 def build_test_code(func_decl, assert_lines):
