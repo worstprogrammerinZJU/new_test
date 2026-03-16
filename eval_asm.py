@@ -16,9 +16,20 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对隔离 + 语法修正版】修正 f-string 无法包含反斜杠的问题"""
+    """【绝对隔离 + 79题逻辑修正版】确保地基稳固，79题精准拦截"""
     c_checks = []
     for line in assert_lines:
+        # ==========================================
+        # 79 题隔离区 (字符串字符统计: "2357BD")
+        # ==========================================
+        if prob_num == 79:
+            # 兼容单引号和双引号的抓取
+            m = re.search(r"assert candidate\(['\"]([^'\"]*)['\"]\)\s*==\s*(\d+)", line)
+            if m:
+                s_in, exp = m.groups()
+                c_checks.append(f'    if (func0("{s_in}") != {exp}) return 1;')
+                continue
+
         # ==========================================
         # 51 题隔离区 (凯撒加密)
         # ==========================================
@@ -51,17 +62,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {exp}) return 1; }}')
                 continue
 
-        # ==========================================
-        # 79 题隔离区 (字符串字符统计)
-        # ==========================================
-        if prob_num == 79:
-            m = re.search(r'assert candidate\("(.*?)"\)\s*==\s*(\d+)', line)
-            if m:
-                s_in, exp = m.groups()
-                c_checks.append(f'    if (func0("{s_in}") != {exp}) return 1;')
-                continue
-
-        # --- 141 分地基逻辑 ---
+        # --- 141 分地基逻辑 (完全不动) ---
         curr = line.replace('True', '1').replace('False', '0')
         
         if prob_num == 45:
@@ -79,7 +80,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 clean = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
                 return f"(char[]){{\"{clean}\"}}"
             if prob_num == 13:
-                # 修复语法错误：先处理内容再放入 f-string
                 c_formatted = content.replace("'", '"')
                 return f"(char*[]){{{c_formatted}}}, {count}"
             if prob_num in [4, 40, 41, 44]:
@@ -100,7 +100,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 args, expected = m.groups()
-                # 修复语法错误：手动处理引号
                 exp_formatted = expected.replace("'", '"')
                 c_checks.append(f'    if (strcmp(func0({args}), {exp_formatted}) != 0) return 1;')
                 continue
@@ -116,6 +115,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
+    """Rescue 逻辑复原"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -182,8 +182,11 @@ def main():
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
-        elif prob_num in [54, 79]:
-            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*-?\d+', raw_test_code)
+        elif prob_num == 79:
+            # 79 题断言可能是 assert candidate("abc") == 1
+            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\d+', raw_test_code)
+        elif prob_num == 54:
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 45:
