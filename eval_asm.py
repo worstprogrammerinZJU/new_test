@@ -16,7 +16,7 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【保留 141 分逻辑，仅为 13, 33 号题开辟沙箱】"""
+    """【在 141 分地基上，为 39, 41 开辟专属逻辑】"""
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
@@ -26,22 +26,28 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             if not content: return "NULL, 0"
             count = len(content.split(','))
             
-            # --- 33 号题专项：原地修改字符串 ---
-            if prob_num == 33:
+            # --- 33, 39 号题专项：原地修改字符数组 ---
+            if prob_num in [33, 39]:
                 clean_content = content.replace(" ", "").replace(",", "")
+                # 如果是数字列表，提取数字字符
+                if prob_num == 39:
+                    clean_content = "".join(re.findall(r'\d+', content))
                 return f"(char[]){{\"{clean_content}\"}}"
 
             if prob_num == 13:
                 c_content = content.replace("'", '"')
                 return f"(char*[]){{{c_content}}}, {count}"
-            if prob_num == 4:
+            
+            # --- 4, 40, 41 号题专项：int 数组 ---
+            if prob_num in [4, 40, 41]:
                 return f"(int[]){{{content}}}, {count}"
+                
             return f"(float[]){{{content}}}, {count}"
             
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         
-        # --- 33 号题原地修改断言 ---
-        if prob_num == 33:
+        # --- 33, 39 号题原地修改断言 ---
+        if prob_num in [33, 39]:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 arg, expected = m.groups()
@@ -70,7 +76,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【补救模式：修复 f-string 语法错误并保持地基逻辑】"""
+    """【补救模式：保持原有地基不动】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -84,7 +90,6 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = []
         for args, expected in assert_lines:
-            # 修复点：提前计算长度，避免 f-string 大括号嵌套冲突
             items = expected.split(',')
             exp_len = len(items) if expected.strip() else 0
             c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
@@ -103,7 +108,7 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             clean_content = content.replace("'", '"')
             items = content.split(',')
             if '"' in clean_content: return f"(char*[]){{{clean_content}}}, {len(items)}"
-            if prob_num == 4: return f"(int[]){{{content}}}, {len(items)}"
+            if prob_num in [4, 40, 41]: return f"(int[]){{{content}}}, {len(items)}"
             return f"(float[]){{{content}}}, {len(items)}"
         curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
         if 'assert candidate' in curr:
@@ -133,36 +138,55 @@ def main():
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=lambda x: int(re.search(r'\d+', x).group()))
 
     passed = 0
-    for asm_f in asm_files:
-        prob_num = int(re.search(r'\d+', asm_f).group())
-        task = tasks[prob_num - 1]
-        raw_test_code = task['test']
-        asm_path = os.path.join(ASM_DIR, asm_f)
-        
-        assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
-        if prob_num == 13: assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
-        
-        print(f"[{asm_f}]", end=" ", flush=True)
-        found = False
-        
-        # 33 号题签名
-        current_sigs = ["extern void func0(char*, int);"] if prob_num == 33 else ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"]
-        signatures = current_sigs + FALLBACK_SIGNATURES
-        
-        for decl in signatures:
-            ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
-            if ok: print("✅ OK (Base)"); found = True; break
+    total = len(asm_files)
+    
+    try:
+        for asm_f in asm_files:
+            prob_num = int(re.search(r'\d+', asm_f).group())
+            task = tasks[prob_num - 1]
+            raw_test_code = task['test']
+            asm_path = os.path.join(ASM_DIR, asm_f)
+            
+            # 增强正则：适配 39 (数组格式断言) 和 41 (整数格式断言)
+            if prob_num in [39, 40]:
+                assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
+            elif prob_num == 41:
+                assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\d+', raw_test_code)
+            elif prob_num == 13: 
+                assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
+            else:
+                assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
+            
+            print(f"[{asm_f}]", end=" ", flush=True)
+            found = False
+            
+            # 题号专用签名分配
+            if prob_num in [33, 39]:
+                current_sigs = ["extern void func0(char*, int);"]
+            else:
+                current_sigs = ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"]
+            
+            signatures = current_sigs + FALLBACK_SIGNATURES
+            
+            for decl in signatures:
+                ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
+                if ok: print("✅ OK (Base)"); found = True; break
 
-        if not found:
-            rescue_sigs = ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]
-            for decl in rescue_sigs:
-                ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
-                if ok: print("✅ OK (Rescue)"); found = True; break
+            if not found:
+                rescue_sigs = ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]
+                for decl in rescue_sigs:
+                    ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
+                    if ok: print("✅ OK (Rescue)"); found = True; break
 
-        if found: passed += 1
-        else: print(f"❌ FAIL")
-
-    print(f"\nFinal Score: {passed}/{len(asm_files)}")
+            if found: passed += 1
+            else: print(f"❌ FAIL")
+            
+    finally:
+        print("\n" + "="*30)
+        print(f"FINAL SCORE: {passed}/{total}")
+        if total > 0:
+            print(f"PASS RATE: {passed/total:.2%}")
+        print("="*30)
 
 if __name__ == "__main__":
     main()
