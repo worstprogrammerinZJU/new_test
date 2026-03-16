@@ -28,7 +28,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
             # --- 33 号题专项：原地修改字符串 ---
             if prob_num == 33:
-                # 将 [1, 2, 3] 转换为字符串 "123" 供 strlen 处理
                 clean_content = content.replace(" ", "").replace(",", "")
                 return f"(char[]){{\"{clean_content}\"}}"
 
@@ -46,7 +45,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 arg, expected = m.groups()
-                # 提取 expected 中的数字并转为字符串
                 exp_str = "".join(re.findall(r'\d+', expected))
                 c_checks.append(f'    {{ char buf[] = {arg}; func0(buf, 0); if (strcmp(buf, "{exp_str}") != 0) return 1; }}')
                 continue
@@ -72,7 +70,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【补救模式：完全保留 141 分逻辑】"""
+    """【补救模式：修复 f-string 语法错误并保持地基逻辑】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -86,9 +84,13 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = []
         for args, expected in assert_lines:
-            c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {len(expected.split(',')) if expected.strip() else 0}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
+            # 修复点：提前计算长度，避免 f-string 大括号嵌套冲突
+            items = expected.split(',')
+            exp_len = len(items) if expected.strip() else 0
+            c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
+    # 默认通用补救逻辑
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -143,7 +145,7 @@ def main():
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
         
-        # 针对 33 号题添加特定签名
+        # 33 号题签名
         current_sigs = ["extern void func0(char*, int);"] if prob_num == 33 else ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"]
         signatures = current_sigs + FALLBACK_SIGNATURES
         
