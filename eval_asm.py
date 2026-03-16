@@ -23,13 +23,14 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         
         # --- 51 题定点：凯撒加密 (原地修改 char*, int) ---
         if prob_num == 51:
+            # 匹配 assert candidate('abc', 5) == 'fgh'
             m = re.search(r"assert candidate\('(.*?)',\s*(\d+)\)\s*==\s*'(.*?)'", line)
             if m:
                 s_in, shift, expected = m.groups()
                 c_checks.append(f'    {{ char buf[] = "{s_in}"; func0(buf, {shift}); if (strcmp(buf, "{expected}") != 0) return 1; }}')
                 continue
 
-        # --- 45 题定点：进制转换 (int, int, char*) ---
+        # --- 45 号题定点手术：进制转换 (int, int, char*) ---
         if prob_num == 45:
             m = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
             if m:
@@ -37,13 +38,11 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
                 continue
 
-        # --- 列表/数组转换逻辑 ---
         def list_to_c(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
             count = len(content.split(','))
             
-            # 33, 39 号题：保持字符串处理逻辑
             if prob_num in [33, 39]:
                 clean_content = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
                 return f"(char[]){{\"{clean_content}\"}}"
@@ -52,7 +51,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_content = content.replace("'", '"')
                 return f"(char*[]){{{c_content}}}, {count}"
             
-            # 4, 40, 41, 44 号题：统一使用 int 数组
             if prob_num in [4, 40, 41, 44]:
                 return f"(int[]){{{content}}}, {count}"
                 
@@ -60,8 +58,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         
-        # --- 特殊题目断言重写 ---
-        # 33, 39 原地修改字符串模式
         if prob_num in [33, 39]:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
@@ -70,7 +66,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ char buf[] = {arg}; func0(buf, 0); if (strcmp(buf, "{exp_str}") != 0) return 1; }}')
                 continue
 
-        # 13 题字符串指针模式
         if prob_num == 13:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
@@ -79,7 +74,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    if (strcmp(func0({args}), {expected}) != 0) return 1;')
                 continue
 
-        # 通用逻辑转换
         if prob_num == 1:
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == 1', ') == 1').replace(' == 0', ') == 10')
         else:
@@ -91,7 +85,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【补救模式：处理 17, 163 等特殊复杂题目】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -110,11 +103,9 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
-    # 默认补救逻辑忽略...
-    return "" 
+    return "" # 通用补救逻辑视情况开启
 
 def try_compile_run(asm_path, driver_c):
-    if not driver_c: return False, "NO_DRIVER"
     with open("temp_tester.c", "w") as f: f.write(driver_c)
     cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
     res = subprocess.run(cmd, shell=True, capture_output=True)
