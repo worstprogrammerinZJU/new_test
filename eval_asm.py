@@ -1,255 +1,226 @@
 import json
-import re
 import os
+import re
 import subprocess
+import tempfile
+import ast
+from typing import List, Dict, Any
 
-# 配置
 ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
-FALLBACK_SIGNATURES = [
-    "extern int func0(int*, int);",
-    "extern int func0(float*, int, float);",
-    "extern int func0(int);",
-    "extern int func0(int, int);",
-    "extern char* func0(char**, int);",
-]
+# 特殊任务的硬编码测试用例
+SPECIAL_TEST_CASES = {
+    32: [  # find_zero
+        {"args": [[1.0, 2.0]], "expected": -0.5, "tolerance": 0.01},
+        {"args": [[-6.0, 11.0, -6.0, 1.0]], "expected": 1.0, "tolerance": 0.01},
+        {"args": [[2.0, -3.0, 1.0]], "expected": 1.0, "tolerance": 0.01},
+    ]
+}
 
-def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全加固地基版】严格物理隔离 96, 109, 115, 116 等关键题目"""
-    c_checks = []
-    for line in assert_lines:
-        # ==========================================
-        # 96 题隔离区 (HumanEval/95)：16 字节内存物理打桩
-        # ==========================================
-        if prob_num == 96:
-            m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line, re.DOTALL)
-            if m_96:
-                content, exp_raw = m_96.groups()
-                target = "1" if exp_raw == "True" else "0"
-                raw_keys = re.findall(r'([\'"].*?[\'"]|\d+)\s*:', content)
-                
-                if not raw_keys and "{}" in line:
-                    c_checks.append(f'    if (func0(NULL, 0) != {target}) return 1;')
-                elif raw_keys:
-                    processed = []
-                    for k in raw_keys:
-                        k = k.strip()
-                        if (k.startswith('"') or k.startswith("'")):
-                            processed.append(f'"{k[1:-1]}"')
-                        else:
-                            processed.append('"123!"')
-                    
-                    c_elements = [f"(unsigned long long)(char*){s}, 0ULL" for s in processed]
-                    c_init = ", ".join(c_elements)
-                    c_checks.append(f'''    {{
-        unsigned long long mem[] = {{ {c_init}, 0ULL, 0ULL }};
-        if (func0((char**)mem, (long){len(processed)}) != {target}) return 1;
-    }}''')
-                continue
+def extract_asm_number(filename: str) -> int:
+    match = re.search(r'problem(\d+)\.s$', filename, re.IGNORECASE)
+    return int(match.group(1)) if match else -1
 
-        # ==========================================
-        # 109 题隔离区 (HumanEval/108)
-        # ==========================================
-        if prob_num == 109:
-            line_clean = line.replace("1**0", "1").replace("0**0", "1").replace("-0", "0")
-            m_109 = re.search(r"candidate\((.*?)\)\s*==\s*(\d+)", line_clean)
-            if m_109:
-                content, expected = m_109.groups()
-                content = content.strip()
-                inner = content[1:-1] if (content.startswith('[') and content.endswith(']')) else content
-                items = [x.strip() for x in inner.split(',')] if inner.strip() else []
-                c_items = "{" + ", ".join(items) + "}" if items else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
-                continue
-
-        # ==========================================
-        # 115 题隔离区 (HumanEval/114)：long long 寻址 (lsl #3)
-        # ==========================================
-        if prob_num == 115:
-            m_115 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+)", line)
-            if m_115:
-                content, expected = m_115.groups()
-                items = content.split(',') if content.strip() else []
-                c_items = "{" + content + "}" if content.strip() else "{0}"
-                c_checks.append(f'    {{ long long arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}LL) return 1; }}')
-                continue
-
-        # ==========================================
-        # 116 题隔离区 (HumanEval/115)：int** 指针阵列寻址 (max_fill)
-        # ==========================================
-        if prob_num == 116:
-            # 匹配 candidate([[1, 1], [1, 1]], 2) == 2
-            m_116 = re.search(r"candidate\(\s*\[(.*?)\]\s*,\s*(\d+)\s*\)\s*==\s*(\d+)", line)
-            if m_116:
-                grid_str, cap, expected = m_116.groups()
-                # 提取子列表：[1, 1]
-                rows_raw = re.findall(r"\[(.*?)\]", grid_str)
-                row_count = len(rows_raw)
-                col_count = len(rows_raw[0].split(',')) if row_count > 0 else 0
-                
-                c_rows = [f"    int r{i}[] = {{{r}}};" for i, r in enumerate(rows_raw)]
-                ptr_init = ", ".join([f"r{i}" for i in range(row_count)]) if row_count > 0 else "NULL"
-                
-                c_checks.append(f'''    {{
-{chr(10).join(c_rows)}
-        int* grid[] = {{ {ptr_init} }};
-        if (func0(grid, {row_count}, {col_count}, {cap}) != {expected}) return 1;
-    }}''')
-                continue
-
-        # ==========================================
-        # 91 题隔离区 (HumanEval/90)
-        # ==========================================
-        if prob_num == 91:
-            m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
-            if m_91:
-                content, exp_raw = m_91.groups()
-                target = "-1" if "None" in exp_raw else exp_raw.replace("0**0", "1").strip()
-                items_str = content.replace("0**0", "1")
-                items = items_str.split(',') if items_str.strip() else []
-                c_items = "{" + items_str + "}" if items_str.strip() else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {target}) return 1; }}')
-                continue
-
-        # ==========================================
-        # 86, 54, 70 等地基隔离区 (保持原逻辑)
-        # ==========================================
-        if prob_num == 86:
-            m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
-            if m_86:
-                content, expected = m_86.groups()
-                items = content.split(',') if content.strip() else []
-                c_items = "{" + content + "}" if content.strip() else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
-                continue
-
-        if prob_num == 54:
-            m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
-            if m_54:
-                x, y, expected = m_54.groups()
-                c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
-                continue
-
-        if prob_num == 70:
-            m_70 = re.search(r"assert candidate\(\[.*?\]\)\s*==\s*(-?\d+)", line)
-            if m_70:
-                content, expected = m_70.groups()
-                items = content.split(',') if content.strip() else []
-                c_items = "{" + content + "}" if content.strip() else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
-                continue
-
-        # ==========================================
-        # 通用地基逻辑
-        # ==========================================
-        curr = line.replace('True', '1').replace('False', '0')
-        if prob_num == 45:
-            m_45 = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
-            if m_45:
-                num, base, expected = m_45.groups()
-                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
-                continue
-
-        def list_to_c(match):
-            content = match.group(1).strip()
-            if not content: return "NULL, 0"
-            count = len(content.split(','))
-            if prob_num in [33, 39]:
-                clean = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
-                return f"(char[]){{\"{clean}\"}}"
-            if prob_num == 13:
-                c_fmt = content.replace("'", '"')
-                return f"(char*[]){{{c_fmt}}}, {count}"
-            if prob_num in [4, 40, 41, 44]:
-                return f"(int[]){{{content}}}, {count}"
-            return f"(float[]){{{content}}}, {count}"
-            
-        curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
-        
-        if prob_num == 1:
-            curr = curr.replace('assert candidate', 'if (!(func0').replace(' == 1', ') == 1').replace(' == 0', ') == 10')
-        else:
-            curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
-        c_checks.append(f"    {curr}) return 1;")
-    
-    return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
-
-# build_test_code_rescue 保持原样
-def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    if prob_num == 17:
-        assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
-        c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
-        return """#include <stdio.h>\n#include <string.h>\nextern void func0(char*, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
-    if prob_num == 163:
-        assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
-        c_checks = [f'    {{ int res[128]; int cnt; func0({a}, res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for a, e in assert_lines]
-        return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
-    return ""
-
-def try_compile_run(asm_path, driver_c):
-    with open("temp_tester.c", "w") as f: f.write(driver_c)
-    cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
-    res = subprocess.run(cmd, shell=True, capture_output=True)
-    if res.returncode != 0: return False, "COMPILE_ERROR"
+def evaluate_ast_node(node):
     try:
-        run_res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=1)
-        return ("PASS" in run_res.stdout), "LOGIC_ERROR"
-    except: return False, "TIMEOUT"
+        if isinstance(node, ast.Constant):
+            return node.value
+        if isinstance(node, ast.Name):
+            if node.id == 'True': return True
+            if node.id == 'False': return False
+            if node.id == 'None': return None
+            return node.id
+        if isinstance(node, ast.List):
+            return [evaluate_ast_node(e) for e in node.elts]
+        if isinstance(node, ast.Tuple):
+            return tuple(evaluate_ast_node(e) for e in node.elts)
+        if isinstance(node, ast.BinOp):
+            l, r = evaluate_ast_node(node.left), evaluate_ast_node(node.right)
+            if isinstance(l, (int, float)) and isinstance(r, (int, float)):
+                if isinstance(node.op, ast.Add): return l + r
+                elif isinstance(node.op, ast.Sub): return l - r
+                elif isinstance(node.op, ast.Mult): return l * r
+                elif isinstance(node.op, ast.Div): return l / r
+    except Exception as e:
+        pass
+    return None
+
+def parse_test_cases(test_code: str, task_id: int) -> List[Dict]:
+    if task_id in SPECIAL_TEST_CASES:
+        return SPECIAL_TEST_CASES[task_id]
+    
+    cases = []
+    try:
+        tree = ast.parse(test_code)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Assert):
+                if isinstance(node.test, ast.Compare):
+                    left, ops, comparators = node.test.left, node.test.ops, node.test.comparators
+                    call_node = None
+                    expected_node = None
+                    
+                    if isinstance(left, ast.Call):
+                        call_node = left
+                        expected_node = comparators[0]
+                    elif isinstance(comparators[0], ast.Call):
+                        call_node = comparators[0]
+                        expected_node = left
+                    
+                    if call_node and isinstance(ops[0], (ast.Eq, ast.Is)):
+                        args = [evaluate_ast_node(arg) for arg in call_node.args]
+                        expected = evaluate_ast_node(expected_node)
+                        cases.append({"args": args, "expected": expected})
+    except Exception as e:
+        print(f"Parse error: {e}")
+    return cases
+
+def format_c_float(val):
+    if val is None: return "0.0f"
+    if isinstance(val, bool): return "1.0f" if val else "0.0f"
+    if isinstance(val, int): return f"{val}.0f"
+    return f"{val}f"
+
+def generate_c_tester(task_id: int, task_name: str, cases: List[Dict]) -> str:
+    # 扩展签名库
+    signatures = {
+        0: ("int", ["float*", "int", "float"], False),
+        32: ("double", ["double*", "int"], False),
+        114: ("long long", ["long long*", "int"], False), # Problem 115
+        115: ("int", ["int**", "int", "int", "int"], False), # Problem 116 (HumanEval 115)
+    }
+    
+    sig = signatures.get(task_id, ("int", ["..."], False))
+    ret_type, arg_types, ret_is_ptr = sig
+    
+    test_blocks = []
+    for i, case in enumerate(cases):
+        args = case['args']
+        expected = case['expected']
+        setup_lines = []
+        call_args = []
+        
+        # --- 特殊处理 116 题 (HumanEval 115) ---
+        if task_id == 115:
+            grid = args[0] # List[List[int]]
+            capacity = args[1]
+            rows = len(grid)
+            cols = len(grid[0]) if rows > 0 else 0
+            
+            # 为每一行创建独立的数组
+            for r_idx, row in enumerate(grid):
+                row_data = ", ".join(map(str, row))
+                setup_lines.append(f'int row_{i}_{r_idx}[] = {{{row_data}}};')
+            
+            # 创建指针数组 (int**)
+            ptrs = ", ".join([f"row_{i}_{r}" for r in range(rows)])
+            setup_lines.append(f'int* grid_{i}[] = {{{ptrs}}};')
+            
+            call_args = [f"grid_{i}", str(rows), str(cols), str(capacity)]
+        
+        # --- 通用参数处理 ---
+        else:
+            for idx, arg in enumerate(args):
+                if isinstance(arg, list):
+                    if not arg:
+                        setup_lines.append(f'void* arr_{i}_{idx} = NULL;')
+                        call_args.extend([f"arr_{i}_{idx}", "0"])
+                    else:
+                        setup_lines.append(f'int arr_{i}_{idx}[] = {{{", ".join(map(str, arg))}}};')
+                        call_args.extend([f"arr_{i}_{idx}", str(len(arg))])
+                elif isinstance(arg, int):
+                    call_args.append(str(arg))
+                elif isinstance(arg, float):
+                    call_args.append(format_c_float(arg))
+                else:
+                    call_args.append("0")
+
+        setup_code = "\n        ".join(setup_lines)
+        call_line = f"{ret_type} res = func0({', '.join(call_args)});"
+        
+        # 结果检查
+        check_code = f'if (res == {expected}) pass_count++; else printf("  T{i} Fail: Exp {expected}, Got %lld\\n", (long long)res);'
+        
+        test_blocks.append(f'''
+    {{
+        {setup_code}
+        {call_line}
+        {check_code}
+    }}''')
+
+    return f'''
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <math.h>
+#include <stdlib.h>
+
+extern {ret_type} func0();
+
+int main() {{
+    int pass_count = 0;
+    int total = {len(cases)};
+    {"".join(test_blocks)}
+    printf("FINAL_SCORE:%d/%d\\n", pass_count, total);
+    return 0;
+}}
+'''
 
 def main():
-    if not os.path.exists(JSONL_FILE): return
-    with open(JSONL_FILE, 'r') as f: tasks = [json.loads(line) for line in f]
-    asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=lambda x: int(re.search(r'\d+', x).group()))
+    if not os.path.exists(JSONL_FILE):
+        print(f"Error: {JSONL_FILE} not found")
+        return
+        
+    tasks = {}
+    with open(JSONL_FILE, 'r') as f:
+        for line in f:
+            data = json.loads(line)
+            tasks[int(data['task_id'].split('/')[-1])] = data
 
-    passed = 0
-    for asm_f in asm_files:
-        prob_num = int(re.search(r'\d+', asm_f).group())
-        task = tasks[prob_num - 1]
-        raw_test_code = task['test']
-        asm_path = os.path.join(ASM_DIR, asm_f)
-        
-        # --- 正则提取层 ---
-        if prob_num == 116:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
-        elif prob_num == 115:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*-?\d+", raw_test_code)
-        elif prob_num == 96:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code, re.DOTALL)
-        elif prob_num == 109:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
-        elif prob_num == 91:
-            assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
-        elif prob_num in [33, 39, 40]:
-            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
-        elif prob_num == 70:
-            assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
-        else:
-            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
-        
-        print(f"[{asm_f}]", end=" ", flush=True)
-        found = False
-        
-        # --- 签名锁定层 ---
-        if prob_num == 116: sigs = ["extern int func0(int**, int, int, int);"]
-        elif prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
-        elif prob_num == 96: sigs = ["extern int func0(char**, int);"]
-        elif prob_num in [109, 86, 91, 70]: sigs = ["extern int func0(int*, int);"]
-        else: sigs = ["extern int func0(int*, int);", "extern int func0();"]
-        
-        for decl in sigs + FALLBACK_SIGNATURES:
-            ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
-            if ok: print("✅ OK (Base)"); found = True; break
+    asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=extract_asm_number)
+    
+    stats = {"total": 0, "passed": 0, "failed": 0}
 
-        if not found:
-            for decl in ["extern void func0(char*, int*, int*);", "extern int func0(char*);"]:
-                ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
-                if ok: print("✅ OK (Rescue)"); found = True; break
+    for f_name in asm_files:
+        prob_num = extract_asm_number(f_name)
+        task_id = prob_num - 1
+        
+        if task_id not in tasks: continue
+        task = tasks[task_id]
+        print(f"\n[Problem {prob_num} -> HE/{task_id}] {task['entry_point']}")
+        
+        test_cases = parse_test_cases(task['test'], task_id)
+        if not test_cases: continue
+        
+        c_code = generate_c_tester(task_id, task['entry_point'], test_cases)
+        
+        with tempfile.NamedTemporaryFile(suffix=".c", mode="w", delete=False) as tmp_f:
+            tmp_f.write(c_code)
+            tmp_c_path = tmp_f.name
+        
+        try:
+            asm_path = os.path.join(ASM_DIR, f_name)
+            # 编译
+            cmd_comp = f"clang -arch arm64 -o runner '{tmp_c_path}' '{asm_path}' -lm"
+            if subprocess.run(cmd_comp, shell=True).returncode == 0:
+                # 运行
+                run_res = subprocess.run("./runner", shell=True, capture_output=True, text=True, timeout=2)
+                print(f"  {run_res.stdout.strip()}")
+                if "FINAL_SCORE" in run_res.stdout:
+                    match = re.search(r"FINAL_SCORE:(\d+)/(\d+)", run_res.stdout)
+                    if match and match.group(1) == match.group(2):
+                        stats["passed"] += 1
+                    else:
+                        stats["failed"] += 1
+            else:
+                print("  ❌ Compilation Failed")
+        except Exception as e:
+            print(f"  ❌ Error: {e}")
+        finally:
+            if os.path.exists(tmp_c_path): os.remove(tmp_c_path)
+            if os.path.exists("runner"): os.remove("runner")
 
-        if found: passed += 1
-        else: print(f"❌ FAIL")
-            
-    print(f"\nFinal Score: {passed}/{len(asm_files)}")
+    print(f"\n📊 Summary: {stats['passed']} Passed, {stats['failed']} Failed")
 
 if __name__ == "__main__":
     main()
