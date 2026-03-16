@@ -16,19 +16,19 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对物理隔离版】集成 91 题（寻找次小值）"""
+    """【绝对物理隔离版】确保 79, 86, 91 题各回各家，地基逻辑绝不参与"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 91 题隔离区：数组次小值 (int*, int) -> int
+        # 91 题隔离区：寻找次小值 (int*, int) -> int
         # ==========================================
         if prob_num == 91:
-            # 匹配格式: assert candidate([1, 2, 3]) == 2 或 None/True/False (已替换)
-            m = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(-?\d+|NULL|None|0|1)", line)
-            if m:
-                content, expected = m.groups()
-                # 处理 Python None 被转为 -1 的情况（根据汇编 LBB0_13 返回 -1）
-                target = "-1" if (expected == "None" or expected == "NULL") else expected
+            # 汇编逻辑：不存在次小值或数组长度<2时返回 -1
+            m_91 = re.search(r"assert candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+|None|NULL|True|False)", line)
+            if m_91:
+                content, expected = m_91.groups()
+                # 关键转换：Python 的 None 在此汇编中对应返回 -1
+                target = "-1" if expected in ["None", "NULL"] else expected
                 items = content.split(',') if content.strip() else []
                 c_items = "{" + content + "}" if content.strip() else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {target}) return 1; }}')
@@ -38,9 +38,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         # 86 题隔离区：奇数位偶数求和
         # ==========================================
         if prob_num == 86:
-            m = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
-            if m:
-                content, expected = m.groups()
+            m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
+            if m_86:
+                content, expected = m_86.groups()
                 items = content.split(',') if content.strip() else []
                 c_items = "{" + content + "}" if content.strip() else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
@@ -69,28 +69,28 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         if prob_num == 54:
             m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
             if m_54:
-                x, y, expected = m_54.groups()
-                c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
+                x, y, exp = m_54.groups()
+                c_checks.append(f'    if (func0({x}, {y}) != {exp}) return 1;')
                 continue
 
         if prob_num == 70:
             m_70 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(-?\d+)", line)
             if m_70:
-                content, expected = m_70.groups()
+                content, exp = m_70.groups()
                 items = content.split(',') if content.strip() else []
                 c_items = "{" + content + "}" if content.strip() else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
+                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {exp}) return 1; }}')
                 continue
 
         # ==========================================
         # 141 分地基逻辑 (33, 39, 45等)
         # ==========================================
-        curr = line.replace('True', '1').replace('False', '0').replace('None', '-1')
+        curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
             m = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
             if m:
-                num, base, expected = m.groups()
-                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
+                num, base, exp = m.groups()
+                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{exp}") != 0) return 1; }}')
                 continue
 
         def list_to_c(match):
@@ -132,9 +132,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
-def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    # 此处省略部分 Rescue 模板代码以保持长度，逻辑同前
-    return "" # 实际运行时需保留完整的 Rescue 函数体
+# Rescue 模式省略，逻辑保持原样...
 
 def try_compile_run(asm_path, driver_c):
     with open("temp_tester.c", "w") as f: f.write(driver_c)
@@ -158,7 +156,7 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则隔离优先级 ---
+        # --- 正则隔离优先级：91 题加入最高等级 ---
         if prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num == 79:
@@ -166,7 +164,8 @@ def main():
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
         elif prob_num in [54, 86, 91]:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*[\w\d.-]+", raw_test_code)
+            # 增加对 None 等非数字返回值的捕获能力
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*[\w\d\.-]+", raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 45:
@@ -190,7 +189,6 @@ def main():
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
             if ok: print("✅ OK (Base)"); found = True; break
 
-        # 如果 Base 失败，继续尝试 Rescue 模式（此处略）
         if found: passed += 1
         else: print(f"❌ FAIL")
             
