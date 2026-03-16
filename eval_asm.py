@@ -20,10 +20,10 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 96 题隔离区 (HumanEval/95)：字典键大小写检查
+        # 96 题隔离区 (HumanEval/95)：深度适配 LSL #4 (16字节寻址)
         # ==========================================
         if prob_num == 96:
-            # 兼容：assert candidate({...}) == True
+            # 兼容：assert candidate({...}) == True, "error message"
             m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line)
             if m_96:
                 content, exp_raw = m_96.groups()
@@ -31,7 +31,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 # 提取 key：匹配冒号前的数字或引号字符串
                 raw_keys = re.findall(r'(\".*?\"|\'.*?\'|\d+)\s*:', content)
                 
-                if not raw_keys and "{}" in line: # 处理空字典 case
+                if not raw_keys and "{}" in line:
                     c_checks.append(f'    if (func0(NULL, 0) != {target}) return 1;')
                 elif raw_keys:
                     processed = []
@@ -42,8 +42,14 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                         else:
                             # 传入非字母字符，让汇编内部的 isalpha 校验失败
                             processed.append('"123"')
-                    c_keys = ", ".join(processed)
-                    c_checks.append(f'    {{ char* keys[] = {{{c_keys}}}; if (func0(keys, {len(processed)}) != {target}) return 1; }}')
+                    
+                    # 关键修复点：汇编 LBB0_4 使用 lsl #4 (即索引乘以 16)
+                    # 我们必须构造一个每个元素占 16 字节的结构体数组来适配它
+                    c_keys = ", ".join([f'{{ {s}, NULL }}' for s in processed])
+                    c_checks.append(f'''    {{
+        struct {{ char* ptr; char* padding; }} keys[] = {{ {c_keys} }};
+        if (func0((char**)keys, {len(processed)}) != {target}) return 1;
+    }}''')
                 continue
 
         # ==========================================
@@ -53,7 +59,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
             if m_91:
                 content, exp_raw = m_91.groups()
-                # 处理 Python 特有值映射
                 target = "-1" if "None" in exp_raw else exp_raw.replace("0**0", "1").strip()
                 items_str = content.replace("0**0", "1")
                 items = items_str.split(',') if items_str.strip() else []
@@ -74,7 +79,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 54 题隔离区 (复原版)
+        # 54 题隔离区
         # ==========================================
         if prob_num == 54:
             m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
@@ -113,7 +118,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 141 分地基逻辑
+        # 地基逻辑 (141)
         # ==========================================
         curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
@@ -163,7 +168,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    # 此处保持原始逻辑... (省略同上)
+    # 此处省略 rescue 的实现，直接使用你提供的原始逻辑即可
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
@@ -216,9 +221,9 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则隔离 (核心修复区) ---
+        # --- 针对 96 题的正则强化 ---
         if prob_num == 96:
-            # 修正 96：允许每行开头的空格，并匹配到行尾
+            # 开启 re.MULTILINE 并允许缩进，捕获完整行
             assert_orig = re.findall(r"^\s*assert candidate\(\{.*?\}\)\s*==\s*.*", raw_test_code, re.MULTILINE)
         elif prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
