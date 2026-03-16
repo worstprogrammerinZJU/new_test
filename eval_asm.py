@@ -20,6 +20,19 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     c_checks = []
     for line in assert_lines:
         # ==========================================
+        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑 (增量添加)
+        # ==========================================
+        if prob_num == 126:
+            m_126 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\w+)", line)
+            if m_126:
+                content, exp_raw = m_126.groups()
+                target = "1" if exp_raw.strip() == "True" else "0"
+                items = [x.strip() for x in content.split(',')] if content.strip() else []
+                c_items = "{" + content + "}" if items else "{0}"
+                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {target}) return 1; }}')
+                continue
+
+        # ==========================================
         # 123 题隔离区 (HumanEval/122)：前 k 个元素中不超过 2 位数的和
         # ==========================================
         if prob_num == 123:
@@ -183,17 +196,16 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
+# build_test_code_rescue, try_compile_run (省略，保持原样)
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
         return """#include <stdio.h>\n#include <string.h>\nextern void func0(char*, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
-    
     if prob_num == 163:
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = [f'    {{ int res[128]; int cnt; func0({a}, res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for a, e in assert_lines]
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
-    
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -238,7 +250,9 @@ def main():
         asm_path = os.path.join(ASM_DIR, asm_f)
         
         # --- 正则提取层 ---
-        if prob_num == 123:
+        if prob_num == 126: # 增量添加
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code)
+        elif prob_num == 123:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 116:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
@@ -269,7 +283,8 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num in [123, 109, 86, 91, 70]: sigs = ["extern int func0(int*, int);"]
+        if prob_num in [126, 123, 109, 86, 91, 70]: # 126 增量添加至此
+            sigs = ["extern int func0(int*, int);"]
         elif prob_num == 116: sigs = ["extern int func0(int**, int, int, int);"]
         elif prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
         elif prob_num == 96: sigs = ["extern int func0(char**, int);"]
