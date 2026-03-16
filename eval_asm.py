@@ -20,19 +20,20 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑 (精准加固)
+        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑 (修复版)
         # ==========================================
         if prob_num == 126:
             m_126 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\w+)", line)
             if m_126:
                 content, exp_raw = m_126.groups()
-                # 显式布尔映射，防止字符串污染
+                # 显式布尔映射
                 target = "1" if exp_raw.strip() == "True" else "0"
                 items = [x.strip() for x in content.split(',')] if content.strip() else []
+                # 即使为空也传入有效地址 {0}，防止汇编 ldr 崩溃
                 c_items = "{" + content + "}" if items else "{0}"
                 
-                # 修改点：引入显式变量 count 以强迫编译器将长度压入 w1 寄存器，匹配汇编寻址
-                c_checks.append(f'    {{ int arr[] = {c_items}; int count = {len(items)}; if (func0(arr, count) != {target}) return 1; }}')
+                # 关键修复：显式使用 long long 定义长度并强转，确保 w1/x1 寄存器被正确填充
+                c_checks.append(f'    {{ int arr[] = {c_items}; long long count = {len(items)}; if (func0(arr, (int)count) != {target}) return 1; }}')
                 continue
 
         # ==========================================
@@ -252,7 +253,7 @@ def main():
         asm_path = os.path.join(ASM_DIR, asm_f)
         
         # --- 正则提取层 ---
-        if prob_num == 126: # 增量添加
+        if prob_num == 126: # 126正则保持
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code)
         elif prob_num == 123:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*-?\d+", raw_test_code)
@@ -285,7 +286,7 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num in [126, 123, 109, 86, 91, 70]: # 126 增量添加至此
+        if prob_num in [126, 123, 109, 86, 91, 70]:
             sigs = ["extern int func0(int*, int);"]
         elif prob_num == 116: sigs = ["extern int func0(int**, int, int, int);"]
         elif prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
