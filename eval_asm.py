@@ -16,18 +16,17 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对物理隔离版】集成 86 题与 91 题逻辑"""
+    """【绝对物理隔离版】"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 91 题隔离区 (HumanEval/90)：找次小值 (int*, int) -> int
+        # 91 题隔离区 (HumanEval/90)：找次小值
         # ==========================================
         if prob_num == 91:
-            # 兼容 candidate([...]) == 2 或 None，同时处理 0**0
             m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
             if m_91:
                 content, exp_raw = m_91.groups()
-                # 处理 Python 特有值
+                # 处理 Python 特有值映射
                 target = "-1" if "None" in exp_raw else exp_raw.replace("0**0", "1").strip()
                 items_str = content.replace("0**0", "1")
                 items = items_str.split(',') if items_str.strip() else []
@@ -36,19 +35,29 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 86 题隔离区：奇数位偶数求和 (int*, int) -> int
+        # 86 题隔离区
         # ==========================================
         if prob_num == 86:
-            m = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
-            if m:
-                content, expected = m.groups()
+            m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
+            if m_86:
+                content, expected = m_86.groups()
                 items = content.split(',') if content.strip() else []
                 c_items = "{" + content + "}" if content.strip() else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
                 continue
 
         # ==========================================
-        # 79 题隔离区：字符统计精准版
+        # 54 题隔离区 (复原版)
+        # ==========================================
+        if prob_num == 54:
+            m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
+            if m_54:
+                x, y, expected = m_54.groups()
+                c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
+                continue
+
+        # ==========================================
+        # 79 题隔离区
         # ==========================================
         if prob_num == 79:
             m_79 = re.search(r'candidate\s*\(\s*["\'](.*?)["\']\s*\)\s*==\s*(\d+)', line)
@@ -58,20 +67,13 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 51, 54, 70 隔离区
+        # 51, 70 隔离区
         # ==========================================
         if prob_num == 51:
             m_51 = re.search(r"assert candidate\('([^']*)',\s*(\d+)\)\s*==\s*'([^']*)'", line)
             if m_51:
                 s_in, shift, expected = m_51.groups()
                 c_checks.append(f'    {{ char buf[] = "{s_in}"; func0(buf, {shift}); if (strcmp(buf, "{expected}") != 0) return 1; }}')
-                continue
-
-        if prob_num == 54:
-            m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
-            if m_54:
-                x, y, expected = m_54.groups()
-                c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
                 continue
 
         if prob_num == 70:
@@ -84,13 +86,13 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 141 分地基逻辑 (完全不动，确保 39, 33 稳定)
+        # 141 分地基逻辑
         # ==========================================
         curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
-            m = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
-            if m:
-                num, base, expected = m.groups()
+            m_45 = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
+            if m_45:
+                num, base, expected = m_45.groups()
                 c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
                 continue
 
@@ -133,7 +135,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
+# try_compile_run, build_test_code_rescue 保持你原始版本不动...
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
+    # 此处省略 rescue 的实现，直接使用你提供的原始逻辑
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
@@ -186,15 +190,21 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则隔离 ---
+        # --- 正则隔离 (核心修复区) ---
         if prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num == 79:
             assert_orig = re.findall(r'assert candidate\s*\(\s*["\'].*?["\']\s*\)\s*==\s*\d+', raw_test_code)
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
-        elif prob_num in [54, 86, 91]:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*.*", raw_test_code)
+        elif prob_num == 54:
+            # 54 题复原：仅匹配数字结果，不带 None 处理，避免干扰逻辑
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
+        elif prob_num == 91:
+            # 91 题：放宽正则以捕获 None 和 0**0
+            assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
+        elif prob_num == 86:
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 45:
@@ -207,9 +217,9 @@ def main():
         
         # --- 签名锁定 ---
         if prob_num in [86, 91, 70]: sigs = ["extern int func0(int*, int);"]
+        elif prob_num == 54: sigs = ["extern int func0(int, int);"]
         elif prob_num == 79: sigs = ["extern int func0(char*);"]
         elif prob_num == 51: sigs = ["extern void func0(char*, int);"]
-        elif prob_num == 54: sigs = ["extern int func0(int, int);"]
         elif prob_num == 45: sigs = ["extern void func0(int, int, char*);"]
         elif prob_num in [33, 39]: sigs = ["extern void func0(char*, int);"]
         else: sigs = ["extern int func0(int*, int);", "extern int func0();"]
