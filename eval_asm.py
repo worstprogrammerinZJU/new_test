@@ -16,19 +16,17 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对物理隔离版】"""
+    """【绝对物理隔离版】地基逻辑与特例隔离"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 96 题隔离区 (HumanEval/95)：深度适配 LSL #4 (16字节寻址)
+        # 96 题隔离区 (HumanEval/95)：16 字节内存对齐适配
         # ==========================================
         if prob_num == 96:
-            # 兼容：assert candidate({...}) == True, "error message"
             m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line)
             if m_96:
                 content, exp_raw = m_96.groups()
                 target = "1" if exp_raw == "True" else "0"
-                # 提取 key：匹配冒号前的数字或引号字符串
                 raw_keys = re.findall(r'(\".*?\"|\'.*?\'|\d+)\s*:', content)
                 
                 if not raw_keys and "{}" in line:
@@ -40,20 +38,21 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                         if (k.startswith('"') or k.startswith("'")):
                             processed.append(f'"{k[1:-1]}"')
                         else:
-                            # 传入非字母字符，让汇编内部的 isalpha 校验失败
-                            processed.append('"123"')
+                            # 传入含非字母的字符串，使汇编内的 _isalpha 返回 0
+                            processed.append('"123!"')
                     
-                    # 关键修复点：汇编 LBB0_4 使用 lsl #4 (即索引乘以 16)
-                    # 我们必须构造一个每个元素占 16 字节的结构体数组来适配它
-                    c_keys = ", ".join([f'{{ {s}, NULL }}' for s in processed])
+                    # 汇编关键：lsl x9, x9, #4 => 索引 * 16
+                    # 构造包含 padding 的结构体以确保每个元素步进为 16 字节
+                    c_keys = ", ".join([f'{{ (char*){s}, (char*)0 }}' for s in processed])
                     c_checks.append(f'''    {{
-        struct {{ char* ptr; char* padding; }} keys[] = {{ {c_keys} }};
-        if (func0((char**)keys, {len(processed)}) != {target}) return 1;
+        struct Align16 {{ char* key; char* padding; }};
+        struct Align16 keys_arr[] = {{ {c_keys} }};
+        if (func0((char**)keys_arr, {len(processed)}) != {target}) return 1;
     }}''')
                 continue
 
         # ==========================================
-        # 91 题隔离区 (HumanEval/90)：找次小值
+        # 91 题隔离区 (HumanEval/90)
         # ==========================================
         if prob_num == 91:
             m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
@@ -67,7 +66,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 86 题隔离区
+        # 86, 54, 79, 51, 70 等隔离区 (保持原逻辑不变)
         # ==========================================
         if prob_num == 86:
             m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
@@ -78,9 +77,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
                 continue
 
-        # ==========================================
-        # 54 题隔离区
-        # ==========================================
         if prob_num == 54:
             m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
             if m_54:
@@ -88,9 +84,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
                 continue
 
-        # ==========================================
-        # 79 题隔离区
-        # ==========================================
         if prob_num == 79:
             m_79 = re.search(r'candidate\s*\(\s*["\'](.*?)["\']\s*\)\s*==\s*(\d+)', line)
             if m_79:
@@ -98,9 +91,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    if (func0("{s_val}") != {expected}) return 1;')
                 continue
 
-        # ==========================================
-        # 51, 70 隔离区
-        # ==========================================
         if prob_num == 51:
             m_51 = re.search(r"assert candidate\('([^']*)',\s*(\d+)\)\s*==\s*'([^']*)'", line)
             if m_51:
@@ -118,7 +108,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 地基逻辑 (141)
+        # 141 分地基逻辑 (保持原逻辑不变)
         # ==========================================
         curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
@@ -168,11 +158,12 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    # 此处省略 rescue 的实现，直接使用你提供的原始逻辑即可
+    """【RESCUE 模式】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
         return """#include <stdio.h>\n#include <string.h>\nextern void func0(char*, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
+    
     if prob_num == 163:
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = [f'    {{ int res[128]; int cnt; func0({a}, res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for a, e in assert_lines]
@@ -221,21 +212,19 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 针对 96 题的正则强化 ---
+        # --- 正则提取层 ---
         if prob_num == 96:
-            # 开启 re.MULTILINE 并允许缩进，捕获完整行
+            # 开启 re.MULTILINE 以支持带缩进的 assert 匹配
             assert_orig = re.findall(r"^\s*assert candidate\(\{.*?\}\)\s*==\s*.*", raw_test_code, re.MULTILINE)
+        elif prob_num == 91:
+            assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
         elif prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num == 79:
             assert_orig = re.findall(r'assert candidate\s*\(\s*["\'].*?["\']\s*\)\s*==\s*\d+', raw_test_code)
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
-        elif prob_num == 54:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
-        elif prob_num == 91:
-            assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
-        elif prob_num == 86:
+        elif prob_num in [54, 86]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
@@ -247,7 +236,7 @@ def main():
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
         
-        # --- 签名锁定 ---
+        # --- 签名锁定层 ---
         if prob_num == 96: sigs = ["extern int func0(char**, int);"]
         elif prob_num in [86, 91, 70]: sigs = ["extern int func0(int*, int);"]
         elif prob_num == 54: sigs = ["extern int func0(int, int);"]
@@ -257,10 +246,12 @@ def main():
         elif prob_num in [33, 39]: sigs = ["extern void func0(char*, int);"]
         else: sigs = ["extern int func0(int*, int);", "extern int func0();"]
         
+        # 尝试 Base 逻辑
         for decl in sigs + FALLBACK_SIGNATURES:
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
             if ok: print("✅ OK (Base)"); found = True; break
 
+        # 尝试 Rescue 逻辑
         if not found:
             for decl in ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]:
                 ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
