@@ -40,7 +40,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                         else:
                             processed.append('"123!"')
                     
-                    # 汇编关键寻址：index * 16。使用 uint64 交替补零模拟。
                     c_elements = [f"(unsigned long long)(char*){s}, 0ULL" for s in processed]
                     c_init = ", ".join(c_elements)
                     c_checks.append(f'''    {{
@@ -50,15 +49,20 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 109 题隔离区 (HumanEval/108)：count_nums 数组处理
+        # 109 题隔离区 (HumanEval/108)：count_nums 深度加固
         # ==========================================
         if prob_num == 109:
-            m_109 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+)", line)
+            # 预处理 Python 特有语法：-0 -> 0, 1**0 -> 1, 0**0 -> 1
+            line_clean = line.replace("1**0", "1").replace("0**0", "1").replace("-0", "0")
+            m_109 = re.search(r"candidate\((.*?)\)\s*==\s*(\d+)", line_clean)
             if m_109:
                 content, expected = m_109.groups()
-                items_str = content.replace("0**0", "1")
-                items = items_str.split(',') if items_str.strip() else []
-                c_items = "{" + items_str + "}" if items_str.strip() else "{0}"
+                content = content.strip()
+                # 提取数组内部内容：处理 candidate([1, 2]) 或 candidate([ ])
+                inner = content[1:-1] if (content.startswith('[') and content.endswith(']')) else content
+                items = [x.strip() for x in inner.split(',')] if inner.strip() else []
+                
+                c_items = "{" + ", ".join(items) + "}" if items else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
                 continue
 
@@ -77,7 +81,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 86, 54, 79, 51, 70 等隔离区 (保持原逻辑)
+        # 86, 54, 70 等地基隔离区 (保持原逻辑)
         # ==========================================
         if prob_num == 86:
             m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
@@ -140,7 +144,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【RESCUE 模式】保持原样"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
@@ -198,7 +201,8 @@ def main():
         if prob_num == 96:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code, re.DOTALL)
         elif prob_num == 109:
-            assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
+            # 强化正则：匹配不一定紧跟方括号的 candidate(...)
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 91:
             assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
         elif prob_num in [33, 39, 40]:
