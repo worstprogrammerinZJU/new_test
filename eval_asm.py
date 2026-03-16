@@ -16,11 +16,24 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全加固地基版】严格物理隔离 96, 109, 115, 116, 123, 147 等关键题目"""
+    """【全加固地基版】严格物理隔离 96, 109, 115, 116, 123, 147, 152 等关键题目"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 147 题隔离区 (HumanEval/146)：specialFilter (新插入)
+        # 152 题隔离区 (HumanEval/151)：double_the_difference (新插入)
+        # ==========================================
+        if prob_num == 152:
+            m_152 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\d+)", line)
+            if m_152:
+                content, expected = m_152.groups()
+                items = [x.strip() for x in content.split(',')] if content.strip() else []
+                # 注意：汇编显示输入为 float*，返回值为 long long (x0)
+                c_items = "{" + content + "}" if items else "{0}"
+                c_checks.append(f'    {{ float arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}LL) return 1; }}')
+                continue
+
+        # ==========================================
+        # 147 题隔离区 (HumanEval/146)：specialFilter (保持)
         # ==========================================
         if prob_num == 147:
             m_147 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\d+)", line)
@@ -231,6 +244,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
+# build_test_code_rescue, try_compile_run 逻辑保持一致...
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
@@ -284,8 +298,10 @@ def main():
         asm_path = os.path.join(ASM_DIR, asm_f)
         
         # --- 正则提取层 ---
-        if prob_num == 147:
-             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
+        if prob_num == 152: # 新增 152 提取
+            assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
+        elif prob_num == 147:
+            assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 138:
             assert_orig = re.findall(r"assert candidate\(\d+\)\s*==\s*\w+", raw_test_code)
         elif prob_num == 129:
@@ -323,7 +339,9 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num == 147:
+        if prob_num == 152: # 152 强制锁定 long long 返回值和 float* 参数
+            sigs = ["extern long long func0(float*, int);"]
+        elif prob_num == 147:
             sigs = ["extern int func0(int*, int);"]
         elif prob_num == 138:
             sigs = ["extern int func0(int);"]
