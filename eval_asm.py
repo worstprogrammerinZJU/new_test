@@ -16,7 +16,7 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全加固地基版】严格物理隔离 96, 109 等关键题目"""
+    """【全加固地基版】严格物理隔离 96, 109, 115 等关键题目"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
@@ -52,18 +52,28 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         # 109 题隔离区 (HumanEval/108)：count_nums 深度加固
         # ==========================================
         if prob_num == 109:
-            # 预处理 Python 特有语法：-0 -> 0, 1**0 -> 1, 0**0 -> 1
             line_clean = line.replace("1**0", "1").replace("0**0", "1").replace("-0", "0")
             m_109 = re.search(r"candidate\((.*?)\)\s*==\s*(\d+)", line_clean)
             if m_109:
                 content, expected = m_109.groups()
                 content = content.strip()
-                # 提取数组内部内容：处理 candidate([1, 2]) 或 candidate([ ])
                 inner = content[1:-1] if (content.startswith('[') and content.endswith(']')) else content
                 items = [x.strip() for x in inner.split(',')] if inner.strip() else []
-                
                 c_items = "{" + ", ".join(items) + "}" if items else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
+                continue
+
+        # ==========================================
+        # 115 题隔离区 (HumanEval/114)：long long 寻址 (lsl #3) 补丁
+        # ==========================================
+        if prob_num == 115:
+            m_115 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+)", line)
+            if m_115:
+                content, expected = m_115.groups()
+                items = content.split(',') if content.strip() else []
+                # 汇编中使用 lsl #3，必须强制使用 long long 数组对齐 8 字节
+                c_items = "{" + content + "}" if content.strip() else "{0}"
+                c_checks.append(f'    {{ long long arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}LL) return 1; }}')
                 continue
 
         # ==========================================
@@ -201,8 +211,10 @@ def main():
         if prob_num == 96:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code, re.DOTALL)
         elif prob_num == 109:
-            # 强化正则：匹配不一定紧跟方括号的 candidate(...)
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
+        elif prob_num == 115:
+            # 115 题正则补丁
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 91:
             assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
         elif prob_num in [33, 39, 40]:
@@ -224,7 +236,8 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num == 96: sigs = ["extern int func0(char**, int);"]
+        if prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
+        elif prob_num == 96: sigs = ["extern int func0(char**, int);"]
         elif prob_num in [109, 86, 91, 70]: sigs = ["extern int func0(int*, int);"]
         elif prob_num == 54: sigs = ["extern int func0(int, int);"]
         elif prob_num == 79: sigs = ["extern int func0(char*);"]
