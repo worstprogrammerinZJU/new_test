@@ -16,7 +16,7 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对隔离完整版】确保 39 题等原有地基逻辑不受任何新题干扰"""
+    """【绝对隔离 + 语法修正版】修正 f-string 无法包含反斜杠的问题"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
@@ -55,14 +55,13 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         # 79 题隔离区 (字符串字符统计)
         # ==========================================
         if prob_num == 79:
-            # 格式: assert candidate("abc") == 1
             m = re.search(r'assert candidate\("(.*?)"\)\s*==\s*(\d+)', line)
             if m:
                 s_in, exp = m.groups()
                 c_checks.append(f'    if (func0("{s_in}") != {exp}) return 1;')
                 continue
 
-        # --- 以下是 141 分地基逻辑 (含 1, 13, 33, 39, 41, 44, 45) ---
+        # --- 141 分地基逻辑 ---
         curr = line.replace('True', '1').replace('False', '0')
         
         if prob_num == 45:
@@ -80,7 +79,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 clean = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
                 return f"(char[]){{\"{clean}\"}}"
             if prob_num == 13:
-                return f"(char*[]){{{content.replace(\"'\", '\"')}}}, {count}"
+                # 修复语法错误：先处理内容再放入 f-string
+                c_formatted = content.replace("'", '"')
+                return f"(char*[]){{{c_formatted}}}, {count}"
             if prob_num in [4, 40, 41, 44]:
                 return f"(int[]){{{content}}}, {count}"
             return f"(float[]){{{content}}}, {count}"
@@ -99,7 +100,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 args, expected = m.groups()
-                c_checks.append(f'    if (strcmp(func0({args}), {expected.replace("\'", "\"")}) != 0) return 1;')
+                # 修复语法错误：手动处理引号
+                exp_formatted = expected.replace("'", '"')
+                c_checks.append(f'    if (strcmp(func0({args}), {exp_formatted}) != 0) return 1;')
                 continue
 
         if prob_num == 1:
@@ -113,7 +116,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【Rescue 模式完整代码 - 无省略】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -130,7 +132,6 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
-    # 通用 Rescue 逻辑
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -176,15 +177,13 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 抓取正则物理隔离：39 题绝对优先保护 ---
+        # --- 抓取正则物理隔离 ---
         if prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
-        elif prob_num == 79:
-            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\d+', raw_test_code)
-        elif prob_num == 54:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
+        elif prob_num in [54, 79]:
+            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*-?\d+', raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 45:
@@ -196,20 +195,13 @@ def main():
         found = False
         
         # --- 签名锁定 ---
-        if prob_num == 79:
-            current_sigs = ["extern int func0(char*);"]
-        elif prob_num == 51:
-            current_sigs = ["extern void func0(char*, int);"]
-        elif prob_num == 54:
-            current_sigs = ["extern int func0(int, int);"]
-        elif prob_num == 70:
-            current_sigs = ["extern int func0(int*, int);"]
-        elif prob_num == 45:
-            current_sigs = ["extern void func0(int, int, char*);"]
-        elif prob_num in [33, 39]:
-            current_sigs = ["extern void func0(char*, int);"]
-        else:
-            current_sigs = ["extern int func0(int*, int);", "extern int func0();"]
+        if prob_num == 79: current_sigs = ["extern int func0(char*);"]
+        elif prob_num == 51: current_sigs = ["extern void func0(char*, int);"]
+        elif prob_num == 54: current_sigs = ["extern int func0(int, int);"]
+        elif prob_num == 70: current_sigs = ["extern int func0(int*, int);"]
+        elif prob_num == 45: current_sigs = ["extern void func0(int, int, char*);"]
+        elif prob_num in [33, 39]: current_sigs = ["extern void func0(char*, int);"]
+        else: current_sigs = ["extern int func0(int*, int);", "extern int func0();"]
         
         for decl in current_sigs + FALLBACK_SIGNATURES:
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
