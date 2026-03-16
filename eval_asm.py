@@ -16,18 +16,18 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【绝对物理隔离版】地基逻辑与特例隔离"""
+    """核心地基逻辑：严格隔离 96 题，其余保持原样"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 96 题隔离区 (HumanEval/95)：16 字节内存对齐 + 哨兵位
+        # 96 题隔离区 (HumanEval/95)：16 字节内存物理打桩
         # ==========================================
         if prob_num == 96:
-            m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line)
+            # 强化正则：使用 re.DOTALL 兼容 GitHub Action 可能存在的换行字典
+            m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line, re.DOTALL)
             if m_96:
                 content, exp_raw = m_96.groups()
                 target = "1" if exp_raw == "True" else "0"
-                # 提取 Key：引号字符串或数字
                 raw_keys = re.findall(r'([\'"].*?[\'"]|\d+)\s*:', content)
                 
                 if not raw_keys and "{}" in line:
@@ -39,16 +39,15 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                         if (k.startswith('"') or k.startswith("'")):
                             processed.append(f'"{k[1:-1]}"')
                         else:
-                            # 传入含数字的字符串，使汇编内的 _isalpha 返回 0
                             processed.append('"123!"')
                     
                     # 汇编关键：lsl x9, x9, #4 => 索引 * 16
-                    # 构造 16 字节步进的结构体，并在末尾添加 NULL 哨兵
-                    c_keys = ", ".join([f'{{ (char*){s}, 0 }}' for s in processed])
+                    # 使用 unsigned long long 数组交替补零，物理模拟 16 字节间距
+                    c_elements = [f"(unsigned long long)(char*){s}, 0ULL" for s in processed]
+                    c_init = ", ".join(c_elements)
                     c_checks.append(f'''    {{
-        struct Align16 {{ char* key; long padding; }};
-        struct Align16 keys_arr[] = {{ {c_keys}, {{ (char*)0, 0 }} }};
-        if (func0((char**)keys_arr, {len(processed)}) != {target}) return 1;
+        unsigned long long mem[] = {{ {c_init}, 0ULL, 0ULL }};
+        if (func0((char**)mem, (long){len(processed)}) != {target}) return 1;
     }}''')
                 continue
 
@@ -109,7 +108,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 141 分地基逻辑 (保持原逻辑不变)
+        # 141 分通用地基逻辑 (保持原逻辑不变)
         # ==========================================
         curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
@@ -159,7 +158,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【RESCUE 模式】"""
+    """【RESCUE 模式】完全保留你的实现"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
@@ -213,9 +212,10 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则提取层 ---
+        # --- 正则提取层 (加固 96 题，其余不动) ---
         if prob_num == 96:
-            assert_orig = re.findall(r"^\s*assert candidate\(\{.*?\}\)\s*==\s*.*", raw_test_code, re.MULTILINE)
+            # 开启 re.DOTALL 以匹配 GitHub Action 中可能的换行字典
+            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code, re.DOTALL)
         elif prob_num == 91:
             assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
         elif prob_num in [33, 39, 40]:
