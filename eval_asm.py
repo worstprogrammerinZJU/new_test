@@ -36,13 +36,12 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         
-        # --- 16 号题沙箱逻辑 ---
+        # --- 16 号题沙箱逻辑 (基于 140 分版本注入) ---
         if prob_num == 16:
-            # 将 assert candidate('xyz') == 3 转换为 if (func0("xyz") != 3) return 1;
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 arg, expected = m.groups()
-                arg = arg.replace("'", '"') # 确保是 C 字符串
+                arg = arg.replace("'", '"') # 确保 'xyz' 变成 "xyz"
                 c_checks.append(f'    if (func0({arg}) != {expected}) return 1;')
                 continue
 
@@ -63,7 +62,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
         c_checks.append(f"    {curr}) return 1;")
     
-    # 模板包含所有必要的头文件
+    # 模板包含所有必要的头文件 (ctype.h 用于 16 号题)
     driver_template = """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <ctype.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}"""
     return driver_template % (func_decl, "\n".join(c_checks))
 
@@ -76,13 +75,12 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             c_checks.append(f"    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {len(expected.split(',')) if expected.strip() else 0}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}")
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
-    # 16 号题如果进入补救模式，也需要特殊处理字符串
+    # 16 号题补救模式
     if prob_num == 16:
-        # 提取所有断言并转换为 build_test_code_original 逻辑
         asserts = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         return build_test_code_original(func_decl, asserts, prob_num)
 
-    # 默认补救逻辑保持 139 版本
+    # 默认补救逻辑保持 139/140 版本
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -125,12 +123,13 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.\'-]+', raw_test_code)
+        # 确保正则包含单引号，以抓取 16 号题的参数
+        assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*[\w\d\.\'-]+", raw_test_code)
         
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
         
-        # 针对 16 号题调整签名优先级
+        # 针对 16 号题优先尝试正确签名，其余保持 140 分逻辑
         sigs = ["extern int func0(char*);"] if prob_num == 16 else ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"]
         signatures = sigs + FALLBACK_SIGNATURES
         
