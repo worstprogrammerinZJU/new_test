@@ -23,23 +23,24 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         # 96 题隔离区 (HumanEval/95)：字典键大小写检查
         # ==========================================
         if prob_num == 96:
-            # 专门匹配带有字典和 True/False 的断言行
+            # 兼容：assert candidate({...}) == True
             m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line)
             if m_96:
                 content, exp_raw = m_96.groups()
                 target = "1" if exp_raw == "True" else "0"
-                # 提取字典中的 key（字符串或数字）
+                # 提取 key：匹配冒号前的数字或引号字符串
                 raw_keys = re.findall(r'(\".*?\"|\'.*?\'|\d+)\s*:', content)
-                if not raw_keys:
+                
+                if not raw_keys and "{}" in line: # 处理空字典 case
                     c_checks.append(f'    if (func0(NULL, 0) != {target}) return 1;')
-                else:
+                elif raw_keys:
                     processed = []
                     for k in raw_keys:
                         k = k.strip()
                         if (k.startswith('"') or k.startswith("'")):
                             processed.append(f'"{k[1:-1]}"')
                         else:
-                            # 汇编会调用 isalpha，数字传入非字母字符串触发 False
+                            # 传入非字母字符，让汇编内部的 isalpha 校验失败
                             processed.append('"123"')
                     c_keys = ", ".join(processed)
                     c_checks.append(f'    {{ char* keys[] = {{{c_keys}}}; if (func0(keys, {len(processed)}) != {target}) return 1; }}')
@@ -159,10 +160,10 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == ', ') == ')
         c_checks.append(f"    {curr}) return 1;")
     
-    return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n#include <ctype.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
+    return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
-# try_compile_run, build_test_code_rescue 使用原始逻辑
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
+    # 此处保持原始逻辑... (省略同上)
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = [f'    {{ int res[256]; int cnt; func0("{m}", res, &cnt); if (cnt != {len(e.split(",")) if e.strip() else 0}) return 1; }}' for m, e in assert_lines]
@@ -217,8 +218,8 @@ def main():
         
         # --- 正则隔离 (核心修复区) ---
         if prob_num == 96:
-            # 96 题：专门捕获字典断言行，哪怕后面跟着错误说明
-            assert_orig = re.findall(r"assert candidate\(\{.*?\}\)\s*==\s*\w+.*", raw_test_code)
+            # 修正 96：允许每行开头的空格，并匹配到行尾
+            assert_orig = re.findall(r"^\s*assert candidate\(\{.*?\}\)\s*==\s*.*", raw_test_code, re.MULTILINE)
         elif prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num == 79:
