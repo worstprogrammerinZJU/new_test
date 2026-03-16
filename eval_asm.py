@@ -16,7 +16,7 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全加固地基版】严格物理隔离 147, 138, 129, 126, 123 等关键题目"""
+    """【全加固地基版】严格物理隔离 96, 109, 115, 116, 123, 147 等关键题目"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
@@ -32,7 +32,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 138 题隔离区 (HumanEval/138)：is_equal_to_sum_even (严格保持)
+        # 138 题隔离区 (HumanEval/138)：is_equal_to_sum_even (保持)
         # ==========================================
         if prob_num == 138:
             m_138 = re.search(r"candidate\((\d+)\)\s*==\s*(\w+)", line)
@@ -43,7 +43,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 129 题隔离区 (HumanEval/128)
+        # 129 题隔离区 (HumanEval/128)：计算绝对值之和与乘积符号
         # ==========================================
         if prob_num == 129:
             m_129 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
@@ -56,7 +56,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 126 题隔离区 (HumanEval/126)
+        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑
         # ==========================================
         if prob_num == 126:
             m_126 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\w+)", line)
@@ -69,7 +69,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 123 题隔离区 (HumanEval/122)
+        # 123 题隔离区 (HumanEval/122)：前 k 个元素中不超过 2 位数的和
         # ==========================================
         if prob_num == 123:
             m_123 = re.search(r"candidate\(\s*\[(.*?)\]\s*,\s*(\d+)\s*\)\s*==\s*(-?\d+)", line)
@@ -80,7 +80,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 96 题隔离区 (HumanEval/95)
+        # 96 题隔离区 (HumanEval/95)：16 字节内存物理打桩
         # ==========================================
         if prob_num == 96:
             m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line, re.DOTALL)
@@ -88,28 +88,44 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 content, exp_raw = m_96.groups()
                 target = "1" if exp_raw == "True" else "0"
                 raw_keys = re.findall(r'([\'"].*?[\'"]|\d+)\s*:', content)
+                
                 if not raw_keys and "{}" in line:
                     c_checks.append(f'    if (func0(NULL, 0) != {target}) return 1;')
                 elif raw_keys:
-                    processed = [f'"{k.strip()[1:-1]}"' if (k.strip().startswith('"') or k.strip().startswith("'")) else '"123!"' for k in raw_keys]
-                    c_init = ", ".join([f"(unsigned long long)(char*){s}, 0ULL" for s in processed])
-                    c_checks.append(f'    {{ unsigned long long mem[] = {{ {c_init}, 0ULL, 0ULL }}; if (func0((char**)mem, (long){len(processed)}) != {target}) return 1; }}')
+                    processed = []
+                    for k in raw_keys:
+                        k = k.strip()
+                        if (k.startswith('"') or k.startswith("'")):
+                            processed.append(f'"{k[1:-1]}"')
+                        else:
+                            processed.append('"123!"')
+                    
+                    c_elements = [f"(unsigned long long)(char*){s}, 0ULL" for s in processed]
+                    c_init = ", ".join(c_elements)
+                    c_checks.append(f'''    {{
+        unsigned long long mem[] = {{ {c_init}, 0ULL, 0ULL }};
+        if (func0((char**)mem, (long){len(processed)}) != {target}) return 1;
+    }}''')
                 continue
 
         # ==========================================
-        # 109, 115, 116, 91, 86, 54, 70, 45 等逻辑 (严格保持原文)
+        # 109 题隔离区 (HumanEval/108)：count_nums 深度加固
         # ==========================================
         if prob_num == 109:
             line_clean = line.replace("1**0", "1").replace("0**0", "1").replace("-0", "0")
             m_109 = re.search(r"candidate\((.*?)\)\s*==\s*(\d+)", line_clean)
             if m_109:
                 content, expected = m_109.groups()
-                inner = content.strip()[1:-1] if content.strip().startswith('[') else content.strip()
+                content = content.strip()
+                inner = content[1:-1] if (content.startswith('[') and content.endswith(']')) else content
                 items = [x.strip() for x in inner.split(',')] if inner.strip() else []
                 c_items = "{" + ", ".join(items) + "}" if items else "{0}"
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
                 continue
 
+        # ==========================================
+        # 115 题隔离区 (HumanEval/114)：long long 寻址 (lsl #3) 补丁
+        # ==========================================
         if prob_num == 115:
             m_115 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+)", line)
             if m_115:
@@ -119,6 +135,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ long long arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}LL) return 1; }}')
                 continue
 
+        # ==========================================
+        # 116 题隔离区 (HumanEval/115)：max_fill 2D 数组补丁
+        # ==========================================
         if prob_num == 116:
             m_116 = re.search(r"candidate\(\s*\[(.*?)\]\s*,\s*(\d+)\s*\)\s*==\s*(\d+)", line)
             if m_116:
@@ -126,11 +145,18 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 rows_raw = re.findall(r"\[(.*?)\]", grid_str)
                 row_count = len(rows_raw)
                 col_count = len(rows_raw[0].split(',')) if row_count > 0 else 0
-                row_decls = " ".join([f"int r{i}[] = {{{rows_raw[i]}}};" for i in range(row_count)])
+                row_decls = [f"int r{i}[] = {{{rows_raw[i]}}};" for i in range(row_count)]
                 row_ptrs = ", ".join([f"r{i}" for i in range(row_count)])
-                c_checks.append(f'    {{ {row_decls} int* grid[] = {{ {row_ptrs} }}; if (func0(grid, {row_count}, {col_count}, {capacity}) != {expected}) return 1; }}')
+                c_checks.append(f'''    {{
+        { " ".join(row_decls) }
+        int* grid[] = {{ {row_ptrs} }};
+        if (func0(grid, {row_count}, {col_count}, {capacity}) != {expected}) return 1;
+    }}''')
                 continue
 
+        # ==========================================
+        # 91 题隔离区 (HumanEval/90)
+        # ==========================================
         if prob_num == 91:
             m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
             if m_91:
@@ -142,6 +168,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {target}) return 1; }}')
                 continue
 
+        # ==========================================
+        # 86, 54, 70 等地基隔离区
+        # ==========================================
         if prob_num == 86:
             m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
             if m_86:
@@ -167,25 +196,33 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {expected}) return 1; }}')
                 continue
 
-        # 通用地基
+        # ==========================================
+        # 通用地基逻辑
+        # ==========================================
         curr = line.replace('True', '1').replace('False', '0')
         if prob_num == 45:
-            m_45 = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*".*?"', line)
+            m_45 = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
             if m_45:
-                num, base, exp = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line).groups()
-                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{exp}") != 0) return 1; }}')
+                num, base, expected = m_45.groups()
+                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
                 continue
 
         def list_to_c(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
             count = len(content.split(','))
-            if prob_num in [33, 39]: return f"(char[]){{\"{content.replace(' ', '').replace(',', '')}\"}}"
-            if prob_num == 13: return f"(char*[]){{{content.replace(\"'\", '\"')}}}, {count}"
-            if prob_num in [4, 40, 41, 44]: return f"(int[]){{{content}}}, {count}"
+            if prob_num in [33, 39]:
+                clean = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
+                return f"(char[]){{\"{clean}\"}}"
+            if prob_num == 13:
+                c_fmt = content.replace("'", '"')
+                return f"(char*[]){{{c_fmt}}}, {count}"
+            if prob_num in [4, 40, 41, 44]:
+                return f"(int[]){{{content}}}, {count}"
             return f"(float[]){{{content}}}, {count}"
             
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
+        
         if prob_num == 1:
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == 1', ') == 1').replace(' == 0', ') == 10')
         else:
@@ -194,7 +231,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
-# --- 下面是 build_test_code_rescue 和 try_compile_run (保持原样) ---
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
@@ -208,8 +244,15 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0').replace('None', 'NULL')
-        curr = re.sub(r"'.*?'", lambda m: '"' + m.group(0)[1:-1] + '"', curr)
-        curr = re.sub(r'\[(.*?)\]', lambda m: f"(int[]){{{m.group(1)}}}, {len(m.group(1).split(','))}" if prob_num in [4, 40, 41, 44] else f"(float[]){{{m.group(1)}}}, {len(m.group(1).split(','))}" if m.group(1).strip() else "NULL, 0", curr)
+        def quote_fix(match): return '"' + match.group(0)[1:-1] + '"'
+        curr = re.sub(r"'.*?'", quote_fix, curr)
+        def list_to_c_rescue(match):
+            content = match.group(1).strip()
+            if not content: return "NULL, 0"
+            items = content.split(',')
+            if prob_num in [4, 40, 41, 44]: return f"(int[]){{{content}}}, {len(items)}"
+            return f"(float[]){{{content}}}, {len(items)}"
+        curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
         if 'assert candidate' in curr:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
@@ -242,7 +285,7 @@ def main():
         
         # --- 正则提取层 ---
         if prob_num == 147:
-            assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
+             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 138:
             assert_orig = re.findall(r"assert candidate\(\d+\)\s*==\s*\w+", raw_test_code)
         elif prob_num == 129:
@@ -280,9 +323,11 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num == 138:
+        if prob_num == 147:
+            sigs = ["extern int func0(int*, int);"]
+        elif prob_num == 138:
             sigs = ["extern int func0(int);"]
-        elif prob_num in [147, 129, 126, 123, 109, 86, 91, 70]:
+        elif prob_num in [129, 126, 123, 109, 86, 91, 70]:
             sigs = ["extern int func0(int*, int);"]
         elif prob_num == 116: sigs = ["extern int func0(int**, int, int, int);"]
         elif prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
