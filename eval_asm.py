@@ -23,17 +23,26 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
         # 96 题隔离区 (HumanEval/95)：字典键大小写检查
         # ==========================================
         if prob_num == 96:
+            # 专门匹配带有字典和 True/False 的断言行
             m_96 = re.search(r"candidate\(\s*\{(.*?)\}\s*\)\s*==\s*(\w+)", line)
             if m_96:
                 content, exp_raw = m_96.groups()
                 target = "1" if exp_raw == "True" else "0"
-                # 提取字典的所有 Key
-                keys = re.findall(r'["\'](.*?)["\']\s*:', content)
-                if not keys and not content.strip(): # 空字典处理
+                # 提取字典中的 key（字符串或数字）
+                raw_keys = re.findall(r'(\".*?\"|\'.*?\'|\d+)\s*:', content)
+                if not raw_keys:
                     c_checks.append(f'    if (func0(NULL, 0) != {target}) return 1;')
                 else:
-                    c_keys = ", ".join([f'"{k}"' for k in keys])
-                    c_checks.append(f'    {{ char* keys[] = {{{c_keys}}}; if (func0(keys, {len(keys)}) != {target}) return 1; }}')
+                    processed = []
+                    for k in raw_keys:
+                        k = k.strip()
+                        if (k.startswith('"') or k.startswith("'")):
+                            processed.append(f'"{k[1:-1]}"')
+                        else:
+                            # 汇编会调用 isalpha，数字传入非字母字符串触发 False
+                            processed.append('"123"')
+                    c_keys = ", ".join(processed)
+                    c_checks.append(f'    {{ char* keys[] = {{{c_keys}}}; if (func0(keys, {len(processed)}) != {target}) return 1; }}')
                 continue
 
         # ==========================================
@@ -152,6 +161,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     
     return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n#include <ctype.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
+# try_compile_run, build_test_code_rescue 使用原始逻辑
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
@@ -207,8 +217,8 @@ def main():
         
         # --- 正则隔离 (核心修复区) ---
         if prob_num == 96:
-            # 96 题：捕获包含字典 {} 的断言
-            assert_orig = re.findall(r"assert candidate\(\{.*?\}\)\s*==\s*\w+", raw_test_code)
+            # 96 题：专门捕获字典断言行，哪怕后面跟着错误说明
+            assert_orig = re.findall(r"assert candidate\(\{.*?\}\)\s*==\s*\w+.*", raw_test_code)
         elif prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num == 79:
