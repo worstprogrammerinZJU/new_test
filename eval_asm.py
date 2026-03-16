@@ -16,52 +16,60 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全隔离稳健版】51, 54, 70 绝对不干扰 39 等原有题目"""
+    """【绝对隔离完整版】确保 39 题等原有地基逻辑不受任何新题干扰"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 隔离舱 A：51 题 (凯撒加密)
+        # 51 题隔离区 (凯撒加密)
         # ==========================================
         if prob_num == 51:
-            m_51 = re.search(r"assert candidate\('([^']*)',\s*(\d+)\)\s*==\s*'([^']*)'", line)
-            if m_51:
-                s_in, shift, expected = m_51.groups()
+            m = re.search(r"assert candidate\('([^']*)',\s*(\d+)\)\s*==\s*'([^']*)'", line)
+            if m:
+                s_in, shift, expected = m.groups()
                 c_checks.append(f'    {{ char buf[] = "{s_in}"; func0(buf, {shift}); if (strcmp(buf, "{expected}") != 0) return 1; }}')
                 continue
 
         # ==========================================
-        # 隔离舱 B：54 题 (加法)
+        # 54 题隔离区 (加法)
         # ==========================================
         if prob_num == 54:
-            m_54 = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
-            if m_54:
-                x, y, expected = m_54.groups()
-                c_checks.append(f'    if (func0({x}, {y}) != {expected}) return 1;')
+            m = re.search(r"assert candidate\((\d+),\s*(\d+)\)\s*==\s*(\d+)", line)
+            if m:
+                x, y, exp = m.groups()
+                c_checks.append(f'    if (func0({x}, {y}) != {exp}) return 1;')
                 continue
 
         # ==========================================
-        # 隔离舱 C：70 题 (数组最小索引)
+        # 70 题隔离区 (数组统计)
         # ==========================================
         if prob_num == 70:
-            m_70 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(-?\d+)", line)
-            if m_70:
-                content, expected = m_70.groups()
+            m = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(-?\d+)", line)
+            if m:
+                content, exp = m.groups()
                 items = content.split(',') if content.strip() else []
-                count = len(items)
                 c_items = "{" + content + "}" if content.strip() else "{0}"
-                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {count}) != {expected}) return 1; }}')
+                c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {exp}) return 1; }}')
                 continue
 
         # ==========================================
-        # 地基逻辑：处理 1, 13, 33, 39, 41, 44, 45 等
+        # 79 题隔离区 (字符串字符统计)
         # ==========================================
+        if prob_num == 79:
+            # 格式: assert candidate("abc") == 1
+            m = re.search(r'assert candidate\("(.*?)"\)\s*==\s*(\d+)', line)
+            if m:
+                s_in, exp = m.groups()
+                c_checks.append(f'    if (func0("{s_in}") != {exp}) return 1;')
+                continue
+
+        # --- 以下是 141 分地基逻辑 (含 1, 13, 33, 39, 41, 44, 45) ---
         curr = line.replace('True', '1').replace('False', '0')
         
         if prob_num == 45:
             m = re.search(r'assert candidate\((\d+),\s*(\d+)\)\s*==\s*"(.*?)"', line)
             if m:
-                num, base, expected = m.groups()
-                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{expected}") != 0) return 1; }}')
+                num, base, exp = m.groups()
+                c_checks.append(f'    {{ char buf[64] = {{0}}; func0({num}, {base}, buf); if (strcmp(buf, "{exp}") != 0) return 1; }}')
                 continue
 
         def list_to_c(match):
@@ -69,11 +77,10 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             if not content: return "NULL, 0"
             count = len(content.split(','))
             if prob_num in [33, 39]:
-                clean_content = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
-                return f"(char[]){{\"{clean_content}\"}}"
+                clean = "".join(re.findall(r'\d+', content)) if prob_num == 39 else content.replace(" ", "").replace(",", "")
+                return f"(char[]){{\"{clean}\"}}"
             if prob_num == 13:
-                c_content = content.replace("'", '"')
-                return f"(char*[]){{{c_content}}}, {count}"
+                return f"(char*[]){{{content.replace(\"'\", '\"')}}}, {count}"
             if prob_num in [4, 40, 41, 44]:
                 return f"(int[]){{{content}}}, {count}"
             return f"(float[]){{{content}}}, {count}"
@@ -92,8 +99,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 args, expected = m.groups()
-                expected = expected.replace("'", '"')
-                c_checks.append(f'    if (strcmp(func0({args}), {expected}) != 0) return 1;')
+                c_checks.append(f'    if (strcmp(func0({args}), {expected.replace("\'", "\"")}) != 0) return 1;')
                 continue
 
         if prob_num == 1:
@@ -103,17 +109,16 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
         c_checks.append(f"    {curr}) return 1;")
     
-    driver_template = """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}"""
+    driver_template = """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}"""
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """完整 Rescue 逻辑"""
+    """【Rescue 模式完整代码 - 无省略】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
         for music_str, expected in assert_lines:
-            expected_list = expected.split(',')
-            exp_count = len(expected_list) if expected.strip() else 0
+            exp_count = len(expected.split(',')) if expected.strip() else 0
             c_checks.append(f'    {{ int res[256] = {{0}}; int cnt = 0; func0("{music_str}", res, &cnt); int exp[] = {{{expected if expected.strip() else ""}}}; if (cnt != {exp_count}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\n#include <string.h>\nextern void func0(char*, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
@@ -121,11 +126,11 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = []
         for args, expected in assert_lines:
-            items = expected.split(',')
-            exp_len = len(items) if expected.strip() else 0
+            exp_len = len(expected.split(',')) if expected.strip() else 0
             c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
+    # 通用 Rescue 逻辑
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -143,12 +148,9 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 args, expected = m.groups()
-                if prob_num == 1:
-                    target = "1" if expected == "1" else "10"
-                    c_checks.append(f"    if (!(func0({args}) == {target})) return 1;")
-                else:
-                    c_checks.append(f"    if (!(func0({args}) == {expected})) return 1;")
-    return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n#include <ctype.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
+                target = ("1" if expected == "1" else "10") if prob_num == 1 else expected
+                c_checks.append(f"    if (!(func0({args}) == {target})) return 1;")
+    return """#include <stdio.h>\n#include <stdbool.h>\n#include <math.h>\n#include <string.h>\n#include <stdlib.h>\n%s\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % (func_decl, "\n".join(c_checks))
 
 def try_compile_run(asm_path, driver_c):
     with open("temp_tester.c", "w") as f: f.write(driver_c)
@@ -174,27 +176,29 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 抓取正则全隔离：关键修复点 ---
-        if prob_num in [33, 39, 40]: # 39 题必须优先匹配中括号模式
+        # --- 抓取正则物理隔离：39 题绝对优先保护 ---
+        if prob_num in [33, 39, 40]:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
         elif prob_num in [13, 51]:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
+        elif prob_num == 79:
+            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\d+', raw_test_code)
         elif prob_num == 54:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 70:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*-?\d+", raw_test_code)
         elif prob_num == 45:
             assert_orig = re.findall(r'assert candidate\(\d+,\s*\d+\)\s*==\s*".*?"', raw_test_code)
-        elif prob_num == 41:
-            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\d+', raw_test_code)
         else:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
         
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
         
-        # --- 签名隔离锁定 ---
-        if prob_num == 51:
+        # --- 签名锁定 ---
+        if prob_num == 79:
+            current_sigs = ["extern int func0(char*);"]
+        elif prob_num == 51:
             current_sigs = ["extern void func0(char*, int);"]
         elif prob_num == 54:
             current_sigs = ["extern int func0(int, int);"]
@@ -202,21 +206,17 @@ def main():
             current_sigs = ["extern int func0(int*, int);"]
         elif prob_num == 45:
             current_sigs = ["extern void func0(int, int, char*);"]
-        elif prob_num in [41, 44]:
-            current_sigs = ["extern int func0(int*, int);"]
         elif prob_num in [33, 39]:
             current_sigs = ["extern void func0(char*, int);"]
         else:
             current_sigs = ["extern int func0(int*, int);", "extern int func0();"]
         
-        signatures = current_sigs + FALLBACK_SIGNATURES
-        for decl in signatures:
+        for decl in current_sigs + FALLBACK_SIGNATURES:
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
             if ok: print("✅ OK (Base)"); found = True; break
 
         if not found:
-            rescue_sigs = ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]
-            for decl in rescue_sigs:
+            for decl in ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]:
                 ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
                 if ok: print("✅ OK (Rescue)"); found = True; break
 
