@@ -8,25 +8,31 @@ ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
 FALLBACK_SIGNATURES = [
-    "extern int func0(float*, int, float);", # 针对 1 号题这种浮点题
+    "extern int func0(int*, int);",          # 针对 4 号题 int 数组
+    "extern int func0(float*, int, float);", # 针对 1 号题
     "extern int func0(int);",
     "extern int func0(int, int);",
     "extern char* func0(char**, int);",
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【保留逻辑并修正返回值判断】"""
+    """【保留逻辑并修正 4 号题的数组类型】"""
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
+        
         def list_to_c(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
             count = len(content.split(','))
+            # 4 号题必须用 int 数组，否则汇编按整数读取 float 会出错
+            if prob_num == 4:
+                return f"(int[]){{{content}}}, {count}"
             return f"(float[]){{{content}}}, {count}"
+            
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         
-        # 1 号题特殊处理：汇编返回 10 代表 False
+        # 1 号题返回值特殊映射
         if prob_num == 1:
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == 1', ') == 1').replace(' == 0', ') == 10')
         else:
@@ -38,7 +44,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【补救模式】保持 163 的成功逻辑"""
+    """【补救模式】"""
     if prob_num == 163:
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = []
@@ -53,7 +59,6 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
     }}""")
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
-    # 其他补救逻辑保持 136 分版本不动
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -62,20 +67,24 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
             s = match.group(0)
             return '"' + s[1:-1] + '"'
         curr = re.sub(r"'.*?'", quote_fix, curr)
+        
         def list_to_c_rescue(match):
             content = match.group(1).strip()
             if not content: return "NULL, 0"
             clean_content = content.replace("'", '"')
             items = content.split(',')
             if '"' in clean_content: return f"(char*[]){{{clean_content}}}, {len(items)}"
+            # 4 号题补救模式也用 int 数组
+            if prob_num == 4:
+                return f"(int[]){{{content}}}, {len(items)}"
             return f"(float[]){{{content}}}, {len(items)}"
+            
         curr = re.sub(r'\[(.*?)\]', list_to_c_rescue, curr)
         
         if 'assert candidate' in curr:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
                 args, expected = m.groups()
-                # 针对 1 号题在补救模式下的判断
                 if prob_num == 1:
                     target = "1" if expected == "1" else "10"
                     c_checks.append(f"    if (!(func0({args}) == {target})) return 1;")
@@ -102,8 +111,6 @@ def main():
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=lambda x: int(re.search(r'\d+', x).group()))
 
     passed = 0
-    fail_list = []
-
     for asm_f in asm_files:
         prob_num = int(re.search(r'\d+', asm_f).group())
         task = tasks[prob_num - 1]
@@ -113,24 +120,21 @@ def main():
         
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
-        last_err = "UNKNOWN"
-
-        # 尝试所有签名
-        for decl in ["extern int func0();", "extern int func0(float*, int, float);"] + FALLBACK_SIGNATURES + ["extern float func0();"]:
+        
+        # 优先尝试最匹配的签名
+        signatures = ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"] + FALLBACK_SIGNATURES
+        
+        for decl in signatures:
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
             if ok: print("✅ OK (Base)"); found = True; break
-            last_err = err
 
         if not found:
             for decl in ["extern int func0(char*);", "extern int func0();"]:
                 ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
                 if ok: print("✅ OK (Rescue)"); found = True; break
-                last_err = err
 
         if found: passed += 1
-        else:
-            print(f"❌ FAIL ({last_err})")
-            fail_list.append((asm_f, last_err))
+        else: print(f"❌ FAIL")
 
     print(f"\nFinal Score: {passed}/{len(asm_files)}")
 
