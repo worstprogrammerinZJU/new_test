@@ -16,28 +16,28 @@ FALLBACK_SIGNATURES = [
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【全加固地基版】严格物理隔离 96, 109, 115, 116, 123, 126, 129, 133 等关键题目"""
+    """【全加固地基版】严格物理隔离 96, 109, 115, 116, 123 等关键题目"""
     c_checks = []
     for line in assert_lines:
         # ==========================================
-        # 133 题隔离区 (HumanEval/132)：is_nested 嵌套括号 (增量添加)
+        # 138 题隔离区 (HumanEval/138)：is_equal_to_sum_even (新插入)
         # ==========================================
-        if prob_num == 133:
-            m_133 = re.search(r"candidate\(\s*['\"](.*?)['\"]\s*\)\s*==\s*(\w+)", line)
-            if m_133:
-                content, exp_raw = m_133.groups()
+        if prob_num == 138:
+            m_138 = re.search(r"candidate\((\d+)\)\s*==\s*(\w+)", line)
+            if m_138:
+                val, exp_raw = m_138.groups()
                 target = "1" if exp_raw.strip() == "True" else "0"
-                c_checks.append(f'    if (func0("{content}") != {target}) return 1;')
+                c_checks.append(f'    if (func0({val}) != {target}) return 1;')
                 continue
 
         # ==========================================
-        # 129 题隔离区 (HumanEval/128)：prod_signs 逻辑 (增量添加)
+        # 129 题隔离区 (HumanEval/128)：计算绝对值之和与乘积符号 (增量添加)
         # ==========================================
         if prob_num == 129:
             m_129 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
             if m_129:
                 content, exp_raw = m_129.groups()
-                # 汇编逻辑：空数组返回 -32768 (Python None)
+                # 汇编逻辑中，None 对应的是 -32768
                 target = "-32768" if "None" in exp_raw else exp_raw.strip()
                 items = [x.strip() for x in content.split(',')] if content.strip() else []
                 c_items = "{" + content + "}" if items else "{0}"
@@ -45,7 +45,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑
+        # 126 题隔离区 (HumanEval/126)：is_sorted 逻辑 (增量添加)
         # ==========================================
         if prob_num == 126:
             m_126 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(\w+)", line)
@@ -98,7 +98,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 109 题隔离区 (HumanEval/108)：count_nums
+        # 109 题隔离区 (HumanEval/108)：count_nums 深度加固
         # ==========================================
         if prob_num == 109:
             line_clean = line.replace("1**0", "1").replace("0**0", "1").replace("-0", "0")
@@ -113,7 +113,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 115 题隔离区 (HumanEval/114)
+        # 115 题隔离区 (HumanEval/114)：long long 寻址 (lsl #3) 补丁
         # ==========================================
         if prob_num == 115:
             m_115 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(-?\d+)", line)
@@ -125,7 +125,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 116 题隔离区 (HumanEval/115)：max_fill 2D 数组
+        # 116 题隔离区 (HumanEval/115)：max_fill 2D 数组补丁
         # ==========================================
         if prob_num == 116:
             m_116 = re.search(r"candidate\(\s*\[(.*?)\]\s*,\s*(\d+)\s*\)\s*==\s*(\d+)", line)
@@ -144,7 +144,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 continue
 
         # ==========================================
-        # 91, 86, 54, 70 等地基隔离区 (保持原逻辑)
+        # 91 题隔离区 (HumanEval/90)
         # ==========================================
         if prob_num == 91:
             m_91 = re.search(r"candidate\(\s*\[(.*?)\]\s*\)\s*==\s*(.*)", line)
@@ -157,6 +157,9 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ int arr[] = {c_items}; if (func0(arr, {len(items)}) != {target}) return 1; }}')
                 continue
 
+        # ==========================================
+        # 86, 54, 70 等地基隔离区 (保持原逻辑)
+        # ==========================================
         if prob_num == 86:
             m_86 = re.search(r"assert candidate\(\[(.*?)\]\)\s*==\s*(\d+)", line)
             if m_86:
@@ -270,11 +273,11 @@ def main():
         asm_path = os.path.join(ASM_DIR, asm_f)
         
         # --- 正则提取层 ---
-        if prob_num == 133:
-            assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code)
-        elif prob_num == 129:
+        if prob_num == 138: # 增量添加 138
+            assert_orig = re.findall(r"assert candidate\(\d+\)\s*==\s*\w+", raw_test_code)
+        elif prob_num == 129: # 增量添加 129
             assert_orig = re.findall(r"(?:assert\s+)?candidate\(.*?\)\s*==\s*.*", raw_test_code)
-        elif prob_num == 126:
+        elif prob_num == 126: # 增量添加 126
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\w+", raw_test_code)
         elif prob_num == 123:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*-?\d+", raw_test_code)
@@ -307,9 +310,9 @@ def main():
         found = False
         
         # --- 签名锁定层 ---
-        if prob_num == 133: 
-            sigs = ["extern int func0(char*);"]
-        elif prob_num in [129, 126, 123, 109, 86, 91, 70]:
+        if prob_num == 138: # 增量添加 138
+            sigs = ["extern int func0(int);"]
+        elif prob_num in [129, 126, 123, 109, 86, 91, 70]: # 增量添加 129
             sigs = ["extern int func0(int*, int);"]
         elif prob_num == 116: sigs = ["extern int func0(int**, int, int, int);"]
         elif prob_num == 115: sigs = ["extern long long func0(long long*, int);"]
