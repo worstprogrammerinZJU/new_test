@@ -8,15 +8,15 @@ ASM_DIR = "./generated_asm"
 JSONL_FILE = "human-eval-v2-20210705.jsonl"
 
 FALLBACK_SIGNATURES = [
-    "extern int func0(int*, int);",          # 针对 4 号题 int 数组
-    "extern int func0(float*, int, float);", # 针对 1 号题
+    "extern int func0(int*, int);",          
+    "extern int func0(float*, int, float);", 
     "extern int func0(int);",
     "extern int func0(int, int);",
     "extern char* func0(char**, int);",
 ]
 
 def build_test_code_original(func_decl, assert_lines, prob_num):
-    """【保留 141 分逻辑，仅为 13, 33 号题开辟沙箱】"""
+    """【保留 141 分逻辑，为 39 号题开辟沙箱】"""
     c_checks = []
     for line in assert_lines:
         curr = line.replace('True', '1').replace('False', '0')
@@ -26,10 +26,12 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             if not content: return "NULL, 0"
             count = len(content.split(','))
             
-            # --- 33 号题专项：原地修改字符串 ---
-            if prob_num == 33:
-                clean_content = content.replace(" ", "").replace(",", "")
-                return f"(char[]){{\"{clean_content}\"}}"
+            # --- 39 号题 & 33 号题共用逻辑：原地修改字节数组 ---
+            if prob_num == 39 or prob_num == 33:
+                nums = [x.strip() for x in content.split(',')]
+                # 将 [1, 2, 3] 转为 "\x01\x02\x03"
+                c_array = "".join([f"\\\\x{int(x):02x}" if x.strip().isdigit() else "\\\\x00" for x in nums])
+                return f'(char[]){{"{c_array}"}}'
 
             if prob_num == 13:
                 c_content = content.replace("'", '"')
@@ -40,7 +42,18 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
             
         curr = re.sub(r'\[(.*?)\]', list_to_c, curr)
         
-        # --- 33 号题原地修改断言 ---
+        # --- 39 号题原地修改断言 ---
+        if prob_num == 39:
+            m = re.search(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', curr)
+            if m:
+                arg, expected = m.groups()
+                exp_nums = [int(x.strip()) for x in expected.split(',')]
+                # 构造对比逻辑
+                cmp_logic = " && ".join([f"((unsigned char)buf[{i}] == {x})" for i, x in enumerate(exp_nums)])
+                c_checks.append(f'    {{ char buf[] = {arg}; func0(buf, 0); if (!({cmp_logic})) return 1; }}')
+                continue
+
+        # 33 号题保持之前的沙箱（如果有）
         if prob_num == 33:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
@@ -49,7 +62,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    {{ char buf[] = {arg}; func0(buf, 0); if (strcmp(buf, "{exp_str}") != 0) return 1; }}')
                 continue
 
-        # 13 号题逻辑
         if prob_num == 13:
             m = re.search(r'assert candidate\((.*?)\)\s*==\s*(.*)', curr)
             if m:
@@ -58,7 +70,6 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
                 c_checks.append(f'    if (strcmp(func0({args}), {expected}) != 0) return 1;')
                 continue
 
-        # 1 号题逻辑
         if prob_num == 1:
             curr = curr.replace('assert candidate', 'if (!(func0').replace(' == 1', ') == 1').replace(' == 0', ') == 10')
         else:
@@ -70,7 +81,7 @@ def build_test_code_original(func_decl, assert_lines, prob_num):
     return driver_template % (func_decl, "\n".join(c_checks))
 
 def build_test_code_rescue(func_decl, raw_test_code, prob_num):
-    """【补救模式：修复 f-string 语法错误并保持地基逻辑】"""
+    """【补救模式：完全保留 141 分地基逻辑】"""
     if prob_num == 17:
         assert_lines = re.findall(r"assert candidate\('(.*?)'\)\s*==\s*\[(.*?)\]", raw_test_code)
         c_checks = []
@@ -84,13 +95,11 @@ def build_test_code_rescue(func_decl, raw_test_code, prob_num):
         assert_lines = re.findall(r'assert candidate\((.*?)\)\s*==\s*\[(.*?)\]', raw_test_code)
         c_checks = []
         for args, expected in assert_lines:
-            # 修复点：提前计算长度，避免 f-string 大括号嵌套冲突
             items = expected.split(',')
             exp_len = len(items) if expected.strip() else 0
             c_checks.append(f'    {{ int res[128]; int cnt = 0; func0({args}, res, &cnt); int exp[] = {{{expected}}}; if (cnt != {exp_len}) return 1; for(int i=0; i<cnt; i++) if(res[i] != exp[i]) return 1; }}')
         return """#include <stdio.h>\nextern void func0(int, int, int*, int*);\nint main() {\n%s\n    printf("PASS\\n");\n    return 0;\n}""" % ("\n".join(c_checks))
 
-    # 默认通用补救逻辑
     assert_lines = re.findall(r'assert candidate\(.*?\)\s*==\s*.+', raw_test_code)
     c_checks = []
     for line in assert_lines:
@@ -139,15 +148,23 @@ def main():
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
-        if prob_num == 13: assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
+        # 39 号题需要特殊提取整个 assert 语句
+        if prob_num == 39:
+            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*\[.*?\]', raw_test_code)
+        else:
+            assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
+        
+        if prob_num == 13:
+             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*'.*?'", raw_test_code)
         
         print(f"[{asm_f}]", end=" ", flush=True)
         found = False
         
-        # 33 号题签名
-        current_sigs = ["extern void func0(char*, int);"] if prob_num == 33 else ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"]
-        signatures = current_sigs + FALLBACK_SIGNATURES
+        # 为 39 增加 void 签名
+        if prob_num == 39:
+            signatures = ["extern void func0(char*, int);"] + FALLBACK_SIGNATURES
+        else:
+            signatures = ["extern int func0(int*, int);", "extern int func0(float*, int, float);", "extern int func0();"] + FALLBACK_SIGNATURES
         
         for decl in signatures:
             ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
