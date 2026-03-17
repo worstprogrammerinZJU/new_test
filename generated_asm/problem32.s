@@ -14,6 +14,7 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
+                                        ; kill: def $x8 killed $xzr
 	strb	wzr, [sp, #31]
 	b	LBB0_9
 LBB0_2:
@@ -31,15 +32,16 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
-	ldr	x10, [sp, #8]
-	sdiv	x9, x8, x10
-	mul	x9, x9, x10
+	ldr	x9, [sp, #8]
+	sdiv	x8, x8, x9
+	mul	x8, x8, x9
 	subs	x8, x8, x9
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
+                                        ; kill: def $x8 killed $xzr
 	strb	wzr, [sp, #31]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
@@ -51,10 +53,10 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_8:
 	mov	w8, #1
-	strb	w8, [sp, #31]
+	str	w8, [sp, #31]
 	b	LBB0_9
 LBB0_9:
-	ldrb	w8, [sp, #31]
+	ldr	w8, [sp, #31]
 	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret

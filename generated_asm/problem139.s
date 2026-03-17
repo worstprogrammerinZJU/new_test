@@ -9,9 +9,9 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 16
 	str	w0, [sp, #8]
 	ldr	w8, [sp, #8]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	mul	w8, w8, w9
 	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne

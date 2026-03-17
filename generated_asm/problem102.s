@@ -28,9 +28,9 @@ LBB0_2:
 	b	LBB0_3
 LBB0_3:
 	ldr	w8, [sp, #4]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	mul	w8, w8, w9
 	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
@@ -42,9 +42,9 @@ LBB0_4:
 	b	LBB0_8
 LBB0_5:
 	ldr	w8, [sp, #4]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	mul	w8, w8, w9
 	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
