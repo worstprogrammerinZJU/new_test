@@ -31,15 +31,15 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
 	ldr	w8, [x8, x9, lsl #2]
-	adds	w8, w8, #99
+	subs	w8, w8, #99
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #16]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	w8, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_5

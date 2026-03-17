@@ -13,19 +13,22 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-16]
-	str	x1, [sp, #40]
+	stur	x1, [x29, #-24]
 	ldur	x0, [x29, #-16]
 	bl	_strlen
-	mov	w8, 0
-	str	w8, [sp, #28]                   ; 4-byte Folded Spill
-	stur	w0, [x29, #-28]
-	ldr	x0, [sp, #40]
+	mov	x8, x0
+	stur	w8, [x29, #-28]
+	ldur	x0, [x29, #-24]
 	bl	_strlen
-	str	w0, [sp, #32]
-	ldr	w8, [sp, #32]
-	lsl	w8, w8, #1
-	add	w8, w8, #1
-	mov	x0, w8
+	mov	x8, x0
+	str	w8, [sp, #32]
+	ldr	w9, [sp, #32]
+	mov	w8, #2
+	mul	w8, w8, w9
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #24]
 	str	wzr, [sp, #20]
@@ -39,26 +42,26 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
-	ldr	x8, [sp, #40]
+	ldur	x8, [x29, #-24]
 	ldrsw	x9, [sp, #20]
 	add	x1, x8, x9
 	ldr	w8, [sp, #32]
 	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	mov	x2, w8
+	subs	w9, w8, w9
+                                        ; implicit-def: $x8
+	mov	x8, x9
 	sxtw	x2, w8
 	mov	x3, #-1
+	str	x3, [sp, #8]                    ; 8-byte Folded Spill
 	bl	___strncpy_chk
+	ldr	x3, [sp, #8]                    ; 8-byte Folded Reload
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #32]
-	add	x0, x8, x9
-	ldrsw	x8, [sp, #20]
-	mov	x9, x8
-	mov	x8, #0
+	add	x8, x8, x9
+	ldrsw	x9, [sp, #20]
 	subs	x0, x8, x9
-	ldr	x1, [sp, #40]
+	ldur	x1, [x29, #-24]
 	ldrsw	x2, [sp, #20]
-	mov	x3, #-1
 	bl	___strncpy_chk
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #32]
@@ -84,4 +87,17 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w8, w8, #1
 	str	w8, [sp, #20]
 	b	LBB0_1
-LBB0
+LBB0_6:
+	ldr	x0, [sp, #24]
+	bl	_free
+	sturb	wzr, [x29, #-1]
+	b	LBB0_7
+LBB0_7:
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

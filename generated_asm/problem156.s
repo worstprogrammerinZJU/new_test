@@ -22,16 +22,16 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldur	w8, [x29, #-4]
-	mov	w9, #10
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w0
+	mov	w10, #10
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	str	w8, [sp, #4]
 	ldr	w8, [sp, #4]
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w0
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_3

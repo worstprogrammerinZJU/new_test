@@ -15,7 +15,7 @@ _func0:                                 ; @func0
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
-	subs	w8, w0, #3
+	subs	x8, x0, #3
 	cset	w8, hs
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
@@ -75,8 +75,8 @@ LBB0_9:
 	sturb	w8, [x29, #-1]
 	b	LBB0_10
 LBB0_10:
-	ldur	w0, [x29, #-1]
-	and	w0, w0, #0x1
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

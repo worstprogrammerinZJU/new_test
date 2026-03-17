@@ -50,10 +50,10 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #20]
-	ldr	w9, [sp]
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w0
+	ldr	w10, [sp]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
@@ -82,3 +82,23 @@ LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
 	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
+LBB0_11:
+	ldr	w8, [sp, #20]
+	str	w8, [sp, #28]
+	b	LBB0_14
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_1
+LBB0_13:
+	str	wzr, [sp, #28]
+	b	LBB0_14
+LBB0_14:
+	ldr	w0, [sp, #28]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

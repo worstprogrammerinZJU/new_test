@@ -11,6 +11,7 @@ _func0:                                 ; @func0
 	mov	x8, #1
 	str	x8, [sp, #16]
 	str	x8, [sp, #8]
+	mov	w8, #1
 	str	w8, [sp, #4]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1

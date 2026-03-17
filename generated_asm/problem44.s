@@ -46,6 +46,8 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_5
 LBB0_5:
 	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
 	b	LBB0_11
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -63,10 +65,14 @@ LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_10:
-	strb	wzr, [sp, #31]
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_11
 LBB0_11:
-	ldrb	w0, [sp, #31]
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

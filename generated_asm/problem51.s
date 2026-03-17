@@ -18,10 +18,10 @@ _func0:                                 ; @func0
 	subs	w8, w8, #0
 	cset	w8, ne
 	and	w10, w8, #0x1
-	mov	w8, #21
-	ldr	w9, [sp, #20]
-	mov	w11, #5
-	csel	w8, w8, w9, w11
+	mov	w9, #21
+	mov	w8, #5
+	ands	w10, w10, #0x1
+	csel	w8, w8, w9, ne
 	stur	w8, [x29, #-16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
@@ -40,13 +40,17 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x9, [sp, #16]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #97
-	add	w8, w8, w10
-	subs	w9, w8, #97
-	str	w9, [sp, #12]
+	ldur	w9, [x29, #-16]
+	add	w8, w8, w9
+	mov	w10, #26
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	add	w8, w8, #97
+	str	w8, [sp, #12]
 	ldr	w8, [sp, #12]
 	ldur	x9, [x29, #-8]
 	ldr	x10, [sp, #16]
-	add	x8, x8, x10
 	strb	w8, [x9, x10]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
