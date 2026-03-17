@@ -406,7 +406,13 @@ def main():
         if found: passed += 1
         else: print(f"❌ FAIL")
             
-    print(f"\nFinal Score: {passed}/{len(asm_files)}")
+    pass_rate = (passed / total_files) * 100
+    print("-" * 30)
+    print(f"Evaluation Results:")
+    print(f"Total Tasks:  {total_files}")
+    print(f"Passed:       {passed}")
+    print(f"Pass Rate:    {pass_rate:.2f}%")
+    print("-" * 30)
 
 if __name__ == "__main__":
     main()
