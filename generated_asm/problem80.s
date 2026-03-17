@@ -5,18 +5,18 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-12]
-	mov	w0, #64
+	mov	x0, #64
 	bl	_malloc
-	str	x0, [sp, #32]
-	ldr	x8, [sp, #32]
+	str	x0, [sp, #24]
+	ldr	x8, [sp, #24]
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_2
@@ -27,8 +27,8 @@ LBB0_1:
 	b	LBB0_11
 LBB0_2:
 	mov	w8, #62
-	str	w8, [sp, #28]
-	ldr	x8, [sp, #32]
+	str	w8, [sp, #20]
+	ldr	x8, [sp, #24]
 	strb	wzr, [x8, #63]
 	ldur	w8, [x29, #-12]
 	subs	w8, w8, #0
@@ -36,13 +36,14 @@ LBB0_2:
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	ldr	x9, [sp, #32]
-	ldr	w8, [sp, #28]
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #20]
+	mov	x8, x10
 	subs	w8, w8, #1
-	str	w8, [sp, #28]
-	add	x8, x9, w8, sxtw
-	mov	w9, #48
-	strb	w9, [x8]
+	str	w8, [sp, #20]
+	add	x9, x9, x10
+	mov	w8, #48
+	strb	w8, [x9]
 	b	LBB0_8
 LBB0_4:
 	b	LBB0_5
@@ -57,4 +58,4 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	mov	w10, #2
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
-	subs	w8, w8, w9
+	subs	w

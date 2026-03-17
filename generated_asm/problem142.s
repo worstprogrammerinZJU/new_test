@@ -13,7 +13,7 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-16]
-	stur	wzr, [x29, #-20]
+	str	wzr, [sp, #28]
 	str	wzr, [sp, #24]
 	ldur	x0, [x29, #-16]
 	bl	_strlen
@@ -25,4 +25,4 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	adrp	x8, l_.str
+	adrp	x8, l_.str@PAGE

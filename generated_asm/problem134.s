@@ -24,12 +24,17 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
-	fmov	d1, d0
-	frcvd	d1, d1
-	fmul	d1, d1, d0
-	fmov	d0, d1
-	frcvd	d0, d0
-	fadd	w8, w8, w0
+	frintz	d0, d0
+	fcvtzs	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	frintz	d0, d0
+	fcvtzs	w9, d0
+	mul	w9, w8, w9
+	ldr	w8, [sp, #16]
+	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1

@@ -35,7 +35,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #40]
 	ldrsw	x10, [sp, #12]
-	ldr	x9, [x9, x10, lsl #3]
+	lsl	x10, x10, #3
+	ldr	x9, [x9, x10]
 	add	x8, x8, x9
 	str	x8, [sp]                        ; 8-byte Folded Spill
 	b	LBB0_5

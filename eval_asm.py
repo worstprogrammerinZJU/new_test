@@ -319,14 +319,17 @@ def main():
     with open(JSONL_FILE, 'r') as f: tasks = [json.loads(line) for line in f]
     asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=lambda x: int(re.search(r'\d+', x).group()))
 
+    # 计算文件总量
+    total_files = len(asm_files)
     passed = 0
+    
     for asm_f in asm_files:
         prob_num = int(re.search(r'\d+', asm_f).group())
         task = tasks[prob_num - 1]
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则提取层 ---
+        # --- 正则提取层 (保持你的所有分支) ---
         if prob_num == 161: # 插入 161 提取
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
         elif prob_num == 158: # 新增 158 提取
@@ -406,7 +409,8 @@ def main():
         if found: passed += 1
         else: print(f"❌ FAIL")
             
-    pass_rate = (passed / total_files) * 100
+    # --- 统计结果输出 ---
+    pass_rate = (passed / total_files) * 100 if total_files > 0 else 0
     print("-" * 30)
     print(f"Evaluation Results:")
     print(f"Total Tasks:  {total_files}")

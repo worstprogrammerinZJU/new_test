@@ -69,12 +69,12 @@ LBB0_5:
 	ldrb	w8, [x8]
 	adrp	x9, _func0.out@PAGE
 	add	x9, x9, _func0.out@PAGEOFF
-	strb	w8, [x9]
-                                        ; kill: def $x8 killed $xzr
-	str	xzr, [x9, x8]
-	stur	x9, [x29, #-8]
+	strb	w8, [x9, #0]
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	stur	x8, [x29, #-8]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #1
+	ldr

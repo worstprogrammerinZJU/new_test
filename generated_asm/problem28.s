@@ -16,7 +16,7 @@ _func0:                                 ; @func0
 	str	x1, [sp, #16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	mov	w8, v0
+	mov	x8, x0
 	str	w8, [sp, #12]
 	str	wzr, [sp, #8]
 	b	LBB0_1
@@ -30,7 +30,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #8]
-	ldrb	w8, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	strb	w8, [sp, #7]
 	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #97
@@ -46,7 +47,6 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #32
-                                        ; kill: def $w8 killed $w8 killed $w8
 	strb	w8, [sp, #7]
 	b	LBB0_9
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -64,7 +64,6 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [sp, #7]
 	add	w8, w8, #32
-                                        ; kill: def $w8 killed $w8 killed $w8
 	strb	w8, [sp, #7]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -77,4 +76,6 @@ LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	strb	w8, [x9]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #

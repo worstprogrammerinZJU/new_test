@@ -13,7 +13,7 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-16]
-	stur	wzr, [x29, #-20]
+	str	wzr, [sp, #28]
 	str	wzr, [sp, #24]
 	str	wzr, [sp, #20]
 	b	LBB0_1
@@ -36,9 +36,9 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
+	ldr	w8, [sp, #28]
 	add	w8, w8, #1
-	stur	w8, [x29, #-20]
+	str	w8, [sp, #28]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]
@@ -49,21 +49,23 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
+	ldr	w8, [sp, #28]
 	subs	w8, w8, #1
-	stur	w8, [x29, #-20]
+	str	w8, [sp, #28]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
+	ldr	w8, [sp, #28]
 	subs	w8, w8, #0
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	stur	wzr, [x29, #-20]
+	str	wzr, [sp, #28]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
+	ldr	w8, [sp, #28]
 	ldr	w9, [sp, #24]
 	subs	w8, w8, w9
-	cset	w8,
+	cset	w8, le
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9

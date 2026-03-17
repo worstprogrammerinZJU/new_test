@@ -44,9 +44,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
 	ldr	s0, [x8, x9, lsl #2]
-	ldr	w8, [sp, #12]
-	subs	w8, w8, w0
-	cset	w8, ls
+	ldr	s1, [sp, #12]
+	fcmp	s0, s1
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -61,4 +61,4 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
 	add	w8, w8, #1
 	str	w8, [sp, #8]
-	b	L
+	b	LBB0_

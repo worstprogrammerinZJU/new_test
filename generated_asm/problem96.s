@@ -38,8 +38,8 @@ LBB0_3:                                 ; =>This Loop Header: Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #16]
-	add	x8, x8, x9, lsl #4
-	ldr	x8, [x8]
+	lsl	x9, x9, #4
+	ldr	x8, [x8, x9]
 	str	x8, [sp, #8]
 	str	wzr, [sp, #4]
 	b	LBB0_5
@@ -48,14 +48,13 @@ LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #4]
 	add	x8, x8, x9
-	ldrb	w0, [x8]
-	bl	_isalpha
-	subs	w8, w0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	stur	wzr, [x29, #-4]
-	b	LBB0_19
-LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
-	ldr	x8, [sp
+	ldrb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	lsl	x9, x9, #1
+	ldrb	w0,

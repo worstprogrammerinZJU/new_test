@@ -31,19 +31,18 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #20]
-	ldrb	w8, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	strb	w8, [sp, #15]
+	ldrsb	w0, [sp, #15]
 	bl	_islower
 	subs	w8, w0, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrsb	w0, [sp, #15]
 	bl	_toupper
-	mov	w8, w0
-	strb	w8, [sp, #15]
+	strb	w0, [sp, #15]
 	b	LBB0_7
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	bl	_isupper
-	subs	w8, w0, #0
-	c
+LBB0_4:                                 ;   in Loop

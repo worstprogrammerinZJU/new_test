@@ -30,7 +30,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	subs	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
 	fcmp	s0, s1
-	cset	w8, ls
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -40,13 +40,13 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
-	ldr	s1, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl #2]
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp]
 	subs	w9, w9, #1
-	ldr	s0, [x8, w9, sxtw #2]
-	fcmp	s1, s0
-	cset	w8, ls
+	ldr	s1, [x8, w9, sxtw #2]
+	fcmp	s0, s1
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -69,14 +69,16 @@ LBB0_8:
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:
-	sturb	wzr, [x0, #-1]
+	strb	wzr, [sp, #31]
 	b	LBB0_11
 LBB0_10:
 	mov	w8, #1
-	sturb	w8, [x0, #-1]
+	strb	w8, [sp, #31]
 	b	LBB0_11
 LBB0_11:
-	ldurb	w0, [x0, #-1]
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function

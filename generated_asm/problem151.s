@@ -61,14 +61,14 @@ LBB0_8:
 	b	LBB0_9
 LBB0_9:
 	ldr	w8, [sp, #20]
-	str	w8, [sp, #28]
+	str	w8, [sp, #12]
 	b	LBB0_11
 LBB0_10:
 	ldr	w8, [sp, #16]
-	str	w8, [sp, #28]
+	str	w8, [sp, #12]
 	b	LBB0_11
 LBB0_11:
-	ldr	w0, [sp, #28]
+	ldr	w0, [sp, #12]
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

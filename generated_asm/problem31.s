@@ -43,12 +43,12 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
 	ldr	x8, [sp, #16]
-	ldr	x9, [sp, #24]
-	ldr	w8, [x9]
-	add	w1, w8, #1
-	str	w1, [x9]
-	add	x8, x8, w8, sxtw #2
-	str	s0, [x8]
+	ldr	x11, [sp, #24]
+	ldrsw	x9, [x11]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [x11]
+	str	s0, [x8, x9, lsl #2]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5

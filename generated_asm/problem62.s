@@ -76,8 +76,8 @@ LBB0_10:
 	sturb	w8, [x29, #-1]
 	b	LBB0_11
 LBB0_11:
-	ldurb	w0, [x29, #-1]
-	and	w0, w0, #0x1
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

@@ -1,11 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal4,4byte_literals
-	.p2align	2                               ; -- Begin function func0
-lCPI0_0:
-	.long	0xc61c4000                      ; float -1.0E+4
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
+	.globl	_func0                        ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -14,7 +9,7 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 32
 	str	x0, [sp, #24]
 	str	w1, [sp, #20]
-	fmov	s0, lCPI0_0@PAGE
+	fmov	s0, #-1.00000000
 	str	s0, [sp, #16]
 	str	wzr, [sp, #12]
 	b	LBB0_1
@@ -26,10 +21,10 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	s1, [sp, #16]
+	ldr	s0, [sp, #16]
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s1, [x8, x9, lsl #2]
 	fcmp	s0, s1
 	cset	w8, pl
 	tbnz	w8, #0, LBB0_4

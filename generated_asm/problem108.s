@@ -47,19 +47,16 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #24]
-	mov	w9, #10
-	mul	w8, w8, w9
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #10]
-	sdiv	w9, w8, w9
-	mul	w9, w9, w9
-	subs	w8, w8, w9
-	add	w8, w8, w0
+	mov	w10, #10
+	mul	w8, w8, w10
+	ldr	w9, [sp, #16]
+	sdiv	w9, w9, w10
+	mul	w9, w9, w10
+	subs	w9, w9, w10
+	add	w8, w8, w9
 	str	w8, [sp, #24]
 	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #10]
-	sdiv	w8, w8, w9
+	sdiv	w8, w8, w10
 	str	w8, [sp, #16]
 	b	LBB0_3
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -69,4 +66,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_6
-LBB0_6:                                 ;   in
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	mov	w10, #2
+	sdiv	w9, w8

@@ -14,13 +14,16 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-12]
 	ldur	w8, [x29, #-12]
-	add	w0, w8, #1
-	lsl	w0, w0, #2
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #8]
-	ldr	x9, [sp, #8]
-	mov	w8, #1
-	str	w8, [x9]
+	ldr	x8, [sp, #8]
+	mov	w9, #1
+	str	w9, [x8]
 	ldur	w8, [x29, #-12]
 	subs	w8, w8, #0
 	cset	w8, ne
@@ -46,17 +49,18 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #4]
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #4]
-	mov	w9, #2
-	sdiv	w8, w8, w9
+	mov	w10, #2
+	sdiv	w8, w8, w10
 	add	w8, w8, #1
 	ldr	x9, [sp, #8]
 	ldrsw	x10, [sp, #4]
@@ -72,7 +76,4 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	subs	w10, w10, #2
 	ldr	w9, [x9, w10, sxtw #2]
 	add	w8, w8, w9
-	add	w8, w8, #1
-	str	w8, [sp, #16]                   ; 4-byte Folded Spill
-	ldr	w8, [sp, #4]
-	add	w8, w
+	add	w8, w8

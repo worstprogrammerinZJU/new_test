@@ -17,7 +17,7 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	str	w8, [sp, #16]
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_2:
 	mov	w8, #1
@@ -35,9 +35,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w9, [sp, #4]
-	subs	w9, w9, #1
-	ldr	w9, [x9, w9, sxtw #2]
+	ldr	w10, [sp, #4]
+	subs	w10, w10, #1
+	ldr	w9, [x9, w10, sxtw #2]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
@@ -78,14 +78,14 @@ LBB0_10:
 	b	LBB0_11
 LBB0_11:
 	mov	w8, #1
-	str	w8, [sp, #16]
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_12:
-	str	wzr, [sp, #16]
+	strb	wzr, [sp, #31]
 	b	LBB0_13
 LBB0_13:
-	ldr	w0, [sp, #16]
-	and	w0, w0, #0x1
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

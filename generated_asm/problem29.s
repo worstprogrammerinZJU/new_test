@@ -41,7 +41,10 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_4:
 	ldr	w8, [sp, #24]
-	add	w0, w8, #1
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #8]
 	ldr	x8, [sp, #8]
@@ -87,6 +90,4 @@ LBB0_11:
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.c

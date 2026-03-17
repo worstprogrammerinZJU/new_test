@@ -10,9 +10,9 @@ _func0:                                 ; @func0
 	str	s0, [sp, #12]
 	ldr	s0, [sp, #12]
 	ldr	s1, [sp, #12]
-	fcvtzs	w8, w1
-	scvtf	s1, s1
-	subs	s0, s0, s1
+	fcvtzs	w8, s1
+	scvtf	s1, w8
+	fsub	s0, s0, s1
 	add	sp, sp, #16
 	ret
 	.cfi_endproc

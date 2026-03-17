@@ -16,11 +16,11 @@ _func0:                                 ; @func0
 	stur	x1, [x29, #-24]
 	ldur	x0, [x29, #-16]
 	bl	_strlen
-	mov	w8, v0
+	mov	x8, x0
 	stur	w8, [x29, #-28]
 	ldur	x0, [x29, #-24]
 	bl	_strlen
-	mov	w8, v0
+	mov	x8, x0
 	str	w8, [sp, #32]
 	str	wzr, [sp, #28]
 	b	LBB0_1

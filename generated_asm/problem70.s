@@ -15,12 +15,15 @@ _func0:                                 ; @func0
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
 	ldur	w8, [x29, #-12]
-	add	w0, w8, #1
-	mov	w1, #4
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
+	mov	x1, #4
 	bl	_calloc
 	str	x0, [sp, #8]
 	mov	w8, #-1
-	str	w8, [sp, #4]
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	str	wzr, [sp]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
@@ -35,9 +38,10 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
 	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
+	add	x9, x8, x9, lsl #2
+	ldr	w8, [x9]
 	add	w8, w8, #1
-	str	w8, [x8, x9, lsl #2]
+	str	w8, [x9]
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
@@ -53,8 +57,9 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #4]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
+	ldr	w9, [sp, #4]                    ; 4-byte Folded Reload
 	subs	w8, w8, w9
 	cset	w8, le
 	tbnz	w8, #0, LBB0_5
@@ -62,7 +67,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	str	w8, [sp, #4]
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -75,7 +81,7 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_7:
 	ldr	x0, [sp, #8]
 	bl	_free
-	ldr	w0, [sp, #4]
+	ldr	w0, [sp, #4]                    ; 4-byte Folded Reload
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

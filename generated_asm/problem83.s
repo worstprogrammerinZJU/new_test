@@ -15,7 +15,7 @@ _func0:                                 ; @func0
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
-	mov	w8, w0
+	mov	x8, x0
 	str	w8, [sp, #12]
 	ldr	w8, [sp, #12]
 	subs	w8, w8, #2
@@ -40,10 +40,10 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #8]
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w0
+	ldr	w10, [sp, #8]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
@@ -59,12 +59,11 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	str	w8, [sp, #8]
 	b	LBB0_3
 LBB0_8:
-	mov	w8, #1
-	sturb	w8, [x29, #-1]
+	sturb	wzr, [x29, #-1]
 	b	LBB0_9
 LBB0_9:
-	ldur	w8, [x29, #-1]
-	ands	w0, w8, #0x1
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

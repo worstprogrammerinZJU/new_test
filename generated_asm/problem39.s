@@ -22,12 +22,12 @@ _func0:                                 ; @func0
 	add	w8, w8, #2
 	mov	w9, #3
 	sdiv	w8, w8, w9
-	str	w8, [sp, #28]
+	stur	w8, [x29, #-20]
 	str	wzr, [sp, #20]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #28]
+	ldur	w9, [x29, #-20]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_12
@@ -49,6 +49,6 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-16]
 	ldr	w9, [sp, #20]
-	mul	w9, w9, w8
+	mov	w10, #3
+	mul	w9, w9, w10
 	subs	w8, w8, w9
-	str	w8, [sp, #8]                    ; 4-byte

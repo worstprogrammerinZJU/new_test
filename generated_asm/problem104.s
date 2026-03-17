@@ -23,7 +23,7 @@ _func0:                                 ; @func0
 LBB0_1:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
-	stur	x8, [x29, #-8]
+	str	x8, [sp, #40]
 	b	LBB0_6
 LBB0_2:
 	ldur	w8, [x29, #-16]
@@ -31,7 +31,7 @@ LBB0_2:
 	add	w8, w8, w9
 	mov	w9, #2
 	sdiv	w8, w8, w9
-	str	w8, [sp, #28]
+	stur	w8, [x29, #-20]
 	mov	w0, #33
 	bl	_malloc
 	str	x0, [sp, #16]
@@ -40,32 +40,29 @@ LBB0_2:
 	mov	w8, #32
 	str	w8, [sp, #12]
 	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	add	w8, w8, w9
-	subs	w9, w8, #1
-	str	w9, [sp, #12]
-	add	x8, x8, w9, sxtw
-	strb	wzr, [x8]
+	ldrsw	x9, [sp, #12]
+	subs	x9, x9, #1
+	str	x9, [sp, #12]
+	strb	wzr, [x8, x9]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #28]
-	mov	w9, #2
-	sdiv	w8, w8, w9
+	ldur	w8, [x29, #-20]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	add	w8, w8, #48
-                                        ; kill: def $x8 killed $w8
 	ldr	x9, [sp, #16]
-	ldr	w8, [sp, #12]
-	subs	w1, w8, #1
-	str	w1, [sp, #12]
-	ldrsw	x9, [sp, #12]
-	add	x8, x8, x9
-	strb	w0, [x8]
-	ldr	w8, [sp, #28]
-	sdiv	w8, w8, w9
-	str	w8, [sp, #28]
+	ldr	w11, [sp, #12]
+	subs	w11, w11, #1
+	str	w11, [sp, #12]
+	strb	w8, [x9, w11, sxtw]
+	ldur	w8, [x29, #-20]
+	sdiv	w8, w8, w10
+	stur	w8, [x29, #-20]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #28]
+	ldur	w8, [x29, #-20]
 	subs	w8, w8, #0
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_3
@@ -73,7 +70,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_5:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
-	add	w8, w8, #1
+	add	w9, w9, #1
 	add	x8, x8, w9, sxtw
 	stur	x8, [x29, #-8]
 	b	LBB0_6

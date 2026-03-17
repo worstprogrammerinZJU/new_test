@@ -5,26 +5,27 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x28, x27, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
+	sub	sp, sp, #224
+	.cfi_def_cfa_offset 224
+	stp	x29, x30, [sp, #208]            ; 16-byte Folded Spill
+	add	x29, sp, #208
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	.cfi_offset w27, -24
-	.cfi_offset w28, -32
-	sub	sp, sp, #208
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
-	stur	x8, [x29, #-24]
-	str	w0, [sp, #56]
-	str	x1, [sp, #48]
-	add	x0, sp, #47
+	stur	x8, [x29, #-8]
+	str	w0, [sp, #36]
+	str	x1, [sp, #24]
+	add	x0, sp, #104
 	adrp	x1, l___const.func0.rep@PAGE
 	add	x1, x1, l___const.func0.rep@PAGEOFF
 	mov	x2, #104
 	bl	_memcpy
-	add	x0, sp, #29
-	adrp	x1
+	add	x0, sp, #32
+	adrp	x1, l___const.func0.num@PAGE
+	add	x1, x1, l___const.func0.num@PAGEOFF
+	mov	x2, #52
+	bl	_memcpy
+	str	wzr, [sp, #20

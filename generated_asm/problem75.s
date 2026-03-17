@@ -57,9 +57,8 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldrsw	x9, [sp, #8]
 	ldr	x0, [x8, x9, lsl #3]
 	bl	_strlen
-	mov	x8, x0
-	ldrsw	x9, [sp]
-	add	x8, x8, x9
+	ldrsw	x8, [sp]
+	add	x8, x8, x0
                                         ; kill: def $w8 killed $w8 killed $x8
 	str	w8, [sp]
 	b	LBB0_7
@@ -81,4 +80,5 @@ LBB0_9:
 	b	LBB0_13
 LBB0_10:
 	ldr	w8, [sp, #4]
-	ldr	w
+	ldr	w9, [sp]
+	subs

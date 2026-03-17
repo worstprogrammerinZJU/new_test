@@ -30,8 +30,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp]
-	ldr	w9, [x9, x10, lsl #2]
+	ldrsw	x9, [sp]
+	ldr	w9, [x9, x9, lsl #2]
 	subs	w0, w8, w9
 	bl	_abs
 	ldr	x8, [sp, #8]

@@ -29,22 +29,22 @@ _func0:                                 ; @func0
 LBB0_1:
 	ldr	d0, [sp, #16]
 	adrp	x8, lCPI0_0@PAGE
-	ldr	q1, [x8, lCPI0_0@PAGEOFF]
-	subs	d0, d0, d1
-	fround	s0, s0, #10.0
-	str	s0, [sp, #8]                    ; 4-byte Folded Spill
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fsub	d0, d0, d1
+	frintz	d0, d0
+	str	d0, [sp, #8]                    ; 8-byte Folded Spill
 	b	LBB0_3
 LBB0_2:
 	ldr	d0, [sp, #16]
 	adrp	x8, lCPI0_0@PAGE
-	ldr	q1, [x8, lCPI0_0@PAGEOFF]
-	add	d0, d0, d1
-	fround	s0, s0, #9.0
-	str	s0, [sp, #8]                    ; 4-byte Folded Spill
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fadd	d0, d0, d1
+	frintz	d0, d0
+	str	d0, [sp, #8]                    ; 8-byte Folded Spill
 	b	LBB0_3
 LBB0_3:
-	ldr	s0, [sp, #8]                    ; 4-byte Folded Reload
-	scvtf	w0, s0
+	ldr	d0, [sp, #8]                    ; 8-byte Folded Reload
+	fcvtzs	w0, d0
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

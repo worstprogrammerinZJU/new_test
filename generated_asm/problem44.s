@@ -66,7 +66,8 @@ LBB0_10:
 	strb	wzr, [sp, #31]
 	b	LBB0_11
 LBB0_11:
-	ldrb	w0, [sp, #31]
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

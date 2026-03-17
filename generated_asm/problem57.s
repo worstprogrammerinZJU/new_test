@@ -14,7 +14,8 @@ _func0:                                 ; @func0
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldrb	w8, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	subs	w8, w8, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_9
@@ -52,7 +53,7 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:
-	sturb	wzr, [x0, #-1]
+	strb	wzr, [sp, #31]
 	b	LBB0_12
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
@@ -66,15 +67,15 @@ LBB0_9:
 	tbnz	w8, #0, LBB0_11
 	b	LBB0_10
 LBB0_10:
-	sturb	wzr, [x0, #-1]
+	strb	wzr, [sp, #31]
 	b	LBB0_12
 LBB0_11:
 	mov	w8, #1
-	sturb	w8, [x0, #-1]
+	strb	w8, [sp, #31]
 	b	LBB0_12
 LBB0_12:
-	ldur	w0, [x0, #-1]
-	and	w0, w0, #0x1
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
