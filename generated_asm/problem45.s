@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -33,16 +33,15 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-	add	w8, w8, #48
-	ldrsw	x10, [sp, #12]
-	mov	x9, x10
-	add	w9, w9, #1
+	add	w2, w8, #48
+	ldr	w8, [sp, #12]
+	add	w9, w8, #1
 	str	w9, [sp, #12]
-	add	x9, sp, #39
-	strb	w8, [x9, x10]
+                                        ; kill: def $w8 killed $w8 killed $x8
+	strb	w8, [sp, #36]
 	ldr	w8, [sp, #32]
-	ldr	w9, [sp, #28]
-	sdiv	w8, w8, w9
+	ldr	w10, [sp, #28]
+	sdiv	w8, w8, w10
 	str	w8, [sp, #32]
 	b	LBB0_1
 LBB0_3:
@@ -56,17 +55,14 @@ LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
 	ldr	w8, [sp, #12]
-	subs	w9, w8, #1
-	str	w9, [sp, #12]
-	add	x8, sp, #39
-	add	x8, x8, w9, sxtw
-	ldrb	w8, [x8]
+	subs	w8, w8, #1
+	str	w8, [sp, #12]
+	ldrb	w8, [sp, #36]
 	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
+	ldr	w10, [sp, #8]
+	add	w11, w10, #1
 	str	w11, [sp, #8]
-	add	x9, x9, x10
+	add	x9, x9, w10, sxtw
 	strb	w8, [x9]
 	b	LBB0_4
 LBB0_6:

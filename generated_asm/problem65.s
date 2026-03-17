@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -60,8 +60,8 @@ LBB0_6:
 	b	LBB0_7
 LBB0_7:
 	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #8]
-	subs	w9, w9, #1
+	ldr	w8, [sp, #8]
+	subs	w9, w8, #1
 	ldrsb	w8, [x8, w9, sxtw]
 	subs	w8, w8, #121
 	cset	w8, eq
@@ -69,8 +69,8 @@ LBB0_7:
 	b	LBB0_8
 LBB0_8:
 	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #8]
-	subs	w9, w9, #1
+	ldr	w8, [sp, #8]
+	subs	w9, w8, #1
 	ldrsb	w8, [x8, w9, sxtw]
 	subs	w8, w8, #89
 	cset	w8, ne

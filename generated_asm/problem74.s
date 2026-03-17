@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -14,9 +14,10 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #20]
-	mov	w10, #2
-	sdiv	w9, w9, w10
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	ldr	w8, [sp, #20]
+	mov	w9, #2
+	sdiv	w8, w8, w9
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
@@ -28,8 +29,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x9, [sp, #24]
 	ldr	w10, [sp, #20]
 	subs	w10, w10, #1
-	ldr	w11, [sp, #12]
-	subs	w10, w10, w11
+	ldr	w9, [sp, #12]
+	subs	w10, w9, w10
 	ldr	w9, [x9, w10, sxtw #2]
 	subs	w8, w8, w9
 	cset	w8, eq

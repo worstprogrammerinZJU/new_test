@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -57,8 +57,9 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldrsw	x9, [sp, #8]
 	ldr	x0, [x8, x9, lsl #3]
 	bl	_strlen
-	ldrsw	x8, [sp]
-	add	x8, x8, x0
+	mov	x8, x0
+	ldrsw	x9, [sp]
+	add	x8, x8, x9
                                         ; kill: def $w8 killed $w8 killed $x8
 	str	w8, [sp]
 	b	LBB0_7
@@ -80,24 +81,4 @@ LBB0_9:
 	b	LBB0_13
 LBB0_10:
 	ldr	w8, [sp, #4]
-	ldr	w9, [sp]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:
-	ldr	x8, [sp, #16]
-	stur	x8, [x29, #-8]
-	b	LBB0_13
-LBB0_12:
-	ldur	x8, [x29, #-16]
-	stur	x8, [x29, #-8]
-	b	LBB0_13
-LBB0_13:
-	ldur	x0, [x29, #-8]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	ldr	w

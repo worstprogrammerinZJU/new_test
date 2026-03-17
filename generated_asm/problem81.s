@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -15,15 +15,12 @@ _func0:                                 ; @func0
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
-	subs	x8, x0, #3
+	subs	w8, w0, #3
 	cset	w8, hs
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	sturb	w8, [x29, #-1]
+	sturb	wzr, [x29, #-1]
 	b	LBB0_10
 LBB0_2:
 	mov	w8, #2
@@ -64,10 +61,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	sturb	w8, [x29, #-1]
+	sturb	wzr, [x29, #-1]
 	b	LBB0_10
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_8
@@ -78,13 +72,11 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_9:
 	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
 	sturb	w8, [x29, #-1]
 	b	LBB0_10
 LBB0_10:
-	ldurb	w8, [x29, #-1]
-	and	w0, w8, #0x1
+	ldur	w0, [x29, #-1]
+	and	w0, w0, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret
