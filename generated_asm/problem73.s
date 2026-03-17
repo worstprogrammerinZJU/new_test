@@ -1,1 +1,47 @@
-; Error: Inference failed
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	cmp	w1, #0
+	cinc	w8, w1, lt
+	asr	w8, w8, #1
+	cmp	w1, #2
+	b.lt	LBB0_4
+; %bb.1:
+	mov	w9, #0
+	sub	w10, w1, #1
+	mov	x11, x0
+LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w12, [x11]
+	ldr	w13, [x0, w10, sxtw #2]
+	cmp	w12, w13
+	b.ne	LBB0_8
+; %bb.3:                                ;   in Loop: Header=BB0_2 Depth=1
+	add	w9, w9, w12, lsl #1
+	add	x11, x11, #4
+	sub	w10, w10, #1
+	sub	x8, x8, #1
+	cbnz	x8, LBB0_2
+	b	LBB0_5
+LBB0_4:
+	mov	w9, #0
+LBB0_5:
+	and	w8, w1, #0x80000001
+	cmp	w8, #1
+	b.ne	LBB0_7
+; %bb.6:
+	ldr	w8, [x0, w8, sxtw #2]
+	add	w9, w9, w8
+LBB0_7:
+	cmp	w9, w2
+	cset	w0, le
+	ret
+LBB0_8:
+	mov	w0, #0
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

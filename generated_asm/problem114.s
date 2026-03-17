@@ -1,1 +1,93 @@
-; Error: Inference failed
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #96
+	.cfi_def_cfa_offset 96
+	stp	x24, x23, [sp, #32]             ; 16-byte Folded Spill
+	stp	x22, x21, [sp, #48]             ; 16-byte Folded Spill
+	stp	x20, x19, [sp, #64]             ; 16-byte Folded Spill
+	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
+	add	x29, sp, #80
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	.cfi_offset w19, -24
+	.cfi_offset w20, -32
+	.cfi_offset w21, -40
+	.cfi_offset w22, -48
+	.cfi_offset w23, -56
+	.cfi_offset w24, -64
+	mov	x21, x1
+	mov	x19, x0
+	sbfiz	x0, x21, #3, #32
+	bl	_malloc
+	mov	x20, x0
+	cmp	w21, #1
+	b.lt	LBB0_9
+; %bb.1:
+	mov	x23, #0
+	mov	w24, w21
+Lloh0:
+	adrp	x21, l_.str@PAGE
+Lloh1:
+	add	x21, x21, l_.str@PAGEOFF
+	b	LBB0_4
+LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
+	mov	w22, #0
+LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
+	mov	w0, #100
+	bl	_malloc
+	str	x0, [x20, x23, lsl #3]
+	stp	x22, x22, [sp, #8]
+	str	x22, [sp]
+	mov	w1, #0
+	mov	w2, #100
+	mov	x3, x21
+	bl	___sprintf_chk
+	add	x23, x23, #1
+	cmp	x23, x24
+	b.eq	LBB0_9
+LBB0_4:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_7 Depth 2
+	ldr	x8, [x19, x23, lsl #3]
+	ldrb	w9, [x8]
+	cbz	w9, LBB0_2
+; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
+	mov	w22, #0
+	add	x8, x8, #1
+	b	LBB0_7
+LBB0_6:                                 ;   in Loop: Header=BB0_7 Depth=2
+	ldrb	w9, [x8], #1
+	cbz	w9, LBB0_3
+LBB0_7:                                 ;   Parent Loop BB0_4 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	sub	w10, w9, #48
+	cmp	w10, #9
+	b.hi	LBB0_6
+; %bb.8:                                ;   in Loop: Header=BB0_7 Depth=2
+	and	w9, w9, #0xff
+	sub	w9, w9, #48
+	and	w9, w9, #0x80000001
+	cmp	w9, #1
+	cinc	w22, w22, eq
+	b	LBB0_6
+LBB0_9:
+	mov	x0, x20
+	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
+	ldp	x20, x19, [sp, #64]             ; 16-byte Folded Reload
+	ldp	x22, x21, [sp, #48]             ; 16-byte Folded Reload
+	ldp	x24, x23, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #96
+	ret
+	.loh AdrpAdd	Lloh0, Lloh1
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"the number of odd elements %d in the string %d of the %d input."
+
+.subsections_via_symbols
