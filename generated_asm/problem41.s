@@ -1,207 +1,185 @@
-stp	x29, x30, [sp, 16]!
-mov	x29, sp
-str	x0, [sp, 48]
-ldr	x0, [sp, 48]
-ldr	w1, [sp, 44]
-sub	w1, w1, #1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
+ldr	w0, [sp, 24]
+ldr	x0, [sp, 20]
+sub	x0, x0, #1
+mov	w1, w0
+mov	w1, w1, lsl 5
+add	w1, w1, w0
+str	w1, [sp, 20]
 cmp	w0, 0
-bne	LBB1_2
-str	wzr, [sp, 44]
-b	LBB1_9
-LBB1_2:
-ldr	w1, [sp, 44]
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_4
-str	wzr, [sp, 44]
-b	LBB1_9
-LBB1_4:
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_6
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_8
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_8
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_8
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_8
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_8
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_10
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_10
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_12
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_12
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_12
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_14
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_14
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_16
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_16
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_18
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_18
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_20
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-bne	LBB1_20
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0, w1
-fscv	x1, w1
-ldr	w0, [x0, w1]
-ldrb	w0, [x0, w0]
-bl	_isalpha
-cmp	w0, 0
-beq	LBB1_22
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-sub	w1, w0
+jb	LBB0_2
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 20]
+sub	w1, w1, 1
+mov	w1, w1, lsl 5
+and	w1, w1, w0
+str	w1, [sp, 20]
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+ldr	w0, [sp, 24]
+sxtb	w1, w0
+add	w1, w1, w0
+str	w1, [sp, 20]
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+ldr	w0, [sp, 24]
+sxtb	w1, w0
+add	w1, w1, w0
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha
+add	x0, x0, :lo12:_isalpha
+mov	w0, sp, lsl 26
+ldr	w1, [x0, w0]
+sxtb	w0, w1
+add	w0, w0, w1
+adrp	x0, _isalpha

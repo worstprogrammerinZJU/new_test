@@ -1,179 +1,176 @@
-.global	_func0
-.type	_func0, @function
-_func0:
-	b	_LBB0_0
-_LBB0_0:
-	push	x29
-	x0 = sp
-	x19 = x0
-	x29 = sp
-	str	x0, [x19, 16]
-	x0 = sp
-	w = 48
-	lsl	x0, w, 1
-	add	x0, x0, 1
-	str	w, [x19, 19]
-	lsl	x0, x0, 1
-	str	x0, [sp, 24]
-	lsl	x0, x0, 1
-	str	x0, [sp, 20]
-	lsl	x0, x0, 1
-	str	x0, [sp, 16]
-	lsl	x0, x0, 1
-	str	x0, [sp, 12]
-	lsl	x0, x0, 1
-	str	x0, [sp, 8]
-	lsl	x0, x0, 1
-	str	x0, [sp, 4]
-	lsl	x0, x0, 1
-	str	x0, [sp, 0]
-	lsl	x0, x0, 1
-	str	x0, [sp, 16]
-	lsl	x0, x0, 1
-	str	x0, [sp, 20]
-	lsl	x0, x0, 1
-	str	x0, [sp, 24]
-	lsl	x0, x0, 1
-	str	x0, [sp, 28]
-	lsl	x0, x0, 1
-	str	x0, [sp, 32]
-	lsl	x0, x0, 1
-	str	x0, [sp, 36]
-	lsl	x0, x0, 1
-	str	x0, [sp, 40]
-	lsl	x0, x0, 1
-	str	x0, [sp, 44]
-	lsl	x0, x0, 1
-	str	x0, [sp, 48]
-	lsl	x0, x0, 1
-	str	x0, [sp, 52]
-	lsl	x0, x0, 1
-	str	x0, [sp, 56]
-	lsl	x0, x0, 1
-	str	x0, [sp, 60]
-	lsl	x0, x0, 1
-	str	x0, [sp, 64]
-	lsl	x0, x0, 1
-	str	x0, [sp, 68]
-	lsl	x0, x0, 1
-	str	x0, [sp, 72]
-	lsl	x0, x0, 1
-	str	x0, [sp, 76]
-	lsl	x0, x0, 1
-	str	x0, [sp, 80]
-	lsl	x0, x0, 1
-	str	x0, [sp, 84]
-	lsl	x0, x0, 1
-	str	x0, [sp, 88]
-	lsl	x0, x0, 1
-	str	x0, [sp, 92]
-	lsl	x0, x0, 1
-	str	x0, [sp, 96]
-	lsl	x0, x0, 1
-	str	x0, [sp, 100]
-	lsl	x0, x0, 1
-	str	x0, [sp, 104]
-	lsl	x0, x0, 1
-	str	x0, [sp, 108]
-	lsl	x0, x0, 1
-	str	x0, [sp, 112]
-	lsl	x0, x0, 1
-	str	x0, [sp, 116]
-	lsl	x0, x0, 1
-	str	x0, [sp, 120]
-	lsl	x0, x0, 1
-	str	x0, [sp, 124]
-	lsl	x0, x0, 1
-	str	x0, [sp, 128]
-	lsl	x0, x0, 1
-	str	x0, [sp, 132]
-	lsl	x0, x0, 1
-	str	x0, [sp, 136]
-	lsl	x0, x0, 1
-	str	x0, [sp, 140]
-	lsl	x0, x0, 1
-	str	x0, [sp, 144]
-	lsl	x0, x0, 1
-	str	x0, [sp, 148]
-	lsl	x0, x0, 1
-	str	x0, [sp, 152]
-	lsl	x0, x0, 1
-	str	x0, [sp, 156]
-	lsl	x0, x0, 1
-	str	x0, [sp, 160]
-	lsl	x0, x0, 1
-	str	x0, [sp, 164]
-	lsl	x0, x0, 1
-	str	x0, [sp, 168]
-	lsl	x0, x0, 1
-	str	x0, [sp, 172]
-	lsl	x0, x0, 1
-	str	x0, [sp, 176]
-	lsl	x0, x0, 1
-	str	x0, [sp, 180]
-	lsl	x0, x0, 1
-	str	x0, [sp, 184]
-	lsl	x0, x0, 1
-	str	x0, [sp, 188]
-	lsl	x0, x0, 1
-	str	x0, [sp, 192]
-	lsl	x0, x0, 1
-	str	x0, [sp, 196]
-	lsl	x0, x0, 1
-	str	x0, [sp, 200]
-	lsl	x0, x0, 1
-	str	x0, [sp, 204]
-	lsl	x0, x0, 1
-	str	x0, [sp, 208]
-	lsl	x0, x0, 1
-	str	x0, [sp, 212]
-	lsl	x0, x0, 1
-	str	x0, [sp, 216]
-	lsl	x0, x0, 1
-	str	x0, [sp, 220]
-	lsl	x0, x0, 1
-	str	x0, [sp, 224]
-	lsl	x0, x0, 1
-	str	x0, [sp, 228]
-	lsl	x0, x0, 1
-	str	x0, [sp, 232]
-	lsl	x0, x0, 1
-	str	x0, [sp, 236]
-	lsl	x0, x0, 1
-	str	x0, [sp, 240]
-	lsl	x0, x0, 1
-	str	x0, [sp, 244]
-	lsl	x0, x0, 1
-	str	x0, [sp, 248]
-	lsl	x0, x0, 1
-	str	x0, [sp, 252]
-	lsl	x0, x0, 1
-	str	x0, [sp, 256]
-	lsl	x0, x0, 1
-	str	x0, [sp, 260]
-	lsl	x0, x0, 1
-	str	x0, [sp, 264]
-	lsl	x0, x0, 1
-	str	x0, [sp, 268]
-	lsl	x0, x0, 1
-	str	x0, [sp, 272]
-	lsl	x0, x0, 1
-	str	x0, [sp, 276]
-	lsl	x0, x0, 1
-	str	x0, [sp, 280]
-	lsl	x0, x0, 1
-	str	x0, [sp, 284]
-	lsl	x0, x0, 1
-	str	x0, [sp, 288]
-	lsl	x0, x0, 1
-	str	x0, [sp, 292]
-	lsl	x0, x0, 1
-	str	x0, [sp, 296]
-	lsl	x0, x0, 1
-	str	x0, [sp, 300]
-	lsl	x0, x0, 1
-	str	x0, [sp, 304]
-	lsl	x0, x0, 1
-	str	x0, [sp, 308]
-	lsl	x0, x0, 1
-	str	x0, [sp, 312
+ldr	w0, [sp, 40]
+sub	w1, w0, 0
+mov	w0, 0
+add	w0, w0, w1
+ldr	x0, [sp, 40]
+adrp	x0, _malloc
+add	x0, x0, :lo12:_malloc
+ldr	x1, [x0]
+cmp	w0, x1
+bne	LBB0_2
+ldr	x0, [sp, 40]
+ldrsw	x0, [sp, 40]
+adrp	x0, __stack_chk_guard
+add	x0, x0, :lo12:__stack_chk_guard
+ldr	x0, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __builtin_strncpy_chk
+add	x0, x0, :lo12:__builtin_strncpy_chk
+ldr	x1, [sp, 40]
+adrp	x1, _strncpy_chk
+add	x1, x1, :lo12:_strncpy_chk
+ldr	x0, [x1]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __strncpy_chk
+add	x0, x0, :lo12:__strncpy_chk
+ldr	x1, [x0]
+ldr	x0, [sp, 40]
+adrp	x0, __

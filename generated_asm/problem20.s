@@ -1,36 +1,182 @@
-ldp	x29, x30, [sp], 48
-mov	x19, 0
-mov	w1, 0
-ldr	w0, [sp, 40]
-str	w0, [sp, 36]
-ldr	w0, [sp, 32]
-cmp	w1, w0
-bge	_Loop1_End
-ldr	w1, [sp, 32]
-ldr	w0, [sp, 28]
-sub	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 28]
-add	w0, w1, 1
-str	w0, [sp, 28]
-ldr	w1, [sp, 28]
-ldr	w0, [sp, 20]
-mul	w0, w1, w0
-str	w0, [sp, 20]
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 16]
-sub	w0, w1, w0
-str	w0, [sp, 16]
-ldr	w1, [sp, 16]
-ldr	w0, [sp, 12]
-sub	w0, w1, w0
-str	w0, [sp, 12]
-ldr	w1, [sp, 12]
-ldr	w0, [sp, 8]
-mul	w0, w1, w0
-str	w0, [sp, 8]
-ldr	w1, [sp, 8]
-ldr	w0, [sp, 4]
-sub	w0, w1, w0
-str	w0, [sp, 4]
-ret
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w1, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w2, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w3, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w4, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w5, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w6, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w7, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w8, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w9, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w10, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w11, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w12, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w13, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w14, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w15, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w16, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w17, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w18, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w19, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w20, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w21, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w22, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w23, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w24, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w25, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w26, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w27, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w28, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w29, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w30, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w31, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w32, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w33, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w34, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w35, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w36, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w37, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w38, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w39, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w40, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w41, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w42, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w43, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w44, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w45, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w46, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w47, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w48, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w49, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w50, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w51, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w52, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w53, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w54, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w55, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w56, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w57, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w58, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w59, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo

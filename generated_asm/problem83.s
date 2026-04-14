@@ -1,17 +1,198 @@
-ldr	w1, [sp, 24]
-mov	w0, 2
-mul	w0, w1, w0
-ldr	w0, [sp, 24]
-cmp	w0, w1
-bgt	_LoopEnd
-ldr	w1, [sp, 24]
-sdiv	w0, w1, w0
-cmp	w0, 0
-bne	_LoopEnd
-ldr	w0, [sp, 24]
-sdiv	w0, w0, w1
-str	w0, [sp, 24]
-b	_LoopEnd
-_LoopEnd:
-str	w0, [sp, 32]
-ret
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, w0
+add	x0, x0, :lo12:w0
+ldr	w1, [x0]
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0

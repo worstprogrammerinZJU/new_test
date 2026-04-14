@@ -1,213 +1,146 @@
-sub	sp, sp, 48
-str	x0, [sp, 40]
-str	wzr, [sp, 36]
-ldrsw	x1, [sp, 36]
-adrp	x0, L_.str
-add	x0, x0, :lo12:L_.str
-ldr	x0, [x0]
-ldrsw	x0, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-beq	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-bne	L1
-ldrsw	x1, [sp, 36]
-ldrb	w0, [x0,
+adrp	x0, _L_.str
+add	x0, x0, :lo12:_L_.str
+ldr	w0, [x0]
+sub	w1, w0, #96
+mov	w2, w1
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+ldrsw	x2, [sp, 28]
+ldrsw	x3, [sp, 32]
+ldrsw	x4, [sp, 33]
+ldrsw	x5, [sp, 33]
+ldrsw	x6, [sp, 33]
+ldrsw	x7, [sp, 33]
+ldrsw	x8, [sp, 33]
+ldrsw	x9, [sp, 33]
+ldrsw	x10, [sp, 33]
+ldrsw	x11, [sp, 33]
+ldrsw	x12, [sp, 33]
+ldrsw	x13, [sp, 33]
+ldrsw	x14, [sp, 33]
+ldrsw	x15, [sp, 33]
+ldrsw	x16, [sp, 33]
+ldrsw	x17, [sp, 33]
+ldrsw	x18, [sp, 33]
+ldrsw	x19, [sp, 33]
+ldrsw	x20, [sp, 33]
+ldrsw	x21, [sp, 33]
+ldrsw	x22, [sp, 33]
+ldrsw	x23, [sp, 33]
+ldrsw	x24, [sp, 33]
+ldrsw	x25, [sp, 33]
+ldrsw	x26, [sp, 33]
+ldrsw	x27, [sp, 33]
+ldrsw	x28, [sp, 33]
+ldrsw	x29, [sp, 33]
+ldrsw	x30, [sp, 33]
+ldrsw	x31, [sp, 33]
+ldrsw	x32, [sp, 33]
+ldrsw	x33, [sp, 33]
+ldrsw	x34, [sp, 33]
+ldrsw	x35, [sp, 33]
+ldrsw	x36, [sp, 33]
+ldrsw	x37, [sp, 33]
+ldrsw	x38, [sp, 33]
+ldrsw	x39, [sp, 33]
+ldrsw	x40, [sp, 33]
+ldrsw	x41, [sp, 33]
+ldrsw	x42, [sp, 33]
+ldrsw	x43, [sp, 33]
+ldrsw	x44, [sp, 33]
+ldrsw	x45, [sp, 33]
+ldrsw	x46, [sp, 33]
+ldrsw	x47, [sp, 33]
+ldrsw	x48, [sp, 33]
+ldrsw	x49, [sp, 33]
+ldrsw	x50, [sp, 33]
+ldrsw	x51, [sp, 33]
+ldrsw	x52, [sp, 33]
+ldrsw	x53, [sp, 33]
+ldrsw	x54, [sp, 33]
+ldrsw	x55, [sp, 33]
+ldrsw	x56, [sp, 33]
+ldrsw	x57, [sp, 33]
+ldrsw	x58, [sp, 33]
+ldrsw	x59, [sp, 33]
+ldrsw	x60, [sp, 33]
+ldrsw	x61, [sp, 33]
+ldrsw	x62, [sp, 33]
+ldrsw	x63, [sp, 33]
+ldrsw	x64, [sp, 33]
+ldrsw	x65, [sp, 33]
+ldrsw	x66, [sp, 33]
+ldrsw	x67, [sp, 33]
+ldrsw	x68, [sp, 33]
+ldrsw	x69, [sp, 33]
+ldrsw	x70, [sp, 33]
+ldrsw	x71, [sp, 33]
+ldrsw	x72, [sp, 33]
+ldrsw	x73, [sp, 33]
+ldrsw	x74, [sp, 33]
+ldrsw	x75, [sp, 33]
+ldrsw	x76, [sp, 33]
+ldrsw	x77, [sp, 33]
+ldrsw	x78, [sp, 33]
+ldrsw	x79, [sp, 33]
+ldrsw	x80, [sp, 33]
+ldrsw	x81, [sp, 33]
+ldrsw	x82, [sp, 33]
+ldrsw	x83, [sp, 33]
+ldrsw	x84, [sp, 33]
+ldrsw	x85, [sp, 33]
+ldrsw	x86, [sp, 33]
+ldrsw	x87, [sp, 33]
+ldrsw	x88, [sp, 33]
+ldrsw	x89, [sp, 33]
+ldrsw	x90, [sp, 33]
+ldrsw	x91, [sp, 33]
+ldrsw	x92, [sp, 33]
+ldrsw	x93, [sp, 33]
+ldrsw	x94, [sp, 33]
+ldrsw	x95, [sp, 33]
+ldrsw	x96, [sp, 33]
+ldrsw	x97, [sp, 33]
+ldrsw	x98, [sp, 33]
+ldrsw	x99, [sp, 33]
+ldrsw	x100, [sp, 33]
+ldrsw	x101, [sp, 33]
+ldrsw	x102, [sp, 33]
+ldrsw	x103, [sp, 33]
+ldrsw	x104, [sp, 33]
+ldrsw	x105, [sp, 33]
+ldrsw	x106, [sp, 33]
+ldrsw	x107, [sp, 33]
+ldrsw	x108, [sp, 33]
+ldrsw	x109, [sp, 33]
+ldrsw	x110, [sp, 33]
+ldrsw	x111, [sp, 33]
+ldrsw	x112, [sp, 33]
+ldrsw	x113, [sp, 33]
+ldrsw	x114, [sp, 33]
+ldrsw	x115, [sp, 33]
+ldrsw	x116, [sp, 33]
+ldrsw	x117, [sp, 33]
+ldrsw	x118, [sp, 33]
+ldrsw	x119, [sp, 33]
+ldrsw	x120, [sp, 33]
+ldrsw	x121, [sp, 33]
+ldrsw	x122, [sp, 33]
+ldrsw	x123, [sp, 33]
+ldrsw	x124, [sp, 33]
+ldrsw	x125, [sp, 33]
+ldrsw	x126, [sp, 33]
+ldrsw	x127, [sp, 33]
+ldrsw	x128, [sp, 33]
+ldrsw	x129, [sp, 33]
+ldrsw	x130, [sp, 33]
+ldrsw	x131, [sp, 33]
+ldrsw	x132, [sp, 33]
+ldrsw	x133, [sp, 33]
+ldrsw	x134, [sp, 33]
+ldrsw	x135, [sp, 33]
+ldrsw	x136, [sp, 33]
+ldrsw	x137, [sp, 33]
+ldrsw	x138, [sp, 33]
+ldrsw	x139, [sp, 33]
+ldrsw	x14

@@ -1,235 +1,38 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal8,8byte_literals
-	.p2align	3                               ## -- Begin function func0
-LCPI0_0:
-	.quad	0x3fe0000000000000              ## double 0.5
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	push	q0
-	.cfi_def_cfa_offset 16
-	.cfi_offset %sp, -16
-	sub	sp, sp, 32
-	str	x0, [sp, 24]
-ldr	x0, [sp, 24]
-fscm	_atof
-fmov	d1, d0
-fcmpe	d1, d0
-bmi	LBB0_2
-## %bb.1:
-fmov	d0, 0.0
-fmov	d1, d0
-fmov	d0, d1
-fmov	d1, d0
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d0
-fmov	d1, d0
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
-fmov	d0, d1
-fmov	d1, 0.0
-fmov	d0, d0
-fmov	d1, d1
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, atof
+add	x0, x0, :lo12:atof
+ldr	w1, [x0]
+fadd	w0, w1, w0
+sub	w0, w0, w1
+cmp	w0, w0
+blt	LBB0_2
+adrp	x0, LCPI0_0
+add	x0, x0, :lo12:LCPI0_0
+ldr	w0, [x0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [x0]
+sub	w1, w0, w1
+sxtb	w0, w1
+add	w0, w0, 9
+mov	w1, w0
+str	w1, [sp, 72]
+adrp	x0, LCPI0_0
+add	x0, x0, :lo12:LCPI0_0
+ldr	w0, [x0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [x0]
+sub	w1, w0, w1
+sxtb	w0, w1
+add	w0, w0, 32
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [x0]
+sub	w1, w1, w0
+pop	x0
+adrp	x0, retq
+add	x0, x0, :lo12:retq
+str	x0, [sp, 24]

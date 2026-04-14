@@ -1,25 +1,203 @@
-stp	x29, x30, [sp, 16]!
-mov	x19, sp
-str	w0, [x19, 44]
-ldrsw	x0, [x19, 44]
-lsl	x0, x0, 2
-bl	_malloc
-str	x0, [x19, 32]
-ldr	w1, [x19, 44]
-ldr	x0, [x19, 32]
-ldrsw	x2, [x19, 36]
-mov	w1, w1
-add	w1, w1, 2
-str	w2, [x0, w1, 4]
-str	w0, [x19, 28]
-b	LBB0_1
-LBB0_1:
-ldr	w0, [x19, 28]
-add	w0, w0, 1
-str	w0, [x19, 28]
-b	LBB0_1
-LBB0_4:
-add	sp, sp, 32
-str	x0, [x19, 32]
-pop	x19, x20
-ret
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, malloc
+add	x0, x0, :lo12:malloc
+ldr	x1, [x0]
+ldrsw	x0, [sp, 56]
+ldr	x1, [sp, 72]
+ldr	x0, [sp, 48]
+str	x1, [x0]
+ldr	w1, [sp, 48]
+sub	w0, w1, w0
+add	x0, x0, 32
+ldr	x0, [sp, 48]
+ldr	x1, [sp, 48]
+ldr	x0, [sp, 48]
+add	x0, x0, w1
+ldrsw	x0, [sp, 48]
+str	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+mov	w1, 1
+str	w1, [sp, 48]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12:sleep
+ldr	x0, [x0]
+adrp	x0, sleep
+add	x0, x0, :lo12

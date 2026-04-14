@@ -1,9 +1,192 @@
-.global	_func0
-.type	_func0, @function
-_func0:
-	b	_LBB0_1
-_LBB0_1:
-	lsl	x1, x0, 2
-	x0 = (x0 * x1) / 4
-	x1 = 0
-	x0 = _strlen(_sp, x0, 16, .gotext, .lo12, .regparm, c, s, i, a, b, d, e, f, g, h, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, acc, cond, imm, imm0, imm1, imm2, imm3, imm4, imm5, imm6, imm7, imm8, imm9, imm10, imm11, imm12, imm13, imm14, imm15, imm16, imm17, imm18, imm19, imm20, imm21, imm22, imm23, imm24, imm25, imm26, imm27, imm28, imm29, imm30, imm31, imm32, imm33, imm34, imm35, imm36, imm37, imm38, imm39, imm40, imm41, imm42, imm43, imm44, imm45, imm46, imm47, imm48, imm49, imm50, imm51, imm52, imm53, imm54, imm55, imm56, imm57, imm58, imm59, imm60, imm61, imm62, imm63, imm64, imm65, imm66, imm67, imm68, imm69, imm70, imm71, imm72, imm73, imm74, imm75, imm76, imm77, imm78, imm79, imm80, imm81, imm82, imm83, imm84, imm85, imm86, imm87, imm88, imm89, imm90, imm91, imm92, imm93, imm94, imm95, imm96, imm97, imm98, imm99, imm100, imm101, imm102, imm103, imm104, imm105, imm106, imm107, imm108, imm109, imm110, imm111, imm112, imm113, imm114, imm115, imm116, imm117, imm118, imm119, imm120, imm121, imm122, imm123, imm124, imm125, imm126, imm127, imm128, imm129, imm130, imm131, imm132, imm133, imm134, imm135, imm136, imm137, imm138, imm139, imm140, imm141, imm142, imm143, imm144, imm145, imm146, imm147, imm148, imm149, imm150, imm151, imm152, imm153, imm154, imm155, imm156, imm157, imm158, imm159, imm160, imm161, imm162, imm163, imm164, imm165, imm166, imm167, imm168, imm169, imm170, imm171, imm172, imm173, imm174, imm175, imm176, imm177, imm178, imm179, imm180, imm181, imm182, imm183, imm184, imm185, imm186, imm187, imm188, imm189, imm190, imm191, imm192, imm193, imm194, imm195, imm196, imm197, imm198, imm199, imm200, imm201, imm202, imm203, imm204, imm205, imm206, imm207, imm208, imm209, imm210, imm211, imm212, imm213, imm214, imm215, imm216, imm217, imm218, imm219, imm220, imm221, imm222, imm223, imm224, imm225, imm226, imm227, imm228, imm229, imm230, imm231, imm232, imm233, imm234, imm235, imm236, imm237, imm238, imm239, imm240, imm241, imm242, imm243, imm244, imm245, imm246, imm247, imm248, imm249, imm250, imm251, imm252, imm253, imm254, imm255, imm256, imm257, imm258, imm259, imm260, imm261, imm262, imm263, imm264, imm265, imm266, imm267, imm268, imm269, imm270, imm271, imm272, imm273, imm274, imm275, imm276, imm277, imm278, imm279, imm280, imm281, imm282, imm283, imm284, imm285, imm286, imm287, imm288, imm289, imm290, imm291, imm292, imm293, imm294, imm295, imm296, imm297, imm298, imm299, imm300, imm301, imm302, imm303, imm304, imm305, imm306, imm307, imm308, imm309, imm310, imm311, imm312, imm313, imm314, imm315, imm316, imm317, imm318, imm319, imm320, imm321, imm322, imm323, imm324, imm325, imm326, imm327, imm328, imm329, imm330, imm331, imm332, imm333, imm334, imm335, imm336, imm337, imm338, imm339, imm340, imm341, imm342, imm343, imm344, imm345, imm346, imm347, imm348, imm349, imm350, imm351, imm352, imm353, imm354, imm355, imm356, imm357, imm358, imm359, imm360, imm361, imm362, imm363, imm364, imm365, imm366, imm367, imm368, imm369, imm370, imm371, imm372, imm373, imm374, imm375, imm376, imm377, imm378, imm379, imm380, imm381, imm382, imm383, imm384, imm385, imm386, imm387, imm388, imm389, imm390, imm391, imm392, imm393, imm394, imm395, imm396, imm397, imm398, imm399, imm400, imm4
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 40]
+str	w1, [sp, 24]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+add	w0, w1, 1
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+sub	w0, w0, 1
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+add	w0, w1, 1
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+add	w0, w1, 1
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]
+sub	w0, w0, 64
+str	w0, [sp, 40]
+ldr	w0, [sp, 40]
+ldrsw	w1, [w0]
+and	w1, w1, 1
+mov	w0, w1
+add	w0, w0, 64
+ldr	w0, [sp, 40]

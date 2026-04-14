@@ -1,72 +1,186 @@
-sub	sp, sp, #48
-str	x0, [sp, 24]
-str	w1, [sp, 20]
-ldr	w0, [sp, 20]
-lsl	w0, w0, 3
-bl	_malloc
-str	x0, [sp, 8]
-str	wzr, [sp, 4]
-add	sp, sp, 48
-mov	w19, w0
-mov	w20, 0
-b	_LoopHeader
-_loop_header:
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-lsl	w0, w0, 3
-bl	_malloc
-ldr	w1, [sp, 4]
-cmp	w1, w0
-beq	_loop_inner
-_loop_inner:
-str	wzr, [sp, 24]
-str	wzr, [sp, 20]
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-lsl	w0, w0, 3
-ldrsw	x0, [sp, 20]
-ldrsw	x1, [sp, 24]
-ldr	x0, [x0, x1, 8]
-ldrsw	x1, [sp, 20]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-b	_loop_inner
-cmp	w0, 48
-blt	_loop_inner
-cmp	w0, 57
-bgt	_loop_inner
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-lsl	w0, w0, 3
-ldrsw	x0, [sp, 20]
-ldrsw	x1, [sp, 24]
-ldr	x0, [x0, x1, 8]
-ldrsw	x1, [sp, 20]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-beq	_loop_inner
-cmp	w0, 1
-bne	_loop_inner
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	_loop_inner
-_loop_inner:
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-lsl	w0, w0, 3
-ldrsw	x0, [sp, 20]
-ldrsw	x1, [sp, 24]
-ldr	x0, [x0, x1, 8]
-ldrsw	x1, [sp, 20]
-ldrb	w0, [x0, x1]
-cmp	w0, 0
-beq	_loop_inner
-cmp	w0, 1
-bne	_loop_inner
-ldr	w1, [sp, 20]
-ldr	w0, [sp, 8]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	_loop_inner
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [x0]
+adrp	x0, _str
+add	x0, x0, :lo12:_str
+ldr	x0, [x0]
+adrp	x0, "the number of odd elements %d in the string %d of the %d input."
+add	x0, x0, :lo12:"the number of odd elements %d in the string %d of the %d input."
+ldr	x0, [x0]
+adrp	x0, _malloc
+add	x0, x0, :lo12:_malloc
+ldr	x0, [x0]
+adrp	x0, malloc
+add	x0, x0, :lo12:malloc
+ldr	x0, [x0]
+adrp	x0, _strdup
+add	x0, x0, :lo12:_strdup
+ldr	x0, [x0]
+adrp	x0, strdup
+add	x0, x0, :lo12:strdup
+ldr	x0, [x0]
+adrp	x0, _strncpy
+add	x0, x0, :lo12:_strncpy
+ldr	x0, [x0]
+adrp	x0, strncpy
+add	x0, x0, :lo12:strncpy
+ldr	x0, [x0]
+adrp	x0, _memset
+add	x0, x0, :lo12:_memset
+ldr	x0, [x0]
+adrp	x0, memset
+add	x0, x0, :lo12:memset
+ldr	x0, [x0]
+adrp	x0, _strchr
+add	x0, x0, :lo12:_strchr
+ldr	x0, [x0]
+adrp	x0, strchr
+add	x0, x0, :lo12:strchr
+ldr	x0, [x0]
+adrp	x0, _strlen
+add	x0, x0, :lo12:_strlen
+ldr	x0, [x0]
+adrp	x0, _strtol
+add	x0, x0, :lo12:_strtol
+ldr	x0, [x0]
+adrp	x0, strtol
+add	x0, x0, :lo12:strtol
+ldr	x0, [x0]
+adrp	x0, _strtol
+add	x0, x0, :lo12:_strtol
+ldr	x0, [x0]
+adrp	x0, _strtol
+add	x0, x0, :lo12:_strtol
+ldr	x0, [x0]
+adrp	x0, _strtol
+add	x0, x0, :lo12:_strtol
+ldr	x0, [x0]
+adrp	x0, _strtok_r
+add	x0, x0, :lo12:_strtok_r
+ldr	x0, [x0]
+adrp	x0, strtok_r
+add	x0, x0, :lo12:strtok_r
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, strtok
+add	x0, x0, :lo12:strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]
+adrp	x0, _strtok
+add	x0, x0, :lo12:_strtok
+ldr	x0, [x0]

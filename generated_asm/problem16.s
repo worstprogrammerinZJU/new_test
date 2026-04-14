@@ -1,148 +1,166 @@
-sub	sp, sp, #176
-mov	x19, x0
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
 ldr	x0, [x0]
-str	x0, [sp, 24]
-str	x0, [sp, 120]
-str	wzr, [sp, 124]
-adrp	x0, ___stack_chk_guard
-add	x0, x0, :lo12:___stack_chk_guard
-ldr	x0, [x0]
-ldr	x0, [x0]
-str	x0, [sp, 208]
-mov	w2, 104
-bl	memset
-str	wzr, [sp, 152]
-ldr	x0, [sp, 120]
-str	x0, [sp, 160]
-str	wzr, [sp, 156]
-b LBB0_1
-LBB0_1:
-ldr	x0, [sp, 160]
-ldrb	w0, [x0]
-cmp	w0, 0
-beq	LBB0_7
-LBB0_2:
-ldr	x0, [sp, 160]
-ldrb	w0, [x0]
-cmp	w0, 32
-beq	LBB0_6
-LBB0_3:
-ldr	x0, [sp, 160]
-ldrb	w0, [x0]
-sub	w0, w0, #97
-str	w0, [sp, 164]
-sxtw	x0, w0
-ldr	w1, [sp, 120, 4]
-add	w0, w1, 1
-str	w0, [sp, 120, 4]
-sxtw	x0, w0
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-cmp	w2, w0
-ble	LBB0_5
-LBB0_4:
-sxtw	x0, w0
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-str	w1, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120, 4]
-ldr	w2, [sp, 152]
-ldr	w0, [sp, 120, 4]
-ldr	w1, [sp, 120, 4]
-ldr	w0, [sp, 120,
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	w1, [x0]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+str	w1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+str	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldrsw	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x0, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack_chk_guard
+ldr	x1, [sp, 28]
+adrp	x0, stack_chk_guard
+add	x0, x0, :lo12:stack

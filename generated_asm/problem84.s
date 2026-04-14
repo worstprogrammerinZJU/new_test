@@ -1,38 +1,187 @@
-subq	$x0, sp, 32
-str	w0, [sp, 60]
-str	x1, [sp, 48]
-mov	w0, 256
-bl	malloc
-str	x0, [sp, 40]
-ldr	x0, [sp, 48]
-str	wzr, [x0]
-mov	w1, 2
-str	w1, [sp, 36]
-b	L1
-L1:
-ldr	w0, [sp, 36]
-mul	w0, w0, w0
-ldr	w1, [sp, 60]
-cmp	w1, w0
-bgt	L3
-b	L2
-L2:
-ldr	w0, [sp, 36]
-mul	w0, w0, w0
-ldr	w1, [sp, 60]
-cmp	w1, w0
-beq	L4
-b	L3
-L3:
-add	w1, w0, 1
-ldr	w0, [sp, 36]
-str	w0, [sp, 36]
-b	L1
-L4:
-ldr	w1, [sp, 36]
-ldr	x0, [sp, 40]
-ldr	w0, [x1]
-add	w2, w0, 1
-ldrsw	x1, [sp, 36]
-str	w2, [x0, 4]
-b	L1
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, _malloc
+add	x0, x0, :lo12:_malloc
+ldr	x1, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+mov	w1, 256
+adrp	x0, w1
+add	x0, x0, :lo12:w1
+ldr	w0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+str	w1, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_local_var
+ldr	x0, [x0]
+adrp	x0, _local_var
+add	x0, x0, :lo12:_

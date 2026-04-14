@@ -1,309 +1,183 @@
-.LLC0:
-.LLC1:
-.LLC2:
-.LLC3:
-.LLC4:
-.LLC5:
-.LLC6:
-.LLC7:
-.LLC8:
-.LLC9:
-.LLC10:
-.LLC11:
-.LLC12:
-.LLC13:
-.LLC14:
-.LLC15:
-.LLC16:
-.LLC17:
-.LLC18:
-.LLC19:
-.LLC20:
-.LLC21:
-.LLC22:
-.LLC23:
-.LLC24:
-.LLC25:
-.LLC26:
-.LLC27:
-.LLC28:
-.LLC29:
-.LLC30:
-.LLC31:
-.LLC32:
-.LLC33:
-.LLC34:
-.LLC35:
-.LLC36:
-.LLC37:
-.LLC38:
-.LLC39:
-.LLC40:
-.LLC41:
-.LLC42:
-.LLC43:
-.LLC44:
-.LLC45:
-.LLC46:
-.LLC47:
-.LLC48:
-.LLC49:
-.LLC50:
-.LLC51:
-.LLC52:
-.LLC53:
-.LLC54:
-.LLC55:
-.LLC56:
-.LLC57:
-.LLC58:
-.LLC59:
-.LLC60:
-.LLC61:
-.LLC62:
-.LLC63:
-.LLC64:
-.LLC65:
-.LLC66:
-.LLC67:
-.LLC68:
-.LLC69:
-.LLC70:
-.LLC71:
-.LLC72:
-.LLC73:
-.LLC74:
-.LLC75:
-.LLC76:
-.LLC77:
-.LLC78:
-.LLC79:
-.LLC80:
-.LLC81:
-.LLC82:
-.LLC83:
-.LLC84:
-.LLC85:
-.LLC86:
-.LLC87:
-.LLC88:
-.LLC89:
-.LLC90:
-.LLC91:
-.LLC92:
-.LLC93:
-.LLC94:
-.LLC95:
-.LLC96:
-.LLC97:
-.LLC98:
-.LLC99:
-.LLC100:
-.LLC101:
-.LLC102:
-.LLC103:
-.LLC104:
-.LLC105:
-.LLC106:
-.LLC107:
-.LLC108:
-.LLC109:
-.LLC110:
-.LLC111:
-.LLC112:
-.LLC113:
-.LLC114:
-.LLC115:
-.LLC116:
-.LLC117:
-.LLC118:
-.LLC119:
-.LLC120:
-.LLC121:
-.LLC122:
-.LLC123:
-.LLC124:
-.LLC125:
-.LLC126:
-.LLC127:
-.LLC128:
-.LLC129:
-.LLC130:
-.LLC131:
-.LLC132:
-.LLC133:
-.LLC134:
-.LLC135:
-.LLC136:
-.LLC137:
-.LLC138:
-.LLC139:
-.LLC140:
-.LLC141:
-.LLC142:
-.LLC143:
-.LLC144:
-.LLC145:
-.LLC146:
-.LLC147:
-.LLC148:
-.LLC149:
-.LLC150:
-.LLC151:
-.LLC152:
-.LLC153:
-.LLC154:
-.LLC155:
-.LLC156:
-.LLC157:
-.LLC158:
-.LLC159:
-.LLC160:
-.LLC161:
-.LLC162:
-.LLC163:
-.LLC164:
-.LLC165:
-.LLC166:
-.LLC167:
-.LLC168:
-.LLC169:
-.LLC170:
-.LLC171:
-.LLC172:
-.LLC173:
-.LLC174:
-.LLC175:
-.LLC176:
-.LLC177:
-.LLC178:
-.LLC179:
-.LLC180:
-.LLC181:
-.LLC182:
-.LLC183:
-.LLC184:
-.LLC185:
-.LLC186:
-.LLC187:
-.LLC188:
-.LLC189:
-.LLC190:
-.LLC191:
-.LLC192:
-.LLC193:
-.LLC194:
-.LLC195:
-.LLC196:
-.LLC197:
-.LLC198:
-.LLC199:
-.LLC200:
-.LLC201:
-.LLC202:
-.LLC203:
-.LLC204:
-.LLC205:
-.LLC206:
-.LLC207:
-.LLC208:
-.LLC209:
-.LLC210:
-.LLC211:
-.LLC212:
-.LLC213:
-.LLC214:
-.LLC215:
-.LLC216:
-.LLC217:
-.LLC218:
-.LLC219:
-.LLC220:
-.LLC221:
-.LLC222:
-.LLC223:
-.LLC224:
-.LLC225:
-.LLC226:
-.LLC227:
-.LLC228:
-.LLC229:
-.LLC230:
-.LLC231:
-.LLC232:
-.LLC233:
-.LLC234:
-.LLC235:
-.LLC236:
-.LLC237:
-.LLC238:
-.LLC239:
-.LLC240:
-.LLC241:
-.LLC242:
-.LLC243:
-.LLC244:
-.LLC245:
-.LLC246:
-.LLC247:
-.LLC248:
-.LLC249:
-.LLC250:
-.LLC251:
-.LLC252:
-.LLC253:
-.LLC254:
-.LLC255:
-.LLC256:
-.LLC257:
-.LLC258:
-.LLC259:
-.LLC260:
-.LLC261:
-.LLC262:
-.LLC263:
-.LLC264:
-.LLC265:
-.LLC266:
-.LLC267:
-.LLC268:
-.LLC269:
-.LLC270:
-.LLC271:
-.LLC272:
-.LLC273:
-.LLC274:
-.LLC275:
-.LLC276:
-.LLC277:
-.LLC278:
-.LLC279:
-.LLC280:
-.LLC281:
-.LLC282:
-.LLC283:
-.LLC284:
-.LLC285:
-.LLC286:
-.LLC287:
-.LLC288:
-.LLC289:
-.LLC290:
-.LLC291:
-.LLC292:
-.LLC293:
-.LLC294:
-.LLC295:
-.LLC296:
-.LLC297:
-.LLC298:
-.LLC299:
-.LLC300:
-.LLC301:
-.LLC302:
-.LLC303:
-.LLC304:
-.LLC305:
-.LLC306:
-.LLC307:
-.LLC
+ldr	x0, [sp, 64]
+ldr	w1, [sp, 12]
+ldr	x1, [sp, 24]
+mov	w0, 0
+str	w0, [x0]
+sub	w0, w1, w0
+bne	x0, w0, LBB0_6
+ldr	x0, [sp, 8]
+ldrsw	x2, [sp, 28]
+ldr	x1, [x0, 8]
+ldr	x0, [sp, 8]
+ldr	x2, [sp, 24]
+add	x2, x2, 1
+str	x2, [x0]
+j	LBB0_5
+LBB0_5:
+ldr	w0, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 28]
+j	LBB0_1
+LBB0_6:
+ldr	w0, [sp, 28]
+sub	w0, w0, 1
+str	w0, [sp, 28]
+LBB0_7:
+ldr	w0, [sp, 28]
+ldr	x0, [sp, 24]
+ldrsw	x1, [x0, 8]
+sub	x1, x1, 1
+cmp	x1, w0
+bge	x0, x1, LBB0_18
+ldr	w0, [sp, 32]
+adrp	x0, _malloc_addr
+add	x0, x0, :lo12:_malloc_addr
+ldr	x0, [x0]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, _free_addr
+add	x0, x0, :lo12:_free_addr
+ldr	x0, [x1, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [x0, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x0, [sp, 64]
+adrp	x0, 0
+add	x0, x0, :lo12:0
+ldr	x1, [sp, 64]
+adrp	x0, 0

@@ -1,19 +1,14 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	push	x29
-	x0 = sp
-	wstr	x0, [sp, 44]
-ldr	w1, [sp, 44]
-add	w0, w1, 1
-mul	w0, w0, w1
-mov	w1, 2
-sdiv	w1, w0, w1
-str	w1, [sp, 44]
-pop	x29
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w1, [x0]
+ldrsw	x0, w1
+add	x0, x0, 1
+movk	x0, #2, lsl x0
+ldmia	x0, [sp, 56]
+div	w1, w0, x0
+sub	w1, w1, w0
+str	w1, [sp, 56]
 ret
-	.cfi_endproc

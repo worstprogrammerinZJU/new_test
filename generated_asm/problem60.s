@@ -1,77 +1,145 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal8,8byte_literals
-	.p2align	3                               ## -- Begin function func0
-LCPI0_0:
-	dbl	0x3f1a36e2eb1c432d              ## double 1.0E-4
-	.section	__TEXT,__literal16,16byte_literals
-	.p2align	4
-LCPI0_1:
-	dbl	0x7fffffffffffffff              ## double NaN
-	dbl	0x7fffffffffffffff              ## double NaN
-LCPI0_2:
-	dbl	0x8000000000000000              ## double -0
-	dbl	0x8000000000000000              ## double -0
-LCPI0_3:
-	dbl	0x3fdfffffffffffff              ## double 0.49999999999999994
-	dbl	0x3fdfffffffffffff              ## double 0.49999999999999994
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	push	q0
-	.cfi_def_cfa_offset 16
-	.cfi_offset %sp, -16
-	sp = sp
-	lr = lr
-	str	x0, [sp, 24]
-	str	w1, [sp, 20]
-str	xzr, [sp, 16]
-str	xzr, [sp, 12]
-b LBB0_1
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-ldr	x1, [sp, 24]
-ldrsw	x0, [sp, 12]
-fmov	s1, s0
-ldr	s0, [sp, 24]
-fmul	s1, s1, s0
-scvtf	d0, s1
-ldr	s0, [sp, 24]
-ldrsw	x0, [sp, 12]
-fmul	s1, s0, s0
-scvtf	d0, s1
-fmov	d1, d0
-adrp	x0, LCPI0_2
-add	x0, x0, :lo12:LCPI0_2
-ldr	d2, [x0]
-adrp	x0, LCPI0_3
-add	x0, x0, :lo12:LCPI0_3
-ldr	d3, [x0]
-cmp	d2, d3
-and	d2, d2, d3
-and	d3, d1, d3
-orr	d0, d2, d3
-add	d1, sp, 23
-scvtf	d0, d0
-fdiv	d0, d0, d1
-fcvt	w0, d0
-mov	w2, 2
-ldp	s0, s1, [sp, 28]
-cmp	w0, w2
-bne	LBB0_6
-b	LBB0_7
-LBB0_6:
-b	LBB0_7
-LBB0_7:
-b	LBB0_8
-LBB0_8:
-ldr	w0, [sp, 12]
-add	w0, w0, 1
-str	w0, [sp, 12]
-b	LBB0_1
-LBB0_9:
-ldr	x1, [sp, 24]
-pop	x0
-ret
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w1, [sp, 24]
+ldr	w0, [sp, 20]
+ldrsw	x0, [sp, 28]
+ldrsw	x1, [sp, 20]
+ldrsw	x2, [sp, 28]
+ldrsw	x3, [sp, 20]
+ldrsw	x4, [sp, 28]
+ldrsw	x5, [sp, 20]
+ldrsw	x6, [sp, 28]
+ldrsw	x7, [sp, 20]
+ldrsw	x8, [sp, 28]
+ldrsw	x9, [sp, 20]
+ldrsw	x10, [sp, 28]
+ldrsw	x11, [sp, 20]
+ldrsw	x12, [sp, 28]
+ldrsw	x13, [sp, 20]
+ldrsw	x14, [sp, 28]
+ldrsw	x15, [sp, 20]
+ldrsw	x16, [sp, 28]
+ldrsw	x17, [sp, 20]
+ldrsw	x18, [sp, 28]
+ldrsw	x19, [sp, 20]
+ldrsw	x20, [sp, 28]
+ldrsw	x21, [sp, 20]
+ldrsw	x22, [sp, 28]
+ldrsw	x23, [sp, 20]
+ldrsw	x24, [sp, 28]
+ldrsw	x25, [sp, 20]
+ldrsw	x26, [sp, 28]
+ldrsw	x27, [sp, 20]
+ldrsw	x28, [sp, 28]
+ldrsw	x29, [sp, 20]
+ldrsw	x30, [sp, 28]
+ldrsw	x31, [sp, 20]
+ldrsw	x32, [sp, 28]
+ldrsw	x33, [sp, 20]
+ldrsw	x34, [sp, 28]
+ldrsw	x35, [sp, 20]
+ldrsw	x36, [sp, 28]
+ldrsw	x37, [sp, 20]
+ldrsw	x38, [sp, 28]
+ldrsw	x39, [sp, 20]
+ldrsw	x40, [sp, 28]
+ldrsw	x41, [sp, 20]
+ldrsw	x42, [sp, 28]
+ldrsw	x43, [sp, 20]
+ldrsw	x44, [sp, 28]
+ldrsw	x45, [sp, 20]
+ldrsw	x46, [sp, 28]
+ldrsw	x47, [sp, 20]
+ldrsw	x48, [sp, 28]
+ldrsw	x49, [sp, 20]
+ldrsw	x50, [sp, 28]
+ldrsw	x51, [sp, 20]
+ldrsw	x52, [sp, 28]
+ldrsw	x53, [sp, 20]
+ldrsw	x54, [sp, 28]
+ldrsw	x55, [sp, 20]
+ldrsw	x56, [sp, 28]
+ldrsw	x57, [sp, 20]
+ldrsw	x58, [sp, 28]
+ldrsw	x59, [sp, 20]
+ldrsw	x60, [sp, 28]
+ldrsw	x61, [sp, 20]
+ldrsw	x62, [sp, 28]
+ldrsw	x63, [sp, 20]
+ldrsw	x64, [sp, 28]
+ldrsw	x65, [sp, 20]
+ldrsw	x66, [sp, 28]
+ldrsw	x67, [sp, 20]
+ldrsw	x68, [sp, 28]
+ldrsw	x69, [sp, 20]
+ldrsw	x70, [sp, 28]
+ldrsw	x71, [sp, 20]
+ldrsw	x72, [sp, 28]
+ldrsw	x73, [sp, 20]
+ldrsw	x74, [sp, 28]
+ldrsw	x75, [sp, 20]
+ldrsw	x76, [sp, 28]
+ldrsw	x77, [sp, 20]
+ldrsw	x78, [sp, 28]
+ldrsw	x79, [sp, 20]
+ldrsw	x80, [sp, 28]
+ldrsw	x81, [sp, 20]
+ldrsw	x82, [sp, 28]
+ldrsw	x83, [sp, 20]
+ldrsw	x84, [sp, 28]
+ldrsw	x85, [sp, 20]
+ldrsw	x86, [sp, 28]
+ldrsw	x87, [sp, 20]
+ldrsw	x88, [sp, 28]
+ldrsw	x89, [sp, 20]
+ldrsw	x90, [sp, 28]
+ldrsw	x91, [sp, 20]
+ldrsw	x92, [sp, 28]
+ldrsw	x93, [sp, 20]
+ldrsw	x94, [sp, 28]
+ldrsw	x95, [sp, 20]
+ldrsw	x96, [sp, 28]
+ldrsw	x97, [sp, 20]
+ldrsw	x98, [sp, 28]
+ldrsw	x99, [sp, 20]
+ldrsw	x100, [sp, 28]
+ldrsw	x101, [sp, 20]
+ldrsw	x102, [sp, 28]
+ldrsw	x103, [sp, 20]
+ldrsw	x104, [sp, 28]
+ldrsw	x105, [sp, 20]
+ldrsw	x106, [sp, 28]
+ldrsw	x107, [sp, 20]
+ldrsw	x108, [sp, 28]
+ldrsw	x109, [sp, 20]
+ldrsw	x110, [sp, 28]
+ldrsw	x111, [sp, 20]
+ldrsw	x112, [sp, 28]
+ldrsw	x113, [sp, 20]
+ldrsw	x114, [sp, 28]
+ldrsw	x115, [sp, 20]
+ldrsw	x116, [sp, 28]
+ldrsw	x117, [sp, 20]
+ldrsw	x118, [sp, 28]
+ldrsw	x119, [sp, 20]
+ldrsw	x120, [sp, 28]
+ldrsw	x121, [sp, 20]
+ldrsw	x122, [sp, 28]
+ldrsw	x123, [sp, 20]
+ldrsw	x124, [sp, 28]
+ldrsw	x125, [sp, 20]
+ldrsw	x126, [sp, 28]
+ldrsw	x127, [sp, 20]
+ldrsw	x128, [sp, 28]
+ldrsw	x129, [sp, 20]
+ldrsw	x130, [sp, 28]
+ldrsw	x131, [sp, 20]
+ldrsw	x132, [sp, 28]
+ldrsw	x133, [sp, 20]
+ldrsw	x134, [sp, 28]
+ldrsw	x135, [sp, 20]
+ldrsw	x136, [sp, 28]
+ldrsw	x137, [sp, 20]
+ldrsw	x138, [sp, 28]
+ldrsw	x139, [sp, 20]
+ldrsw	x140, [sp,

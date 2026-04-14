@@ -1,62 +1,178 @@
-ldr	w19, [sp, 20]
-mov	w2, 33
-bl	malloc
-mov	x1, x0
-mov	w0, w19
-cmp	w0, w2
-ble	LBB0_2
-adrp	x0, .str
-add	x0, x0, :lo12:.str
-ldr	x0, [x0, 40]
-add	sp, sp, 72
-str	x0, [sp, 64]
-b	LBB0_6
-LBB0_2:
-ldr	w0, [sp, 20]
-add	w0, w0, w19
-mov	w2, 2
-sdiv	w1, w0, w2
-mov	w0, 32
-bl	malloc
-ldr	x0, [sp, 48]
-strb	wzr, [x0]
-mov	w1, w0
-mov	w0, w1
-sub	w0, w0, #1
-mov	w1, w0
-mov	w0, w1
-lsl	w1, w1, 2
-mov	w0, w0
+adrp	x0, _L_.str
+add	x0, x0, :lo12:_L_.str
+ldr	w0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+sub	x0, xsp, 48
+ldr	w1, [sp, x0]
+ldr	w2, [sp, 40]
+cmp	w1, w2
+jle	LBB0_2
+ldrsw	x0, [sp, 40]
+ldr	w1, [sp, 48]
 add	w1, w1, w0
-mov	w0, w1
-lsl	w0, w0, 1
-mov	w1, w0
-lsl	w1, w1, 1
-mov	w0, w0
-and	w0, w0, 255
-str	w0, [x0, w1]
-mov	w1, w0
-mov	w0, w1
-sub	w0, w0, #1
-mov	w1, w0
-lsl	w1, w1, 2
-mov	w0, w0
-and	w0, w0, 255
-str	w0, [x0, w1]
-ldr	w1, [sp, 20]
-mov	w0, w1
-lsl	w0, w0, 1
-add	w0, w0, 48
-mov	w1, w0
-ldr	x0, [sp, 48]
-ldr	w0, [sp, 44]
-sub	w0, w0, #1
-mov	w1, w0
-lsl	w1, w1, 2
-mov	w0, w0
-and	w0, w0, 255
-str	w0, [x0, w1]
-ldr	x0, [sp, 48]
-add	x19, sp, 72
-str	x0, [x19]
-ret
+movk	w1, #2, lsl #17
+lddiv	w1, w1, w1
+ldrsw	x0, [sp, 40]
+adrp	x0, malloc
+add	x0, x0, :lo12:malloc
+ldr	x0, [x0]
+str	x0, [sp, 32]
+ldr	x0, [sp, 32]
+and	x0, x0, 0xff
+adrp	x0, _malloc
+add	x0, x0, :lo12:_malloc
+ldr	w1, [sp, 36]
+sub	w1, w1, 1
+ldr	w0, [sp, 36]
+movk	w0, w1, lsl #1
+ldrsw	w1, [sp, 36]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldr	w0, [x0, w1]
+movk	w0, w0, 0
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldr	w0, [x0, w1]
+sub	w0, w0, 1
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w0, [x0, w1]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldrsw	w1, [x0, w0]
+adrp	x0, x0
+add	x0,

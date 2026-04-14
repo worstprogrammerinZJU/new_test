@@ -1,189 +1,184 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal16,16byte_literals
-	.p2align	4                               ## -- Begin function func0
-LCPI0_0:
-	dup	x0, #0x7FFFFFFFFFFFFFFF
-	dup	q0, x0
-	dup	q1, q0
-	dup	q2, q1
-	dup	q3, q2
-	dup	q4, q3
-	dup	q5, q4
-	dup	q6, q5
-	dup	q7, q6
-	dup	q8, q7
-	dup	q9, q8
-	dup	q10, q9
-	dup	q11, q10
-	dup	q12, q11
-	dup	q13, q12
-	dup	q14, q13
-	dup	q15, q14
-	dup	q16, q15
-	dup	q17, q16
-	dup	q18, q17
-	dup	q19, q18
-	dup	q20, q19
-	dup	q21, q20
-	dup	q22, q21
-	dup	q23, q22
-	dup	q24, q23
-	dup	q25, q24
-	dup	q26, q25
-	dup	q27, q26
-	dup	q28, q27
-	dup	q29, q28
-	dup	q30, q29
-	dup	q31, q30
-	dup	q32, q31
-	dup	q33, q32
-	dup	q34, q33
-	dup	q35, q34
-	dup	q36, q35
-	dup	q37, q36
-	dup	q38, q37
-	dup	q39, q38
-	dup	q40, q39
-	dup	q41, q40
-	dup	q42, q41
-	dup	q43, q42
-	dup	q44, q43
-	dup	q45, q44
-	dup	q46, q45
-	dup	q47, q46
-	dup	q48, q47
-	dup	q49, q48
-	dup	q50, q49
-	dup	q51, q50
-	dup	q52, q51
-	dup	q53, q52
-	dup	q54, q53
-	dup	q55, q54
-	dup	q56, q55
-	dup	q57, q56
-	dup	q58, q57
-	dup	q59, q58
-	dup	q60, q59
-	dup	q61, q60
-	dup	q62, q61
-	dup	q63, q62
-	dup	q64, q63
-	dup	q65, q64
-	dup	q66, q65
-	dup	q67, q66
-	dup	q68, q67
-	dup	q69, q68
-	dup	q70, q69
-	dup	q71, q70
-	dup	q72, q71
-	dup	q73, q72
-	dup	q74, q73
-	dup	q75, q74
-	dup	q76, q75
-	dup	q77, q76
-	dup	q78, q77
-	dup	q79, q78
-	dup	q80, q79
-	dup	q81, q80
-	dup	q82, q81
-	dup	q83, q82
-	dup	q84, q83
-	dup	q85, q84
-	dup	q86, q85
-	dup	q87, q86
-	dup	q88, q87
-	dup	q89, q88
-	dup	q90, q89
-	dup	q91, q90
-	dup	q92, q91
-	dup	q93, q92
-	dup	q94, q93
-	dup	q95, q94
-	dup	q96, q95
-	dup	q97, q96
-	dup	q98, q97
-	dup	q99, q98
-	dup	q100, q99
-	dup	q101, q100
-	dup	q102, q101
-	dup	q103, q102
-	dup	q104, q103
-	dup	q105, q104
-	dup	q106, q105
-	dup	q107, q106
-	dup	q108, q107
-	dup	q109, q108
-	dup	q110, q109
-	dup	q111, q110
-	dup	q112, q111
-	dup	q113, q112
-	dup	q114, q113
-	dup	q115, q114
-	dup	q116, q115
-	dup	q117, q116
-	dup	q118, q117
-	dup	q119, q118
-	dup	q120, q119
-	dup	q121, q120
-	dup	q122, q121
-	dup	q123, q122
-	dup	q124, q123
-	dup	q125, q124
-	dup	q126, q125
-	dup	q127, q126
-	dup	q128, q127
-	dup	q129, q128
-	dup	q130, q129
-	dup	q131, q130
-	dup	q132, q131
-	dup	q133, q132
-	dup	q134, q133
-	dup	q135, q134
-	dup	q136, q135
-	dup	q137, q136
-	dup	q138, q137
-	dup	q139, q138
-	dup	q140, q139
-	dup	q141, q140
-	dup	q142, q141
-	dup	q143, q142
-	dup	q144, q143
-	dup	q145, q144
-	dup	q146, q145
-	dup	q147, q146
-	dup	q148, q147
-	dup	q149, q148
-	dup	q150, q149
-	dup	q151, q150
-	dup	q152, q151
-	dup	q153, q152
-	dup	q154, q153
-	dup	q155, q154
-	dup	q156, q155
-	dup	q157, q156
-	dup	q158, q157
-	dup	q159, q158
-	dup	q160, q159
-	dup	q161, q160
-	dup	q162, q161
-	dup	q163, q162
-	dup	q164, q163
-	dup	q165, q164
-	dup	q166, q165
-	dup	q167, q166
-	dup	q168, q167
-	dup	q169, q168
-	dup	q170, q169
-	dup	q171, q170
-	dup	q172, q171
-	dup	q173, q172
-	dup	q174, q173
-	dup	q175, q174
-	dup	q176, q175
-	dup	q177, q176
-	dup	q178, q177
-	dup	q179, q178
-	dup	q180, q179
-	dup	q181, q180
-	dup	q
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, LCPI0_0
+add	x0, x0, :lo12:LCPI0_0
+ldr	x0, [x0]
+adrp	x0, 0x7fffffffffffffff
+add	x0, x0, :lo12:0x7fffffffffffffff
+ldr	x1, [x0]
+adrp	x0, 0x7fffffffffffffff
+add	x0, x0, :lo12:0x7fffffffffffffff
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w1, [x0]
+adrp	x0, LBB0_1
+add	x0, x0, :lo12:LBB0_1
+ldr	w0, [sp, 28]
+cmp	w0, w1
+jb	LBB0_10
+adrp	x0, LBB0_3
+add	x0, x0, :lo12:LBB0_3
+ldr	w0, [sp, 32]
+adrp	x0, LBB0_1
+add	x0, x0, :lo12:LBB0_1
+ldr	w1, [sp, 28]
+adrp	x0, LBB0_6
+add	x0, x0, :lo12:LBB0_6
+ldr	w0, [sp, 4]
+adrp	x0, LBB0_7
+add	x0, x0, :lo12:LBB0_7
+ldr	w1, [sp, 32]
+adrp	x0, LBB0_8
+add	x0, x0, :lo12:LBB0_8
+ldr	w0, [sp, 28]
+adrp	x0, LBB0_9
+add	x0, x0, :lo12:LBB0_9
+ldr	w1, [sp, 28]
+adrp	x0, LBB0_10
+add	x0, x0, :lo12:LBB0_10
+ldr	w0, [sp, 4]
+adrp	x0, LBB0_11
+add	x0, x0, :lo12:LBB0_11
+ldr	w1, [sp, 4]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [sp, w1]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w1, [sp, w0]
+adrp	x0, sp
+add	x0, x0, :lo12

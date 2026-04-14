@@ -1,301 +1,187 @@
-.global	_func0
-.type	_func0, @function
-_func0:
-	b	_LBB0_0
-_LBB0_0:
-	push	x29
-	x0 = sp
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x19
-	x19 = x0
-	x29 = sp
-	x18 = x19
-	x20 = sp
-	x1 = x20
-	x0 = x
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp

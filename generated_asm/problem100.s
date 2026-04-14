@@ -1,217 +1,213 @@
-ldp	x29, x30, [sp], 32
-mov	x19, 0
-mov	w1, 1
-str	w1, [sp, 44]
-str	w0, [sp, 40]
-str	w1, [sp, 36]
-str	w0, [sp, 24]
-b	LBB0_1
-LBB0_1:
 ldr	w0, [sp, 24]
-add	w1, w0, 1
-str	w1, [sp, 24]
-ldr	w0, [sp, 20]
-sub	w0, w1, w0
+cmp	w0, 1
+jge	LBB0_13
+ldr	w0, [sp, 12]
+add	w0, w0, sp[sp]
+str	w0, [sp, 12]
+ldr	w0, [sp, 12]
+ldrsw	x0, [sp, 20]
+ldr	w0, [sp, 12]
 str	w0, [sp, 20]
-ldr	w0, [sp, 20]
-mul	w1, w0, w1
-ldr	w0, [sp, 24]
-cmp	w1, w0
-bgt	LBB0_13
-LBB0_13:
-ldr	w0, [sp, 20]
-add	w1, w0, 1
-str	w1, [sp, 20]
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_14
-LBB0_14:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_16
-LBB0_16:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0_12
-LBB0_12:
-ldr	w0, [sp, 24]
-add	w0, w0, 1
-str	w0, [sp, 24]
-ldr	w0, [sp, 20]
-cmp	w0, w1
-bne	LBB0_14
-LBB0_14:
-str	wzr, [sp, 20]
-b	LBB0_17
-LBB0_17:
-b	LBB0_1
-LBB0_1:
-str	wzr, [sp, 20]
-b	LBB0_1
-LBB0_10:
-ldr	w0, [sp, 20]
-cmp	w0, 0
-beq	LBB0
+ldrsw	x0, [sp, 20]
+ldr	w0, [sp, 12]
+str	w0, [sp, 20]
+str	w1, [sp, 28]
+str	w2, [sp, 32]
+LBB0_3:
+ldr	x0, [sp, 32]
+smull	x1, x0, sp[sp]
+cmp	x0, sp[sp]
+jge	LBB0_8
+ldr	w0, [sp, 12]
+lddiv	x0, w0, sp[sp]
+sxtb	x1, w0
+sub	x0, x0, x1
+sxtb	x0, w0
+add	x0, x0, 1
+str	x0, [sp, 32]
+jmp	LBB0_3
+LBB0_6:
+jmp	LBB0_7
+LBB0_7:
+ldr	x0, [sp, 32]
+add	x0, x0, 1
+str	x0, [sp, 32]
+jmp	LBB0_3
+LBB0_8:
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+add	x0, x0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxtb	x0, w0
+sub	x0, w0, 1
+sxt

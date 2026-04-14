@@ -1,43 +1,176 @@
-subq	$x0, sp, 32
-str	x0, [sp, 40]
-str	wzr, [sp, 36]
-ldr	x0, [sp, 40]
-mov	w1, 0
-bl	strlen
-str	w0, [sp, 32]
-str	wzr, [sp, 28]
-b	L[[_loop_header]]
-_loop_header:
-ldr	w1, [sp, 28]
-ldr	x0, [sp, 40]
-ldrb	w0, [x0, w1]
-bl	isalpha
-cmp	w0, 0
-beq	[L[[_loop_body]]]
-ldr	x0, [sp, 40]
-ldrb	w1, [sp, 28]
-ldrb	w0, [x0, w1]
-bl	isupper
-cmp	w0, 0
-beq	[L[[_loop_body]]]
-ldr	x0, [sp, 40]
-ldrb	w1, [sp, 28]
-ldrb	w0, [x0, w1]
-bl_tolower
+ldr	w0, [sp, 24]
+sub	w1, w0, #32
+str	w1, [sp, 24]
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+test	x0, x0
+bge	_loop1
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+cmp	w0, #0
+beq	_check_upper
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'A', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+cmp	w0, #0
+b	_loop1
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
 and	w0, w0, 255
-strb	w0, [x0, w1]
-b	[L[[_loop_body]]]
-_loop_body:
-ldr	x1, [sp, 28]
-ldr	x0, [sp, 40]
-ldrb	w0, [x0, w1]
-bl	islower
-cmp	w0, 0
-beq	[L[[_loop_body]]]
-ldr	x0, [sp, 40]
-ldrb	w1, [sp, 28]
-ldrb	w0, [x0, w1]
-bl_toupper
+str	w0, [sp, 24]
+loop1:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w1
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
 and	w0, w0, 255
-strb	w0, [x0, w1]
-b	[L[[_loop_body]]]
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w1
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'A', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w1
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'A', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'A', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'A', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 20]
+sub	x1, x1, w0
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 20]
+movk	w0, 'a', lsl 16
+add	x1, x1, w0
+ldr	w0, [x0, x1]
+and	w0, w0, 255
+str	w0, [sp, 24]
+smw	w1, [sp, 20]
+sub	w1, w1, w0

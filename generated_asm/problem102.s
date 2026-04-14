@@ -1,18 +1,56 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-stp	x29, sp
-mov	x19, sp
-str	w0, [x19, -4]
-ldr	w0, [x19, -4]
-mul	w0, w0, w0
-str	w0, [x19, -4]
-pop	x29
-ret
-	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	w0, [x0]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [sp, 56]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldr	x0, [x0]
+ldrsw	x0, [sp, 72]
+ldr	x0, [sp, 48]
+sub	x0, x0, w0
+mov	w1, #1
+smull	x0, w1, x0
+str	x0, [sp, 48]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [sp, 56]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldr	x0, [x0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldrsw	x0, [sp, 72]
+ldr	x0, [sp, 48]
+sub	x0, x0, w0
+mov	w1, #1
+smull	x0, w1, x0
+str	x0, [sp, 48]
+adrp	x0, _func0
+add	x0, x0, :lo12:_func0
+ldr	x0, [x0]
+adrp	x0, __main
+add	x0, x0, :lo12:__main
+ldr	x0, [sp, 56]
+adrp	x0, x0
+add	x0, x0, :lo12:x0
+ldr	x0, [x0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [sp, 72]
+ldr	x0, [sp, 48]
+sub	x0, x0, w0
+mov	w1, #1
+smull	x0, w1, x0
+str	x0, [sp, 48]

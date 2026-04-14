@@ -1,229 +1,195 @@
 ldr	x0, [sp, 24]
 cmp	x0, 2
-beq	LBB1
-ldr	w0, [sp, 20]
-cmp	w0, w0
-bge	LBB2
-ldr	w0, [sp, 20]
-sub	w0, w0, w0
-blr
-LBB2:
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB3
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-blr
-LBB3:
-ldr	w0, [sp, 24]
-cmp	w0, w0
-beq	LBB4
-ldr	w0, [sp, 20]
-sub	w0, w0, w0
-blr
-LBB4:
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB5
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-blr
-LBB5:
-ldr	w0, [sp, 24]
-cmp	w0, w0
-beq	LBB6
-ldr	w0, [sp, 20]
-sub	w0, w0, w0
-blr
-LBB6:
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB7
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
+jle	LBB0_2
+ldr	w1, [sp, 20]
+ldr	w0, [sp, 16]
+sub	w1, w1, w0
+b LBB0_3
+LBB0_2:
+ldr	w1, [sp, 20]
+ldr	w0, [sp, 16]
+sub	w1, w1, w0
+b LBB0_5
+LBB0_5:
+ldr	w1, [sp, 24]
+ldr	w0, [sp, 32]
+sub	w0, w1, w0
+add	w0, w0, w1
 mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB8
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
+sub	w0, w1, w0
+add	w1, w0, 2
+mov	w0, w1
+str	w0, [sp, 36]
+cmp	w1, 2
+bge LBB0_8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
 mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB9
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
+sub	w0, w1, w0
+add	w1, w0, 2
+mov	w0, w1
+str	w0, [sp, 36]
+ldr	w1, [sp, 24]
+ldrsw	x0, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
 mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB10
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB11
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB12
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB13
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB14
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB15
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB16
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB17
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB18
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB19
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB20
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB21
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB22
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB23
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB24
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB25
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB26
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB27
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB28
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB29
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB30
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB31
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB32
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB33
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB34
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB35
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB36
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB37
-ldr	w0, [sp, 24]
-sub	w0, w0, w0
-mov	w1, w0
-ldr	w0, [sp, 20]
-cmp	w0, w0
-beq	LBB38
-ldr	w0, [sp, 24]
-sub	w0, w0, w
+sub	w0, w1, w0
+add	w1, w0, 2
+mov	w0, w1
+str	w0, [sp, 36]
+adrp	x0, _str
+add	x0, x0, :lo12:_str
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, _str.1
+add	x0, x0, :lo12:_str.1
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, .
+add	x0, x0, :lo12:.
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 24]
+smull	x2, x1, x0
+add	x0, x0, x1
+sub	x1, x0, x1
+add	x0, x1, 2
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	x0, [x0]
+ldr	x1, [sp, 24]
+sub	x0, x1, x0
+ldr	x0, [

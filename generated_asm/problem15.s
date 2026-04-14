@@ -1,48 +1,63 @@
-.global	_func0
-.type	_func0, @function
-_func0:
-b	LBB0_1
-.LBB0_1:
-ldr	w19, [sp, 44]
-ldr	x0, [sp, 56]
-mov	w2, 2
-ldrsw	x0, [sp, 44]
-mul	w0, w2, w0
-cmp	w19, w0
-bge	LBB0_6
-.LBB0_6:
-mov	w1, w0
-ldr	w0, [sp, 56]
-movk	w0, 0x3f, lsl 16
-and	w0, w0, w1
-cmp	w0, w19
-beq	LBB0_10
-.LBB0_10:
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 28]
+ldr	x0, [sp, 40]
+sub	x0, w1, x0
+mov	w1, 2
+lddiv	w0, w1, w0
+cmp	w1, #0
+bne	LBB0_4
+ldr	w0, [sp, 44]
+add	w0, w0, 1
+str	w0, [sp, 40]
+LBB0_4:
+jz	LBB0_5
+ldr	w0, [sp, 44]
 add	w0, w0, 1
 str	w0, [sp, 44]
-b	LBB0_1
-.LBB0_11:
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 56]
-movk	w0, 0x3f, lsl 16
-and	w0, w0, w1
-cmp	w1, w0
-bne	LBB0_11
-.LBB0_12:
-ldr	w1, [sp, 40]
-ldr	w0, [sp, 56]
-sub	w0, w1, w0
-cmp	w0, w19
-blt	LBB0_14
-.LBB0_14:
-adrp	x0, .str
-add	x0, x0, :lo12:.str
+jnz	LBB0_1
+LBB0_5:
+ldr	w0, [sp, 44]
+add	w0, w0, 1
+str	w0, [sp, 44]
+jnz	LBB0_1
+LBB0_6:
+ldr	w0, [sp, 48]
+ldrsw	x0, [sp, 36]
+ldr	w1, [x0, 4]
+sub	x0, w1, 2
+lddiv	w0, w1, x0
+cmp	w1, #0
+bne	LBB0_10
+ldr	w0, [sp, 40]
+add	w0, w0, 1
+str	w0, [sp, 40]
+LBB0_10:
+jz	LBB0_11
+ldr	w0, [sp, 48]
+add	w0, w0, 1
+str	w0, [sp, 48]
+jnz	LBB0_7
+LBB0_11:
+ldr	w0, [sp, 48]
+add	w0, w0, 1
+str	w0, [sp, 48]
+jnz	LBB0_6
+LBB0_12:
+ldr	w0, [sp, 40]
+sub	w1, w0, sp, 20
+bls	x0
+ldr	x0, [sp, 24]
+str	x0, [sp, 8]
+ldr	x0, [sp, 24]
+str	x0, [sp, 8]
+adrp	x0, _str
+add	x0, x0, :lo12:_str
 ldr	x0, [x0]
-str	x0, [sp, 48]
-b	LBB0_15
-.LBB0_15:
-adrp	x0, .str.1
-add	x0, x0, :lo12:.str.1
+adrp	x0, _str1
+add	x0, x0, :lo12:_str1
 ldr	x0, [x0]
-str	x0, [sp, 48]
+adrp	x0, sp
+add	x0, x0, :lo12:sp
+ldr	w0, [x0]
+pop	w0
 ret

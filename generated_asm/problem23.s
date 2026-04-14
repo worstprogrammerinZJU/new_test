@@ -1,125 +1,159 @@
-sub	sp, sp, 48
-str	x0, [sp, 32]
-mov	x1, sp
-ldr	x0, [sp, 32]
-mov	w1, w0
-sub	w0, w0, #2
-movk	w1, 0x42, lsl 16
-movk	w1, 0x43, lsl 16
-movk	w1, 0x44, lsl 16
-movk	w1, 0x45, lsl 16
-movk	w1, 0x46, lsl 16
-movk	w1, 0x47, lsl 16
-movk	w1, 0x48, lsl 16
-movk	w1, 0x49, lsl 16
-movk	w1, 0x4a, lsl 16
-movk	w1, 0x4b, lsl 16
-movk	w1, 0x4c, lsl 16
-movk	w1, 0x4d, lsl 16
-movk	w1, 0x4e, lsl 16
-movk	w1, 0x4f, lsl 16
-movk	w1, 0x50, lsl 16
-movk	w1, 0x51, lsl 16
-movk	w1, 0x52, lsl 16
-movk	w1, 0x53, lsl 16
-movk	w1, 0x54, lsl 16
-movk	w1, 0x55, lsl 16
-movk	w1, 0x56, lsl 16
-movk	w1, 0x57, lsl 16
-movk	w1, 0x58, lsl 16
-movk	w1, 0x59, lsl 16
-movk	w1, 0x5a, lsl 16
-movk	w1, 0x5b, lsl 16
-movk	w1, 0x5c, lsl 16
-movk	w1, 0x5d, lsl 16
-movk	w1, 0x5e, lsl 16
-movk	w1, 0x5f, lsl 16
-movk	w1, 0x60, lsl 16
-movk	w1, 0x61, lsl 16
-movk	w1, 0x62, lsl 16
-movk	w1, 0x63, lsl 16
-movk	w1, 0x64, lsl 16
-movk	w1, 0x65, lsl 16
-movk	w1, 0x66, lsl 16
-movk	w1, 0x67, lsl 16
-movk	w1, 0x68, lsl 16
-movk	w1, 0x69, lsl 16
-movk	w1, 0x6a, lsl 16
-movk	w1, 0x6b, lsl 16
-movk	w1, 0x6c, lsl 16
-movk	w1, 0x6d, lsl 16
-movk	w1, 0x6e, lsl 16
-movk	w1, 0x6f, lsl 16
-movk	w1, 0x70, lsl 16
-movk	w1, 0x71, lsl 16
-movk	w1, 0x72, lsl 16
-movk	w1, 0x73, lsl 16
-movk	w1, 0x74, lsl 16
-movk	w1, 0x75, lsl 16
-movk	w1, 0x76, lsl 16
-movk	w1, 0x77, lsl 16
-movk	w1, 0x78, lsl 16
-movk	w1, 0x79, lsl 16
-movk	w1, 0x7a, lsl 16
-movk	w1, 0x7b, lsl 16
-movk	w1, 0x7c, lsl 16
-movk	w1, 0x7d, lsl 16
-movk	w1, 0x7e, lsl 16
-movk	w1, 0x7f, lsl 16
-movk	w1, 0x80, lsl 16
-movk	w1, 0x81, lsl 16
-movk	w1, 0x82, lsl 16
-movk	w1, 0x83, lsl 16
-movk	w1, 0x84, lsl 16
-movk	w1, 0x85, lsl 16
-movk	w1, 0x86, lsl 16
-movk	w1, 0x87, lsl 16
-movk	w1, 0x88, lsl 16
-movk	w1, 0x89, lsl 16
-movk	w1, 0x8a, lsl 16
-movk	w1, 0x8b, lsl 16
-movk	w1, 0x8c, lsl 16
-movk	w1, 0x8d, lsl 16
-movk	w1, 0x8e, lsl 16
-movk	w1, 0x8f, lsl 16
-movk	w1, 0x90, lsl 16
-movk	w1, 0x91, lsl 16
-movk	w1, 0x92, lsl 16
-movk	w1, 0x93, lsl 16
-movk	w1, 0x94, lsl 16
-movk	w1, 0x95, lsl 16
-movk	w1, 0x96, lsl 16
-movk	w1, 0x97, lsl 16
-movk	w1, 0x98, lsl 16
-movk	w1, 0x99, lsl 16
-movk	w1, 0x9a, lsl 16
-movk	w1, 0x9b, lsl 16
-movk	w1, 0x9c, lsl 16
-movk	w1, 0x9d, lsl 16
-movk	w1, 0x9e, lsl 16
-movk	w1, 0x9f, lsl 16
-movk	w1, 0xa0, lsl 16
-movk	w1, 0xa1, lsl 16
-movk	w1, 0xa2, lsl 16
-movk	w1, 0xa3, lsl 16
-movk	w1, 0xa4, lsl 16
-movk	w1, 0xa5, lsl 16
-movk	w1, 0xa6, lsl 16
-movk	w1, 0xa7, lsl 16
-movk	w1, 0xa8, lsl 16
-movk	w1, 0xa9, lsl 16
-movk	w1, 0xaa, lsl 16
-movk	w1, 0xab, lsl 16
-movk	w1, 0xac, lsl 16
-movk	w1, 0xad, lsl 16
-movk	w1, 0xae, lsl 16
-movk	w1, 0xaf, lsl 16
-movk	w1, 0xb0, lsl 16
-movk	w1, 0xb1, lsl 16
-movk	w1, 0xb2, lsl 16
-movk	w1, 0xb3, lsl 16
-movk	w1, 0xb4, lsl 16
-movk	w1, 0xb5, lsl 16
-movk	w1, 0xb6, lsl 16
-movk	w1, 0xb7, lsl 16
-movk	w1, 0xb
+adrp	x0, _func0.out
+add	x0, x0, :lo12:_func0.out
+ldr	w0, [x0]
+sub	w1, w0, #2
+ldrsw	x0, [sp, 24]
+ldrsw	x1, [sp, 36]
+ldrsw	x2, [sp, 48]
+ldrsw	x0, [sp, 40]
+mov	w1, w1, lsl 1
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw	x2, [sp, 40]
+ldrsw	x0, [sp, 40]
+ldrsw	x1, [sp, 40]
+ldrsw
