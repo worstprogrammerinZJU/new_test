@@ -1,32 +1,134 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	$0, -12(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-12(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$0, %eax
-	je	LBB0_3
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-12(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -12(%rbp)
-	jmp	LBB0_1
-LBB0_3:
-	movl	-12(%rbp), %eax
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols
+ldr	x0, [sp, 56]
+ldr	w1, [sp, 72]
+ldrb	wzr, [x0, w1]
+strb	wzr, [sp, 72]
+strb	wzr, [sp, 56]
+strb	wzr, [sp, 40]
+strb	wzr, [sp, 24]
+strb	wzr, [sp, 8]
+strb	wzr, [sp, 0]
+strb	wzr, [sp, 16]
+strb	wzr, [sp, 32]
+strb	wzr, [sp, 48]
+strb	wzr, [sp, 64]
+strb	wzr, [sp, 80]
+strb	wzr, [sp, 96]
+strb	wzr, [sp, 112]
+strb	wzr, [sp, 128]
+strb	wzr, [sp, 144]
+strb	wzr, [sp, 160]
+strb	wzr, [sp, 176]
+strb	wzr, [sp, 192]
+strb	wzr, [sp, 208]
+strb	wzr, [sp, 224]
+strb	wzr, [sp, 240]
+strb	wzr, [sp, 256]
+strb	wzr, [sp, 272]
+strb	wzr, [sp, 288]
+strb	wzr, [sp, 304]
+strb	wzr, [sp, 320]
+strb	wzr, [sp, 336]
+strb	wzr, [sp, 352]
+strb	wzr, [sp, 368]
+strb	wzr, [sp, 384]
+strb	wzr, [sp, 400]
+strb	wzr, [sp, 416]
+strb	wzr, [sp, 432]
+strb	wzr, [sp, 448]
+strb	wzr, [sp, 464]
+strb	wzr, [sp, 480]
+strb	wzr, [sp, 496]
+strb	wzr, [sp, 512]
+strb	wzr, [sp, 528]
+strb	wzr, [sp, 544]
+strb	wzr, [sp, 560]
+strb	wzr, [sp, 576]
+strb	wzr, [sp, 592]
+strb	wzr, [sp, 608]
+strb	wzr, [sp, 624]
+strb	wzr, [sp, 640]
+strb	wzr, [sp, 656]
+strb	wzr, [sp, 672]
+strb	wzr, [sp, 688]
+strb	wzr, [sp, 704]
+strb	wzr, [sp, 720]
+strb	wzr, [sp, 736]
+strb	wzr, [sp, 752]
+strb	wzr, [sp, 768]
+strb	wzr, [sp, 784]
+strb	wzr, [sp, 800]
+strb	wzr, [sp, 816]
+strb	wzr, [sp, 832]
+strb	wzr, [sp, 848]
+strb	wzr, [sp, 864]
+strb	wzr, [sp, 880]
+strb	wzr, [sp, 896]
+strb	wzr, [sp, 912]
+strb	wzr, [sp, 928]
+strb	wzr, [sp, 944]
+strb	wzr, [sp, 960]
+strb	wzr, [sp, 976]
+strb	wzr, [sp, 992]
+strb	wzr, [sp, 1008]
+strb	wzr, [sp, 1024]
+strb	wzr, [sp, 1040]
+strb	wzr, [sp, 1056]
+strb	wzr, [sp, 1072]
+strb	wzr, [sp, 1088]
+strb	wzr, [sp, 1104]
+strb	wzr, [sp, 1120]
+strb	wzr, [sp, 1136]
+strb	wzr, [sp, 1152]
+strb	wzr, [sp, 1168]
+strb	wzr, [sp, 1184]
+strb	wzr, [sp, 1200]
+strb	wzr, [sp, 1216]
+strb	wzr, [sp, 1232]
+strb	wzr, [sp, 1248]
+strb	wzr, [sp, 1264]
+strb	wzr, [sp, 1280]
+strb	wzr, [sp, 1296]
+strb	wzr, [sp, 1312]
+strb	wzr, [sp, 1328]
+strb	wzr, [sp, 1344]
+strb	wzr, [sp, 1360]
+strb	wzr, [sp, 1376]
+strb	wzr, [sp, 1392]
+strb	wzr, [sp, 1408]
+strb	wzr, [sp, 1424]
+strb	wzr, [sp, 1440]
+strb	wzr, [sp, 1456]
+strb	wzr, [sp, 1472]
+strb	wzr, [sp, 1488]
+strb	wzr, [sp, 1504]
+strb	wzr, [sp, 1520]
+strb	wzr, [sp, 1536]
+strb	wzr, [sp, 1552]
+strb	wzr, [sp, 1568]
+strb	wzr, [sp, 1584]
+strb	wzr, [sp, 1600]
+strb	wzr, [sp, 1616]
+strb	wzr, [sp, 1632]
+strb	wzr, [sp, 1648]
+strb	wzr, [sp, 1664]
+strb	wzr, [sp, 1680]
+strb	wzr, [sp, 1696]
+strb	wzr, [sp, 1712]
+strb	wzr, [sp, 1728]
+strb	wzr, [sp, 1744]
+strb	wzr, [sp, 1760]
+strb	wzr, [sp, 1776]
+strb	wzr, [sp, 1792]
+strb	wzr, [sp, 1808]
+strb	wzr, [sp, 1824]
+strb	wzr, [sp, 1840]
+strb	wzr, [sp, 1856]
+strb	wzr, [sp, 1872]
+strb	wzr, [sp, 1888]
+strb	wzr, [sp, 1904]
+strb	wzr, [sp, 1920]
+strb	wzr, [sp, 1936]
+strb	wzr, [sp, 1952]
+strb	wzr, [sp, 1968]
+strb	wzr, [sp, 1984]
+strb	wzr, [sp, 20

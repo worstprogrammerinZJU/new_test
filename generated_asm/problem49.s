@@ -1,152 +1,125 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-	movq	%rdi, -16(%rbp)
-	movl	$0, -20(%rbp)
-	movl	$0, -24(%rbp)
-	movq	-16(%rbp), %rdi
-	callq	_strlen
-                                        ## kill: def $eax killed $eax killed $rax
-	movl	%eax, -28(%rbp)
-	cmpl	$5, -28(%rbp)
-	jge	LBB0_2
-## %bb.1:
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -8(%rbp)
-	jmp	LBB0_24
-LBB0_2:
-	movq	-16(%rbp), %rax
-	movb	(%rax), %al
-	movb	%al, -29(%rbp)
-	movsbl	-29(%rbp), %eax
-	cmpl	$65, %eax
-	jl	LBB0_6
-## %bb.3:
-	movsbl	-29(%rbp), %eax
-	cmpl	$90, %eax
-	jle	LBB0_5
-## %bb.4:
-	movsbl	-29(%rbp), %eax
-	cmpl	$97, %eax
-	jl	LBB0_6
-LBB0_5:
-	movsbl	-29(%rbp), %eax
-	cmpl	$122, %eax
-	jle	LBB0_7
-LBB0_6:
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -8(%rbp)
-	jmp	LBB0_24
-LBB0_7:
-	movq	-16(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	addq	%rcx, %rax
-	addq	$-4, %rax
-	movq	%rax, -40(%rbp)
-	movq	-40(%rbp), %rdi
-	leaq	L_.str.1(%rip), %rsi
-	callq	_strcmp
-	cmpl	$0, %eax
-	je	LBB0_11
-## %bb.8:
-	movq	-40(%rbp), %rdi
-	leaq	L_.str.2(%rip), %rsi
-	callq	_strcmp
-	cmpl	$0, %eax
-	je	LBB0_11
-## %bb.9:
-	movq	-40(%rbp), %rdi
-	leaq	L_.str.3(%rip), %rsi
-	callq	_strcmp
-	cmpl	$0, %eax
-	je	LBB0_11
-## %bb.10:
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -8(%rbp)
-	jmp	LBB0_24
-LBB0_11:
-	movl	$0, -44(%rbp)
-LBB0_12:                                ## =>This Inner Loop Header: Depth=1
-	movl	-44(%rbp), %eax
-	cmpl	-28(%rbp), %eax
-	jge	LBB0_20
-## %bb.13:                              ##   in Loop: Header=BB0_12 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$48, %eax
-	jl	LBB0_16
-## %bb.14:                              ##   in Loop: Header=BB0_12 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$57, %eax
-	jg	LBB0_16
-## %bb.15:                              ##   in Loop: Header=BB0_12 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-LBB0_16:                                ##   in Loop: Header=BB0_12 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$46, %eax
-	jne	LBB0_18
-## %bb.17:                              ##   in Loop: Header=BB0_12 Depth=1
-	movl	-24(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -24(%rbp)
-LBB0_18:                                ##   in Loop: Header=BB0_12 Depth=1
-	jmp	LBB0_19
-LBB0_19:                                ##   in Loop: Header=BB0_12 Depth=1
-	movl	-44(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -44(%rbp)
-	jmp	LBB0_12
-LBB0_20:
-	cmpl	$3, -20(%rbp)
-	jg	LBB0_22
-## %bb.21:
-	cmpl	$1, -24(%rbp)
-	je	LBB0_23
-LBB0_22:
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -8(%rbp)
-	jmp	LBB0_24
-LBB0_23:
-	leaq	L_.str.4(%rip), %rax
-	movq	%rax, -8(%rbp)
-LBB0_24:
-	movq	-8(%rbp), %rax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"No"
-
-L_.str.1:                               ## @.str.1
-	.asciz	".txt"
-
-L_.str.2:                               ## @.str.2
-	.asciz	".exe"
-
-L_.str.3:                               ## @.str.3
-	.asciz	".dll"
-
-L_.str.4:                               ## @.str.4
-	.asciz	"Yes"
-
-.subsections_via_symbols
+func0:
+	pop	wsp
+	xor	w0, w0
+	lwzr	w1, [sp, 24]
+	lwcx	w2, [sp, 20]
+	lwcx	w3, [sp, 40]
+	dlwcx	w4, [sp, 48]
+	dlwcx	w5, [sp, 44]
+	dlwcx	w6, [sp, 40]
+	dlwcx	w7, [sp, 36]
+	dlwcx	w8, [sp, 32]
+	dlwcx	w9, [sp, 28]
+	dlwcx	w10, [sp, 24]
+	dlwcx	w11, [sp, 20]
+	dlwcx	w12, [sp, 16]
+	dlwcx	w13, [sp, 12]
+	dlwcx	w14, [sp, 8]
+	dlwcx	w15, [sp, 4]
+	dlwcx	w16, [sp, 0]
+	dlwcx	w17, [sp, 4]
+	dlwcx	w18, [sp, 8]
+	dlwcx	w19, [sp, 12]
+	dlwcx	w20, [sp, 16]
+	dlwcx	w21, [sp, 20]
+	dlwcx	w22, [sp, 24]
+	dlwcx	w23, [sp, 28]
+	dlwcx	w24, [sp, 32]
+	dlwcx	w25, [sp, 36]
+	dlwcx	w26, [sp, 40]
+	dlwcx	w27, [sp, 44]
+	dlwcx	w28, [sp, 48]
+	dlwcx	w29, [sp, 52]
+	dlwcx	w30, [sp, 56]
+	dlwcx	w31, [sp, 60]
+	dlwcx	w32, [sp, 64]
+	dlwcx	w33, [sp, 68]
+	dlwcx	w34, [sp, 72]
+	dlwcx	w35, [sp, 76]
+	dlwcx	w36, [sp, 80]
+	dlwcx	w37, [sp, 84]
+	dlwcx	w38, [sp, 88]
+	dlwcx	w39, [sp, 92]
+	dlwcx	w40, [sp, 96]
+	dlwcx	w41, [sp, 100]
+	dlwcx	w42, [sp, 104]
+	dlwcx	w43, [sp, 108]
+	dlwcx	w44, [sp, 112]
+	dlwcx	w45, [sp, 116]
+	dlwcx	w46, [sp, 120]
+	dlwcx	w47, [sp, 124]
+	dlwcx	w48, [sp, 128]
+	dlwcx	w49, [sp, 132]
+	dlwcx	w50, [sp, 136]
+	dlwcx	w51, [sp, 140]
+	dlwcx	w52, [sp, 144]
+	dlwcx	w53, [sp, 148]
+	dlwcx	w54, [sp, 152]
+	dlwcx	w55, [sp, 156]
+	dlwcx	w56, [sp, 160]
+	dlwcx	w57, [sp, 164]
+	dlwcx	w58, [sp, 168]
+	dlwcx	w59, [sp, 172]
+	dlwcx	w60, [sp, 176]
+	dlwcx	w61, [sp, 180]
+	dlwcx	w62, [sp, 184]
+	dlwcx	w63, [sp, 188]
+	dlwcx	w64, [sp, 192]
+	dlwcx	w65, [sp, 196]
+	dlwcx	w66, [sp, 200]
+	dlwcx	w67, [sp, 204]
+	dlwcx	w68, [sp, 208]
+	dlwcx	w69, [sp, 212]
+	dlwcx	w70, [sp, 216]
+	dlwcx	w71, [sp, 220]
+	dlwcx	w72, [sp, 224]
+	dlwcx	w73, [sp, 228]
+	dlwcx	w74, [sp, 232]
+	dlwcx	w75, [sp, 236]
+	dlwcx	w76, [sp, 240]
+	dlwcx	w77, [sp, 244]
+	dlwcx	w78, [sp, 248]
+	dlwcx	w79, [sp, 252]
+	dlwcx	w80, [sp, 256]
+	dlwcx	w81, [sp, 260]
+	dlwcx	w82, [sp, 264]
+	dlwcx	w83, [sp, 268]
+	dlwcx	w84, [sp, 272]
+	dlwcx	w85, [sp, 276]
+	dlwcx	w86, [sp, 280]
+	dlwcx	w87, [sp, 284]
+	dlwcx	w88, [sp, 288]
+	dlwcx	w89, [sp, 292]
+	dlwcx	w90, [sp, 296]
+	dlwcx	w91, [sp, 300]
+	dlwcx	w92, [sp, 304]
+	dlwcx	w93, [sp, 308]
+	dlwcx	w94, [sp, 312]
+	dlwcx	w95, [sp, 316]
+	dlwcx	w96, [sp, 320]
+	dlwcx	w97, [sp, 324]
+	dlwcx	w98, [sp, 328]
+	dlwcx	w99, [sp, 332]
+	dlwcx	w100, [sp, 336]
+	dlwcx	w101, [sp, 340]
+	dlwcx	w102, [sp, 344]
+	dlwcx	w103, [sp, 348]
+	dlwcx	w104, [sp, 352]
+	dlwcx	w105, [sp, 356]
+	dlwcx	w106, [sp, 360]
+	dlwcx	w107, [sp, 364]
+	dlwcx	w108, [sp, 368]
+	dlwcx	w109, [sp, 372]
+	dlwcx	w110, [sp, 376]
+	dlwcx	w111, [sp, 380]
+	dlwcx	w112, [sp, 384]
+	dlwcx	w113, [sp, 388]
+	dlwcx	w114, [sp, 392]
+	dlwcx	w115, [sp, 396]
+	dlwcx	w116, [sp, 400]
+	dlwcx	w117, [sp, 404]
+	dlwcx	w118, [sp, 408]
+	dlwcx	w119, [sp, 412]
+	dlwcx	w120, [sp, 416]
+	dlwcx	w121, [sp, 420]
+	dlwcx	w122

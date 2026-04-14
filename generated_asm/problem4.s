@@ -1,45 +1,160 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$32, %rsp
-	movl	%edi, -4(%rbp)
-	movslq	-4(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, -16(%rbp)
-	movl	-4(%rbp), %ecx
-	movq	-16(%rbp), %rax
-	movl	%ecx, (%rax)
-	movl	$1, -20(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	cmpl	-4(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	movl	-4(%rax,%rcx,4), %edx
-	addl	$2, %edx
-	movq	-16(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	movq	-16(%rbp), %rax
-	addq	$32, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
+.func0
+ldr	xsp, [sp]
+str	xzr, [sp, 72]
+ldr	w0, [sp, 56]
+ldr	w1, [sp, 48]
+ldr	w2, [sp, 40]
+ldr	w3, [sp, 32]
+ldr	w4, [sp, 24]
+ldr	w5, [sp, 16]
+ldr	w6, [sp, 8]
+ldr	w7, [sp, 0]
+mov	w0, w7
+ldr	w1, [sp, 56]
+ldr	w2, [sp, 48]
+ldr	w3, [sp, 40]
+ldr	w4, [sp, 32]
+ldr	w5, [sp, 24]
+ldr	w6, [sp, 16]
+ldr	w7, [sp, 8]
+ldr	w8, [sp, 0]
+ldr	w9, [sp, 72]
+ldr	w10, [sp, 64]
+ldr	w11, [sp, 56]
+ldr	w12, [sp, 48]
+ldr	w13, [sp, 40]
+ldr	w14, [sp, 32]
+ldr	w15, [sp, 24]
+ldr	w16, [sp, 16]
+ldr	w17, [sp, 8]
+ldr	w18, [sp, 0]
+ldr	w19, [sp, 72]
+ldr	w20, [sp, 64]
+ldr	w21, [sp, 56]
+ldr	w22, [sp, 48]
+ldr	w23, [sp, 40]
+ldr	w24, [sp, 32]
+ldr	w25, [sp, 24]
+ldr	w26, [sp, 16]
+ldr	w27, [sp, 8]
+ldr	w28, [sp, 0]
+ldr	w29, [sp, 72]
+ldr	w30, [sp, 64]
+ldr	w31, [sp, 56]
+ldr	w32, [sp, 48]
+ldr	w33, [sp, 40]
+ldr	w34, [sp, 32]
+ldr	w35, [sp, 24]
+ldr	w36, [sp, 16]
+ldr	w37, [sp, 8]
+ldr	w38, [sp, 0]
+ldr	w39, [sp, 72]
+ldr	w40, [sp, 64]
+ldr	w41, [sp, 56]
+ldr	w42, [sp, 48]
+ldr	w43, [sp, 40]
+ldr	w44, [sp, 32]
+ldr	w45, [sp, 24]
+ldr	w46, [sp, 16]
+ldr	w47, [sp, 8]
+ldr	w48, [sp, 0]
+ldr	w49, [sp, 72]
+ldr	w50, [sp, 64]
+ldr	w51, [sp, 56]
+ldr	w52, [sp, 48]
+ldr	w53, [sp, 40]
+ldr	w54, [sp, 32]
+ldr	w55, [sp, 24]
+ldr	w56, [sp, 16]
+ldr	w57, [sp, 8]
+ldr	w58, [sp, 0]
+ldr	w59, [sp, 72]
+ldr	w60, [sp, 64]
+ldr	w61, [sp, 56]
+ldr	w62, [sp, 48]
+ldr	w63, [sp, 40]
+ldr	w64, [sp, 32]
+ldr	w65, [sp, 24]
+ldr	w66, [sp, 16]
+ldr	w67, [sp, 8]
+ldr	w68, [sp, 0]
+ldr	w69, [sp, 72]
+ldr	w70, [sp, 64]
+ldr	w71, [sp, 56]
+ldr	w72, [sp, 48]
+ldr	w73, [sp, 40]
+ldr	w74, [sp, 32]
+ldr	w75, [sp, 24]
+ldr	w76, [sp, 16]
+ldr	w77, [sp, 8]
+ldr	w78, [sp, 0]
+ldr	w79, [sp, 72]
+ldr	w80, [sp, 64]
+ldr	w81, [sp, 56]
+ldr	w82, [sp, 48]
+ldr	w83, [sp, 40]
+ldr	w84, [sp, 32]
+ldr	w85, [sp, 24]
+ldr	w86, [sp, 16]
+ldr	w87, [sp, 8]
+ldr	w88, [sp, 0]
+ldr	w89, [sp, 72]
+ldr	w90, [sp, 64]
+ldr	w91, [sp, 56]
+ldr	w92, [sp, 48]
+ldr	w93, [sp, 40]
+ldr	w94, [sp, 32]
+ldr	w95, [sp, 24]
+ldr	w96, [sp, 16]
+ldr	w97, [sp, 8]
+ldr	w98, [sp, 0]
+ldr	w99, [sp, 72]
+ldr	w100, [sp, 64]
+ldr	w101, [sp, 56]
+ldr	w102, [sp, 48]
+ldr	w103, [sp, 40]
+ldr	w104, [sp, 32]
+ldr	w105, [sp, 24]
+ldr	w106, [sp, 16]
+ldr	w107, [sp, 8]
+ldr	w108, [sp, 0]
+ldr	w109, [sp, 72]
+ldr	w110, [sp, 64]
+ldr	w111, [sp, 56]
+ldr	w112, [sp, 48]
+ldr	w113, [sp, 40]
+ldr	w114, [sp, 32]
+ldr	w115, [sp, 24]
+ldr	w116, [sp, 16]
+ldr	w117, [sp, 8]
+ldr	w118, [sp, 0]
+ldr	w119, [sp, 72]
+ldr	w120, [sp, 64]
+ldr	w121, [sp, 56]
+ldr	w122, [sp, 48]
+ldr	w123, [sp, 40]
+ldr	w124, [sp, 32]
+ldr	w125, [sp, 24]
+ldr	w126, [sp, 16]
+ldr	w127, [sp, 8]
+ldr	w128, [sp, 0]
+ldr	w129, [sp, 72]
+ldr	w130, [sp, 64]
+ldr	w131, [sp, 56]
+ldr	w132, [sp, 48]
+ldr	w133, [sp, 40]
+ldr	w134, [sp, 32]
+ldr	w135, [sp, 24]
+ldr	w136, [sp, 16]
+ldr	w137, [sp, 8]
+ldr	w138, [sp, 0]
+ldr	w139, [sp, 72]
+ldr	w140, [sp, 64]
+ldr	w141, [sp, 56]
+ldr	w142, [sp, 48]
+ldr	w143, [sp, 40]
+ldr	w144, [sp, 32]
+ldr	w145, [sp, 24]
+ldr	w146, [sp, 16]
+ldr	w147, [sp, 8]
+ldr	w

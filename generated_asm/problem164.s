@@ -1,75 +1,155 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-	movq	%rdi, -8(%rbp)
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -16(%rbp)
-	movl	$0, -20(%rbp)
-	movl	$0, -24(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-24(%rbp), %rcx
-	movsbl	(%rax,%rcx), %ecx
-	xorl	%eax, %eax
-                                        ## kill: def $al killed $al killed $eax
-	cmpl	$0, %ecx
-	movb	%al, -25(%rbp)                  ## 1-byte Spill
-	je	LBB0_3
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-24(%rbp), %eax
-	shll	$1, %eax
-	cltq
-	movq	%rax, -40(%rbp)                 ## 8-byte Spill
-	movq	-8(%rbp), %rdi
-	callq	_strlen
-	movq	%rax, %rcx
-	movq	-40(%rbp), %rax                 ## 8-byte Reload
-	cmpq	%rcx, %rax
-	setb	%al
-	movb	%al, -25(%rbp)                  ## 1-byte Spill
-LBB0_3:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movb	-25(%rbp), %al                  ## 1-byte Reload
-	testb	$1, %al
-	jne	LBB0_4
-	jmp	LBB0_8
-LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%rbp), %rdi
-	movq	-8(%rbp), %rax
-	movl	-24(%rbp), %ecx
-	shll	$1, %ecx
-	movslq	%ecx, %rcx
-	movsbl	(%rax,%rcx), %esi
-	callq	_strchr
-	cmpq	$0, %rax
-	je	LBB0_6
-## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_7
-LBB0_7:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-24(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -24(%rbp)
-	jmp	LBB0_1
-LBB0_8:
-	movl	-20(%rbp), %eax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"AEIOU"
+.func0
+ldr	w0, [sp, 40]
+ldr	w1, [sp, 24]
+movzr	w1, w1, lsl 1
+ldr	w2, [sp, 24]
+ldr	w3, [sp, 20]
+ldr	w4, [sp, 20]
+ldr	w5, [sp, 20]
+ldr	w6, [sp, 20]
+ldr	w7, [sp, 20]
+ldr	w8, [sp, 20]
+ldr	w9, [sp, 20]
+ldr	w10, [sp, 20]
+ldr	w11, [sp, 20]
+ldr	w12, [sp, 20]
+ldr	w13, [sp, 20]
+ldr	w14, [sp, 20]
+ldr	w15, [sp, 20]
+ldr	w16, [sp, 20]
+ldr	w17, [sp, 20]
+ldr	w18, [sp, 20]
+ldr	w19, [sp, 20]
+ldr	w20, [sp, 20]
+ldr	w21, [sp, 20]
+ldr	w22, [sp, 20]
+ldr	w23, [sp, 20]
+ldr	w24, [sp, 20]
+ldr	w25, [sp, 20]
+ldr	w26, [sp, 20]
+ldr	w27, [sp, 20]
+ldr	w28, [sp, 20]
+ldr	w29, [sp, 20]
+ldr	w30, [sp, 20]
+ldr	w31, [sp, 20]
+ldr	w32, [sp, 20]
+ldr	w33, [sp, 20]
+ldr	w34, [sp, 20]
+ldr	w35, [sp, 20]
+ldr	w36, [sp, 20]
+ldr	w37, [sp, 20]
+ldr	w38, [sp, 20]
+ldr	w39, [sp, 20]
+ldr	w40, [sp, 20]
+ldr	w41, [sp, 20]
+ldr	w42, [sp, 20]
+ldr	w43, [sp, 20]
+ldr	w44, [sp, 20]
+ldr	w45, [sp, 20]
+ldr	w46, [sp, 20]
+ldr	w47, [sp, 20]
+ldr	w48, [sp, 20]
+ldr	w49, [sp, 20]
+ldr	w50, [sp, 20]
+ldr	w51, [sp, 20]
+ldr	w52, [sp, 20]
+ldr	w53, [sp, 20]
+ldr	w54, [sp, 20]
+ldr	w55, [sp, 20]
+ldr	w56, [sp, 20]
+ldr	w57, [sp, 20]
+ldr	w58, [sp, 20]
+ldr	w59, [sp, 20]
+ldr	w60, [sp, 20]
+ldr	w61, [sp, 20]
+ldr	w62, [sp, 20]
+ldr	w63, [sp, 20]
+ldr	w64, [sp, 20]
+ldr	w65, [sp, 20]
+ldr	w66, [sp, 20]
+ldr	w67, [sp, 20]
+ldr	w68, [sp, 20]
+ldr	w69, [sp, 20]
+ldr	w70, [sp, 20]
+ldr	w71, [sp, 20]
+ldr	w72, [sp, 20]
+ldr	w73, [sp, 20]
+ldr	w74, [sp, 20]
+ldr	w75, [sp, 20]
+ldr	w76, [sp, 20]
+ldr	w77, [sp, 20]
+ldr	w78, [sp, 20]
+ldr	w79, [sp, 20]
+ldr	w80, [sp, 20]
+ldr	w81, [sp, 20]
+ldr	w82, [sp, 20]
+ldr	w83, [sp, 20]
+ldr	w84, [sp, 20]
+ldr	w85, [sp, 20]
+ldr	w86, [sp, 20]
+ldr	w87, [sp, 20]
+ldr	w88, [sp, 20]
+ldr	w89, [sp, 20]
+ldr	w90, [sp, 20]
+ldr	w91, [sp, 20]
+ldr	w92, [sp, 20]
+ldr	w93, [sp, 20]
+ldr	w94, [sp, 20]
+ldr	w95, [sp, 20]
+ldr	w96, [sp, 20]
+ldr	w97, [sp, 20]
+ldr	w98, [sp, 20]
+ldr	w99, [sp, 20]
+ldr	w100, [sp, 20]
+ldr	w101, [sp, 20]
+ldr	w102, [sp, 20]
+ldr	w103, [sp, 20]
+ldr	w104, [sp, 20]
+ldr	w105, [sp, 20]
+ldr	w106, [sp, 20]
+ldr	w107, [sp, 20]
+ldr	w108, [sp, 20]
+ldr	w109, [sp, 20]
+ldr	w110, [sp, 20]
+ldr	w111, [sp, 20]
+ldr	w112, [sp, 20]
+ldr	w113, [sp, 20]
+ldr	w114, [sp, 20]
+ldr	w115, [sp, 20]
+ldr	w116, [sp, 20]
+ldr	w117, [sp, 20]
+ldr	w118, [sp, 20]
+ldr	w119, [sp, 20]
+ldr	w120, [sp, 20]
+ldr	w121, [sp, 20]
+ldr	w122, [sp, 20]
+ldr	w123, [sp, 20]
+ldr	w124, [sp, 20]
+ldr	w125, [sp, 20]
+ldr	w126, [sp, 20]
+ldr	w127, [sp, 20]
+ldr	w128, [sp, 20]
+ldr	w129, [sp, 20]
+ldr	w130, [sp, 20]
+ldr	w131, [sp, 20]
+ldr	w132, [sp, 20]
+ldr	w133, [sp, 20]
+ldr	w134, [sp, 20]
+ldr	w135, [sp, 20]
+ldr	w136, [sp, 20]
+ldr	w137, [sp, 20]
+ldr	w138, [sp, 20]
+ldr	w139, [sp, 20]
+ldr	w140, [sp, 20]
+ldr	w141, [sp, 20]
+ldr	w142, [sp, 20]
+ldr	w143, [sp, 20]
+ldr	w144, [sp, 20]
+ldr	w145, [sp, 20]
+ldr	w146, [sp, 20]
+ldr	w147, [sp, 20]
+ldr	w148, [sp, 20]
+ldr	w149, [sp, 20]
+ldr	w150, [sp, 20]
+ldr	w151, [sp, 20]
+ldr	w152, [sp, 20]

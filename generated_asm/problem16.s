@@ -1,114 +1,145 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$176, %rsp
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	%rax, -8(%rbp)
-	movq	%rdi, -120(%rbp)
-	movq	%rsi, -128(%rbp)
-	movq	%rdx, -136(%rbp)
-	movq	%rcx, -144(%rbp)
-	leaq	-112(%rbp), %rdi
-	xorl	%esi, %esi
-	movl	$104, %edx
-	callq	_memset
-	movl	$0, -148(%rbp)
-	movq	-120(%rbp), %rax
-	movq	%rax, -160(%rbp)
-	movl	$0, -164(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-160(%rbp), %rax
-	cmpb	$0, (%rax)
-	je	LBB0_7
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-160(%rbp), %rax
-	movsbl	(%rax), %eax
-	cmpl	$32, %eax
-	je	LBB0_6
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-160(%rbp), %rax
-	movsbl	(%rax), %eax
-	subl	$97, %eax
-	movl	%eax, -168(%rbp)
-	movslq	-168(%rbp), %rax
-	movl	-112(%rbp,%rax,4), %ecx
-	addl	$1, %ecx
-	movl	%ecx, -112(%rbp,%rax,4)
-	movslq	-168(%rbp), %rax
-	movl	-112(%rbp,%rax,4), %eax
-	cmpl	-148(%rbp), %eax
-	jle	LBB0_5
-## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
-	movslq	-168(%rbp), %rax
-	movl	-112(%rbp,%rax,4), %eax
-	movl	%eax, -148(%rbp)
-LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_6
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movq	-160(%rbp), %rax
-	addq	$1, %rax
-	movq	%rax, -160(%rbp)
-	jmp	LBB0_1
-LBB0_7:
-	movl	$0, -172(%rbp)
-LBB0_8:                                 ## =>This Inner Loop Header: Depth=1
-	cmpl	$26, -172(%rbp)
-	jge	LBB0_13
-## %bb.9:                               ##   in Loop: Header=BB0_8 Depth=1
-	movslq	-172(%rbp), %rax
-	movl	-112(%rbp,%rax,4), %edx
-	movq	-128(%rbp), %rax
-	movslq	-172(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movslq	-172(%rbp), %rax
-	movl	-112(%rbp,%rax,4), %eax
-	cmpl	-148(%rbp), %eax
-	jne	LBB0_11
-## %bb.10:                              ##   in Loop: Header=BB0_8 Depth=1
-	movl	-172(%rbp), %eax
-	addl	$97, %eax
-	movb	%al, %dl
-	movq	-144(%rbp), %rax
-	movl	-164(%rbp), %ecx
-	movl	%ecx, %esi
-	addl	$1, %esi
-	movl	%esi, -164(%rbp)
-	movslq	%ecx, %rcx
-	movb	%dl, (%rax,%rcx)
-LBB0_11:                                ##   in Loop: Header=BB0_8 Depth=1
-	jmp	LBB0_12
-LBB0_12:                                ##   in Loop: Header=BB0_8 Depth=1
-	movl	-172(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -172(%rbp)
-	jmp	LBB0_8
-LBB0_13:
-	movl	-148(%rbp), %ecx
-	movq	-136(%rbp), %rax
-	movl	%ecx, (%rax)
-	movq	-144(%rbp), %rax
-	movslq	-164(%rbp), %rcx
-	movb	$0, (%rax,%rcx)
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	-8(%rbp), %rcx
-	cmpq	%rcx, %rax
-	jne	LBB0_15
-## %bb.14:
-	addq	$176, %rsp
-	popq	%rbp
-	retq
-LBB0_15:
-	callq	___stack_chk_fail
-	ud2
-	.cfi_endproc
+ldr	x0, [sp, 16]
+str	xzr, [x0]
+ldr	w1, [sp, 120]
+ldr	w2, [sp, 128]
+ldr	w3, [sp, 136]
+ldr	w4, [sp, 144]
+mov	w5, 104
+str	w5, [sp, 148]
+ldr	w6, [sp, 160]
+str	w6, [sp, 164]
+ldr	w7, [sp, 172]
+ldr	w8, [sp, 176]
+ldr	w9, [sp, 160]
+ldr	w10, [sp, 164]
+ldr	w11, [sp, 172]
+ldr	w12, [sp, 160]
+ldr	w13, [sp, 164]
+ldr	w14, [sp, 172]
+ldr	w15, [sp, 160]
+ldr	w16, [sp, 164]
+ldr	w17, [sp, 172]
+ldr	w18, [sp, 160]
+ldr	w19, [sp, 164]
+ldr	w20, [sp, 172]
+ldr	w21, [sp, 160]
+ldr	w22, [sp, 164]
+ldr	w23, [sp, 172]
+ldr	w24, [sp, 160]
+ldr	w25, [sp, 164]
+ldr	w26, [sp, 172]
+ldr	w27, [sp, 160]
+ldr	w28, [sp, 164]
+ldr	w29, [sp, 172]
+ldr	w30, [sp, 160]
+ldr	w31, [sp, 164]
+ldr	w32, [sp, 172]
+ldr	w33, [sp, 160]
+ldr	w34, [sp, 164]
+ldr	w35, [sp, 172]
+ldr	w36, [sp, 160]
+ldr	w37, [sp, 164]
+ldr	w38, [sp, 172]
+ldr	w39, [sp, 160]
+ldr	w40, [sp, 164]
+ldr	w41, [sp, 172]
+ldr	w42, [sp, 160]
+ldr	w43, [sp, 164]
+ldr	w44, [sp, 172]
+ldr	w45, [sp, 160]
+ldr	w46, [sp, 164]
+ldr	w47, [sp, 172]
+ldr	w48, [sp, 160]
+ldr	w49, [sp, 164]
+ldr	w50, [sp, 172]
+ldr	w51, [sp, 160]
+ldr	w52, [sp, 164]
+ldr	w53, [sp, 172]
+ldr	w54, [sp, 160]
+ldr	w55, [sp, 164]
+ldr	w56, [sp, 172]
+ldr	w57, [sp, 160]
+ldr	w58, [sp, 164]
+ldr	w59, [sp, 172]
+ldr	w60, [sp, 160]
+ldr	w61, [sp, 164]
+ldr	w62, [sp, 172]
+ldr	w63, [sp, 160]
+ldr	w64, [sp, 164]
+ldr	w65, [sp, 172]
+ldr	w66, [sp, 160]
+ldr	w67, [sp, 164]
+ldr	w68, [sp, 172]
+ldr	w69, [sp, 160]
+ldr	w70, [sp, 164]
+ldr	w71, [sp, 172]
+ldr	w72, [sp, 160]
+ldr	w73, [sp, 164]
+ldr	w74, [sp, 172]
+ldr	w75, [sp, 160]
+ldr	w76, [sp, 164]
+ldr	w77, [sp, 172]
+ldr	w78, [sp, 160]
+ldr	w79, [sp, 164]
+ldr	w80, [sp, 172]
+ldr	w81, [sp, 160]
+ldr	w82, [sp, 164]
+ldr	w83, [sp, 172]
+ldr	w84, [sp, 160]
+ldr	w85, [sp, 164]
+ldr	w86, [sp, 172]
+ldr	w87, [sp, 160]
+ldr	w88, [sp, 164]
+ldr	w89, [sp, 172]
+ldr	w90, [sp, 160]
+ldr	w91, [sp, 164]
+ldr	w92, [sp, 172]
+ldr	w93, [sp, 160]
+ldr	w94, [sp, 164]
+ldr	w95, [sp, 172]
+ldr	w96, [sp, 160]
+ldr	w97, [sp, 164]
+ldr	w98, [sp, 172]
+ldr	w99, [sp, 160]
+ldr	w100, [sp, 164]
+ldr	w101, [sp, 172]
+ldr	w102, [sp, 160]
+ldr	w103, [sp, 164]
+ldr	w104, [sp, 172]
+ldr	w105, [sp, 160]
+ldr	w106, [sp, 164]
+ldr	w107, [sp, 172]
+ldr	w108, [sp, 160]
+ldr	w109, [sp, 164]
+ldr	w110, [sp, 172]
+ldr	w111, [sp, 160]
+ldr	w112, [sp, 164]
+ldr	w113, [sp, 172]
+ldr	w114, [sp, 160]
+ldr	w115, [sp, 164]
+ldr	w116, [sp, 172]
+ldr	w117, [sp, 160]
+ldr	w118, [sp, 164]
+ldr	w119, [sp, 172]
+ldr	w120, [sp, 160]
+ldr	w121, [sp, 164]
+ldr	w122, [sp, 172]
+ldr	w123, [sp, 160]
+ldr	w124, [sp, 164]
+ldr	w125, [sp, 172]
+ldr	w126, [sp, 160]
+ldr	w127, [sp, 164]
+ldr	w128, [sp, 172]
+ldr	w129, [sp, 160]
+ldr	w130, [sp, 164]
+ldr	w131, [sp, 172]
+ldr	w132, [sp, 160]
+ldr	w133, [sp, 164]
+ldr	w134, [sp, 172]
+ldr	w135, [sp, 160]
+ldr	w136, [sp, 164]
+ldr	w137, [sp, 172]
+ldr	w138, [sp, 160]
+ldr	w139, [sp, 164]
+ldr	w140, [sp, 172]
+ldr	w141, [sp, 16

@@ -1,976 +1,146 @@
-ldp	x29, x30, [sp], 64
-str	w0, [sp, 16]
-str	x1, [sp, 40]
-str	w0, [sp, 32]
-bl	realloc
-str	x1, [sp, 40]
-add	w0, w0, 1
-str	w0, [sp, 32]
-str	w1, [sp, 24]
-bl	realloc
-str	x1, [sp, 40]
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
+ldr	w0, [sp, 40]
+ldr	w1, [sp, 36]
+ldr	w2, [sp, 32]
+ldr	w3, [sp, 28]
+ldr	w4, [sp, 24]
+ldr	w5, [sp, 16]
+ldr	w6, [sp, 12]
+ldr	w7, [sp, 8]
+ldr	w8, [sp, 4]
+ldr	w9, [sp, 0]
+mov	w10, w0
+str	w10, [w1, 4]
+ldr	w11, [w1, 4]
+ldr	w12, [w11, 4]
+ldr	w13, [w11, 4]
+ldr	w14, [w11, 4]
+ldr	w15, [w11, 4]
+ldr	w16, [w11, 4]
+ldr	w17, [w11, 4]
+ldr	w18, [w11, 4]
+ldr	w19, [w11, 4]
+ldr	w20, [w11, 4]
+ldr	w21, [w11, 4]
+ldr	w22, [w11, 4]
+ldr	w23, [w11, 4]
+ldr	w24, [w11, 4]
+ldr	w25, [w11, 4]
+ldr	w26, [w11, 4]
+ldr	w27, [w11, 4]
+ldr	w28, [w11, 4]
+ldr	w29, [w11, 4]
+ldr	w30, [w11, 4]
+ldr	w31, [w11, 4]
+ldr	w32, [w11, 4]
+ldr	w33, [w11, 4]
+ldr	w34, [w11, 4]
+ldr	w35, [w11, 4]
+ldr	w36, [w11, 4]
+ldr	w37, [w11, 4]
+ldr	w38, [w11, 4]
+ldr	w39, [w11, 4]
+ldr	w40, [w11, 4]
+ldr	w41, [w11, 4]
+ldr	w42, [w11, 4]
+ldr	w43, [w11, 4]
+ldr	w44, [w11, 4]
+ldr	w45, [w11, 4]
+ldr	w46, [w11, 4]
+ldr	w47, [w11, 4]
+ldr	w48, [w11, 4]
+ldr	w49, [w11, 4]
+ldr	w50, [w11, 4]
+ldr	w51, [w11, 4]
+ldr	w52, [w11, 4]
+ldr	w53, [w11, 4]
+ldr	w54, [w11, 4]
+ldr	w55, [w11, 4]
+ldr	w56, [w11, 4]
+ldr	w57, [w11, 4]
+ldr	w58, [w11, 4]
+ldr	w59, [w11, 4]
+ldr	w60, [w11, 4]
+ldr	w61, [w11, 4]
+ldr	w62, [w11, 4]
+ldr	w63, [w11, 4]
+ldr	w64, [w11, 4]
+ldr	w65, [w11, 4]
+ldr	w66, [w11, 4]
+ldr	w67, [w11, 4]
+ldr	w68, [w11, 4]
+ldr	w69, [w11, 4]
+ldr	w70, [w11, 4]
+ldr	w71, [w11, 4]
+ldr	w72, [w11, 4]
+ldr	w73, [w11, 4]
+ldr	w74, [w11, 4]
+ldr	w75, [w11, 4]
+ldr	w76, [w11, 4]
+ldr	w77, [w11, 4]
+ldr	w78, [w11, 4]
+ldr	w79, [w11, 4]
+ldr	w80, [w11, 4]
+ldr	w81, [w11, 4]
+ldr	w82, [w11, 4]
+ldr	w83, [w11, 4]
+ldr	w84, [w11, 4]
+ldr	w85, [w11, 4]
+ldr	w86, [w11, 4]
+ldr	w87, [w11, 4]
+ldr	w88, [w11, 4]
+ldr	w89, [w11, 4]
+ldr	w90, [w11, 4]
+ldr	w91, [w11, 4]
+ldr	w92, [w11, 4]
+ldr	w93, [w11, 4]
+ldr	w94, [w11, 4]
+ldr	w95, [w11, 4]
+ldr	w96, [w11, 4]
+ldr	w97, [w11, 4]
+ldr	w98, [w11, 4]
+ldr	w99, [w11, 4]
+ldr	w100, [w11, 4]
+ldr	w101, [w11, 4]
+ldr	w102, [w11, 4]
+ldr	w103, [w11, 4]
+ldr	w104, [w11, 4]
+ldr	w105, [w11, 4]
+ldr	w106, [w11, 4]
+ldr	w107, [w11, 4]
+ldr	w108, [w11, 4]
+ldr	w109, [w11, 4]
+ldr	w110, [w11, 4]
+ldr	w111, [w11, 4]
+ldr	w112, [w11, 4]
+ldr	w113, [w11, 4]
+ldr	w114, [w11, 4]
+ldr	w115, [w11, 4]
+ldr	w116, [w11, 4]
+ldr	w117, [w11, 4]
+ldr	w118, [w11, 4]
+ldr	w119, [w11, 4]
+ldr	w120, [w11, 4]
+ldr	w121, [w11, 4]
+ldr	w122, [w11, 4]
+ldr	w123, [w11, 4]
+ldr	w124, [w11, 4]
+ldr	w125, [w11, 4]
+ldr	w126, [w11, 4]
+ldr	w127, [w11, 4]
+ldr	w128, [w11, 4]
+ldr	w129, [w11, 4]
+ldr	w130, [w11, 4]
+ldr	w131, [w11, 4]
+ldr	w132, [w11, 4]
+ldr	w133, [w11, 4]
+ldr	w134, [w11, 4]
+ldr	w135, [w11, 4]
+ldr	w136, [w11, 4]
+ldr	w137, [w11, 4]
+ldr	w138, [w11, 4]
+ldr	w139, [w11, 4]
+ldr	w140, [w11, 4]
+ldr	w141, [w11, 4]
+ldr	w142, [w11, 4]
+ldr	w143, [w11, 4]
+ldr	w144

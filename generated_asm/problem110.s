@@ -1,13 +1,13 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.section	__TEXT,__literal16,16byte_literals
-.p2align	4                               ## -- Begin function func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.section	__TEXT,__literal16,16byte_literals
+	.p2align	4                               ## -- Begin function func0
 LCPI0_0:
 	.quad	0x7fffffffffffffff              ## double NaN
 	.quad	0x7fffffffffffffff              ## double NaN
-.section	__TEXT,__text,regular,pure_instructions
-.globl	_func0
-.p2align	4, 0x90
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
 ## %bb.0:

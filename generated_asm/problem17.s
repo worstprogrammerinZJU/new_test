@@ -1,152 +1,138 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$96, %rsp
-	movq	%rdi, -8(%rbp)
-	movq	%rsi, -16(%rbp)
-	movq	%rdx, -24(%rbp)
-	movq	%rcx, -32(%rbp)
-	movq	-8(%rbp), %rdi
-	callq	_strlen
-                                        ## kill: def $eax killed $eax killed $rax
-	movl	%eax, -36(%rbp)
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movslq	%eax, %rdi
-	shlq	$0, %rdi
-	callq	_malloc
-	movq	%rax, -48(%rbp)
-	movl	$0, -52(%rbp)
-	movl	$0, -56(%rbp)
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_3 Depth 2
-	movq	-8(%rbp), %rax
-	movslq	-56(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$0, %eax
-	je	LBB0_11
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%rbp), %rax
-	movq	%rax, -64(%rbp)
-	movb	$0, -65(%rbp)
-LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movq	-64(%rbp), %rax
-	movsbl	(%rax), %eax
-	cmpl	$0, %eax
-	je	LBB0_7
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-56(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	movq	-64(%rbp), %rcx
-	movsbl	(%rcx), %ecx
-	cmpl	%ecx, %eax
-	jne	LBB0_6
-## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
-	movb	$1, -65(%rbp)
-	jmp	LBB0_7
-LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=2
-	movq	-64(%rbp), %rax
-	addq	$1, %rax
-	movq	%rax, -64(%rbp)
-	jmp	LBB0_3
-LBB0_7:                                 ##   in Loop: Header=BB0_1 Depth=1
-	testb	$1, -65(%rbp)
-	jne	LBB0_9
-## %bb.8:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-56(%rbp), %rcx
-	movb	(%rax,%rcx), %dl
-	movq	-48(%rbp), %rax
-	movl	-52(%rbp), %ecx
-	movl	%ecx, %esi
-	addl	$1, %esi
-	movl	%esi, -52(%rbp)
-	movslq	%ecx, %rcx
-	movb	%dl, (%rax,%rcx)
-LBB0_9:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_10
-LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
-	movl	-56(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -56(%rbp)
-	jmp	LBB0_1
-LBB0_11:
-	movq	-48(%rbp), %rax
-	movslq	-52(%rbp), %rcx
-	movb	$0, (%rax,%rcx)
-	movq	-48(%rbp), %rdi
-	callq	_strlen
-                                        ## kill: def $eax killed $eax killed $rax
-	movl	%eax, -72(%rbp)
-	movb	$1, -73(%rbp)
-	movl	$0, -80(%rbp)
-LBB0_12:                                ## =>This Inner Loop Header: Depth=1
-	movl	-80(%rbp), %eax
-	movl	%eax, -84(%rbp)                 ## 4-byte Spill
-	movl	-72(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, %ecx
-	movl	-84(%rbp), %eax                 ## 4-byte Reload
-	cmpl	%ecx, %eax
-	jge	LBB0_17
-## %bb.13:                              ##   in Loop: Header=BB0_12 Depth=1
-	movq	-48(%rbp), %rax
-	movslq	-80(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	movq	-48(%rbp), %rcx
-	movl	-72(%rbp), %edx
-	subl	$1, %edx
-	subl	-80(%rbp), %edx
-	movslq	%edx, %rdx
-	movsbl	(%rcx,%rdx), %ecx
-	cmpl	%ecx, %eax
-	je	LBB0_15
-## %bb.14:
-	movb	$0, -73(%rbp)
-	jmp	LBB0_17
-LBB0_15:                                ##   in Loop: Header=BB0_12 Depth=1
-	jmp	LBB0_16
-LBB0_16:                                ##   in Loop: Header=BB0_12 Depth=1
-	movl	-80(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -80(%rbp)
-	jmp	LBB0_12
-LBB0_17:
-	movq	-24(%rbp), %rdi
-	movq	-48(%rbp), %rsi
-	movq	$-1, %rdx
-	callq	___strcpy_chk
-	movq	-32(%rbp), %rdi
-	movb	-73(%rbp), %cl
-	leaq	L_.str.1(%rip), %rsi
-	leaq	L_.str(%rip), %rax
-	testb	$1, %cl
-	cmovneq	%rax, %rsi
-	movq	$-1, %rdx
-	callq	___strcpy_chk
-	movq	-48(%rbp), %rdi
-	callq	_free
-	addq	$96, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"True"
-
-L_.str.1:                               ## @.str.1
-	.asciz	"False"
+func0:
+	pop	wsp
+	xor	x0, wsp
+	xor	x1, [sp, 96]
+	xor	x2, [sp, 16]
+	xor	x3, [sp, 24]
+	xor	x4, [sp, 32]
+	xor	x5, [sp, 48]
+	xor	x6, [sp, 52]
+	xor	x7, [sp, 56]
+	xor	x8, [sp, 64]
+	xor	x9, [sp, 72]
+	xor	x10, [sp, 73]
+	xor	x11, [sp, 80]
+	xor	x12, [sp, 84]
+	xor	x13, [sp, 88]
+	xor	x14, [sp, 92]
+	xor	x15, [sp, 96]
+	xor	x16, [sp, 104]
+	xor	x17, [sp, 112]
+	xor	x18, [sp, 120]
+	xor	x19, [sp, 128]
+	xor	x20, [sp, 136]
+	xor	x21, [sp, 144]
+	xor	x22, [sp, 152]
+	xor	x23, [sp, 160]
+	xor	x24, [sp, 168]
+	xor	x25, [sp, 176]
+	xor	x26, [sp, 184]
+	xor	x27, [sp, 192]
+	xor	x28, [sp, 200]
+	xor	x29, [sp, 208]
+	xor	x30, [sp, 216]
+	xor	x31, [sp, 224]
+	xor	x32, [sp, 232]
+	xor	x33, [sp, 240]
+	xor	x34, [sp, 248]
+	xor	x35, [sp, 256]
+	xor	x36, [sp, 264]
+	xor	x37, [sp, 272]
+	xor	x38, [sp, 280]
+	xor	x39, [sp, 288]
+	xor	x40, [sp, 296]
+	xor	x41, [sp, 304]
+	xor	x42, [sp, 312]
+	xor	x43, [sp, 320]
+	xor	x44, [sp, 328]
+	xor	x45, [sp, 336]
+	xor	x46, [sp, 344]
+	xor	x47, [sp, 352]
+	xor	x48, [sp, 360]
+	xor	x49, [sp, 368]
+	xor	x50, [sp, 376]
+	xor	x51, [sp, 384]
+	xor	x52, [sp, 392]
+	xor	x53, [sp, 400]
+	xor	x54, [sp, 408]
+	xor	x55, [sp, 416]
+	xor	x56, [sp, 424]
+	xor	x57, [sp, 432]
+	xor	x58, [sp, 440]
+	xor	x59, [sp, 448]
+	xor	x60, [sp, 456]
+	xor	x61, [sp, 464]
+	xor	x62, [sp, 472]
+	xor	x63, [sp, 480]
+	xor	x64, [sp, 488]
+	xor	x65, [sp, 496]
+	xor	x66, [sp, 504]
+	xor	x67, [sp, 512]
+	xor	x68, [sp, 520]
+	xor	x69, [sp, 528]
+	xor	x70, [sp, 536]
+	xor	x71, [sp, 544]
+	xor	x72, [sp, 552]
+	xor	x73, [sp, 560]
+	xor	x74, [sp, 568]
+	xor	x75, [sp, 576]
+	xor	x76, [sp, 584]
+	xor	x77, [sp, 592]
+	xor	x78, [sp, 600]
+	xor	x79, [sp, 608]
+	xor	x80, [sp, 616]
+	xor	x81, [sp, 624]
+	xor	x82, [sp, 632]
+	xor	x83, [sp, 640]
+	xor	x84, [sp, 648]
+	xor	x85, [sp, 656]
+	xor	x86, [sp, 664]
+	xor	x87, [sp, 672]
+	xor	x88, [sp, 680]
+	xor	x89, [sp, 688]
+	xor	x90, [sp, 696]
+	xor	x91, [sp, 704]
+	xor	x92, [sp, 712]
+	xor	x93, [sp, 720]
+	xor	x94, [sp, 728]
+	xor	x95, [sp, 736]
+	xor	x96, [sp, 744]
+	xor	x97, [sp, 752]
+	xor	x98, [sp, 760]
+	xor	x99, [sp, 768]
+	xor	x100, [sp, 776]
+	xor	x101, [sp, 784]
+	xor	x102, [sp, 792]
+	xor	x103, [sp, 800]
+	xor	x104, [sp, 808]
+	xor	x105, [sp, 816]
+	xor	x106, [sp, 824]
+	xor	x107, [sp, 832]
+	xor	x108, [sp, 840]
+	xor	x109, [sp, 848]
+	xor	x110, [sp, 856]
+	xor	x111, [sp, 864]
+	xor	x112, [sp, 872]
+	xor	x113, [sp, 880]
+	xor	x114, [sp, 888]
+	xor	x115, [sp, 896]
+	xor	x116, [sp, 904]
+	xor	x117, [sp, 912]
+	xor	x118, [sp, 920]
+	xor	x119, [sp, 928]
+	xor	x120, [sp, 936]
+	xor	x121, [sp, 944]
+	xor	x122, [sp, 952]
+	xor	x123, [sp, 960]
+	xor	x124, [sp, 968]
+	xor	x125, [sp, 976]
+	xor	x126, [sp, 984]
+	xor	x127, [sp, 992]
+	xor	x128, [sp, 1000]
+	xor	x129, [sp, 1008]
+	xor	x130, [sp, 1016]
+	xor	x131, [sp, 1024]
+	xor	x132, [sp, 1032]
+	xor	x133, [sp, 1040]
+	xor	x134, [sp, 1048]
+	xor	x

@@ -1,287 +1,157 @@
-ldp	x29, x30, [sp], 64
-ldr	w0, [sp, 16]
-ldr	w1, [sp, 12]
-ldr	w2, [sp, 8]
-bl	_snprintf_chk
-add	sp, sp, 16
-ldr	w0, [sp, 16]
-add	w0, w0, 1
-ldr	w0, [sp, 16]
-bl	_malloc
-mov	x0, [sp, 32]
-blc	x0, 0
-blw	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0, 0
-bl	w0,
+_func0:
+ldr	w0, [sp, 40]
+mov	w1, 1
+mov	w2, 1
+mov	w3, 1
+ldr	w4, [sp, 48]
+str	w0, [w4, 0]
+str	w1, [sp, 40]
+str	w2, [sp, 44]
+ldr	w3, [sp, 48]
+ldr	w4, [sp, 40]
+ldr	w5, [sp, 44]
+ldr	w6, [sp, 48]
+ldr	w7, [sp, 40]
+ldr	w8, [sp, 44]
+ldr	w9, [sp, 48]
+ldr	w10, [sp, 40]
+ldr	w11, [sp, 44]
+ldr	w12, [sp, 48]
+ldr	w13, [sp, 40]
+ldr	w14, [sp, 44]
+ldr	w15, [sp, 48]
+ldr	w16, [sp, 40]
+ldr	w17, [sp, 44]
+ldr	w18, [sp, 48]
+ldr	w19, [sp, 40]
+ldr	w20, [sp, 44]
+ldr	w21, [sp, 48]
+ldr	w22, [sp, 40]
+ldr	w23, [sp, 44]
+ldr	w24, [sp, 48]
+ldr	w25, [sp, 40]
+ldr	w26, [sp, 44]
+ldr	w27, [sp, 48]
+ldr	w28, [sp, 40]
+ldr	w29, [sp, 44]
+ldr	w30, [sp, 48]
+ldr	w31, [sp, 40]
+ldr	w32, [sp, 44]
+ldr	w33, [sp, 48]
+ldr	w34, [sp, 40]
+ldr	w35, [sp, 44]
+ldr	w36, [sp, 48]
+ldr	w37, [sp, 40]
+ldr	w38, [sp, 44]
+ldr	w39, [sp, 48]
+ldr	w40, [sp, 40]
+ldr	w41, [sp, 44]
+ldr	w42, [sp, 48]
+ldr	w43, [sp, 40]
+ldr	w44, [sp, 44]
+ldr	w45, [sp, 48]
+ldr	w46, [sp, 40]
+ldr	w47, [sp, 44]
+ldr	w48, [sp, 48]
+ldr	w49, [sp, 40]
+ldr	w50, [sp, 44]
+ldr	w51, [sp, 48]
+ldr	w52, [sp, 40]
+ldr	w53, [sp, 44]
+ldr	w54, [sp, 48]
+ldr	w55, [sp, 40]
+ldr	w56, [sp, 44]
+ldr	w57, [sp, 48]
+ldr	w58, [sp, 40]
+ldr	w59, [sp, 44]
+ldr	w60, [sp, 48]
+ldr	w61, [sp, 40]
+ldr	w62, [sp, 44]
+ldr	w63, [sp, 48]
+ldr	w64, [sp, 40]
+ldr	w65, [sp, 44]
+ldr	w66, [sp, 48]
+ldr	w67, [sp, 40]
+ldr	w68, [sp, 44]
+ldr	w69, [sp, 48]
+ldr	w70, [sp, 40]
+ldr	w71, [sp, 44]
+ldr	w72, [sp, 48]
+ldr	w73, [sp, 40]
+ldr	w74, [sp, 44]
+ldr	w75, [sp, 48]
+ldr	w76, [sp, 40]
+ldr	w77, [sp, 44]
+ldr	w78, [sp, 48]
+ldr	w79, [sp, 40]
+ldr	w80, [sp, 44]
+ldr	w81, [sp, 48]
+ldr	w82, [sp, 40]
+ldr	w83, [sp, 44]
+ldr	w84, [sp, 48]
+ldr	w85, [sp, 40]
+ldr	w86, [sp, 44]
+ldr	w87, [sp, 48]
+ldr	w88, [sp, 40]
+ldr	w89, [sp, 44]
+ldr	w90, [sp, 48]
+ldr	w91, [sp, 40]
+ldr	w92, [sp, 44]
+ldr	w93, [sp, 48]
+ldr	w94, [sp, 40]
+ldr	w95, [sp, 44]
+ldr	w96, [sp, 48]
+ldr	w97, [sp, 40]
+ldr	w98, [sp, 44]
+ldr	w99, [sp, 48]
+ldr	w100, [sp, 40]
+ldr	w101, [sp, 44]
+ldr	w102, [sp, 48]
+ldr	w103, [sp, 40]
+ldr	w104, [sp, 44]
+ldr	w105, [sp, 48]
+ldr	w106, [sp, 40]
+ldr	w107, [sp, 44]
+ldr	w108, [sp, 48]
+ldr	w109, [sp, 40]
+ldr	w110, [sp, 44]
+ldr	w111, [sp, 48]
+ldr	w112, [sp, 40]
+ldr	w113, [sp, 44]
+ldr	w114, [sp, 48]
+ldr	w115, [sp, 40]
+ldr	w116, [sp, 44]
+ldr	w117, [sp, 48]
+ldr	w118, [sp, 40]
+ldr	w119, [sp, 44]
+ldr	w120, [sp, 48]
+ldr	w121, [sp, 40]
+ldr	w122, [sp, 44]
+ldr	w123, [sp, 48]
+ldr	w124, [sp, 40]
+ldr	w125, [sp, 44]
+ldr	w126, [sp, 48]
+ldr	w127, [sp, 40]
+ldr	w128, [sp, 44]
+ldr	w129, [sp, 48]
+ldr	w130, [sp, 40]
+ldr	w131, [sp, 44]
+ldr	w132, [sp, 48]
+ldr	w133, [sp, 40]
+ldr	w134, [sp, 44]
+ldr	w135, [sp, 48]
+ldr	w136, [sp, 40]
+ldr	w137, [sp, 44]
+ldr	w138, [sp, 48]
+ldr	w139, [sp, 40]
+ldr	w140, [sp, 44]
+ldr	w141, [sp, 48]
+ldr	w142, [sp, 40]
+ldr	w143, [sp, 44]
+ldr	w144, [sp, 48]
+ldr	w145, [sp, 40]
+ldr	w146, [sp, 44]
+ldr	w147, [sp, 48]
+ldr	w148, [sp, 40]
+ldr	w149, [sp, 44]
+ldr	w150, [sp,

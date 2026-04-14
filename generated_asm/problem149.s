@@ -1,134 +1,147 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-	movl	%edi, -4(%rbp)
-	leaq	-10(%rbp), %rdi
-	movl	-4(%rbp), %r8d
-	xorl	%esi, %esi
-	movl	$6, %edx
-	leaq	L_.str(%rip), %rcx
-	movb	$0, %al
-	callq	___sprintf_chk
-	movl	$0, -16(%rbp)
-	movl	$0, -20(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movslq	-20(%rbp), %rax
-	movsbl	-10(%rbp,%rax), %eax
-	cmpl	$0, %eax
-	je	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movslq	-20(%rbp), %rax
-	movsbl	-10(%rbp,%rax), %eax
-	subl	$48, %eax
-	addl	-16(%rbp), %eax
-	movl	%eax, -16(%rbp)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	movl	$33, %edi
-	callq	_malloc
-	movq	%rax, -32(%rbp)
-	movl	$0, -36(%rbp)
-	cmpl	$0, -16(%rbp)
-	jne	LBB0_6
-## %bb.5:
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	movl	%ecx, %edx
-	addl	$1, %edx
-	movl	%edx, -36(%rbp)
-	movslq	%ecx, %rcx
-	movb	$48, (%rax,%rcx)
-	jmp	LBB0_10
-LBB0_6:
-	jmp	LBB0_7
-LBB0_7:                                 ## =>This Inner Loop Header: Depth=1
-	cmpl	$0, -16(%rbp)
-	jle	LBB0_9
-## %bb.8:                               ##   in Loop: Header=BB0_7 Depth=1
-	movl	-16(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	addl	$48, %edx
-                                        ## kill: def $dl killed $dl killed $edx
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	movl	%ecx, %esi
-	addl	$1, %esi
-	movl	%esi, -36(%rbp)
-	movslq	%ecx, %rcx
-	movb	%dl, (%rax,%rcx)
-	movl	-16(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, -16(%rbp)
-	jmp	LBB0_7
-LBB0_9:
-	jmp	LBB0_10
-LBB0_10:
-	movq	-32(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movb	$0, (%rax,%rcx)
-	movl	$0, -40(%rbp)
-LBB0_11:                                ## =>This Inner Loop Header: Depth=1
-	movl	-40(%rbp), %eax
-	movl	%eax, -48(%rbp)                 ## 4-byte Spill
-	movl	-36(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, %ecx
-	movl	-48(%rbp), %eax                 ## 4-byte Reload
-	cmpl	%ecx, %eax
-	jge	LBB0_14
-## %bb.12:                              ##   in Loop: Header=BB0_11 Depth=1
-	movq	-32(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movb	(%rax,%rcx), %al
-	movb	%al, -41(%rbp)
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	subl	-40(%rbp), %ecx
-	subl	$1, %ecx
-	movslq	%ecx, %rcx
-	movb	(%rax,%rcx), %dl
-	movq	-32(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movb	%dl, (%rax,%rcx)
-	movb	-41(%rbp), %dl
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	subl	-40(%rbp), %ecx
-	subl	$1, %ecx
-	movslq	%ecx, %rcx
-	movb	%dl, (%rax,%rcx)
-## %bb.13:                              ##   in Loop: Header=BB0_11 Depth=1
-	movl	-40(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -40(%rbp)
-	jmp	LBB0_11
-LBB0_14:
-	movq	-32(%rbp), %rax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"%d"
+ldr	w0, [sp, 40]
+ldr	w1, [sp, 28]
+ldr	w2, [sp, 20]
+ldr	w3, [sp, 16]
+ldr	w4, [sp, 12]
+ldr	w5, [sp, 8]
+ldr	w6, [sp, 4]
+ldr	w7, [sp, 0]
+mov	w0, w7
+strb	w0, [w1, 0]
+strb	w0, [w1, 1]
+strb	w0, [w1, 2]
+strb	w0, [w1, 3]
+strb	w0, [w1, 4]
+strb	w0, [w1, 5]
+strb	w0, [w1, 6]
+strb	w0, [w1, 7]
+strb	w0, [w1, 8]
+strb	w0, [w1, 9]
+strb	w0, [w1, 10]
+strb	w0, [w1, 11]
+strb	w0, [w1, 12]
+strb	w0, [w1, 13]
+strb	w0, [w1, 14]
+strb	w0, [w1, 15]
+strb	w0, [w1, 16]
+strb	w0, [w1, 17]
+strb	w0, [w1, 18]
+strb	w0, [w1, 19]
+strb	w0, [w1, 20]
+strb	w0, [w1, 21]
+strb	w0, [w1, 22]
+strb	w0, [w1, 23]
+strb	w0, [w1, 24]
+strb	w0, [w1, 25]
+strb	w0, [w1, 26]
+strb	w0, [w1, 27]
+strb	w0, [w1, 28]
+strb	w0, [w1, 29]
+strb	w0, [w1, 30]
+strb	w0, [w1, 31]
+strb	w0, [w1, 32]
+strb	w0, [w1, 33]
+strb	w0, [w1, 34]
+strb	w0, [w1, 35]
+strb	w0, [w1, 36]
+strb	w0, [w1, 37]
+strb	w0, [w1, 38]
+strb	w0, [w1, 39]
+strb	w0, [w1, 40]
+strb	w0, [w1, 41]
+strb	w0, [w1, 42]
+strb	w0, [w1, 43]
+strb	w0, [w1, 44]
+strb	w0, [w1, 45]
+strb	w0, [w1, 46]
+strb	w0, [w1, 47]
+strb	w0, [w1, 48]
+strb	w0, [w1, 49]
+strb	w0, [w1, 50]
+strb	w0, [w1, 51]
+strb	w0, [w1, 52]
+strb	w0, [w1, 53]
+strb	w0, [w1, 54]
+strb	w0, [w1, 55]
+strb	w0, [w1, 56]
+strb	w0, [w1, 57]
+strb	w0, [w1, 58]
+strb	w0, [w1, 59]
+strb	w0, [w1, 60]
+strb	w0, [w1, 61]
+strb	w0, [w1, 62]
+strb	w0, [w1, 63]
+strb	w0, [w1, 64]
+strb	w0, [w1, 65]
+strb	w0, [w1, 66]
+strb	w0, [w1, 67]
+strb	w0, [w1, 68]
+strb	w0, [w1, 69]
+strb	w0, [w1, 70]
+strb	w0, [w1, 71]
+strb	w0, [w1, 72]
+strb	w0, [w1, 73]
+strb	w0, [w1, 74]
+strb	w0, [w1, 75]
+strb	w0, [w1, 76]
+strb	w0, [w1, 77]
+strb	w0, [w1, 78]
+strb	w0, [w1, 79]
+strb	w0, [w1, 80]
+strb	w0, [w1, 81]
+strb	w0, [w1, 82]
+strb	w0, [w1, 83]
+strb	w0, [w1, 84]
+strb	w0, [w1, 85]
+strb	w0, [w1, 86]
+strb	w0, [w1, 87]
+strb	w0, [w1, 88]
+strb	w0, [w1, 89]
+strb	w0, [w1, 90]
+strb	w0, [w1, 91]
+strb	w0, [w1, 92]
+strb	w0, [w1, 93]
+strb	w0, [w1, 94]
+strb	w0, [w1, 95]
+strb	w0, [w1, 96]
+strb	w0, [w1, 97]
+strb	w0, [w1, 98]
+strb	w0, [w1, 99]
+strb	w0, [w1, 100]
+strb	w0, [w1, 101]
+strb	w0, [w1, 102]
+strb	w0, [w1, 103]
+strb	w0, [w1, 104]
+strb	w0, [w1, 105]
+strb	w0, [w1, 106]
+strb	w0, [w1, 107]
+strb	w0, [w1, 108]
+strb	w0, [w1, 109]
+strb	w0, [w1, 110]
+strb	w0, [w1, 111]
+strb	w0, [w1, 112]
+strb	w0, [w1, 113]
+strb	w0, [w1, 114]
+strb	w0, [w1, 115]
+strb	w0, [w1, 116]
+strb	w0, [w1, 117]
+strb	w0, [w1, 118]
+strb	w0, [w1, 119]
+strb	w0, [w1, 120]
+strb	w0, [w1, 121]
+strb	w0, [w1, 122]
+strb	w0, [w1, 123]
+strb	w0, [w1, 124]
+strb	w0, [w1, 125]
+strb	w0, [w1, 126]
+strb	w0, [w1, 127]
+strb	w0, [w1, 128]
+strb	w0, [w1, 129]
+strb	w0, [w1, 130]
+strb	w0, [w1, 131]
+strb	w0, [w1, 132]
+strb	w0, [w1, 133]
+strb	w0, [w1, 134]
+strb	w0, [w1, 135]
+strb	w0, [w1, 136]
+strb	w

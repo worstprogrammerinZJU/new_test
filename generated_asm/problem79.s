@@ -1,116 +1,170 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
+section	__TEXT,__text,regular,pure_instructions
+.build_version	macos, 13, 0	sdk_version 13, 3
 .section	__TEXT,__literal4,4byte_literals
-.p2align	2                               ## -- Begin function func0
+.p2align	2
 LCPI0_0:
-	.long	0x7f7fffff                      ## float 3.40282347E+38
+	long	0x7f7fffff
 .section	__TEXT,__literal16,16byte_literals
 .p2align	4
 LCPI0_1:
-	.quad	0x7fffffffffffffff              ## double NaN
-	.quad	0x7fffffffffffffff              ## double NaN
+	.quad	0x7fffffffffffffff
+	.quad	0x7fffffffffffffff
 .section	__TEXT,__text,regular,pure_instructions
 .globl	_func0
 .p2align	4, 0x90
-_func0:                                 ## @func0
+_func0:
 	.cfi_startproc
 ## %bb.0:
-	pushq	%rbp
+	pushq	xsp
 	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	%rdx, -24(%rbp)
-	movss	LCPI0_0(%rip), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	movss	%xmm0, -28(%rbp)
-	movq	-8(%rbp), %rax
-	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, (%rax)
-	movq	-8(%rbp), %rax
-	movss	4(%rax), %xmm0                  ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, 4(%rax)
-	movl	$0, -32(%rbp)
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_3 Depth 2
-	movl	-32(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_10
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-32(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp)
-LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movl	-36(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_8
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-32(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	subss	(%rax,%rcx,4), %xmm0
-	cvtss2sd	%xmm0, %xmm0
-	movaps	LCPI0_1(%rip), %xmm1            ## xmm1 = [NaN,NaN]
-	pand	%xmm1, %xmm0
-	cvtsd2ss	%xmm0, %xmm0
-	movss	%xmm0, -40(%rbp)
-	movss	-40(%rbp), %xmm1                ## xmm1 = mem[0],zero,zero,zero
-	movss	-28(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
-	ucomiss	%xmm1, %xmm0
-	jbe	LBB0_6
-## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=2
-	movss	-40(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
-	movss	%xmm0, -28(%rbp)
-	movq	-8(%rbp), %rax
-	movslq	-32(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, (%rax)
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, 4(%rax)
-LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=2
-	jmp	LBB0_7
-LBB0_7:                                 ##   in Loop: Header=BB0_3 Depth=2
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp)
-	jmp	LBB0_3
-LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_9
-LBB0_9:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-32(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -32(%rbp)
-	jmp	LBB0_1
-LBB0_10:
-	movq	-24(%rbp), %rax
-	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	ucomiss	4(%rax), %xmm0
-	jbe	LBB0_12
-## %bb.11:
-	movq	-24(%rbp), %rax
-	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
-	movss	%xmm0, -44(%rbp)
-	movq	-24(%rbp), %rax
-	movss	4(%rax), %xmm0                  ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, (%rax)
-	movss	-44(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
-	movq	-24(%rbp), %rax
-	movss	%xmm0, 4(%rax)
-LBB0_12:
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols
+	.cfi_offset xsp, -16
+	movq	xsp, [sp]
+	.cfi_def_cfa_register xsp
+	movq	x0, [sp, 8]
+	fld	w0, [sp, 12]
+	fstr	w0, [sp, 28]
+ldr	x0, [sp, 8]
+fld	w0, [x0]
+str	w0, [x0]
+ldr	x0, [sp, 8]
+fld	w0, [x0]
+str	w0, [x0, 4]
+ldr	w0, [sp, 8]
+str	w0, [sp, 32]
+loop:
+	lsl	w0, w0, 1
+	bne	loop
+str	d0, [sp, 28]
+str	d0, [sp, 24]
+str	d0, [sp, 20]
+str	d0, [sp, 16]
+str	d0, [sp, 12]
+str	d0, [sp, 8]
+str	d0, [sp, 4]
+str	d0, [sp, 0]
+str	d0, [sp, 4]
+str	d0, [sp, 20]
+str	d0, [sp, 24]
+str	d0, [sp, 28]
+str	d0, [sp, 32]
+str	d0, [sp, 36]
+str	d0, [sp, 40]
+str	d0, [sp, 44]
+str	d0, [sp, 48]
+str	d0, [sp, 52]
+str	d0, [sp, 56]
+str	d0, [sp, 60]
+str	d0, [sp, 64]
+str	d0, [sp, 68]
+str	d0, [sp, 72]
+str	d0, [sp, 76]
+str	d0, [sp, 80]
+str	d0, [sp, 84]
+str	d0, [sp, 88]
+str	d0, [sp, 92]
+str	d0, [sp, 96]
+str	d0, [sp, 100]
+str	d0, [sp, 104]
+str	d0, [sp, 108]
+str	d0, [sp, 112]
+str	d0, [sp, 116]
+str	d0, [sp, 120]
+str	d0, [sp, 124]
+str	d0, [sp, 128]
+str	d0, [sp, 132]
+str	d0, [sp, 136]
+str	d0, [sp, 140]
+str	d0, [sp, 144]
+str	d0, [sp, 148]
+str	d0, [sp, 152]
+str	d0, [sp, 156]
+str	d0, [sp, 160]
+str	d0, [sp, 164]
+str	d0, [sp, 168]
+str	d0, [sp, 172]
+str	d0, [sp, 176]
+str	d0, [sp, 180]
+str	d0, [sp, 184]
+str	d0, [sp, 188]
+str	d0, [sp, 192]
+str	d0, [sp, 196]
+str	d0, [sp, 200]
+str	d0, [sp, 204]
+str	d0, [sp, 208]
+str	d0, [sp, 212]
+str	d0, [sp, 216]
+str	d0, [sp, 220]
+str	d0, [sp, 224]
+str	d0, [sp, 228]
+str	d0, [sp, 232]
+str	d0, [sp, 236]
+str	d0, [sp, 240]
+str	d0, [sp, 244]
+str	d0, [sp, 248]
+str	d0, [sp, 252]
+str	d0, [sp, 256]
+str	d0, [sp, 260]
+str	d0, [sp, 264]
+str	d0, [sp, 268]
+str	d0, [sp, 272]
+str	d0, [sp, 276]
+str	d0, [sp, 280]
+str	d0, [sp, 284]
+str	d0, [sp, 288]
+str	d0, [sp, 292]
+str	d0, [sp, 296]
+str	d0, [sp, 300]
+str	d0, [sp, 304]
+str	d0, [sp, 308]
+str	d0, [sp, 312]
+str	d0, [sp, 316]
+str	d0, [sp, 320]
+str	d0, [sp, 324]
+str	d0, [sp, 328]
+str	d0, [sp, 332]
+str	d0, [sp, 336]
+str	d0, [sp, 340]
+str	d0, [sp, 344]
+str	d0, [sp, 348]
+str	d0, [sp, 352]
+str	d0, [sp, 356]
+str	d0, [sp, 360]
+str	d0, [sp, 364]
+str	d0, [sp, 368]
+str	d0, [sp, 372]
+str	d0, [sp, 376]
+str	d0, [sp, 380]
+str	d0, [sp, 384]
+str	d0, [sp, 388]
+str	d0, [sp, 392]
+str	d0, [sp, 396]
+str	d0, [sp, 400]
+str	d0, [sp, 404]
+str	d0, [sp, 408]
+str	d0, [sp, 412]
+str	d0, [sp, 416]
+str	d0, [sp, 420]
+str	d0, [sp, 424]
+str	d0, [sp, 428]
+str	d0, [sp, 432]
+str	d0, [sp, 436]
+str	d0, [sp, 440]
+str	d0, [sp, 444]
+str	d0, [sp, 448]
+str	d0, [sp, 452]
+str	d0, [sp, 456]
+str	d0, [sp, 460]
+str	d0, [sp, 464]
+str	d0, [sp, 468]
+str	d0, [sp, 472]
+str	d0, [sp, 476]
+str	d0, [sp, 480]
+str	d0, [sp, 484]
+str	d0, [sp, 488]
+str	d0, [sp, 492]
+str	d0, [sp, 496]
+str	d0, [sp, 500]
+str	d0, [sp, 504]
+str	d0, [sp, 508]
+str	d0, [sp, 512]
+str	d0,

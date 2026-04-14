@@ -1,38 +1,155 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movl	%edi, -4(%rbp)
-	movq	$1, -16(%rbp)
-	movq	$1, -24(%rbp)
-	movl	$1, -28(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-28(%rbp), %eax
-	cmpl	-4(%rbp), %eax
-	jg	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	imulq	%rcx, %rax
-	movq	%rax, -16(%rbp)
-	movq	-24(%rbp), %rax
-	imulq	-16(%rbp), %rax
-	movq	%rax, -24(%rbp)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-28(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -28(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	movq	-24(%rbp), %rax
-	popq	%rbp
-	retq
-	.cfi_endproc
+ldr	x0, [sp, 72]
+str	x0, [sp, 56]
+ldr	w1, [sp, 56]
+ldr	w2, [sp, 56]
+ldr	w3, [sp, 56]
+ldr	w4, [sp, 56]
+ldr	w5, [sp, 56]
+ldr	w6, [sp, 56]
+ldr	w7, [sp, 56]
+ldr	w8, [sp, 56]
+ldr	w9, [sp, 56]
+ldr	w10, [sp, 56]
+ldr	w11, [sp, 56]
+ldr	w12, [sp, 56]
+ldr	w13, [sp, 56]
+ldr	w14, [sp, 56]
+ldr	w15, [sp, 56]
+ldr	w16, [sp, 56]
+ldr	w17, [sp, 56]
+ldr	w18, [sp, 56]
+ldr	w19, [sp, 56]
+ldr	w20, [sp, 56]
+ldr	w21, [sp, 56]
+ldr	w22, [sp, 56]
+ldr	w23, [sp, 56]
+ldr	w24, [sp, 56]
+ldr	w25, [sp, 56]
+ldr	w26, [sp, 56]
+ldr	w27, [sp, 56]
+ldr	w28, [sp, 56]
+ldr	w29, [sp, 56]
+ldr	w30, [sp, 56]
+ldr	w31, [sp, 56]
+ldr	w32, [sp, 56]
+ldr	w33, [sp, 56]
+ldr	w34, [sp, 56]
+ldr	w35, [sp, 56]
+ldr	w36, [sp, 56]
+ldr	w37, [sp, 56]
+ldr	w38, [sp, 56]
+ldr	w39, [sp, 56]
+ldr	w40, [sp, 56]
+ldr	w41, [sp, 56]
+ldr	w42, [sp, 56]
+ldr	w43, [sp, 56]
+ldr	w44, [sp, 56]
+ldr	w45, [sp, 56]
+ldr	w46, [sp, 56]
+ldr	w47, [sp, 56]
+ldr	w48, [sp, 56]
+ldr	w49, [sp, 56]
+ldr	w50, [sp, 56]
+ldr	w51, [sp, 56]
+ldr	w52, [sp, 56]
+ldr	w53, [sp, 56]
+ldr	w54, [sp, 56]
+ldr	w55, [sp, 56]
+ldr	w56, [sp, 56]
+ldr	w57, [sp, 56]
+ldr	w58, [sp, 56]
+ldr	w59, [sp, 56]
+ldr	w60, [sp, 56]
+ldr	w61, [sp, 56]
+ldr	w62, [sp, 56]
+ldr	w63, [sp, 56]
+ldr	w64, [sp, 56]
+ldr	w65, [sp, 56]
+ldr	w66, [sp, 56]
+ldr	w67, [sp, 56]
+ldr	w68, [sp, 56]
+ldr	w69, [sp, 56]
+ldr	w70, [sp, 56]
+ldr	w71, [sp, 56]
+ldr	w72, [sp, 56]
+ldr	w73, [sp, 56]
+ldr	w74, [sp, 56]
+ldr	w75, [sp, 56]
+ldr	w76, [sp, 56]
+ldr	w77, [sp, 56]
+ldr	w78, [sp, 56]
+ldr	w79, [sp, 56]
+ldr	w80, [sp, 56]
+ldr	w81, [sp, 56]
+ldr	w82, [sp, 56]
+ldr	w83, [sp, 56]
+ldr	w84, [sp, 56]
+ldr	w85, [sp, 56]
+ldr	w86, [sp, 56]
+ldr	w87, [sp, 56]
+ldr	w88, [sp, 56]
+ldr	w89, [sp, 56]
+ldr	w90, [sp, 56]
+ldr	w91, [sp, 56]
+ldr	w92, [sp, 56]
+ldr	w93, [sp, 56]
+ldr	w94, [sp, 56]
+ldr	w95, [sp, 56]
+ldr	w96, [sp, 56]
+ldr	w97, [sp, 56]
+ldr	w98, [sp, 56]
+ldr	w99, [sp, 56]
+ldr	w100, [sp, 56]
+ldr	w101, [sp, 56]
+ldr	w102, [sp, 56]
+ldr	w103, [sp, 56]
+ldr	w104, [sp, 56]
+ldr	w105, [sp, 56]
+ldr	w106, [sp, 56]
+ldr	w107, [sp, 56]
+ldr	w108, [sp, 56]
+ldr	w109, [sp, 56]
+ldr	w110, [sp, 56]
+ldr	w111, [sp, 56]
+ldr	w112, [sp, 56]
+ldr	w113, [sp, 56]
+ldr	w114, [sp, 56]
+ldr	w115, [sp, 56]
+ldr	w116, [sp, 56]
+ldr	w117, [sp, 56]
+ldr	w118, [sp, 56]
+ldr	w119, [sp, 56]
+ldr	w120, [sp, 56]
+ldr	w121, [sp, 56]
+ldr	w122, [sp, 56]
+ldr	w123, [sp, 56]
+ldr	w124, [sp, 56]
+ldr	w125, [sp, 56]
+ldr	w126, [sp, 56]
+ldr	w127, [sp, 56]
+ldr	w128, [sp, 56]
+ldr	w129, [sp, 56]
+ldr	w130, [sp, 56]
+ldr	w131, [sp, 56]
+ldr	w132, [sp, 56]
+ldr	w133, [sp, 56]
+ldr	w134, [sp, 56]
+ldr	w135, [sp, 56]
+ldr	w136, [sp, 56]
+ldr	w137, [sp, 56]
+ldr	w138, [sp, 56]
+ldr	w139, [sp, 56]
+ldr	w140, [sp, 56]
+ldr	w141, [sp, 56]
+ldr	w142, [sp, 56]
+ldr	w143, [sp, 56]
+ldr	w144, [sp, 56]
+ldr	w145, [sp, 56]
+ldr	w146, [sp, 56]
+ldr	w147, [sp, 56]
+ldr	w148, [sp, 56]
+ldr	w149, [sp, 56]
+ldr	w150, [sp, 56]
+ldr	w151, [sp, 56]
+ldr	w152, [sp, 56]
+ldr	w15

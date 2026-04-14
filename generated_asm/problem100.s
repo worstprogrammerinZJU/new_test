@@ -1,326 +1,186 @@
-ldp	x29, x30, [sp], 48
-add	x29, sp, 16
-str	w0, [sp, 24]
-str	w1, [sp, 16]
-str	w2, [sp, 8]
-str	w3, [sp]
 ldr	w0, [sp, 24]
-cmp	w0, w1
-blz	_loop_exit
+cmp	w0, 1
+jge	LBB0_13
 ldr	w0, [sp, 12]
-add	w0, w0, [sp, 16]
+ldr	w1, [sp, 16]
+ldr	w0, [w1]
 str	w0, [sp, 12]
-str	w0, [sp, 20]
+ldr	w0, [sp, 16]
+ldr	w1, [sp, 16]
+ldr	w0, [w1]
+ldr	w1, [sp, 16]
+ldr	w0, [w1]
 str	w0, [sp, 16]
-str	w0, [sp, 24]
-str	w0, [sp, 32]
+ldr	w0, [sp, 16]
+ldrb	w0, [sp, 28]
 str	w0, [sp, 28]
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
-blb	_loop_outer
-blb	_loop_inner
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+ldr	w1, [sp, 24]
+ldr	w0, [w1]
+str	w0, [sp, 24]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 24]

@@ -1,46 +1,147 @@
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movl	$0, -16(%rbp)
-	movl	$0, -20(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	cvtss2sd	%xmm0, %xmm0
-	roundsd	$10, %xmm0, %xmm0
-	cvttsd2si	%xmm0, %eax
-	movq	-8(%rbp), %rcx
-	movslq	-20(%rbp), %rdx
-	movss	(%rcx,%rdx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	cvtss2sd	%xmm0, %xmm0
-	roundsd	$10, %xmm0, %xmm0
-	cvttsd2si	%xmm0, %ecx
-	imull	%ecx, %eax
-	addl	-16(%rbp), %eax
-	movl	%eax, -16(%rbp)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	movl	-16(%rbp), %eax
-	popq	%rbp
-	retq
-	.cfi_endproc
+ldr	x0, [sp, 72]
+ldr	w1, [sp, 56]
+ldr	w2, [sp, 48]
+ldr	w3, [sp, 40]
+ldr	w4, [sp, 32]
+ldr	w5, [sp, 24]
+ldr	w6, [sp, 16]
+ldr	w7, [sp, 8]
+ldr	w8, [sp, 0]
+ldrb	w9, [w7]
+strb	w9, [w8, 0]
+strb	w9, [w8, 1]
+strb	w9, [w8, 2]
+strb	w9, [w8, 3]
+strb	w9, [w8, 4]
+strb	w9, [w8, 5]
+strb	w9, [w8, 6]
+strb	w9, [w8, 7]
+strb	w9, [w8, 8]
+strb	w9, [w8, 9]
+strb	w9, [w8, 10]
+strb	w9, [w8, 11]
+strb	w9, [w8, 12]
+strb	w9, [w8, 13]
+strb	w9, [w8, 14]
+strb	w9, [w8, 15]
+strb	w9, [w8, 16]
+strb	w9, [w8, 17]
+strb	w9, [w8, 18]
+strb	w9, [w8, 19]
+strb	w9, [w8, 20]
+strb	w9, [w8, 21]
+strb	w9, [w8, 22]
+strb	w9, [w8, 23]
+strb	w9, [w8, 24]
+strb	w9, [w8, 25]
+strb	w9, [w8, 26]
+strb	w9, [w8, 27]
+strb	w9, [w8, 28]
+strb	w9, [w8, 29]
+strb	w9, [w8, 30]
+strb	w9, [w8, 31]
+strb	w9, [w8, 32]
+strb	w9, [w8, 33]
+strb	w9, [w8, 34]
+strb	w9, [w8, 35]
+strb	w9, [w8, 36]
+strb	w9, [w8, 37]
+strb	w9, [w8, 38]
+strb	w9, [w8, 39]
+strb	w9, [w8, 40]
+strb	w9, [w8, 41]
+strb	w9, [w8, 42]
+strb	w9, [w8, 43]
+strb	w9, [w8, 44]
+strb	w9, [w8, 45]
+strb	w9, [w8, 46]
+strb	w9, [w8, 47]
+strb	w9, [w8, 48]
+strb	w9, [w8, 49]
+strb	w9, [w8, 50]
+strb	w9, [w8, 51]
+strb	w9, [w8, 52]
+strb	w9, [w8, 53]
+strb	w9, [w8, 54]
+strb	w9, [w8, 55]
+strb	w9, [w8, 56]
+strb	w9, [w8, 57]
+strb	w9, [w8, 58]
+strb	w9, [w8, 59]
+strb	w9, [w8, 60]
+strb	w9, [w8, 61]
+strb	w9, [w8, 62]
+strb	w9, [w8, 63]
+strb	w9, [w8, 64]
+strb	w9, [w8, 65]
+strb	w9, [w8, 66]
+strb	w9, [w8, 67]
+strb	w9, [w8, 68]
+strb	w9, [w8, 69]
+strb	w9, [w8, 70]
+strb	w9, [w8, 71]
+strb	w9, [w8, 72]
+strb	w9, [w8, 73]
+strb	w9, [w8, 74]
+strb	w9, [w8, 75]
+strb	w9, [w8, 76]
+strb	w9, [w8, 77]
+strb	w9, [w8, 78]
+strb	w9, [w8, 79]
+strb	w9, [w8, 80]
+strb	w9, [w8, 81]
+strb	w9, [w8, 82]
+strb	w9, [w8, 83]
+strb	w9, [w8, 84]
+strb	w9, [w8, 85]
+strb	w9, [w8, 86]
+strb	w9, [w8, 87]
+strb	w9, [w8, 88]
+strb	w9, [w8, 89]
+strb	w9, [w8, 90]
+strb	w9, [w8, 91]
+strb	w9, [w8, 92]
+strb	w9, [w8, 93]
+strb	w9, [w8, 94]
+strb	w9, [w8, 95]
+strb	w9, [w8, 96]
+strb	w9, [w8, 97]
+strb	w9, [w8, 98]
+strb	w9, [w8, 99]
+strb	w9, [w8, 100]
+strb	w9, [w8, 101]
+strb	w9, [w8, 102]
+strb	w9, [w8, 103]
+strb	w9, [w8, 104]
+strb	w9, [w8, 105]
+strb	w9, [w8, 106]
+strb	w9, [w8, 107]
+strb	w9, [w8, 108]
+strb	w9, [w8, 109]
+strb	w9, [w8, 110]
+strb	w9, [w8, 111]
+strb	w9, [w8, 112]
+strb	w9, [w8, 113]
+strb	w9, [w8, 114]
+strb	w9, [w8, 115]
+strb	w9, [w8, 116]
+strb	w9, [w8, 117]
+strb	w9, [w8, 118]
+strb	w9, [w8, 119]
+strb	w9, [w8, 120]
+strb	w9, [w8, 121]
+strb	w9, [w8, 122]
+strb	w9, [w8, 123]
+strb	w9, [w8, 124]
+strb	w9, [w8, 125]
+strb	w9, [w8, 126]
+strb	w9, [w8, 127]
+strb	w9, [w8, 128]
+strb	w9, [w8, 129]
+strb	w9, [w8, 130]
+strb	w9, [w8, 131]
+strb	w9, [w8, 132]
+strb	w9, [w8, 133]
+strb	w9, [w8, 134]
+strb	w9, [w8, 135]
+strb

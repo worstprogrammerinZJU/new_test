@@ -1,9 +1,18 @@
-ldp	x29, x30, [sp], 48
-add	x29, x19, x29
-str	x0, [sp, 16]
-str	w1, [sp, 12]
-str	x0, [sp, 40]
+ldr	x0, [sp, 24]
+ldr	x0, [x0]
+ldr	x1, [x0]
+ldr	x2, [sp, 16]
+str	x1, [x2, 8]
+ldr	x1, [x0]
+ldr	x2, [x0]
+ldr	x3, [x2]
+fmov	d0, d0, lsl	x3, d0
+str	d0, [x1, 8]
+ldr	d0, [x0]
+ldr	x1, [x0]
+ldr	x2, [x0]
+ldr	x3, [x2]
+str	x1, [x1, 8]
+ldr	x0, [sp, 24]
+str	x0, [x0]
 str	x0, [sp, 32]
-str	w0, [sp, 28]
-stp	x29, x30, [sp], 48
-ret

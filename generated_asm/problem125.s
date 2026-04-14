@@ -1,39 +1,176 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	%rdx, -24(%rbp)
-	movl	$1, -28(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-28(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	cvtsi2ssl	-28(%rbp), %xmm0
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	mulss	(%rax,%rcx,4), %xmm0
-	movq	-24(%rbp), %rax
-	movl	-28(%rbp), %ecx
-	subl	$1, %ecx
-	movslq	%ecx, %rcx
-	movss	%xmm0, (%rax,%rcx,4)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-28(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -28(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	popq	%rbp
-	retq
-	.cfi_endproc
+ldr	x0, [sp, 72]
+ldr	w1, [sp, 56]
+ldr	x1, [sp, 48]
+ldr	w0, [sp, 40]
+ldr	w1, [sp, 32]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 16]
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 0]
+mov	w0, 1
+loop_loop:
+ldrs	w0, [sp, 24]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp, 8]
+str	w0, [sp, 0]
+str	w1, [sp, 72]
+str	w0, [sp, 56]
+str	w1, [sp, 40]
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w0, [sp, 8]
+str	w1, [sp, 0]
+str	w0, [sp, 72]
+str	w1, [sp, 56]
+str	w0, [sp, 40]
+str	w1, [sp, 32]
+str	w0, [sp, 16]
+str	w1, [sp,
