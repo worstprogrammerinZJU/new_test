@@ -20,9 +20,9 @@ LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
 ## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
 	movq	-8(%rbp), %rax
 	movslq	-16(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
+	movl	[%rax,%rcx,4], %edx
 	addl	$1, %edx
-	movl	%edx, (%rax,%rcx,4)
+	movl	%edx, [%rax,%rcx,4]
 ## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
 	movl	-16(%rbp), %eax
 	addl	$1, %eax
@@ -32,5 +32,3 @@ LBB0_4:
 	popq	%rbp
 	retq
 	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols

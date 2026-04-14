@@ -34,24 +34,22 @@ LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
 	movl	%eax, %ecx
 	movl	-20(%rbp), %eax                 ## 4-byte Reload
 	cmpl	%ecx, %eax
-	jne	LBB0_4
+jne	LBB0_4
 ## %bb.3:
-	movl	$1, -4(%rbp)
-	jmp	LBB0_7
+movl	$1, -4(%rbp)
+jmp	LBB0_7
 LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_5
+jmp	LBB0_5
 LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-12(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -12(%rbp)
-	jmp	LBB0_1
+movl	-12(%rbp), %eax
+addl	$1, %eax
+movl	%eax, -12(%rbp)
+jmp	LBB0_1
 LBB0_6:
-	movl	$0, -4(%rbp)
+movl	$0, -4(%rbp)
 LBB0_7:
-	movl	-4(%rbp), %eax
-	addq	$32, %rsp
-	popq	%rbp
-	retq
+movl	-4(%rbp), %eax
+addq	$32, %rsp
+popq	%rbp
+retq
 	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols

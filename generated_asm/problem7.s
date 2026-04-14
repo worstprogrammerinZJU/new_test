@@ -1,83 +1,159 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-	movl	%edi, -12(%rbp)
-	movl	%esi, -16(%rbp)
-	movl	-12(%rbp), %eax
-	cmpl	-16(%rbp), %eax
-	jle	LBB0_2
-## %bb.1:
-	leaq	L_.str(%rip), %rax
-	movq	%rax, -8(%rbp)
-	jmp	LBB0_6
-LBB0_2:
-	movl	-16(%rbp), %eax
-	addl	-12(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, -20(%rbp)
-	movl	$33, %edi
-	callq	_malloc
-	movq	%rax, -32(%rbp)
-	movq	-32(%rbp), %rax
-	movb	$0, (%rax)
-	movl	$32, -36(%rbp)
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	movl	%ecx, %edx
-	addl	$-1, %edx
-	movl	%edx, -36(%rbp)
-	movslq	%ecx, %rcx
-	movb	$0, (%rax,%rcx)
-LBB0_3:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	addl	$48, %edx
-                                        ## kill: def $dl killed $dl killed $edx
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	movl	%ecx, %esi
-	addl	$-1, %esi
-	movl	%esi, -36(%rbp)
-	movslq	%ecx, %rcx
-	movb	%dl, (%rax,%rcx)
-	movl	-20(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, -20(%rbp)
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=1
-	cmpl	$0, -20(%rbp)
-	jg	LBB0_3
-## %bb.5:
-	movq	-32(%rbp), %rax
-	movl	-36(%rbp), %ecx
-	addl	$1, %ecx
-	movslq	%ecx, %rcx
-	addq	%rcx, %rax
-	movq	%rax, -8(%rbp)
-LBB0_6:
-	movq	-8(%rbp), %rax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
-	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"-1"
-
-.subsections_via_symbols
+ldp	x29, x30, [sp], 64
+ldr	w0, [sp, 16]
+ldr	w1, [sp, 12]
+ldr	x2, [sp, 40]
+cmp	w0, x2
+blz	malloc
+add	w0, w1, w0
+ldp	x0, x1, [sp], 48
+mov	x1, 33
+stp	x19, x20, [sp, 16]
+stp	x29, x30, [sp]
+strb	0, [sp, 31]
+str	w0, [sp, 32]
+strb	0, [sp, 29]
+str	w0, [sp, 32]
+strb	0, [sp, 27]
+strb	w0, [sp, 26]
+strb	w0, [sp, 25]
+strb	w0, [sp, 24]
+strb	w0, [sp, 23]
+strb	w0, [sp, 22]
+strb	w0, [sp, 21]
+strb	w0, [sp, 20]
+strb	w0, [sp, 19]
+strb	w0, [sp, 18]
+strb	w0, [sp, 17]
+strb	w0, [sp, 16]
+strb	w0, [sp, 15]
+strb	w0, [sp, 14]
+strb	w0, [sp, 13]
+strb	w0, [sp, 12]
+strb	w0, [sp, 11]
+strb	w0, [sp, 10]
+strb	w0, [sp, 9]
+strb	w0, [sp, 8]
+strb	w0, [sp, 7]
+strb	w0, [sp, 6]
+strb	w0, [sp, 5]
+strb	w0, [sp, 4]
+strb	w0, [sp, 3]
+strb	w0, [sp, 2]
+strb	w0, [sp, 1]
+strb	w0, [sp, 0]
+strb	w0, [sp, -1]
+strb	w0, [sp, -2]
+strb	w0, [sp, -3]
+strb	w0, [sp, -4]
+strb	w0, [sp, -5]
+strb	w0, [sp, -6]
+strb	w0, [sp, -7]
+strb	w0, [sp, -8]
+strb	w0, [sp, -9]
+strb	w0, [sp, -10]
+strb	w0, [sp, -11]
+strb	w0, [sp, -12]
+strb	w0, [sp, -13]
+strb	w0, [sp, -14]
+strb	w0, [sp, -15]
+strb	w0, [sp, -16]
+strb	w0, [sp, -17]
+strb	w0, [sp, -18]
+strb	w0, [sp, -19]
+strb	w0, [sp, -20]
+strb	w0, [sp, -21]
+strb	w0, [sp, -22]
+strb	w0, [sp, -23]
+strb	w0, [sp, -24]
+strb	w0, [sp, -25]
+strb	w0, [sp, -26]
+strb	w0, [sp, -27]
+strb	w0, [sp, -28]
+strb	w0, [sp, -29]
+strb	w0, [sp, -30]
+strb	w0, [sp, -31]
+strb	w0, [sp, -32]
+strb	w0, [sp, -33]
+strb	w0, [sp, -34]
+strb	w0, [sp, -35]
+strb	w0, [sp, -36]
+strb	w0, [sp, -37]
+strb	w0, [sp, -38]
+strb	w0, [sp, -39]
+strb	w0, [sp, -40]
+strb	w0, [sp, -41]
+strb	w0, [sp, -42]
+strb	w0, [sp, -43]
+strb	w0, [sp, -44]
+strb	w0, [sp, -45]
+strb	w0, [sp, -46]
+strb	w0, [sp, -47]
+strb	w0, [sp, -48]
+strb	w0, [sp, -49]
+strb	w0, [sp, -50]
+strb	w0, [sp, -51]
+strb	w0, [sp, -52]
+strb	w0, [sp, -53]
+strb	w0, [sp, -54]
+strb	w0, [sp, -55]
+strb	w0, [sp, -56]
+strb	w0, [sp, -57]
+strb	w0, [sp, -58]
+strb	w0, [sp, -59]
+strb	w0, [sp, -60]
+strb	w0, [sp, -61]
+strb	w0, [sp, -62]
+strb	w0, [sp, -63]
+strb	w0, [sp, -64]
+strb	w0, [sp, -65]
+strb	w0, [sp, -66]
+strb	w0, [sp, -67]
+strb	w0, [sp, -68]
+strb	w0, [sp, -69]
+strb	w0, [sp, -70]
+strb	w0, [sp, -71]
+strb	w0, [sp, -72]
+strb	w0, [sp, -73]
+strb	w0, [sp, -74]
+strb	w0, [sp, -75]
+strb	w0, [sp, -76]
+strb	w0, [sp, -77]
+strb	w0, [sp, -78]
+strb	w0, [sp, -79]
+strb	w0, [sp, -80]
+strb	w0, [sp, -81]
+strb	w0, [sp, -82]
+strb	w0, [sp, -83]
+strb	w0, [sp, -84]
+strb	w0, [sp, -85]
+strb	w0, [sp, -86]
+strb	w0, [sp, -87]
+strb	w0, [sp, -88]
+strb	w0, [sp, -89]
+strb	w0, [sp, -90]
+strb	w0, [sp, -91]
+strb	w0, [sp, -92]
+strb	w0, [sp, -93]
+strb	w0, [sp, -94]
+strb	w0, [sp, -95]
+strb	w0, [sp, -96]
+strb	w0, [sp, -97]
+strb	w0, [sp, -98]
+strb	w0, [sp, -99]
+strb	w0, [sp, -100]
+strb	w0, [sp, -101]
+strb	w0, [sp, -102]
+strb	w0, [sp, -103]
+strb	w0, [sp, -104]
+strb	w0, [sp, -105]
+strb	w0, [sp, -106]
+strb	w0, [sp, -107]
+strb	w0, [sp, -108]
+strb	w0, [sp, -109]
+strb	w0, [sp, -110]
+strb	w0, [sp, -111]
+strb	w0, [sp, -112]
+strb	w0, [sp, -113]
+strb	w0, [sp, -114]
+strb	w0, [sp, -115]
+strb	w0, [sp, -116]

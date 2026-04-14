@@ -147,6 +147,6 @@ l___const.func0.num:
 	.long	9                                 ## 0x9
 	.long	5                                 ## 0x5
 	.long	4                                   ## 0x4
-	.long	1                                   ## 0x1
+	.long	1                                     ## 0x1
 
 .subsections_via_symbols

@@ -1,7 +1,7 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
 ## %bb.0:
@@ -153,4 +153,4 @@ LBB0_22:                                ##   in Loop: Header=BB0_17 Depth=1
 	movl	%eax, -36(%rbp)
 	jmp	LBB0_17
 LBB0_23:
-	mov
+	movq	-

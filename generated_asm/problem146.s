@@ -1,7 +1,7 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal8,8byte_literals
-	.p2align	3                               ## -- Begin function func0
+.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__literal8,8byte_literals
+.p2align	3                               ## -- Begin function func0
 LCPI0_0:
 	.quad	0x400fffcb923a29c7              ## double 3.9998999999999998
 LCPI0_1:
@@ -26,9 +26,9 @@ LCPI0_10:
 	.quad	0x3fe667381d7dbf48              ## double 0.70009999999999994
 LCPI0_11:
 	.quad	0x3f1a36e2eb1c432d              ## double 1.0E-4
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	4, 0x90
+.section	__TEXT,__text,regular,pure_instructions
+.globl	_func0
+.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
 ## %bb.0:
@@ -122,4 +122,4 @@ LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
 LBB0_12:                                ##   in Loop: Header=BB0_1 Depth=1
 	movq	-8(%rbp), %rax
 	movslq	-28(%rbp), %rcx
-	movss
+	movss	(%rax,%rcx,
