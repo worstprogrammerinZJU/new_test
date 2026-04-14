@@ -1,49 +1,164 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_8
-; %bb.1:
-	mov	w8, w1
-	cmp	w1, #16
-	b.hs	LBB0_3
-; %bb.2:
-	mov	x9, #0
-	b	LBB0_6
-LBB0_3:
-	and	x9, x8, #0xfffffff0
-	add	x10, x0, #32
-	movi.4s	v0, #1
-	mov	x11, x9
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q1, q2, [x10, #-32]
-	ldp	q3, q4, [x10]
-	add.4s	v1, v1, v0
-	add.4s	v2, v2, v0
-	add.4s	v3, v3, v0
-	add.4s	v4, v4, v0
-	stp	q1, q2, [x10, #-32]
-	stp	q3, q4, [x10], #64
-	subs	x11, x11, #16
-	b.ne	LBB0_4
-; %bb.5:
-	cmp	x9, x8
-	b.eq	LBB0_8
-LBB0_6:
-	add	x10, x0, x9, lsl #2
-	sub	x8, x8, x9
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w9, [x10]
-	add	w9, w9, #1
-	str	w9, [x10], #4
-	subs	x8, x8, #1
-	b.ne	LBB0_7
-LBB0_8:
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LLC0:
+ldr	w19, [sp, 44]
+ldr	w20, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w1, w0
+str	w19, [sp, 44]
+str	w20, [sp, 40]
+b L[LC0]
+.LLC1:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+beq L[LC1]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+bgt L[LC1]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC1]
+b L[LC1]
+.LLC2:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC2]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+ble L[LC2]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC2]
+b L[LC2]
+.LLC3:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC3]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+blt L[LC3]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC3]
+b L[LC3]
+.LLC4:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC4]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+bgt L[LC4]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC4]
+b L[LC4]
+.LLC5:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC5]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+ble L[LC5]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC5]
+b L[LC5]
+.LLC6:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC6]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+blt L[LC6]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC6]
+b L[LC6]
+.LLC7:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC7]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+bgt L[LC7]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC7]
+b L[LC7]
+.LLC8:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC8]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+ble L[LC8]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC8]
+b L[LC8]
+.LLC9:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC9]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+blt L[LC9]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC9]
+b L[LC9]
+.LLC10:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, 0
+beq L[LC10]
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 56]
+mov	w0, w1
+cmp	x0, w0
+bgt L[LC10]
+ldr	w1, [sp, 44]
+cmp	x0, w1
+bhi L[LC10]
+b L[LC10]
+.LLC11:
+ldr	w1, [sp, 44]
+add	w1, w1, 1
+str	w1, [sp, 44]
+str	w1, [sp, 40]
+ret

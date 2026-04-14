@@ -1,55 +1,179 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x22, x21, [sp, #-48]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 48
-	stp	x20, x19, [sp, #16]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x19, x0
-	ldrb	w22, [x0]
-	cbz	w22, LBB0_5
-; %bb.1:
-	add	x21, x19, #1
-Lloh0:
-	adrp	x20, l_.str@PAGE
-Lloh1:
-	add	x20, x20, l_.str@PAGEOFF
-	b	LBB0_3
-LBB0_2:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldrb	w22, [x21], #1
-	cbz	w22, LBB0_5
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	sxtb	w1, w22
-	mov	x0, x20
-	mov	w2, #11
-	bl	_memchr
-	cbnz	x0, LBB0_2
-; %bb.4:                                ;   in Loop: Header=BB0_3 Depth=1
-	strb	w22, [x19], #1
-	b	LBB0_2
-LBB0_5:
-	strb	wzr, [x19]
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp], #48             ; 16-byte Folded Reload
-	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"AEIOUaeiou"
-
-.subsections_via_symbols
+sub	sp, sp, #288
+ldr	x19, [sp, 16]
+mov	w1, w19
+ldr	x0, [sp, 48]
+ldrb	w0, [x0, w1]
+cmp	w0, 47
+beq	Loop1
+ldr	x0, [sp, 48]
+ldrb	w1, [x0, w1]
+ldrsw	x0, [sp, 48]
+and	w1, w1, 255
+str	w1, [sp, 112]
+b	Loop1
+Loop1:
+ldrsw	x1, [sp, 48]
+ldrb	w0, [x1, w0]
+ldrsw	x0, [sp, 48]
+and	w0, w0, 255
+strb	w0, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+str	w0, [sp, 160]
+str	wzr, [sp, 152]
+b	Loop1
+Loop2:
+ldrsw	x1, [sp, 152]
+ldrb	w0, [x1, w0]
+ldrsw	x0, [sp, 152]
+and	w0, w0, 255
+strb	w0, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+add	w0, w0, 1
+str	w0, [sp, 160]
+ldr	w1, [sp, 152]
+add	w0, w1, 1
+str	w0, [sp, 152]
+b	Loop2
+Loop3:
+ldrsw	x1, [sp, 152]
+ldrb	w0, [x1, w0]
+ldrsw	x0, [sp, 152]
+and	w0, w0, 255
+strb	w0, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+add	w0, w0, 1
+str	w0, [sp, 160]
+ldr	x1, [sp, 152]
+and	w1, w1, 255
+ldrsw	x0, [sp, 152]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 160]
+and	w0, w0, 255
+ldrsw	x0, [sp, 160]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 112]
+add	x1, sp, 112
+bl	_atoi
+ldr	w0, [sp, 112]
+and	w0, w0, 255
+ldrsw	x0, [sp, 112]
+and	w0, w0, 255
+ldrb	w1, [x0, w1]
+str	w1, [sp, 160]
+add	x1, sp, 160
+bl	_atoi
+ldr	w0, [sp, 16

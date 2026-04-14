@@ -1,224 +1,250 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #112
-	.cfi_def_cfa_offset 112
-	stp	x26, x25, [sp, #32]             ; 16-byte Folded Spill
-	stp	x24, x23, [sp, #48]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #64]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #80]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #96]             ; 16-byte Folded Spill
-	add	x29, sp, #96
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	.cfi_offset w25, -72
-	.cfi_offset w26, -80
-	mov	x20, x1
-	mov	x19, x0
-Lloh0:
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-Lloh1:
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-Lloh2:
-	ldr	x8, [x8]
-	str	x8, [sp, #24]
-	sbfiz	x0, x20, #2, #32
-	bl	_malloc
-	mov	x21, x0
-	cmp	w20, #1
-	b.lt	LBB0_18
-; %bb.1:
-	mov	x23, #0
-	mov	w24, w20
-	add	x25, sp, #12
-Lloh3:
-	adrp	x22, l_.str@PAGE
-Lloh4:
-	add	x22, x22, l_.str@PAGEOFF
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	mov	w9, #0
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldrsb	w10, [sp, #16]
-	sub	w10, w9, w10
-	add	w10, w10, #48
-	lsl	x11, x23, #2
-	ldr	w12, [x19, x11]
-	sub	w9, w9, #48
-	cmp	w12, #0
-	csel	w9, w9, w10, gt
-	str	w9, [x21, x11]
-	add	x23, x23, #1
-	cmp	x23, x24
-	b.eq	LBB0_13
-LBB0_4:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_8 Depth 2
-                                        ;     Child Loop BB0_12 Depth 2
-	ldr	w8, [x19, x23, lsl #2]
-	cmp	w8, #0
-	cneg	w8, w8, mi
-	str	x8, [sp]
-	add	x0, sp, #12
-	mov	w1, #0
-	mov	w2, #12
-	mov	x3, x22
-	bl	___sprintf_chk
-	add	x0, sp, #12
-	bl	_strlen
-	cmp	w0, #2
-	b.lt	LBB0_2
-; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
-	and	x8, x0, #0xffffffff
-	sub	x10, x8, #1
-	cmp	x10, #8
-	b.hs	LBB0_7
-; %bb.6:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	w9, #0
-	mov	w11, #1
-	b	LBB0_11
-LBB0_7:                                 ;   in Loop: Header=BB0_4 Depth=1
-	cmp	x10, #32
-	b.hs	LBB0_9
-; %bb.8:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	w9, #0
-	mov	w11, #1
-	b	LBB0_14
-LBB0_9:                                 ;   in Loop: Header=BB0_4 Depth=1
-	movi.2d	v0, #0000000000000000
-	and	x12, x10, #0xffffffffffffffe0
-	orr	x11, x12, #0x1
-	movi.2d	v2, #0000000000000000
-	add	x9, x25, #17
-	movi.2d	v1, #0000000000000000
-	mov	x13, x12
-	movi.2d	v3, #0000000000000000
-	movi.2d	v4, #0000000000000000
-	movi.2d	v6, #0000000000000000
-	movi.2d	v5, #0000000000000000
-	movi.2d	v7, #0000000000000000
-LBB0_10:                                ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldp	q16, q17, [x9, #-16]
-	sshll.8h	v18, v16, #0
-	sshll2.8h	v16, v16, #0
-	sshll.8h	v19, v17, #0
-	sshll2.8h	v17, v17, #0
-	saddw2.4s	v3, v3, v16
-	saddw.4s	v1, v1, v16
-	saddw2.4s	v2, v2, v18
-	saddw.4s	v0, v0, v18
-	saddw2.4s	v7, v7, v17
-	saddw.4s	v5, v5, v17
-	saddw2.4s	v6, v6, v19
-	saddw.4s	v4, v4, v19
-	add	x9, x9, #32
-	subs	x13, x13, #32
-	b.ne	LBB0_10
-	add.4s	v2, v6, v2
-	add.4s	v3, v7, v3
-	add.4s	v0, v4, v0
-	add.4s	v1, v5, v1
-	addv.4s	s0, v1
-	fmov	w9, s0
-	cmp	x10, x12
-	b.eq	LBB0_3
-LBB0_11:                                ;   in Loop: Header=BB0_4 Depth=1
-	add	x10, x25, x11
-	sub	x8, x8, x11
-LBB0_12:                                ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldrsb	w11, [x10], #1
-	add	w9, w9, w11
-	sub	w9, w9, #48
-	subs	x8, x8, #1
-	b.ne	LBB0_12
-	b	LBB0_3
-LBB0_13:
-	mov	w8, #0
-	add	x9, x21, #4
-	add	x10, x19, #4
-	mov	w11, #1
-	b	LBB0_15
-LBB0_14:                                ;   in Loop: Header=BB0_4 Depth=1
-	ldpsw2.8h	v0, v1, [x9, #-1]
-	ldpsw.8h	v2, v3, [x9], #32
-	saddw.4s	v4, v0, v2
-	saddw2.4s	v0, v0, v2
-	saddw.4s	v5, v1, v3
-	saddw2.4s	v1, v1, v3
-	add.4s	v0, v5, v0
-	add.4s	v1, v4, v1
-	addv.4s	s0, v1
-	fmov	w9, s0
-	add	x11, x11, #1
-	add	x10, x10, #16
-	cmp	x24, x11
-	b.ne	LBB0_14
-	b	LBB0_3
-LBB0_15:                                ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_17 Depth 2
-	cmp	w20, #1
-	b.eq	LBB0_19
-; %bb.16:                               ;   in Loop: Header=BB0_15 Depth=1
-	ldr	w12, [x21]
-	mov	x13, x10
-	mov	x14, x9
-	mov	x15, x11
-LBB0_17:                                ;   Parent Loop BB0_15 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w16, [x14], #4
-	cmp	w12, w16
-	stp	w16, w12, [x13, #-4]
-	rev64.2s	v0, v0
-	str	d0, [x13], #8
-	mov	x12, x16
-	subs	x15, x15, #1
-	b.ne	LBB0_17
-LBB0_18:                                ; =>This Inner Loop Header: Depth=1
-	add	w8, w8, #1
-	cmp	w8, w20
-	b.ne	LBB0_15
-LBB0_19:
-	mov	x0, x21
-	bl	_free
-	ldr	x8, [sp, #24]
-Lloh5:
-	adrp	x9, ___stack_chk_guard@GOTPAGE
-Lloh6:
-	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
-Lloh7:
-	ldr	x9, [x9]
-	cmp	x9, x8
-	b.ne	LBB0_21
-; %bb.20:
-	mov	x0, x19
-	ldp	x29, x30, [sp, #96]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #80]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x26, x25, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #112
-	ret
-LBB0_21:
-	bl	___stack_chk_fail
-	.loh AdrpLdrGotLdr	Lloh0, Lloh1, Lloh2
-	.loh AdrpAdd	Lloh3, Lloh4
-	.loh AdrpLdrGotLdr	Lloh5, Lloh6, Lloh7
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"%d"
-
-.subsections_via_symbols
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ## -- Begin function func0
+LCPI0_0:
+	dbl	x0.0
+LCPI0_1:
+	dbl	x0.1
+LCPI0_2:
+	dbl	x0.2
+LCPI0_3:
+	dbl	x0.3
+LCPI0_4:
+	dbl	x0.4
+LCPI0_5:
+	dbl	x0.5
+LCPI0_6:
+	dbl	x0.6
+LCPI0_7:
+	dbl	x0.7
+LCPI0_8:
+	dbl	x0.8
+LCPI0_9:
+	dbl	x0.9
+LCPI0_10:
+	dbl	x0.10
+LCPI0_11:
+	dbl	x0.11
+LCPI0_12:
+	dbl	x0.12
+LCPI0_13:
+	dbl	x0.13
+LCPI0_14:
+	dbl	x0.14
+LCPI0_15:
+	dbl	x0.15
+LCPI0_16:
+	dbl	x0.16
+LCPI0_17:
+	dbl	x0.17
+LCPI0_18:
+	dbl	x0.18
+LCPI0_19:
+	dbl	x0.19
+LCPI0_20:
+	dbl	x0.20
+LCPI0_21:
+	dbl	x0.21
+LCPI0_22:
+	dbl	x0.22
+LCPI0_23:
+	dbl	x0.23
+LCPI0_24:
+	dbl	x0.24
+LCPI0_25:
+	dbl	x0.25
+LCPI0_26:
+	dbl	x0.26
+LCPI0_27:
+	dbl	x0.27
+LCPI0_28:
+	dbl	x0.28
+LCPI0_29:
+	dbl	x0.29
+LCPI0_30:
+	dbl	x0.30
+LCPI0_31:
+	dbl	x0.31
+LCPI0_32:
+	dbl	x0.32
+LCPI0_33:
+	dbl	x0.33
+LCPI0_34:
+	dbl	x0.34
+LCPI0_35:
+	dbl	x0.35
+LCPI0_36:
+	dbl	x0.36
+LCPI0_37:
+	dbl	x0.37
+LCPI0_38:
+	dbl	x0.38
+LCPI0_39:
+	dbl	x0.39
+LCPI0_40:
+	dbl	x0.40
+LCPI0_41:
+	dbl	x0.41
+LCPI0_42:
+	dbl	x0.42
+LCPI0_43:
+	dbl	x0.43
+LCPI0_44:
+	dbl	x0.44
+LCPI0_45:
+	dbl	x0.45
+LCPI0_46:
+	dbl	x0.46
+LCPI0_47:
+	dbl	x0.47
+LCPI0_48:
+	dbl	x0.48
+LCPI0_49:
+	dbl	x0.49
+LCPI0_50:
+	dbl	x0.50
+LCPI0_51:
+	dbl	x0.51
+LCPI0_52:
+	dbl	x0.52
+LCPI0_53:
+	dbl	x0.53
+LCPI0_54:
+	dbl	x0.54
+LCPI0_55:
+	dbl	x0.55
+LCPI0_56:
+	dbl	x0.56
+LCPI0_57:
+	dbl	x0.57
+LCPI0_58:
+	dbl	x0.58
+LCPI0_59:
+	dbl	x0.59
+LCPI0_60:
+	dbl	x0.60
+LCPI0_61:
+	dbl	x0.61
+LCPI0_62:
+	dbl	x0.62
+LCPI0_63:
+	dbl	x0.63
+LCPI0_64:
+	dbl	x0.64
+LCPI0_65:
+	dbl	x0.65
+LCPI0_66:
+	dbl	x0.66
+LCPI0_67:
+	dbl	x0.67
+LCPI0_68:
+	dbl	x0.68
+LCPI0_69:
+	dbl	x0.69
+LCPI0_70:
+	dbl	x0.70
+LCPI0_71:
+	dbl	x0.71
+LCPI0_72:
+	dbl	x0.72
+LCPI0_73:
+	dbl	x0.73
+LCPI0_74:
+	dbl	x0.74
+LCPI0_75:
+	dbl	x0.75
+LCPI0_76:
+	dbl	x0.76
+LCPI0_77:
+	dbl	x0.77
+LCPI0_78:
+	dbl	x0.78
+LCPI0_79:
+	dbl	x0.79
+LCPI0_80:
+	dbl	x0.80
+LCPI0_81:
+	dbl	x0.81
+LCPI0_82:
+	dbl	x0.82
+LCPI0_83:
+	dbl	x0.83
+LCPI0_84:
+	dbl	x0.84
+LCPI0_85:
+	dbl	x0.85
+LCPI0_86:
+	dbl	x0.86
+LCPI0_87:
+	dbl	x0.87
+LCPI0_88:
+	dbl	x0.88
+LCPI0_89:
+	dbl	x0.89
+LCPI0_90:
+	dbl	x0.90
+LCPI0_91:
+	dbl	x0.91
+LCPI0_92:
+	dbl	x0.92
+LCPI0_93:
+	dbl	x0.93
+LCPI0_94:
+	dbl	x0.94
+LCPI0_95:
+	dbl	x0.95
+LCPI0_96:
+	dbl	x0.96
+LCPI0_97:
+	dbl	x0.97
+LCPI0_98:
+	dbl	x0.98
+LCPI0_99:
+	dbl	x0.99
+LCPI0_100:
+	dbl	x0.100
+LCPI0_101:
+	dbl	x0.101
+LCPI0_102:
+	dbl	x0.102
+LCPI0_103:
+	dbl	x0.103
+LCPI0_104:
+	dbl	x0.104
+LCPI0_105:
+	dbl	x0.105
+LCPI0_106:
+	dbl	x0.106
+LCPI0_107:
+	dbl	x0.107
+LCPI0_108:
+	dbl	x0.108
+LCPI0_109:
+	dbl	x0.109
+LCPI0_110:
+	dbl	x0.110
+LCPI0_111:
+	dbl	x0.111
+LCPI0_112:
+	dbl	x0.112
+LCPI0_113:
+	dbl	x0.113
+LCPI0_114:
+	dbl	x0.114
+LCPI0_115:
+	dbl	x0.115
+LCPI0_116:
+	dbl	x0.116
+LCPI0_117:
+	dbl	x0.117
+LCPI0_118:
+	dbl	x0.118
+LCPI0_119:
+	dbl	x0.119
+LCPI0_120:
+	dbl	x0.120
+LCPI0_121:
+	dbl	x0.121
+LCPI0_122:
+	dbl

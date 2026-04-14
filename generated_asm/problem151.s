@@ -1,29 +1,31 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w0, #1
-	cset	w8, gt
-	cmp	w0, #4
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w9, #2
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	sdiv	w10, w0, w9
-	msub	w10, w10, w9, w0
-	cmp	w10, #0
-	csel	w8, wzr, w8, eq
-	add	w9, w9, #1
-	mul	w10, w9, w9
-	cmp	w10, w0
-	b.le	LBB0_2
-LBB0_3:
-	cmp	w8, #0
-	csel	w0, w2, w1, eq
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+subq	$x2, sp, 128
+mov	x19, x0
+ldr	x0, [sp, 16]
+ldrb	w0, [x0]
+str	w0, [sp, 152]
+str	x19, [sp, 88]
+str	wzr, [sp, 92]
+str	wzr, [sp, 96]
+str	wzr, [sp, 100]
+ldr	w19, [sp, 100]
+ldr	w0, [sp, 152]
+cmp	w19, w0
+bgt	_LoopHeader0
+ldr	x0, [sp, 88]
+ldrsw	x1, [sp, 100]
+and	x1, x1, 255
+and	x0, x0, 255
+mov	w2, 32
+cmp	w1, w2
+beq	_LoopHeader1
+ldr	x0, [sp, 88]
+ldrsw	x1, [sp, 100]
+and	x1, x1, 255
+and	x0, x0, 255
+cmp	w1, 0
+bne	_LoopHeader2
+_LoopHeader0:
+stp	x29, x30, [sp], 96
+mov	x29, sp
+add	sp, sp, 128
+ret

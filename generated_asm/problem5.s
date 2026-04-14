@@ -1,118 +1,228 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, #0
-	b.le	LBB0_3
-; %bb.1:
-	mov	w8, w1
-	cmp	w1, #16
-	b.hs	LBB0_4
-; %bb.2:
-	mov	x9, #0
-	movi	d0, #0000000000000000
-	b	LBB0_7
-LBB0_3:
-	scvtf	s0, w1
-	movi	d1, #0000000000000000
-	b	LBB0_13
-LBB0_4:
-	and	x9, x8, #0xfffffff0
-	add	x10, x0, #32
-	movi	d0, #0000000000000000
-	mov	x11, x9
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q1, q2, [x10, #-32]
-	ldp	q3, q4, [x10], #64
-	fadd.4s	v0, v0, v1
-	fadd.4s	v0, v0, v2
-	fadd.4s	v0, v0, v3
-	fadd.4s	v0, v0, v4
-	subs	x11, x11, #16
-	b.ne	LBB0_5
-; %bb.6:
-	cmp	x9, x8
-	b.eq	LBB0_9
-LBB0_7:
-	add	x10, x0, x9, lsl #2
-	sub	x11, x8, x9
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	s1, [x10], #4
-	fadd	s0, s0, s1
-	subs	x11, x11, #1
-	b.ne	LBB0_8
-LBB0_9:
-	scvtf	s1, w1
-	fdiv	s0, s0, s1
-	cmp	w1, #16
-	b.hs	LBB0_11
-; %bb.10:
-	mov	x9, #0
-	movi	d2, #0000000000000000
-	b	LBB0_14
-LBB0_11:
-	and	x9, x8, #0xfffffff0
-	add	x10, x0, #32
-	movi	d2, #0000000000000000
-	mov	x11, x9
-LBB0_12:                                ; =>This Inner Loop Header: Depth=1
-	ldp	q3, q4, [x10, #-32]
-	ldp	q5, q6, [x10], #64
-	fsub.4s	v3, v3, v0
-	fsub.4s	v4, v4, v0
-	fsub.4s	v5, v5, v0
-	fsub.4s	v6, v6, v0
-	bit.16b	v2, v3, v1
-	mov	s3, v2[3]
-	mov	s7, v2[2]
-	mov	s16, v2[1]
-	bit.16b	v4, v4, v1
-	mov	s17, v4[3]
-	mov	s18, v4[2]
-	mov	s19, v4[1]
-	bit.16b	v5, v5, v1
-	mov	s20, v5[3]
-	mov	s21, v5[2]
-	mov	s22, v5[1]
-	bit.16b	v6, v6, v1
-	mov	s23, v6[3]
-	mov	s24, v6[2]
-	mov	s25, v6[1]
-	fadd	s2, s2, s3
-	fadd	s2, s2, s16
-	fadd	s2, s2, s7
-	fadd	s2, s2, s17
-	fadd	s2, s2, s4
-	fadd	s2, s2, s19
-	fadd	s2, s2, s18
-	fadd	s2, s2, s10
-	fadd	s2, s2, s5
-	fadd	s2, s2, s22
-	fadd	s2, s2, s21
-	fadd	s2, s2, s20
-	fadd	s2, s2, s6
-	fadd	s2, s2, s25
-	fadd	s2, s2, s24
-	fadd	s2, s2, s23
-	subs	x11, x11, #16
-	b.ne	LBB0_12
-LBB0_13:
-	cbz	x9, LBB0_16
-LBB0_14:
-	add	x10, x0, x9, lsl #2
-	sub	x8, x8, x9
-LBB0_15:                                ; =>This Inner Loop Header: Depth=1
-	ldr	s3, [x10], #4
-	fabd	s3, s3, s0
-	fadd	s2, s2, s3
-	subs	x8, x8, #1
-	b.ne	LBB0_15
-LBB0_16:
-	fdiv	s0, s2, s1
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	w1, [sp, 24]
+mov	w0, w1
+sub	w0, w0, #1
+str	w0, [sp, 28]
+ldr	w1, [sp, 24]
+cmp	w1, w0
+bgt	LBB1
+ldr	w0, [sp, 24]
+sub	w0, w0, #1
+str	w0, [sp, 28]
+b	LBB1
+LBB1:
+str	w0, [sp, 28]
+b	END
+LBB0_2:
+ldr	w1, [sp, 24]
+ldr	w0, [sp, 28]
+cmp	w1, w0
+bge	LBB0_5
+ldr	w1, [sp, 24]
+cmp	w1, w0
+bne	LBB0_5
+ldr	w0, [sp, 24]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+bne	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp	w0, 1
+beq	LBB0_7
+ldr	w0, [sp, 28]
+cmp

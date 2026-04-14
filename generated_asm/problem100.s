@@ -1,28 +1,217 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x29, x30, [sp, #-16]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 16
-	mov	x29, sp
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	bl	_atof
-	fmov	d1, #-0.50000000
-	fadd	d1, d0, d1
-	frintp	d1, d1
-	fmov	d2, #0.50000000
-	fadd	d2, d0, d2
-	frintm	d2, d2
-	fcmp	d0, #0.0
-	fcsel	d0, d1, d2, mi
-	fcvtzs	w0, d0
-	ldp	x29, x30, [sp], #16             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldp	x29, x30, [sp], 32
+mov	x19, 0
+mov	w1, 1
+str	w1, [sp, 44]
+str	w0, [sp, 40]
+str	w1, [sp, 36]
+str	w0, [sp, 24]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 24]
+add	w1, w0, 1
+str	w1, [sp, 24]
+ldr	w0, [sp, 20]
+sub	w0, w1, w0
+str	w0, [sp, 20]
+ldr	w0, [sp, 20]
+mul	w1, w0, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	LBB0_13
+LBB0_13:
+ldr	w0, [sp, 20]
+add	w1, w0, 1
+str	w1, [sp, 20]
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_14
+LBB0_14:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_16
+LBB0_16:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0_12
+LBB0_12:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bne	LBB0_14
+LBB0_14:
+str	wzr, [sp, 20]
+b	LBB0_17
+LBB0_17:
+b	LBB0_1
+LBB0_1:
+str	wzr, [sp, 20]
+b	LBB0_1
+LBB0_10:
+ldr	w0, [sp, 20]
+cmp	w0, 0
+beq	LBB0

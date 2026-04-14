@@ -1,79 +1,248 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.section	__TEXT,__literal4,4byte_literals
+	.p2align	2                               ## -- Begin function func0
+LCPI0_0:
+	.long	0x42c80000                      ## float 100
+LCPI0_3:
+	.long	0x40000000                      ## float 2
+LCPI0_4:
+	.long	0xbf800000                      ## float -1
+	.section	__TEXT,__literal16,16byte_literals
+	.p2align	4
+LCPI0_1:
+	.long	0x80000000                      ## float -0
+	.long	0x80000000                      ## float -0
+	.long	0x80000000                      ## float -0
+	.long	0x80000000                      ## float -0
+LCPI0_2:
+	.long	0x3effffff                      ## float 0.49999997
+	.long	0x3effffff                      ## float 0.49999997
+	.long	0x3effffff                      ## float 0.49999997
+	.long	0x3effffff                      ## float 0.49999997
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	stp	x20, x19, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	mov	x19, x0
-	bl	_strlen
-	cbz	w0, LBB0_11
-; %bb.1:
-	lsl	x20, x0, #32
-	mov	x8, #-4294967296
-	add	x8, x20, x8
-	asr	x8, x8, #32
-	ldrsb	w0, [x19, x8]
-	tbnz	w0, #31, LBB0_3
-; %bb.2:
-Lloh0:
-	adrp	x8, __DefaultRuneLocale@GOTPAGE
-Lloh1:
-	ldr	x8, [x8, __DefaultRuneLocale@GOTPAGEOFF]
-	add	x8, x8, x0, lsl #2
-	ldr	w8, [x8, #60]
-	and	w0, w8, #0x100
-	cbnz	w0, LBB0_4
-	b	LBB0_11
-LBB0_3:
-	mov	w1, #256
-	bl	___maskrune
-	cbz	w0, LBB0_11
-LBB0_4:
-	cmp	w20, #1
-	b.ne	LBB0_6
-; %bb.5:
-	mov	w0, #1
-	b	LBB0_11
-LBB0_6:
-	mov	x8, #-8589934592
-	add	x8, x20, x8
-	asr	x8, x8, #32
-	ldrsb	w0, [x19, x8]
-	tbnz	w0, #31, LBB0_8
-; %bb.7:
-Lloh2:
-	adrp	x8, __DefaultRuneLocale@GOTPAGE
-Lloh3:
-	ldr	x8, [x8, __DefaultRuneLocale@GOTPAGEOFF]
-	add	x8, x8, x0, lsl #2
-	ldr	w8, [x8, #60]
-	and	w0, w8, #0x100
-	b	LBB0_9
-LBB0_8:
-	mov	w1, #256
-	bl	___maskrune
-LBB0_9:
-	cmp	w0, #0
-	cset	w0, eq
-	b	LBB0_11
-LBB0_10:
-                                        ; implicit-def: $w0
-LBB0_11:
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp], #32             ; 16-byte Folded Reload
-	ret
-	.loh AdrpLdrGot	Lloh0, Lloh1
-	.loh AdrpLdrGot	Lloh2, Lloh3
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+## %bb.0:
+	push	q0
+	.cfi_def_cfa_offset 16
+	.cfi_offset %sp, -16
+	sqstp	x19
+	lsl	x1, #3
+	x0 = 0
+	x1 = 0
+	x2 = 0
+	x3 = 0
+	x4 = 0
+	x5 = 0
+	x6 = 0
+	x7 = 0
+	x8 = 0
+	x9 = 0
+	x10 = 0
+	x11 = 0
+	x12 = 0
+	x13 = 0
+	x14 = 0
+	x15 = 0
+	x16 = 0
+	x17 = 0
+	x18 = 0
+	x19 = 0
+	x20 = 0
+	x21 = 0
+	x22 = 0
+	x23 = 0
+	x24 = 0
+	x25 = 0
+	x26 = 0
+	x27 = 0
+	x28 = 0
+	x29 = 0
+	x30 = 0
+	x31 = 0
+	x32 = 0
+	x33 = 0
+	x34 = 0
+	x35 = 0
+	x36 = 0
+	x37 = 0
+	x38 = 0
+	x39 = 0
+	x40 = 0
+	x41 = 0
+	x42 = 0
+	x43 = 0
+	x44 = 0
+	x45 = 0
+	x46 = 0
+	x47 = 0
+	x48 = 0
+	x49 = 0
+	x50 = 0
+	x51 = 0
+	x52 = 0
+	x53 = 0
+	x54 = 0
+	x55 = 0
+	x56 = 0
+	x57 = 0
+	x58 = 0
+	x59 = 0
+	x60 = 0
+	x61 = 0
+	x62 = 0
+	x63 = 0
+	x64 = 0
+	x65 = 0
+	x66 = 0
+	x67 = 0
+	x68 = 0
+	x69 = 0
+	x70 = 0
+	x71 = 0
+	x72 = 0
+	x73 = 0
+	x74 = 0
+	x75 = 0
+	x76 = 0
+	x77 = 0
+	x78 = 0
+	x79 = 0
+	x80 = 0
+	x81 = 0
+	x82 = 0
+	x83 = 0
+	x84 = 0
+	x85 = 0
+	x86 = 0
+	x87 = 0
+	x88 = 0
+	x89 = 0
+	x90 = 0
+	x91 = 0
+	x92 = 0
+	x93 = 0
+	x94 = 0
+	x95 = 0
+	x96 = 0
+	x97 = 0
+	x98 = 0
+	x99 = 0
+	x100 = 0
+	x101 = 0
+	x102 = 0
+	x103 = 0
+	x104 = 0
+	x105 = 0
+	x106 = 0
+	x107 = 0
+	x108 = 0
+	x109 = 0
+	x110 = 0
+	x111 = 0
+	x112 = 0
+	x113 = 0
+	x114 = 0
+	x115 = 0
+	x116 = 0
+	x117 = 0
+	x118 = 0
+	x119 = 0
+	x120 = 0
+	x121 = 0
+	x122 = 0
+	x123 = 0
+	x124 = 0
+	x125 = 0
+	x126 = 0
+	x127 = 0
+	x128 = 0
+	x129 = 0
+	x130 = 0
+	x131 = 0
+	x132 = 0
+	x133 = 0
+	x134 = 0
+	x135 = 0
+	x136 = 0
+	x137 = 0
+	x138 = 0
+	x139 = 0
+	x140 = 0
+	x141 = 0
+	x142 = 0
+	x143 = 0
+	x144 = 0
+	x145 = 0
+	x146 = 0
+	x147 = 0
+	x148 = 0
+	x149 = 0
+	x150 = 0
+	x151 = 0
+	x152 = 0
+	x153 = 0
+	x154 = 0
+	x155 = 0
+	x156 = 0
+	x157 = 0
+	x158 = 0
+	x159 = 0
+	x160 = 0
+	x161 = 0
+	x162 = 0
+	x163 = 0
+	x164 = 0
+	x165 = 0
+	x166 = 0
+	x167 = 0
+	x168 = 0
+	x169 = 0
+	x170 = 0
+	x171 = 0
+	x172 = 0
+	x173 = 0
+	x174 = 0
+	x175 = 0
+	x176 = 0
+	x177 = 0
+	x178 = 0
+	x179 = 0
+	x180 = 0
+	x181 = 0
+	x182 = 0
+	x183 = 0
+	x184 = 0
+	x185 = 0
+	x186 = 0
+	x187 = 0
+	x188 = 0
+	x189 = 0
+	x190 = 0
+	x191 = 0
+	x192 = 0
+	x193 = 0
+	x194 = 0
+	x195 = 0
+	x196 = 0
+	x197 = 0
+	x198 = 0
+	x199 = 0
+	x200 = 0
+	x201 = 0
+	x202 = 0
+	x203 = 0
+	x204 = 0
+	x205 = 0
+	x206 = 0
+	x207 = 0
+	x208 = 0
+	x209 = 0
+	x210 = 0
+	x211 = 0
+	x212 = 0
+	x213 = 0
+	x214 = 0

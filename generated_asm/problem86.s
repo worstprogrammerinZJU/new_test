@@ -1,86 +1,55 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	subs	w9, w1, #2
-	b.ge	LBB0_2
-; %bb.1:
-	mov	w0, #0
-	ret
-LBB0_2:
-	cmp	w9, #32
-	b.hs	LBB0_4
-; %bb.3:
-	mov	x10, #0
-	mov	w8, #0
-	mov	w11, #1
-	b	LBB0_7
-LBB0_4:
-	lsr	w8, w9, #1
-	add	w8, w8, #1
-	ands	x10, x8, #0xf
-	mov	w11, #16
-	csel	x11, x11, x10, eq
-	sub	x10, x8, x11
-	lsl	x8, x10, #1
-	add	x8, x8, #1
-	add	x12, x0, #68
-	movi.2d	v0, #0000000000000000
-	movi.4s	v1, #1
-	mov	x13, x10
-	movi.2d	v2, #0000000000000000
-	movi.2d	v3, #0000000000000000
-	movi.2d	v4, #0000000000000000
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	sub	x14, x12, #64
-	ld2.4s	{ v5, v6 }, [x14]
-	sub	x14, x12, #32
-	ld2.4s	{ v16, v17 }, [x14]
-	mov	x14, x12
-	ld2.4s	{ v18, v19 }, [x14], #32
-	ld2.4s	{ v20, v21 }, [x14]
-	and.16b	v22, v5, v1
-	and.16b	v23, v16, v1
-	and.16b	v24, v18, v1
-	and.16b	v25, v20, v1
-	cmeq.4s	v22, v22, #0
-	cmeq.4s	v23, v23, #0
-	cmeq.4s	v24, v24, #0
-	cmeq.4s	v25, v25, #0
-	and.16b	v5, v5, v22
-	and.16b	v6, v16, v23
-	and.16b	v16, v18, v24
-	and.16b	v18, v20, v25
-	add.4s	v0, v5, v0
-	add.4s	v2, v6, v2
-	add.4s	v3, v16, v3
-	add.4s	v4, v18, v4
-	add	x12, x12, #128
-	subs	x13, x13, #16
-	b.ne	LBB0_5
-; %bb.6:
-	add.4s	v0, v2, v0
-	add.4s	v0, v3, v0
-	add.4s	v0, v4, v0
-	addv.4s	s0, v0
-	fmov	w8, s0
-LBB0_7:
-	lsr	x9, x9, #1
-	add	x9, x9, x10
-	add	x10, x0, x8, lsl #2
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w11, [x10], #8
-	tst	w11, #0x1
-	csel	w11, w11, wzr, eq
-	add	w8, w11, w8
-	subs	x9, x9, #1
-	b.ne	LBB0_8
-; %bb.9:
-	mov	x0, x8
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, -48]!
+mov	x20, sp
+str	x0, [sp, 40]
+str	x19, [sp, 32]
+ldr	x0, [sp, 40]
+bl	str_len
+str	w0, [sp, 28]
+str	wzr, [sp, 24]
+LBB0_1:
+ldr	w1, [sp, 28]
+ldr	w0, [sp, 24]
+and	w0, w1, 255
+cmp	w0, 97
+blt	LBB0_5
+ldr	w0, [sp, 24]
+sub	w0, w0, #32
+strb	w0, [sp, 25]
+ldr	w0, [sp, 25]
+cmp	w0, 122
+bgt	LBB0_5
+ldr	w0, [sp, 25]
+sub	w0, w0, #32
+strb	w0, [sp, 25]
+b	LBB0_9
+LBB0_5:
+ldr	w0, [sp, 25]
+cmp	w0, 65
+blt	LBB0_8
+ldr	w0, [sp, 25]
+cmp	w0, 90
+bgt	LBB0_8
+ldr	w0, [sp, 25]
+add	w0, w0, #32
+strb	w0, [sp, 25]
+b	LBB0_9
+LBB0_9:
+ldr	w1, [sp, 20]
+ldr	w0, [sp, 24]
+and	w1, w1, 255
+and	w0, w0, 255
+strb	w1, [w0, w1]
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+b	LBB0_1
+LBB0_11:
+ldr	x1, [sp, 20]
+ldr	w0, [sp, 24]
+and	w1, w1, 255
+and	w0, w0, 255
+strb	w1, [x1, w0]
+add	sp, sp, 32
+pop	x29
+pop	x30
+ret

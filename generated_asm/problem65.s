@@ -1,64 +1,119 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.global	_func0
+.p2align	4, 0x90
+_func0:
 	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x19, x0
-	bl	_strlen
-	subs	w23, w0, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	x21, x0
-	mov	w20, #0
-	and	x24, x0, #0xffffffff
-Lloh0:
-	adrp	x22, l_.str@PAGE
-Lloh1:
-	add	x22, x22, l_.str@PAGEOFF
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsb	w1, [x19], #1
-	mov	x0, x22
-	mov	w2, #11
-	bl	_memchr
-	cmp	x0, #0
-	cinc	w20, w20, ne
-	subs	x24, x24, #1
-	b.ne	LBB0_2
-	b	LBB0_4
+sub	sp, sp, #208
+mov	x2, 104
+adrp	x0, l___const.func0.rep
+add	x1, x0, :lo12:l___const.func0.rep
+ldr	x0, [sp, 88]
+bl	x2, x1
+adrp	x0, l___const.func0.num
+add	x1, x0, :lo12:l___const.func0.num
+ldr	x0, [sp, 104]
+bl	x2, x1
+str	wzr, [sp, 96]
+ldr	x0, [sp, 96]
+and	x0, x0, 255
+strb	wzr, [x0]
+b	LBB0_1
+LBB0_1:
+cmp	x0, 0
+ble	LBB0_8
+b	LBB0_3
 LBB0_3:
-	mov	w20, #0
-LBB0_4:
-	ldrb	w8, [x19, w23, uxtw]
-	orr	w8, w8, #0x20
-	cmp	w8, #121
-	csinc	w0, w20, w20, eq
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"aeiouAEIOU"
-
-.subsections_via_symbols
+ldr	w1, [sp, 96]
+ldr	x0, [sp, 88]
+add	x0, x0, :lo12:x___const.func0.rep*4
+mov	w2, 52
+adrp	x0, l___const.func0.num
+add	x1, x0, :lo12:l___const.func0.num
+ldr	x0, [sp, 104]
+bl	x2, x1, x1, w2
+ldr	x0, [sp, 96]
+sub	w0, w0, w1
+mov	w1, 1
+ldr	w0, [sp, 96]
+add	w0, w0, w1
+str	w0, [sp, 96]
+b	LBB0_3
+LBB0_5:
+cmp	x0, 0
+ble	LBB0_7
+ldr	w0, [sp, 96]
+add	w0, w0, 1
+str	w0, [sp, 96]
+b	LBB0_1
+LBB0_7:
+b	LBB0_1
+LBB0_8:
+adrp	x0, l___const.func0.rep
+add	x0, x0, :lo12:l___const.func0.rep
+ldr	x1, [x0]
+adrp	x0, l___const.func0.num
+add	x0, x0, :lo12:l___const.func0.num
+ldr	x0, [sp, 104]
+cmp	x1, x0
+bne	LBB0_10
+add	sp, sp, 208
+ret
+LBB0_10:
+bl	___stack_chk_fail
+ud2
+.section	__TEXT,__cstring,cstring_literals
+.Lstr:
+	.asciz	"m"
+.Lstr.1:
+	.asciz	"cm"
+.Lstr.2:
+	.asciz	"d"
+.Lstr.3:
+	.asciz	"cd"
+.Lstr.4:
+	.asciz	"c"
+.Lstr.5:
+	.asciz	"xc"
+.Lstr.6:
+	.asciz	"l"
+.Lstr.7:
+	.asciz	"xl"
+.Lstr.8:
+	.asciz	"x"
+.Lstr.9:
+	.asciz	"ix"
+.Lstr.10:
+	.asciz	"v"
+.Lstr.11:
+	.asciz	"iv"
+.Lstr.12:
+	.asciz	"i"
+.section	__DATA,__const
+.p2align	4
+l___const.func0.rep:
+	qword	x0, .Lstr
+	qword	x0, .Lstr.1
+	qword	x0, .Lstr.2
+	qword	x0, .Lstr.3
+	qword	x0, .Lstr.4
+	qword	x0, .Lstr.5
+	qword	x0, .Lstr.6
+	qword	x0, .Lstr.7
+	qword	x0, .Lstr.8
+	qword	x0, .Lstr.9
+	qword	x0, .Lstr.10
+	qword	x0, .Lstr.11
+	qword	x0, .Lstr.12
+.l___const.func0.num:
+	.long	1000
+	.long	900
+	.long	500
+	.long	400
+	.long	100
+	.long	90
+	.long	50
+	.long	40
+	.long	10
+	.long	9
+	.long	5
+	.long	4
+	.long	1

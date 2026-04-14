@@ -1,60 +1,55 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x20, x19, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	mov	x19, x0
-	add	w20, w0, #1
-	mov	x8, x20
-	sbfiz	x0, x8, #2, #32
-	bl	_malloc
-	mov	w8, #1
-	str	w8, [x0]
-	cbz	w19, LBB0_2
-; %bb.1:
-	mov	w8, #3
-	str	w8, [x0, #4]
-	cmp	w19, #2
-	b.ge	LBB0_3
-LBB0_2:
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp], #32             ; 16-byte Folded Reload
-	ret
-LBB0_3:
-	mov	w9, #2
-	mov	w10, #3
-	b	LBB0_5
-LBB0_4:                                 ;   in Loop: Header=BB0_5 Depth=1
-	str	w10, [x0, x9, lsl #2]
-	mov	x9, x11
-	cmp	x11, x20
-	b.eq	LBB0_2
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	tbnz	w9, #0, LBB0_7
-; %bb.6:                                ;   in Loop: Header=BB0_5 Depth=1
-	lsr	w10, w9, #1
-	add	w10, w10, #1
-	add	x11, x9, #1
-	b	LBB0_4
-LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w12, [x0, x9, lsl #2]
-	ubfx	x11, x9, #1, #31
-	add	w11, w11, #1
-	add	w11, w10, w11
-	add	w10, w11, w12
-	add	w10, w10, #1
-	b	LBB0_4
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LBB0_1:
+ldr	w1, [sp, 44]
+ldr	x0, [sp, 48]
+ldrsz	x0, w1
+ldrsw	x0, [x0, 4]
+cmp	w1, w0
+bge	_LBB0_8
+_LBB0_2:
+ldr	x0, [sp, 48]
+ldrsw	x1, [sp, 44]
+ldrsw	x0, [x0, 4]
+div	w1, w1, w0
+cmp	w0, 0
+bne	_LBB0_6
+_LBB0_3:
+ldr	x0, [sp, 48]
+ldrsw	x1, [sp, 44]
+ldrsw	x0, [x0, 4]
+div	w1, w1, w0
+cmp	w0, 0
+beq	_LBB0_6
+_LBB0_4:
+ldr	w1, [sp, 44]
+cmp	w1, -1
+bne	_LBB0_6
+_LBB0_5:
+ldr	x0, [sp, 48]
+ldrsw	x1, [sp, 44]
+ldrsw	x0, [x0, 4]
+div	w1, w1, w0
+str	w0, [sp, 44]
+str	w1, [sp, 40]
+_LBB0_6:
+b	_LBB0_7
+_LBB0_7:
+ldr	w1, [sp, 44]
+add	w0, w1, 1
+str	w0, [sp, 44]
+b	_LBB0_1
+_LBB0_8:
+ldr	w1, [sp, 40]
+cmp	w1, -1
+bne	_LBB0_10
+stp	xzr, [sp, 24]
+b	_LBB0_11
+_LBB0_10:
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 48]
+str	w1, [x0]
+mov	w1, w1
+ldr	w1, [sp, 40]
+ldr	x0, [sp, 48]
+str	w1, [x0, 4]
+stp	xzr, [sp, 24]
+ret

@@ -1,38 +1,24 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_4
-; %bb.1:
-	mov	w8, #0
-	mov	w9, #0
-	mov	w10, w1
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w11, [x0], #4
-	cmp	w11, w8
-	ccmp	w8, #0, #4, gt
-	csel	w12, w11, w8, ne
-	cmp	w11, #0
-	csel	w13, w11, w9, eq
-	cmp	w11, w9
-	ccmp	w9, #0, #4, le
-	csel	w11, w11, w9, eq
-	tst	w11, #0x80000000
-	csel	w9, w9, w13, eq
-	csel	w10, w12, w10, eq
-	add	x11, x10, #1
-	subs	x10, x10, #1
-	b.ne	LBB0_2
-; %bb.3:
-	stp	w10, w9, [x2]
-	ret
-LBB0_4:
-	stp	wzr, wzr, [x2]
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldrb	w0, [sp, 79]
+mov	w1, 2
+sdiv	w1, w1, w0
+str	w1, [sp, 79]
+ldr	w1, [sp, 79]
+ldr	w0, [sp, 76]
+cmp	w1, w0
+bge	_LoopEnd
+ldrsw	x1, [sp, 76]
+ldr	w0, [sp, 79]
+add	w1, w0, #1
+sub	w1, w1, :lo12:w0
+ldr	w0, [sp, 76]
+sub	w1, w1, w0
+fdiv	w1, w0, w1
+fcmpe	x0, x1, x0
+beq	_LoopEnd
+ldr	w0, [sp, 76]
+add	w0, w0, #1
+str	w0, [sp, 76]
+b	_LoopStart
+_LoopEnd:
+stp	x29, x30, [sp], 48
+ret

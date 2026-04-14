@@ -1,47 +1,210 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, #0
-	cinc	w8, w1, lt
-	asr	w8, w8, #1
-	cmp	w1, #2
-	b.lt	LBB0_4
-; %bb.1:
-	mov	w9, #0
-	sub	w10, w1, #1
-	mov	x11, x0
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w12, [x11]
-	ldr	w13, [x0, w10, sxtw #2]
-	cmp	w12, w13
-	b.ne	LBB0_8
-; %bb.3:                                ;   in Loop: Header=BB0_2 Depth=1
-	add	w9, w9, w12, lsl #1
-	add	x11, x11, #4
-	sub	w10, w10, #1
-	sub	x8, x8, #1
-	cbnz	x8, LBB0_2
-	b	LBB0_5
-LBB0_4:
-	mov	w9, #0
-LBB0_5:
-	and	w8, w1, #0x80000001
-	cmp	w8, #1
-	b.ne	LBB0_7
-; %bb.6:
-	ldr	w8, [x0, w8, sxtw #2]
-	add	w9, w9, w8
-LBB0_7:
-	cmp	w9, w2
-	cset	w0, le
-	ret
-LBB0_8:
-	mov	w0, #0
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	x0, [sp, 40]
+mov	w1, w0
+blt	w1, w1, #1
+cmp	w1, 0
+bgt	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #2
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #3
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #4
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #5
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #6
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #7
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #8
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #9
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #10
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #11
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #12
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #13
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #14
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #15
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #16
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #17
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #18
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #19
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #20
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #21
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #22
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #23
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #24
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #25
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #26
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #27
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #28
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #29
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #30
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub

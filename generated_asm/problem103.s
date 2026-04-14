@@ -1,24 +1,21 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, w0
-	b.ge	LBB0_2
-; %bb.1:
-	mov	w0, #-1
-	ret
-LBB0_2:
-	and	w8, w1, #0x80000001
-	ccmp	w8, #1, #0, eq
-	b.eq	LBB0_5
-; %bb.3:
-	cmp	w8, #1
-	cset	w8, eq
-	sub	w0, w1, w8
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+str	x0, [sp, 24]
+str	w1, [sp, 20]
+str	wzr, [sp, 16]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 16]
+cmp	w1, w0
+bge	LBB0_4
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 16]
+mov	w2, w0
+add	w0, w2, 1
+str	w0, [x1, w0]
+add	w0, w0, 1
+str	w0, [sp, 16]
+b	LBB0_1
+LBB0_4:
+stp	x29, x30, [sp]
+ret

@@ -1,65 +1,42 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x22, x21, [sp, #-48]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 48
-	stp	x20, x19, [sp, #16]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	cmp	w1, #1
-	b.lt	LBB0_7
-; %bb.1:
-	mov	x20, x1
-	mov	x19, x0
-	mov	w21, w1
-	lsl	x0, x21, #2
-	bl	_malloc
-	cbz	x0, LBB0_8
-; %bb.2:
-	ldr	w8, [x19]
-	str	w8, [x0]
-	cmp	w20, #1
-	b.eq	LBB0_8
-; %bb.3:
-	add	x9, x19, #4
-	sub	x10, x21, #1
-	add	x11, x0, #4
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w12, [x9], #4
-	cmp	w12, w8
-	csel	w8, w12, w8, gt
-	str	w8, [x11], #4
-	subs	x10, x10, #1
-	b.ne	LBB0_4
-; %bb.5:
-	mov	x0, x8
-	b	LBB0_8
-LBB0_6:                                 ;   in Loop: Header=BB0_7 Depth=1
-	str	w8, [x0, #4]
-	add	x0, x0, #4
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [x19], #4
-	cmp	w8, w8
-	csel	w8, w8, w8, gt
-	str	w8, [x0]
-	subs	x21, x21, #1
-	b.ne	LBB0_7
-LBB0_8:
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp], #48             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldrb	w1, [sp, 63]
+ldrb	w0, [sp, 63]
+cmp	w1, w0
+beq	_LoopEnd
+ldr	w0, [sp, 60]
+sub	w1, w0, #1
+movk	w1, 0x3f, lsl 16
+mul	w1, w1, w1
+lsl	w1, w1, 2
+add	w1, w1, w0
+str	w1, [sp, 60]
+b	_LoopEnd
+_LoopEnd:
+ldr	w1, [sp, 60]
+ldr	x0, [sp, 48]
+bl	malloc
+str	x0, [sp, 32]
+str	wzr, [sp, 28]
+mov	w1, 1
+str	w1, [sp, 28]
+mov	w1, 1
+str	w1, [sp, 28]
+_LoopInner:
+ldr	w1, [sp, 28]
+ldrsw	x0, [sp, 60]
+mov	w2, w1
+lsl	w1, w1, 2
+add	w1, w1, w0
+str	w1, [x0, w2]
+b	_LoopInner
+_LoopOuter:
+ldr	w2, [sp, 28]
+ldr	x0, [sp, 32]
+ldrsw	x0, [sp, 60]
+sub	w0, w0, #1
+lsl	w0, w0, 2
+add	w0, w0, w2
+str	w0, [x0, w2]
+b	_LoopOuter
+_LoopEnd:
+add	sp, sp, 40
+ret

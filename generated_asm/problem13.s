@@ -1,63 +1,179 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	cmp	w1, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	x19, x0
-	mov	w21, #0
-	mov	w22, w1
-Lloh0:
-	adrp	x20, l_.str@PAGE
-Lloh1:
-	add	x20, x20, l_.str@PAGEOFF
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	x23, [x19], #8
-	mov	x0, x23
-	bl	_strlen
-	cmp	w21, w0
-	csel	w21, w21, w0, gt
-	csel	x20, x23, x20, lt
-	subs	x22, x22, #1
-	b.ne	LBB0_2
-	b	LBB0_4
-LBB0_3:
-Lloh2:
-	adrp	x20, l_.str@PAGE
-Lloh3:
-	add	x20, x20, l_.str@PAGEOFF
-LBB0_4:
-	mov	x0, x20
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.loh AdrpAdd	Lloh2, Lloh3
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.space	1
-
-.subsections_via_symbols
+.global	_func0
+.type	_func0, @function
+_func0:
+	b	_LBB0_0
+_LBB0_0:
+	push	x29
+	x0 = sp
+	x19 = x0
+	x29 = sp
+	str	x0, [x19, 16]
+	x0 = sp
+	w = 48
+	lsl	x0, w, 1
+	add	x0, x0, 1
+	str	w, [x19, 19]
+	lsl	x0, x0, 1
+	str	x0, [sp, 24]
+	lsl	x0, x0, 1
+	str	x0, [sp, 20]
+	lsl	x0, x0, 1
+	str	x0, [sp, 16]
+	lsl	x0, x0, 1
+	str	x0, [sp, 12]
+	lsl	x0, x0, 1
+	str	x0, [sp, 8]
+	lsl	x0, x0, 1
+	str	x0, [sp, 4]
+	lsl	x0, x0, 1
+	str	x0, [sp, 0]
+	lsl	x0, x0, 1
+	str	x0, [sp, 16]
+	lsl	x0, x0, 1
+	str	x0, [sp, 20]
+	lsl	x0, x0, 1
+	str	x0, [sp, 24]
+	lsl	x0, x0, 1
+	str	x0, [sp, 28]
+	lsl	x0, x0, 1
+	str	x0, [sp, 32]
+	lsl	x0, x0, 1
+	str	x0, [sp, 36]
+	lsl	x0, x0, 1
+	str	x0, [sp, 40]
+	lsl	x0, x0, 1
+	str	x0, [sp, 44]
+	lsl	x0, x0, 1
+	str	x0, [sp, 48]
+	lsl	x0, x0, 1
+	str	x0, [sp, 52]
+	lsl	x0, x0, 1
+	str	x0, [sp, 56]
+	lsl	x0, x0, 1
+	str	x0, [sp, 60]
+	lsl	x0, x0, 1
+	str	x0, [sp, 64]
+	lsl	x0, x0, 1
+	str	x0, [sp, 68]
+	lsl	x0, x0, 1
+	str	x0, [sp, 72]
+	lsl	x0, x0, 1
+	str	x0, [sp, 76]
+	lsl	x0, x0, 1
+	str	x0, [sp, 80]
+	lsl	x0, x0, 1
+	str	x0, [sp, 84]
+	lsl	x0, x0, 1
+	str	x0, [sp, 88]
+	lsl	x0, x0, 1
+	str	x0, [sp, 92]
+	lsl	x0, x0, 1
+	str	x0, [sp, 96]
+	lsl	x0, x0, 1
+	str	x0, [sp, 100]
+	lsl	x0, x0, 1
+	str	x0, [sp, 104]
+	lsl	x0, x0, 1
+	str	x0, [sp, 108]
+	lsl	x0, x0, 1
+	str	x0, [sp, 112]
+	lsl	x0, x0, 1
+	str	x0, [sp, 116]
+	lsl	x0, x0, 1
+	str	x0, [sp, 120]
+	lsl	x0, x0, 1
+	str	x0, [sp, 124]
+	lsl	x0, x0, 1
+	str	x0, [sp, 128]
+	lsl	x0, x0, 1
+	str	x0, [sp, 132]
+	lsl	x0, x0, 1
+	str	x0, [sp, 136]
+	lsl	x0, x0, 1
+	str	x0, [sp, 140]
+	lsl	x0, x0, 1
+	str	x0, [sp, 144]
+	lsl	x0, x0, 1
+	str	x0, [sp, 148]
+	lsl	x0, x0, 1
+	str	x0, [sp, 152]
+	lsl	x0, x0, 1
+	str	x0, [sp, 156]
+	lsl	x0, x0, 1
+	str	x0, [sp, 160]
+	lsl	x0, x0, 1
+	str	x0, [sp, 164]
+	lsl	x0, x0, 1
+	str	x0, [sp, 168]
+	lsl	x0, x0, 1
+	str	x0, [sp, 172]
+	lsl	x0, x0, 1
+	str	x0, [sp, 176]
+	lsl	x0, x0, 1
+	str	x0, [sp, 180]
+	lsl	x0, x0, 1
+	str	x0, [sp, 184]
+	lsl	x0, x0, 1
+	str	x0, [sp, 188]
+	lsl	x0, x0, 1
+	str	x0, [sp, 192]
+	lsl	x0, x0, 1
+	str	x0, [sp, 196]
+	lsl	x0, x0, 1
+	str	x0, [sp, 200]
+	lsl	x0, x0, 1
+	str	x0, [sp, 204]
+	lsl	x0, x0, 1
+	str	x0, [sp, 208]
+	lsl	x0, x0, 1
+	str	x0, [sp, 212]
+	lsl	x0, x0, 1
+	str	x0, [sp, 216]
+	lsl	x0, x0, 1
+	str	x0, [sp, 220]
+	lsl	x0, x0, 1
+	str	x0, [sp, 224]
+	lsl	x0, x0, 1
+	str	x0, [sp, 228]
+	lsl	x0, x0, 1
+	str	x0, [sp, 232]
+	lsl	x0, x0, 1
+	str	x0, [sp, 236]
+	lsl	x0, x0, 1
+	str	x0, [sp, 240]
+	lsl	x0, x0, 1
+	str	x0, [sp, 244]
+	lsl	x0, x0, 1
+	str	x0, [sp, 248]
+	lsl	x0, x0, 1
+	str	x0, [sp, 252]
+	lsl	x0, x0, 1
+	str	x0, [sp, 256]
+	lsl	x0, x0, 1
+	str	x0, [sp, 260]
+	lsl	x0, x0, 1
+	str	x0, [sp, 264]
+	lsl	x0, x0, 1
+	str	x0, [sp, 268]
+	lsl	x0, x0, 1
+	str	x0, [sp, 272]
+	lsl	x0, x0, 1
+	str	x0, [sp, 276]
+	lsl	x0, x0, 1
+	str	x0, [sp, 280]
+	lsl	x0, x0, 1
+	str	x0, [sp, 284]
+	lsl	x0, x0, 1
+	str	x0, [sp, 288]
+	lsl	x0, x0, 1
+	str	x0, [sp, 292]
+	lsl	x0, x0, 1
+	str	x0, [sp, 296]
+	lsl	x0, x0, 1
+	str	x0, [sp, 300]
+	lsl	x0, x0, 1
+	str	x0, [sp, 304]
+	lsl	x0, x0, 1
+	str	x0, [sp, 308]
+	lsl	x0, x0, 1
+	str	x0, [sp, 312

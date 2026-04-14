@@ -1,14 +1,19 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	fmul	s0, s0, s1
-	fmov	s1, #0.50000000
-	fmul	s0, s0, s1
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.type	_func0, @function
+_func0:
+bl	_func0
+str	w0, [sp, 4]
+str	w1, [sp, 24]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 24]
+mul	w0, w0, w1
+str	w0, [sp, 24]
+ldr	w1, [sp, 24]
+sub	w0, w1, w0
+str	w0, [sp, 20]
+ldr	w1, [sp, 20]
+mov	w0, w1
+str	w0, [sp, 24]
+b	LBB0_1
+ret

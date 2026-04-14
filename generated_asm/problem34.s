@@ -1,113 +1,228 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x22, x21, [sp, #-48]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 48
-	stp	x20, x19, [sp, #16]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x19, x2
-	mov	x21, x1
-	mov	x20, x0
-	mov	w8, #21846
-	movk	w8, #21845, lsl #16
-	smull	x8, w1, w8
-	lsr	x9, x8, #63
-	lsr	x8, x8, #32
-	add	w8, w8, w9
-	sbfiz	x8, x8, #2, #32
-	add	x0, x8, #4
-	bl	_malloc
-	cmp	w21, #1
-	b.lt	LBB0_13
-; %bb.1:
-	mov	w9, #0
-	mov	x8, #0
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w10, [x20, w9, uxtw #2]
-	str	w10, [x0, x8, lsl #2]
-	add	x8, x8, #1
-	add	w9, w9, #3
-	cmp	w9, w21
-	b.lt	LBB0_2
-; %bb.3:
-	cmp	w8, #1
-	b.le	LBB0_10
-; %bb.4:
-	mov	x10, #0
-	sub	x11, x8, #1
-	and	x12, x11, #0xffffffff
-	and	x13, x8, #0xffffffff
-	mov	w14, #1
-	b	LBB0_6
-LBB0_5:                                 ;   in Loop: Header=BB0_6 Depth=1
-	add	x14, x14, #1
-	mov	x10, x15
-	cmp	x15, x12
-	b.eq	LBB0_10
-LBB0_6:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_7 Depth 2
-	mov	x15, x10
-	add	x10, x10, #1
-	mov	x16, x14
-	mov	x17, x15
-LBB0_7:                                 ;   Parent Loop BB0_6 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w1, [x0, x16, lsl #2]
-	ldr	w2, [x0, w17, sxtw #2]
-	cmp	w1, w2
-	csel	w17, w16, w17, lt
-	add	x16, x16, #1
-	cmp	x13, x16
-	b.ne	LBB0_7
-; %bb.8:                                ;   in Loop: Header=BB0_6 Depth=1
-	cmp	x15, w17, uxtw
-	b.eq	LBB0_5
-; %bb.9:                                ;   in Loop: Header=BB0_6 Depth=1
-	lsl	x16, x15, #2
-	ldr	w17, [x0, x16]
-	sbfiz	x1, x17, #2, #32
-	ldr	w17, [x0, x1]
-	str	w17, [x0, x16]
-	str	w1, [x0, x1]
-	b	LBB0_5
-LBB0_10:
-	cmp	w21, #1
-	b.lt	LBB0_13
-; %bb.11:
-	mov	x8, #0
-	mov	w9, w21
-	mov	w10, #43691
-	movk	w10, #43690, lsl #16
-LBB0_12:                                ; =>This Inner Loop Header: Depth=1
-	umull	x11, w8, w10
-	lsr	x11, x11, #33
-	add	w12, w11, w11, lsl #1
-	add	x11, x0, w11, uxtw #2
-	cmp	w8, w12
-	csel	x11, x11, x20, eq
-	ldr	w11, [x11]
-	str	w11, [x19, x8, lsl #2]
-	add	x8, x8, #1
-	add	x20, x20, #4
-	cmp	x9, x8
-	b.ne	LBB0_12
-LBB0_13:
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp], #48             ; 16-byte Folded Reload
-	b	_free
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+sub	sp, sp, #32
+str	x0, [sp, 16]
+str	w1, [sp, 12]
+ldr	w0, [sp, 12]
+cmp	w0, 0
+bne	L1
+mov	w0, 0
+str	w0, [sp, 24]
+mov	w0, 1
+str	w0, [sp, 20]
+b	L1
+L1:
+ldr	w0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L2
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L3
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L2
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bge	L4
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+b	L3
+L2:
+ldr	w0, [sp, 20]
+mul	w0, w0, -28
+str	w0, [sp, 20]
+ldr	w0, [sp, 20]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L5
+ldr	x0, [sp, 20]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L6
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L5
+ldr	x0, [sp, 20]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bge	L7
+ldr	w0, [sp, 20]
+add	w0, w0, 1
+str	w0, [sp, 20]
+b	L6
+L5:
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 20]
+b	L3
+L6:
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L9
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L10
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L11
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L12
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L13
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L14
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L15
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L16
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L17
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L18
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L19
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L20
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L21
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L22
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L23
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L24
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L25
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L26
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L27
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L28
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L29
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L30
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+beq	L31
+ldrsw	x1, [sp, 16]
+cmp	x1, 0
+bgt	L8
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 16]
+cmp	x

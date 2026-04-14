@@ -1,67 +1,53 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.section	__TEXT,__literal4,4byte_literals
+	.p2align	2                               ## -- Begin function func0
+LCPI0_0:
+	.long	0xc61c4000                      ## float -1.0E+4
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_12
-; %bb.1:
-	mov	x9, #0
-	mov	w8, #0
-	mov	w10, w1
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	cmp	w11, w8
-	csel	w8, w11, w8, gt
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	add	x9, x9, #1
-	cmp	x9, x10
-	b.eq	LBB0_9
-LBB0_4:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_7 Depth 2
-	ldr	w11, [x0, x9, lsl #2]
-	cmp	w11, #2
-	b.lt	LBB0_3
-; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
-	cmp	w11, #4
-	b.lo	LBB0_2
-; %bb.6:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	w12, #2
-LBB0_7:                                 ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	sdiv	w13, w11, w12
-	msub	w13, w13, w12, w11
-	cbz	w13, LBB0_3
-; %bb.8:                                ;   in Loop: Header=BB0_7 Depth=2
-	add	w12, w12, #1
-	mul	w13, w12, w12
-	cmp	w13, w11
-	b.le	LBB0_7
-	b	LBB0_2
-LBB0_9:
-	cmp	w8, #1
-	b.lt	LBB0_12
-; %bb.10:
-	mov	w9, #0
-	mov	w10, #52429
-	movk	w10, #52428, lsl #16
-	mov	w11, #10
-LBB0_11:                                ; =>This Inner Loop Header: Depth=1
-	umull	x12, w8, w10
-	lsr	x12, x12, #35
-	msub	w13, w12, w11, w8
-	add	w9, w9, w13
-	cmp	w8, #9
-	mov	x8, x12
-	b.hi	LBB0_11
-	b	LBB0_13
-LBB0_12:
-	mov	w9, #0
-LBB0_13:
-	mov	x0, x9
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+## %bb.0:
+	push	q0
+	.cfi_def_cfa_offset 16
+	.cfi_offset %sp, -16
+	xsp, sp
+	str	d0, [sp, 24]
+	str	w1, [sp, 20]
+adrp	x0, LCPI0_0
+ldr	d0, [x0]
+str	d0, [sp, 16]
+str	wzr, [sp, 12]
+b	LBB0_1
+## %bb.1:
+ldr	d1, [sp, 16]
+ldrsw	x0, [sp, 24]
+fmov	d0, #0
+fcmpe	d1, d0
+bge	LBB0_6
+## %bb.2:
+ldrsw	x0, [sp, 24]
+adrp	x1, LCPI0_0
+ldr	d1, [x1]
+fmov	d0, #0
+fcmpe	d1, d0
+blt	LBB0_5
+## %bb.3:
+ldrsw	x0, [sp, 24]
+adrp	x1, LCPI0_0
+ldr	d1, [x1]
+fmov	d0, #0
+fcmpe	d1, d0
+blt	LBB0_5
+## %bb.4:
+ldrsw	x0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+b	LBB0_1
+LBB0_6:
+ldr	d0, [sp, 16]
+str	d0, [sp, 16]
+pop	q0
+ret

@@ -1,113 +1,125 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	mov	x19, x1
-	ldrb	w8, [x0]
-	cbz	w8, LBB0_16
-; %bb.1:
-	mov	x20, x0
-	mov	w21, #0
-Lloh0:
-	adrp	x22, _func0.out@PAGE
-Lloh1:
-	add	x22, x22, _func0.out@PAGEOFF
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	str	w8, [x22, w21, sxtw #2]
-	add	w21, w21, #1
-	ldrb	w8, [x9]
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	mov	x20, x9
-	cbz	w8, LBB0_17
-LBB0_4:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_5 Depth 2
-                                        ;     Child Loop BB0_14 Depth 2
-	sxtb	w9, w8
-	sub	w9, w9, #48
-	cmp	w9, #10
-	b.lo	LBB0_8
-LBB0_5:                                 ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	tst	w8, #0xff
-	b.eq	LBB0_17
-; %bb.6:                                ;   in Loop: Header=BB0_5 Depth=2
-	and	w9, w8, #0xff
-	cmp	w9, #45
-	b.eq	LBB0_9
-; %bb.7:                                ;   in Loop: Header=BB0_5 Depth=2
-	ldrsb	w8, [x20, #1]!
-	sub	w9, w8, #48
-	cmp	w9, #9
-	b.hi	LBB0_5
-LBB0_8:                                 ;   in Loop: Header=BB0_4 Depth=1
-	tst	w8, #0xff
-	b.eq	LBB0_17
-LBB0_9:                                 ;   in Loop: Header=BB0_4 Depth=1
-	add	x1, sp, #8
-	mov	x0, x20
-	mov	w2, #10
-	bl	_strtol
-	ldr	x9, [sp, #8]
-	cmp	x20, x9
-	b.eq	LBB0_13
-; %bb.10:                               ;   in Loop: Header=BB0_4 Depth=1
-	ldrb	w10, [x9]
-	cmp	w10, #44
-	ccmp	w10, #0, #4, ne
-	b.ne	LBB0_13
-; %bb.11:                               ;   in Loop: Header=BB0_4 Depth=1
-	str	w8, [x22, w21, sxtw #2]
-	add	w21, w21, #1
-	ldrb	w8, [x9]
-LBB0_12:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	x20, x9
-	cbnz	w8, LBB0_4
-	b	LBB0_17
-LBB0_13:                                ;   in Loop: Header=BB0_4 Depth=1
-	ldrb	w8, [x9]
-	cbz	w8, LBB0_15
-LBB0_14:                                ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	cmp	w8, #44
-	b.eq	LBB0_12
-; %bb.15:                               ;   in Loop: Header=BB0_14 Depth=2
-	add	x9, x9, #1
-	ldrb	w8, [x9]
-	cbnz	w8, LBB0_14
-	b	LBB0_12
-LBB0_16:
-	mov	w21, #0
-LBB0_17:
-	str	w21, [x19]
-Lloh2:
-	adrp	x0, _func0.out@PAGE
-Lloh3:
-	add	x0, x0, _func0.out@PAGEOFF
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.loh AdrpAdd	Lloh2, Lloh3
-	.cfi_endproc
-                                        ; -- End function
-.zerofill __DATA,__bss,_func0.out,1024,2 ; @func0.out
-.subsections_via_symbols
+sub	sp, sp, 48
+str	x0, [sp, 32]
+mov	x1, sp
+ldr	x0, [sp, 32]
+mov	w1, w0
+sub	w0, w0, #2
+movk	w1, 0x42, lsl 16
+movk	w1, 0x43, lsl 16
+movk	w1, 0x44, lsl 16
+movk	w1, 0x45, lsl 16
+movk	w1, 0x46, lsl 16
+movk	w1, 0x47, lsl 16
+movk	w1, 0x48, lsl 16
+movk	w1, 0x49, lsl 16
+movk	w1, 0x4a, lsl 16
+movk	w1, 0x4b, lsl 16
+movk	w1, 0x4c, lsl 16
+movk	w1, 0x4d, lsl 16
+movk	w1, 0x4e, lsl 16
+movk	w1, 0x4f, lsl 16
+movk	w1, 0x50, lsl 16
+movk	w1, 0x51, lsl 16
+movk	w1, 0x52, lsl 16
+movk	w1, 0x53, lsl 16
+movk	w1, 0x54, lsl 16
+movk	w1, 0x55, lsl 16
+movk	w1, 0x56, lsl 16
+movk	w1, 0x57, lsl 16
+movk	w1, 0x58, lsl 16
+movk	w1, 0x59, lsl 16
+movk	w1, 0x5a, lsl 16
+movk	w1, 0x5b, lsl 16
+movk	w1, 0x5c, lsl 16
+movk	w1, 0x5d, lsl 16
+movk	w1, 0x5e, lsl 16
+movk	w1, 0x5f, lsl 16
+movk	w1, 0x60, lsl 16
+movk	w1, 0x61, lsl 16
+movk	w1, 0x62, lsl 16
+movk	w1, 0x63, lsl 16
+movk	w1, 0x64, lsl 16
+movk	w1, 0x65, lsl 16
+movk	w1, 0x66, lsl 16
+movk	w1, 0x67, lsl 16
+movk	w1, 0x68, lsl 16
+movk	w1, 0x69, lsl 16
+movk	w1, 0x6a, lsl 16
+movk	w1, 0x6b, lsl 16
+movk	w1, 0x6c, lsl 16
+movk	w1, 0x6d, lsl 16
+movk	w1, 0x6e, lsl 16
+movk	w1, 0x6f, lsl 16
+movk	w1, 0x70, lsl 16
+movk	w1, 0x71, lsl 16
+movk	w1, 0x72, lsl 16
+movk	w1, 0x73, lsl 16
+movk	w1, 0x74, lsl 16
+movk	w1, 0x75, lsl 16
+movk	w1, 0x76, lsl 16
+movk	w1, 0x77, lsl 16
+movk	w1, 0x78, lsl 16
+movk	w1, 0x79, lsl 16
+movk	w1, 0x7a, lsl 16
+movk	w1, 0x7b, lsl 16
+movk	w1, 0x7c, lsl 16
+movk	w1, 0x7d, lsl 16
+movk	w1, 0x7e, lsl 16
+movk	w1, 0x7f, lsl 16
+movk	w1, 0x80, lsl 16
+movk	w1, 0x81, lsl 16
+movk	w1, 0x82, lsl 16
+movk	w1, 0x83, lsl 16
+movk	w1, 0x84, lsl 16
+movk	w1, 0x85, lsl 16
+movk	w1, 0x86, lsl 16
+movk	w1, 0x87, lsl 16
+movk	w1, 0x88, lsl 16
+movk	w1, 0x89, lsl 16
+movk	w1, 0x8a, lsl 16
+movk	w1, 0x8b, lsl 16
+movk	w1, 0x8c, lsl 16
+movk	w1, 0x8d, lsl 16
+movk	w1, 0x8e, lsl 16
+movk	w1, 0x8f, lsl 16
+movk	w1, 0x90, lsl 16
+movk	w1, 0x91, lsl 16
+movk	w1, 0x92, lsl 16
+movk	w1, 0x93, lsl 16
+movk	w1, 0x94, lsl 16
+movk	w1, 0x95, lsl 16
+movk	w1, 0x96, lsl 16
+movk	w1, 0x97, lsl 16
+movk	w1, 0x98, lsl 16
+movk	w1, 0x99, lsl 16
+movk	w1, 0x9a, lsl 16
+movk	w1, 0x9b, lsl 16
+movk	w1, 0x9c, lsl 16
+movk	w1, 0x9d, lsl 16
+movk	w1, 0x9e, lsl 16
+movk	w1, 0x9f, lsl 16
+movk	w1, 0xa0, lsl 16
+movk	w1, 0xa1, lsl 16
+movk	w1, 0xa2, lsl 16
+movk	w1, 0xa3, lsl 16
+movk	w1, 0xa4, lsl 16
+movk	w1, 0xa5, lsl 16
+movk	w1, 0xa6, lsl 16
+movk	w1, 0xa7, lsl 16
+movk	w1, 0xa8, lsl 16
+movk	w1, 0xa9, lsl 16
+movk	w1, 0xaa, lsl 16
+movk	w1, 0xab, lsl 16
+movk	w1, 0xac, lsl 16
+movk	w1, 0xad, lsl 16
+movk	w1, 0xae, lsl 16
+movk	w1, 0xaf, lsl 16
+movk	w1, 0xb0, lsl 16
+movk	w1, 0xb1, lsl 16
+movk	w1, 0xb2, lsl 16
+movk	w1, 0xb3, lsl 16
+movk	w1, 0xb4, lsl 16
+movk	w1, 0xb5, lsl 16
+movk	w1, 0xb6, lsl 16
+movk	w1, 0xb7, lsl 16
+movk	w1, 0xb

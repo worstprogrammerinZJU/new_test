@@ -1,38 +1,208 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w1, #1
-	b.lt	LBB0_6
-; %bb.1:
-	ldr	w8, [x0]
-	cmp	w8, w2
-	b.ge	LBB0_7
-; %bb.2:
-	mov	w8, w1
-	mov	w11, #1
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	mov	x9, x11
-	cmp	x8, x11
-	b.eq	LBB0_5
-; %bb.4:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w10, [x0, x9, lsl #2]
-	add	x11, x9, #1
-	cmp	w10, w2
-	b.lt	LBB0_3
-LBB0_5:
-	cmp	x9, x8
-	cset	w0, hs
-	ret
-LBB0_6:
-	mov	w0, #1
-	ret
-LBB0_7:
-	mov	w0, #0
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+mov	w19, 12
+mov	w20, 0
+ldr	x1, [sp, 16]
+mov	w3, w19
+bl	_malloc
+str	x0, [sp, 48]
+str	wzr, [sp, 52]
+adrp	x0, _str
+add	x0, x0, :lo12:_str
+ldr	w0, [x0]
+mov	w4, w0
+stp	x19, x20, [sp, 104]
+add	sp, sp, 104
+mov	w1, w0
+mov	w2, w3
+mov	w3, w4
+bl	_abs
+str	x0, [sp, 48]
+mov	w4, 0
+mov	w5, w1
+mov	w6, w2
+mov	w7, w3
+mov	w8, w4
+mov	w9, w5
+mov	w10, w6
+mov	w11, w7
+mov	w12, w8
+mov	w13, w9
+mov	w14, w10
+mov	w15, w11
+mov	w16, w12
+mov	w17, w13
+mov	w18, w14
+mov	w19, w15
+mov	w20, w16
+mov	w21, w17
+mov	w22, w18
+mov	w23, w19
+mov	w24, w20
+mov	w25, w21
+mov	w26, w22
+mov	w27, w23
+mov	w28, w24
+mov	w29, w25
+mov	w30, w26
+mov	w31, w27
+mov	w32, w28
+mov	w33, w29
+mov	w34, w30
+mov	w35, w31
+mov	w36, w32
+mov	w37, w33
+mov	w38, w34
+mov	w39, w35
+mov	w40, w36
+mov	w41, w37
+mov	w42, w38
+mov	w43, w39
+mov	w44, w40
+mov	w45, w41
+mov	w46, w42
+mov	w47, w43
+mov	w48, w44
+mov	w49, w45
+mov	w50, w46
+mov	w51, w47
+mov	w52, w48
+mov	w53, w49
+mov	w54, w50
+mov	w55, w51
+mov	w56, w52
+mov	w57, w53
+mov	w58, w54
+mov	w59, w55
+mov	w60, w56
+mov	w61, w57
+mov	w62, w58
+mov	w63, w59
+mov	w64, w60
+mov	w65, w61
+mov	w66, w62
+mov	w67, w63
+mov	w68, w64
+mov	w69, w65
+mov	w70, w66
+mov	w71, w67
+mov	w72, w68
+mov	w73, w69
+mov	w74, w70
+mov	w75, w71
+mov	w76, w72
+mov	w77, w73
+mov	w78, w74
+mov	w79, w75
+mov	w80, w76
+mov	w81, w77
+mov	w82, w78
+mov	w83, w79
+mov	w84, w80
+mov	w85, w81
+mov	w86, w82
+mov	w87, w83
+mov	w88, w84
+mov	w89, w85
+mov	w90, w86
+mov	w91, w87
+mov	w92, w88
+mov	w93, w89
+mov	w94, w90
+mov	w95, w91
+mov	w96, w92
+mov	w97, w93
+mov	w98, w94
+mov	w99, w95
+mov	w100, w96
+mov	w101, w97
+mov	w102, w98
+mov	w103, w99
+mov	w104, w100
+mov	w105, w101
+mov	w106, w102
+mov	w107, w103
+mov	w108, w104
+mov	w109, w105
+mov	w110, w106
+mov	w111, w107
+mov	w112, w108
+mov	w113, w109
+mov	w114, w110
+mov	w115, w111
+mov	w116, w112
+mov	w117, w113
+mov	w118, w114
+mov	w119, w115
+mov	w120, w116
+mov	w121, w117
+mov	w122, w118
+mov	w123, w119
+mov	w124, w120
+mov	w125, w121
+mov	w126, w122
+mov	w127, w123
+mov	w128, w124
+mov	w129, w125
+mov	w130, w126
+mov	w131, w127
+mov	w132, w128
+mov	w133, w129
+mov	w134, w130
+mov	w135, w131
+mov	w136, w132
+mov	w137, w133
+mov	w138, w134
+mov	w139, w135
+mov	w140, w136
+mov	w141, w137
+mov	w142, w138
+mov	w143, w139
+mov	w144, w140
+mov	w145, w141
+mov	w146, w142
+mov	w147, w143
+mov	w148, w144
+mov	w149, w145
+mov	w150, w146
+mov	w151, w147
+mov	w152, w148
+mov	w153, w149
+mov	w154, w150
+mov	w155, w151
+mov	w156, w152
+mov	w157, w153
+mov	w158, w154
+mov	w159, w155
+mov	w160, w156
+mov	w161, w157
+mov	w162, w158
+mov	w163, w159
+mov	w164, w160
+mov	w165, w161
+mov	w166, w162
+mov	w167, w163
+mov	w168, w164
+mov	w169, w165
+mov	w170, w166
+mov	w171, w167
+mov	w172, w168
+mov	w173, w169
+mov	w174, w170
+mov	w175, w171
+mov	w176, w172
+mov	w177, w173
+mov	w178, w174
+mov	w179, w175
+mov	w180, w176
+mov	w181, w177
+mov	w182, w178
+mov	w183, w179
+mov	w184, w180
+mov	w185, w181
+mov	w186, w182
+mov	w187, w183
+mov	w188, w184
+mov	w189, w185
+mov	w190, w186
+mov	w191, w187
+mov	w192, w188
+mov	w19

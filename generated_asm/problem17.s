@@ -1,106 +1,736 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x28, x27, [sp, #-80]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 80
-	stp	x24, x23, [sp, #16]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #32]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	.cfi_offset w27, -72
-	.cfi_offset w28, -80
-	sub	sp, sp, #1040
-	mov	x19, x0
-Lloh0:
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-Lloh1:
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-Lloh2:
-	ldr	x8, [x8]
-	stur	x8, [x29, #-72]
-	add	x21, sp, #8
-	add	x0, sp, #8
-	mov	w1, #1024
-	bl	_bzero
-	ldrb	w8, [x19]
-	cbz	w8, LBB0_8
-; %bb.1:
-	mov	w20, #0
-	add	x22, x19, #1
-Lloh3:
-	adrp	x23, __DefaultRuneLocale@GOTPAGE
-Lloh4:
-	ldr	x23, [x23, __DefaultRuneLocale@GOTPAGEOFF]
-	mov	w24, #1
-	b	LBB0_3
-LBB0_2:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldrb	w8, [x22], #1
-	cbz	w8, LBB0_9
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	and	w0, w8, #0xff
-	bl	___tolower
-                                        ; kill: def $w0 killed $w0 def $x0
-	sxtb	x27, w0
-	ldr	w8, [x21, x27, lsl #2]
-	cbnz	w8, LBB0_2
-; %bb.4:                                ;   in Loop: Header=BB0_3 Depth=1
-	and	w0, w0, #0xff
-	cmp	w0, #127
-	b.hi	LBB0_6
-; %bb.5:                                ;   in Loop: Header=BB0_3 Depth=1
-	add	x8, x23, w0, uxtw #2
-	ldr	w8, [x8, #60]
-	and	w0, w8, #0x100
-	cbnz	w0, LBB0_7
-	b	LBB0_2
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	mov	w1, #256
-	bl	___maskrune
-	cbz	w0, LBB0_2
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	str	w24, [x21, x27, lsl #2]
-	add	w20, w20, #1
-	b	LBB0_2
-LBB0_8:
-	mov	w20, #0
-LBB0_9:
-	ldur	x8, [x29, #-72]
-Lloh5:
-	adrp	x9, ___stack_chk_guard@GOTPAGE
-Lloh6:
-	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
-Lloh7:
-	ldr	x9, [x9]
-	cmp	x9, x8
-	b.ne	LBB0_11
-; %bb.10:
-	mov	x0, x20
-	add	sp, sp, #1040
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x28, x27, [sp], #80             ; 16-byte Folded Reload
-	ret
-LBB0_11:
-	bl	___stack_chk_fail
-	.loh AdrpLdrGotLdr	Lloh0, Lloh1, Lloh2
-	.loh AdrpLdrGot	Lloh3, Lloh4
-	.loh AdrpLdrGotLdr	Lloh5, Lloh6, Lloh7
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.type	_func0, @function
+_func0:
+	b	_LBB0_0
+_LBB0_0:
+	push	x29
+	x0 = sp
+	x19 = x0
+	x29 = sp
+	x18 = sp
+	x17 = sp
+	x16 = sp
+	x15 = sp
+	x14 = sp
+	x13 = sp
+	x12 = sp
+	x11 = sp
+	x10 = sp
+	x9 = sp
+	x8 = sp
+	x7 = sp
+	x6 = sp
+	x5 = sp
+	x4 = sp
+	x3 = sp
+	x2 = sp
+	x1 = sp
+	x0 = sp
+	str	x0, [sp, 24]
+	str	x19, [sp, 16]
+	str	x18, [sp, 8]
+	str	x17, [sp, 32]
+	str	x16, [sp, 40]
+	str	x15, [sp, 48]
+	str	x14, [sp, 56]
+	str	x13, [sp, 64]
+	str	x12, [sp, 72]
+	str	x11, [sp, 80]
+	str	x10, [sp, 88]
+	str	x9, [sp, 96]
+	str	x8, [sp, 104]
+	str	x7, [sp, 112]
+	str	x6, [sp, 120]
+	str	x5, [sp, 128]
+	str	x4, [sp, 136]
+	str	x3, [sp, 144]
+	str	x2, [sp, 152]
+	str	x1, [sp, 160]
+	str	x0, [sp, 168]
+ldr	x0, [sp, 168]
+ldr	w1, [sp, 152]
+ldr	w0, [sp, 160]
+bl	strlen
+mov	w1, w0
+add	w0, w1, 1
+fscv	x0, [sp, 168]
+mov	w1, w0
+lsl	x0, x0, 0
+bl	malloc
+str	x0, [sp, 96]
+str	wzr, [sp, 92]
+str	wzr, [sp, 88]
+_loop0:
+ldr	x0, [sp, 168]
+ldr	w1, [sp, 88]
+ldrb	w0, [x0, w1]
+cmp	w0, 0
+beq	_loop0_1
+_loop0_1:
+ldr	x0, [sp, 152]
+str	x0, [sp, 80]
+strb	wzr, [sp, 79]
+_loop1:
+ldr	x0, [sp, 168]
+ldrb	w0, [x0]
+cmp	w0, 0
+beq	_loop1_1
+_loop1_1:
+ldr	w1, [sp, 88]
+cmp	w1, w0
+bne	_loop0
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop

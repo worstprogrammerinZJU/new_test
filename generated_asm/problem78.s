@@ -1,22 +1,252 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.global	_func0
+.p2align	4, 0x90
+_func0:
 	.cfi_startproc
-; %bb.0:
-	mov	w8, #0
-	cmp	w0, #0
-	cneg	w9, w0, mi
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	mul	w10, w8, w8
-	add	w8, w8, #1
-	mul	w10, w10, w8
-	cmp	w10, w9
-	b.lo	LBB0_1
-; %bb.2:
-	cset	w0, ls
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+sub	sp, sp, #160
+mov	x2, 40
+ldr	x1, [sp, 104]
+bl	memset
+add	sp, sp, 128
+adrp	x0, l___const.func0.numto
+add	x1, x0, :lo12:l___const.func0.numto
+ldr	w19, [sp, 88]
+mov	w2, 80
+ldr	x0, [sp, 128]
+ldr	w1, [sp, 88]
+cmp	w1, w19
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0, w1, 1
+mov	w2, 1
+mov	x1, x0
+adrp	x0, l___const.func0.numto
+add	x0, x0, :lo12:l___const.func0.numto
+ldr	x1, [x0]
+ldr	w0, [sp, 88]
+cmp	w0, w1
+beq	_loop_too_small
+b	_loop_large
+_loop_too_small:
+ldr	w1, [sp, 88]
+cmp	w1, 32
+bgt	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+cmp	w1, 0
+bne	_loop_large
+b	_loop_small
+_loop_large:
+ldr	w1, [sp, 88]
+cmp	w1, 10
+bge	_loop_large
+b	_loop_small
+_loop_small:
+ldr	w1, [sp, 88]
+add	w0

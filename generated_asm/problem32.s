@@ -1,35 +1,63 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	x0, #2
-	b.ge	LBB0_2
-; %bb.1:
-	mov	w0, #0
-	ret
+ldr	x0, [sp, 16]
+mov	w1, w0
+strb	w1, [sp, 29]
+b	LBB0_13
 LBB0_2:
-	cmp	x0, #4
-	b.hs	LBB0_4
-; %bb.3:
-	mov	w0, #1
-	ret
-LBB0_4:
-	mov	w8, #2
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	sdiv	x9, x0, x8
-	msub	x9, x9, x8, x0
-	add	x8, x8, #1
-	mul	x10, x8, x8
-	cmp	x9, #0
-	ccmp	x10, x0, #0, ne
-	b.le	LBB0_5
-; %bb.6:
-	cmp	x9, #0
-	cset	w0, ne
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	w0, [sp, 28]
+cmp	w0, w1
+bge	LBB0_12
+ldr	w1, [sp, 28]
+sub	w1, w1, #1
+ldrsw	x1, [sp, 28]
+ldr	x0, [sp, 16]
+ldrsw	x0, [sp, 28]
+mov	w2, w0
+sub	w2, w2, #1
+ldrsw	x2, [sp, 28]
+ldr	w0, [x0, x2, 4]
+cmp	x2, x1
+bge	LBB0_6
+ldr	w1, [sp, 28]
+sub	w1, w1, #1
+ldrsw	x1, [sp, 28]
+ldr	x0, [x0, x1, 4]
+cmp	x1, x2
+beq	LBB0_10
+ldr	w1, [sp, 28]
+sub	w1, w1, #2
+ldrsw	x1, [sp, 28]
+ldr	x0, [x0, x1, 4]
+cmp	x1, x2
+bne	LBB0_10
+ldr	w1, [sp, 28]
+sub	w1, w1, #1
+ldrsw	x1, [sp, 28]
+ldr	x0, [x0, x1, 4]
+cmp	x1, x2
+bgt	LBB0_10
+b	LBB0_11
+LBB0_6:
+ldr	w1, [sp, 28]
+sub	w1, w1, #1
+ldrsw	x1, [sp, 28]
+ldr	x0, [x0, x1, 4]
+cmp	x1, x2
+beq	LBB0_10
+ldr	w1, [sp, 28]
+sub	w1, w1, #2
+ldrsw	x1, [sp, 28]
+ldr	x0, [x0, x1, 4]
+cmp	x1, x2
+bgt	LBB0_10
+b	LBB0_11
+LBB0_10:
+b	LBB0_11
+LBB0_11:
+ldr	w0, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 28]
+strb	w0, [sp, 29]
+b	LBB0_3
+LBB0_3:
+strb	w0, [sp, 29]
+b	_LoopEnd

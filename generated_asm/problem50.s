@@ -1,26 +1,149 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	cmp	w0, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w9, #1
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	lsl	w8, w9, #1
-	sdiv	w9, w8, w1
-	msub	w9, w9, w1, w8
-	subs	w0, w0, #1
-	b.ne	LBB0_2
-	b	LBB0_4
-LBB0_3:
-	mov	w9, #1
-LBB0_4:
-	mov	x0, x9
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	x0, [sp, 24]
+mov	w1, w0
+ldr	w0, [sp, 20]
+cmp	w0, w1
+bge	L1
+ldr	w1, [sp, 20]
+ldr	w0, [sp, 24]
+mul	w0, w1, w0
+sxtw	x1, w0
+ldr	x0, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x0, 44]
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20, [x1, 44]
+smulh	x0, x19, x20, sxtw(x0, 4)
+add	x0, x0, x1
+ldr	x1, [sp, 24]
+ldrsw	x0, [sp, 20]
+mov	w2, 4
+ldp	x19, x20

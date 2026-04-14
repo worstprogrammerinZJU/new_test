@@ -1,51 +1,203 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.global	_func0
+.p2align	4, 0x90
+_func0:
 	.cfi_startproc
-; %bb.0:
-	stp	x20, x19, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	mov	x20, x1
-	mov	x19, x0
-	add	w8, w1, #1
-	sxtw	x0, w8
-	mov	w1, #4
-	bl	_calloc
-	cmp	w20, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w19, #-1
-	mov	w8, w20
-	mov	x9, x19
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsw	x10, [x19], #4
-	lsl	x11, x10, #2
-	ldr	w12, [x0, x11]
-	add	w12, w12, #1
-	str	w12, [x0, x11]
-	cmp	w10, w9
-	ccmp	w12, w10, #8, le
-	csel	w9, w10, w9, lt
-	subs	x8, x8, #1
-	b.ne	LBB0_2
-	b	LBB0_4
-LBB0_3:
-	mov	w9, #-1
+sub	sp, sp, #80
+mov	x19, sp
+str	x0, [sp, 24]
+str	x1, [sp, 16]
+ldr	w3, [sp, 20]
+ldr	w2, [sp, 19]
+ldr	d0, [sp, 24]
+lsl	d0, d0, 2
+bl	_malloc
+str	x0, [sp, 16]
+ldr	d0, [sp, 24]
+lsl	d0, d0, 2
+bl	_malloc
+str	x0, [sp, 8]
+mov	w1, 0
+str	w1, [sp, 44]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 44]
+add	w0, w0, 1
+str	w0, [sp, 44]
+b	LBB0_1
 LBB0_4:
-	bl	_free
-	mov	x0, x9
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp], #32             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+mov	w1, 0
+str	w1, [sp, 40]
+b	LBB0_5
+LBB0_5:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_8
+LBB0_8:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_11
+LBB0_11:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_14
+LBB0_14:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_17
+LBB0_17:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_20
+LBB0_20:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_23
+LBB0_23:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_26
+LBB0_26:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_30
+LBB0_30:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_33
+LBB0_33:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_36
+LBB0_36:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_40
+LBB0_40:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_43
+LBB0_43:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_46
+LBB0_46:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_50
+LBB0_50:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_53
+LBB0_53:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_56
+LBB0_56:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_60
+LBB0_60:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_63
+LBB0_63:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_66
+LBB0_66:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_69
+LBB0_69:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]
+cmp	x0, x1
+str	x1, [x0, 4]
+b	LBB0_72
+LBB0_72:
+adrp	x0, .str
+add	x1, x0, :lo12:.str
+ldr	x0, [sp, 24]
+ldrsw	x1, [sp, 44]

@@ -1,55 +1,56 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x20, x19, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	cmp	w0, w1
-	b.le	LBB0_2
-; %bb.1:
-Lloh0:
-	adrp	x0, l_.str@PAGE
-Lloh1:
-	add	x0, x0, l_.str@PAGEOFF
-	b	LBB0_4
-LBB0_2:
-	add	w19, w1, w0
-	mov	w0, #33
-	bl	_malloc
-	strb	wzr, [x0]
-	strb	wzr, [x0, #32]!
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	cmp	w19, #0
-	cinc	w8, w19, lt
-	asr	w8, w8, #1
-	and	w9, w8, #0x1
-	cmp	w8, #0
-	cneg	w9, w9, lt
-	add	w9, w9, #48
-	sturb	w9, [x0, #-1]
-	sub	x0, x0, #1
-	cmp	w19, #3
-	mov	x19, x8
-	b.gt	LBB0_3
-LBB0_4:
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp], #32             ; 16-byte Folded Reload
-	ret
-	.loh AdrpAdd	Lloh0, Lloh1
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"-1"
-
-.subsections_via_symbols
+ldp	x29, x30, [sp], 32
+mov	x19, sp
+str	x0, [x19, 16]
+str	w1, [x19, 12]
+str	w0, [x19, 8]
+LBB1:
+ldr	w0, [sp, 8]
+cmp	w1, w0
+bge	LBB10
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 12]
+LBB2:
+ldr	w1, [sp, 12]
+ldr	w0, [sp, 8]
+cmp	w1, w0
+bge	LBB6
+ldr	x0, [sp, 16]
+sxtw	x1, w0
+sxtw	x0, x1
+ldrsw	x1, [sp, 12]
+add	w0, w1, w0, 4
+ldrsw	x1, [sp, 8]
+add	w0, w1, w1, 4
+cmp	w0, 0
+bne	LBB4
+strb	w0, [sp, 23]
+b	LBB11
+LBB4:
+b	LBB5
+LBB5:
+b	LBB6
+LBB6:
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	LBB2
+LBB7:
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	LBB2
+LBB8:
+b	LBB9
+LBB9:
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	LBB1
+LBB10:
+strb	w0, [sp, 23]
+b	LBB11
+LBB11:
+and	w0, w0, 255
+strb	w0, [sp, 22]
+ret

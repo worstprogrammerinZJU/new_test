@@ -1,109 +1,17 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x19, x1
-	ldrb	w8, [x0]
-	cbz	w8, LBB0_16
-; %bb.1:
-	mov	x20, x0
-	mov	x22, #0
-	mov	w21, #0
-	mov	w23, #0
-	cmp	w8, #32
-	b.ne	LBB0_3
-LBB0_2:
-	add	w23, w23, #1
-	b	LBB0_11
-LBB0_3:
-	cmp	w23, #1
-	b.eq	LBB0_8
-; %bb.4:
-	cmp	w23, #2
-	b.ne	LBB0_6
-; %bb.5:
-	add	w8, w21, #1
-	mov	w23, #2
-	strb	w23, [x19, w21, sxtw]
-	b	LBB0_9
-LBB0_6:
-	cmp	w23, #3
-	b.lt	LBB0_10
-; %bb.7:
-	mov	w8, #45
-	mov	w23, #1
-	b	LBB0_9
-LBB0_8:
-	mov	w8, #95
-LBB0_9:
-	add	w21, w21, w23
-	strb	w8, [x19, w21, sxtw]
-LBB0_10:
-	mov	w23, #0
-	add	x8, x22, #1
-	ldrb	w8, [x20, x8]
-	add	w21, w21, #1
-	strb	w8, [x19, w21, sxtw]
-LBB0_11:
-	mov	x0, x20
-	bl	_strlen
-	cmp	x0, x22
-	b.ls	LBB0_13
-; %bb.12:
-	add	x8, x22, #1
-	ldrb	w8, [x20, x8]
-	mov	x22, x21
-	cmp	w8, #32
-	b.ne	LBB0_3
-	b	LBB0_2
-LBB0_13:
-	cmp	w23, #1
-	b.eq	LBB0_18
-; %bb.14:
-	cmp	w23, #2
-	b.ne	LBB0_17
-; %bb.15:
-	add	w8, w21, #1
-	mov	w23, #2
-	strb	w23, [x19, w21, sxtw]
-	b	LBB0_19
-LBB0_16:
-	mov	w21, #0
-	b	LBB0_20
-LBB0_17:
-	cmp	w23, #3
-	b.lt	LBB0_20
-LBB0_18:
-	mov	w8, #95
-	mov	w23, #1
-LBB0_19:
-	add	w21, w21, w23
-	strb	w8, [x19, w21, sxtw]
-LBB0_20:
-	strb	wzr, [x19, w21, sxtw]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	x0, [sp, 24]
+mov	w1, w0
+bl	_abs
+sxtw	x0, w1
+ldr	w1, [sp, 24]
+cmp	w1, w0
+bgt	L1
+ldr	w0, [sp, 24]
+sub	w0, w0, #1
+str	w0, [sp, 24]
+b	L1
+L1:
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 24]
+str	wzr, [sp, 28]
+ret

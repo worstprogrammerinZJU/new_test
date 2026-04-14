@@ -1,42 +1,46 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x20, x19, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	mov	x19, x0
-	sbfiz	x0, x19, #2, #32
-	bl	_malloc
-	cmp	w19, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w8, #0
-	mov	w9, #1
-	mov	w10, #1
-	mov	w11, w19
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	mul	w10, w10, w9
-	sub	w8, w8, #1
-	tst	w9, #0x1
-	csinc	w8, w10, w8, ne
-	str	w8, [x0], #4
-	add	w9, w9, #1
-	subs	x11, x11, #1
-	b.ne	LBB0_2
-LBB0_3:
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp], #32             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, 16]!
+mov	x29, sp
+ldr	x19, [sp, 40]
+mov	x0, x19
+bl	___stack_chk_guard
+str	x0, [sp, 72]
+str	w0, [sp, 604]
+str	wzr, [sp, 600]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 600]
+cmp	w19, w0
+bgt	LBB0_4
+sub	w0, w19, #1
+sxtw	x1, w0
+add	x1, sp, 604
+ldr	w0, [sp, 600]
+sub	w0, w0, #2
+sxtw	x1, w0
+add	x1, x1, 19
+ldr	w0, [sp, 600]
+sub	w0, w0, #3
+sxtw	x1, w0
+add	x1, x1, 19
+ldr	w0, [sp, 600]
+sub	w0, w0, #4
+sxtw	x1, w0
+add	x1, x1, 19
+ldrsw	x0, [sp, 600]
+str	x1, [x1, x0]
+b	LBB0_1
+LBB0_4:
+ldr	w0, [sp, 600]
+lsl	x0, x0, 2
+add	x1, sp, 604
+ldr	x0, [x1, x0]
+ldr	w1, [sp, 600]
+cmp	x1, w0
+bne	LBB0_6
+ldr	w0, [sp, 600]
+add	x1, sp, 604
+str	w0, [x1, 40]
+b	LBB0_1
+LBB0_6:
+bl	___stack_chk_fail
+ud2

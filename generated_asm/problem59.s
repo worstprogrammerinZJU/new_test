@@ -1,138 +1,210 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x19, x4
-	mov	x20, x3
-	mov	x21, x2
-	mov	x23, x1
-	mov	x22, x0
-	sbfiz	x0, x23, #2, #32
-	bl	_malloc
-	cmp	w23, #1
-	b.lt	LBB0_22
-; %bb.1:
-	mov	x9, #0
-	mov	w8, #0
-	mov	w10, w23
-	mov	w11, w20
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	str	w12, [x0, w8, sxtw #2]
-	add	w8, w8, #1
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	add	x9, x9, #1
-	cmp	x9, x10
-	b.eq	LBB0_12
-LBB0_4:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_6 Depth 2
-                                        ;     Child Loop BB0_10 Depth 2
-	cmp	w8, #1
-	b.lt	LBB0_8
-; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w12, [x22, x9, lsl #2]
-	mov	x13, x11
-	mov	x14, x0
-LBB0_6:                                 ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w15, [x14]
-	cmp	w15, w12
-	b.eq	LBB0_3
-; %bb.7:                                ;   in Loop: Header=BB0_6 Depth=2
-	add	x14, x14, #4
-	subs	x13, x13, #1
-	b.ne	LBB0_6
-LBB0_8:                                 ;   in Loop: Header=BB0_4 Depth=1
-	cmp	w20, #1
-	b.lt	LBB0_3
-; %bb.9:                                ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w12, [x22, x9, lsl #2]
-	mov	x13, x11
-	mov	x14, x21
-LBB0_10:                                ;   Parent Loop BB0_4 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w15, [x14]
-	cmp	w12, w15
-	b.eq	LBB0_2
-; %bb.11:                               ;   in Loop: Header=BB0_10 Depth=2
-	add	x14, x14, #4
-	subs	x13, x13, #1
-	b.ne	LBB0_10
-	b	LBB0_3
-LBB0_12:
-	cmp	w8, #2
-	b.lt	LBB0_23
-; %bb.13:
-	mov	w9, #0
-	sub	w10, w8, #1
-	add	x11, x0, #4
-	mov	x12, x10
-	b	LBB0_15
-LBB0_14:                                ;   in Loop: Header=BB0_15 Depth=1
-	add	w9, w9, #1
-	sub	w12, w12, #1
-	cmp	w9, w10
-	b.eq	LBB0_23
-LBB0_15:                                ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_19 Depth 2
-	mov	w12, w12
-	mvn	w13, w9
-	add	w13, w8, w13
-	cmp	w13, #1
-	b.lt	LBB0_14
-; %bb.16:                               ;   in Loop: Header=BB0_15 Depth=1
-	ldr	w13, [x0]
-	mov	x14, x12
-	mov	x15, x11
-	b	LBB0_19
-LBB0_17:                                ;   in Loop: Header=BB0_19 Depth=2
-	stp	w16, w13, [x15, #-4]
-LBB0_18:                                ;   in Loop: Header=BB0_19 Depth=2
-	add	x15, x15, #4
-	subs	x14, x14, #1
-	b.eq	LBB0_14
-LBB0_19:                                ;   Parent Loop BB0_15 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w16, [x15]
-	cmp	w13, w16
-	b.gt	LBB0_17
-; %bb.20:                               ;   in Loop: Header=BB0_19 Depth=2
-	mov	x13, x16
-	b	LBB0_18
-LBB0_21:                                ;   in Loop: Header=BB0_22 Depth=1
-	str	w10, [x19]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-LBB0_22:
-	mov	w8, #0
-LBB0_23:
-	str	w8, [x19]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+mov	w19, 1
+str	w19, [sp, 28]
+str	w0, [sp, 24]
+ldr	w3, [sp, 20]
+ldr	w2, [sp, 24]
+ldr	w0, [sp, 28]
+cmp	w0, w3
+bge	LBB1_2
+## LBB1.0:
+ldr	w0, [sp, 24]
+mul	w0, w0, w3
+ldr	w3, [sp, 28]
+cmp	w3, w0
+bgt	LBB1_8
+## LBB1.1:
+ldr	w0, [sp, 24]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.2:
+mov	w0, 2
+str	w0, [sp, 20]
+b	LBB1_7
+LBB1_3:
+ldr	w0, [sp, 20]
+add	w0, w0, 1
+str	w0, [sp, 20]
+b	LBB1_7
+LBB1_4:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.5:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.6:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.7:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.8:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.9:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.10:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.11:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.12:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.13:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.14:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.15:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.16:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.17:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.18:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.19:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.20:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.21:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.22:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.23:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.24:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.25:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.26:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.27:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.28:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.29:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.30:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.31:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.32:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.33:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.34:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.35:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.36:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.37:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.38:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.39:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.40:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.41:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.42:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.43:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.44:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.45:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.46:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.47:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.48:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3
+bls	LBB1_6
+## LBB1.49:
+ldr	w0, [sp, 20]
+sub	w0, w0, w3

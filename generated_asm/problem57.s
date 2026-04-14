@@ -1,34 +1,61 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	mov	w8, #0
-	b	LBB0_3
-LBB0_1:                                 ;   in Loop: Header=BB0_3 Depth=1
-	add	w8, w8, #1
-LBB0_2:                                 ;   in Loop: Header=BB0_3 Depth=1
-	and	w9, w9, #0xff
-	cmp	w9, #62
-	cset	w9, eq
-	add	x0, x0, #1
-	subs	w8, w8, w9
-	b.mi	LBB0_6
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldrb	w9, [x0]
-	cmp	w9, #60
-	b.eq	LBB0_1
-; %bb.4:                                ;   in Loop: Header=BB0_3 Depth=1
-	cbnz	w9, LBB0_2
-; %bb.5:
-	cmp	w8, #0
-	cset	w0, eq
-	ret
-LBB0_6:
-	mov	w0, #0
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, 16]!
+mov	x20, sp
+str	x0, [x20, 72]
+str	x19, [x20, 64]
+ldr	x0, [x20, 72]
+bl	str_len
+str	w0, [x20, 56]
+ldrsw	x0, [x20, 56]
+lsl	x0, x0, 3
+bl	malloc
+str	x0, [sp, 48]
+ldr	x0, [sp, 48]
+add	w1, w0, 1
+bl	malloc
+ldr	x0, [sp, 48]
+ldrsw	x1, [x20, 56]
+and	x1, x1, 255
+strb	w1, [x0, x1]
+str	w0, [sp, 44]
+b	LBB0_1
+LBB0_1:
+ldr	w0, [sp, 44]
+add	w1, w0, 1
+bl	str_len
+str	x0, [sp, 40]
+ldr	x0, [sp, 40]
+ldr	x1, [sp, 56]
+add	x1, x1, 2
+bl	realloc
+str	x0, [sp, 40]
+ldr	x0, [x20, 72]
+ldrsw	x1, [sp, 44]
+and	x1, x1, 255
+strb	x1, [x0, x1]
+ldr	x0, [sp, 40]
+ldr	x1, [sp, 56]
+and	x1, x1, 255
+strb	w1, [x0, x1]
+ldr	x0, [sp, 40]
+bl	str_len
+bl	str_len
+bl	malloc
+mov	x1, x0
+ldr	x0, [sp, 48]
+ldrsw	x1, [sp, 44]
+and	x1, x1, 255
+strb	x1, [x0, x1]
+ldr	x0, [sp, 40]
+ldr	x1, [sp, 56]
+and	x1, x1, 255
+strb	w1, [x0, x1]
+ldr	x0, [sp, 40]
+bl	str_len
+bl	str_len
+bl	malloc
+mov	x1, x0
+ldr	x0, [sp, 48]
+ldrsw	x1, [sp, 44]
+and	x1, x1, 255
+strb	x1, [x0, x1]
+ldp	x29, x30, [sp], 96

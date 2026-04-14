@@ -1,90 +1,65 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.global	_func0
+.p2align	4, 0x90
+_func0:
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	mov	x19, x1
-Lloh0:
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-Lloh1:
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-Lloh2:
-	ldr	x8, [x8]
-	stur	x8, [x29, #-24]
-	strh	wzr, [sp, #32]
-	str	xzr, [sp, #24]
-	strh	wzr, [sp, #16]
-	str	xzr, [sp, #8]
-	ldrb	w14, [x0]
-	cbz	w14, LBB0_8
-; %bb.1:
-	mov	w10, #0
-	mov	w9, #0
-	add	x8, x0, #1
-	add	x11, sp, #8
-	add	x12, sp, #24
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	cmp	w9, #0
-	ccmp	w10, #0, #4, eq
-	csinc	w9, w9, wzr, le
-	csel	w10, wzr, w10, eq
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldrb	w14, [x8], #1
-	cbz	w14, LBB0_8
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	sxtb	w13, w14
-	sub	w13, w13, #48
-	cmp	w13, #9
-	b.hi	LBB0_2
-; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
-	add	w10, w10, #1
-	cbz	w9, LBB0_7
-; %bb.6:                                ;   in Loop: Header=BB0_4 Depth=1
-	strb	w14, [x11, w10, sxtw]
-	mov	w9, #1
-	b	LBB0_3
-LBB0_7:                                 ;   in Loop: Header=BB0_4 Depth=1
-	strb	w14, [x12, w10, sxtw]
-	b	LBB0_3
-LBB0_8:
-	add	x0, sp, #24
-	bl	_atoi
-	mov	x20, x0
-	add	x0, sp, #8
-	bl	_atoi
-	ldur	x8, [x29, #-24]
-Lloh3:
-	adrp	x9, ___stack_chk_guard@GOTPAGE
-Lloh4:
-	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
-Lloh5:
-	ldr	x9, [x9]
-	cmp	x9, x8
-	b.ne	LBB0_10
-; %bb.9:
-	add	w8, w20, w0
-	sub	w0, w19, w8
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-LBB0_10:
-	bl	___stack_chk_fail
-	.loh AdrpLdrGotLdr	Lloh0, Lloh1, Lloh2
-	.loh AdrpLdrGotLdr	Lloh3, Lloh4, Lloh5
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+sub	sp, sp, #48
+mov	w1, 2
+str	w1, [sp, 20]
+mov	w0, 1
+str	w0, [sp, 16]
+ldr	w0, [sp, 16]
+cmp	w0, w1
+bgt	_LoopHeader
+_LoopHeader:
+ldr	w1, [sp, 20]
+mov	w0, 0
+bl	___snprintf_chk
+str	w0, [sp, 20]
+ldr	w0, [sp, 20]
+add	w0, w0, 1
+str	w0, [sp, 20]
+b	_LoopHeader
+_LoopEnd:
+bl	_malloc
+str	x0, [sp, 32]
+cmp	x0, 0
+b	_LoopEnd
+str	xzr, [sp, 40]
+b	_LoopEnd
+_LoopEnd:
+str	xzr, [sp, 56]
+b	_LoopEnd
+_LoopEnd:
+ldr	x0, [sp, 40]
+bl	___sprintf_chk
+mov	w19, w0
+ldr	x0, [sp, 40]
+sxtw	x0, x19
+add	x0, x0, x19
+str	x0, [sp, 40]
+mov	w1, 1
+bl	___sprintf_chk
+ldr	x0, [sp, 40]
+sxtw	x1, x0
+add	x0, x1, x0
+str	x0, [sp, 40]
+mov	w1, 1
+str	w1, [sp, 44]
+ldr	w0, [sp, 44]
+cmp	w0, w19
+bgt	_LoopHeader
+_LoopHeader:
+ldr	x0, [sp, 40]
+bl	___sprintf_chk
+mov	w19, w0
+ldr	x0, [sp, 40]
+sxtw	x0, x19
+add	x0, x0, x19
+str	x0, [sp, 40]
+mov	w1, 1
+str	w1, [sp, 44]
+b	_LoopHeader
+_LoopEnd:
+ldr	x0, [sp, 56]
+add	sp, sp, 48
+ret

@@ -1,77 +1,48 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x26, x25, [sp, #-80]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 80
-	stp	x24, x23, [sp, #16]             ; 16-byte Folded Spill
-	stp	x22, x21, [sp, #32]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #48]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	.cfi_offset w25, -72
-	.cfi_offset w26, -80
-	mov	x19, x1
-	mov	x22, x0
-	bl	_strlen
-	mov	x20, x0
-	lsl	x23, x0, #32
-	asr	x0, x23, #29
-	bl	_malloc
-	mov	x21, x0
-	mov	x8, #4294967296
-	add	x8, x23, x8
-	asr	x0, x8, #32
-	bl	_malloc
-	mov	x23, x0
-	strb	wzr, [x0]
-	cmp	w20, #1
-	b.lt	LBB0_3
-; %bb.1:
-	and	x25, x20, #0xffffffff
-	mov	x26, x21
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	mov	x0, x23
-	bl	_strlen
-	add	x1, x0, #2
-	mov	x0, x23
-	bl	_realloc
-	mov	x23, x0
-	ldrb	w8, [x22], #1
-	add	x9, x0, x0, lsl #3
-	strb	w8, [x9]
-	strb	wzr, [x9, #1]
-	bl	_strlen
-	add	x0, x0, #1
-	bl	_malloc
-	str	x0, [x26], #8
-	mov	x1, x23
-	bl	_strcpy
-	subs	x25, x25, #1
-	b.ne	LBB0_2
-LBB0_3:
-	mov	x0, x23
-	bl	_free
-	str	w20, [x19]
-	mov	x0, x21
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x26, x25, [sp], #80             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.type	_func0, @function
+_func0:
+b	LBB0_1
+.LBB0_1:
+ldr	w19, [sp, 44]
+ldr	x0, [sp, 56]
+mov	w2, 2
+ldrsw	x0, [sp, 44]
+mul	w0, w2, w0
+cmp	w19, w0
+bge	LBB0_6
+.LBB0_6:
+mov	w1, w0
+ldr	w0, [sp, 56]
+movk	w0, 0x3f, lsl 16
+and	w0, w0, w1
+cmp	w0, w19
+beq	LBB0_10
+.LBB0_10:
+add	w0, w0, 1
+str	w0, [sp, 44]
+b	LBB0_1
+.LBB0_11:
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 56]
+movk	w0, 0x3f, lsl 16
+and	w0, w0, w1
+cmp	w1, w0
+bne	LBB0_11
+.LBB0_12:
+ldr	w1, [sp, 40]
+ldr	w0, [sp, 56]
+sub	w0, w1, w0
+cmp	w0, w19
+blt	LBB0_14
+.LBB0_14:
+adrp	x0, .str
+add	x0, x0, :lo12:.str
+ldr	x0, [x0]
+str	x0, [sp, 48]
+b	LBB0_15
+.LBB0_15:
+adrp	x0, .str.1
+add	x0, x0, :lo12:.str.1
+ldr	x0, [x0]
+str	x0, [sp, 48]
+ret

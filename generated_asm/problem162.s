@@ -1,110 +1,227 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x19, x0
-	bl	_strlen
-	mov	x20, x0
-	cmp	w20, #1
-	b.lt	LBB0_13
-; %bb.1:
-	mov	w22, #0
-Lloh0:
-	adrp	x23, __DefaultRuneLocale@GOTPAGE
-Lloh1:
-	ldr	x23, [x23, __DefaultRuneLocale@GOTPAGEOFF]
-	mov	w24, w20
-	b	LBB0_4
-LBB0_2:                                 ;   in Loop: Header=BB0_4 Depth=1
-	add	w22, w22, #1
-LBB0_3:                                 ;   in Loop: Header=BB0_4 Depth=1
-	add	x19, x19, #1
-	subs	x24, x24, #1
-	b.eq	LBB0_14
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsb	w21, [x19]
-	tbnz	w21, #31, LBB0_8
-; %bb.5:                                ;   in Loop: Header=BB0_4 Depth=1
-	add	x8, x23, w21, uxtw #2
-	ldr	w8, [x8, #60]
-	tbz	w8, #8, LBB0_2
-; %bb.6:                                ;   in Loop: Header=BB0_4 Depth=1
-	tbnz	w8, #15, LBB0_10
-; %bb.7:                                ;   in Loop: Header=BB0_4 Depth=1
-	and	w0, w8, #0x1000
-	cbnz	w0, LBB0_12
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_4 Depth=1
-	mov	x0, x21
-	mov	w1, #256
-	bl	___maskrune
-	cbz	w0, LBB0_2
-; %bb.9:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	x0, x21
-	mov	w1, #32768
-	bl	___maskrune
-	cbz	w0, LBB0_11
-LBB0_10:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	x0, x21
-	bl	___tolower
-	strb	w0, [x19]
-	b	LBB0_3
-LBB0_11:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	x0, x21
-	mov	w1, #4096
-	bl	___maskrune
-	cbz	w0, LBB0_3
-LBB0_12:                                ;   in Loop: Header=BB0_4 Depth=1
-	mov	x0, x21
-	bl	___toupper
-	strb	w0, [x19]
-	b	LBB0_3
-LBB0_13:
-	mov	w22, #0
-LBB0_14:
-	cmp	w22, w20
-	ccmp	w20, #2, #8, eq
-	b.lt	LBB0_17
-; %bb.15:
-	ubfx	x8, x20, #1, #31
-	mov	x9, #-4294967296
-	add	x10, x9, x20, lsl #32
-	mov	x11, x19
-LBB0_16:                                ; =>This Inner Loop Header: Depth=1
-	ldrb	w12, [x11]
-	asr	x13, x10, #32
-	ldrb	w14, [x19, x13]
-	strb	w14, [x11], #1
-	strb	w12, [x19, x13]
-	add	x10, x10, x9
-	subs	x8, x8, #1
-	b.ne	LBB0_16
-LBB0_17:
-	mov	x0, x19
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.loh AdrpLdrGot	Lloh0, Lloh1
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+subq	$x0, sp, 48
+str	w0, [sp, 60]
+str	x1, [sp, 48]
+ldr	w0, [sp, 60]
+lsl	w0, w0, 2
+bl	_malloc
+str	x0, [sp, 24]
+ldr	x0, [sp, 48]
+str	wzr, [x0]
+mov	w1, 2
+str	w1, [sp, 20]
+b	L1
+L1:
+mov	w1, 1
+str	w1, [sp, 16]
+b	L3
+L2:
+ldr	w0, [sp, 16]
+ldr	x1, [sp, 48]
+cmp	x1, x0
+cmp	w0, w1
+beq	L4
+ldr	w0, [sp, 16]
+add	w0, w0, 1
+str	w0, [sp, 16]
+b	L3
+L4:
+ldr	w1, [sp, 16]
+ldr	x0, [sp, 48]
+sxtw	x0, w1
+ldr	w1, [x0, 4]
+mov	w2, w1
+ldr	w1, [sp, 20]
+mul	w1, w1, w2
+ldr	w0, [sp, 24]
+cmp	w1, w0
+ble	L5
+ldr	w1, [sp, 24]
+ldr	w0, [sp, 20]
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bgt	L6
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 24]
+cmp	w1, w0
+bge	L7
+ldr	w1, [sp, 20]
+sub	w0, w1, w0
+negs	w1, w1
+ldr	w0, [sp, 2

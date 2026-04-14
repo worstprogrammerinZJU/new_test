@@ -1,40 +1,210 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	fadd	s3, s1, s2
-	fmov	s0, #-1.00000000
-	fcmp	s3, s0
-	b.ls	LBB0_4
-; %bb.1:
-	fadd	s3, s0, s1
-	fcmp	s3, s2
-	b.ls	LBB0_4
-; %bb.2:
-	fadd	s3, s0, s2
-	fcmp	s3, s1
-	b.ls	LBB0_4
-; %bb.3:
-	fadd	s3, s0, s2
-	fmov	s0, #0.50000000
-	fmul	s0, s3, s0
-	fsub	s3, s0, s1
-	fmul	s3, s0, s3
-	fsub	s1, s0, s1
-	fmul	s1, s1, s3
-	fsub	s0, s0, s2
-	fmul	s0, s0, s1
-	fsqrt	s0, s0
-	mov	w8, #1120403456
-	fmov	s1, w8
-	fmul	s0, s0, s1
-	frinta	s0, s0
-	fdiv	s0, s0, s1
-LBB0_4:
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	x0, [sp, 40]
+mov	w1, w0
+blt	w1, w1, #1
+cmp	w1, 0
+bgt	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #2
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #3
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #4
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #5
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #6
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #7
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #8
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #9
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #10
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #11
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #12
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #13
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #14
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #15
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #16
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #17
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #18
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #19
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #20
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #21
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #22
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #23
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #24
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #25
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #26
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #27
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #28
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #29
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub	w1, w1, #30
+mul	w1, w1, w0
+str	w1, [sp, 36]
+ldr	w1, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 40]
+sub

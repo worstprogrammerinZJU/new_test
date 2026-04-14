@@ -1,63 +1,309 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	ldr	d1, [x0]
-	str	d1, [x2]
-	cmp	w1, #1
-	b.lt	LBB0_8
-; %bb.1:
-	mov	x12, #0
-	mov	w8, w1
-	fmov	s2, s1
-	mov	w9, #2139095040
-	mov	x10, x8
-	mov	x11, x0
-	b	LBB0_3
-LBB0_2:                                 ;   in Loop: Header=BB0_3 Depth=1
-	add	x11, x11, #4
-	sub	x10, x10, #1
-	mov	x12, x13
-	cmp	x13, x8
-	b.eq	LBB0_8
-LBB0_3:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_6 Depth 2
-	add	x13, x12, #1
-	cmp	x13, x8
-	b.hs	LBB0_2
-; %bb.4:                                ;   in Loop: Header=BB0_3 Depth=1
-	mov	x14, x10
-	mov	x15, x11
-	b	LBB0_6
-LBB0_5:                                 ;   in Loop: Header=BB0_6 Depth=2
-	add	x15, x15, #4
-	subs	x14, x14, #1
-	b.eq	LBB0_2
-LBB0_6:                                 ;   Parent Loop BB0_3 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	s3, [x0, x12, lsl #2]
-	ldr	s4, [x15]
-	fabd	s4, s3, s4
-	fmov	s5, w9
-	fcmp	s4, s5
-	b.pl	LBB0_5
-; %bb.7:                                ;   in Loop: Header=BB0_6 Depth=2
-	str	s3, [x2]
-	ldr	s1, [x15]
-	str	s1, [x2, #4]
-	fmov	s2, s3
-	fmov	s4, s4
-	b	LBB0_5
-LBB0_8:
-	fcmp	s2, s1
-	b.pl	LBB0_10
-; %bb.9:
-	stp	s1, s2, [x2]
-LBB0_10:
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LLC0:
+.LLC1:
+.LLC2:
+.LLC3:
+.LLC4:
+.LLC5:
+.LLC6:
+.LLC7:
+.LLC8:
+.LLC9:
+.LLC10:
+.LLC11:
+.LLC12:
+.LLC13:
+.LLC14:
+.LLC15:
+.LLC16:
+.LLC17:
+.LLC18:
+.LLC19:
+.LLC20:
+.LLC21:
+.LLC22:
+.LLC23:
+.LLC24:
+.LLC25:
+.LLC26:
+.LLC27:
+.LLC28:
+.LLC29:
+.LLC30:
+.LLC31:
+.LLC32:
+.LLC33:
+.LLC34:
+.LLC35:
+.LLC36:
+.LLC37:
+.LLC38:
+.LLC39:
+.LLC40:
+.LLC41:
+.LLC42:
+.LLC43:
+.LLC44:
+.LLC45:
+.LLC46:
+.LLC47:
+.LLC48:
+.LLC49:
+.LLC50:
+.LLC51:
+.LLC52:
+.LLC53:
+.LLC54:
+.LLC55:
+.LLC56:
+.LLC57:
+.LLC58:
+.LLC59:
+.LLC60:
+.LLC61:
+.LLC62:
+.LLC63:
+.LLC64:
+.LLC65:
+.LLC66:
+.LLC67:
+.LLC68:
+.LLC69:
+.LLC70:
+.LLC71:
+.LLC72:
+.LLC73:
+.LLC74:
+.LLC75:
+.LLC76:
+.LLC77:
+.LLC78:
+.LLC79:
+.LLC80:
+.LLC81:
+.LLC82:
+.LLC83:
+.LLC84:
+.LLC85:
+.LLC86:
+.LLC87:
+.LLC88:
+.LLC89:
+.LLC90:
+.LLC91:
+.LLC92:
+.LLC93:
+.LLC94:
+.LLC95:
+.LLC96:
+.LLC97:
+.LLC98:
+.LLC99:
+.LLC100:
+.LLC101:
+.LLC102:
+.LLC103:
+.LLC104:
+.LLC105:
+.LLC106:
+.LLC107:
+.LLC108:
+.LLC109:
+.LLC110:
+.LLC111:
+.LLC112:
+.LLC113:
+.LLC114:
+.LLC115:
+.LLC116:
+.LLC117:
+.LLC118:
+.LLC119:
+.LLC120:
+.LLC121:
+.LLC122:
+.LLC123:
+.LLC124:
+.LLC125:
+.LLC126:
+.LLC127:
+.LLC128:
+.LLC129:
+.LLC130:
+.LLC131:
+.LLC132:
+.LLC133:
+.LLC134:
+.LLC135:
+.LLC136:
+.LLC137:
+.LLC138:
+.LLC139:
+.LLC140:
+.LLC141:
+.LLC142:
+.LLC143:
+.LLC144:
+.LLC145:
+.LLC146:
+.LLC147:
+.LLC148:
+.LLC149:
+.LLC150:
+.LLC151:
+.LLC152:
+.LLC153:
+.LLC154:
+.LLC155:
+.LLC156:
+.LLC157:
+.LLC158:
+.LLC159:
+.LLC160:
+.LLC161:
+.LLC162:
+.LLC163:
+.LLC164:
+.LLC165:
+.LLC166:
+.LLC167:
+.LLC168:
+.LLC169:
+.LLC170:
+.LLC171:
+.LLC172:
+.LLC173:
+.LLC174:
+.LLC175:
+.LLC176:
+.LLC177:
+.LLC178:
+.LLC179:
+.LLC180:
+.LLC181:
+.LLC182:
+.LLC183:
+.LLC184:
+.LLC185:
+.LLC186:
+.LLC187:
+.LLC188:
+.LLC189:
+.LLC190:
+.LLC191:
+.LLC192:
+.LLC193:
+.LLC194:
+.LLC195:
+.LLC196:
+.LLC197:
+.LLC198:
+.LLC199:
+.LLC200:
+.LLC201:
+.LLC202:
+.LLC203:
+.LLC204:
+.LLC205:
+.LLC206:
+.LLC207:
+.LLC208:
+.LLC209:
+.LLC210:
+.LLC211:
+.LLC212:
+.LLC213:
+.LLC214:
+.LLC215:
+.LLC216:
+.LLC217:
+.LLC218:
+.LLC219:
+.LLC220:
+.LLC221:
+.LLC222:
+.LLC223:
+.LLC224:
+.LLC225:
+.LLC226:
+.LLC227:
+.LLC228:
+.LLC229:
+.LLC230:
+.LLC231:
+.LLC232:
+.LLC233:
+.LLC234:
+.LLC235:
+.LLC236:
+.LLC237:
+.LLC238:
+.LLC239:
+.LLC240:
+.LLC241:
+.LLC242:
+.LLC243:
+.LLC244:
+.LLC245:
+.LLC246:
+.LLC247:
+.LLC248:
+.LLC249:
+.LLC250:
+.LLC251:
+.LLC252:
+.LLC253:
+.LLC254:
+.LLC255:
+.LLC256:
+.LLC257:
+.LLC258:
+.LLC259:
+.LLC260:
+.LLC261:
+.LLC262:
+.LLC263:
+.LLC264:
+.LLC265:
+.LLC266:
+.LLC267:
+.LLC268:
+.LLC269:
+.LLC270:
+.LLC271:
+.LLC272:
+.LLC273:
+.LLC274:
+.LLC275:
+.LLC276:
+.LLC277:
+.LLC278:
+.LLC279:
+.LLC280:
+.LLC281:
+.LLC282:
+.LLC283:
+.LLC284:
+.LLC285:
+.LLC286:
+.LLC287:
+.LLC288:
+.LLC289:
+.LLC290:
+.LLC291:
+.LLC292:
+.LLC293:
+.LLC294:
+.LLC295:
+.LLC296:
+.LLC297:
+.LLC298:
+.LLC299:
+.LLC300:
+.LLC301:
+.LLC302:
+.LLC303:
+.LLC304:
+.LLC305:
+.LLC306:
+.LLC307:
+.LLC

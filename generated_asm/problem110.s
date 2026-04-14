@@ -1,101 +1,219 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.section	__TEXT,__literal16,16byte_literals
+	.p2align	4                               ## -- Begin function func0
+LCPI0_0:
+	dnz	LCPI0_0, #1
+	dnz	LCPI0_0, #1
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	cbz	w1, LBB0_4
-; %bb.1:
-	stp	d11, d10, [sp, #-48]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 48
-	stp	d9, d8, [sp, #16]               ; 16-byte Folded Spill
-	.cfi_offset b8, -8
-	.cfi_offset b9, -16
-	.cfi_offset b10, -24
-	.cfi_offset b11, -32
-	.cfi_remember_state
-	cmp	w1, #1
-	b.le	LBB0_5
-; %bb.2:
-	mov	w8, w1
-	ldr	w9, [x0]
-	sub	x11, x8, #1
-	cmp	x11, #16
-	b.hs	LBB0_6
-; %bb.3:
-	mov	w10, #0
-	mov	w12, #1
-	mov	x13, x9
-	b	LBB0_9
+## %bb.0:
+	push	q0
+	.cfi_def_cfa_offset 16
+	.cfi_offset %sp, -16
+	sp = sp
+	wr	x0, [sp, 24]
+	ws	x1, [sp, 20]
+	fscv	x0, s0
+	fscv	x0, s0
+	fscv	x0, s0
+	wzr	x0
+	str	x0, [sp, 16]
+	str	w1, [sp, 16]
+b	LBB0_1
+## %bb.1:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_4
+## %bb.2:
+ldr	x0, [sp, 24]
+fscv	x1, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
 LBB0_4:
-	.cfi_def_cfa wsp, 0
-	.cfi_same_value b8
-	.cfi_same_value b9
-	.cfi_same_value b10
-	.cfi_same_value b11
-	mov	w0, #1
-	ret
-LBB0_5:
-	.cfi_restore_state
-	mov	w10, #0
-	ldr	w9, [x0]
-	b	LBB0_11
-LBB0_6:
-	and	x14, x11, #0xfffffffffffffff0
-	orr	x12, x14, #0x1
-	dup.4s	v0, w9
-	add	x13, x0, #36
-	movi.2d	v1, #0000000000000000
-	mov	x15, x14
-	movi.2d	v2, #0000000000000000
-	movi.2d	v3, #0000000000000000
-	movi.2d	v4, #0000000000000000
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldp	q5, q6, [x13, #-32]
-	ext.16b	v7, v0, v5, #12
-	ldp	q16, q0, [x13], #64
-	ext.16b	v17, v5, v6, #12
-	ext.16b	v18, v6, v16, #12
-	ext.16b	v19, v16, v0, #12
-	cmgt.4s	v5, v7, v5
-	cmgt.4s	v6, v17, v6
-	cmgt.4s	v7, v18, v16
-	cmgt.4s	v16, v19, v0
-	sub.4s	v1, v1, v5
-	sub.4s	v2, v2, v6
-	sub.4s	v3, v3, v7
-	sub.4s	v4, v4, v16
-	subs	x15, x15, #16
-	b.ne	LBB0_7
-; %bb.8:
-	add.4s	v1, v2, v1
-	add.4s	v1, v3, v1
-	add.4s	v1, v4, v1
-	addv.4s	s1, v1
-	fmov	w10, s1
-	cmp	x11, x14
-	b.eq	LBB0_11
-LBB0_9:
-	add	x11, x0, x12, lsl #2
-	sub	x8, x8, x12
-LBB0_10:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w12, [x11], #4
-	cmp	w12, w13
-	cinc	w10, w10, lt
-	mov	x13, x12
-	subs	x8, x8, #1
-	b.ne	LBB0_10
-LBB0_11:
-	sub	w8, w1, #1
-	ldr	w8, [x0, w8, sxtw #2]
-	cmp	w8, w9
-	cinc	w8, w10, gt
-	cmp	w8, #2
-	cset	w0, lo
-	ldp	d9, d8, [sp, #16]               ; 16-byte Folded Reload
-	ldp	d11, d10, [sp], #48             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+fscv	x1, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_8
+## %bb.3:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_8:
+fscv	x1, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_12
+## %bb.4:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_12:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_16
+## %bb.5:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_16:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_20
+## %bb.6:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_20:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_24
+## %bb.7:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_24:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_28
+## %bb.8:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_28:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_32
+## %bb.9:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_32:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_36
+## %bb.10:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_36:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_40
+## %bb.11:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_40:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_44
+## %bb.12:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_44:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_48
+## %bb.13:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_48:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_52
+## %bb.14:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_52:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_56
+## %bb.15:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1
+LBB0_56:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+fcmpe	x1, x0
+bge	LBB0_60
+## %bb.16:
+ldr	x1, [sp, 24]
+fscv	x0, s0
+fmov	x0, 0
+add	x0, x0, 1
+str	x0, [sp, 16]
+b	LBB0_1

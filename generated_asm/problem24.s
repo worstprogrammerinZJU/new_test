@@ -1,18 +1,223 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	mov	x8, x0
-	mov	w0, #-1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldrb	w9, [x8], #1
-	add	w0, w0, #1
-	cbnz	w9, LBB0_1
-; %bb.2:
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, 16]!
+mov	x20, sp
+str	x0, [sp, 48]
+str	x19, [sp, 40]
+ldr	x0, [sp, 48]
+ldr	w1, [sp, 47]
+ldr	x0, [sp, 40]
+sub	w0, w1, w0
+bl	strlen
+str	w0, [sp, 44]
+ldr	x0, [sp, 40]
+ldr	w1, [sp, 47]
+ldr	x0, [sp, 48]
+sub	w0, w1, w0
+bl	strlen
+str	w0, [sp, 40]
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bge	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bge	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bge	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+bgt	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0
+beq	L1
+ldr	w1, [sp, 44]
+ldr	w0, [sp, 40]
+cmp	w1, w0

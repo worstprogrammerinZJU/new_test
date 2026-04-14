@@ -1,67 +1,179 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	stp	x24, x23, [sp, #-64]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 64
-	stp	x22, x21, [sp, #16]             ; 16-byte Folded Spill
-	stp	x20, x19, [sp, #32]             ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w19, -24
-	.cfi_offset w20, -32
-	.cfi_offset w21, -40
-	.cfi_offset w22, -48
-	.cfi_offset w23, -56
-	.cfi_offset w24, -64
-	mov	x21, x3
-	mov	x19, x2
-	mov	x20, x0
-	cmp	w1, #1
-	b.lt	LBB0_3
-; %bb.1:
-	mov	w22, #0
-	mov	w23, w1
-	mov	x24, x20
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	x0, [x24], #8
-	bl	_strlen
-	add	w22, w22, w0
-	subs	x23, x23, #1
-	b.ne	LBB0_2
-	b	LBB0_4
-LBB0_3:
-	mov	w22, #0
-LBB0_4:
-	cmp	w21, #1
-	b.lt	LBB0_7
-; %bb.5:
-	mov	w23, #0
-	mov	w21, w21
-LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	x0, [x19], #8
-	bl	_strlen
-	add	w23, w23, w0
-	subs	x21, x21, #1
-	b.ne	LBB0_6
-	b	LBB0_8
-LBB0_7:
-	mov	w23, #0
-LBB0_8:
-	cmp	w22, w23
-	ccmp	w22, w23, #8, gt
-	csel	x0, x19, x20, ge
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	ldp	x20, x19, [sp, #32]             ; 16-byte Folded Reload
-	ldp	x22, x21, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x24, x23, [sp], #64             ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.type	_func0, @function
+_func0:
+	b	__main_loop
+__main_loop:
+	push	q0
+	x0 = sp
+	str	x0, [sp, 40]
+	str	x0, [sp, 36]
+	str	w0, [sp, 32]
+	str	w0, [sp, 31]
+	str	w0, [sp, 30]
+	str	w0, [sp, 29]
+	str	w0, [sp, 28]
+	str	w0, [sp, 27]
+	str	w0, [sp, 26]
+	str	w0, [sp, 25]
+	str	w0, [sp, 24]
+	str	w0, [sp, 23]
+	str	w0, [sp, 22]
+	str	w0, [sp, 21]
+	str	w0, [sp, 20]
+	str	w0, [sp, 19]
+	str	w0, [sp, 18]
+	str	w0, [sp, 17]
+	str	w0, [sp, 16]
+	str	w0, [sp, 15]
+	str	w0, [sp, 14]
+	str	w0, [sp, 13]
+	str	w0, [sp, 12]
+	str	w0, [sp, 11]
+	str	w0, [sp, 10]
+	str	w0, [sp, 9]
+	str	w0, [sp, 8]
+	str	w0, [sp, 7]
+	str	w0, [sp, 6]
+	str	w0, [sp, 5]
+	str	w0, [sp, 4]
+	str	w0, [sp, 3]
+	str	w0, [sp, 2]
+	str	w0, [sp, 1]
+	str	w0, [sp, 0]
+	lsl	x0, w0, 2
+	str	w0, [sp, 36]
+	str	w0, [sp, 35]
+	str	w0, [sp, 34]
+	str	w0, [sp, 33]
+	str	w0, [sp, 32]
+	str	w0, [sp, 31]
+	str	w0, [sp, 30]
+	str	w0, [sp, 29]
+	str	w0, [sp, 28]
+	str	w0, [sp, 27]
+	str	w0, [sp, 26]
+	str	w0, [sp, 25]
+	str	w0, [sp, 24]
+	str	w0, [sp, 23]
+	str	w0, [sp, 22]
+	str	w0, [sp, 21]
+	str	w0, [sp, 20]
+	str	w0, [sp, 19]
+	str	w0, [sp, 18]
+	str	w0, [sp, 17]
+	str	w0, [sp, 16]
+	str	w0, [sp, 15]
+	str	w0, [sp, 14]
+	str	w0, [sp, 13]
+	str	w0, [sp, 12]
+	str	w0, [sp, 11]
+	str	w0, [sp, 10]
+	str	w0, [sp, 9]
+	str	w0, [sp, 8]
+	str	w0, [sp, 7]
+	str	w0, [sp, 6]
+	str	w0, [sp, 5]
+	str	w0, [sp, 4]
+	str	w0, [sp, 3]
+	str	w0, [sp, 2]
+	str	w0, [sp, 1]
+	str	w0, [sp, 0]
+	lsl	x0, w0, 2
+	str	w0, [sp, 36]
+	str	w0, [sp, 35]
+	str	w0, [sp, 34]
+	str	w0, [sp, 33]
+	str	w0, [sp, 32]
+	str	w0, [sp, 31]
+	str	w0, [sp, 30]
+	str	w0, [sp, 29]
+	str	w0, [sp, 28]
+	str	w0, [sp, 27]
+	str	w0, [sp, 26]
+	str	w0, [sp, 25]
+	str	w0, [sp, 24]
+	str	w0, [sp, 23]
+	str	w0, [sp, 22]
+	str	w0, [sp, 21]
+	str	w0, [sp, 20]
+	str	w0, [sp, 19]
+	str	w0, [sp, 18]
+	str	w0, [sp, 17]
+	str	w0, [sp, 16]
+	str	w0, [sp, 15]
+	str	w0, [sp, 14]
+	str	w0, [sp, 13]
+	str	w0, [sp, 12]
+	str	w0, [sp, 11]
+	str	w0, [sp, 10]
+	str	w0, [sp, 9]
+	str	w0, [sp, 8]
+	str	w0, [sp, 7]
+	str	w0, [sp, 6]
+	str	w0, [sp, 5]
+	str	w0, [sp, 4]
+	str	w0, [sp, 3]
+	str	w0, [sp, 2]
+	str	w0, [sp, 1]
+	str	w0, [sp, 0]
+	lsl	x0, w0, 2
+	str	w0, [sp, 36]
+	str	w0, [sp, 35]
+	str	w0, [sp, 34]
+	str	w0, [sp, 33]
+	str	w0, [sp, 32]
+	str	w0, [sp, 31]
+	str	w0, [sp, 30]
+	str	w0, [sp, 29]
+	str	w0, [sp, 28]
+	str	w0, [sp, 27]
+	str	w0, [sp, 26]
+	str	w0, [sp, 25]
+	str	w0, [sp, 24]
+	str	w0, [sp, 23]
+	str	w0, [sp, 22]
+	str	w0, [sp, 21]
+	str	w0, [sp, 20]
+	str	w0, [sp, 19]
+	str	w0, [sp, 18]
+	str	w0, [sp, 17]
+	str	w0, [sp, 16]
+	str	w0, [sp, 15]
+	str	w0, [sp, 14]
+	str	w0, [sp, 13]
+	str	w0, [sp, 12]
+	str	w0, [sp, 11]
+	str	w0, [sp, 10]
+	str	w0, [sp, 9]
+	str	w0, [sp, 8]
+	str	w0, [sp, 7]
+	str	w0, [sp, 6]
+	str	w0, [sp, 5]
+	str	w0, [sp, 4]
+	str	w0, [sp, 3]
+	str	w0, [sp, 2]
+	str	w0, [sp, 1]
+	str	w0, [sp, 0]
+	lsl	x0, w0, 2
+	str	w0, [sp, 36]
+	str	w0, [sp, 35]
+	str	w0, [sp, 34]
+	str	w0, [sp, 33]
+	str	w0, [sp, 32]
+	str	w0, [sp, 31]
+	str	w0, [sp, 30]
+	str	w0, [sp, 29]
+	str	w0, [sp, 28]
+	str	w0, [sp, 27]
+	str	w0, [sp, 26]
+	str	w0, [sp, 25]
+	str	w0, [sp, 24]
+	str	w0, [sp, 23]
+	str	w0, [sp, 22]
+	str	w0, [sp, 21]
+	str	w0, [sp, 20]
+	str	w0, [sp, 19]
+	str	w0, [sp, 18]
+	str	w0, [sp, 17]
+	str	w0, [sp, 16]
+	str	w0
