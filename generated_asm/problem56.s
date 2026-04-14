@@ -1,7 +1,7 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
 ## %bb.0:
@@ -173,4 +173,4 @@ l___const.func0.planets:
 	.quad	L_.str
 	.quad	L_.str.1
 	.quad	L_.str.2
-	.quad	L_.str.3
+	.quad	L_.

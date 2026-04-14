@@ -1,12 +1,12 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.section	__TEXT,__literal4,4byte_literals
-.p2align	2                               ## -- Begin function func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.section	__TEXT,__literal4,4byte_literals
+	.p2align	2                               ## -- Begin function func0
 LCPI0_0:
 	.long	0xc61c4000                      ## float -1.0E+4
-.section	__TEXT,__text,regular,pure_instructions
-.globl	_func0
-.p2align	4, 0x90
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
 ## %bb.0:
@@ -48,3 +48,5 @@ LBB0_6:
 	popq	%rbp
 	retq
 	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols

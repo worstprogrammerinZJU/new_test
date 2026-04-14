@@ -75,3 +75,5 @@ LBB0_9:
 	popq	%rbp
 	retq
 	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols

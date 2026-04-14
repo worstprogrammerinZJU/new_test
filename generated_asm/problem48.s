@@ -58,6 +58,13 @@ LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
 	movl	%edx, -24(%rbp)
 	movslq	%ecx, %rcx
 	movb	$95, (%rax,%rcx)
+	movq	-16(%rbp), %rax
+	movl	-24(%rbp), %ecx
+	movl	%ecx, %edx
+	addl	$1, %edx
+	movl	%edx, -24(%rbp)
+	movslq	%ecx, %rcx
+	movb	$95, (%rax,%rcx)
 LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
 	cmpl	$2, -20(%rbp)
 	jle	LBB0_10
