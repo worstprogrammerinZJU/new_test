@@ -1,38 +1,205 @@
-b	_LBB0_0
-_LBB0_0:
-ldr	w1, [sp, 28]
-cmp	w0, w1
-beq	_LBB0_1
-b	_LBB0_0
-_LBB0_1:
-mov	w1, 1
-ldr	w0, [sp, 28]
-sub	w0, w1, w0
-add	w1, w0, #1
-ldr	x0, [sp, 40]
-ldrm	x0, [x0, 4]
-ldr	x1, [sp, 40]
-cmp	x1, x0
-bge	_LBB0_3
-_LBB0_2:
-ldr	w1, [sp, 28]
-add	w0, w1, #1
-ldr	w0, [sp, 28]
-add	w0, w0, w1
-str	w0, [sp, 28]
-b	_LBB0_0
-_LBB0_3:
-ldr	w1, [sp, 28]
-cmp	w1, 1
-beq	_LBB0_4
-b	_LBB0_0
-_LBB0_4:
-ldr	w1, [sp, 28]
-cmp	w1, 2
-bgt	_LBB0_5
-b	_LBB0_0
-_LBB0_5:
-ldr	w1, [sp, 28]
-add	w0, w1, #1
-str	w0, [sp, 28]
-b	_LBB0_3
+ldp	x29, x30, [sp], 48
+mov	x29, sp
+str	w0, [sp, 16]
+str	w1, [sp, 12]
+str	w2, [sp, 8]
+cmp	w0, w0
+blt	LBB0_2
+strb	1, [sp, 0]
+jmp	LBB0_13
+LBB0_2:
+strb	1, [sp, 20]
+LBB0_3:
+ldr	w0, [sp, 24]
+cmp	w0, w0
+ble	LBB0_8
+ldr	x1, [sp, 16]
+add	w0, w0, 1
+str	w0, [sp, 24]
+blt	LBB0_7
+ldr	w0, [sp, 24]
+add	w0, w0, 1
+str	w0, [sp, 20]
+blt	LBB0_3
+LBB0_8:
+ldr	x1, [sp, 16]
+ldr	w0, [sp, 12]
+sub	w0, w0, 1
+add	w0, w0, w0
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0, 1
+add	w0, w0

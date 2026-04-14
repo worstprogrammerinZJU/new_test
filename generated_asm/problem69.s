@@ -1,23 +1,40 @@
-ldr	w1, [sp, 76]
-ldr	w0, [sp, 80]
-cmp	w1, w0
-ble	LBB0_2
-ldr	w1, [sp, 80]
-add	w0, w1, w0
-mov	w1, w0
-str	w1, [sp, 88]
-ldr	x0, [sp, 56]
-ldr	w1, [sp, 80]
-add	w0, w1, w0
-mov	w1, w0
-str	w1, [x0, 4]
-b	LBB0_3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	movl	%edi, -4(%rbp)
+	movl	%esi, -8(%rbp)
+	movl	%edx, -12(%rbp)
+	movq	%rcx, -24(%rbp)
+	movl	-8(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jle	LBB0_2
+## %bb.1:
+	movl	-4(%rbp), %ecx
+	addl	-12(%rbp), %ecx
+	movq	-24(%rbp), %rax
+	movl	%ecx, (%rax)
+	movq	-24(%rbp), %rax
+	movl	$0, 4(%rax)
+	jmp	LBB0_3
 LBB0_2:
-ldr	w1, [sp, 80]
-sub	w0, w1, sp, 88
-mov	w1, w0
-str	w1, [x0, 4]
-b	LBB0_3
+	movl	-4(%rbp), %ecx
+	addl	-8(%rbp), %ecx
+	movq	-24(%rbp), %rax
+	movl	%ecx, (%rax)
+	movl	-12(%rbp), %ecx
+	subl	-8(%rbp), %ecx
+	movq	-24(%rbp), %rax
+	movl	%ecx, 4(%rax)
 LBB0_3:
-str	wzr, [sp, 88]
-ret
+	popq	%rbp
+	retq
+	.cfi_endproc

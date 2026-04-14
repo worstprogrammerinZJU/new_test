@@ -1,250 +1,152 @@
-b	=LBB0_0
-:LBB0_0:
-add	sp, sp, 48
-ldr	w0, [sp, 24]
-mov	w1, w0
-ldr	w0, [sp, 24]
-cmp	w0, 5
-beq	=LBB0_1
-ldr	w0, [sp, 24]
-cmp	w0, 65
-blt	=LBB0_2
-ldr	w0, [sp, 24]
-cmp	w0, 90
-ble	=LBB0_3
-ldr	w0, [sp, 24]
-cmp	w0, 97
-blt	=LBB0_4
-ldr	w0, [sp, 24]
-cmp	w0, 122
-ble	=LBB0_5
-ldr	w0, [sp, 24]
-cmp	w0, 100
-bgt	=LBB0_6
-ldr	w0, [sp, 24]
-cmp	w0, 102
-ble	=LBB0_7
-ldr	w0, [sp, 24]
-cmp	w0, 104
-ble	=LBB0_8
-ldr	w0, [sp, 24]
-cmp	w0, 106
-ble	=LBB0_9
-ldr	w0, [sp, 24]
-cmp	w0, 108
-ble	=LBB0_a
-ldr	w0, [sp, 24]
-cmp	w0, 110
-ble	=LBB0_b
-ldr	w0, [sp, 24]
-cmp	w0, 112
-ble	=LBB0_c
-ldr	w0, [sp, 24]
-cmp	w0, 114
-ble	=LBB0_d
-ldr	w0, [sp, 24]
-cmp	w0, 116
-ble	=LBB0_e
-ldr	w0, [sp, 24]
-cmp	w0, 118
-ble	=LBB0_f
-ldr	w0, [sp, 24]
-cmp	w0, 120
-ble	=LBB0_g
-ldr	w0, [sp, 24]
-cmp	w0, 122
-ble	=LBB0_h
-ldr	w0, [sp, 24]
-cmp	w0, 124
-ble	=LBB0_i
-ldr	w0, [sp, 24]
-cmp	w0, 126
-ble	=LBB0_j
-ldr	w0, [sp, 24]
-cmp	w0, 128
-ble	=LBB0_k
-ldr	w0, [sp, 24]
-cmp	w0, 130
-ble	=LBB0_l
-ldr	w0, [sp, 24]
-cmp	w0, 132
-ble	=LBB0_m
-ldr	w0, [sp, 24]
-cmp	w0, 134
-ble	=LBB0_n
-ldr	w0, [sp, 24]
-cmp	w0, 136
-ble	=LBB0_o
-ldr	w0, [sp, 24]
-cmp	w0, 138
-ble	=LBB0_p
-ldr	w0, [sp, 24]
-cmp	w0, 140
-ble	=LBB0_q
-ldr	w0, [sp, 24]
-cmp	w0, 142
-ble	=LBB0_r
-ldr	w0, [sp, 24]
-cmp	w0, 144
-ble	=LBB0_s
-ldr	w0, [sp, 24]
-cmp	w0, 146
-ble	=LBB0_t
-ldr	w0, [sp, 24]
-cmp	w0, 148
-ble	=LBB0_u
-ldr	w0, [sp, 24]
-cmp	w0, 150
-ble	=LBB0_v
-ldr	w0, [sp, 24]
-cmp	w0, 152
-ble	=LBB0_w
-ldr	w0, [sp, 24]
-cmp	w0, 154
-ble	=LBB0_x
-ldr	w0, [sp, 24]
-cmp	w0, 156
-ble	=LBB0_y
-ldr	w0, [sp, 24]
-cmp	w0, 158
-ble	=LBB0_z
-ldr	w0, [sp, 24]
-cmp	w0, 160
-bgt	=_Exit
-:_Exit:
-b	_LoopEnd
-_LoopEnd:
-b	_LoopStart
-_LoopStart:
-ldr	w0, [sp, 24]
-cmp	w0, 162
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 164
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 166
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 168
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 170
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 172
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 174
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 176
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 178
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 180
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 182
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 184
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 186
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 188
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 190
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 192
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 194
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 196
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 198
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 200
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 202
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_LoopContinue:
-ldr	w0, [sp, 24]
-cmp	w0, 204
-beq	=_LoopBreak
-:_LoopBreak:
-b	_LoopStart
-:_
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$48, %rsp
+	movq	%rdi, -16(%rbp)
+	movl	$0, -20(%rbp)
+	movl	$0, -24(%rbp)
+	movq	-16(%rbp), %rdi
+	callq	_strlen
+                                        ## kill: def $eax killed $eax killed $rax
+	movl	%eax, -28(%rbp)
+	cmpl	$5, -28(%rbp)
+	jge	LBB0_2
+## %bb.1:
+	leaq	L_.str(%rip), %rax
+	movq	%rax, -8(%rbp)
+	jmp	LBB0_24
+LBB0_2:
+	movq	-16(%rbp), %rax
+	movb	(%rax), %al
+	movb	%al, -29(%rbp)
+	movsbl	-29(%rbp), %eax
+	cmpl	$65, %eax
+	jl	LBB0_6
+## %bb.3:
+	movsbl	-29(%rbp), %eax
+	cmpl	$90, %eax
+	jle	LBB0_5
+## %bb.4:
+	movsbl	-29(%rbp), %eax
+	cmpl	$97, %eax
+	jl	LBB0_6
+LBB0_5:
+	movsbl	-29(%rbp), %eax
+	cmpl	$122, %eax
+	jle	LBB0_7
+LBB0_6:
+	leaq	L_.str(%rip), %rax
+	movq	%rax, -8(%rbp)
+	jmp	LBB0_24
+LBB0_7:
+	movq	-16(%rbp), %rax
+	movslq	-28(%rbp), %rcx
+	addq	%rcx, %rax
+	addq	$-4, %rax
+	movq	%rax, -40(%rbp)
+	movq	-40(%rbp), %rdi
+	leaq	L_.str.1(%rip), %rsi
+	callq	_strcmp
+	cmpl	$0, %eax
+	je	LBB0_11
+## %bb.8:
+	movq	-40(%rbp), %rdi
+	leaq	L_.str.2(%rip), %rsi
+	callq	_strcmp
+	cmpl	$0, %eax
+	je	LBB0_11
+## %bb.9:
+	movq	-40(%rbp), %rdi
+	leaq	L_.str.3(%rip), %rsi
+	callq	_strcmp
+	cmpl	$0, %eax
+	je	LBB0_11
+## %bb.10:
+	leaq	L_.str(%rip), %rax
+	movq	%rax, -8(%rbp)
+	jmp	LBB0_24
+LBB0_11:
+	movl	$0, -44(%rbp)
+LBB0_12:                                ## =>This Inner Loop Header: Depth=1
+	movl	-44(%rbp), %eax
+	cmpl	-28(%rbp), %eax
+	jge	LBB0_20
+## %bb.13:                              ##   in Loop: Header=BB0_12 Depth=1
+	movq	-16(%rbp), %rax
+	movslq	-44(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$48, %eax
+	jl	LBB0_16
+## %bb.14:                              ##   in Loop: Header=BB0_12 Depth=1
+	movq	-16(%rbp), %rax
+	movslq	-44(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$57, %eax
+	jg	LBB0_16
+## %bb.15:                              ##   in Loop: Header=BB0_12 Depth=1
+	movl	-20(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -20(%rbp)
+LBB0_16:                                ##   in Loop: Header=BB0_12 Depth=1
+	movq	-16(%rbp), %rax
+	movslq	-44(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$46, %eax
+	jne	LBB0_18
+## %bb.17:                              ##   in Loop: Header=BB0_12 Depth=1
+	movl	-24(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -24(%rbp)
+LBB0_18:                                ##   in Loop: Header=BB0_12 Depth=1
+	jmp	LBB0_19
+LBB0_19:                                ##   in Loop: Header=BB0_12 Depth=1
+	movl	-44(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -44(%rbp)
+	jmp	LBB0_12
+LBB0_20:
+	cmpl	$3, -20(%rbp)
+	jg	LBB0_22
+## %bb.21:
+	cmpl	$1, -24(%rbp)
+	je	LBB0_23
+LBB0_22:
+	leaq	L_.str(%rip), %rax
+	movq	%rax, -8(%rbp)
+	jmp	LBB0_24
+LBB0_23:
+	leaq	L_.str.4(%rip), %rax
+	movq	%rax, -8(%rbp)
+LBB0_24:
+	movq	-8(%rbp), %rax
+	addq	$48, %rsp
+	popq	%rbp
+	retq
+	.cfi_endproc
+                                        ## -- End function
+	.section	__TEXT,__cstring,cstring_literals
+L_.str:                                 ## @.str
+	.asciz	"No"
+
+L_.str.1:                               ## @.str.1
+	.asciz	".txt"
+
+L_.str.2:                               ## @.str.2
+	.asciz	".exe"
+
+L_.str.3:                               ## @.str.3
+	.asciz	".dll"
+
+L_.str.4:                               ## @.str.4
+	.asciz	"Yes"
+
+.subsections_via_symbols

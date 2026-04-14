@@ -1,178 +1,26 @@
-b	_LBB0_1
-_LBB0_1:
-ldr	w1, [sp, 20]
+ldp	x29, x30, [sp], 48
+mov	x29, sp
+str	w0, [sp, 28]
+str	w1, [sp, 24]
+str	w2, [sp, 20]
+str	w3, [sp, 16]
+str	w4, [sp, 12]
+ldr	w0, [sp, 28]
+cmp	w0, w1
+blt	LBB0_10
+str	w0, [sp, 32]
+str	w0, [sp, 36]
+ldr	w0, [sp, 36]
+add	w0, w0, lsl	16
+str	w0, [sp, 32]
+str	w0, [sp, 36]
+add	w0, w0, 1
+str	w0, [sp, 32]
+blb	LBB0_3
+LBB0_10:
 ldr	w0, [sp, 24]
-cmp	w1, w0
-beq	_LBB0_10
-add	w0, w1, 1
+add	w0, w0, [sp, 20]
+sub	w0, w0, 1
+ldp	x29, x30, [sp], 32
+add	w0, w0, [sp, 24]
 str	w0, [sp, 24]
-b	_LBB0_1
-_LBB0_10:
-ldr	w1, [sp, 24]
-sub	w0, w1, #1
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, le
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, lt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, gt
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ge
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, ne
-fdiv	d0, d0, 0.001
-fcmpe	d0, 0.001
-cset	d0, eq
-fdiv	d0, d0

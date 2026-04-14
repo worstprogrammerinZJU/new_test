@@ -1,171 +1,983 @@
-b LBB0_1
-LBB0_1:
-ldr	w0, [sp, 40]
-cmp	w0, 0
-beq	END_LBB0_1
-ldr	w0, [sp, 36]
-cmp	w0, 0
-bgt	END_LBB0_1
-ldr	w0, [sp, 36]
-sub	w0, w0, #1
-str	w0, [sp, 36]
-b	END_LBB0_1
-END_LBB0_1:
-ldr	w0, [sp, 36]
-add	w0, w0, 1
-str	w0, [sp, 36]
-b	END_LBB0_1
-END_LBB0_1:
-ldr	x0, [sp, 40]
-ldr	d0, [sp, 36]
-fdiv	d0, d0, 1.0
-mov	d1, d0
-ldr	d0, [sp, 36]
-fmul	d0, d1, d0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0, 1.0
-str	d0, [sp, 36]
-ldr	d0, [sp, 36]
-fmul	d0, d0
+ldp	x29, x30, [sp], 80
+mov	x29, sp
+str	x0, [sp, 40]
+str	w1, [sp, 36]
+str	w2, [sp, 32]
+str	x3, [sp, 24]
+bl	malloc
+str	x0, [sp, 48]
+str	w0, [sp, 44]
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop

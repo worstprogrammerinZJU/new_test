@@ -1,24 +1,14 @@
-b	_LoopHeader
-_loopheader:
-ldr	w1, [sp, 76]
-ldr	w0, [sp, 80]
-cmp	w1, w0
-beq	_OutOfLoop
-add	w0, w0, 1
-str	w0, [sp, 80]
-b	_LoopHeader
-_OutOfLoop:
-ldr	w1, [sp, 76]
-sub	w0, w1, #1
-ldr	x1, [sp, 80]
-ldr	w0, [x1, 4]
+ldp	x29, x30, [sp], 48
+mov	x29, sp
+str	x0, [sp, 16]
+str	w1, [sp, 12]
+str	w0, [sp, 8]
+str	w1, [sp, 4]
+ldr	w0, [sp, 16]
 cmp	w0, w1
-beq	_OutOfLoop
-add	w1, w1, 1
-ldr	x0, [sp, 80]
-ldrsw	x0, [x0, 4]
-cmp	w1, w0
-beq	_OutOfLoop
-add	w0, w0, 1
-str	w0, [sp, 80]
-b	_LoopHeader
+blz	w0, LBB0_7
+ldr	x1, [sp, 12]
+add	w0, w0, w1
+str	w0, [sp, 16]
+blz	w0, LBB0_1
+ret

@@ -1,211 +1,114 @@
-adrp	x0, ___stack_chk_guard@GOTPCREL
-add	x0, x0, :lo12:___stack_chk_guard@GOTPCREL
-ldr	x0, [x0]
-ldr	x0, [x0]
-str	x0, [sp, 40]
-mov	x19, x0
-mov	w2, 104
-bl	memset
-str	wzr, [sp, 152]
-ldr	x0, [sp, 152]
-str	x0, [sp, 168]
-b LBB0_1
-LBB0_1:
-ldr	w0, [sp, 152]
-ldrb	w0, [x0]
-cmp	w0, 0
-beq	LBB0_7
-LBB0_2:
-ldr	w0, [sp, 152]
-ldrb	w0, [x0]
-cmp	w0, 32
-beq	LBB0_6
-LBB0_3:
-ldr	w0, [sp, 152]
-ldrb	w0, [x0]
-sub	w0, w0, #97
-str	w0, [sp, 160]
-fcmpe	x0, 1.0
-fcmpe	x0, 0.0
-bne	LBB0_4
-LBB0_5:
-fcmpe	x0, 1.0
-fcmpe	x0, 0.0
-b	(L[sp, 160])
-LBB0_6:
-ldr	x0, [sp, 160]
-add	x0, x0, 1
-str	x0, [sp, 160]
-b	(L[sp, 152])
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$176, %rsp
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	movq	%rax, -8(%rbp)
+	movq	%rdi, -120(%rbp)
+	movq	%rsi, -128(%rbp)
+	movq	%rdx, -136(%rbp)
+	movq	%rcx, -144(%rbp)
+	leaq	-112(%rbp), %rdi
+	xorl	%esi, %esi
+	movl	$104, %edx
+	callq	_memset
+	movl	$0, -148(%rbp)
+	movq	-120(%rbp), %rax
+	movq	%rax, -160(%rbp)
+	movl	$0, -164(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movq	-160(%rbp), %rax
+	cmpb	$0, (%rax)
+	je	LBB0_7
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-160(%rbp), %rax
+	movsbl	(%rax), %eax
+	cmpl	$32, %eax
+	je	LBB0_6
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-160(%rbp), %rax
+	movsbl	(%rax), %eax
+	subl	$97, %eax
+	movl	%eax, -168(%rbp)
+	movslq	-168(%rbp), %rax
+	movl	-112(%rbp,%rax,4), %ecx
+	addl	$1, %ecx
+	movl	%ecx, -112(%rbp,%rax,4)
+	movslq	-168(%rbp), %rax
+	movl	-112(%rbp,%rax,4), %eax
+	cmpl	-148(%rbp), %eax
+	jle	LBB0_5
+## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
+	movslq	-168(%rbp), %rax
+	movl	-112(%rbp,%rax,4), %eax
+	movl	%eax, -148(%rbp)
+LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_6
+LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
+	movq	-160(%rbp), %rax
+	addq	$1, %rax
+	movq	%rax, -160(%rbp)
+	jmp	LBB0_1
 LBB0_7:
-str	wzr, [sp, 164]
-b	(L[sp, 160])
-LBB0_8:
-ldr	w1, [sp, 164]
-ldr	x0, [sp, 152]
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_9:
-fcmpe	x0, 26.0
-bgt	LBB0_13
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_10:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_11:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_12:
-ldr	w0, [sp, 164]
-add	w0, w0, 1
-str	w0, [sp, 164]
-b	(L[sp, 152])
+	movl	$0, -172(%rbp)
+LBB0_8:                                 ## =>This Inner Loop Header: Depth=1
+	cmpl	$26, -172(%rbp)
+	jge	LBB0_13
+## %bb.9:                               ##   in Loop: Header=BB0_8 Depth=1
+	movslq	-172(%rbp), %rax
+	movl	-112(%rbp,%rax,4), %edx
+	movq	-128(%rbp), %rax
+	movslq	-172(%rbp), %rcx
+	movl	%edx, (%rax,%rcx,4)
+	movslq	-172(%rbp), %rax
+	movl	-112(%rbp,%rax,4), %eax
+	cmpl	-148(%rbp), %eax
+	jne	LBB0_11
+## %bb.10:                              ##   in Loop: Header=BB0_8 Depth=1
+	movl	-172(%rbp), %eax
+	addl	$97, %eax
+	movb	%al, %dl
+	movq	-144(%rbp), %rax
+	movl	-164(%rbp), %ecx
+	movl	%ecx, %esi
+	addl	$1, %esi
+	movl	%esi, -164(%rbp)
+	movslq	%ecx, %rcx
+	movb	%dl, (%rax,%rcx)
+LBB0_11:                                ##   in Loop: Header=BB0_8 Depth=1
+	jmp	LBB0_12
+LBB0_12:                                ##   in Loop: Header=BB0_8 Depth=1
+	movl	-172(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -172(%rbp)
+	jmp	LBB0_8
 LBB0_13:
-ldr	w1, [sp, 160]
-ldr	x0, [sp, 168]
-mov	w0, w1
-str	w0, [sp, 160]
-ldr	w1, [sp, 160]
-ldr	w0, [sp, 164]
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_14:
-fcmpe	x0, 26.0
-bcc	LBB0_13
+	movl	-148(%rbp), %ecx
+	movq	-136(%rbp), %rax
+	movl	%ecx, (%rax)
+	movq	-144(%rbp), %rax
+	movslq	-164(%rbp), %rcx
+	movb	$0, (%rax,%rcx)
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	movq	-8(%rbp), %rcx
+	cmpq	%rcx, %rax
+	jne	LBB0_15
+## %bb.14:
+	addq	$176, %rsp
+	popq	%rbp
+	retq
 LBB0_15:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_16:
-ldr	w1, [sp, 160]
-ldr	x0, [sp, 152]
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_17:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_18:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_19:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_20:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_21:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_22:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_23:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_24:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_25:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_26:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_27:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_28:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_29:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_30:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_31:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_32:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_33:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_34:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_35:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_36:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_37:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_38:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_39:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_40:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_41:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_42:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_43:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_44:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_45:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_46:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_47:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_48:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_49:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_50:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_51:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_52:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_53:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_54:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_55:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_56:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_57:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_58:
-fcmpe	x0, 26.0
-bcc	LBB0_13
-LBB0_59:
-fcm
+	callq	___stack_chk_fail
+	ud2
+	.cfi_endproc

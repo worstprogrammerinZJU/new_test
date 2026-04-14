@@ -1,77 +1,107 @@
-b	=LBB0_1
-:LBB0_1:
-ldr	w1, [sp, 20]
-cmp	w1, 1000
-beq	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 1000
-bgt	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 90
-bgt	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 97
-ble	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 65
-ble	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 90
-bgt	_LBB0_16
-ldr	w1, [sp, 20]
-cmp	w1, 122
-ble	_LBB0_16
-ldr	w1, [sp, 20]
-sub	w1, w1, #1
-b	_LBB0_16
-_LBB0_16:
-ldr	w1, [sp, 20]
-add	w1, w1, 1
-str	w1, [sp, 20]
-b	_LBB0_1
-_LBB0_1:
-ldr	w1, [sp, 20]
-add	w1, w1, 1
-str	w1, [sp, 20]
-b	_LBB0_1
-_LBB0_3:
-ldr	x1, [sp, 24]
-ldr	x0, [sp, 32]
-fcmpe	x0, x1
-beq	_LBB0_12
-ldr	x1, [sp, 24]
-fcmpe	x0, x1
-bgt	_LBB0_12
-ldr	x1, [sp, 24]
-fmul	x0, x1, x0
-str	x0, [sp, 20]
-strz	"x", [sp, 20]
-b	_LBB0_3
-_LBB0_12:
-ldr	w0, [sp, 20]
-ldr	w1, [sp, 28]
-cmp	w1, w0
-ble	_LBB0_14
-mov	w1, w0
-str	w1, [sp, 28]
-mov	x0, x1
-ldr	x1, [sp, 40]
-fcmpe	x1, x0
-beq	_LBB0_15
-ldr	w1, [sp, 28]
-fcmpe	x0, x1
-bgt	_LBB0_15
-ldr	x1, [sp, 40]
-fmul	x0, x1, x0
-str	x0, [sp, 20]
-strz	"x", [sp, 20]
-b	_LBB0_1
-_LBB0_14:
-ldr	w0, [sp, 20]
-str	w0, [sp, 28]
-b	_LBB0_15
-_LBB0_15:
-ldr	w0, [sp, 20]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	_LBB0_1
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$80, %rsp
+	movq	%rdi, -8(%rbp)
+	movq	%rsi, -16(%rbp)
+	movl	%edx, -20(%rbp)
+	movq	%rcx, -32(%rbp)
+	movl	$-1000, -36(%rbp)               ## imm = 0xFC18
+	movq	$0, -48(%rbp)
+	movl	$0, -52(%rbp)
+LBB0_1:                                 ## =>This Loop Header: Depth=1
+                                        ##     Child Loop BB0_3 Depth 2
+	movl	-52(%rbp), %eax
+	cmpl	-20(%rbp), %eax
+	jge	LBB0_16
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-16(%rbp), %rax
+	movslq	-52(%rbp), %rcx
+	movq	(%rax,%rcx,8), %rax
+	movq	%rax, -64(%rbp)
+	movl	$0, -68(%rbp)
+	movl	$0, -72(%rbp)
+LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	movq	-64(%rbp), %rax
+	movslq	-72(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$0, %eax
+	je	LBB0_12
+## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
+	movq	-64(%rbp), %rax
+	movslq	-72(%rbp), %rcx
+	movb	(%rax,%rcx), %al
+	movb	%al, -73(%rbp)
+	movsbl	-73(%rbp), %eax
+	cmpl	$65, %eax
+	jl	LBB0_7
+## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=2
+	movsbl	-73(%rbp), %eax
+	cmpl	$90, %eax
+	jg	LBB0_7
+## %bb.6:                               ##   in Loop: Header=BB0_3 Depth=2
+	movl	-68(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -68(%rbp)
+LBB0_7:                                 ##   in Loop: Header=BB0_3 Depth=2
+	movsbl	-73(%rbp), %eax
+	cmpl	$97, %eax
+	jl	LBB0_10
+## %bb.8:                               ##   in Loop: Header=BB0_3 Depth=2
+	movsbl	-73(%rbp), %eax
+	cmpl	$122, %eax
+	jg	LBB0_10
+## %bb.9:                               ##   in Loop: Header=BB0_3 Depth=2
+	movl	-68(%rbp), %eax
+	addl	$-1, %eax
+	movl	%eax, -68(%rbp)
+LBB0_10:                                ##   in Loop: Header=BB0_3 Depth=2
+	jmp	LBB0_11
+LBB0_11:                                ##   in Loop: Header=BB0_3 Depth=2
+	movl	-72(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -72(%rbp)
+	jmp	LBB0_3
+LBB0_12:                                ##   in Loop: Header=BB0_1 Depth=1
+	movl	-68(%rbp), %eax
+	cmpl	-36(%rbp), %eax
+	jle	LBB0_14
+## %bb.13:                              ##   in Loop: Header=BB0_1 Depth=1
+	movl	-68(%rbp), %eax
+	movl	%eax, -36(%rbp)
+	movq	-64(%rbp), %rax
+	movq	%rax, -48(%rbp)
+LBB0_14:                                ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_15
+LBB0_15:                                ##   in Loop: Header=BB0_1 Depth=1
+	movl	-52(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -52(%rbp)
+	jmp	LBB0_1
+LBB0_16:
+	movq	-32(%rbp), %rdi
+	movq	-8(%rbp), %r8
+	movq	-48(%rbp), %r9
+	xorl	%esi, %esi
+	movq	$-1, %rdx
+	leaq	L_.str(%rip), %rcx
+	movb	$0, %al
+	callq	___sprintf_chk
+	addq	$80, %rsp
+	popq	%rbp
+	retq
+	.cfi_endproc
+                                        ## -- End function
+	.section	__TEXT,__cstring,cstring_literals
+L_.str:                                 ## @.str
+	.asciz	"%s.%s"

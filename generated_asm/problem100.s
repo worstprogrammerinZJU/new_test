@@ -1,40 +1,326 @@
-b	_LBB0_1
-_LBB0_1:
-ldr	w1, [sp, 40]
-cmp	w1, 1
-beq	_LBB0_13
-ldr	w1, [sp, 44]
-add	w0, w1, 1
-str	w0, [sp, 40]
-b	_LBB0_3
-_LBB0_3:
-ldr	w1, [sp, 40]
-mul	w0, w1, 1000000000
-ldr	w0, [sp, 44]
+ldp	x29, x30, [sp], 48
+add	x29, sp, 16
+str	w0, [sp, 24]
+str	w1, [sp, 16]
+str	w2, [sp, 8]
+str	w3, [sp]
+ldr	w0, [sp, 24]
 cmp	w0, w1
-bgt	_LBB0_8
-ldr	w1, [sp, 44]
-sub	w0, w1, #1
-str	w0, [sp, 40]
-b	_LBB0_3
-_LBB0_8:
-ldr	w0, [sp, 40]
-cmp	w0, 0
-beq	_LBB0_10
-ldr	w1, [sp, 44]
-add	w0, w1, 1
-str	w0, [sp, 40]
-b	_LBB0_12
-_LBB0_10:
-ldr	w0, [sp, 40]
-cmp	w0, 0
-b	_LBB0_14
-_LBB0_12:
-ldr	w1, [sp, 44]
-add	w0, w1, 1
-str	w0, [sp, 40]
-b	_LBB0_1
-_LBB0_1:
-mov	w1, 0
-str	w1, [sp, 40]
-b	_LBB0_1
+blz	_loop_exit
+ldr	w0, [sp, 12]
+add	w0, w0, [sp, 16]
+str	w0, [sp, 12]
+str	w0, [sp, 20]
+str	w0, [sp, 16]
+str	w0, [sp, 24]
+str	w0, [sp, 32]
+str	w0, [sp, 28]
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner
+blb	_loop_outer
+blb	_loop_inner

@@ -1,197 +1,762 @@
-b LBB0_1
-LBB0_1:
-ldr	w0, [sp, 20]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b LBB0_1
-LBB0_2:
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 20]
-mov	x0, x1
-lsl	x0, x0, 3
-bl	str_len
-cmp	x0, 0
-bne	LBB0_4
-b LBB0_3
-LBB0_3:
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 20]
-mov	x0, x1
-lsl	x0, x0, 3
-bl	str_len
-ldr	x1, [sp, 40]
-ldrsw	x0, [x1]
-mov	x1, x0
-lsl	x1, x1, 3
-bl	str_len
-mov	x0, x1
-movk	x0, 0xf, lsl 8
-str	x0, [x0, x1, 8]
-b LBB0_5
-LBB0_4:
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 20]
-mov	x0, x1
-lsl	x0, x0, 3
-bl	str_len
-ldr	x1, [sp, 40]
-ldrsw	x0, [x1]
-add	x0, x0, 1
-mov	x1, x0
-lsl	x1, x1, 3
-bl	str_len
-mov	x0, x1
-movk	x0, 0xf, lsl 8
-str	x0, [x0, x1, 8]
-b LBB0_6
-LBB0_5:
-ldr	w0, [sp, 20]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b LBB0_1
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+pushq	%rbp
+.cfi_def_cfa_offset 16
+.cfi_offset %rbp, -16
+movq	%rsp, %rbp
+.cfi_def_cfa_register %rbp
+subq	$64, %rsp
+movq	%rdi, -8(%rbp)
+movl	%esi, -12(%rbp)
+movq	%rdx, -24(%rbp)
+movq	-24(%rbp), %rax
+movl	$0, ([]rax)
+movl	$0, -28(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+movl	-28(%rbp), %eax
+cmpb	-12(%rbp), %eax
+.jge	LBB0_6
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movblb	-28(%rbp), %rcx
+movb	w0, [w1, 1]
+blc	str
+.andb	w0, w0, #1
+.cpb	w0, w0, :lo12, :none
+.jne	LBB0_4
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movblb	-28(%rbp), %rcx
+movb	w0, [w1, 1]
+blc	str
+.andb	w0, w0, #1
+.cpb	w0, w0, :lo12, :none
+.movb	w0, [w1, 1]
+movq	-24(%rbp), %rax
+movblb	w0, [w1]
+addb	w0, w0, #1
+movb	w0, [w1]
+LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_5
+LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
+movblb	w0, [w1]
+addb	w0, w0, #1
+movb	w0, [w1]
+	jmp	LBB0_1
 LBB0_6:
-mov	w0, 0
-str	w0, [sp, 20]
-b LBB0_7
-LBB0_7:
-ldr	w0, [sp, 20]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b LBB0_7
-LBB0_8:
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:sp[20]
-ldr	w0, [x0]
-sub	w1, w0, #1
-ldr	w0, [sp, 20]
-sub	w1, w1, w0
-cmp	w0, w1
-bge	LBB0_10
-b LBB0_9
-LBB0_9:
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	w0, [x0]
-sub	w1, w0, #1
-ldr	w0, [sp, 20]
-sub	w1, w1, w0
-cmp	w0, w1
-bge	LBB0_12
-b LBB0_10
-LBB0_10:
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x0, [x0]
-ldrsw	x1, [x1]
-lsl	x1, x1, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp, 20]
-ldr	x1, [x0]
-ldrsw	x0, [x1]
-lsl	x0, x0, 3
-bl	str_len
-adrp	x0, [sp, 20]
-add	x0, x0, :lo12:[sp,
+	movblb	w0, [w1]
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop

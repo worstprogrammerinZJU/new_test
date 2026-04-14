@@ -1,24 +1,21 @@
-b	_LoopHeader
-_loopheader:
-ldr	w1, [sp, 76]
-mov	w0, 10
-fdiv	w0, w1, w0
-str	w0, [sp, 76]
-ldr	w1, [sp, 76]
-mov	w0, 2
-fdiv	w0, w1, w0
-cmp	w1, 0
-bne	_LoopBody
-_loopbody:
-ldr	w0, [sp, 76]
-add	w0, w0, 1
-str	w0, [sp, 76]
-b	_EndLoop
-_EndLoop:
-ldr	w0, [sp, 76]
-mov	w1, 10
-fdiv	w0, w1, w0
-str	w0, [sp, 76]
-ldr	w0, [sp, 76]
+ldp	x29, x30, [sp], 48
+str	w0, [sp, 16]
+str	x1, [sp, 40]
+str	w2, [sp, 24]
+str	w3, [sp, 20]
+add	w4, w0, 10
+ldp	x0, x1, [sp], 32
+str	w4, [sp, 16]
+str	w5, [sp, 28]
+str	w6, [sp, 24]
+cmp	w7, 0
+bltabs
+add	w4, w5, 1
+str	w4, [sp, 20]
+add	w4, w6, 1
+str	w4, [sp, 16]
+add	w4, w0, 10
+ldp	x0, x1, [sp], 32
+str	w4, [sp, 16]
 cmp	w0, 0
-bgt	_LoopHeader
+bge	lbba

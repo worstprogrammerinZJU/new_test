@@ -1,17 +1,34 @@
-b	_LBB0_1
-_LBB0_1:
-ldr	w1, [sp, 56]
-ldr	w0, [sp, 60]
-cmp	w1, w0
-beq	_LBB0_4
-ldr	x1, [sp, 64]
-ldrsw	x0, [x1, 4]
-add	w0, w0, 1
-str	w0, [x1, 4]
-mov	w1, w0
-add	w0, w1, 1
-str	w0, [sp, 60]
-b	_LBB0_1
-_LBB0_4:
-str	w0, [sp, 60]
-ret
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	movq	%rdi, -8(%rbp)
+	movl	%esi, -12(%rbp)
+	movl	$0, -16(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movl	-16(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jge	LBB0_4
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-8(%rbp), %rax
+	movslq	-16(%rbp), %rcx
+	movl	[%rax,%rcx,4], %edx
+	addl	$1, %edx
+	movl	%edx, [%rax,%rcx,4]
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-16(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -16(%rbp)
+	jmp	LBB0_1
+LBB0_4:
+	popq	%rbp
+	retq
+	.cfi_endproc

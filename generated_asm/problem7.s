@@ -1,207 +1,159 @@
-adrp	x0, L_.str
-add	x0, x0, :lo12:L_.str
-ldr	w19, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-mov	w2, w1
-sub	w0, w1, w2
-cmp	w0, 0
-ble	LBB0_2
-LBB0_2:
-ldr	w0, [sp, 72]
-add	w0, w0, w1
-mov	w1, 2
-fscvtsw	d0, w0
-fdiv	d0, d0, 2
-str	d0, [sp, 64]
-bl	malloc
-ldr	x0, [sp, 48]
-mov	w1, 33
-bl	_malloc
-mov	w1, w0
-mov	w0, 32
-str	w0, [sp, 64]
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-str	d0, [sp, 64]
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-str	d0, [x0, w1]
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-str	d0, [sp, 64]
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-ldr	x0, [sp, 48]
-fcmpe	d0, w1
-bgt	LBB0_3
-LBB0_3:
-ldr	w1, [sp, 64]
-sub	w0, w1, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0, [sp, 64]
-sub	w0, w0, #1
-fscvtsw	d0, w0
-fdiv	d0, d0, w1
-mov	w1, w0
-ldr	w0,
+ldp	x29, x30, [sp], 64
+ldr	w0, [sp, 16]
+ldr	w1, [sp, 12]
+ldr	x2, [sp, 40]
+cmp	w0, x2
+blz	malloc
+add	w0, w1, w0
+ldp	x0, x1, [sp], 48
+mov	x1, 33
+stp	x19, x20, [sp, 16]
+stp	x29, x30, [sp]
+strb	0, [sp, 31]
+str	w0, [sp, 32]
+strb	0, [sp, 29]
+str	w0, [sp, 32]
+strb	0, [sp, 27]
+strb	w0, [sp, 26]
+strb	w0, [sp, 25]
+strb	w0, [sp, 24]
+strb	w0, [sp, 23]
+strb	w0, [sp, 22]
+strb	w0, [sp, 21]
+strb	w0, [sp, 20]
+strb	w0, [sp, 19]
+strb	w0, [sp, 18]
+strb	w0, [sp, 17]
+strb	w0, [sp, 16]
+strb	w0, [sp, 15]
+strb	w0, [sp, 14]
+strb	w0, [sp, 13]
+strb	w0, [sp, 12]
+strb	w0, [sp, 11]
+strb	w0, [sp, 10]
+strb	w0, [sp, 9]
+strb	w0, [sp, 8]
+strb	w0, [sp, 7]
+strb	w0, [sp, 6]
+strb	w0, [sp, 5]
+strb	w0, [sp, 4]
+strb	w0, [sp, 3]
+strb	w0, [sp, 2]
+strb	w0, [sp, 1]
+strb	w0, [sp, 0]
+strb	w0, [sp, -1]
+strb	w0, [sp, -2]
+strb	w0, [sp, -3]
+strb	w0, [sp, -4]
+strb	w0, [sp, -5]
+strb	w0, [sp, -6]
+strb	w0, [sp, -7]
+strb	w0, [sp, -8]
+strb	w0, [sp, -9]
+strb	w0, [sp, -10]
+strb	w0, [sp, -11]
+strb	w0, [sp, -12]
+strb	w0, [sp, -13]
+strb	w0, [sp, -14]
+strb	w0, [sp, -15]
+strb	w0, [sp, -16]
+strb	w0, [sp, -17]
+strb	w0, [sp, -18]
+strb	w0, [sp, -19]
+strb	w0, [sp, -20]
+strb	w0, [sp, -21]
+strb	w0, [sp, -22]
+strb	w0, [sp, -23]
+strb	w0, [sp, -24]
+strb	w0, [sp, -25]
+strb	w0, [sp, -26]
+strb	w0, [sp, -27]
+strb	w0, [sp, -28]
+strb	w0, [sp, -29]
+strb	w0, [sp, -30]
+strb	w0, [sp, -31]
+strb	w0, [sp, -32]
+strb	w0, [sp, -33]
+strb	w0, [sp, -34]
+strb	w0, [sp, -35]
+strb	w0, [sp, -36]
+strb	w0, [sp, -37]
+strb	w0, [sp, -38]
+strb	w0, [sp, -39]
+strb	w0, [sp, -40]
+strb	w0, [sp, -41]
+strb	w0, [sp, -42]
+strb	w0, [sp, -43]
+strb	w0, [sp, -44]
+strb	w0, [sp, -45]
+strb	w0, [sp, -46]
+strb	w0, [sp, -47]
+strb	w0, [sp, -48]
+strb	w0, [sp, -49]
+strb	w0, [sp, -50]
+strb	w0, [sp, -51]
+strb	w0, [sp, -52]
+strb	w0, [sp, -53]
+strb	w0, [sp, -54]
+strb	w0, [sp, -55]
+strb	w0, [sp, -56]
+strb	w0, [sp, -57]
+strb	w0, [sp, -58]
+strb	w0, [sp, -59]
+strb	w0, [sp, -60]
+strb	w0, [sp, -61]
+strb	w0, [sp, -62]
+strb	w0, [sp, -63]
+strb	w0, [sp, -64]
+strb	w0, [sp, -65]
+strb	w0, [sp, -66]
+strb	w0, [sp, -67]
+strb	w0, [sp, -68]
+strb	w0, [sp, -69]
+strb	w0, [sp, -70]
+strb	w0, [sp, -71]
+strb	w0, [sp, -72]
+strb	w0, [sp, -73]
+strb	w0, [sp, -74]
+strb	w0, [sp, -75]
+strb	w0, [sp, -76]
+strb	w0, [sp, -77]
+strb	w0, [sp, -78]
+strb	w0, [sp, -79]
+strb	w0, [sp, -80]
+strb	w0, [sp, -81]
+strb	w0, [sp, -82]
+strb	w0, [sp, -83]
+strb	w0, [sp, -84]
+strb	w0, [sp, -85]
+strb	w0, [sp, -86]
+strb	w0, [sp, -87]
+strb	w0, [sp, -88]
+strb	w0, [sp, -89]
+strb	w0, [sp, -90]
+strb	w0, [sp, -91]
+strb	w0, [sp, -92]
+strb	w0, [sp, -93]
+strb	w0, [sp, -94]
+strb	w0, [sp, -95]
+strb	w0, [sp, -96]
+strb	w0, [sp, -97]
+strb	w0, [sp, -98]
+strb	w0, [sp, -99]
+strb	w0, [sp, -100]
+strb	w0, [sp, -101]
+strb	w0, [sp, -102]
+strb	w0, [sp, -103]
+strb	w0, [sp, -104]
+strb	w0, [sp, -105]
+strb	w0, [sp, -106]
+strb	w0, [sp, -107]
+strb	w0, [sp, -108]
+strb	w0, [sp, -109]
+strb	w0, [sp, -110]
+strb	w0, [sp, -111]
+strb	w0, [sp, -112]
+strb	w0, [sp, -113]
+strb	w0, [sp, -114]
+strb	w0, [sp, -115]
+strb	w0, [sp, -116]

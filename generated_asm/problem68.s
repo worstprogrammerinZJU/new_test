@@ -1,175 +1,287 @@
-.global	_func0
-_func0:
-	section	.data
-	str	w, [sp, 20]
-	str	w, [sp, 24]
-	str	w, [sp, 28]
-	str	w, [sp, 32]
-	str	w, [sp, 36]
-	str	w, [sp, 40]
-	str	w, [sp, 44]
-	str	w, [sp, 48]
-	str	w, [sp, 52]
-	str	w, [sp, 56]
-	str	w, [sp, 60]
-	str	w, [sp, 64]
-	str	w, [sp, 68]
-	str	w, [sp, 72]
-	str	w, [sp, 76]
-	str	w, [sp, 80]
-	str	w, [sp, 84]
-	str	w, [sp, 88]
-	str	w, [sp, 92]
-	str	w, [sp, 96]
-	str	w, [sp, 100]
-	str	w, [sp, 104]
-	str	w, [sp, 108]
-	str	w, [sp, 112]
-	str	w, [sp, 116]
-	str	w, [sp, 120]
-	str	w, [sp, 124]
-	str	w, [sp, 128]
-	str	w, [sp, 132]
-	str	w, [sp, 136]
-	str	w, [sp, 140]
-	str	w, [sp, 144]
-	str	w, [sp, 148]
-	str	w, [sp, 152]
-	str	w, [sp, 156]
-	str	w, [sp, 160]
-	str	w, [sp, 164]
-	str	w, [sp, 168]
-	str	w, [sp, 172]
-	str	w, [sp, 176]
-	str	w, [sp, 180]
-	str	w, [sp, 184]
-	str	w, [sp, 188]
-	str	w, [sp, 192]
-	str	w, [sp, 196]
-	str	w, [sp, 200]
-	str	w, [sp, 204]
-	str	w, [sp, 208]
-	str	w, [sp, 212]
-	str	w, [sp, 216]
-	str	w, [sp, 220]
-	str	w, [sp, 224]
-	str	w, [sp, 228]
-	str	w, [sp, 232]
-	str	w, [sp, 236]
-	str	w, [sp, 240]
-	str	w, [sp, 244]
-	str	w, [sp, 248]
-	str	w, [sp, 252]
-	str	w, [sp, 256]
-	str	w, [sp, 260]
-	str	w, [sp, 264]
-	str	w, [sp, 268]
-	str	w, [sp, 272]
-	str	w, [sp, 276]
-	str	w, [sp, 280]
-	str	w, [sp, 284]
-	str	w, [sp, 288]
-	str	w, [sp, 292]
-	str	w, [sp, 296]
-	str	w, [sp, 300]
-	str	w, [sp, 304]
-	str	w, [sp, 308]
-	str	w, [sp, 312]
-	str	w, [sp, 316]
-	str	w, [sp, 320]
-	str	w, [sp, 324]
-	str	w, [sp, 328]
-	str	w, [sp, 332]
-	str	w, [sp, 336]
-	str	w, [sp, 340]
-	str	w, [sp, 344]
-	str	w, [sp, 348]
-	str	w, [sp, 352]
-	str	w, [sp, 356]
-	str	w, [sp, 360]
-	str	w, [sp, 364]
-	str	w, [sp, 368]
-	str	w, [sp, 372]
-	str	w, [sp, 376]
-	str	w, [sp, 380]
-	str	w, [sp, 384]
-	str	w, [sp, 388]
-	str	w, [sp, 392]
-	str	w, [sp, 396]
-	str	w, [sp, 400]
-	str	w, [sp, 404]
-	str	w, [sp, 408]
-	str	w, [sp, 412]
-	str	w, [sp, 416]
-	str	w, [sp, 420]
-	str	w, [sp, 424]
-	str	w, [sp, 428]
-	str	w, [sp, 432]
-	str	w, [sp, 436]
-	str	w, [sp, 440]
-	str	w, [sp, 444]
-	str	w, [sp, 448]
-	str	w, [sp, 452]
-	str	w, [sp, 456]
-	str	w, [sp, 460]
-	str	w, [sp, 464]
-	str	w, [sp, 468]
-	str	w, [sp, 472]
-	str	w, [sp, 476]
-	str	w, [sp, 480]
-	str	w, [sp, 484]
-	str	w, [sp, 488]
-	str	w, [sp, 492]
-	str	w, [sp, 496]
-	str	w, [sp, 500]
-	str	w, [sp, 504]
-	str	w, [sp, 508]
-	str	w, [sp, 512]
-	str	w, [sp, 516]
-	str	w, [sp, 520]
-	str	w, [sp, 524]
-	str	w, [sp, 528]
-	str	w, [sp, 532]
-	str	w, [sp, 536]
-	str	w, [sp, 540]
-	str	w, [sp, 544]
-	str	w, [sp, 548]
-	str	w, [sp, 552]
-	str	w, [sp, 556]
-	str	w, [sp, 560]
-	str	w, [sp, 564]
-	str	w, [sp, 568]
-	str	w, [sp, 572]
-	str	w, [sp, 576]
-	str	w, [sp, 580]
-	str	w, [sp, 584]
-	str	w, [sp, 588]
-	str	w, [sp, 592]
-	str	w, [sp, 596]
-	str	w, [sp, 600]
-	str	w, [sp, 604]
-	str	w, [sp, 608]
-	str	w, [sp, 612]
-	str	w, [sp, 616]
-	str	w, [sp, 620]
-	str	w, [sp, 624]
-	str	w, [sp, 628]
-	str	w, [sp, 632]
-	str	w, [sp, 636]
-	str	w, [sp, 640]
-	str	w, [sp, 644]
-	str	w, [sp, 648]
-	str	w, [sp, 652]
-	str	w, [sp, 656]
-	str	w, [sp, 660]
-	str	w, [sp, 664]
-	str	w, [sp, 668]
-	str	w, [sp, 672]
-	str	w, [sp, 676]
-	str	w, [sp, 680]
-	str	w, [sp, 684]
-	str	w, [sp, 688]
-	str	w, [sp, 692]
-	str	w, [sp, 696]
-	str	w, [sp, 700]
-	str	w
+ldp	x29, x30, [sp], 64
+ldr	w0, [sp, 16]
+ldr	w1, [sp, 12]
+ldr	w2, [sp, 8]
+bl	_snprintf_chk
+add	sp, sp, 16
+ldr	w0, [sp, 16]
+add	w0, w0, 1
+ldr	w0, [sp, 16]
+bl	_malloc
+mov	x0, [sp, 32]
+blc	x0, 0
+blw	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0, 0
+bl	w0,

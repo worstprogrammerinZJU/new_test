@@ -1,190 +1,129 @@
-b	=LBB0_1
-LBB0_1:
-ldr	w1, [sp, 24]
-ldr	x0, [sp, 40]
-movk	x0, #0x0000000a
-fmovn	x0, x1, x0
-fcmpe	x0, x1, x0
-beq	,LBB0_2
-ldr	w1, [sp, 24]
-add	w1, w1, 1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_2:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_3
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_3:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_4
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_4:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_5
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_5:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_6
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_6:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_7
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_7:
-ldr	w1, [sp, 24]
-cmp	w1, 0
-bne	,LBB0_8
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_8:
-b	=LBB0_10
-LBB0_10:
-ldr	w1, [sp, 24]
-sub	w1, w1, #1
-str	w1, [sp, 24]
-b	=LBB0_1
-LBB0_1:
-ldr	w1, [sp, 24]
-add	w1, w1, 1
-str	w1, [sp, 24]
-b	=LBB0_1
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+pushq	%rbp
+.cfi_def_cfa_offset 16
+.cfi_offset %rbp, -16
+movq	%rsp, %rbp
+.cfi_def_cfa_register %rbp
+subq	$32, %rsp
+movq	%rdi, -8(%rbp)
+movl	$0, -12(%rbp)
+movq	-8(%rbp), %rdi
+callq	_strlen
+                                        ## kill: def $eax killed $eax killed $rax
+movl	%eax, -16(%rbp)
+movl	$0, -20(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+movl	-20(%rbp), %eax
+cmpl	-16(%rbp), %eax
+jge	LBB0_12
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movzbl	(%rax,%rcx), %edi
+callq	_isalpha
+cmpl	$0, %eax
+je	LBB0_9
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movzbl	(%rax,%rcx), %edi
+callq	_isupper
+cmpl	$0, %eax
+je	LBB0_5
+## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movzbl	(%rax,%rcx), %edi
+callq	_tolower
+movb	%al, %dl
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movb	%dl, (%rax,%rcx)
+jmp	LBB0_8
+LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movzbl	(%rax,%rcx), %edi
+callq	_islower
+cmpl	$0, %eax
+je	LBB0_7
+## %bb.6:                               ##   in Loop: Header=BB0_1 Depth=1
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movzbl	(%rax,%rcx), %edi
+callq	_toupper
+movb	%al, %dl
+movq	-8(%rbp), %rax
+movslq	-20(%rbp), %rcx
+movb	%dl, (%rax,%rcx)
+LBB0_7:                                 ##   in Loop: Header=BB0_1 Depth=1
+jmp	LBB0_8
+LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
+jmp	LBB0_10
+LBB0_9:                                 ##   in Loop: Header=BB0_1 Depth=1
+movl	-12(%rbp), %eax
+addl	$1, %eax
+movl	%eax, -12(%rbp)
+LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
+jmp	LBB0_11
+LBB0_11:                                ##   in Loop: Header=BB0_1 Depth=1
+movl	-20(%rbp), %eax
+addl	$1, %eax
+movl	%eax, -20(%rbp)
+jmp	LBB0_1
 LBB0_12:
-ldr	w1, [sp, 24]
-ldr	w0, [sp, 28]
-cmp	w1, w0
-bgt	,LBB0_13
-ldr	w1, [sp, 28]
-sub	w1, w1, #1
-str	w1, [sp, 28]
-b	=LBB0_1
-LBB0_13:
-ldr	w1, [sp, 28]
-sub	w1, w1, #1
-str	w1, [sp, 28]
-b	=LBB0_1
-LBB0_14:
-ldr	w1, [sp, 28]
-sub	w1, w1, #1
-str	w1, [sp, 28]
-b	=LBB0_14
-LBB0_15:
-ldr	w1, [sp, 28]
-sub	w1, w1, #1
-str	w1, [sp, 28]
-b	=LBB0_14
-LBB0_16:
-ldr	w1, [sp, 28]
-sub	w1, w1, #1
-str	w1, [sp, 28]
-b	=LBB0_14
+movl	-12(%rbp), %eax
+cmpl	-16(%rbp), %eax
+jne	LBB0_18
+## %bb.13:
+movl	$0, -24(%rbp)
+LBB0_14:                                ## =>This Inner Loop Header: Depth=1
+movl	-24(%rbp), %eax
+movl	%eax, -32(%rbp)                 ## 4-byte Spill
+movl	-16(%rbp), %eax
+movl	$2, %ecx
+cltd
+idivl	%ecx
+movl	%eax, %ecx
+movl	-32(%rbp), %eax                 ## 4-byte Reload
+cmpl	%ecx, %eax
+jge	LBB0_17
+## %bb.15:                              ##   in Loop: Header=BB0_14 Depth=1
+movq	-8(%rbp), %rax
+movslq	-24(%rbp), %rcx
+movb	(%rax,%rcx), %al
+movb	%al, -25(%rbp)
+movq	-8(%rbp), %rax
+movl	-16(%rbp), %ecx
+subl	-24(%rbp), %ecx
+subl	$1, %ecx
+movslq	%ecx, %rcx
+movb	(%rax,%rcx), %dl
+movq	-8(%rbp), %rax
+movslq	-24(%rbp), %rcx
+movb	%dl, (%rax,%rcx)
+movb	-25(%rbp), %dl
+movq	-8(%rbp), %rax
+movl	-16(%rbp), %ecx
+subl	-24(%rbp), %ecx
+subl	$1, %ecx
+movslq	%ecx, %rcx
+movb	%dl, (%rax,%rcx)
+## %bb.16:                              ##   in Loop: Header=BB0_14 Depth=1
+movl	-24(%rbp), %eax
+addl	$1, %eax
+movl	%eax, -24(%rbp)
+jmp	LBB0_14
 LBB0_17:
-b	=LBB0_18
+jmp	LBB0_18
 LBB0_18:
-ldr	x1, [sp, 40]
-ldr	x0, [sp, 40]
-add	x0, x0, 32
-str	x0, [sp, 40]
-ldr	x1, [sp, 40]
-ldr	x0, [sp, 40]
-sub	x0, x1, x0
-sub	x1, sp, 40
-ldr	x0, [sp, 40]
-mul	x1, x0, x1
-str	x1, [sp, 40]
-ldr	w1, [sp, 28]
-ldr	w0, [sp, 28]
-sub	w1, w1, w0
-sub	w1, w1, #1
-fdiv	d0, d0, d1
-fcsel	w1, w1, w0, lt
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
-str	w1, [sp, 28]
-str	x1, [sp, 40]
-str	x0, [sp, 40]
+movq	-8(%rbp), %rax
+addq	$32, %rsp
+popq	%rbp
+retq
+.cfi_endproc

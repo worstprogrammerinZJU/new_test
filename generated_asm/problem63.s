@@ -1,169 +1,966 @@
-b	_LBB0_1
-_LBB0_1:
-ldr	w1, [sp, 28]
-cmp	w1, 0
-beq	_LBB0_6
-ldr	w1, [sp, 32]
-add	w1, w1, w1, lsl 1
-add	w0, w1, 1
-bl	_malloc
-str	d0, [sp, 40]
-mov	w1, 0
-str	w1, [sp, 44]
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-fcmpe	w0, w1
-bgt	_LBB0_2
-_LBB0_2:
-ldr	w1, [sp, 44]
-ldr	w0, [sp, 40]
-fmul	w0, w1, w0
+ldp	x29, x30, [sp], 64
+mov	x29, sp
+str	x0, [sp, 16]
+str	x1, [sp, 40]
+str	w0, [sp, 32]
+bl	str_len
+str	w0, [sp, 28]
+str	x0, [sp, 44]
+bl	str_len
+str	w0, [sp, 32]
+str	w0, [sp, 40]
+bl	malloc
+str	x0, [sp, 48]
 str	w0, [sp, 44]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
-fmul	w0, w1, w0
-str	w0, [sp, 32]
-ldr	w1, [sp, 32]
-sub	w1, w1, w1, lsl 1
-ldr	w0, [sp, 44]
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop

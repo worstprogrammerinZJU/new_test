@@ -1,210 +1,116 @@
-.LCB0_1:
-ldrsw	x0, [sp, 20]
-cmp	x0, 0
-bge	.LCB0_10
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	.LCB0_3
-.LCB0_3:
-ldrsw	x0, [sp, 20]
-cmp	x0, 0
-bge	.LCB0_8
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	.LCB0_1
-.LCB0_8:
-b	.LCB0_9
-.LCB0_9:
-ldrsw	x0, [sp, 20]
-add	w0, w0, 1
-str	w0, [sp, 20]
-b	.LCB0_1
-.LCB0_10:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_12
-b	.LCB0_11
-.LCB0_11:
-mov	d0, 0.0
-fmov	d1, d0
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_13
-b	.LCB0_12
-.LCB0_12:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_14
-b	.LCB0_13
-.LCB0_13:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_15
-b	.LCB0_14
-.LCB0_14:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_16
-b	.LCB0_15
-.LCB0_15:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_17
-b	.LCB0_16
-.LCB0_16:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_18
-b	.LCB0_17
-.LCB0_17:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_19
-b	.LCB0_18
-.LCB0_18:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_20
-b	.LCB0_19
-.LCB0_19:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_21
-b	.LCB0_20
-.LCB0_20:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_22
-b	.LCB0_21
-.LCB0_21:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_23
-b	.LCB0_22
-.LCB0_22:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_24
-b	.LCB0_23
-.LCB0_23:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_25
-b	.LCB0_24
-.LCB0_24:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_26
-b	.LCB0_25
-.LCB0_25:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_27
-b	.LCB0_26
-.LCB0_26:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_28
-b	.LCB0_27
-.LCB0_27:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_29
-b	.LCB0_28
-.LCB0_28:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_30
-b	.LCB0_29
-.LCB0_29:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_31
-b	.LCB0_30
-.LCB0_30:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_32
-b	.LCB0_31
-.LCB0_31:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_33
-b	.LCB0_32
-.LCB0_32:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_34
-b	.LCB0_33
-.LCB0_33:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_35
-b	.LCB0_34
-.LCB0_34:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_36
-b	.LCB0_35
-.LCB0_35:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_37
-b	.LCB0_36
-.LCB0_36:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_38
-b	.LCB0_37
-.LCB0_37:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_39
-b	.LCB0_38
-.LCB0_38:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_40
-b	.LCB0_39
-.LCB0_39:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_41
-b	.LCB0_40
-.LCB0_40:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_42
-b	.LCB0_41
-.LCB0_41:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_43
-b	.LCB0_42
-.LCB0_42:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_44
-b	.LCB0_43
-.LCB0_43:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_45
-b	.LCB0_44
-.LCB0_44:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_46
-b	.LCB0_45
-.LCB0_45:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_47
-b	.LCB0_46
-.LCB0_46:
-ldr	d0, [sp, 24]
-fcmpe	d0, 0.0
-bcc	.LCB0_48
-b	.LCB0_47
-.LCB0_47:
-ldr	d0, [sp, 24]
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__literal4,4byte_literals
+.p2align	2                               ## -- Begin function func0
+LCPI0_0:
+	.long	0x7f7fffff                      ## float 3.40282347E+38
+.section	__TEXT,__literal16,16byte_literals
+.p2align	4
+LCPI0_1:
+	.quad	0x7fffffffffffffff              ## double NaN
+	.quad	0x7fffffffffffffff              ## double NaN
+.section	__TEXT,__text,regular,pure_instructions
+.globl	_func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	movq	%rdi, -8(%rbp)
+	movl	%esi, -12(%rbp)
+	movq	%rdx, -24(%rbp)
+	movss	LCPI0_0(%rip), %xmm0            ## xmm0 = mem[0],zero,zero,zero
+	movss	%xmm0, -28(%rbp)
+	movq	-8(%rbp), %rax
+	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, (%rax)
+	movq	-8(%rbp), %rax
+	movss	4(%rax), %xmm0                  ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, 4(%rax)
+	movl	$0, -32(%rbp)
+LBB0_1:                                 ## =>This Loop Header: Depth=1
+                                        ##     Child Loop BB0_3 Depth 2
+	movl	-32(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jge	LBB0_10
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-32(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -36(%rbp)
+LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	movl	-36(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jge	LBB0_8
+## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
+	movq	-8(%rbp), %rax
+	movslq	-32(%rbp), %rcx
+	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
+	movq	-8(%rbp), %rax
+	movslq	-36(%rbp), %rcx
+	subss	(%rax,%rcx,4), %xmm0
+	cvtss2sd	%xmm0, %xmm0
+	movaps	LCPI0_1(%rip), %xmm1            ## xmm1 = [NaN,NaN]
+	pand	%xmm1, %xmm0
+	cvtsd2ss	%xmm0, %xmm0
+	movss	%xmm0, -40(%rbp)
+	movss	-40(%rbp), %xmm1                ## xmm1 = mem[0],zero,zero,zero
+	movss	-28(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
+	ucomiss	%xmm1, %xmm0
+	jbe	LBB0_6
+## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=2
+	movss	-40(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
+	movss	%xmm0, -28(%rbp)
+	movq	-8(%rbp), %rax
+	movslq	-32(%rbp), %rcx
+	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, (%rax)
+	movq	-8(%rbp), %rax
+	movslq	-36(%rbp), %rcx
+	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, 4(%rax)
+LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=2
+	jmp	LBB0_7
+LBB0_7:                                 ##   in Loop: Header=BB0_3 Depth=2
+	movl	-36(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -36(%rbp)
+	jmp	LBB0_3
+LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_9
+LBB0_9:                                 ##   in Loop: Header=BB0_1 Depth=1
+	movl	-32(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -32(%rbp)
+	jmp	LBB0_1
+LBB0_10:
+	movq	-24(%rbp), %rax
+	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	ucomiss	4(%rax), %xmm0
+	jbe	LBB0_12
+## %bb.11:
+	movq	-24(%rbp), %rax
+	movss	(%rax), %xmm0                   ## xmm0 = mem[0],zero,zero,zero
+	movss	%xmm0, -44(%rbp)
+	movq	-24(%rbp), %rax
+	movss	4(%rax), %xmm0                  ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, (%rax)
+	movss	-44(%rbp), %xmm0                ## xmm0 = mem[0],zero,zero,zero
+	movq	-24(%rbp), %rax
+	movss	%xmm0, 4(%rax)
+LBB0_12:
+	popq	%rbp
+	retq
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols

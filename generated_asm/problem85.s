@@ -1,241 +1,150 @@
-b	_LoopHeader0
-_loopHeader0:
-b	_LoopBody0
-_body0:
-ldr	w1, [sp, 20]
-mov	w0, w1
-lsl	w0, w0, 2
-bl	_malloc
-str	d0, [sp, 40]
-ldr	d1, [sp, 40]
-ldrsw	x0, [sp, 40]
-add	x0, x0, d1
-lsl	x0, x0, 2
-bl	_calloc
-str	d0, [sp, 48]
-ldr	d1, [sp, 40]
-ldrsw	x0, [sp, 40]
-add	x0, x0, d1
-lsl	x0, x0, 2
-bl	_calloc
-str	d0, [sp, 56]
-str	wzr, [sp, 60]
-str	wzr, [sp, 64]
-str	wzr, [sp, 52]
-str	wzr, [sp, 56]
-b	_LoopHeader0
-_LoopHeader0:
-b	_LoopBody0
-_LoopBody0:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd0
-b	_LoopBody0
-_LoopEnd0:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader0
-_LoopHeader1:
-b	_LoopBody1
-_LoopBody1:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd1
-b	_LoopBody1
-_LoopEnd1:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader1
-_LoopHeader2:
-b	_LoopBody2
-_LoopBody2:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd2
-b	_LoopBody2
-_LoopEnd2:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader2
-_LoopHeader3:
-b	_LoopBody3
-_LoopBody3:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd3
-b	_LoopBody3
-_LoopEnd3:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader3
-_LoopHeader4:
-b	_LoopBody4
-_LoopBody4:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd4
-b	_LoopBody4
-_LoopEnd4:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader4
-_LoopHeader5:
-b	_LoopBody5
-_LoopBody5:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd5
-b	_LoopBody5
-_LoopEnd5:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader5
-_LoopHeader6:
-b	_LoopBody6
-_LoopBody6:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd6
-b	_LoopBody6
-_LoopEnd6:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader6
-_LoopHeader7:
-b	_LoopBody7
-_LoopBody7:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd7
-b	_LoopBody7
-_LoopEnd7:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader7
-_LoopHeader8:
-b	_LoopBody8
-_LoopBody8:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd8
-b	_LoopBody8
-_LoopEnd8:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader8
-_LoopHeader9:
-b	_LoopBody9
-_LoopBody9:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd9
-b	_LoopBody9
-_LoopEnd9:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader9
-_LoopHeader10:
-b	_LoopBody10
-_LoopBody10:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd10
-b	_LoopBody10
-_LoopEnd10:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader10
-_LoopHeader11:
-b	_LoopBody11
-_LoopBody11:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd11
-b	_LoopBody11
-_LoopEnd11:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader11
-_LoopHeader12:
-b	_LoopBody12
-_LoopBody12:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd12
-b	_LoopBody12
-_LoopEnd12:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader12
-_LoopHeader13:
-b	_LoopBody13
-_LoopBody13:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd13
-b	_LoopBody13
-_LoopEnd13:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader13
-_LoopHeader14:
-b	_LoopBody14
-_LoopBody14:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd14
-b	_LoopBody14
-_LoopEnd14:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader14
-_LoopHeader15:
-b	_LoopBody15
-_LoopBody15:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd15
-b	_LoopBody15
-_LoopEnd15:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
-b	_LoopHeader15
-_LoopHeader16:
-b	_LoopBody16
-_LoopBody16:
-ldr	w1, [sp, 20]
-cmp	w1, 0
-beq	_LoopEnd16
-b	_LoopBody16
-_LoopEnd16:
-mov	w1, 0
-str	w1, [sp, 60]
-str	w1, [sp, 64]
-b	_LoopHeader16
-_LoopHeader17:
-b	_LoopBody17
-_LoopBody17:
-ldr	w1, [sp, 20]
-cmp	w1, 1
-beq	_LoopEnd17
-b	_LoopBody17
-_LoopEnd17:
-mov	w1, 0
-str	w1, [sp, 56]
-str	w1, [sp, 60]
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$112, %rsp
+	movq	%rdi, -8(%rbp)
+	movl	%esi, -12(%rbp)
+	movq	%rdx, -24(%rbp)
+	movslq	-12(%rbp), %rdi
+	shlq	$2, %rdi
+	callq	_malloc
+	movq	%rax, -32(%rbp)
+	movslq	-12(%rbp), %rdi
+	movl	$4, %esi
+	callq	_calloc
+	movq	%rax, -40(%rbp)
+	movslq	-12(%rbp), %rdi
+	movl	$4, %esi
+	callq	_calloc
+	movq	%rax, -48(%rbp)
+	movl	$0, -52(%rbp)
+	movl	$0, -56(%rbp)
+	movl	$0, -60(%rbp)
+	movl	$0, -64(%rbp)
+LBB0_1:                                 ## =>This Loop Header: Depth=1
+                                        ##     Child Loop BB0_3 Depth 2
+                                        ##     Child Loop BB0_11 Depth 2
+	movl	-64(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jge	LBB0_21
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-8(%rbp), %rax
+	movslq	-64(%rbp), %rcx
+	movl	(%rax,%rcx,4), %eax
+	movl	%eax, -68(%rbp)
+	movl	$0, -72(%rbp)
+	movl	$0, -76(%rbp)
+LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	movl	-76(%rbp), %eax
+	cmpl	-56(%rbp), %eax
+	jge	LBB0_8
+## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
+	movq	-48(%rbp), %rax
+	movslq	-76(%rbp), %rcx
+	movl	(%rax,%rcx,4), %eax
+	cmpl	-68(%rbp), %eax
+	jne	LBB0_6
+## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	$1, -72(%rbp)
+	jmp	LBB0_8
+LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=2
+	jmp	LBB0_7
+LBB0_7:                                 ##   in Loop: Header=BB0_3 Depth=2
+	movl	-76(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -76(%rbp)
+	jmp	LBB0_3
+LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
+	cmpl	$0, -72(%rbp)
+	je	LBB0_10
+## %bb.9:                               ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_20
+LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
+	movl	$0, -80(%rbp)
+	movl	$0, -84(%rbp)
+LBB0_11:                                ##   Parent Loop BB0_1 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	movl	-84(%rbp), %eax
+	cmpl	-52(%rbp), %eax
+	jge	LBB0_16
+## %bb.12:                              ##   in Loop: Header=BB0_11 Depth=2
+	movq	-40(%rbp), %rax
+	movslq	-84(%rbp), %rcx
+	movl	(%rax,%rcx,4), %eax
+	cmpl	-68(%rbp), %eax
+	jne	LBB0_14
+## %bb.13:                              ##   in Loop: Header=BB0_1 Depth=1
+	movl	$1, -80(%rbp)
+	jmp	LBB0_16
+LBB0_14:                                ##   in Loop: Header=BB0_11 Depth=2
+	jmp	LBB0_15
+LBB0_15:                                ##   in Loop: Header=BB0_11 Depth=2
+	movl	-84(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -84(%rbp)
+	jmp	LBB0_11
+LBB0_16:                                ##   in Loop: Header=BB0_1 Depth=1
+	cmpl	$0, -80(%rbp)
+	je	LBB0_18
+## %bb.17:                              ##   in Loop: Header=BB0_1 Depth=1
+	movl	-68(%rbp), %edx
+	movq	-48(%rbp), %rax
+	movl	-56(%rbp), %ecx
+	movl	%ecx, %esi
+	addl	$1, %esi
+	movl	%esi, -56(%rbp)
+	movslq	%ecx, %rcx
+	movl	%edx, (%rax,%rcx,4)
+	jmp	LBB0_19
+LBB0_18:                                ##   in Loop: Header=BB0_1 Depth=1
+	movl	-68(%rbp), %edx
+	movq	-40(%rbp), %rax
+	movl	-52(%rbp), %ecx
+	movl	%ecx, %esi
+	addl	$1, %esi
+	movl	%esi, -52(%rbp)
+	movslq	%ecx, %rcx
+	movl	%edx, (%rax,%rcx,4)
+LBB0_19:                                ##   in Loop: Header=BB0_1 Depth=1
+	jmp	LBB0_20
+LBB0_20:                                ##   in Loop: Header=BB0_1 Depth=1
+	movl	-64(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -64(%rbp)
+	jmp	LBB0_1
+LBB0_21:
+	movl	$0, -88(%rbp)
+LBB0_22:                                ## =>This Loop Header: Depth=1
+                                        ##     Child Loop BB0_24 Depth 2
+	movl	-88(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jge	LBB0_33
+## %bb.23:                              ##   in Loop: Header=BB0_22 Depth=1
+	movq	-8(%rbp), %rax
+	movslq	-88(%rbp), %rcx
+	movl	(%rax,%rcx,4), %eax
+	movl	%eax, -92(%rbp)
+	movl	$0, -96(%rbp)
+	movl	$0, -100(%rbp)
+LBB0_24:                                ##   Parent Loop BB0_22 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	movl	-100(%rbp), %eax
+	cmpl	-56(%rbp), %eax
+	jge	LBB0_29
+## %bb.25:                              ##   in Loop: Header=BB0_24 Depth=2
+	movq	-48(%rbp), %rax
+	movslq	-100(%rbp), %rcx
+	movl	(%rax,%rcx,4), %eax
+	cmpl	-92(%rbp), %eax
+	jne	LBB0_27
+## %bb.26:                              ##   in Loop: Header=

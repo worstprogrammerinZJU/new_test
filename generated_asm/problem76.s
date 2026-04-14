@@ -1,23 +1,15 @@
-b	_LBB0_3
-_LBB0_3:
-ldr	w1, [sp, 24]
-ldr	x0, [sp, 40]
-sub	w0, w1, w0
-cmp	w0, 0
-beq	_LBB0_8
-b	_LBB0_3
-_LBB0_8:
-ldr	w0, [sp, 28]
-add	w0, w0, 1
+ldp	x29, x30, [sp], 64
+str	x0, [sp, 16]
+str	x1, [sp, 24]
 str	w0, [sp, 28]
-b	_LBB0_3
-_LBB0_6:
-ldr	w0, [sp, 32]
-add	w0, w0, 1
+ldr	x0, [sp, 16]
+add	w0, w0, :lo12:x1
 str	w0, [sp, 32]
-b	_LBB0_7
-_LBB0_7:
-ldr	w0, [sp, 40]
-add	w0, w0, 1
-str	w0, [sp, 40]
-b	_LBB0_3
+str	x0, [sp, 40]
+cmp	w0, :lo12:x0
+bl	strncmp
+bl_strlen
+bl_strlen
+bl_strlen
+bl_strlen
+stp	x29, x30, [sp], 64

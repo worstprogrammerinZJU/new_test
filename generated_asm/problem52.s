@@ -1,193 +1,156 @@
-adrp	x0, ___stack_chk_guard@GOTPCREL
-add	x0, x0, :lo12:___stack_chk_guard@GOTPCREL
-ldr	x0, [x0]
-ldr	x0, [x0]
-ldr	x1, [sp, 40]
-mov	w1, 0
-str	w1, [sp, 300]
-str	x1, [sp, 304]
-mov	x0, sp
-add	sp, sp, 288
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-cmp	w0, 47
-beq	L1
-ldr	x0, [sp, 300]
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 47
-beq	L2
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L1
-L2:
-add	x0, x0, 1
-str	w0, [sp, 300]
-add	x0, x0, 1
-str	w0, [sp, 304]
-b	L1
-L1:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 47
-beq	L3
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L3
-L3:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L4
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L4
-L4:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L5
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L5
-L5:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L6
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L6
-L6:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L7
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L7
-L7:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L8
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L8
-L8:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L9
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L9
-L9:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L10
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L10
-L10:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L11
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L11
-L11:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L12
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-sub	x0, x0, #1
-str	w0, [sp, 300]
-b	L12
-L12:
-ldr	x1, [sp, 304]
-sub	x0, x1, #1
-ldrsw	x1, [sp, 300]
-and	x1, x1, 255
-ldrsw	x0, [sp, 304]
-cmp	x1, 0
-beq	L13
-ldr	x0, [sp, 300]
-ldrsw	x1, [x0, w1
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
+.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$288, %rsp                      ## imm = 0x120
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	movq	%rax, -8(%rbp)
+	movq	%rdi, -240(%rbp)
+	movq	%rsi, -248(%rbp)
+	movl	$0, -268(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movq	-240(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$47, %eax
+	je	LBB0_4
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-240(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movb	(%rax,%rcx), %cl
+	movslq	-268(%rbp), %rax
+	movb	%cl, -112(%rbp,%rax)
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+	jmp	LBB0_1
+LBB0_4:
+	movslq	-268(%rbp), %rax
+	movb	$0, -112(%rbp,%rax)
+	leaq	-112(%rbp), %rdi
+	callq	_atoi
+	movl	%eax, -252(%rbp)
+	movl	$0, -272(%rbp)
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+LBB0_5:                                 ## =>This Inner Loop Header: Depth=1
+	movq	-240(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$0, %eax
+	je	LBB0_8
+## %bb.6:                               ##   in Loop: Header=BB0_5 Depth=1
+	movq	-240(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movb	(%rax,%rcx), %cl
+	movslq	-272(%rbp), %rax
+	movb	%cl, -224(%rbp,%rax)
+## %bb.7:                               ##   in Loop: Header=BB0_5 Depth=1
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+	movl	-272(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -272(%rbp)
+	jmp	LBB0_5
+LBB0_8:
+	movslq	-272(%rbp), %rax
+	movb	$0, -224(%rbp,%rax)
+	leaq	-224(%rbp), %rdi
+	callq	_atoi
+	movl	%eax, -256(%rbp)
+	movl	$0, -268(%rbp)
+LBB0_9:                                 ## =>This Inner Loop Header: Depth=1
+	movq	-248(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$47, %eax
+	je	LBB0_12
+## %bb.10:                              ##   in Loop: Header=BB0_9 Depth=1
+	movq	-248(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movb	(%rax,%rcx), %cl
+	movslq	-268(%rbp), %rax
+	movb	%cl, -112(%rbp,%rax)
+## %bb.11:                              ##   in Loop: Header=BB0_9 Depth=1
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+	jmp	LBB0_9
+LBB0_12:
+	movslq	-268(%rbp), %rax
+	movb	$0, -112(%rbp,%rax)
+	leaq	-112(%rbp), %rdi
+	callq	_atoi
+	movl	%eax, -260(%rbp)
+	movl	$0, -272(%rbp)
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+LBB0_13:                                ## =>This Inner Loop Header: Depth=1
+	movq	-248(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$0, %eax
+	je	LBB0_16
+## %bb.14:                              ##   in Loop: Header=BB0_13 Depth=1
+	movq	-248(%rbp), %rax
+	movslq	-268(%rbp), %rcx
+	movb	(%rax,%rcx), %cl
+	movslq	-272(%rbp), %rax
+	movb	%cl, -224(%rbp,%rax)
+## %bb.15:                              ##   in Loop: Header=BB0_13 Depth=1
+	movl	-268(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -268(%rbp)
+	movl	-272(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -272(%rbp)
+	jmp	LBB0_13
+LBB0_16:
+	movslq	-272(%rbp), %rax
+	movb	$0, -224(%rbp,%rax)
+	leaq	-224(%rbp), %rdi
+	callq	_atoi
+	movl	%eax, -264(%rbp)
+	movl	-252(%rbp), %eax
+	imull	-260(%rbp), %eax
+	movl	-256(%rbp), %ecx
+	imull	-264(%rbp), %ecx
+	cltd
+	idivl	%ecx
+	cmpl	$0, %edx
+	jne	LBB0_18
+## %bb.17:
+	movl	$1, -228(%rbp)
+	jmp	LBB0_19
+LBB0_18:
+	movl	$0, -228(%rbp)
+LBB0_19:
+	movl	-228(%rbp), %eax
+	movl	%eax, -276(%rbp)                ## 4-byte Spill
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	movq	-8(%rbp), %rcx
+	cmpq	%rcx, %rax
+	jne	LBB0_21
+## %bb.20:
+	movl	-276(%rbp), %eax                ## 4-byte Reload
+	addq	$288, %rsp                      ## imm = 0x120
+	popq	%rbp
+	retq
+LBB0_21:
+	callq	___stack_chk_fail
+	ud2
+	.cfi_end

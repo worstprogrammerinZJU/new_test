@@ -1,250 +1,819 @@
-b	_LoopHeader
-_loopheader:
-ldr	w1, [sp, 20]
-ldr	x0, [sp, 40]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 24]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 24]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bge	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-blt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-ble	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-beq	_EndLoop
-ldr	w1, [sp, 20]
-cmp	x0, w1
-bgt	_EndLoop
-ldr	w
+ldp	x29, x30, [sp], 48
+add	sp, sp, 16
+str	x0, [sp, 24]
+str	w1, [sp, 20]
+str	x2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+cmp	w0, w1
+blz	_loop_body
+ldr	x0, [sp, 24]
+str	w0, [sp, 16]
+str	w1, [sp, 20]
+str	w2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+cmp	w0, 0
+bne	_loop_body
+ldr	x0, [sp, 24]
+str	w0, [sp, 16]
+str	w1, [sp, 20]
+str	w2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+cmp	w0, 0
+blz	_loop_body
+ldr	x0, [sp, 24]
+str	w0, [sp, 16]
+str	w1, [sp, 20]
+str	w2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+cmp	w0, 0
+blz	_loop_body
+ldr	x0, [sp, 24]
+str	w0, [sp, 16]
+str	w1, [sp, 20]
+str	w2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+cmp	w0, 0
+blz	_loop_body
+ldr	x0, [sp, 24]
+str	w0, [sp, 16]
+str	w1, [sp, 20]
+str	w2, [sp, 16]
+str	w3, [sp, 12]
+str	w4, [sp, 8]
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
