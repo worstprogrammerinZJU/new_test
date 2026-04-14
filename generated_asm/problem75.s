@@ -1,175 +1,236 @@
-.func0
-ldr	w0, [sp, 40]
+b	_LoopHeader
+_loopheader:
+b	_LoopBody
+_LoopBody:
+ldr	w1, [sp, 20]
+cmp	w1, 3
+beq	_EndLoop
+cmp	w1, 2
+bgt	_EndLoop
+b	_LoopBody
+_EndLoop:
+mov	w1, w0
 add	w0, w0, 1
-ldr	x0, [sp, 48]
-ldr	x1, [sp, 48]
-ldrsw	x0, [sp, 48]
-ldrsw	x1, [sp, 48]
-sub	x0, x1, x0
-ldr	x0, [sp, 48]
-mov	w1, 3
-ldr	x0, [sp, 48]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
+ldrsw	x0, [sp, 20]
+movk	x0, #0x00000001
+lsl	x0, x0, 2
+bl	 realloc
+str	x0, [sp, 24]
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 strcmp
+cmp	x0, 0
+bne	_LoopBody
+b	_EndLoop
+_EndLoop:
+mov	w1, w0
+add	w0, w0, 1
+ldrsw	x0, [sp, 20]
+movk	x0, #0x00000001
+lsl	x0, x0, 2
+bl	 realloc
+str	x0, [sp, 24]
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 strcpy_chk
+mov	w1, w0
+adrp	x0, .str
+add	x0, x0, :lo12:.str
 ldr	x1, [x0]
-ldr	x0, [sp, 48]
-ldrz	x0, [x0]
-add	x0, x0, :lo12:_strlen
-ldr	x1, [sp, 48]
-add	x0, x0, w1
-ldr	x0, [sp, 48]
-adrp	x0, _malloc
-add	x0, x0, :lo12:_malloc
+bl	 strcat_chk
+mov	w1, w0
+adrp	x0, .str.1
+add	x0, x0, :lo12:.str.1
 ldr	x1, [x0]
-adrp	x0, _strcpy_chk
-add	x0, x0, :lo12:_strcpy_chk
-ldr	x0, [sp, 48]
+bl	 strcmp
+cmp	x0, 0
+bne	_LoopBody
+b	_EndLoop
+_EndLoop:
+mov	w1, w0
+add	w0, w0, 1
+ldrsw	x0, [sp, 20]
+movk	x0, #0x00000001
+lsl	x0, x0, 2
+bl	 realloc
+str	x0, [sp, 24]
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 __strcat_chk
+mov	w1, w0
+adrp	x0, .str.2
+add	x0, x0, :lo12:.str.2
 ldr	x1, [x0]
-ldr	x0, [sp, 48]
-adrp	x0, L_.str
-add	x0, x0, :lo12:L_.str
+bl	 __strcpy_chk
+mov	w1, w0
+adrp	x0, .str.3
+add	x0, x0, :lo12:.str.3
 ldr	x1, [x0]
-ldrsw	x0, [sp, 48]
-sub	x0, x1, x0
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.1
-add	x0, x0, :lo12:L_.str.1
-ldr	x0, [x0]
-adrp	x0, _strcmp
-add	x0, x0, :lo12:_strcmp
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, strcpy_chk
-add	x0, x0, :lo12:strcpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.2
-add	x0, x0, :lo12:L_.str.2
-ldr	x0, [x0]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, strcpy_chk
-add	x0, x0, :lo12:strcpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.3
-add	x0, x0, :lo12:L_.str.3
-ldr	x0, [x0]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, strcpy_chk
-add	x0, x0, :lo12:strcpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.4
-add	x0, x0, :lo12:L_.str.4
-ldr	x0, [x0]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, strcpy_chk
-add	x0, x0, :lo12:strcpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.5
-add	x0, x0, :lo12:L_.str.5
-ldr	x0, [x0]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, strcpy_chk
-add	x0, x0, :lo12:strcpy_chk
-ldr	x0, [sp, 48]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, __const_char_table
-add	x0, x0, :lo12:__const_char_table
-ldr	x1, [x0]
-adrp	x0, L_.str.6
-add	x0, x0, :lo12:L_.str.6
-ldr	x0, [x0]
-adrp	x0, _strcat_chk
-add	x0, x0, :lo12:_strcat_chk
-ldr	x0, [sp, 48]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x1, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [sp, 48]
-adrp	x0, _strncpy_chk
-add	x0, x0, :lo12:_strncpy_chk
-ldr	x0, [sp
+bl	 strcmp
+cmp	x0, 0
+bne	_LoopBody
+b	_EndLoop
+_EndLoop:
+mov	w1, w0
+add	w0, w0, 1
+ldrsw	x0, [sp, 20]
+movk	x0, #0x00000001
+lsl	x0, x0, 2
+bl	 realloc
+str	x0, [sp, 24]
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0, w0, w1
+mov	w1, w0
+ldr	x0, [sp, 24]
+bl	 realloc
+mov	w1, w0
+ldr	w0, [sp, 24]
+add	w0,

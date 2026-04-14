@@ -1,180 +1,49 @@
-ldr	w0, [sp, 4]
-ldr	x0, [sp, 24]
-ldr	x1, [sp, 20]
-mov	w1, 0
-loop_loop:
-add	w1, w1, #1
-str	w1, [sp, 20]
-ldr	x0, [sp, 24]
-ldrsw	x1, [sp, 20]
-ldrb	x2, [x0, x1*4]
-ldr	x0, [sp, 24]
-sub	x0, x0, :lo12:x1
-ldr	x1, [sp, 20]
-adrp	x0, _abs
-add	x0, x0, :lo12:_abs
-ldr	x2, [x0, x1]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w0, w1
-str	w0, [sp, 28]
-cmp	w0, 0
-jle	loop_inner
+b	_LBB0_1
+_LBB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 10
+beq	_LBB0_10
+ldr	w1, [sp, 20]
+sub	w0, w1, #10
+fdiv	d0, d0, w0
+add	w1, sp, 20
+ldr	w1, [sp, 20]
+sub	w0, w1, #10
+fdiv	d0, d0, w0
+str	d0, [sp, 20]
+mov	w1, w0
 ldr	w0, [sp, 24]
-add	w0, w0, #1
+fdiv	w0, w0, w1
 str	w0, [sp, 24]
-ldr	w0, [sp, 28]
+b	_LBB0_5
+_LBB0_5:
 ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
+ldr	w0, [sp, 20]
+mul	w0, w1, w0
+fdiv	d0, d0, w0
+str	d0, [sp, 20]
+cmp	w1, 1
+blt	_LBB0_7
+_LBB0_7:
+ldr	w1, [sp, 20]
+ldr	w0, [sp, 24]
 sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
 str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
+cmp	w1, 0
+ble	_LBB0_9
+_LBB0_9:
+ldr	w1, [sp, 20]
+add	w0, w1, #1
+str	w0, [sp, 20]
+b	_LBB0_10
+_LBB0_10:
+b	_LBB0_11
+_LBB0_11:
+ldr	w0, [sp, 20]
 add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w1, w0, w1
-str	w1, [sp, 24]
-ldr	w0, [sp, 28]
-ldr	w1, [sp, 24]
-sub	w0, w1, w0
-str	w0, [sp, 28]
-ldr	w0, [sp, 24]
-add	w0, w0, #1
-str	w0, [sp, 24]
-ldr	w0, [sp, 28]
+str	w0, [sp, 20]
+b	_LBB0_1
+_LBB0_1:
+ldr	w0, [sp, 20]
+add	sp, sp, 32
+ret

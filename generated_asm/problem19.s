@@ -1,198 +1,180 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-adrp	x0, w1
-add	x0, x0, :lo12:w1
-ldr	w0, [x0]
-adrp	x0, w0
-add	x0, x0, :lo12:w0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
-adrp	x0, x0
-add	x0, x0, :lo12:x0
-ldr	x0, [x0]
+b	_LoopHeader
+_loopheader:
+ldr	w0, [sp, 20]
+cmp	w0, 1
+beq	_EndLoop
+add	w0, w0, 1
+str	w0, [sp, 20]
+b	_LoopHeader
+_EndLoop:
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fcmpe	x1, x0
+bgt	_OutOfOrder
+blt	_OutOfOrder
+ldr	x1, [sp, 40]
+fcmpe	x0, x1
+bgt	_OutOfOrder
+blt	_OutOfOrder
+mov	x1, x0
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 32]
+ldr	x1, [sp, 32]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]
+fmul	x0, x1, x0
+str	x0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	x0, [sp, 40]

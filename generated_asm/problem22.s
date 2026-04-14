@@ -1,182 +1,205 @@
-ldr	w0, [sp, 40]
-ldr	w1, [sp, 48]
-mov	w2, w0
-add	w2, w2, w1
-ldr	x0, [sp, 40]
-adrp	x0, _malloc_addr
-add	x0, x0, :lo12:_malloc_addr
-ldr	x1, [x0]
-ldrsw	x0, [sp, 40]
-sub	x0, x1, x0
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 48]
-add	x0, x0, x1
-ldr
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w19, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.str
+add	x0, x0, :lo12:L_.str
+ldr	x0, [x0]
+mov	w1, w0
+adrp	x0, L_.

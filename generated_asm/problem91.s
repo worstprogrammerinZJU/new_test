@@ -1,206 +1,30 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-sub	w1, w0, #2
-cmp	w1, w0
-bge	LBB0_2
-ldr	w0, [sp, 4]
-mov	w1, 0
-str	w1, [sp, 1]
-jmp	LBB0_9
+b	LBB0_2
 LBB0_2:
-adrp	x0, 2
-add	x0, x0, :lo12:2
-ldr	x0, [x0]
-adrp	x0, 24
-add	x0, x0, :lo12:24
-ldr	x1, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x1
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x1
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-sub	x0, x0, x2
-sxtw	x1, x1
-smull	x2, x1, x0
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x
+ldr	x0, [sp, 40]
+cmp	x0, 2
+beq	LBB0_3
+b	LBB0_8
+LBB0_3:
+ldr	x0, [sp, 40]
+sxtw	x0, w0
+fcmpe	x0, x0, 0.0
+fdiv	x0, x0, 2.0
+fcmpe	x0, x0, 0.0
+fcmp	d0, 0.0
+bne	LBB0_6
+b	END_LBB0_3
+LBB0_6:
+ldr	w0, [sp, 40]
+add	w0, w0, 1
+strh	w0, [sp, 40]
+b	LBB0_3
+END_LBB0_3:
+mov	w1, 1
+ldr	w0, [sp, 40]
+and	w0, w0, w1
+and	w0, w0, 1
+and	w0, w0, 255
+blt	w0, w0, 0
+mov	w1, w0
+strb	w1, [sp, 39]
+b	END_FUNC0

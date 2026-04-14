@@ -1,181 +1,208 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+b	_LBB0_1
+_LBB0_1:
+ldr	w1, [sp, 20]
+mov	w0, w1
+lsl	w0, w0, 2
+ldr	x0, [sp, 40]
+fadd	w0, w0, 1
+str	w0, [sp, 40]
+b	_LBB0_1
+_LBB0_2:
+ldr	w1, [sp, 20]
+mov	w0, 0
+fsub	w0, w1, w0
+str	w0, [sp, 24]
+b	_LBB0_1
+_LBB0_3:
+ldr	w1, [sp, 20]
+mov	w0, 0
+fadd	w0, w1, w0
+str	w0, [sp, 28]
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_6
+_LBB0_4:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+bne	_LBB0_6
+_LBB0_5:
+mov	w1, 1
+str	w1, [sp, 24]
+b	_LBB0_6
+_LBB0_6:
+b	_LBB0_7
+_LBB0_7:
+ldr	w0, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 28]
+b	_LBB0_3
+_LBB0_8:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_10
+_LBB0_9:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+bne	_LBB0_10
+_LBB0_10:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+ble	_LBB0_11
+_LBB0_11:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 20]
+b	_LBB0_1
+_LBB0_12:
+mov	w0, 0
+str	w0, [sp, 20]
+_LBB0_13:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 24]
+b	_LBB0_13
+_LBB0_14:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 28]
+b	_LBB0_13
+_LBB0_15:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_17
+_LBB0_16:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+ble	_LBB0_17
+_LBB0_17:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+bne	_LBB0_17
+_LBB0_18:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_19
+_LBB0_19:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 20]
+b	_LBB0_15
+_LBB0_20:
+ldr	w1, [sp, 24]
+add	w0, w1, 1
+str	w0, [sp, 24]
+b	_LBB0_20
+_LBB0_21:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 20]
+b	_LBB0_13
+_LBB0_22:
+ldr	w1, [sp, 24]
+sub	w0, w1, #1
+ldr	x0, [sp, 40]
 ldr	w0, [x0]
-adrp	x0, _malloc
-add	x0, x0, :lo12:_malloc
-ldr	x0, [x0]
-adrp	x0, __malloc
-add	x0, x0, :lo12:__malloc
-ldr	x0, [x0]
-adrp	x0, malloc
-add	x0, x0, :lo12:malloc
-ldr	x0, [x0]
-adrp	x0, _free
-add	x0, x0, :lo12:_free
-ldr	x0, [x0]
-adrp	x0, _calloc
-add	x0, x0, :lo12:_calloc
-ldr	x0, [x0]
-adrp	x0, calloc
-add	x0, x0, :lo12:calloc
-ldr	x0, [x0]
-adrp	x0, _realloc
-add	x0, x0, :lo12:_realloc
-ldr	x0, [x0]
-adrp	x0, realloc
-add	x0, x0, :lo12:realloc
-ldr	x0, [x0]
-adrp	x0, _freez
-add	x0, x0, :lo12:_freez
-ldr	x0, [x0]
-adrp	x0, freez
-add	x0, x0, :lo12:freez
-ldr	x0, [x0]
-adrp	x0, _memalign
-add	x0, x0, :lo12:_memalign
-ldr	x0, [x0]
-adrp	x0, memalign
-add	x0, x0, :lo12:memalign
-ldr	x0, [x0]
-adrp	x0, _freemem
-add	x0, x0, :lo12:_freemem
-ldr	x0, [x0]
-adrp	x0, _munmap
-add	x0, x0, :lo12:_munmap
-ldr	x0, [x0]
-adrp	x0, _munmapz
-add	x0, x0, :lo12:_munmapz
-ldr	x0, [x0]
-adrp	x0, _sbrk
-add	x0, x0, :lo12:_sbrk
-ldr	x0, [x0]
-adrp	x0, sbrk
-add	x0, x0, :lo12:sbrk
-ldr	x0, [x0]
-adrp	x0, _brk
-add	x0, x0, :lo12:_brk
-ldr	x0, [x0]
-adrp	x0, _sbrkptr
-add	x0, x0, :lo12:_sbrkptr
-ldr	x0, [x0]
-adrp	x0, brkptr
-add	x0, x0, :lo12:brkptr
-ldr	x0, [x0]
-adrp	x0, _stack_chk_guard
-add	x0, x0, :lo12:_stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, _stack_chk_maybe_abort
-add	x0, x0, :lo12:_stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, _stack_chk_fail
-add	x0, x0, :lo12:_stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, _stack_chk
-add	x0, x0, :lo12:_stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, _stack_chk_guard
-add	x0, x0, :lo12:_stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, _stack_chk_maybe_abort
-add	x0, x0, :lo12:_stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk_fail
-add	x0, x0, :lo12:stack_chk_fail
-ldr	x0, [x0]
-adrp	x0, stack_chk
-add	x0, x0, :lo12:stack_chk
-ldr	x0, [x0]
-adrp	x0, stack_chk_guard
-add	x0, x0, :lo12:stack_chk_guard
-ldr	x0, [x0]
-adrp	x0, stack_chk_maybe_abort
-add	x0, x0, :lo12:stack_chk_maybe_abort
-ldr	x0, [x0]
-adrp	x0, stack_chk
+mov	w1, w0
+mov	w0, w1
+str	w0, [sp, 24]
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_17
+_LBB0_16:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+ble	_LBB0_17
+_LBB0_17:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+bne	_LBB0_17
+_LBB0_18:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_19
+_LBB0_19:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 20]
+b	_LBB0_15
+_LBB0_20:
+ldr	w1, [sp, 24]
+add	w0, w1, 1
+str	w0, [sp, 24]
+b	_LBB0_20
+_LBB0_21:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
+str	w0, [sp, 20]
+b	_LBB0_13
+_LBB0_22:
+ldr	w1, [sp, 24]
+sub	w0, w1, #1
+ldr	x0, [sp, 40]
+ldr	w0, [x0]
+mov	w1, w0
+mov	w0, w1
+str	w0, [sp, 24]
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]
+fcmn	d0, d1
+fcmpe	d0, 0
+cmp	d1, 0
+beq	_LBB0_17
+_LBB0_16:
+ldr	x0, [sp, 40]
+ldr	d1, [sp, 28]
+ldr	d0, [x0, 4]

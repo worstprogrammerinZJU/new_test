@@ -1,189 +1,200 @@
-ldr	w0, [sp, 64]
-ldr	x0, [sp, 12]
-ldr	x1, [sp, 24]
-mov	w1, 3
-lddiv	w0, w1
-add	w0, w0, 1
-lsl	w0, w0, 2
-adrp	x0, _malloc
-add	x0, x0, :lo12:_malloc
-ldr	x0, [x0]
-str	wzr, [sp, 40]
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+mov	w3, w1
+mov	w2, 3
+ldrt	x0, [sp, 20]
+fdiv	w0, w2, w0
+sxtw	x0, w0
+bl	_malloc
+str	x0, [sp, 40]
 str	wzr, [sp, 44]
-str	wzr, [sp, 36]
-lsl	x0, x0, 3
-sub	x1, sp, 36
-cmp	w0, x1
-jge	LBB0_4
-ldr	x0, [sp, 8]
-ldrsw	x1, [sp, 36]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-add	x0, x0, x1
-str	w1, [x0, 4]
-ldr	w0, [sp, 44]
-add	w0, w0, 1
+str	wzr, [sp, 42]
+b	_LoopBody_BB0_1
+_loopbody_BB0_1:
+ldr	w1, [sp, 20]
+add	w0, w1, 1
 str	w0, [sp, 44]
-ldr	w0, [sp, 36]
-add	w0, w0, 1
-str	w0, [sp, 36]
-LBB0_1:
-lsl	x0, x0, 3
-sub	x1, sp, 36
-add	x0, x0, x1
-cmp	w0, x0
-jge	LBB0_4
-ldr	x0, [sp, 8]
-lsl	x1, x1, 3
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-ldr	x0, [sp, 36]
-add	x0, x0, 1
-str	x0, [sp, 36]
-LBB0_4:
-ldr	w0, [sp, 36]
-lsl	x0, x0, 3
-sub	x1, sp, 36
-add	x0, x0, x1
-cmp	w0, x0
-jge	LBB0_16
-ldr	w0, [sp, 36]
-lsl	x0, x0, 3
-sub	x1, sp, 40
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 48]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 48]
-ldrsw	x1, [sp, 40]
-add	x0, x0, x1
-ldrsw	x1, [sp, 48]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 48]
-add	x0, x0, x1
-ldrsw	x1, [sp, 40]
-ldr	x0, [sp, 40]
-add	x0, x0, 1
-str	x0, [sp, 40]
-LBB0_7:
-ldr	w0, [sp, 40]
-ldrsw	x1, [sp, 44]
-sub	w0, w0, 1
-cmp	w0, w0
-jge	LBB0_12
-ldr	x0, [sp, 32]
-ldrsw	x1, [sp, 36]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-add	x0, x0, x1
-ldrsw	x1, [sp, 36]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-add	x0, x0, x1
-ldrsw	x1, [sp, 40]
-ldr	x0, [sp, 40]
-add	x0, x0, 1
-str	x0, [sp, 40]
-LBB0_10:
-ldr	w0, [sp, 40]
-lsl	x0, x0, 3
-sub	x1, sp, 40
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 48]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 48]
-add	x0, x0, x1
-ldr	x0, [sp, 48]
-ldrsw	x1, [sp, 40]
-add	x0, x0, x1
-ldrsw	x1, [sp, 48]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 48]
-add	x0, x0, x1
-ldrsw	x1, [sp, 40]
-ldr	x0, [sp, 40]
-add	x0, x0, 1
-str	x0, [sp, 40]
-LBB0_11:
-ldr	w0, [sp, 40]
-lsl	x0, x0, 3
-sub	x1, sp, 40
-add	x0, x0, x1
-ldr	x0, [sp, 40]
-ldrsw	x1, [sp, 48]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 48]
-add	x0, x0, x1
-ldrsw	x1, [sp, 40]
-ldr	x0, [sp, 40]
-add	x0, x0, 1
-str	x0, [sp, 40]
-LBB0_12:
-ldr	w0, [sp, 48]
-ldrsw	x1, [sp, 36]
-sub	w0, w0, x1
-cmp	w0, w0
-je	LBB0_14
-adrp	x0, _malloc
-add	x0, x0, :lo12:_malloc
-ldr	x0, [x0]
-ldrsw	x1, [sp, 36]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-add	x0, x0, x1
-ldrsw	x1, [sp, 36]
-ldr	x0, [x0, 4]
-ldrsw	x1, [sp, 36]
-add	x0, x0, x1
-ldrsw	x1, [sp, 40]
-adrp	x0, _free
-add	x0, x0, :lo12:_free
-ldr	x0, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-add	x0, x0, x1
-ldr	x0, [x0, 64]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-add	x0, x0, x1
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-add	x0, x0, 64
-ldr	x0, [sp, 64]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-add	x0, x0, x1
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-add	x0, x0, 64
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x0, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
-ldr	x1, [x0]
-adrp	x0, sp
-add	x0, x0, :lo12:sp
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 3
+beq	_LoopEnd_BB0_1
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 44]
+b	_LoopHeader_BB0_1
+_loopend_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+bgt	_LoopEnd_BB0_2
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_2
+_loopend_BB0_2:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_3
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_3
+_loopend_BB0_3:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 3
+beq	_LoopEnd_BB0_4
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_4
+_loopend_BB0_4:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_5
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_5
+_loopend_BB0_5:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_6
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_6
+_loopend_BB0_6:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_7
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_7
+_loopend_BB0_7:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_8
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_8
+_loopend_BB0_8:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_9
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_9
+_loopend_BB0_9:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_10
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_10
+_loopend_BB0_10:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_11
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_11
+_loopend_BB0_11:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_12
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_12
+_loopend_BB0_12:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_13
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_13
+_loopend_BB0_13:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_14
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_14
+_loopend_BB0_14:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_15
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_15
+_loopend_BB0_15:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_16
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_16
+_loopend_BB0_16:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_17
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_17
+_loopend_BB0_17:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_18
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_LoopEnd_BB0_18
+_loopend_BB0_18:
+b	_LoopHeader_BB0_1
+_loopheader_BB0_1:
+ldr	w1, [sp, 20]
+cmp	w1, 0
+beq	_LoopEnd_BB0_19
+ldr	w0, [sp, 20]
+sub	w0, w0, #1
+str	w0, [sp, 40]
+b	_L

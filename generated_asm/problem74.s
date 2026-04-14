@@ -1,166 +1,47 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, __stack_chk_guard@GOTPCREL
-add	x0, x0, :lo12:__stack_chk_guard@GOTPCREL
+adrp	x0, ___stack_chk_guard
+add	x0, x0, :lo12:__stack_chk_guard
 ldr	x0, [x0]
-ldr	x1, [sp, 1072]
-str	x1, [sp, 1048]
-ldr	w0, [sp, 1048]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	x0, [sp, 1040]
-ldrsw	x1, [sp, 1040]
-mov	w1, 1024
-ldr	x0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	x0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	x0, [sp, 1040]
-cmp	w0, w1
-bne	LBB0_5
-ldr	w0, [sp, 1048]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-ldrsw	w1, [w0]
-cmp	w1, w0
-bne	LBB0_5
-ldrsw	w0, [sp, 1048]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp, 1040]
-adrp	x0, _memset
-add	x0, x0, :lo12:_memset
-ldr	w0, [sp, 1040]
-adrp	x0, _tolower
-add	x0, x0, :lo12:_tolower
-ldr	w0, [sp, 1040]
-adrp	x0, _isalpha
-add	x0, x0, :lo12:_isalpha
-ldr	w0, [sp
+ldr	x0, [x0]
+mov	w2, 1024
+bl	memset
+str	wzr, [sp, 208]
+mov	w1, 0
+ldr	x0, [sp, 208]
+ldrsw	x1, [x0, w1]
+cmp	w1, 0
+beq	L1
+ldr	x0, [sp, 208]
+ldrsw	x1, [x0, w1]
+and	w0, w1, 255
+bl_tolower
+strb	w0, [sp, 209]
+ldr	x0, [sp, 208]
+ldrsw	x1, [x0, w1]
+cmp	w1, 0
+bne	L2
+ldr	x0, [sp, 208]
+ldrsw	x1, [x0, w1]
+and	w0, w1, 255
+bl_isalpha
+cmp	w0, 0
+beq	L2
+ldr	x0, [sp, 208]
+ldrb	w0, [x0, w1]
+strb	w0, [sp, 209]
+add	w0, w0, 1
+str	w0, [sp, 212]
+b	L3
+L1:
+ldr	w0, [sp, 212]
+add	w0, w0, 1
+str	w0, [sp, 212]
+b	L1
+L2:
+ldr	w0, [sp, 212]
+add	w0, w0, 1
+str	w0, [sp, 212]
+b	L1
+L3:
+ldr	w0, [sp, 208]
+str	w0, [sp, 208]
+ret

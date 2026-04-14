@@ -1,29 +1,16 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-sub	w1, w1, w0
-cmp	w1, 2
-bne	LBB0_3
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-sub	w1, w1, w0
-cmp	w1, 8
-blt	LBB0_3
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-str	w1, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 28]
+bl	w1, w0, 2
+cmp	w2, 0
+bne	L1
+ldr	w0, [sp, 56]
+cmp	w0, 8
+blt	L1
+mov	w1, 1
+str	w1, [sp, 56]
+b L2
+L1:
+mov	w1, 0
+str	w1, [sp, 56]
+L2:
+ldr	w0, [sp, 56]
 pop	x0
 ret

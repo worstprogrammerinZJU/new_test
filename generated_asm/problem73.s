@@ -1,158 +1,37 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	x0, [x0]
-mov	w1, w1
-sub	w1, w1, w2
-cmp	w1, w3
-bge	LBB0_2
-ldr	w1, [sp, 24]
-ldrsw	w0, [sp, 20]
-ldrsw	w1, [sp, 16]
-ldrsw	w2, [sp, 8]
-ldrsw	w3, [sp, 4]
-ldr	x0, [sp, 24]
-mov	w1, w1
-and	w1, w1, w3
-bge	LBB0_2
-ldrsw	w1, [sp, 24]
-ldrsw	w0, [sp, 20]
-ldrsw	w1, [sp, 16]
-ldrsw	w2, [sp, 8]
-ldrsw	w3, [sp, 4]
-ldrsw	w4, [sp, 24]
-ldrsw	w5, [sp, 20]
-ldrsw	w6, [sp, 16]
-ldrsw	w7, [sp, 8]
-ldrsw	w8, [sp, 4]
-ldrsw	w9, [sp, 24]
-ldrsw	w10, [sp, 20]
-ldrsw	w11, [sp, 16]
-ldrsw	w12, [sp, 8]
-ldrsw	w13, [sp, 4]
-ldrsw	w14, [sp, 24]
-ldrsw	w15, [sp, 20]
-ldrsw	w16, [sp, 16]
-ldrsw	w17, [sp, 8]
-ldrsw	w18, [sp, 4]
-ldrsw	w19, [sp, 24]
-ldrsw	w20, [sp, 20]
-ldrsw	w21, [sp, 16]
-ldrsw	w22, [sp, 8]
-ldrsw	w23, [sp, 4]
-ldrsw	w24, [sp, 24]
-ldrsw	w25, [sp, 20]
-ldrsw	w26, [sp, 16]
-ldrsw	w27, [sp, 8]
-ldrsw	w28, [sp, 4]
-ldrsw	w29, [sp, 24]
-ldrsw	w30, [sp, 20]
-ldrsw	w31, [sp, 16]
-ldrsw	w32, [sp, 8]
-ldrsw	w33, [sp, 4]
-ldrsw	w34, [sp, 24]
-ldrsw	w35, [sp, 20]
-ldrsw	w36, [sp, 16]
-ldrsw	w37, [sp, 8]
-ldrsw	w38, [sp, 4]
-ldrsw	w39, [sp, 24]
-ldrsw	w40, [sp, 20]
-ldrsw	w41, [sp, 16]
-ldrsw	w42, [sp, 8]
-ldrsw	w43, [sp, 4]
-ldrsw	w44, [sp, 24]
-ldrsw	w45, [sp, 20]
-ldrsw	w46, [sp, 16]
-ldrsw	w47, [sp, 8]
-ldrsw	w48, [sp, 4]
-ldrsw	w49, [sp, 24]
-ldrsw	w50, [sp, 20]
-ldrsw	w51, [sp, 16]
-ldrsw	w52, [sp, 8]
-ldrsw	w53, [sp, 4]
-ldrsw	w54, [sp, 24]
-ldrsw	w55, [sp, 20]
-ldrsw	w56, [sp, 16]
-ldrsw	w57, [sp, 8]
-ldrsw	w58, [sp, 4]
-ldrsw	w59, [sp, 24]
-ldrsw	w60, [sp, 20]
-ldrsw	w61, [sp, 16]
-ldrsw	w62, [sp, 8]
-ldrsw	w63, [sp, 4]
-ldrsw	w64, [sp, 24]
-ldrsw	w65, [sp, 20]
-ldrsw	w66, [sp, 16]
-ldrsw	w67, [sp, 8]
-ldrsw	w68, [sp, 4]
-ldrsw	w69, [sp, 24]
-ldrsw	w70, [sp, 20]
-ldrsw	w71, [sp, 16]
-ldrsw	w72, [sp, 8]
-ldrsw	w73, [sp, 4]
-ldrsw	w74, [sp, 24]
-ldrsw	w75, [sp, 20]
-ldrsw	w76, [sp, 16]
-ldrsw	w77, [sp, 8]
-ldrsw	w78, [sp, 4]
-ldrsw	w79, [sp, 24]
-ldrsw	w80, [sp, 20]
-ldrsw	w81, [sp, 16]
-ldrsw	w82, [sp, 8]
-ldrsw	w83, [sp, 4]
-ldrsw	w84, [sp, 24]
-ldrsw	w85, [sp, 20]
-ldrsw	w86, [sp, 16]
-ldrsw	w87, [sp, 8]
-ldrsw	w88, [sp, 4]
-ldrsw	w89, [sp, 24]
-ldrsw	w90, [sp, 20]
-ldrsw	w91, [sp, 16]
-ldrsw	w92, [sp, 8]
-ldrsw	w93, [sp, 4]
-ldrsw	w94, [sp, 24]
-ldrsw	w95, [sp, 20]
-ldrsw	w96, [sp, 16]
-ldrsw	w97, [sp, 8]
-ldrsw	w98, [sp, 4]
-ldrsw	w99, [sp, 24]
-ldrsw	w100, [sp, 20]
-ldrsw	w101, [sp, 16]
-ldrsw	w102, [sp, 8]
-ldrsw	w103, [sp, 4]
-ldrsw	w104, [sp, 24]
-ldrsw	w105, [sp, 20]
-ldrsw	w106, [sp, 16]
-ldrsw	w107, [sp, 8]
-ldrsw	w108, [sp, 4]
-ldrsw	w109, [sp, 24]
-ldrsw	w110, [sp, 20]
-ldrsw	w111, [sp, 16]
-ldrsw	w112, [sp, 8]
-ldrsw	w113, [sp, 4]
-adrp	x0, w1
-add	x0, x0, :lo12:w1
-ldr	w0, [sp, 24]
-ldrsw	w1, [sp, 20]
-ldrsw	w2, [sp, 16]
-ldrsw	w3, [sp, 8]
-ldrsw	w4, [sp, 4]
-ldrsw	w5, [sp, 24]
-ldrsw	w6, [sp, 20]
-ldrsw	w7, [sp, 16]
-ldrsw	w8, [sp, 8]
-ldrsw	w9, [sp, 4]
-ldrsw	w10, [sp, 24]
-ldrsw	w11, [sp, 20]
-ldrsw	w12, [sp,
+b	LBB0_2
+LBB0_2:
+ldr	w0, [sp, 44]
+cmp	w0, 10
+beq	LBB0_7
+ldr	w1, [sp, 44]
+mov	w0, w1
+add	w0, w0, 1
+str	w0, [sp, 44]
+b	LBB0_3
+LBB0_3:
+ldr	w0, [sp, 44]
+ldr	w1, [sp, 56]
+cmp	w1, w0
+bgt	LBB0_9
+ldr	w1, [sp, 56]
+cmp	w1, 10
+bge	LBB0_7
+ldr	w1, [sp, 56]
+ldr	w0, [sp, 44]
+sub	w0, w0, #2
+fdiv	d0, d0, w0
+ldr	w1, [sp, 44]
+blt	w1, w1, 0
+cmp	w1, 0
+bne	LBB0_7
+ldr	w1, [sp, 44]
+ldr	x2, [sp, 48]
+ldr	x1, [x2]
+mov	w0, w1, lsl 1
+str	d0, [x1, 44]
+b	LBB0_7
+LBB0_7:
+ldr	w0, [sp, 44]
+add	w0, w0, 1
+str	w0, [sp, 44]
+b	LBB0_3

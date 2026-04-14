@@ -1,172 +1,211 @@
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w0, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w4, [x0]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-str	w4, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+b	LBB0_2
+LBB0_2:
 ldr	w0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-str	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+mov	w1, 2
+mul	w0, w1, w0
 ldr	w0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-sub	w0, w0, w1
-ldrsw	x0, [sp, 24]
-movk	x0, #2
-smull	x1, w0, x0
-cmp	x0, w1
-bge	LBB0_2
-ldrsw	x0, [sp, 24]
-ldrsw	x1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+cmp	w0, w1
+bgt	LBB0_8
 ldr	w0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+sxtw	x0, w0
+fdiv	w0, w0, w1
 ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-str	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+cmp	w1, w0
+bne	LBB0_6
+b	LBB0_7
+LBB0_6:
+mov	w1, 0
+str	w1, [sp, 24]
+b	LBB0_7
+LBB0_7:
 ldr	w0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+add	w0, w0, 1
+str	w0, [sp, 24]
+b	LBB0_3
+LBB0_3:
 ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w3, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
+fcmpe	x0, w1
+bgt	LBB0_8
 ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w2, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr	w1, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldrsw	x0, [sp, 24]
-adrp	x0, _func0
-add	x0, x0, :lo12:_func0
-ldr
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB0_10
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+bgt	LBB0_8
+ldr	w1, [sp, 28]
+fcmpe	x0, w1
+beq	LBB
