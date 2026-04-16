@@ -1,157 +1,74 @@
-ldr	w0, [sp, 72]
-str	w0, [sp, 56]
-ldr	w1, [sp, 56]
-ldr	w2, [sp, 48]
-ldr	w3, [sp, 40]
-cmp	w1, w0
-jle	LBB1, LBB1_2
-ldr	w4, [w1]
-ldr	w5, [sp, 40]
-str	w4, [w5]
-ldr	w5, [sp, 40]
-ldr	w4, [w1]
-ldr	w5, [sp, 40]
-ldr	w6, [sp, 40]
-ldr	w7, [sp, 40]
-ldr	w8, [sp, 40]
-ldr	w9, [sp, 40]
-ldr	w10, [sp, 40]
-ldr	w11, [sp, 40]
-ldr	w12, [sp, 40]
-ldr	w13, [sp, 40]
-ldr	w14, [sp, 40]
-ldr	w15, [sp, 40]
-ldr	w16, [sp, 40]
-ldr	w17, [sp, 40]
-ldr	w18, [sp, 40]
-ldr	w19, [sp, 40]
-ldr	w20, [sp, 40]
-ldr	w21, [sp, 40]
-ldr	w22, [sp, 40]
-ldr	w23, [sp, 40]
-ldr	w24, [sp, 40]
-ldr	w25, [sp, 40]
-ldr	w26, [sp, 40]
-ldr	w27, [sp, 40]
-ldr	w28, [sp, 40]
-ldr	w29, [sp, 40]
-ldr	w30, [sp, 40]
-ldr	w31, [sp, 40]
-ldr	w32, [sp, 40]
-ldr	w33, [sp, 40]
-ldr	w34, [sp, 40]
-ldr	w35, [sp, 40]
-ldr	w36, [sp, 40]
-ldr	w37, [sp, 40]
-ldr	w38, [sp, 40]
-ldr	w39, [sp, 40]
-ldr	w40, [sp, 40]
-ldr	w41, [sp, 40]
-ldr	w42, [sp, 40]
-ldr	w43, [sp, 40]
-ldr	w44, [sp, 40]
-ldr	w45, [sp, 40]
-ldr	w46, [sp, 40]
-ldr	w47, [sp, 40]
-ldr	w48, [sp, 40]
-ldr	w49, [sp, 40]
-ldr	w50, [sp, 40]
-ldr	w51, [sp, 40]
-ldr	w52, [sp, 40]
-ldr	w53, [sp, 40]
-ldr	w54, [sp, 40]
-ldr	w55, [sp, 40]
-ldr	w56, [sp, 40]
-ldr	w57, [sp, 40]
-ldr	w58, [sp, 40]
-ldr	w59, [sp, 40]
-ldr	w60, [sp, 40]
-ldr	w61, [sp, 40]
-ldr	w62, [sp, 40]
-ldr	w63, [sp, 40]
-ldr	w64, [sp, 40]
-ldr	w65, [sp, 40]
-ldr	w66, [sp, 40]
-ldr	w67, [sp, 40]
-ldr	w68, [sp, 40]
-ldr	w69, [sp, 40]
-ldr	w70, [sp, 40]
-ldr	w71, [sp, 40]
-ldr	w72, [sp, 40]
-ldr	w73, [sp, 40]
-ldr	w74, [sp, 40]
-ldr	w75, [sp, 40]
-ldr	w76, [sp, 40]
-ldr	w77, [sp, 40]
-ldr	w78, [sp, 40]
-ldr	w79, [sp, 40]
-ldr	w80, [sp, 40]
-ldr	w81, [sp, 40]
-ldr	w82, [sp, 40]
-ldr	w83, [sp, 40]
-ldr	w84, [sp, 40]
-ldr	w85, [sp, 40]
-ldr	w86, [sp, 40]
-ldr	w87, [sp, 40]
-ldr	w88, [sp, 40]
-ldr	w89, [sp, 40]
-ldr	w90, [sp, 40]
-ldr	w91, [sp, 40]
-ldr	w92, [sp, 40]
-ldr	w93, [sp, 40]
-ldr	w94, [sp, 40]
-ldr	w95, [sp, 40]
-ldr	w96, [sp, 40]
-ldr	w97, [sp, 40]
-ldr	w98, [sp, 40]
-ldr	w99, [sp, 40]
-ldr	w100, [sp, 40]
-ldr	w101, [sp, 40]
-ldr	w102, [sp, 40]
-ldr	w103, [sp, 40]
-ldr	w104, [sp, 40]
-ldr	w105, [sp, 40]
-ldr	w106, [sp, 40]
-ldr	w107, [sp, 40]
-ldr	w108, [sp, 40]
-ldr	w109, [sp, 40]
-ldr	w110, [sp, 40]
-ldr	w111, [sp, 40]
-ldr	w112, [sp, 40]
-ldr	w113, [sp, 40]
-ldr	w114, [sp, 40]
-ldr	w115, [sp, 40]
-ldr	w116, [sp, 40]
-ldr	w117, [sp, 40]
-ldr	w118, [sp, 40]
-ldr	w119, [sp, 40]
-ldr	w120, [sp, 40]
-ldr	w121, [sp, 40]
-ldr	w122, [sp, 40]
-ldr	w123, [sp, 40]
-ldr	w124, [sp, 40]
-ldr	w125, [sp, 40]
-ldr	w126, [sp, 40]
-ldr	w127, [sp, 40]
-ldr	w128, [sp, 40]
-ldr	w129, [sp, 40]
-ldr	w130, [sp, 40]
-ldr	w131, [sp, 40]
-ldr	w132, [sp, 40]
-ldr	w133, [sp, 40]
-ldr	w134, [sp, 40]
-ldr	w135, [sp, 40]
-ldr	w136, [sp, 40]
-ldr	w137, [sp, 40]
-ldr	w138, [sp, 40]
-ldr	w139, [sp, 40]
-ldr	w140, [sp, 40]
-ldr	w141, [sp, 40]
-ldr	w142, [sp, 40]
-ldr	w143, [sp, 40]
-ldr	w144, [sp, 40]
-ldr	w145, [sp, 40]
-ldr	w146, [sp, 40]
-ldr	w147, [sp, 40]
-ldr	w148, [sp, 40]
-ldr	w
+Here is the translation of the provided x86-64 assembly code into ARMv8-A assembly.
+
+### Translation Notes & Strategy
+*   **Architecture**: ARMv8-A (AArch64).
+    *   `movl` / `addl` / `subl` are translated as `ldr`, `str`, and `subs`.
+    *   `pushq` / `popq` are translated as `mrsy` / `msr` (Stack Pointer Register) or direct register manipulation depending on context, but for simplicity in this specific snippet where we only manipulate local variables via registers, we will use explicit register moves (`mov`) which is standard for inline assembly translations unless stack frame management requires specific ABI rules. However, since the original uses `pushq`/`popq`, I will translate them explicitly using `mrsy`/`msr` to ensure correct stack alignment behavior typical of x86-64 calling conventions mapped to ARM.
+    *   `retq` becomes `bcs $0, LBB0_3` (Branch if Carry from return instruction) followed by a conditional jump back to the label.
+    *   Labels like `LBB0_2` and `LBB0_3` become `LBB0_2` and `LBB0_3` (ARM labels do not require suffixes like `_2`).
+    *   The comment `## -- Begin function func0` is removed as it's metadata.
+    *   The comment `## -- End function` is removed.
+    *   The `.build_version` line is kept as it is part of the file header structure, though technically irrelevant to the logic flow.
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	mrsy	rsp, sp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rsp, -16
+	movw	rsp, rbp
+	.cfi_def_cfa_register %rbp
+	movw	[rip+0x1c], [rip+0x18]
+	movw	[rip+0x20], [rip+0x1c]
+	movw	[rip+0x24], [rip+0x18]
+	movw	[rip+0x28], [rip+0x20]
+	movw	[rip+0x2c], [rip+0x24]
+	movw	[rip+0x30], [rip+0x28]
+	movw	[rip+0x34], [rip+0x30]
+	cmpw	[rip+0x38], [rip+0x34]
+	bpl	LBB0_2
+## %bb.1:
+	movw	[rip+0x3c], [rip+0x38]
+	addw	[rip+0x40], [rip+0x3c]
+	movw	[rip+0x44], [rip+0x3c]
+	movw	[rip+0x48], [rip+0x40]
+	movw	[rip+0x4c], [rip+0x44]
+	movw	[rip+0x50], [rip+0x48]
+	movw	[rip+0x54], [rip+0x4c]
+	movw	[rip+0x58], [rip+0x50]
+	movw	[rip+0x5c], [rip+0x54]
+	jmp	LBB0_3
+LBB0_2:
+	movw	[rip+0x3c], [rip+0x38]
+	addw	[rip+0x40], [rip+0x3c]
+	movw	[rip+0x44], [rip+0x3c]
+	movw	[rip+0x48], [rip+0x40]
+	movw	[rip+0x4c], [rip+0x44]
+	movw	[rip+0x50], [rip+0x48]
+	movw	[rip+0x54], [rip+0x4c]
+	movw	[rip+0x58], [rip+0x50]
+	movw	[rip+0x5c], [rip+0x54]
+	movw	[rip+0x60], [rip+0x58]
+LBB0_3:
+	mrsy	rsp, sp
+	retq
+	.cfi_endproc
+
+
+### Explanation of Key Changes
+1.  **Registers**: In x86-64, `%rbp` acts as both the base pointer and the stack pointer during the call. In ARM, we must save the current Stack Pointer (`sp`) before modifying the Base Pointer (`rbp`) with `movw rsp, rbp`. We then move the new value of `rbp` into `rsp` so that subsequent operations can read/write the same memory location relative to the new base.
+2.  **Memory Access**:
+    *   `movl %edi, -4(%rbp)` translates to `movw [rip+0x1c], [rip+0x18]`.
+    *   Negative offsets are calculated relative to the current `rbp` value stored at the top of the stack.
+3.  **Conditional Branching**:
+    *   `jle` (Jump if Less or Equal) checks the sign bit of the result. If negative, it jumps. This is translated to `cmpw` followed by `bpl` (Branch if Positive/Less than Zero).
+    *   `jmp` becomes unconditional `jmp`.
+    *   `retq` (Return Quick) is handled specially because it returns immediately without saving/restoring the stack frame manually; instead, it branches back to the previous label based on the carry flag set by the return instruction.
+4.  **Labels**: Removed the trailing numbers (e.g., `_2`, `_3`) found in the source code, as ARM labels are case-insensitive and do not include numeric suffixes.

@@ -1,161 +1,102 @@
-.func0
-ldr	x0, [sp, 64]
-ldr	w0, [sp, 12]
-ldr	x1, [sp, 24]
-mov	w1, w0
-shl	w1, w1, 2
-call	malloc
-str	x0, [sp, 32]
-str	w0, [sp, 40]
-str	w0, [sp, 44]
-loop_outer:
-ldr	w0, [sp, 44]
-cmp	w0, 1
-jz	loop_inner
-ldr	w0, [sp, 44]
-str	w0, [sp, 48]
-loop_inner:
-ldr	w0, [sp, 48]
-ldr	w1, [sp, 12]
-ldr	w2, [sp, 24]
-ldr	w3, [sp, 32]
-ldr	w4, [sp, 40]
-ldr	w5, [sp, 48]
-ldr	w6, [sp, 52]
-ldr	w7, [sp, 64]
-ldr	w8, [sp, 44]
-ldr	w9, [sp, 48]
-ldr	w10, [sp, 52]
-ldr	w11, [sp, 64]
-ldr	w12, [sp, 40]
-ldr	w13, [sp, 44]
-ldr	w14, [sp, 48]
-ldr	w15, [sp, 52]
-ldr	w16, [sp, 64]
-ldr	w17, [sp, 40]
-ldr	w18, [sp, 44]
-ldr	w19, [sp, 48]
-ldr	w20, [sp, 52]
-ldr	w21, [sp, 64]
-ldr	w22, [sp, 40]
-ldr	w23, [sp, 44]
-ldr	w24, [sp, 48]
-ldr	w25, [sp, 52]
-ldr	w26, [sp, 64]
-ldr	w27, [sp, 40]
-ldr	w28, [sp, 44]
-ldr	w29, [sp, 48]
-ldr	w30, [sp, 52]
-ldr	w31, [sp, 64]
-ldr	w32, [sp, 40]
-ldr	w33, [sp, 44]
-ldr	w34, [sp, 48]
-ldr	w35, [sp, 52]
-ldr	w36, [sp, 64]
-ldr	w37, [sp, 40]
-ldr	w38, [sp, 44]
-ldr	w39, [sp, 48]
-ldr	w40, [sp, 52]
-ldr	w41, [sp, 64]
-ldr	w42, [sp, 40]
-ldr	w43, [sp, 44]
-ldr	w44, [sp, 48]
-ldr	w45, [sp, 52]
-ldr	w46, [sp, 64]
-ldr	w47, [sp, 40]
-ldr	w48, [sp, 44]
-ldr	w49, [sp, 48]
-ldr	w50, [sp, 52]
-ldr	w51, [sp, 64]
-ldr	w52, [sp, 40]
-ldr	w53, [sp, 44]
-ldr	w54, [sp, 48]
-ldr	w55, [sp, 52]
-ldr	w56, [sp, 64]
-ldr	w57, [sp, 40]
-ldr	w58, [sp, 44]
-ldr	w59, [sp, 48]
-ldr	w60, [sp, 52]
-ldr	w61, [sp, 64]
-ldr	w62, [sp, 40]
-ldr	w63, [sp, 44]
-ldr	w64, [sp, 48]
-ldr	w65, [sp, 52]
-ldr	w66, [sp, 64]
-ldr	w67, [sp, 40]
-ldr	w68, [sp, 44]
-ldr	w69, [sp, 48]
-ldr	w70, [sp, 52]
-ldr	w71, [sp, 64]
-ldr	w72, [sp, 40]
-ldr	w73, [sp, 44]
-ldr	w74, [sp, 48]
-ldr	w75, [sp, 52]
-ldr	w76, [sp, 64]
-ldr	w77, [sp, 40]
-ldr	w78, [sp, 44]
-ldr	w79, [sp, 48]
-ldr	w80, [sp, 52]
-ldr	w81, [sp, 64]
-ldr	w82, [sp, 40]
-ldr	w83, [sp, 44]
-ldr	w84, [sp, 48]
-ldr	w85, [sp, 52]
-ldr	w86, [sp, 64]
-ldr	w87, [sp, 40]
-ldr	w88, [sp, 44]
-ldr	w89, [sp, 48]
-ldr	w90, [sp, 52]
-ldr	w91, [sp, 64]
-ldr	w92, [sp, 40]
-ldr	w93, [sp, 44]
-ldr	w94, [sp, 48]
-ldr	w95, [sp, 52]
-ldr	w96, [sp, 64]
-ldr	w97, [sp, 40]
-ldr	w98, [sp, 44]
-ldr	w99, [sp, 48]
-ldr	w100, [sp, 52]
-ldr	w101, [sp, 64]
-ldr	w102, [sp, 40]
-ldr	w103, [sp, 44]
-ldr	w104, [sp, 48]
-ldr	w105, [sp, 52]
-ldr	w106, [sp, 64]
-ldr	w107, [sp, 40]
-ldr	w108, [sp, 44]
-ldr	w109, [sp, 48]
-ldr	w110, [sp, 52]
-ldr	w111, [sp, 64]
-ldr	w112, [sp, 40]
-ldr	w113, [sp, 44]
-ldr	w114, [sp, 48]
-ldr	w115, [sp, 52]
-ldr	w116, [sp, 64]
-ldr	w117, [sp, 40]
-ldr	w118, [sp, 44]
-ldr	w119, [sp, 48]
-ldr	w120, [sp, 52]
-ldr	w121, [sp, 64]
-ldr	w122, [sp, 40]
-ldr	w123, [sp, 44]
-ldr	w124, [sp, 48]
-ldr	w125, [sp, 52]
-ldr	w126, [sp, 64]
-ldr	w127, [sp, 40]
-ldr	w128, [sp, 44]
-ldr	w129, [sp, 48]
-ldr	w130, [sp, 52]
-ldr	w131, [sp, 64]
-ldr	w132, [sp, 40]
-ldr	w133, [sp, 44]
-ldr	w134, [sp, 48]
-ldr	w135, [sp, 52]
-ldr	w136, [sp, 64]
-ldr	w137, [sp, 40]
-ldr	w138, [sp, 44]
-ldr	w139, [sp, 48]
-ldr	w140, [sp, 52]
-ldr	w141, [sp, 64]
-ldr	w142, [sp, 40]
-ldr	w1
+Here is the translation of the provided `x86-64` assembly code into `ARMv8-A` assembly.
+
+### Translation Notes & Strategy
+*   **Architecture Differences**: The primary differences involve register usage (using `r0-r15` instead of `%rbx-%rbp`, using `movsxd`/`movsxd` for signed integer operations where appropriate, and handling stack alignment differently).
+*   **Loop Logic**: The nested loops are translated by mapping the loop headers (`LBB...`) to specific ARM labels. The logic inside the inner loops (e.g., `addl $1`, `cmp`, `jmp`) is preserved directly as they represent simple arithmetic increments or conditionals.
+*   **Memory Access**:
+    *   `movq` / `movl`: Translated to `ldr` with immediate offsets.
+    *   `movslq` (signed shift): Translated to `ldsr` (load sign-extended) followed by a conditional move if needed, though since the source data is likely already aligned correctly for this pattern, direct loads often suffice depending on compiler optimization assumptions. Here, we assume the source registers hold the correct values.
+    *   `movl` / `movq` with index: Translated to `str` (store) and `ldr` (load) with calculated indices.
+*   **Stack Alignment**: The original uses `subq $64, %rsp`. In ARM, we typically use `subq $16, %sp` (since `sp` is usually 16-byte aligned at entry) and rely on the OS or linker to ensure proper alignment before calling functions like `_malloc`. We will adjust the offset accordingly.
+*   **Function Signature**: Based on the call `callq _malloc`, the function expects an argument passed via `$r0` (or similar convention in ARM). However, looking closely at the input, there is no explicit parameter passing instruction visible in the snippet other than the implicit return value from `_malloc`. Standard practice for such snippets without explicit args suggests either:
+    1.  The caller passes arguments in `$r0-$rN`.
+    2.  Or it's a standalone function returning void. Given the complexity of the loop, it likely takes arguments. I will add placeholders for potential arguments ($r0, r1...) but keep the core logic identical. If strict portability requires zero arguments, the signature remains `void func0()`. Let's assume standard C ABI where arguments might be present; however, since none are explicitly defined in the snippet, I will write it assuming the caller handles them or it's a pure function. To be safe and accurate to the *code structure*, I will omit explicit argument pushes unless inferred, but note that ARM functions often take arguments. *Correction*: Looking at the `callq _malloc`, if `_malloc` expects arguments, they must be pushed. Since they aren't in the snippet, I will translate the body exactly and leave the argument push/pull out or assume they exist in `$r0-$rN`. For maximum fidelity to the *provided text*, I will not add arguments that don't exist, but I will ensure the function signature matches what would logically follow. Actually, standard ARM conventions for these types of snippets often imply arguments are in `$r0-$rN`. I will generate the code assuming the caller provides arguments in `$r0-$rN` (standard C ABI) or simply return void if strictly following "no args". Let's stick to the visible instructions.
+
+**Refined Plan**: Translate every instruction literally. Use `r0-r15`. Map `x86` memory layout to `ARM` relative addresses.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	func0
+	.p2align	4, 0x90
+func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	rsp, rbp
+	.cfi_def_cfa_register %rbp
+	subq	$rsp, $64, rsp
+	# Load arguments (Assuming caller passes args in r0-rN based on typical patterns, 
+	# but here only specific slots are used below. If no args, skip push/pop of args).
+	# Note: In the original x86, %rdi was -8(%rbp). In ARM, we load into r0/r1/etc.
+	# Assuming standard C ABI where args are in r0..rn.
+	# If the original code relied on specific registers being set up by the caller,
+	# we preserve that assumption.
+	
+	# Original: movq %rdi, -8(%rbp) -> Load arg 0 into r0 (assuming arg 0 is in %rdi)
+	# Original: movl %esi, -12(%rbp) -> Load arg 1 into r1
+	# Original: movq %rdx, -24(%rbp) -> Load arg 2 into r2
+	
+	# We will map these to r0, r1, r2 respectively for clarity, 
+	# OR if the original intended specific registers, we must infer.
+	# Given the lack of explicit 'movl $X, %reg' for args in the snippet,
+	# we assume the caller sets them up or this is a simplified view.
+	# However, to be precise to the *structure*:
+	# Let's assume the caller provided args in r0, r1, r2 corresponding to the shifts.
+	# But wait, the original code does NOT push/pop args. It just moves them.
+	# So we just load them into general purpose registers.
+	
+	# Mapping:
+	# %rdi -> r0
+	# %esi -> r1
+	# %rdx -> r2
+	
+	ldr	r0, [rsp, -8]
+	ldr	r1, [rsp, -12]
+	ldr	r2, [rsp, -24]
+	
+	# Original: movslq -12(%rbp), %rdi
+	# This is a signed shift. In ARM, we can do this with ldsr or mul/add.
+	# Assuming the value at -12(%rbp) is in r1.
+	# We need to shift r1 left by 2 bits.
+	# Option A: Multiply by 4 then divide? No, simpler to use ldsr/mov.
+	# If the value is already positive/negative consistent, ldsr works.
+	# Let's assume the value is in r1.
+	ldsr	r3, [r1, #2]
+	# Wait, the original says "movslq ... %rdi". This implies shifting the content of %rdi.
+	# So we should have loaded the value first.
+	# Correction: The original code sequence is:
+	# movq %rdi, -8(%rbp)  (Load arg 0 into r0)
+	# movl %esi, -12(%rbp) (Load arg 1 into r1)
+	# movq %rdx, -24(%rbp) (Load arg 2 into r2)
+	# movslq -12(%rbp), %rdi (Shift r1 left 2, put result in r0?? No, %rdi is r0)
+	# Ah, the original code has a bug or specific ordering?
+	# Let's re-read carefully:
+	# movq %rdi, -8(%rbp)  -> r0 = arg0
+	# movl %esi, -12(%rbp) -> r1 = arg1
+	# movq %rdx, -24(%rbp) -> r2 = arg2
+	# movslq -12(%rbp), %rdi -> Shift r1 left 2, store in r0?
+	# Yes, %rdi is r0. So r0 = r1 << 2.
+	# Then call malloc.
+	# Then: movq %rax, -32(%rbp) -> Store r0 (result of shift) to -32(%rbp)
+	# This seems odd. Usually you pass the pointer.
+	# Maybe the intention was:
+	# r0 = arg0
+	# r1 = arg1
+	# r2 = arg2
+	# r0 = r1 << 2 (shifted copy?)
+	# And then pass r0 to malloc?
+	# Let's look at the next line: movq %rax, -32(%rbp).
+	# If r0 holds the shifted value, we store it.
+	# Then LBB0_1 starts: movl -44(%rbp), %eax.
+	# -44(%rbp) corresponds to -32(%rbp) + 12.
+	# So the pointer stored at -32 is moved to -44.
+	# This looks like the function stores the pointer returned by malloc at -32,
+	# and then accesses it later.
+	# Okay, let's proceed with literal translation of the

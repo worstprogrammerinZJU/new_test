@@ -1,148 +1,87 @@
-ldr	x0, [sp, 72]
-ldr	w1, [sp, 56]
-ldr	xzr, [sp, 40]
-ldr	wzr, [sp, 32]
-ldr	w0, [sp, 24]
-ldr	w1, [sp, 16]
-ldr	w2, [sp, 8]
-ldr	w3, [sp, 0]
-loop_loop:
-cmp	w1, w0
-jg	loop_done
-ldr	x0, [sp, 8]
-ldr	w1, [sp, 16]
-ldr	w2, [sp, 24]
-ldr	w3, [sp, 32]
-ldr	w4, [sp, 40]
-ldr	w5, [sp, 56]
-ldr	w6, [sp, 72]
-ldr	w7, [sp, 88]
-ldr	w8, [sp, 96]
-ldr	w9, [sp, 104]
-ldr	w10, [sp, 112]
-ldr	w11, [sp, 120]
-ldr	w12, [sp, 128]
-ldr	w13, [sp, 136]
-ldr	w14, [sp, 144]
-ldr	w15, [sp, 152]
-ldr	w16, [sp, 160]
-ldr	w17, [sp, 168]
-ldr	w18, [sp, 176]
-ldr	w19, [sp, 184]
-ldr	w20, [sp, 192]
-ldr	w21, [sp, 200]
-ldr	w22, [sp, 208]
-ldr	w23, [sp, 216]
-ldr	w24, [sp, 224]
-ldr	w25, [sp, 232]
-ldr	w26, [sp, 240]
-ldr	w27, [sp, 248]
-ldr	w28, [sp, 256]
-ldr	w29, [sp, 264]
-ldr	w30, [sp, 272]
-ldr	w31, [sp, 280]
-ldr	w32, [sp, 288]
-ldr	w33, [sp, 296]
-ldr	w34, [sp, 304]
-ldr	w35, [sp, 312]
-ldr	w36, [sp, 320]
-ldr	w37, [sp, 328]
-ldr	w38, [sp, 336]
-ldr	w39, [sp, 344]
-ldr	w40, [sp, 352]
-ldr	w41, [sp, 360]
-ldr	w42, [sp, 368]
-ldr	w43, [sp, 376]
-ldr	w44, [sp, 384]
-ldr	w45, [sp, 392]
-ldr	w46, [sp, 400]
-ldr	w47, [sp, 408]
-ldr	w48, [sp, 416]
-ldr	w49, [sp, 424]
-ldr	w50, [sp, 432]
-ldr	w51, [sp, 440]
-ldr	w52, [sp, 448]
-ldr	w53, [sp, 456]
-ldr	w54, [sp, 464]
-ldr	w55, [sp, 472]
-ldr	w56, [sp, 480]
-ldr	w57, [sp, 488]
-ldr	w58, [sp, 496]
-ldr	w59, [sp, 504]
-ldr	w60, [sp, 512]
-ldr	w61, [sp, 520]
-ldr	w62, [sp, 528]
-ldr	w63, [sp, 536]
-ldr	w64, [sp, 544]
-ldr	w65, [sp, 552]
-ldr	w66, [sp, 560]
-ldr	w67, [sp, 568]
-ldr	w68, [sp, 576]
-ldr	w69, [sp, 584]
-ldr	w70, [sp, 592]
-ldr	w71, [sp, 600]
-ldr	w72, [sp, 608]
-ldr	w73, [sp, 616]
-ldr	w74, [sp, 624]
-ldr	w75, [sp, 632]
-ldr	w76, [sp, 640]
-ldr	w77, [sp, 648]
-ldr	w78, [sp, 656]
-ldr	w79, [sp, 664]
-ldr	w80, [sp, 672]
-ldr	w81, [sp, 680]
-ldr	w82, [sp, 688]
-ldr	w83, [sp, 696]
-ldr	w84, [sp, 704]
-ldr	w85, [sp, 712]
-ldr	w86, [sp, 720]
-ldr	w87, [sp, 728]
-ldr	w88, [sp, 736]
-ldr	w89, [sp, 744]
-ldr	w90, [sp, 752]
-ldr	w91, [sp, 760]
-ldr	w92, [sp, 768]
-ldr	w93, [sp, 776]
-ldr	w94, [sp, 784]
-ldr	w95, [sp, 792]
-ldr	w96, [sp, 800]
-ldr	w97, [sp, 808]
-ldr	w98, [sp, 816]
-ldr	w99, [sp, 824]
-ldr	w100, [sp, 832]
-ldr	w101, [sp, 840]
-ldr	w102, [sp, 848]
-ldr	w103, [sp, 856]
-ldr	w104, [sp, 864]
-ldr	w105, [sp, 872]
-ldr	w106, [sp, 880]
-ldr	w107, [sp, 888]
-ldr	w108, [sp, 896]
-ldr	w109, [sp, 904]
-ldr	w110, [sp, 912]
-ldr	w111, [sp, 920]
-ldr	w112, [sp, 928]
-ldr	w113, [sp, 936]
-ldr	w114, [sp, 944]
-ldr	w115, [sp, 952]
-ldr	w116, [sp, 960]
-ldr	w117, [sp, 968]
-ldr	w118, [sp, 976]
-ldr	w119, [sp, 984]
-ldr	w120, [sp, 992]
-ldr	w121, [sp, 1000]
-ldr	w122, [sp, 1008]
-ldr	w123, [sp, 1016]
-ldr	w124, [sp, 1024]
-ldr	w125, [sp, 1032]
-ldr	w126, [sp, 1040]
-ldr	w127, [sp, 1048]
-ldr	w128, [sp, 1056]
-ldr	w129, [sp, 1064]
-ldr	w130, [sp, 1072]
-ldr	w131, [sp, 1080]
-ldr	w132, [sp, 1088]
-ldr	w133, [sp, 1096]
-ldr	w134, [sp, 1104]
-ldr	w135, [sp, 1112]
-ldr
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Function Signature**: The original code takes three arguments (`%rdi`, `%esi`, `%rdx`) and returns nothing. In ARMv8-A, this maps directly to `push {r0-r7}` followed by a call with no arguments.
+2.  **Register Mapping**:
+    *   `rbp` → `r15` (Stack Frame Pointer)
+    *   `rdi` → `r0`
+    *   `esi` → `r1`
+    *   `rdx` → `r2`
+    *   General purpose registers are mapped similarly (e.g., `%rax` → `r0`).
+3.  **Loop Logic Analysis**:
+    *   **Header (`LBB0_1`)**: Loads `val = -36(%rbp)` (which is `-12(rbp)` after push/pop logic adjustment or direct offset calculation). It compares against `val`. If `val >= 0`, it jumps to `LBB0_4`. Otherwise, it increments `val` and loops back.
+        *   *Correction on Offset*: In the source, `-36(%rbp)` is loaded. Since `rbp` starts at `rsp + 16`, `-36(%rbp)` effectively points to an address relative to the stack frame. However, looking closely at the loop structure:
+            *   Iteration 1: Load from `-36`, compare with result.
+            *   Iteration 2: Increment result, load new value from `-36`.
+            *   This implies the variable being incremented is stored at `-36(%rbp)`.
+            *   Wait, let's re-read carefully: `movl -36(%rbp), %eax` then `addl $1, %eax`. Then `movl %eax, -36(%rbp)`. Yes, the data at `-36(%rbp)` is the accumulator that gets incremented.
+    *   **Body (`LBB0_4`)**: Reads two values from memory addresses derived from the loop counter.
+        *   Address 1: `-28(%rbp)` (Offset -36 + 8? No, look at previous lines: `-28` was set as base for first read? Let's trace offsets.)
+        *   Trace offsets relative to `rbp`:
+            *   Init: `-36` (val), `-12` (cond), `-8` (temp1), `-24` (temp2), `-32` (loop var).
+            *   Body Read 1: `movl -28(%rbp), %ecx`. Note: `-28` is not explicitly initialized in the snippet before use inside LBB0_4, but logically if we assume standard padding or specific alignment, often these offsets align. However, strictly translating based on visible labels:
+                *   First read uses `-28(%rbp)`.
+                *   Second read uses `-24(%rbp)`.
+                *   Write uses `4(%rax)` where `rax` holds the second temp value.
+            *   *Hypothesis*: The offsets `-28` and `-24` likely correspond to specific internal variables defined elsewhere or are fixed offsets intended for the loop body. I will translate them exactly as labeled.
+4.  **Calling Convention**:
+    *   Arguments passed via `movq`/`movl` into negative offsets of `rbp`.
+    *   Return value pushed onto stack.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section __TEXT,__text,regular,pure_instructions
+.build_version macOS, 13, 0 sdk_version 13, 3
+.globl _func0
+.p2align 4, 0x90
+_func0:
+    .cfi_startproc
+    # %bb.0:
+    push {r0-r7}
+    .cfi_def_cfa_offset 16
+    .cfi_offset r15, -16
+    mov r15, sp
+    .cfi_def_cfa_register r15
+    mov r0, [sp]          # Copy argument 1 (rdi)
+    mov r1, [sp-8]        # Copy argument 2 (esi)
+    mov r2, [sp-12]       # Copy argument 3 (rdx)
+    mov r3, #0            # Initialize loop counter
+    mov r4, #1            # Initialize loop incrementer
+    
+LBB0_1:
+    mov r3, [r15-36]      # Load loop header value (-12 relative to rbp)
+    cmp r3, r0            # Compare with condition (-12 relative to rbp)
+    jge LBB0_4            # Jump if greater or equal
+    
+    # %bb.2:
+    mov r0, [r15-8]       # Load temp1 (-8 relative to rbp)
+    mov r3, [r15-36]      # Load loop header value again
+    add r3, r3, #1        # Increment loop header value
+    mov [r15-36], r3      # Store incremented value back to [-36(%rbp)]
+    
+    jmp LBB0_1            # Infinite loop for header check
+    
+LBB0_4:
+    # %bb.3:
+    mov r3, [r15-28]      # Load first body value (-28 relative to rbp)
+    mov r0, [r15-24]      # Load second body value (-24 relative to rbp)
+    mov r3, [r0]          # Move second value to register
+    mov r3, [r15-32]      # Load loop header value again
+    mov [r0+4], r3        # Write third value to [second_value + 4]
+    
+    pop {r0-r7}           # Restore saved registers
+    ret                   # Return
+    .cfi_endproc
+
+
+### Key Differences Explained
+*   **Registers**: Used `r0-r7` instead of `%rax-%rdx-%rsi-%rdi-%rbp`.
+*   **Labels**: Converted `LBB0_1`, `LBB0_4`, etc., to uppercase ARM labels.
+*   **Instructions**:
+    *   `pushq` / `popq` became `push {r0-r7}` / `pop {r0-r7}`.
+    *   `movq` / `movl` became `mov` (for immediate values like `$0`, `$1`) or `mov [mem], reg`.
+    *   `imull` (signed 64-bit multiplication) was replaced by manual addition since the loop logic only adds 1 to the header variable; there is no explicit multiplication instruction needed here.
+*   **Offsets**: Handled negative offsets using `[label-offset]` syntax common in AArch64 inline assembly.

@@ -1,270 +1,154 @@
+Here is the translation of the provided `x86-64` assembly into **ARMv8-A** (AArch64).
+
+### Translation Notes & Assumptions
+1.  **Architecture**: ARMv8-A uses a 64-bit register set (`r0-r15`) and a 64-bit stack pointer (`sp`). The instruction encoding differs significantly from x86-64 (e.g., `movq` becomes `mov rX, rY`, `callq` becomes `bl X`).
+2.  **Stack Alignment**: The original code aligns the stack at `0x90`. In ARM, this corresponds to an alignment of 16 bytes on the stack frame itself (though the compiler handles the actual alignment via `push/pop` or `sub sp by N`). We will assume standard ARM calling convention where the return address is pushed onto the stack before the first instruction.
+3.  **Function Pointer**: The original code uses `movq ___stack_chk_guard@GOTPCREL(%rip), %rax` followed by `%rax` as the base for local variables. In ARM, we use `add sp, #16` (or similar) to simulate the stack frame setup, then load the guard value into a register (typically `r12` or `r13` depending on convention; here we'll use `r12` as it's common for local data).
+4.  **Loop Logic**:
+    *   Original: `cmp $0, -180(%rbp)` -> `jle LBB0_8`.
+    *   ARM equivalent: `cmp r12, #0` (assuming `-180` is stored in `r12` after the initial move). If equal or less than zero, jump back.
+5.  **String Concatenation**: Uses `memcpy` + manual string manipulation.
+6.  **Constants**: The `.section __data,__const` section contains hardcoded values. These are loaded directly into registers. Note that the original has `long 1000` but the comment says "0x3e8". I will translate the literal value `1000` as written in the source code unless it's clearly a hex typo. Given the context of other numbers like 900, 500, etc., they look like decimal integers representing offsets. However, looking closely at the pattern `1000, 900...`, these might be interpreted as hex if the original was generated with specific flags, but without explicit `h` prefix, `1000` is likely decimal. Wait, re-reading the source: `long 1000`. Standard x86-64 `long` is 64-bit signed integer. `1000` fits easily. I will keep them as decimal literals.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0
+.p2align	4, 0x90
 _func0:
-	pull	x0, [sp]
-	xzr	w1
-	xzr	w2
-	xzr	w3
-	xzr	w4
-	xzr	w5
-	xzr	w6
-	xzr	w7
-	xzr	w8
-	xzr	w9
-	xzr	w10
-	xzr	w11
-	xzr	w12
-	xzr	w13
-	xzr	w14
-	xzr	w15
-	xzr	w16
-	xzr	w17
-	xzr	w18
-	xzr	w19
-	xzr	w20
-	xzr	w21
-	xzr	w22
-	xzr	w23
-	xzr	w24
-	xzr	w25
-	xzr	w26
-	xzr	w27
-	xzr	w28
-	xzr	w29
-	xzr	w30
-	xzr	w31
-	xzr	w32
-	xzr	w33
-	xzr	w34
-	xzr	w35
-	xzr	w36
-	xzr	w37
-	xzr	w38
-	xzr	w39
-	xzr	w40
-	xzr	w41
-	xzr	w42
-	xzr	w43
-	xzr	w44
-	xzr	w45
-	xzr	w46
-	xzr	w47
-	xzr	w48
-	xzr	w49
-	xzr	w50
-	xzr	w51
-	xzr	w52
-	xzr	w53
-	xzr	w54
-	xzr	w55
-	xzr	w56
-	xzr	w57
-	xzr	w58
-	xzr	w59
-	xzr	w60
-	xzr	w61
-	xzr	w62
-	xzr	w63
-	xzr	w64
-	xzr	w65
-	xzr	w66
-	xzr	w67
-	xzr	w68
-	xzr	w69
-	xzr	w70
-	xzr	w71
-	xzr	w72
-	xzr	w73
-	xzr	w74
-	xzr	w75
-	xzr	w76
-	xzr	w77
-	xzr	w78
-	xzr	w79
-	xzr	w80
-	xzr	w81
-	xzr	w82
-	xzr	w83
-	xzr	w84
-	xzr	w85
-	xzr	w86
-	xzr	w87
-	xzr	w88
-	xzr	w89
-	xzr	w90
-	xzr	w91
-	xzr	w92
-	xzr	w93
-	xzr	w94
-	xzr	w95
-	xzr	w96
-	xzr	w97
-	xzr	w98
-	xzr	w99
-	xzr	w100
-	xzr	w101
-	xzr	w102
-	xzr	w103
-	xzr	w104
-	xzr	w105
-	xzr	w106
-	xzr	w107
-	xzr	w108
-	xzr	w109
-	xzr	w110
-	xzr	w111
-	xzr	w112
-	xzr	w113
-	xzr	w114
-	xzr	w115
-	xzr	w116
-	xzr	w117
-	xzr	w118
-	xzr	w119
-	xzr	w120
-	xzr	w121
-	xzr	w122
-	xzr	w123
-	xzr	w124
-	xzr	w125
-	xzr	w126
-	xzr	w127
-	xzr	w128
-	xzr	w129
-	xzr	w130
-	xzr	w131
-	xzr	w132
-	xzr	w133
-	xzr	w134
-	xzr	w135
-	xzr	w136
-	xzr	w137
-	xzr	w138
-	xzr	w139
-	xzr	w140
-	xzr	w141
-	xzr	w142
-	xzr	w143
-	xzr	w144
-	xzr	w145
-	xzr	w146
-	xzr	w147
-	xzr	w148
-	xzr	w149
-	xzr	w150
-	xzr	w151
-	xzr	w152
-	xzr	w153
-	xzr	w154
-	xzr	w155
-	xzr	w156
-	xzr	w157
-	xzr	w158
-	xzr	w159
-	xzr	w160
-	xzr	w161
-	xzr	w162
-	xzr	w163
-	xzr	w164
-	xzr	w165
-	xzr	w166
-	xzr	w167
-	xzr	w168
-	xzr	w169
-	xzr	w170
-	xzr	w171
-	xzr	w172
-	xzr	w173
-	xzr	w174
-	xzr	w175
-	xzr	w176
-	xzr	w177
-	xzr	w178
-	xzr	w179
-	xzr	w180
-	xzr	w181
-	xzr	w182
-	xzr	w183
-	xzr	w184
-	xzr	w185
-	xzr	w186
-	xzr	w187
-	xzr	w188
-	xzr	w189
-	xzr	w190
-	xzr	w191
-	xzr	w192
-	xzr	w193
-	xzr	w194
-	xzr	w195
-	xzr	w196
-	xzr	w197
-	xzr	w198
-	xzr	w199
-	xzr	w200
-	xzr	w201
-	xzr	w202
-	xzr	w203
-	xzr	w204
-	xzr	w205
-	xzr	w206
-	xzr	w207
-	xzr	w208
-	xzr	w209
-	xzr	w210
-	xzr	w211
-	xzr	w212
-	xzr	w213
-	xzr	w214
-	xzr	w215
-	xzr	w216
-	xzr	w217
-	xzr	w218
-	xzr	w219
-	xzr	w220
-	xzr	w221
-	xzr	w222
-	xzr	w223
-	xzr	w224
-	xzr	w225
-	xzr	w226
-	xzr	w227
-	xzr	w228
-	xzr	w229
-	xzr	w230
-	xzr	w231
-	xzr	w232
-	xzr	w233
-	xzr	w234
-	xzr	w235
-	xzr	w236
-	xzr	w237
-	xzr	w238
-	xzr	w239
-	xzr	w240
-	xzr	w241
-	xzr	w242
-	xzr	w243
-	xzr	w244
-	xzr	w245
-	xzr	w246
-	xzr	w247
-	xzr	w248
-	xzr	w249
-	xzr	w250
-	xzr	w251
-	xzr	w252
-	xzr	w253
-	xzr	w254
-	xzr	w255
-	xzr	w256
-	xzr	w257
-	xzr	w258
-	xzr	w259
-	xzr	w260
-	xzr	w261
-	xzr	w262
-	xzr	w263
-	xzr	w264
-	xzr	w265
-	xzr	w266
-	xzr	w267
-	xzr	w268
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$208, %rsp
+	# Load GOTPCREL into RAX (simulating movq ...(%rip))
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	# Move RAX to RAX (no-op)
+	movq	%rax, %rax
+	# Store guard value to -8(%rbp)
+	movq	(%rax), %rax
+	# Load edi into -180(%rbp)
+	movl	%edi, -180(%rbp)
+	# Load si into -192(%rbp)
+	movq	%rsi, -192(%rbp)
+	# Calculate offset for next iteration (-112(%rbp))
+	leaq	-112(%rbp), %rdi
+	# Load const string pointer into -112(%rbp)
+	leaq	l___const.func0.rep(%rip), %rsi
+	# Set loop counter variable (loop count = 104)
+	movl	$104, %edx
+	# Call memcpy
+	callq	_memcpy
+	# Calculate offset for second part (-176(%rbp))
+	leaq	-176(%rbp), %rdi
+	# Load num constant into -176(%rbp)
+	leaq	l___const.func0.num(%rip), %rsi
+	# Set loop counter variable (loop count = 52)
+	movl	$52, %edx
+	# Call memcpy
+	callq	_memcpy
+	# Clear buffer at -196(%rbp)
+	movl	$0, -196(%rbp)
+	# Copy null terminator from previous memcpy result
+	movq	-192(%rbp), %rax
+	# Write null byte
+	movb	$0, (%rax)
+
+LBB0_1:
+	# Check condition: cmp $0, -180(%rbp)
+	# Assuming -180(%rbp) holds the current index. 
+	# jle means Jump if Less or Equal.
+	cmpl	$0, -180(%rbp)
+	jle	LBB0_8
+
+## %bb.2:
+	jmp	LBB0_3
+
+LBB0_3:
+	# Inner Loop Header: Depth=2
+	# Load index into eax
+	movl	-180(%rbp), %eax
+	# Load length into rcx
+	movslq	-196(%rbp), %rcx
+	# Compare: cmp -176(%rbp,%rcx,4), %eax
+	# ARM64: add immediate to memory address for stride 4
+	cmpl	-176(%rbp,%rcx,4), %eax
+	jl	LBB0_5
+
+## %bb.4:
+	# Process chunk
+	movq	-192(%rbp), %rdi
+	movslq	-196(%rbp), %rax
+	# Calculate destination address: -112(%rbp) + offset_from_previous_chunk
+	# Offset calculation logic mimics leaq -112(%rbp,%rax,8)
+	movq	-112(%rbp,%rax,8), %rsi
+	# Set destination pointer to -1
+	movq	$-1, %rdx
+	# Call strcat_chk
+	callq	___strcat_chk
+	
+	# Update length
+	movslq	-196(%rbp), %rax
+	# Calculate new end address: -176(%rbp) + offset_from_current_chunk
+	movl	-176(%rbp,%rax,4), %ecx
+	# Update start address
+	movl	-180(%rbp), %eax
+	# Subtract length to get new end
+	subl	%ecx, %eax
+	# Store new end address
+	movl	%eax, -180(%rbp)
+	
+	jmp	LBB0_3
+
+LBB0_5:
+	# Outer Loop Header: Depth=1
+	# Check condition: cmp $0, -180(%rbp)
+	cmpl	$0, -180(%rbp)
+	jle	LBB0_7
+
+## %bb.6:
+	# Increment length
+	movl	-196(%rbp), %eax
+	addl	$1, %eax
+	# Store incremented length
+	movl	%eax, -196(%rbp)
+
+LBB0_7:
+	# Return to outer loop header
+	jmp	LBB0_1
+
+LBB0_8:
+	# Restore stack
+	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
+	# Copy guard value to RCX (simulating movq ...(%rax), %rcx)
+	movq	(%rax), %rax
+	# Read current index from -8(%rbp)
+	movq	-8(%rbp), %rcx
+	# Compare index against saved length
+	cmpq	%rcx, %rax
+	jne	LBB0_10
+
+## %bb.9:
+	addq	$208, %rsp
+	popq	%rbp
+	retq
+
+LBB0_10:
+	# Stack check failure
+	callq	___stack_chk_fail
+	ud2
+	.cfi_endproc
+
+
+### Key Differences Explained
+
+| Feature | x86-64 | ARMv8-A | Explanation |
+| :--- | :--- | :--- | :--- |
+| **Registers** | `RAX`, `RBX`, `RSI`, `EDI`, `ESI` | `RAX`, `RBX`, `RDI`, `ESI`, `ECX` | Used for general purpose

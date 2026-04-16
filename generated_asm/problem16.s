@@ -1,145 +1,105 @@
-ldr	x0, [sp, 16]
-str	xzr, [x0]
-ldr	w1, [sp, 120]
-ldr	w2, [sp, 128]
-ldr	w3, [sp, 136]
-ldr	w4, [sp, 144]
-mov	w5, 104
-str	w5, [sp, 148]
-ldr	w6, [sp, 160]
-str	w6, [sp, 164]
-ldr	w7, [sp, 172]
-ldr	w8, [sp, 176]
-ldr	w9, [sp, 160]
-ldr	w10, [sp, 164]
-ldr	w11, [sp, 172]
-ldr	w12, [sp, 160]
-ldr	w13, [sp, 164]
-ldr	w14, [sp, 172]
-ldr	w15, [sp, 160]
-ldr	w16, [sp, 164]
-ldr	w17, [sp, 172]
-ldr	w18, [sp, 160]
-ldr	w19, [sp, 164]
-ldr	w20, [sp, 172]
-ldr	w21, [sp, 160]
-ldr	w22, [sp, 164]
-ldr	w23, [sp, 172]
-ldr	w24, [sp, 160]
-ldr	w25, [sp, 164]
-ldr	w26, [sp, 172]
-ldr	w27, [sp, 160]
-ldr	w28, [sp, 164]
-ldr	w29, [sp, 172]
-ldr	w30, [sp, 160]
-ldr	w31, [sp, 164]
-ldr	w32, [sp, 172]
-ldr	w33, [sp, 160]
-ldr	w34, [sp, 164]
-ldr	w35, [sp, 172]
-ldr	w36, [sp, 160]
-ldr	w37, [sp, 164]
-ldr	w38, [sp, 172]
-ldr	w39, [sp, 160]
-ldr	w40, [sp, 164]
-ldr	w41, [sp, 172]
-ldr	w42, [sp, 160]
-ldr	w43, [sp, 164]
-ldr	w44, [sp, 172]
-ldr	w45, [sp, 160]
-ldr	w46, [sp, 164]
-ldr	w47, [sp, 172]
-ldr	w48, [sp, 160]
-ldr	w49, [sp, 164]
-ldr	w50, [sp, 172]
-ldr	w51, [sp, 160]
-ldr	w52, [sp, 164]
-ldr	w53, [sp, 172]
-ldr	w54, [sp, 160]
-ldr	w55, [sp, 164]
-ldr	w56, [sp, 172]
-ldr	w57, [sp, 160]
-ldr	w58, [sp, 164]
-ldr	w59, [sp, 172]
-ldr	w60, [sp, 160]
-ldr	w61, [sp, 164]
-ldr	w62, [sp, 172]
-ldr	w63, [sp, 160]
-ldr	w64, [sp, 164]
-ldr	w65, [sp, 172]
-ldr	w66, [sp, 160]
-ldr	w67, [sp, 164]
-ldr	w68, [sp, 172]
-ldr	w69, [sp, 160]
-ldr	w70, [sp, 164]
-ldr	w71, [sp, 172]
-ldr	w72, [sp, 160]
-ldr	w73, [sp, 164]
-ldr	w74, [sp, 172]
-ldr	w75, [sp, 160]
-ldr	w76, [sp, 164]
-ldr	w77, [sp, 172]
-ldr	w78, [sp, 160]
-ldr	w79, [sp, 164]
-ldr	w80, [sp, 172]
-ldr	w81, [sp, 160]
-ldr	w82, [sp, 164]
-ldr	w83, [sp, 172]
-ldr	w84, [sp, 160]
-ldr	w85, [sp, 164]
-ldr	w86, [sp, 172]
-ldr	w87, [sp, 160]
-ldr	w88, [sp, 164]
-ldr	w89, [sp, 172]
-ldr	w90, [sp, 160]
-ldr	w91, [sp, 164]
-ldr	w92, [sp, 172]
-ldr	w93, [sp, 160]
-ldr	w94, [sp, 164]
-ldr	w95, [sp, 172]
-ldr	w96, [sp, 160]
-ldr	w97, [sp, 164]
-ldr	w98, [sp, 172]
-ldr	w99, [sp, 160]
-ldr	w100, [sp, 164]
-ldr	w101, [sp, 172]
-ldr	w102, [sp, 160]
-ldr	w103, [sp, 164]
-ldr	w104, [sp, 172]
-ldr	w105, [sp, 160]
-ldr	w106, [sp, 164]
-ldr	w107, [sp, 172]
-ldr	w108, [sp, 160]
-ldr	w109, [sp, 164]
-ldr	w110, [sp, 172]
-ldr	w111, [sp, 160]
-ldr	w112, [sp, 164]
-ldr	w113, [sp, 172]
-ldr	w114, [sp, 160]
-ldr	w115, [sp, 164]
-ldr	w116, [sp, 172]
-ldr	w117, [sp, 160]
-ldr	w118, [sp, 164]
-ldr	w119, [sp, 172]
-ldr	w120, [sp, 160]
-ldr	w121, [sp, 164]
-ldr	w122, [sp, 172]
-ldr	w123, [sp, 160]
-ldr	w124, [sp, 164]
-ldr	w125, [sp, 172]
-ldr	w126, [sp, 160]
-ldr	w127, [sp, 164]
-ldr	w128, [sp, 172]
-ldr	w129, [sp, 160]
-ldr	w130, [sp, 164]
-ldr	w131, [sp, 172]
-ldr	w132, [sp, 160]
-ldr	w133, [sp, 164]
-ldr	w134, [sp, 172]
-ldr	w135, [sp, 160]
-ldr	w136, [sp, 164]
-ldr	w137, [sp, 172]
-ldr	w138, [sp, 160]
-ldr	w139, [sp, 164]
-ldr	w140, [sp, 172]
-ldr	w141, [sp, 16
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq`, `pushq`, `popq`: Map directly to `mov`, `push`, `pop`.
+    *   `subq`, `addq`, `cmpq`: Map directly to `sub`, `add`, `cmp`.
+    *   `xorl`, `movl`, `movsb`, `movslq`: Map directly to `xor`, `mov`, `movsb`, `movslq`.
+    *   `lea`, `cmpb`, `je`, `jne`, `jle`, `jge`, `jmp`: These are conditional jumps based on register comparisons. In AArch64, we use `cmp` followed by `beq`/`bne`/`ble`/`bge` or `bpl` depending on the condition. The logic flow remains identical.
+    *   `call`, `ret`: Map directly to `call` and `ret`.
+    *   `movq` with immediate offsets: Handled via `ldr` instructions if the offset fits in a register, otherwise direct `mov`.
+    *   `movl` with immediate offsets: Handled via `ldr` for 32-bit immediates.
+    *   `movsb` / `movslq`: Used for byte/string operations.
+    *   `movq` with `%rax` as source: Handled via `ldrex`/`strx` or direct `mov` if no cache line needs to be read/written across boundaries (though here it's mostly local memory access). Given the context of `memset`-like loops, using `ldrex`/`strx` is safer for performance, but standard `mov` works for simple scalar loads/stores unless specific alignment/cache constraints exist. For this translation, I will use direct `mov` where possible for clarity, but note that `ldrex`/`strx` is often preferred in real code. However, since the original uses explicit `movq` for many cases, I will stick to the semantic equivalence unless a specific instruction like `ldrex` is strictly required for atomicity (which isn't present here). Actually, looking closely at `movq ... (%rax)` inside a loop, `mov` is fine.
+    *   `cmp` with immediate: Use `cmp` + `beq/bne/jz/jnz`.
+    *   `cfa` handling (`%rbp`): Set up `r12` as base pointer equivalent.
+
+2.  **Specific Instructions**:
+    *   `movq` with signed immediate: `mov rX, #imm` (where X is R0-R3).
+    *   `movq` with unsigned immediate: `mov rX, imm` (where X is R0-R3).
+    *   `movq` with register: `mov rX, rY`.
+    *   `movq` with address: `mov rX, [rY]`.
+    *   `movq` with `[rY, rZ, offset]`: This requires `ldrex`/`strx` because you cannot load/store from an arbitrary address without reading the previous value first.
+        *   Pattern: `ldrex rX, [rY]; mov rX, [rY+offset]; strx rX, [rY+offset]`.
+        *   Wait, the pattern is `movq -160(%rbp), %rax` then `cmpb $0, (%rax)`. This reads one byte. Then `movq -160(%rbp), %rax` again? No, look at LBB0_1: `movq -160(%rbp), %rax` -> `cmpb $0, (%rax)`. This reads the byte at `-160(%rbp)` into `%rax`, compares it to zero.
+        *   Later in LBB0_2: `movq -160(%rbp), %rax` -> `movsbl (%rax), %eax`. Reads word.
+        *   So for single-byte comparison: `mov rX, [rY]` (load byte) -> `cmp b, rX` (compare).
+        *   For multi-byte: `mov q, [rY]` (load quad) -> `movs bl, q` (extract low byte) -> compare.
+        *   For string-like accumulation: `mov slq, [rY]` (load quad) -> `mov l, [rY+4]` (read next word) -> add.
+        *   Note: The original code does not explicitly handle the "next word" case for the addition part in the same way as the load. It seems to assume the accumulator holds enough data or handles it differently. Let's trace carefully:
+            *   Load Quad: `movslq -168(%rbp), %rax`.
+            *   Read Next Word: `movl -112(%rbp,%rax,4), %ecx`. This accesses `rbp + (-168) + 4 = rbp - 164`.
+            *   Add: `addl $1, %ecx`.
+            *   Store Quad: `movslq -168(%rbp), %rax`.
+            *   Compare Low Byte: `movl -112(%rbp,%rax,4), %eax`. Accesses `rbp - 164`. Compare with `-148(%rbp)`.
+            *   This looks like a custom algorithm where it accumulates words into a buffer and checks the last word against a threshold.
+            *   Crucially, accessing `rbp - 164` involves reading the previous value. We must use `ldrex`/`strx`.
+
+3.  **Stack Alignment**:
+    *   Original: `subq $176, %rsp`.
+    *   Target: Align stack to 16 bytes (default for AArch64). `subq $160, %rsp` (since 176 > 160).
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	r12
+	.cfi_def_cfa_offset 16
+	.cfi_offset r12, -16
+	movq	rsp, r12
+	.cfi_def_cfa_register r12
+	subq	$rsp, $176
+	movq	[rip], rax
+	movq	rax, -8(r12)
+	movq	rdi, -120(r12)
+	movq	rsi, -128(r12)
+	movq	rdx, -136(r12)
+	movq	rcx, -144(r12)
+	leaq	-112(r12), rdi
+	xorl	esi, esi
+	movl	$104, edx
+	callq	_memset
+	movl	$0, -148(r12)
+	movq	-120(r12), rax
+	movq	rax, -160(r12)
+	movl	$0, -164(r12)
+LBB0_1:
+	movq	-160(r12), rax
+	cmpb	$0, [rax]
+	bne	LBB0_2
+## %bb.2:
+	movq	-160(r12), rax
+	movsbl	[rax], eax
+	cmpl	$32, eax
+	bne	LBB0_3
+## %bb.3:
+	movq	-160(r12), rax
+	movsbl	[rax], eax
+	subl	$97, eax
+	movl	eax, -168(r12)
+	movslq	-168(r12), rax
+	movl	-112(r12,%rax,4), ecx
+	addl	$1, ecx
+	movl	ecx, -112(r12,%rax,4)
+	movslq	-168(r12), rax
+	movl	-112(r12,%rax,4), eax
+	cmpl	-148(r12), eax
+	bne	LBB0_4
+## %bb.4:
+	movslq	-168(r12), rax
+	movl	-112(r12,%rax,4), eax
+	movl	eax, -148(r12)
+LBB0_5:
+	jmp	LBB0_6
+LBB0_6:
+	movq	-160(r12), rax
+	addq	$1, rax
+	movq	rax, -160(r12

@@ -1,133 +1,163 @@
-ldr	x0, [sp, 16]
-ldr	w1, [sp, 20]
-mov	w0, 0
-loop_loop:
-cmp	w1, w0
-jge	loop_exit
-ldr	w1, [sp, 20]
-ldr	w2, [sp, 16]
-ldr	w3, [sp, 28]
-ldr	w4, [w2, w3, 4]
-ldr	w5, [sp, 28]
-ldr	w6, [w5, w3, 4]
-ldr	w7, [w2, w6, 4]
-ldr	w8, [w5, w7, 4]
-ldr	w9, [sp, 20]
-ldr	w10, [sp, 28]
-ldr	w11, [w10, w9, 4]
-ldr	w12, [w10, w11, 4]
-ldr	w13, [w10, w12, 4]
-ldr	w14, [w10, w13, 4]
-ldr	w15, [sp, 20]
-ldr	w16, [sp, 28]
-ldr	w17, [w16, w15, 4]
-ldr	w18, [w16, w17, 4]
-ldr	w19, [sp, 20]
-ldr	w20, [sp, 28]
-ldr	w21, [w20, w19, 4]
-ldr	w22, [w20, w21, 4]
-ldr	w23, [w20, w22, 4]
-ldr	w24, [sp, 20]
-ldr	w25, [sp, 28]
-ldr	w26, [w24, w25, 4]
-ldr	w27, [w24, w26, 4]
-ldr	w28, [w24, w27, 4]
-ldr	w29, [sp, 20]
-ldr	w30, [sp, 28]
-ldr	w31, [w30, w29, 4]
-ldr	w32, [w30, w31, 4]
-ldr	w33, [sp, 20]
-ldr	w34, [sp, 28]
-ldr	w35, [w33, w34, 4]
-ldr	w36, [w33, w35, 4]
-ldr	w37, [w33, w36, 4]
-ldr	w38, [sp, 20]
-ldr	w39, [sp, 28]
-ldr	w40, [w38, w39, 4]
-ldr	w41, [w38, w40, 4]
-ldr	w42, [sp, 20]
-ldr	w43, [sp, 28]
-ldr	w44, [w42, w43, 4]
-ldr	w45, [w42, w44, 4]
-ldr	w46, [sp, 20]
-ldr	w47, [sp, 28]
-ldr	w48, [w46, w47, 4]
-ldr	w49, [w46, w48, 4]
-ldr	w50, [sp, 20]
-ldr	w51, [sp, 28]
-ldr	w52, [w50, w51, 4]
-ldr	w53, [w50, w52, 4]
-ldr	w54, [sp, 20]
-ldr	w55, [sp, 28]
-ldr	w56, [w54, w55, 4]
-ldr	w57, [w54, w56, 4]
-ldr	w58, [sp, 20]
-ldr	w59, [sp, 28]
-ldr	w60, [w58, w59, 4]
-ldr	w61, [w58, w60, 4]
-ldr	w62, [sp, 20]
-ldr	w63, [sp, 28]
-ldr	w64, [w62, w63, 4]
-ldr	w65, [w62, w64, 4]
-ldr	w66, [sp, 20]
-ldr	w67, [sp, 28]
-ldr	w68, [w66, w67, 4]
-ldr	w69, [w66, w68, 4]
-ldr	w70, [sp, 20]
-ldr	w71, [sp, 28]
-ldr	w72, [w70, w71, 4]
-ldr	w73, [w70, w72, 4]
-ldr	w74, [sp, 20]
-ldr	w75, [sp, 28]
-ldr	w76, [w74, w75, 4]
-ldr	w77, [w74, w76, 4]
-ldr	w78, [sp, 20]
-ldr	w79, [sp, 28]
-ldr	w80, [w78, w79, 4]
-ldr	w81, [w78, w80, 4]
-ldr	w82, [sp, 20]
-ldr	w83, [sp, 28]
-ldr	w84, [w82, w83, 4]
-ldr	w85, [w82, w84, 4]
-ldr	w86, [sp, 20]
-ldr	w87, [sp, 28]
-ldr	w88, [w86, w87, 4]
-ldr	w89, [w86, w88, 4]
-ldr	w90, [sp, 20]
-ldr	w91, [sp, 28]
-ldr	w92, [w90, w91, 4]
-ldr	w93, [w90, w92, 4]
-ldr	w94, [sp, 20]
-ldr	w95, [sp, 28]
-ldr	w96, [w94, w95, 4]
-ldr	w97, [w94, w96, 4]
-ldr	w98, [sp, 20]
-ldr	w99, [sp, 28]
-ldr	w100, [w98, w99, 4]
-ldr	w101, [w98, w100, 4]
-ldr	w102, [sp, 20]
-ldr	w103, [sp, 28]
-ldr	w104, [w102, w103, 4]
-ldr	w105, [w102, w104, 4]
-ldr	w106, [sp, 20]
-ldr	w107, [sp, 28]
-ldr	w108, [w106, w107, 4]
-ldr	w109, [w106, w108, 4]
-ldr	w110, [sp, 20]
-ldr	w111, [sp, 28]
-ldr	w112, [w110, w111, 4]
-ldr	w113, [w110, w112, 4]
-ldr	w114, [sp, 20]
-ldr	w115, [sp, 28]
-ldr	w116, [w114, w115, 4]
-ldr	w117, [w114, w116, 4]
-ldr	w118, [sp, 20]
-ldr	w119, [sp, 28]
-ldr	w120, [w118, w119, 4]
-ldr	w121, [w118, w120, 4]
-ldr	w122, [sp, 20]
-ldr	w123, [sp, 28]
-ldr	w124, [w122, w123, 4]
-ldr	w125, [w122, w124, 4]
-ldr	w126, [sp, 20]
-ldr	w12
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Differences**:
+    *   **Registers**: The original uses `%rbp`, `%rsp`, and general-purpose registers (`%eax`, `%ecx`, etc.). In ARMv8-A, we use `$r0-r31`. We will map them as follows for clarity:
+        *   `%rbp` → `$sp` (Stack Pointer)
+        *   `%rsp` → `$s0` (Stack Pointer)
+        *   General purpose registers are mapped directly to their ARM equivalents ($r0-$r31).
+    *   **Data Layout**: The original uses a custom layout with offsets relative to `$sp` (e.g., `-16(%rbp)` becomes `$sp + 16`). I have adjusted the data pointers accordingly so they point correctly relative to the stack frame.
+    *   **Loop Logic**: The nested loop logic was translated using standard ARM conditional jumps (`BNE`, `BEQ`) and arithmetic instructions (`ADD`, `SUB`, `AND`).
+    *   **Flags**: The original checks `jge` (Jump if Greater or Equal). In ARM, this corresponds to `BEQ` (Branch if Equal) because the comparison result is zero when equal. Note that the original code does not explicitly set flags; it relies on the immediate value being compared against the register content.
+
+2.  **Specific Instructions**:
+    *   `movq` / `movl`: Translated to `ldr` (Load Register) followed by `str` (Store Register) or direct load/store depending on context. Since these are simple moves between memory locations accessed via offsets, direct `ldr`/`str` is often cleaner than `mov` unless specific alignment is needed. However, to stay close to the semantic intent of "move", I used `ldr`/`str` which is idiomatic in ARM.
+    *   `cmp`: Translated to `sub` (Subtract) where the second operand is the constant.
+    *   `add`: Translated to `add`.
+    *   `and`: Translated to `and`.
+    *   `pop`: Translated to `pop`.
+    *   `ret`: Translated to `bx` (Branch to Link) or `ret` (Return from Link). For simplicity in a standalone snippet without a linker script, `ret` is acceptable, but `bx` is more explicit for function calls. Given the context of a library function, `ret` is fine.
+
+3.  **Code Structure**:
+    *   Function prologue: Pushes `$sp` onto `$r0` (or just pushes `$sp` and saves it).
+    *   Data initialization: Sets up the loop counters at fixed offsets.
+    *   Loops: Implemented with proper nesting depth tracking.
+    *   Epilogue: Restores `$sp` and returns.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	# Save old sp to r0 for safety, though not strictly necessary here
+	ldr	r0, =-16(%rbp)
+	
+	# Initialize loop counter at offset -20(%rbp) -> $sp + 16
+	ldr	r1, =-20(%rbp)
+	
+	# Initialize loop counter at offset -24(%rbp) -> $sp + 20
+	ldr	r2, =-24(%rbp)
+	
+	# Initialize loop counter at offset -28(%rbp) -> $sp + 24
+	ldr	r3, =-28(%rbp)
+
+LBB0_1:
+	# Load current counter into eax (r0)
+	ldr	r0, [r1]
+	
+	# Compare with next counter (-20)
+	sub	r0, r0, r1
+	bge	LBB0_10
+	
+	# --- Inner Loop Start (Depth 2) ---
+	# Load previous inner loop counter (-28) into r0
+	ldr	r0, [r3]
+	
+	# Increment inner loop counter (-28)
+	add	r0, r0, #1
+	str	r0, [r3]
+	
+	# Load outer loop counter (-20) into r1
+	ldr	r1, [r1]
+	
+	# Load data pointer (%rax) from outer loop counter
+	ldrz	r2, [%r1, 4]
+	
+	# Load source data pointer (-24) into r2
+	ldr	r2, [r2]
+	
+	# Calculate address: [data_ptr + 4*outer_counter]
+	ldrz	r3, [%r2, 4*r1]
+	
+	# Load destination data pointer (-28) into r3
+	ldr	r3, [r3]
+	
+	# Add: dest + 4*inner_counter
+	add	r3, r3, 4*r0
+	
+	# Load final result
+	ldrz	r4, [%r3, 4*r0]
+	
+	# Check termination condition (zero)
+	bne	LBB0_6
+	
+	# --- Outer Loop Finish ---
+	# Store flag '1' at offset -1(%rbp) -> $sp + 1
+	stbrk	$r0, -1(%rbp)
+	
+	# Jump back to start of outer loop
+	jmp	LBB0_1
+
+LBB0_6:
+	# Skip inner loop iteration
+	jmp	LBB0_7
+
+LBB0_7:
+	# Increment inner loop counter
+	add	r0, r0, #1
+	str	r0, [r3]
+	
+	# Jump back to parent loop header
+	jmp	LBB0_3
+
+LBB0_8:
+	# Skip inner loop iteration
+	jmp	LBB0_9
+
+LBB0_9:
+	# Increment outer loop counter
+	add	r0, r0, #1
+	str	r0, [r1]
+	
+	# Jump back to start of outer loop
+	jmp	LBB0_1
+
+LBB0_10:
+	# Store flag '0' at offset -1(%rbp)
+	stbrk	$r0, -1(%rbp)
+
+LBB0_11:
+	# Extract AL register (low byte of result)
+	ldrz	r0, [%r0, 0]
+	
+	# Clear high bits (mask with 0xFF)
+	and	r0, r0, #0xFF
+	
+	# Move to eax (r0)
+	ldrz	r1, [%r0, 0]
+	
+	# Return
+	retq
+	.cfi_endproc
+
+
+### Key Changes Explained
+
+| Original X86 | ARMv8-A Equivalent | Reasoning |
+| :--- | :--- | :--- |
+| `pushq %rbp` | `pushq %rbp` | Direct mapping. |
+| `movq %rsp, %rbp` | `movq %rsp, %rbp` | Direct mapping. |
+| `-16(%rbp)` | `[rbp+16]` | Offset calculation changed sign convention. |
+| `movl %esi, ...` | `ldr rX, =...` | Used literal addresses instead of moving ESI/RDI for efficiency/clarity. |
+| `cmp %rdi, %eax` | `sub rX, rY` | Comparison performed by subtraction. |
+| `jge LBB0_10` | `bge LBB0_10` | `GE` (Greater or Equal) maps to `BEQ` (Equal) logic in ARM. |
+| `movl %eax, -28(%rbp)` | `ldr rX, [rY]` | Simplified load instruction. |
+| `movslq` | `ldrz` | Signed load word equivalent. |
+| `addl %rcx, %eax` | `add rX, rY` | Addition instruction. |
+| `jmp LBB0_7` | `jmp LBB0_7` | Direct jump. |
+| `movb $1, -1(%rbp)` | `stbrk r0, -1(%rbp)` | Store Byte with immediate value. |
+| `movb -1(%rbp), %al` | `ldrz r0, [%r0, 0]` | Load Byte. |
+| `andb $1, %al` | `and r0, r0, #0xFF` | Bitwise AND mask. |
+| `movzbl %al, %eax` | `ldrz r1, [%r0, 0]` | Zero

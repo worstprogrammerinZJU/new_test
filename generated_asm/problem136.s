@@ -1,155 +1,90 @@
-ldr	x0, [sp, 16]
-ldr	w1, [sp, 20]
-ldr	w2, [sp, 24]
-ldr	w3, [sp, 28]
-ldr	w4, [sp, 32]
-ldr	w5, [sp, 20]
-ldr	w6, [sp, 24]
-ldr	w7, [sp, 28]
-ldr	w8, [sp, 32]
-ldr	w9, [sp, 20]
-ldr	w10, [sp, 24]
-ldr	w11, [sp, 28]
-ldr	w12, [sp, 32]
-ldr	w13, [sp, 20]
-ldr	w14, [sp, 24]
-ldr	w15, [sp, 28]
-ldr	w16, [sp, 32]
-ldr	w17, [sp, 20]
-ldr	w18, [sp, 24]
-ldr	w19, [sp, 28]
-ldr	w20, [sp, 32]
-ldr	w21, [sp, 20]
-ldr	w22, [sp, 24]
-ldr	w23, [sp, 28]
-ldr	w24, [sp, 32]
-ldr	w25, [sp, 20]
-ldr	w26, [sp, 24]
-ldr	w27, [sp, 28]
-ldr	w28, [sp, 32]
-ldr	w29, [sp, 20]
-ldr	w30, [sp, 24]
-ldr	w31, [sp, 28]
-ldr	w32, [sp, 32]
-ldr	w33, [sp, 20]
-ldr	w34, [sp, 24]
-ldr	w35, [sp, 28]
-ldr	w36, [sp, 32]
-ldr	w37, [sp, 20]
-ldr	w38, [sp, 24]
-ldr	w39, [sp, 28]
-ldr	w40, [sp, 32]
-ldr	w41, [sp, 20]
-ldr	w42, [sp, 24]
-ldr	w43, [sp, 28]
-ldr	w44, [sp, 32]
-ldr	w45, [sp, 20]
-ldr	w46, [sp, 24]
-ldr	w47, [sp, 28]
-ldr	w48, [sp, 32]
-ldr	w49, [sp, 20]
-ldr	w50, [sp, 24]
-ldr	w51, [sp, 28]
-ldr	w52, [sp, 32]
-ldr	w53, [sp, 20]
-ldr	w54, [sp, 24]
-ldr	w55, [sp, 28]
-ldr	w56, [sp, 32]
-ldr	w57, [sp, 20]
-ldr	w58, [sp, 24]
-ldr	w59, [sp, 28]
-ldr	w60, [sp, 32]
-ldr	w61, [sp, 20]
-ldr	w62, [sp, 24]
-ldr	w63, [sp, 28]
-ldr	w64, [sp, 32]
-ldr	w65, [sp, 20]
-ldr	w66, [sp, 24]
-ldr	w67, [sp, 28]
-ldr	w68, [sp, 32]
-ldr	w69, [sp, 20]
-ldr	w70, [sp, 24]
-ldr	w71, [sp, 28]
-ldr	w72, [sp, 32]
-ldr	w73, [sp, 20]
-ldr	w74, [sp, 24]
-ldr	w75, [sp, 28]
-ldr	w76, [sp, 32]
-ldr	w77, [sp, 20]
-ldr	w78, [sp, 24]
-ldr	w79, [sp, 28]
-ldr	w80, [sp, 32]
-ldr	w81, [sp, 20]
-ldr	w82, [sp, 24]
-ldr	w83, [sp, 28]
-ldr	w84, [sp, 32]
-ldr	w85, [sp, 20]
-ldr	w86, [sp, 24]
-ldr	w87, [sp, 28]
-ldr	w88, [sp, 32]
-ldr	w89, [sp, 20]
-ldr	w90, [sp, 24]
-ldr	w91, [sp, 28]
-ldr	w92, [sp, 32]
-ldr	w93, [sp, 20]
-ldr	w94, [sp, 24]
-ldr	w95, [sp, 28]
-ldr	w96, [sp, 32]
-ldr	w97, [sp, 20]
-ldr	w98, [sp, 24]
-ldr	w99, [sp, 28]
-ldr	w100, [sp, 32]
-ldr	w101, [sp, 20]
-ldr	w102, [sp, 24]
-ldr	w103, [sp, 28]
-ldr	w104, [sp, 32]
-ldr	w105, [sp, 20]
-ldr	w106, [sp, 24]
-ldr	w107, [sp, 28]
-ldr	w108, [sp, 32]
-ldr	w109, [sp, 20]
-ldr	w110, [sp, 24]
-ldr	w111, [sp, 28]
-ldr	w112, [sp, 32]
-ldr	w113, [sp, 20]
-ldr	w114, [sp, 24]
-ldr	w115, [sp, 28]
-ldr	w116, [sp, 32]
-ldr	w117, [sp, 20]
-ldr	w118, [sp, 24]
-ldr	w119, [sp, 28]
-ldr	w120, [sp, 32]
-ldr	w121, [sp, 20]
-ldr	w122, [sp, 24]
-ldr	w123, [sp, 28]
-ldr	w124, [sp, 32]
-ldr	w125, [sp, 20]
-ldr	w126, [sp, 24]
-ldr	w127, [sp, 28]
-ldr	w128, [sp, 32]
-ldr	w129, [sp, 20]
-ldr	w130, [sp, 24]
-ldr	w131, [sp, 28]
-ldr	w132, [sp, 32]
-ldr	w133, [sp, 20]
-ldr	w134, [sp, 24]
-ldr	w135, [sp, 28]
-ldr	w136, [sp, 32]
-ldr	w137, [sp, 20]
-ldr	w138, [sp, 24]
-ldr	w139, [sp, 28]
-ldr	w140, [sp, 32]
-ldr	w141, [sp, 20]
-ldr	w142, [sp, 24]
-ldr	w143, [sp, 28]
-ldr	w144, [sp, 32]
-ldr	w145, [sp, 20]
-ldr	w146, [sp, 24]
-ldr	w147, [sp, 28]
-ldr	w148, [sp, 32]
-ldr	w149, [sp, 20]
-ldr	w150, [sp, 24]
-ldr	w151, [sp, 28]
-ldr	w152, [sp, 32]
-ldr	w153, [sp, 20]
-ldr	w
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Differences**:
+    *   **Registers**: The original uses `%rbp`, `%rsp`, and general-purpose registers (`%eax`, `%ebx`, etc.). In ARMv8-A, we use `%r0-r15`. I will map them as follows for clarity:
+        *   `%rbp` → `%r12` (Base Pointer)
+        *   `%rsp` → `%r13` (Stack Pointer)
+        *   `%rdi` → `%r11`
+        *   `%rsi` → `%r10`
+        *   `%rdx` → `%r9`
+        *   `%rcx` → `%r8`
+        *   `%r12` → `%r7`
+        *   `%r13` → `%r6`
+        *   `%r14` → `%r5`
+        *   `%r15` → `%r4`
+    *   **Data Types**: The original mixes `movl` (32-bit) and `movq` (64-bit). To maintain performance characteristics similar to the original while using standard ARM types, I have used `movl` where a 32-bit value suffices and `movq` where a 64-bit value is needed (e.g., pointers or large offsets).
+    *   **Loop Logic**: The original contains complex loop headers (`LBB0_1`, `LBB0_4`, `LBB0_8`) with specific spilling/loading logic. This indicates a highly optimized inner-loop algorithm (likely related to integer division or multiplication with carry propagation). I have preserved this exact control flow structure but adapted the register names and addressing modes.
+    *   **Special Instructions**:
+        *   `cltd`: Used to clear the top of the stack pointer (SPTR) before loading/store operations. In ARM, this is typically done via `subq $16, %sp` followed by `addq $16, %sp` or simply ensuring the SP is aligned. However, since the original relies on `idivl` which expects an aligned SP, I will ensure the SP alignment is respected manually if necessary, though `cltd` usually implies clearing the high bits of the SP register itself. In pure ARM, you cannot "clear" the SP register directly; you must adjust it. Given the context of `idivl`, the assumption is that the compiler ensured alignment. I will keep the explicit `cltd` instruction style but note that in native ARM, this might be replaced by adjusting the SP offset. For strict fidelity to the source's intent regarding stack alignment during load/store cycles, I will retain the concept of preparing the stack pointer.
+        *   `setle`: Sets the lower half of the result to zero if the upper half was less than or equal to zero.
+        *   `andb`: Bitwise AND with immediate.
+        *   `movzbl`: Move Zeroed Byte Load (loads from memory only if byte is non-zero).
+
+2.  **Addressing Modes**:
+    *   Original: `-16(%rbp)` (Relative offset).
+    *   ARM: `[r12, #-16]` or `[r12, #-16]`.
+    *   Original: `(%rax,%rcx,4)` (Load from address + offset*4).
+    *   ARM: `[rax, r8, #4]` or `[rax, r8, #4]`.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %r12
+	.cfi_def_cfa_register %r12
+	movl	%r11, -16(%r12)              ## %rdi -> [-16(%r12)]
+	movl	%r10, -20(%r12)             ## %rsi -> [-20(%r12)]
+	movl	%r9, -24(%r12)              ## %rdx -> [-24(%r12)]
+	movl	$0, -28(%r12)               ## %rcx -> [-28(%r12)]
+	movl	$0, -32(%r12)               ## %r12 -> [-32(%r12)]
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movl	-32(%r12), %r0               ## movl -32(%rbp), %eax
+	movl	%r0, -36(%r12)              ## 4-byte Spill
+	movl	-20(%r12), %r0              ## movl -20(%rbp), %eax
+	movl	$2, %r3                     ## movl $2, %ecx
+	cltd                             ## Clear Top of Stack Pointer (Align SP)
+	idivl	%r3                      ## idivl %ecx (Note: cltd ensures alignment)
+	movl	%r0, %r3                   ## movl %eax, %ecx
+	movl	-36(%r12), %r0             ## movl -36(%rbp), %eax
+	cmpl	%r3, %r0                  ## cmpl %ecx, %eax
+	jge	LBB0_6                     ## jge LBB0_6
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-16(%r12), %r1                ## movq -16(%rbp), %rax
+	movslq	-32(%r12), %r8              ## movslq -32(%rbp), %rcx
+	movl	(%r1, %r8, 4), %r0           ## movl (%rax,%rcx,4), %eax
+	movq	-16(%r12), %r8              ## movq -16(%rbp), %rcx
+	movl	-20(%r12), %r9              ## movl -20(%rbp), %edx
+	subl	$1, %r9                    ## subl $1, %edx
+	subl	-32(%r12), %r9              ## subl -32(%rbp), %edx
+	movslq	%r9, %r10                ## movslq %edx, %rdx
+	cmpl	(%r8, %r10, 4), %r0        ## cmpl (%rcx,%rdx,4), %eax
+	je	LBB0_4                       ## je LBB0_4
+## %bb.3:
+	movb	$0, -1(%r12)                ## movb $0, -1(%rbp)
+	jmp	LBB0_9                       ## jmp LBB0_9
+LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
+	movq	-16(%r12), %r1                ## movq -16(%rbp), %rax
+	movslq	-32(%r12), %r8              ## movslq -32(%rbp), %rcx
+	movl	(%r1, %r8, 4), %r0           ## movl (%rax,%rcx,4), %eax
+	movq	-16(%r12), %r8              ## movq -16(%rbp), %rcx
+	movl	-20(%r12), %r9              ## movl -20(%rbp), %edx
+	subl	$1, %r9                    ## subl $1, %edx
+	subl	-32(%r12), %r9              ## subl -32(%rbp), %edx
+	movslq	%r9, %r10                ## movslq %edx, %rdx
+	addl	(%r8, %r10, 4), %r0         ## addl (%rcx,%rdx,4), %eax
+	addl	-28(%r12), %r0              ## addl -28(%rbp), %eax
+	movl	%r0, -28(%r12)              ## movl %eax, -28(%rbp)
+## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-32(%r12), %r0               ## movl -3

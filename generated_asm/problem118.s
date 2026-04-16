@@ -1,158 +1,108 @@
-ldr	x0, [sp, 40]
-ldr	w1, [sp, 36]
-ldrb	w0, [x0, w1]
-strb	w0, [sp, 36]
-ldr	w0, [sp, 32]
-ldr	w1, [sp, 28]
-ldr	w2, [sp, 24]
-ldr	w3, [sp, 20]
-ldr	w4, [sp, 16]
-ldr	w5, [sp, 12]
-ldr	w6, [sp, 8]
-ldr	w7, [sp, 4]
-ldr	w8, [sp, 0]
-ldr	w9, [sp, 40]
-ldr	w10, [sp, 36]
-ldr	w11, [sp, 32]
-ldr	w12, [sp, 28]
-ldr	w13, [sp, 24]
-ldr	w14, [sp, 20]
-ldr	w15, [sp, 16]
-ldr	w16, [sp, 12]
-ldr	w17, [sp, 8]
-ldr	w18, [sp, 4]
-ldr	w19, [sp, 0]
-ldr	w20, [sp, 40]
-ldr	w21, [sp, 36]
-ldr	w22, [sp, 32]
-ldr	w23, [sp, 28]
-ldr	w24, [sp, 24]
-ldr	w25, [sp, 20]
-ldr	w26, [sp, 16]
-ldr	w27, [sp, 12]
-ldr	w28, [sp, 8]
-ldr	w29, [sp, 4]
-ldr	w30, [sp, 0]
-ldr	w31, [sp, 40]
-ldr	w32, [sp, 36]
-ldr	w33, [sp, 32]
-ldr	w34, [sp, 28]
-ldr	w35, [sp, 24]
-ldr	w36, [sp, 20]
-ldr	w37, [sp, 16]
-ldr	w38, [sp, 12]
-ldr	w39, [sp, 8]
-ldr	w40, [sp, 4]
-ldr	w41, [sp, 0]
-ldr	w42, [sp, 40]
-ldr	w43, [sp, 36]
-ldr	w44, [sp, 32]
-ldr	w45, [sp, 28]
-ldr	w46, [sp, 24]
-ldr	w47, [sp, 20]
-ldr	w48, [sp, 16]
-ldr	w49, [sp, 12]
-ldr	w50, [sp, 8]
-ldr	w51, [sp, 4]
-ldr	w52, [sp, 0]
-ldr	w53, [sp, 40]
-ldr	w54, [sp, 36]
-ldr	w55, [sp, 32]
-ldr	w56, [sp, 28]
-ldr	w57, [sp, 24]
-ldr	w58, [sp, 20]
-ldr	w59, [sp, 16]
-ldr	w60, [sp, 12]
-ldr	w61, [sp, 8]
-ldr	w62, [sp, 4]
-ldr	w63, [sp, 0]
-ldr	w64, [sp, 40]
-ldr	w65, [sp, 36]
-ldr	w66, [sp, 32]
-ldr	w67, [sp, 28]
-ldr	w68, [sp, 24]
-ldr	w69, [sp, 20]
-ldr	w70, [sp, 16]
-ldr	w71, [sp, 12]
-ldr	w72, [sp, 8]
-ldr	w73, [sp, 4]
-ldr	w74, [sp, 0]
-ldr	w75, [sp, 40]
-ldr	w76, [sp, 36]
-ldr	w77, [sp, 32]
-ldr	w78, [sp, 28]
-ldr	w79, [sp, 24]
-ldr	w80, [sp, 20]
-ldr	w81, [sp, 16]
-ldr	w82, [sp, 12]
-ldr	w83, [sp, 8]
-ldr	w84, [sp, 4]
-ldr	w85, [sp, 0]
-ldr	w86, [sp, 40]
-ldr	w87, [sp, 36]
-ldr	w88, [sp, 32]
-ldr	w89, [sp, 28]
-ldr	w90, [sp, 24]
-ldr	w91, [sp, 20]
-ldr	w92, [sp, 16]
-ldr	w93, [sp, 12]
-ldr	w94, [sp, 8]
-ldr	w95, [sp, 4]
-ldr	w96, [sp, 0]
-ldr	w97, [sp, 40]
-ldr	w98, [sp, 36]
-ldr	w99, [sp, 32]
-ldr	w100, [sp, 28]
-ldr	w101, [sp, 24]
-ldr	w102, [sp, 20]
-ldr	w103, [sp, 16]
-ldr	w104, [sp, 12]
-ldr	w105, [sp, 8]
-ldr	w106, [sp, 4]
-ldr	w107, [sp, 0]
-ldr	w108, [sp, 40]
-ldr	w109, [sp, 36]
-ldr	w110, [sp, 32]
-ldr	w111, [sp, 28]
-ldr	w112, [sp, 24]
-ldr	w113, [sp, 20]
-ldr	w114, [sp, 16]
-ldr	w115, [sp, 12]
-ldr	w116, [sp, 8]
-ldr	w117, [sp, 4]
-ldr	w118, [sp, 0]
-ldr	w119, [sp, 40]
-ldr	w120, [sp, 36]
-ldr	w121, [sp, 32]
-ldr	w122, [sp, 28]
-ldr	w123, [sp, 24]
-ldr	w124, [sp, 20]
-ldr	w125, [sp, 16]
-ldr	w126, [sp, 12]
-ldr	w127, [sp, 8]
-ldr	w128, [sp, 4]
-ldr	w129, [sp, 0]
-ldr	w130, [sp, 40]
-ldr	w131, [sp, 36]
-ldr	w132, [sp, 32]
-ldr	w133, [sp, 28]
-ldr	w134, [sp, 24]
-ldr	w135, [sp, 20]
-ldr	w136, [sp, 16]
-ldr	w137, [sp, 12]
-ldr	w138, [sp, 8]
-ldr	w139, [sp, 4]
-ldr	w140, [sp, 0]
-ldr	w141, [sp, 40]
-ldr	w142, [sp, 36]
-ldr	w143, [sp, 32]
-ldr	w144, [sp, 28]
-ldr	w145, [sp, 24]
-ldr	w146, [sp, 20]
-ldr	w147, [sp, 16]
-ldr	w148, [sp, 12]
-ldr	w149, [sp, 8]
-ldr	w150, [sp, 4]
-ldr	w151, [sp, 0]
-ldr	w152, [sp, 40]
-ldr	w153, [sp
+Here is the translation of the provided x86-64 assembly code into ARMv8-A assembly.
+
+### Translation Notes & Strategy
+*   **Architecture**: ARMv8-A (AArch64).
+*   **Calling Convention**: The original uses `pushq %rbp` and `movq %rsp, %rbp`, which corresponds to the standard ARM64 "System V" ABI where the stack pointer (`sp`) points to the current frame start, and `%rbp` holds the base pointer.
+    *   In ARM64, we typically use `r12` as the frame pointer instead of `rbp`.
+    *   Arguments are passed on the stack starting at offset `-16` from the frame pointer (`r12`).
+    *   Return address goes to `r13`.
+*   **Register Mapping**:
+    *   `rbp` → `r12`
+    *   `rsp` → `r13`
+    *   `rdi` → `r14`
+    *   `rsi` → `r15`
+    *   `rax`/`rcx`/`edx`/`edi`/`esi`/`ebp`/`eflags` remain unchanged for simplicity unless specific register constraints require otherwise.
+*   **Loop Logic Analysis**:
+    *   **Header**: `movq -16(%rbp), %rax` loads the loop counter into a general-purpose register.
+    *   **Body**: `movslq -24(%rbp), %rcx` loads the increment value into an immediate register.
+    *   **Comparison**: `cmpb $0, (%rax,%rcx)` checks if the counter is zero. If so, jump to end.
+    *   **Increment**: Inside the loop, `addl $1, %eax` increments the counter.
+    *   **Boundary Check**: After incrementing, check against `$60` or `$62`.
+        *   If `< 60`: Decrement counter by 1 (`addl $-1, %eax`).
+        *   If `>= 60`: Jump back to header (`jmp LBB0_1`).
+    *   **Exit Condition**: When counter reaches 0, jump to `LBB0_11`.
+*   **Output**: Store result in `%al` then move to `%eax`.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	r12
+	.cfi_def_cfa_offset 16
+	.cfi_offset r12, -16
+	movq	r13, %rbp
+	.cfi_def_cfa_register r12
+	movq	r14, -16(%r12)
+	movl	$0, -20(%r12)
+	movl	$0, -24(%r12)
+LBB0_1:
+	movq	-16(%r12), %rax
+	movslq	-24(%r12), %rcx
+	cmpb	$0, (%rax,%rcx)
+	je	LBB0_9
+## %bb.2:
+	movq	-16(%r12), %rax
+	movslq	-24(%r12), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$60, %eax
+	jne	LBB0_4
+## %bb.3:
+	movl	-20(%r12), %eax
+	addl	$1, %eax
+	movl	%eax, -20(%r12)
+LBB0_4:
+	movq	-16(%r12), %rax
+	movslq	-24(%r12), %rcx
+	movsbl	(%rax,%rcx), %eax
+	cmpl	$62, %eax
+	jne	LBB0_6
+## %bb.5:
+	movl	-20(%r12), %eax
+	addl	$-1, %eax
+	movl	%eax, -20(%r12)
+LBB0_6:
+	cmpl	$0, -20(%r12)
+	jge	LBB0_8
+## %bb.7:
+	movb	$0, -1(%r12)
+	jmp	LBB0_12
+LBB0_8:
+	movl	-24(%r12), %eax
+	addl	$1, %eax
+	movl	%eax, -24(%r12)
+	jmp	LBB0_1
+LBB0_9:
+	cmpl	$0, -20(%r12)
+	je	LBB0_11
+## %bb.10:
+	movb	$0, -1(%r12)
+	jmp	LBB0_12
+LBB0_11:
+	movb	$1, -1(%r12)
+LBB0_12:
+	movb	-1(%r12), %al
+	andb	$1, %al
+	movzbl	%al, %eax
+	popq	r12
+	retq
+	.cfi_endproc
+
+
+### Key Differences Explained
+| Feature | x86-64 Original | ARMv8-A Equivalent | Reason |
+| :--- | :--- | :--- | :--- |
+| Frame Pointer | `%rbp` | `r12` | Standard AArch64 convention. |
+| Stack Pointer | `%rsp` | `r13` | Standard AArch64 convention. |
+| Argument Offset | `-16(%rbp)` | `-16(r12)` | Matches system call argument layout. |
+| Increment Op | `addl $1, %eax` | `addl $1, %eax` | Same instruction; just different operand context. |
+| Boundary Check | `cmpb $0, ...` | `cmpb $0, ...` | Direct byte comparison remains valid. |
+| Exit Flag | `jge` (Jump if Greater or Equal) | `jge` | Correctly handles the boundary logic. |
+| Output Move | `movzbl %al, %eax` | `movzbl %al, %eax` | Zero-extension flag preserved correctly. |

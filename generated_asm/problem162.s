@@ -1,140 +1,87 @@
-ldr	x0, [sp, 40]
-mov	w1, 0
-ldr	x0, [sp, 40]
-str	w1, [x0]
-ldr	w0, [sp, 40]
-ldr	w1, [sp, 40]
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 40]
-ldr	x2, [sp, 40]
-ldr	w0, [x1]
-ldr	w1, [x1, 4]
-ldr	w2, [x1, 8]
-ldr	w3, [x1, 12]
-ldr	w4, [x1, 16]
-ldr	w5, [x1, 20]
-ldr	w6, [x1, 24]
-ldr	w7, [x1, 28]
-ldr	w8, [x1, 32]
-ldr	w9, [x1, 36]
-ldr	w10, [x1, 40]
-ldr	w11, [x1, 44]
-ldr	w12, [x1, 48]
-ldr	w13, [x1, 52]
-ldr	w14, [x1, 56]
-ldr	w15, [x1, 60]
-ldr	w16, [x1, 64]
-ldr	w17, [x1, 68]
-ldr	w18, [x1, 72]
-ldr	w19, [x1, 76]
-ldr	w20, [x1, 80]
-ldr	w21, [x1, 84]
-ldr	w22, [x1, 88]
-ldr	w23, [x1, 92]
-ldr	w24, [x1, 96]
-ldr	w25, [x1, 100]
-ldr	w26, [x1, 104]
-ldr	w27, [x1, 108]
-ldr	w28, [x1, 112]
-ldr	w29, [x1, 116]
-ldr	w30, [x1, 120]
-ldr	w31, [x1, 124]
-ldr	w32, [x1, 128]
-ldr	w33, [x1, 132]
-ldr	w34, [x1, 136]
-ldr	w35, [x1, 140]
-ldr	w36, [x1, 144]
-ldr	w37, [x1, 148]
-ldr	w38, [x1, 152]
-ldr	w39, [x1, 156]
-ldr	w40, [x1, 160]
-ldr	w41, [x1, 164]
-ldr	w42, [x1, 168]
-ldr	w43, [x1, 172]
-ldr	w44, [x1, 176]
-ldr	w45, [x1, 180]
-ldr	w46, [x1, 184]
-ldr	w47, [x1, 188]
-ldr	w48, [x1, 192]
-ldr	w49, [x1, 196]
-ldr	w50, [x1, 200]
-ldr	w51, [x1, 204]
-ldr	w52, [x1, 208]
-ldr	w53, [x1, 212]
-ldr	w54, [x1, 216]
-ldr	w55, [x1, 220]
-ldr	w56, [x1, 224]
-ldr	w57, [x1, 228]
-ldr	w58, [x1, 232]
-ldr	w59, [x1, 236]
-ldr	w60, [x1, 240]
-ldr	w61, [x1, 244]
-ldr	w62, [x1, 248]
-ldr	w63, [x1, 252]
-ldr	w64, [x1, 256]
-ldr	w65, [x1, 260]
-ldr	w66, [x1, 264]
-ldr	w67, [x1, 268]
-ldr	w68, [x1, 272]
-ldr	w69, [x1, 276]
-ldr	w70, [x1, 280]
-ldr	w71, [x1, 284]
-ldr	w72, [x1, 288]
-ldr	w73, [x1, 292]
-ldr	w74, [x1, 296]
-ldr	w75, [x1, 300]
-ldr	w76, [x1, 304]
-ldr	w77, [x1, 308]
-ldr	w78, [x1, 312]
-ldr	w79, [x1, 316]
-ldr	w80, [x1, 320]
-ldr	w81, [x1, 324]
-ldr	w82, [x1, 328]
-ldr	w83, [x1, 332]
-ldr	w84, [x1, 336]
-ldr	w85, [x1, 340]
-ldr	w86, [x1, 344]
-ldr	w87, [x1, 348]
-ldr	w88, [x1, 352]
-ldr	w89, [x1, 356]
-ldr	w90, [x1, 360]
-ldr	w91, [x1, 364]
-ldr	w92, [x1, 368]
-ldr	w93, [x1, 372]
-ldr	w94, [x1, 376]
-ldr	w95, [x1, 380]
-ldr	w96, [x1, 384]
-ldr	w97, [x1, 388]
-ldr	w98, [x1, 392]
-ldr	w99, [x1, 396]
-ldr	w100, [x1, 400]
-ldr	w101, [x1, 404]
-ldr	w102, [x1, 408]
-ldr	w103, [x1, 412]
-ldr	w104, [x1, 416]
-ldr	w105, [x1, 420]
-ldr	w106, [x1, 424]
-ldr	w107, [x1, 428]
-ldr	w108, [x1, 432]
-ldr	w109, [x1, 436]
-ldr	w110, [x1, 440]
-ldr	w111, [x1, 444]
-ldr	w112, [x1, 448]
-ldr	w113, [x1, 452]
-ldr	w114, [x1, 456]
-ldr	w115, [x1, 460]
-ldr	w116, [x1, 464]
-ldr	w117, [x1, 468]
-ldr	w118, [x1, 472]
-ldr	w119, [x1, 476]
-ldr	w120, [x1, 480]
-ldr	w121, [x1, 484]
-ldr	w122, [x1, 488]
-ldr	w123, [x1, 492]
-ldr	w124, [x1, 496]
-ldr	w125, [x1, 500]
-ldr	w126, [x1, 504]
-ldr	w127, [x1, 508]
-ldr	w128, [x1, 512]
-ldr	w129, [x1, 516]
-ldr	w130, [x1
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Differences**:
+    *   **Registers**: `x86` uses `%rbp`, `%rsp`. `ARMv8-A` uses `$sp` (stack pointer) and `$r0-r31` (general purpose registers). The stack frame layout must be adjusted accordingly (`push {r0...}` instead of `pushq %rbp`).
+    *   **Memory Access**: `x86` uses signed/unsigned offsets with base addresses. `ARMv8-A` uses immediate values for offsets relative to a register or address. The instruction `movl $0, (%rax)` becomes `movs r0, #0; movs r1, [r0]`.
+    *   **Division**: `idiv` on x86 returns quotient in `edx` and remainder in `eax`. In ARM, `div` takes two operands and returns quotient in `r0` and remainder in `r1`.
+    *   **Loop Logic**: The loop logic (checking bounds, incrementing counters) was translated line-by-line while preserving the control flow structure.
+    *   **Functionality**: The original code calls `_malloc` (likely `mmap` or similar system call) and performs arithmetic checks. The translation assumes these are valid instructions available in standard ARM toolchains (e.g., GCC ARM Embedded Toolchain). If specific libc functions like `malloc` aren't present, they will be replaced with manual memory management placeholders.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	push {r0, r1, r2, r3}                  ## Equivalent to pushq %rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %sp, -16
+	mov sp, rbp                           ## movq %rsp, %rbp -> mov sp, rbp
+	.cfi_def_cfa_register %sp              ## cfi_offset %rbp, -16 -> cfi_offset %sp, -16
+	sub sp, $48                           ## subq $48, %rsp -> sub sp, $48
+	mov r0, rdi                           ## movl %edi, -4(%rbp) -> mov r0, rdi
+	mov r1, rsi                           ## movq %rsi, -16(%rbp) -> mov r1, rsi
+	mul r0, r1                            ## movslq -4(%rbp), %rdi -> mul r0, r1
+	shl r0, $2                            ## shlq $2, %rdi -> shld r0, r1, #2
+	call _malloc                          ## callq _malloc
+	mov r0, rax                           ## movq %rax, -24(%rbp) -> mov r0, rax
+	mov r1, -16(%rbp)                     ## movq -16(%rbp), %rax -> mov r1, r1
+	mov r2, #0                            ## movl $0, (%rax) -> movs r2, #0
+	mov r3, #2                            ## movl $2, -28(%rbp) -> movs r3, #2
+LBB0_1:                                 ## =>This Loop Header: Depth=1
+                                        ##     Child Loop BB0_3 Depth 2
+	mov r0, -28(%rbp)                     ## movl -28(%rbp), %eax -> mov r0, r0
+	bic r0, r0                            ## cmp -4(%rbp), %eax -> cmp r0, r0
+	bge LBB0_14                           ## jge LBB0_14 -> bge LBB0_14
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	mov r0, #1                            ## movl $1, -36(%rbp) -> movs r0, #1
+	mov r1, #0                            ## movl $0, -32(%rbp) -> movs r1, #0
+LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
+                                        ## =>  This Inner Loop Header: Depth=2
+	mov r0, -32(%rbp)                     ## movl -32(%rbp), %eax -> mov r0, r0
+	mov r1, -16(%rbp)                     ## movq -16(%rbp), %rcx -> mov r1, r1
+	bic r0, r0                            ## cmp (%rcx), %eax -> cmp r1, r0
+	bge LBB0_10                           ## jge LBB0_10 -> bge LBB0_10
+## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
+	mov r0, -24(%rbp)                     ## movq -24(%rbp), %rax -> mov r0, r0
+	mul r0, r1                            ## movslq -32(%rbp), %rcx -> mul r0, r1
+	mov r1, r0                            ## movl (%rax,%rcx,4), %eax -> mov r1, r0
+	mov r2, r0                            ## movl %eax, -40(%rbp) -> movs r2, r0
+	mov r3, r0                            ## movl -40(%rbp), %eax -> movs r3, r0
+	mull r0, r1                           ## imull -40(%rbp), %eax -> mull r0, r1
+	bic r0, r0                            ## cmp -28(%rbp), %eax -> bic r0, r0
+	ble LBB0_6                            ## jle LBB0_6 -> ble LBB0_6
+## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
+	jmp LBB0_10                           ## jmp LBB0_10
+LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=2
+	mov r0, -28(%rbp)                     ## movl -28(%rbp), %eax -> mov r0, r0
+	stc                                   ## cltd -> stc
+	div r0, r1                            ## idivl -40(%rbp) -> div r0, r1
+	bic r0, r0                            ## cmp $0, %edx -> bic r0, r0
+	bne LBB0_8                            ## jne LBB0_8 -> bne LBB0_8
+## %bb.7:                               ##   in Loop: Header=BB0_1 Depth=1
+	mov r0, #0                            ## movl $0, -36(%rbp) -> movs r0, #0
+	jmp LBB0_10                           ## jmp LBB0_10
+LBB0_8:                                 ##   in Loop: Header=BB0_3 Depth=2
+	jmp LBB0_9                            ## jmp LBB0_9
+LBB0_9:                                 ##   in Loop: Header=BB0_3 Depth=2
+	mov r0, -32(%rbp)                     ## movl -32(%rbp), %eax -> mov r0, r0
+	add r0, #1                            ## addl $1, %eax -> add r0, #1
+	mov r1, r0                            ## movl %eax, -32(%rbp) -> movs r1, r0
+	jmp LBB0_3                            ## jmp LBB0_3
+LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
+	bic r0, r0                            ## cmp $0, -36(%rbp) -> bic r0, r0
+	be LBB0_12                            ## je LBB0_12 -> be LBB0_12
+## %bb.11:                              ##   in Loop: Header=BB0_1 Depth=1
+	mov r0, -28(%rbp)                     ## movl -28(%rbp), %edx -> mov r0, r0
+	mov r1, -24(%rbp)                    ## movq -24(%rbp), %rax -> mov r1, r1
+	mov r2, -16(%rbp)                   ## movq -16(%rbp), %rcx -> mov r2, r1
+	mul r0, r2                            ## movslq (%rcx), %rcx -> mul r0, r2
+	mov r0, r0                            ## movl %edx, (%rax,%rcx,

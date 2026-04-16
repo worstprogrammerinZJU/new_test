@@ -1,148 +1,211 @@
-ldr	x0, [sp, 24]
-ldr	w1, [sp, 12]
-ldr	w2, [sp, 16]
-ldr	xzr, [sp, 28]
-loop_outer:
-ldr	w0, [x0]
-ldr	w1, [w1]
-sub	w1, w1, 1
-cmp	w0, w1
-jg	loop_inner
-ldr	w0, [sp, 32]
-ldr	w1, [sp, 12]
-ldr	w2, [sp, 16]
-ldr	w3, [sp, 28]
-ldr	w4, [sp, 40]
-ldr	w5, [sp, 48]
-ldr	w6, [sp, 56]
-ldr	w7, [sp, 64]
-ldr	w8, [sp, 72]
-ldr	w9, [sp, 80]
-ldr	w10, [sp, 88]
-ldr	w11, [sp, 96]
-ldr	w12, [sp, 104]
-ldr	w13, [sp, 112]
-ldr	w14, [sp, 120]
-ldr	w15, [sp, 128]
-ldr	w16, [sp, 136]
-ldr	w17, [sp, 144]
-ldr	w18, [sp, 152]
-ldr	w19, [sp, 160]
-ldr	w20, [sp, 168]
-ldr	w21, [sp, 176]
-ldr	w22, [sp, 184]
-ldr	w23, [sp, 192]
-ldr	w24, [sp, 200]
-ldr	w25, [sp, 208]
-ldr	w26, [sp, 216]
-ldr	w27, [sp, 224]
-ldr	w28, [sp, 232]
-ldr	w29, [sp, 240]
-ldr	w30, [sp, 248]
-ldr	w31, [sp, 256]
-ldr	w32, [sp, 264]
-ldr	w33, [sp, 272]
-ldr	w34, [sp, 280]
-ldr	w35, [sp, 288]
-ldr	w36, [sp, 296]
-ldr	w37, [sp, 304]
-ldr	w38, [sp, 312]
-ldr	w39, [sp, 320]
-ldr	w40, [sp, 328]
-ldr	w41, [sp, 336]
-ldr	w42, [sp, 344]
-ldr	w43, [sp, 352]
-ldr	w44, [sp, 360]
-ldr	w45, [sp, 368]
-ldr	w46, [sp, 376]
-ldr	w47, [sp, 384]
-ldr	w48, [sp, 392]
-ldr	w49, [sp, 400]
-ldr	w50, [sp, 408]
-ldr	w51, [sp, 416]
-ldr	w52, [sp, 424]
-ldr	w53, [sp, 432]
-ldr	w54, [sp, 440]
-ldr	w55, [sp, 448]
-ldr	w56, [sp, 456]
-ldr	w57, [sp, 464]
-ldr	w58, [sp, 472]
-ldr	w59, [sp, 480]
-ldr	w60, [sp, 488]
-ldr	w61, [sp, 496]
-ldr	w62, [sp, 504]
-ldr	w63, [sp, 512]
-ldr	w64, [sp, 520]
-ldr	w65, [sp, 528]
-ldr	w66, [sp, 536]
-ldr	w67, [sp, 544]
-ldr	w68, [sp, 552]
-ldr	w69, [sp, 560]
-ldr	w70, [sp, 568]
-ldr	w71, [sp, 576]
-ldr	w72, [sp, 584]
-ldr	w73, [sp, 592]
-ldr	w74, [sp, 600]
-ldr	w75, [sp, 608]
-ldr	w76, [sp, 616]
-ldr	w77, [sp, 624]
-ldr	w78, [sp, 632]
-ldr	w79, [sp, 640]
-ldr	w80, [sp, 648]
-ldr	w81, [sp, 656]
-ldr	w82, [sp, 664]
-ldr	w83, [sp, 672]
-ldr	w84, [sp, 680]
-ldr	w85, [sp, 688]
-ldr	w86, [sp, 696]
-ldr	w87, [sp, 704]
-ldr	w88, [sp, 712]
-ldr	w89, [sp, 720]
-ldr	w90, [sp, 728]
-ldr	w91, [sp, 736]
-ldr	w92, [sp, 744]
-ldr	w93, [sp, 752]
-ldr	w94, [sp, 760]
-ldr	w95, [sp, 768]
-ldr	w96, [sp, 776]
-ldr	w97, [sp, 784]
-ldr	w98, [sp, 792]
-ldr	w99, [sp, 800]
-ldr	w100, [sp, 808]
-ldr	w101, [sp, 816]
-ldr	w102, [sp, 824]
-ldr	w103, [sp, 832]
-ldr	w104, [sp, 840]
-ldr	w105, [sp, 848]
-ldr	w106, [sp, 856]
-ldr	w107, [sp, 864]
-ldr	w108, [sp, 872]
-ldr	w109, [sp, 880]
-ldr	w110, [sp, 888]
-ldr	w111, [sp, 896]
-ldr	w112, [sp, 904]
-ldr	w113, [sp, 912]
-ldr	w114, [sp, 920]
-ldr	w115, [sp, 928]
-ldr	w116, [sp, 936]
-ldr	w117, [sp, 944]
-ldr	w118, [sp, 952]
-ldr	w119, [sp, 960]
-ldr	w120, [sp, 968]
-ldr	w121, [sp, 976]
-ldr	w122, [sp, 984]
-ldr	w123, [sp, 992]
-ldr	w124, [sp, 1000]
-ldr	w125, [sp, 1008]
-ldr	w126, [sp, 1016]
-ldr	w127, [sp, 1024]
-ldr	w128, [sp, 1032]
-ldr	w129, [sp, 1040]
-ldr	w130, [sp, 1048]
-ldr	w131, [sp, 1056]
-ldr	w132, [sp, 1064]
-ldr	w133, [sp, 1072]
-ldr	w134, [sp, 1080]
-ldr	w135, [sp, 1088]
-ldr	w136, [sp, 1096]
-ldr	w137, [sp,
+Here is the translation of the provided x86-64 assembly code into ARMv8-A assembly.
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq` (64-bit) $\rightarrow$ `mov q` (ARM64).
+    *   `movl` (32-bit) $\rightarrow$ `mov r` or `mov w`.
+    *   Register names are preserved where possible (`%rbp`, `%rsp`, `%rdi`, etc.), but standard ARM64 conventions apply (e.g., using `r0-r15`).
+    *   The stack pointer (`%rsp`) maps directly to `sp`.
+    *   The base register (`%rbp`) maps to `rbp`.
+    *   Negative offsets like `-8(%rbp)` translate to `sub sp, #8, rbp` followed by a load/store with an offset relative to `rbp`.
+2.  **Loop Logic**:
+    *   The original code uses a complex loop structure with multiple inner loops and conditional jumps based on signed comparisons (`jge`, `jle`). These are translated as direct `cmp` instructions followed by `b` (branch) instructions.
+    *   The logic inside the loops involves adding 1 to counters and comparing against loop headers.
+3.  **Specific Instructions**:
+    *   `pushq` / `popq`: `push {r0-r15}` / `pop {r0-r15}`.
+    *   `retq`: `ret`.
+    *   `cfi_startproc` / `cfi_endproc`: Removed for clean ARM syntax.
+    *   `@func0`: Renamed to `_func0`.
+    *   `__TEXT...`: Removed from final executable output.
+
+### ARMv8-A Assembly Code
+
+
+.section	_text, "reg", "progbits"
+.global	func0
+.func	func0
+.type	func0, @function
+
+_func0:
+	.size	func0, .-func0
+
+_push_frame:
+	push {r0-r15}
+	sub sp, #16
+	mov sp, rsp
+	mov rbp, rsp
+	mov rdi, -8(rbp)
+	mov rsi, -12(rbp)
+	mov edx, -16(rbp)
+	mov rcx, -24(rbp)
+	mov rax, $0
+.LBB0_1:
+	mov rax, -28(rbp)
+	mov ecx, -12(rbp)
+	sub ecx, $1
+	cmp rax, ecx
+	bge LBB0_10
+
+	mov rax, $0
+.LBB0_3:
+	mov rax, -32(rbp)
+	mov ecx, -12(rbp)
+	sub ecx, -28(rbp)
+	sub ecx, $1
+	cmp rax, ecx
+	bge LBB0_8
+
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rdx, rdx
+	mov rax, -8(rbp)
+	mov ecx, -32(rbp)
+	add ecx, $1
+	mov rdx, ecx
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov ecx, -32(rbp)
+	add ecx, $1
+	mov rdx, ecx
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov ecx, -32(rbp)
+	add ecx, $1
+	mov rdx, ecx
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov ecx, -32(rbp)
+	add ecx, $1
+	mov rdx, ecx
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov rdx, -32(rbp)
+	add rdx, $1
+	mov rax, -8(rbp)
+	mov r

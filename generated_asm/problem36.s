@@ -1,193 +1,149 @@
-section	__TEXT,__text,regular,pure_instructions
-.build_version	macos, 13, 0	sdk_version 13, 3
-.global	func0
-	p2align	4, 0x90
-func0:
-	cfi_startproc
+Here is the translation of the provided `x86-64` assembly code into `ARMv8-A` (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq`, `movl`, `addl`, etc., are translated to `MOVQ`, `MOVW`, and `ADDW`.
+    *   `cmp` instructions use `CMP` with immediate values or register comparisons.
+    *   `sub`, `imul`, `div`, `shl`, `clt`, `idiv` are mapped to their AArch64 equivalents (`SUB`, `IMUL`, `DIV`, `SHL`, `CLTD`, `IDIV`).
+    *   `call`, `ret` remain as `CALL` and `RET`.
+    *   Register names follow standard conventions: `%rbp` → `$sp`, `%rsp` → `$sp`, `%rdi` → `$r0`, `%rsi` → `$r1`, `%edx` → `$r2`, `%rcx` → `$r3`, `%rax` → `$r4`, `%eax` → `$r5`, etc.
+    *   Memory addressing modes:
+        *   `[base + offset]` becomes `[base + imm]`.
+        *   `[base + offset*size]` uses `ADDW`/`SUBW` for small offsets or `LDW`/`STW` for larger ones.
+        *   The loop header logic (`LBB0_1`, `LBB0_3`, etc.) represents nested loops. In ARM, we typically flatten these by using a single outer loop that iterates over the inner loop's state variables, or keep them if they represent distinct control flow paths. Given the structure, I will translate the explicit labels but note that the "inner" logic often gets optimized away in high-level ARM code unless specific hardware constraints exist. However, to preserve the exact instruction sequence requested, I will map the logical blocks directly.
+2.  **Loop Logic Preservation**:
+    *   The code contains complex nested loops (e.g., `LBB0_1` -> `LBB0_3` -> `LBB0_6`).
+    *   In pure ARM assembly without inline assembly helpers, this requires manual iteration. For example, `LBB0_1` pushes data, compares it against a threshold, jumps back if true.
+    *   The `malloc` call at `LBB0_22` is preserved exactly.
+    *   The `idiv` logic inside `LBB0_24` involves checking the sign bit of the result before division; this must be handled carefully.
+3.  **Specific Instructions**:
+    *   `cld` / `icl`: Used for signed integer division.
+    *   `cltd`: Clears the top carry flag before division.
+    *   `idiv`: Performs signed division.
+    *   `movslq`: Signed multiply.
+    *   `movw`: Unsigned word move (used where unsigned comparison was implied, though some ARM ops handle signed implicitly depending on context; here we stick to the source semantics).
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
 ## %bb.0:
-	pushq	xsp
-	cfi_def_cfa_offset 16
-	cfi_offset xsp, -16
-	xsp, [sp]
-	subq	xsp, 64
-	xor	w0, w0
-	xor	w1, w1
-	xor	w2, w2
-	xor	w3, w3
-	xor	w4, w4
-	xor	w5, w5
-	xor	w6, w6
-	xor	w7, w7
-	xor	w8, w8
-	xor	w9, w9
-	xor	w10, w10
-	xor	w11, w11
-	xor	w12, w12
-	xor	w13, w13
-	xor	w14, w14
-	xor	w15, w15
-	xor	w16, w16
-	xor	w17, w17
-	xor	w18, w18
-	xor	w19, w19
-	xor	w20, w20
-	xor	w21, w21
-	xor	w22, w22
-	xor	w23, w23
-	xor	w24, w24
-	xor	w25, w25
-	xor	w26, w26
-	xor	w27, w27
-	xor	w28, w28
-	xor	w29, w29
-	xor	w30, w30
-	xor	w31, w31
-	xor	w32, w32
-	xor	w33, w33
-	xor	w34, w34
-	xor	w35, w35
-	xor	w36, w36
-	xor	w37, w37
-	xor	w38, w38
-	xor	w39, w39
-	xor	w40, w40
-	xor	w41, w41
-	xor	w42, w42
-	xor	w43, w43
-	xor	w44, w44
-	xor	w45, w45
-	xor	w46, w46
-	xor	w47, w47
-	xor	w48, w48
-	xor	w49, w49
-	xor	w50, w50
-	xor	w51, w51
-	xor	w52, w52
-	xor	w53, w53
-	xor	w54, w54
-	xor	w55, w55
-	xor	w56, w56
-	xor	w57, w57
-	xor	w58, w58
-	xor	w59, w59
-	xor	w60, w60
-	xor	w61, w61
-	xor	w62, w62
-	xor	w63, w63
-	xor	w64, w64
-	xor	w65, w65
-	xor	w66, w66
-	xor	w67, w67
-	xor	w68, w68
-	xor	w69, w69
-	xor	w70, w70
-	xor	w71, w71
-	xor	w72, w72
-	xor	w73, w73
-	xor	w74, w74
-	xor	w75, w75
-	xor	w76, w76
-	xor	w77, w77
-	xor	w78, w78
-	xor	w79, w79
-	xor	w80, w80
-	xor	w81, w81
-	xor	w82, w82
-	xor	w83, w83
-	xor	w84, w84
-	xor	w85, w85
-	xor	w86, w86
-	xor	w87, w87
-	xor	w88, w88
-	xor	w89, w89
-	xor	w90, w90
-	xor	w91, w91
-	xor	w92, w92
-	xor	w93, w93
-	xor	w94, w94
-	xor	w95, w95
-	xor	w96, w96
-	xor	w97, w97
-	xor	w98, w98
-	xor	w99, w99
-	xor	w100, w100
-	xor	w101, w101
-	xor	w102, w102
-	xor	w103, w103
-	xor	w104, w104
-	xor	w105, w105
-	xor	w106, w106
-	xor	w107, w107
-	xor	w108, w108
-	xor	w109, w109
-	xor	w110, w110
-	xor	w111, w111
-	xor	w112, w112
-	xor	w113, w113
-	xor	w114, w114
-	xor	w115, w115
-	xor	w116, w116
-	xor	w117, w117
-	xor	w118, w118
-	xor	w119, w119
-	xor	w120, w120
-	xor	w121, w121
-	xor	w122, w122
-	xor	w123, w123
-	xor	w124, w124
-	xor	w125, w125
-	xor	w126, w126
-	xor	w127, w127
-	xor	w128, w128
-	xor	w129, w129
-	xor	w130, w130
-	xor	w131, w131
-	xor	w132, w132
-	xor	w133, w133
-	xor	w134, w134
-	xor	w135, w135
-	xor	w136, w136
-	xor	w137, w137
-	xor	w138, w138
-	xor	w139, w139
-	xor	w140, w140
-	xor	w141, w141
-	xor	w142, w142
-	xor	w143, w143
-	xor	w144, w144
-	xor	w145, w145
-	xor	w146, w146
-	xor	w147, w147
-	xor	w148, w148
-	xor	w149, w149
-	xor	w150, w150
-	xor	w151, w151
-	xor	w152, w152
-	xor	w153, w153
-	xor	w154, w154
-	xor	w155, w155
-	xor	w156, w156
-	xor	w157, w157
-	xor	w158, w158
-	xor	w159, w159
-	xor	w160, w160
-	xor	w161, w161
-	xor	w162, w162
-	xor	w163, w163
-	xor	w164, w164
-	xor	w165, w165
-	xor	w166, w166
-	xor	w167, w167
-	xor	w168, w168
-	xor	w169, w169
-	xor	w170, w170
-	xor	w171, w171
-	xor	w172, w172
-	xor	w173, w173
-	xor	w174, w174
-	xor	w175, w175
-	xor	w176, w176
-	xor	w177, w177
-	xor	w178, w178
-	xor	w179, w179
-	xor
+	pushq	%s0
+	.cfi_def_cfa_offset 16
+	.cfi_offset %sp, -16
+	movq	%s0, %sp
+	.cfi_def_cfa_register %sp
+	subq	$64, %sp
+	movq	%s0, -8(%sp)
+	movl	%s0, -12(%sp)
+	movl	%s0, -16(%sp)
+	movq	%s0, -24(%sp)
+	movl	$0, -28(%sp)
+LBB0_1:
+	movl	-28(%sp), %r0
+	cmp	-12(%sp), %r0
+	jge	LBB0_10
+## %bb.2:
+	movl	$0, -32(%sp)
+LBB0_3:
+	movl	-32(%sp), %r0
+	cmp	-12(%sp), %r0
+	jge	LBB0_8
+## %bb.4:
+	movq	-8(%sp), %r4
+	movslq	-28(%sp), %r3
+	movq	(%r4,%r3,8), %r4
+	movslq	-32(%sp), %r3
+	cmp	$1, (%r4,%r3,4)
+jne	LBB0_6
+## %bb.5:
+	movl	-28(%sp), %r0
+	movl	%r0, -36(%sp)
+	movl	-32(%sp), %r0
+	movl	%r0, -40(%sp)
+LBB0_6:
+	jmp	LBB0_7
+LBB0_7:
+	movl	-32(%sp), %r0
+	addl	$1, %r0
+	movl	%r0, -32(%sp)
+	jmp	LBB0_3
+LBB0_8:
+	jmp	LBB0_9
+LBB0_9:
+	movl	-28(%sp), %r0
+	addl	$1, %r0
+	movl	%r0, -28(%sp)
+	jmp	LBB0_1
+LBB0_10:
+	movl	-12(%sp), %r0
+	imull	-12(%sp), %r0
+	movl	%r0, -44(%sp)
+	cmp	$0, -36(%sp)
+jle	LBB0_13
+## %bb.11:
+	movq	-8(%sp), %r4
+	movl	-36(%sp), %r3
+	subl	$1, %r3
+	movslq	%r3, %r3
+	movq	(%r4,%r3,8), %r4
+	movslq	-40(%sp), %r3
+	movl	(%r4,%r3,4), %r0
+	cmp	-44(%sp), %r0
+jge	LBB0_13
+## %bb.12:
+	movq	-8(%sp), %r4
+	movl	-36(%sp), %r3
+	subl	$1, %r3
+	movslq	%r3, %r3
+	movq	(%r4,%r3,8), %r4
+	movslq	-40(%sp), %r3
+	movl	(%r4,%r3,4), %r0
+	movl	%r0, -44(%sp)
+LBB0_13:
+	movl	-36(%sp), %r0
+	movl	-12(%sp), %r3
+	subl	$1, %r3
+	cmp	%r3, %r0
+jge	LBB0_16
+## %bb.14:
+	movq	-8(%sp), %r4
+	movl	-36(%sp), %r3
+	addl	$1, %r3
+	movslq	%r3, %r3
+	movq	(%r4,%r3,8), %r4
+	movslq	-40(%sp), %r3
+	movl	(%r4,%r3,4), %r0
+	cmp	-44(%sp), %r0
+jge	LBB0_16
+## %bb.15:
+	movq	-8(%sp), %r4
+	movl	-36(%sp), %r3
+	addl	$1, %r3
+	movslq	%r3, %r3
+	movq	(%r4,%r3,8), %r4
+	movslq	-40(%sp), %r3
+	movl	(%r4,%r3,4), %r0
+	movl	%r0, -44(%sp)
+LBB0_16:
+	cmp	$0, -40(%sp)
+jle	LBB0_19
+## %bb.17:
+	movq	-8(%sp), %r4
+	movslq	-36(%sp), %r3
+	movq	(%r4,%r3,8), %r4
+	movl	-40(%sp), %r3
+	subl	$1, %r3
+	movslq	%r3, %r3
+	movl	(%r4,%r3,4), %r0
+	cmp	-44(%sp), %r0
+jge	LBB0_19
+## %bb.18:
+	movq	-8(%

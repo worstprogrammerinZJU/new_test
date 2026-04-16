@@ -1,157 +1,112 @@
-ldr	x0, [sp, 16]
-ldr	w1, [sp, 20]
-ldr	x1, [sp, 32]
-ldr	w2, [sp, 36]
-ldr	w3, [sp, 40]
-ldrb	w4, [w1]
-cmp	w4, w3
-jg	LBB0_8
-ldr	x0, [sp, 16]
-ldr	w1, [sp, 44]
-ldr	w2, [x0, w1, 4]
-ldr	w3, [sp, 36]
-ldr	w4, [sp, 40]
-ldr	w5, [sp, 44]
-strb	w4, [sp, 36]
-strb	w5, [sp, 40]
-ldr	w4, [sp, 44]
-ldr	w5, [sp, 40]
-ldr	w6, [sp, 44]
-ldr	w7, [sp, 40]
-ldr	w8, [sp, 44]
-ldr	w9, [sp, 40]
-ldr	w10, [sp, 44]
-ldr	w11, [sp, 40]
-ldr	w12, [sp, 44]
-ldr	w13, [sp, 40]
-ldr	w14, [sp, 44]
-ldr	w15, [sp, 40]
-ldr	w16, [sp, 44]
-ldr	w17, [sp, 40]
-ldr	w18, [sp, 44]
-ldr	w19, [sp, 40]
-ldr	w20, [sp, 44]
-ldr	w21, [sp, 40]
-ldr	w22, [sp, 44]
-ldr	w23, [sp, 40]
-ldr	w24, [sp, 44]
-ldr	w25, [sp, 40]
-ldr	w26, [sp, 44]
-ldr	w27, [sp, 40]
-ldr	w28, [sp, 44]
-ldr	w29, [sp, 40]
-ldr	w30, [sp, 44]
-ldr	w31, [sp, 40]
-ldr	w32, [sp, 44]
-ldr	w33, [sp, 40]
-ldr	w34, [sp, 44]
-ldr	w35, [sp, 40]
-ldr	w36, [sp, 44]
-ldr	w37, [sp, 40]
-ldr	w38, [sp, 44]
-ldr	w39, [sp, 40]
-ldr	w40, [sp, 44]
-ldr	w41, [sp, 40]
-ldr	w42, [sp, 44]
-ldr	w43, [sp, 40]
-ldr	w44, [sp, 44]
-ldr	w45, [sp, 40]
-ldr	w46, [sp, 44]
-ldr	w47, [sp, 40]
-ldr	w48, [sp, 44]
-ldr	w49, [sp, 40]
-ldr	w50, [sp, 44]
-ldr	w51, [sp, 40]
-ldr	w52, [sp, 44]
-ldr	w53, [sp, 40]
-ldr	w54, [sp, 44]
-ldr	w55, [sp, 40]
-ldr	w56, [sp, 44]
-ldr	w57, [sp, 40]
-ldr	w58, [sp, 44]
-ldr	w59, [sp, 40]
-ldr	w60, [sp, 44]
-ldr	w61, [sp, 40]
-ldr	w62, [sp, 44]
-ldr	w63, [sp, 40]
-ldr	w64, [sp, 44]
-ldr	w65, [sp, 40]
-ldr	w66, [sp, 44]
-ldr	w67, [sp, 40]
-ldr	w68, [sp, 44]
-ldr	w69, [sp, 40]
-ldr	w70, [sp, 44]
-ldr	w71, [sp, 40]
-ldr	w72, [sp, 44]
-ldr	w73, [sp, 40]
-ldr	w74, [sp, 44]
-ldr	w75, [sp, 40]
-ldr	w76, [sp, 44]
-ldr	w77, [sp, 40]
-ldr	w78, [sp, 44]
-ldr	w79, [sp, 40]
-ldr	w80, [sp, 44]
-ldr	w81, [sp, 40]
-ldr	w82, [sp, 44]
-ldr	w83, [sp, 40]
-ldr	w84, [sp, 44]
-ldr	w85, [sp, 40]
-ldr	w86, [sp, 44]
-ldr	w87, [sp, 40]
-ldr	w88, [sp, 44]
-ldr	w89, [sp, 40]
-ldr	w90, [sp, 44]
-ldr	w91, [sp, 40]
-ldr	w92, [sp, 44]
-ldr	w93, [sp, 40]
-ldr	w94, [sp, 44]
-ldr	w95, [sp, 40]
-ldr	w96, [sp, 44]
-ldr	w97, [sp, 40]
-ldr	w98, [sp, 44]
-ldr	w99, [sp, 40]
-ldr	w100, [sp, 44]
-ldr	w101, [sp, 40]
-ldr	w102, [sp, 44]
-ldr	w103, [sp, 40]
-ldr	w104, [sp, 44]
-ldr	w105, [sp, 40]
-ldr	w106, [sp, 44]
-ldr	w107, [sp, 40]
-ldr	w108, [sp, 44]
-ldr	w109, [sp, 40]
-ldr	w110, [sp, 44]
-ldr	w111, [sp, 40]
-ldr	w112, [sp, 44]
-ldr	w113, [sp, 40]
-ldr	w114, [sp, 44]
-ldr	w115, [sp, 40]
-ldr	w116, [sp, 44]
-ldr	w117, [sp, 40]
-ldr	w118, [sp, 44]
-ldr	w119, [sp, 40]
-ldr	w120, [sp, 44]
-ldr	w121, [sp, 40]
-ldr	w122, [sp, 44]
-ldr	w123, [sp, 40]
-ldr	w124, [sp, 44]
-ldr	w125, [sp, 40]
-ldr	w126, [sp, 44]
-ldr	w127, [sp, 40]
-ldr	w128, [sp, 44]
-ldr	w129, [sp, 40]
-ldr	w130, [sp, 44]
-ldr	w131, [sp, 40]
-ldr	w132, [sp, 44]
-ldr	w133, [sp, 40]
-ldr	w134, [sp, 44]
-ldr	w135, [sp, 40]
-ldr	w136, [sp, 44]
-ldr	w137, [sp, 40]
-ldr	w138, [sp, 44]
-ldr	w139, [sp, 40]
-ldr	w140, [sp, 44]
-ldr	w141, [sp, 40]
-ldr	w142, [sp, 44]
-ldr	w143, [sp, 40]
-ldr	w14
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq`, `movl`, `addl`, etc., are translated to their AArch64 equivalents (`mov q`, `mov l`, `add l`).
+    *   Signed integer operations (`cmp`, `jge`, `jl`) map directly to `cmp`, `ble`, and `blt`.
+    *   The loop logic involves a specific pattern where an accumulator (`%eax`/`%rax`) holds a value, it is added to a register holding the loop counter, then written back to memory at a calculated offset. This mimics the "incremental update" often seen in cryptographic or hash functions.
+2.  **Register Renaming**:
+    *   `rbp` -> `%r13`
+    *   `rsi` -> `%r12`
+    *   `rdi` -> `%r11`
+    *   `rdx` -> `%r10`
+    *   `r12-r15` are used for local storage if needed (though not strictly required here as registers are reused).
+3.  **Memory Layout**:
+    *   The original uses negative offsets relative to `rbp` (e.g., `-16(%rbp)`). In ARM, we use positive offsets like `[R13 + 16]` or simply `[R13+16]`.
+    *   The constant `0x7FFFFFFF` is stored at a fixed offset from `rbp`.
+4.  **Loop Logic Analysis**:
+    *   **Header**: Loads base values into registers.
+    *   **Body**: Repeatedly adds the current value to the counter, updates the data pointer, and checks bounds.
+    *   **End**: Updates the final result pointers and returns.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0
+.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %r13
+	.cfi_def_cfa_register %r13
+	movq	%r11, -16(%r13)
+	movq	%r12, -20(%r13)
+	movq	%r10, -32(%r13)
+	movq	$2147483647, -36(%r13)          ## imm = 0x7FFFFFFF
+	movq	$-1, -40(%r13)
+	movq	$0, -44(%r13)
+
+LBB0_1:
+	movq	-44(%r13), %r11
+	cmpq	-20(%r13), %r11
+	ble	LBB0_8
+## %bb.2:
+	movq	-16(%r13), %r11
+	movq	-44(%r13), %r12
+	movlq	[%r11, %r12, 4], %r11
+	movq	$2, %r12
+	bltd
+	cmpq	$0, %r10
+	bne	LBB0_6
+## %bb.3:
+	movq	-16(%r13), %r11
+	movq	-44(%r13), %r12
+	movlq	[%r11, %r12, 4], %r11
+	cmpq	-36(%r13), %r11
+	lt	LBB0_5
+## %bb.4:
+	cmpq	$-1, -40(%r13)
+	bne	LBB0_6
+LBB0_5:
+	movq	-16(%r13), %r11
+	movq	-44(%r13), %r12
+	movlq	[%r11, %r12, 4], %r11
+	movq	%r11, -36(%r13)
+	movq	-44(%r13), %r11
+	movq	%r11, -40(%r13)
+LBB0_6:
+	jmp	LBB0_7
+LBB0_7:
+	movq	-44(%r13), %r11
+	addq	$1, %r11
+	movq	%r11, -44(%r13)
+	jmp	LBB0_1
+LBB0_8:
+	cmpq	$-1, -40(%r13)
+	bne	LBB0_10
+## %bb.9:
+	movq	$0, -8(%r13)
+	jmp	LBB0_11
+LBB0_10:
+	movq	-36(%r13), %r12
+	movq	-32(%r13), %r11
+	movq	[%r11, %r12, 4], %r11
+	movq	-40(%r13), %r12
+	movq	-32(%r13), %r11
+	movq	%r11, 4(%r11)
+	movq	-32(%r13), %r11
+	movq	%r11, -8(%r13)
+LBB0_11:
+	movq	-8(%r13), %r11
+	popq	%r13
+	retq
+	.cfi_endproc
+
+
+### Key Differences Explained
+*   **Registers**: Used `%r13` instead of `rbp` for the stack frame base.
+*   **Load/Store Syntax**: Changed from `movq %reg, [offset]` to `movq [base_reg, offset, size]`. For example, `movq %rdi, -16(%rbp)` becomes `movq [%r11, -16, 4]`.
+*   **Comparison Instructions**:
+    *   `cmpl $X, Y` $\rightarrow$ `cmpq $X, Y`
+    *   `jne` $\rightarrow$ `bne`
+    *   `jl` $\rightarrow$ `lt`
+    *   `jge` $\rightarrow$ `ble`
+*   **Signedness**: Explicitly noted that signed comparisons (`cmpq`, `movq`) handle the large constants correctly without needing explicit sign-extension instructions like `sllq` or `srlq` unless comparing against negative numbers specifically (which is handled by the compiler's implicit extension when using `cmpq` with immediate values representing signed integers). Note: In this specific code, all immediate values fit within standard 32-bit signed ranges except the max int literal which fits in 32 bits anyway.
+*   **Loop Structure**: The logic inside `LBB0_1` through `LBB0_8` was condensed into a single block because the conditional jumps (`jle`, `jb`, `jg`) were replaced by direct branch labels (`lt`, `blt`, `ble`) based on the comparison results, removing the need for complex label-based conditionals.

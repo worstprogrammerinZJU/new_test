@@ -1,160 +1,74 @@
-ldr	x0, [sp, 72]
-str	xzr, [sp, 72]
-str	w0, [sp, 16]
-ldr	w1, [sp, 16]
-str	w1, [sp, 16]
-ldr	w2, [sp, 16]
-str	w2, [sp, 16]
-ldr	w3, [sp, 16]
-str	w3, [sp, 16]
-ldr	w4, [sp, 16]
-str	w4, [sp, 16]
-ldr	w5, [sp, 16]
-str	w5, [sp, 16]
-ldr	w6, [sp, 16]
-str	w6, [sp, 16]
-ldr	w7, [sp, 16]
-str	w7, [sp, 16]
-ldr	w8, [sp, 16]
-str	w8, [sp, 16]
-ldr	w9, [sp, 16]
-str	w9, [sp, 16]
-ldr	w10, [sp, 16]
-str	w10, [sp, 16]
-ldr	w11, [sp, 16]
-str	w11, [sp, 16]
-ldr	w12, [sp, 16]
-str	w12, [sp, 16]
-ldr	w13, [sp, 16]
-str	w13, [sp, 16]
-ldr	w14, [sp, 16]
-str	w14, [sp, 16]
-ldr	w15, [sp, 16]
-str	w15, [sp, 16]
-ldr	w16, [sp, 16]
-str	w16, [sp, 16]
-ldr	w17, [sp, 16]
-str	w17, [sp, 16]
-ldr	w18, [sp, 16]
-str	w18, [sp, 16]
-ldr	w19, [sp, 16]
-str	w19, [sp, 16]
-ldr	w20, [sp, 16]
-str	w20, [sp, 16]
-ldr	w21, [sp, 16]
-str	w21, [sp, 16]
-ldr	w22, [sp, 16]
-str	w22, [sp, 16]
-ldr	w23, [sp, 16]
-str	w23, [sp, 16]
-ldr	w24, [sp, 16]
-str	w24, [sp, 16]
-ldr	w25, [sp, 16]
-str	w25, [sp, 16]
-ldr	w26, [sp, 16]
-str	w26, [sp, 16]
-ldr	w27, [sp, 16]
-str	w27, [sp, 16]
-ldr	w28, [sp, 16]
-str	w28, [sp, 16]
-ldr	w29, [sp, 16]
-str	w29, [sp, 16]
-ldr	w30, [sp, 16]
-str	w30, [sp, 16]
-ldr	w31, [sp, 16]
-str	w31, [sp, 16]
-ldr	w32, [sp, 16]
-str	w32, [sp, 16]
-ldr	w33, [sp, 16]
-str	w33, [sp, 16]
-ldr	w34, [sp, 16]
-str	w34, [sp, 16]
-ldr	w35, [sp, 16]
-str	w35, [sp, 16]
-ldr	w36, [sp, 16]
-str	w36, [sp, 16]
-ldr	w37, [sp, 16]
-str	w37, [sp, 16]
-ldr	w38, [sp, 16]
-str	w38, [sp, 16]
-ldr	w39, [sp, 16]
-str	w39, [sp, 16]
-ldr	w40, [sp, 16]
-str	w40, [sp, 16]
-ldr	w41, [sp, 16]
-str	w41, [sp, 16]
-ldr	w42, [sp, 16]
-str	w42, [sp, 16]
-ldr	w43, [sp, 16]
-str	w43, [sp, 16]
-ldr	w44, [sp, 16]
-str	w44, [sp, 16]
-ldr	w45, [sp, 16]
-str	w45, [sp, 16]
-ldr	w46, [sp, 16]
-str	w46, [sp, 16]
-ldr	w47, [sp, 16]
-str	w47, [sp, 16]
-ldr	w48, [sp, 16]
-str	w48, [sp, 16]
-ldr	w49, [sp, 16]
-str	w49, [sp, 16]
-ldr	w50, [sp, 16]
-str	w50, [sp, 16]
-ldr	w51, [sp, 16]
-str	w51, [sp, 16]
-ldr	w52, [sp, 16]
-str	w52, [sp, 16]
-ldr	w53, [sp, 16]
-str	w53, [sp, 16]
-ldr	w54, [sp, 16]
-str	w54, [sp, 16]
-ldr	w55, [sp, 16]
-str	w55, [sp, 16]
-ldr	w56, [sp, 16]
-str	w56, [sp, 16]
-ldr	w57, [sp, 16]
-str	w57, [sp, 16]
-ldr	w58, [sp, 16]
-str	w58, [sp, 16]
-ldr	w59, [sp, 16]
-str	w59, [sp, 16]
-ldr	w60, [sp, 16]
-str	w60, [sp, 16]
-ldr	w61, [sp, 16]
-str	w61, [sp, 16]
-ldr	w62, [sp, 16]
-str	w62, [sp, 16]
-ldr	w63, [sp, 16]
-str	w63, [sp, 16]
-ldr	w64, [sp, 16]
-str	w64, [sp, 16]
-ldr	w65, [sp, 16]
-str	w65, [sp, 16]
-ldr	w66, [sp, 16]
-str	w66, [sp, 16]
-ldr	w67, [sp, 16]
-str	w67, [sp, 16]
-ldr	w68, [sp, 16]
-str	w68, [sp, 16]
-ldr	w69, [sp, 16]
-str	w69, [sp, 16]
-ldr	w70, [sp, 16]
-str	w70, [sp, 16]
-ldr	w71, [sp, 16]
-str	w71, [sp, 16]
-ldr	w72, [sp, 16]
-str	w72, [sp, 16]
-ldr	w73, [sp, 16]
-str	w73, [sp, 16]
-ldr	w74, [sp, 16]
-str	w74, [sp, 16]
-ldr	w75, [sp, 16]
-str	w75, [sp, 16]
-ldr	w76, [sp, 16]
-str	w76, [sp, 16]
-ldr	w77, [sp, 16]
-str	w77, [sp, 16]
-ldr	w78, [sp, 16]
-str	w78, [sp, 16]
-ldr
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Differences**:
+    *   **Registers**: The original uses `%rbp`, `%rsp`. In ARMv8, we use `$sp` and `$ra` (which acts as a pseudo-RBP for stack alignment purposes). We will assume standard calling convention where arguments are passed on the stack.
+    *   **Stack Alignment**: The original aligns at `0x90` (`0x1B0`). ARM requires strict alignment before entering a function. We must ensure `$sp` is aligned to 16 bytes.
+    *   **Calling Convention**: The original pushes `%rbp` manually. In ARM, this is done automatically by the linker/loader if using an ABI-compatible binary, but since this looks like raw inline assembly or a custom build, we will follow the explicit push/pop pattern shown in the source to maintain portability within the target context.
+    *   **Memory Model**: The original uses negative offsets relative to `%rbp`. This translates directly to positive offsets relative to `$sp` in ARM.
+    *   **Loop Logic**: The complex loop logic involving `movl`, `cltq`, `addl`, and conditional jumps needs careful mapping. The `cltq` instruction is used here likely to set up a specific register state or handle a specific memory access mode; however, without knowing the exact CPU architecture constraints of the target (e.g., whether it supports `cltq` or if it's a simplified version), I will translate the *logic* faithfully while noting that `cltq` might need adjustment depending on the actual ARM variant (e.g., NEON vs. non-NEON). Given the complexity, I will preserve the instruction names but adjust the operand sizes to match ARM64 registers ($r0-r7).
+
+2.  **Specific Instructions**:
+    *   `pushq`, `popq`: Used for stack frame management.
+    *   `subq`, `addq`: For offset calculations.
+    *   `cmp`, `jg/jne`: For conditionals.
+    *   `callq`, `retq`: Function calls and returns.
+    *   `movl`, `movslq`: Data movement.
+    *   `xorl`, `sltq` (implied): Bitwise operations.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	$r0          # Simulate %rbp with $ra/pseudo-RBP
+	.cfi_def_cfa_offset 16
+	.cfi_offset $ra, -16
+	subq	$r0, $sp, 0x1B0      # subq $432, %rsp -> subq $r0, $sp, 0x1B0
+	movq	___stack_chk_guard@GOTPCREL($pc_rel), $r0
+	movq	$r0, $r0            # movq (%rax), %rax -> movq $r0, $r0 (effectively no-op or copy)
+	movq	$r0, -8($sp)        # movq %rax, -8(%rbp) -> movq $r0, -8($sp)
+	movl	$edi, -420($sp)     # movl %edi, -420(%rbp) -> movl $edi, -420($sp)
+	lea	-416($sp), $r0      # leaq -416(%rbp), %rdi -> lea -416($sp), $r0
+	xorl	$r1, $r1            # xorl %esi, %esi -> xorl $r1, $r1
+	movl	$400, $r2           # movl $400, %edx -> movl $400, $r2
+	callq	_memset
+	movl	$0, -412($sp)       # movl $0, -412(%rbp) -> movl $0, -412($sp)
+	movl	$1, -408($sp)       # movl $1, -408(%rbp) -> movl $1, -408($sp)
+	movl	$3, -424($sp)       # movl $3, -424(%rbp) -> movl $3, -424($sp)
+
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movl	-424($sp), $r0         # movl -424(%rbp), %eax -> movl -424($sp), $r0
+	cmp	-420($sp), $r0         # cmp -420(%rbp), %eax -> cmp -420($sp), $r0
+	jge	LBB0_4                 # jg LBB0_4 -> jge LBB0_4 (since signed comparison)
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-424($sp), $r0         # movl -424(%rbp), %eax -> movl -424($sp), $r0
+	subl	$r1, $r0              # subl $1, %eax -> subl $r1, $r0
+	cltq                       # cltq (Note: On some ARM variants/clusters, this may be replaced or require specific flags; kept as-is per source)
+	movl	-416($sp,$r0,4), $r2  # movl -416(%rbp,%rax,4), %ecx -> movl -416($sp,$r0,4), $r2
+	movl	-424($sp), $r0         # movl -424(%rbp), %eax -> movl -424($sp), $r0
+	subl	$r2, $r0              # subl $2, %eax -> subl $r2, $r0
+	cltq                       # cltq
+	addl	-416($sp,$r0,4), $r2  # addl -416(%rbp,%rax,4), %ecx -> addl -416($sp,$r0,4), $r2
+	movl	-424($sp), $r0         # movl -424(%rbp), %eax -> movl -424($sp), $r0
+	movslq	-424($sp), $r3      # movslq -424(%rbp), %rax -> movslq -424($sp), $r3
+	movl	$r2, -416($sp,$r0,4)  # movl %ecx, -416(%rbp,%rax,4) -> movl $r2, -416($sp,$r0,4)
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-424($sp), $r0         # movl -424(%rbp), %eax -> movl -424($sp), $r0
+	addl	$r1, $r0              # addl $1, %eax -> addl $r1, $r0
+	movl	$r0, -424($sp)        # movl %eax, -424(%rbp) -> movl $r0, -424($sp)
+	jmp	LBB0_1                 # jmp LBB0_1 -> jmp LBB0_1
+LBB0_4:
+	movslq	-420($sp), $r3      # movslq -420(%rbp), %rax -> movslq -420($sp), $r3
+	movl	-416($sp,$r3,4), $r4  # movl -416(%rbp,%rax,4), %eax -> movl -416($sp,$r3,4), $r4
+	movl	$r4, -428($sp)        # movl %eax, -428(%rbp) -> movl $r4, -428($sp)                ## 4-byte Spill
+	movq	___stack_chk_guard@GOTPCREL($pc_rel), $r0
+	movq	$r0, $r0              # movq (%rax), %rax -> movq $r0, $r0
+	movq	-8($sp), $r3c        # movq -8(%rbp), %

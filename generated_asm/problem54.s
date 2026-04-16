@@ -1,143 +1,108 @@
-ldr	x0, [sp, 24]
-ldr	x1, [sp, 16]
-ldr	w0, [x1, 0]
-str	w0, [sp, 20]
-ldr	x0, [x1, 4]
-ldr	w1, [sp, 20]
-ldr	w2, [x0, w1]
-ldr	w3, [sp, 20]
-ldr	w4, [x0, w3]
-ldr	w5, [x0, w4]
-ldr	w6, [x0, w5]
-ldr	w7, [x0, w6]
-ldr	w8, [x0, w7]
-ldr	w9, [x0, w8]
-ldr	w10, [x0, w9]
-ldr	w11, [x0, w10]
-ldr	w12, [x0, w11]
-ldr	w13, [x0, w12]
-ldr	w14, [x0, w13]
-ldr	w15, [x0, w14]
-ldr	w16, [x0, w15]
-ldr	w17, [x0, w16]
-ldr	w18, [x0, w17]
-ldr	w19, [x0, w18]
-ldr	w20, [x0, w19]
-ldr	w21, [x0, w20]
-ldr	w22, [x0, w21]
-ldr	w23, [x0, w22]
-ldr	w24, [x0, w23]
-ldr	w25, [x0, w24]
-ldr	w26, [x0, w25]
-ldr	w27, [x0, w26]
-ldr	w28, [x0, w27]
-ldr	w29, [x0, w28]
-ldr	w30, [x0, w29]
-ldr	w31, [x0, w30]
-ldr	w32, [x0, w31]
-ldr	w33, [x0, w32]
-ldr	w34, [x0, w33]
-ldr	w35, [x0, w34]
-ldr	w36, [x0, w35]
-ldr	w37, [x0, w36]
-ldr	w38, [x0, w37]
-ldr	w39, [x0, w38]
-ldr	w40, [x0, w39]
-ldr	w41, [x0, w40]
-ldr	w42, [x0, w41]
-ldr	w43, [x0, w42]
-ldr	w44, [x0, w43]
-ldr	w45, [x0, w44]
-ldr	w46, [x0, w45]
-ldr	w47, [x0, w46]
-ldr	w48, [x0, w47]
-ldr	w49, [x0, w48]
-ldr	w50, [x0, w49]
-ldr	w51, [x0, w50]
-ldr	w52, [x0, w51]
-ldr	w53, [x0, w52]
-ldr	w54, [x0, w53]
-ldr	w55, [x0, w54]
-ldr	w56, [x0, w55]
-ldr	w57, [x0, w56]
-ldr	w58, [x0, w57]
-ldr	w59, [x0, w58]
-ldr	w60, [x0, w59]
-ldr	w61, [x0, w60]
-ldr	w62, [x0, w61]
-ldr	w63, [x0, w62]
-ldr	w64, [x0, w63]
-ldr	w65, [x0, w64]
-ldr	w66, [x0, w65]
-ldr	w67, [x0, w66]
-ldr	w68, [x0, w67]
-ldr	w69, [x0, w68]
-ldr	w70, [x0, w69]
-ldr	w71, [x0, w70]
-ldr	w72, [x0, w71]
-ldr	w73, [x0, w72]
-ldr	w74, [x0, w73]
-ldr	w75, [x0, w74]
-ldr	w76, [x0, w75]
-ldr	w77, [x0, w76]
-ldr	w78, [x0, w77]
-ldr	w79, [x0, w78]
-ldr	w80, [x0, w79]
-ldr	w81, [x0, w80]
-ldr	w82, [x0, w81]
-ldr	w83, [x0, w82]
-ldr	w84, [x0, w83]
-ldr	w85, [x0, w84]
-ldr	w86, [x0, w85]
-ldr	w87, [x0, w86]
-ldr	w88, [x0, w87]
-ldr	w89, [x0, w88]
-ldr	w90, [x0, w89]
-ldr	w91, [x0, w90]
-ldr	w92, [x0, w91]
-ldr	w93, [x0, w92]
-ldr	w94, [x0, w93]
-ldr	w95, [x0, w94]
-ldr	w96, [x0, w95]
-ldr	w97, [x0, w96]
-ldr	w98, [x0, w97]
-ldr	w99, [x0, w98]
-ldr	w100, [x0, w99]
-ldr	w101, [x0, w100]
-ldr	w102, [x0, w101]
-ldr	w103, [x0, w102]
-ldr	w104, [x0, w103]
-ldr	w105, [x0, w104]
-ldr	w106, [x0, w105]
-ldr	w107, [x0, w106]
-ldr	w108, [x0, w107]
-ldr	w109, [x0, w108]
-ldr	w110, [x0, w109]
-ldr	w111, [x0, w110]
-ldr	w112, [x0, w111]
-ldr	w113, [x0, w112]
-ldr	w114, [x0, w113]
-ldr	w115, [x0, w114]
-ldr	w116, [x0, w115]
-ldr	w117, [x0, w116]
-ldr	w118, [x0, w117]
-ldr	w119, [x0, w118]
-ldr	w120, [x0, w119]
-ldr	w121, [x0, w120]
-ldr	w122, [x0, w121]
-ldr	w123, [x0, w122]
-ldr	w124, [x0, w123]
-ldr	w125, [x0, w124]
-ldr	w126, [x0, w125]
-ldr	w127, [x0, w126]
-ldr	w128, [x0, w127]
-ldr	w129, [x0, w128]
-ldr	w130, [x0, w129]
-ldr	w131, [x0, w130]
-ldr	w132, [x0, w131]
-ldr	w133, [x0, w132]
-ldr	w134, [x0, w133]
-ldr	w135, [x0, w134]
-ldr	w136, [x0, w135]
-ldr	w137, [x0, w136]
-ldr	w138, [x0, w13
+Here is the translation of the provided x86-64 assembly code into ARMv8-A assembly.
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movl` (Load 32-bit): Maps directly to `ldr`.
+    *   `movq` (Load 64-bit): Maps directly to `ldp`.
+    *   `addl`, `subl`, `cmp`: Map directly to `add`, `sub`, and `cmp`.
+    *   `idivl` (Divide Integer Long): In ARMv8, this maps to `divs` with a specific instruction set feature (`FPU DIVS`) or simply `divs` if using FPU instructions. Since the original uses `cltd` (clear top of data segment register) before division, it implies an integer-only context where `divs` is preferred for performance over `movaap` + `divs`. However, standard `divs` on ARMv8 often requires setting up the registers manually. The most direct equivalent without assuming complex FPU state setup is `divs r0, r1, r2`.
+    *   `cltd`: This clears the Top of Data Segment Register (TDSR). On ARMv8, we can simulate this by clearing the upper bits of the TDSR using `movsrs` or by explicitly clearing the relevant bits in the TDSR register itself via `movsrs` followed by masking, but usually, `divs` handles the sign extension automatically if the source is signed. To strictly mimic `cltd` behavior which ensures the result is treated as signed regardless of overflow, we will use `divs` which performs signed division. If strict hardware emulation of "clearing the top" is required beyond just signed arithmetic, one would need to manipulate the TDSR, but `divs` is the functional equivalent for signed integer division.
+    *   `pushq`/`popq`: Maps to `stmdb sp!, {r0-r15}` / `ldmdb sp!, {r0-r15}`.
+    *   `cfa` adjustments: We must adjust the stack pointer offset based on the loop depth logic.
+
+2.  **Loop Logic Analysis**:
+    *   **Outer Loop (LBB0_1)**: Iterates while `idx < 10`. It loads `idx` from memory, compares, and jumps back if condition met.
+    *   **Inner Loop (LBB0_4)**: Iterates while `idx < 10`. It calculates `val = idx * 10`. Then checks if `val >= 10`. If so, it decrements `idx` and repeats. Note that the inner loop header says `Depth=2`, implying two levels of nesting, but looking at the structure:
+        *   LBB0_1 runs once per outer iteration.
+        *   Inside LBB0_1, there is a block starting at LBB0_4.
+        *   LBB0_4 checks `idx < 10`. If true, it enters another check inside LBB0_4? No, wait.
+        *   Let's re-read carefully:
+            *   `LBB0_1`: Checks `idx < 10`. If false -> jump to `LBB0_12`.
+            *   `LBB0_4`: Checks `idx < 10`. If false -> jump to `LBB0_6`.
+            *   Wait, the headers say `Depth=1` then `Depth=2`.
+            *   Actually, looking at the labels:
+                *   `LBB0_1` is the main entry point.
+                *   `LBB0_4` is inside `LBB0_1`.
+                *   `LBB0_6` is inside `LBB0_4`.
+                *   `LBB0_9` is inside `LBB0_6`.
+                *   `LBB0_10` is inside `LBB0_9`.
+            *   This looks like a nested loop structure where the condition changes.
+            *   Outer loop condition: `idx < 10`.
+            *   Inner loop condition: `idx < 10` (in LBB0_4) AND `val < 10` (in LBB0_6)?
+            *   Let's trace the flow again:
+                1. `LBB0_1`: Load `idx`. Check `< 10`. Jump to `LBB0_12` if not.
+                2. `LBB0_4`: Load `idx`. Calculate `val = idx * 10`. Check `< 10`. Jump to `LBB0_6` if not.
+                3. `LBB0_6`: Load `val`. Check `< 10`. Jump to `LBB0_9` if not.
+                4. `LBB0_9`: Load `val`. Add 1. Check `< 10`. Jump to `LBB0_10` if not.
+                5. `LBB0_10`: Jump to `LBB0_11`.
+                6. `LBB0_11`: Update `idx` (incremented previously?). Jump to `LBB0_1`.
+            *   Correction on `LBB0_11`: It does `addl $1, %eax` (where `%eax` holds `idx`). So `idx++`. Then jumps to `LBB0_1`.
+            *   So the total logic is: While `idx < 10`, calculate `val = idx * 10`. While `val < 10`, do something else?
+            *   Actually, let's look at the `LBB0_6` body: `movl -24(%rbp), %eax; movl -24(%rbp), %eax; ...`. It seems to be doing some accumulation or adjustment.
+            *   Regardless of the exact math, the control flow is sequential. I will translate the labels sequentially.
+
+3.  **Register Allocation**:
+    *   `rbp` is used as the frame pointer.
+    *   Arguments are passed in `rdi` (-8), `esi` (-12).
+    *   Loop counters are stored in memory relative to `rbp`.
+    *   Stack grows down.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section __TEXT,__text,regular,pure_instructions
+.build_version macOS, 13, 0 sdk_version 13, 3
+.globl _func0
+.p2align 4, 0x90
+_func0:
+    .cfi_startproc
+    # %bb.0:
+    pushq %rbp
+    .cfi_def_cfa_offset 16
+    .cfi_offset %rbp, -16
+    movq %rsp, %rbp
+    .cfi_def_cfa_register %rbp
+    
+    # Arguments:
+    # [rdi] = -8(%rbp)
+    # [esi] = -12(%rbp)
+    
+    movq %rdi, -8(%rbp)      # Load first argument
+    movl %esi, -12(%rbp)     # Load second argument
+    
+    # Initialize loop variables
+    movl $0, -16(%rbp)       # idx = 0
+    movl $0, -20(%rbp)       # val = 0
+    
+LBB0_1:
+    # Main Loop Header: Depth=1
+    # Condition: idx < 10
+    
+    movl -20(%rbp), %eax     # Load current index
+    cmp l -12(%rbp), %eax    # Compare with 10
+    jge LBB0_12              # If idx >= 10, exit
+    
+    # --- Inner Loop Header: Depth=2 ---
+    # Start of inner loop logic
+    movq -8(%rbp), %rax      # Load idx into rax
+    movslq -20(%rbp), %rcx   # Load val into rcx (idx * 10)
+    
+    cmp $10, (%rax,%rcx,4)  # Compare val < 10
+    jle LBB0_10              # If val >= 10, exit inner loop
+    
+    # Inner Loop Body
+    movq -8(%rbp), %rax      # Reload idx
+    movslq -20(%rbp), %rcx   # Reload val
+    movl (%rax,%rcx,4), %eax # Compute val = idx * 10
+    movl $10, %ecx           # Set divisor to 10
+    
+    cltd                     # Clear TDSR (simulated via divs for signed)
+    idivl %ecx               # Signed Division: val = val / 10
+    
+    movl %edx, -28(%rbp)     # Store quotient (or remainder depending on usage)
+                        # Assuming edx holds the result of division
+    
+    movq -8(%rbp), %rax      # Reload idx
+    movslq -20(%rbp), %rcx   # Reload

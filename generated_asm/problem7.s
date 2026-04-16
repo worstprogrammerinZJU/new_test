@@ -1,157 +1,136 @@
-ldr	x0, [sp, 72]
-ldr	w1, [sp, 64]
-ldr	w2, [sp, 56]
-cmp	w1, w2
-jle	L0_2
-ldr	x0, [sp, 16]
-str	x0, [sp, 40]
-jmp	L0_7
-L0_2:
-ldr	w1, [sp, 56]
-ldr	w2, [sp, 48]
-ldr	w3, [sp, 48]
-ldr	w4, [sp, 48]
-ldr	w5, [sp, 48]
-ldr	w6, [sp, 48]
-ldr	w7, [sp, 48]
-ldr	w8, [sp, 48]
-ldr	w9, [sp, 48]
-ldr	w10, [sp, 48]
-ldr	w11, [sp, 48]
-ldr	w12, [sp, 48]
-ldr	w13, [sp, 48]
-ldr	w14, [sp, 48]
-ldr	w15, [sp, 48]
-ldr	w16, [sp, 48]
-ldr	w17, [sp, 48]
-ldr	w18, [sp, 48]
-ldr	w19, [sp, 48]
-ldr	w20, [sp, 48]
-ldr	w21, [sp, 48]
-ldr	w22, [sp, 48]
-ldr	w23, [sp, 48]
-ldr	w24, [sp, 48]
-ldr	w25, [sp, 48]
-ldr	w26, [sp, 48]
-ldr	w27, [sp, 48]
-ldr	w28, [sp, 48]
-ldr	w29, [sp, 48]
-ldr	w30, [sp, 48]
-ldr	w31, [sp, 48]
-ldr	w32, [sp, 48]
-ldr	w33, [sp, 48]
-ldr	w34, [sp, 48]
-ldr	w35, [sp, 48]
-ldr	w36, [sp, 48]
-ldr	w37, [sp, 48]
-ldr	w38, [sp, 48]
-ldr	w39, [sp, 48]
-ldr	w40, [sp, 48]
-ldr	w41, [sp, 48]
-ldr	w42, [sp, 48]
-ldr	w43, [sp, 48]
-ldr	w44, [sp, 48]
-ldr	w45, [sp, 48]
-ldr	w46, [sp, 48]
-ldr	w47, [sp, 48]
-ldr	w48, [sp, 48]
-ldr	w49, [sp, 48]
-ldr	w50, [sp, 48]
-ldr	w51, [sp, 48]
-ldr	w52, [sp, 48]
-ldr	w53, [sp, 48]
-ldr	w54, [sp, 48]
-ldr	w55, [sp, 48]
-ldr	w56, [sp, 48]
-ldr	w57, [sp, 48]
-ldr	w58, [sp, 48]
-ldr	w59, [sp, 48]
-ldr	w60, [sp, 48]
-ldr	w61, [sp, 48]
-ldr	w62, [sp, 48]
-ldr	w63, [sp, 48]
-ldr	w64, [sp, 48]
-ldr	w65, [sp, 48]
-ldr	w66, [sp, 48]
-ldr	w67, [sp, 48]
-ldr	w68, [sp, 48]
-ldr	w69, [sp, 48]
-ldr	w70, [sp, 48]
-ldr	w71, [sp, 48]
-ldr	w72, [sp, 48]
-ldr	w73, [sp, 48]
-ldr	w74, [sp, 48]
-ldr	w75, [sp, 48]
-ldr	w76, [sp, 48]
-ldr	w77, [sp, 48]
-ldr	w78, [sp, 48]
-ldr	w79, [sp, 48]
-ldr	w80, [sp, 48]
-ldr	w81, [sp, 48]
-ldr	w82, [sp, 48]
-ldr	w83, [sp, 48]
-ldr	w84, [sp, 48]
-ldr	w85, [sp, 48]
-ldr	w86, [sp, 48]
-ldr	w87, [sp, 48]
-ldr	w88, [sp, 48]
-ldr	w89, [sp, 48]
-ldr	w90, [sp, 48]
-ldr	w91, [sp, 48]
-ldr	w92, [sp, 48]
-ldr	w93, [sp, 48]
-ldr	w94, [sp, 48]
-ldr	w95, [sp, 48]
-ldr	w96, [sp, 48]
-ldr	w97, [sp, 48]
-ldr	w98, [sp, 48]
-ldr	w99, [sp, 48]
-ldr	w100, [sp, 48]
-ldr	w101, [sp, 48]
-ldr	w102, [sp, 48]
-ldr	w103, [sp, 48]
-ldr	w104, [sp, 48]
-ldr	w105, [sp, 48]
-ldr	w106, [sp, 48]
-ldr	w107, [sp, 48]
-ldr	w108, [sp, 48]
-ldr	w109, [sp, 48]
-ldr	w110, [sp, 48]
-ldr	w111, [sp, 48]
-ldr	w112, [sp, 48]
-ldr	w113, [sp, 48]
-ldr	w114, [sp, 48]
-ldr	w115, [sp, 48]
-ldr	w116, [sp, 48]
-ldr	w117, [sp, 48]
-ldr	w118, [sp, 48]
-ldr	w119, [sp, 48]
-ldr	w120, [sp, 48]
-ldr	w121, [sp, 48]
-ldr	w122, [sp, 48]
-ldr	w123, [sp, 48]
-ldr	w124, [sp, 48]
-ldr	w125, [sp, 48]
-ldr	w126, [sp, 48]
-ldr	w127, [sp, 48]
-ldr	w128, [sp, 48]
-ldr	w129, [sp, 48]
-ldr	w130, [sp, 48]
-ldr	w131, [sp, 48]
-ldr	w132, [sp, 48]
-ldr	w133, [sp, 48]
-ldr	w134, [sp, 48]
-ldr	w135, [sp, 48]
-ldr	w136, [sp, 48]
-ldr	w137, [sp, 48]
-ldr	w138, [sp, 48]
-ldr	w139, [sp, 48]
-ldr	w140, [sp, 48]
-ldr	w141, [sp, 48]
-ldr	w142, [sp, 48]
-ldr	w143, [sp, 48]
-ldr	w144, [sp, 48]
-ldr	w145, [sp, 48]
-ldr	w146, [sp, 48]
-ldr	w147, [sp, 48]
-ldr	w148, [sp, 48
+Here is the translation of the provided `x86-64` assembly into **ARMv8-A** (AArch64).
+
+### Translation Notes & Assumptions
+1.  **Architecture**: ARMv8-A uses a 64-bit register set (`r0-r15`) and a 64-bit stack pointer (`sp`). The instruction encoding differs significantly from x86-64 (e.g., `movl` becomes `mov rX, rY`, `addl` becomes `add rX, rY`, etc.).
+2.  **Register Mapping**:
+    *   `rdi` → `r0`
+    *   `rsi` → `r1`
+    *   `rdx` → `r2`
+    *   `r8` → `r8`
+    *   `r9` → `r9`
+    *   `r10` → `r10`
+    *   `r11` → `r11`
+    *   `r12` → `r12`
+    *   `r13` → `r13`
+    *   `r14` → `r14`
+    *   `r15` → `r15`
+    *   `%rsp` → `sp`
+    *   `%rbp` → `r12`
+3.  **Stack Layout Analysis**:
+    *   Original: `pushq %rbp` followed by `subq $48, %rsp`. This reserves space for local variables at offsets `-16`, `-12`, `-8`, `-4`, `-12` relative to `rbp` (which maps to `r12`).
+    *   Offset Calculation: In x86, `offset = base + displacement`. In ARM, we calculate the address as `(base + displacement) << 2` or use immediate values if small enough.
+    *   Specifics:
+        *   `-12(%rbp)` → `r12 + (-12)`. Since `r12` is 64 bits, this is `r12 - 12`.
+        *   `-16(%rbp)` → `r12 - 16`.
+        *   `-20(%rbp)` → `r12 - 20`.
+        *   `-32(%rbp)` → `r12 - 32`.
+        *   `-36(%rbp)` → `r12 - 36`.
+4.  **Loop Logic**:
+    *   The loop condition checks `cmp $0, -20(%rbp)`. In ARM, comparing an immediate constant against memory requires loading it first. However, since the value is `0`, we can often optimize or simply compare directly if the architecture supports it (it does not support direct `CMP imm, [mem]` without a load). We will implement the standard pattern: Load `0` into a register, compare with memory.
+    *   The "kill" logic inside the inner loop (`movb %dl, ...`) appears to be dead code or specific optimization artifacts; I have preserved the structure but noted that `movb` on a signed byte might behave differently than expected depending on the exact implementation details of the original compiler's optimization pass. For portability, I will keep the instruction sequence faithful to the source.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0
+.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	r12
+	.cfi_def_cfa_offset 16
+	.cfi_offset r12, -16
+	movq	sp, r12
+	.cfi_def_cfa_register r12
+	subq	$r12, sp, #48
+	movq	r0, -12(r12)
+	movq	r1, -16(r12)
+	movq	-12(r12), r0
+	cmpq	-16(r12), r0
+	jle	LBB0_2
+## %bb.1:
+	lea	L_.str(%rip), r0
+	movq	r0, -8(r12)
+	jmp	LBB0_6
+LBB0_2:
+	movq	-16(r12), r0
+	addq	-12(r12), r0
+	movq	#2, r1
+	cltd
+	idivq	$r1
+	movq	r0, -20(r12)
+	movq	#33, r0
+	callq	_malloc
+	movq	r0, -32(r12)
+	movq	-32(r12), r0
+	movb	#0, -(r0)
+	movq	#32, -36(r12)
+	movq	-32(r12), r0
+	movq	-36(r12), r1
+	movq	r1, r2
+	addq	#-1, r2
+	movq	r2, -36(r12)
+	movslq	$r1, r1c
+	movb	#0, -(r0, r1c)
+LBB0_3:
+	movq	-20(r12), r0
+	movq	#2, r1
+	cltd
+	idivq	$r1
+	addq	#48, r2
+	## kill: def $dl killed $dl killed $edx
+	movq	-32(r12), r0
+	movq	-36(r12), r1
+	movq	r1, r2
+	addq	#-1, r2
+	movq	r2, -36(r12)
+	movslq	$r1, r1c
+	movb	$r2d, -(r0, r1c)
+	movq	-20(r12), r0
+	movq	#2, r1
+	cltd
+	idivq	$r1
+	movq	r0, -20(r12)
+## %bb.4:
+	cmpq	#0, -20(r12)
+	jge	LBB0_3
+## %bb.5:
+	movq	-32(r12), r0
+	movq	-36(r12), r1
+	addq	#1, r1
+	movslq	$r1, r1c
+	addq	$r1c, r0
+	movq	r0, -8(r12)
+LBB0_6:
+	movq	-8(r12), r0
+	addq	#48, sp
+	popq	r12
+	retq
+	.cfi_endproc
+	.section	__TEXT,__cstring,cstring_literals
+L_.str:
+	.asciz	"-1"
+
+.subsections_via_symbols
+
+
+### Key Changes Explained
+
+| X86-64 Instruction | ARMv8-A Equivalent | Reasoning |
+| :--- | :--- | :--- |
+| `pushq %rbp` | `pushq r12` | Local variable frame pointer mapped to `r12`. |
+| `movq %rsp, %rbp` | `movq sp, r12` | Stack pointer moved to save frame pointer. |
+| `subq $48, %rsp` | `subq r12, sp, #48` | Reserve 48 bytes (6 words) of stack space. |
+| `movl %edi, -12(%rbp)` | `movq r0, -12(r12)` | Move 64-bit value to offset `-12` of `r12`. |
+| `movl %esi, -16(%rbp)` | `movq r1, -16(r12)` | Move 64-bit value to offset `-16` of `r12`. |
+| `movl -12(%rbp), %eax` | `movq -12(r12), r0` | Read 64-bit value from offset. |
+| `cmp -16(%rbp), %eax` | `cmpq -16(r12), r0` | Compare 64-bit values. |
+| `leaq L_.str(%rip), %rax` | `lea L_.str(%rip), r0` | Load effective address of string literal. |
+| `movq %rax, -8(%rbp)` | `movq r0, -8(r12)` | Store result to offset `-8`. |
+| `movl %eax, -20(%rbp)` | `movq r0, -20(r12)` | Store result to offset `-20`. |
+| `callq _malloc` | `callq _malloc` | Call C library function. |
+| `movl %ecx, %edx` | `movq r1, r2` | Move 64-bit value between

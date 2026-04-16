@@ -1,139 +1,113 @@
-ldr	x0, [sp, 40]
-ldr	w1, [sp, 32]
-ldrb	w0, [x0]
-strb	w0, [x0, 1]
-ldr	x0, [sp, 40]
-ldr	x1, [sp, 32]
-ldr	w0, [x1]
-ldr	w1, [x1, 4]
-ldr	w2, [x1, 4]
-ldr	w3, [x1, 8]
-ldr	w4, [x1, 12]
-ldr	w5, [x1, 16]
-ldr	w6, [x1, 20]
-ldr	w7, [x1, 24]
-ldr	w8, [x1, 28]
-ldr	w9, [x1, 32]
-ldr	w10, [x1, 36]
-ldr	w11, [x1, 40]
-ldr	w12, [x1, 44]
-ldr	w13, [x1, 48]
-ldr	w14, [x1, 52]
-ldr	w15, [x1, 56]
-ldr	w16, [x1, 60]
-ldr	w17, [x1, 64]
-ldr	w18, [x1, 68]
-ldr	w19, [x1, 72]
-ldr	w20, [x1, 76]
-ldr	w21, [x1, 80]
-ldr	w22, [x1, 84]
-ldr	w23, [x1, 88]
-ldr	w24, [x1, 92]
-ldr	w25, [x1, 96]
-ldr	w26, [x1, 100]
-ldr	w27, [x1, 104]
-ldr	w28, [x1, 108]
-ldr	w29, [x1, 112]
-ldr	w30, [x1, 116]
-ldr	w31, [x1, 120]
-ldr	w32, [x1, 124]
-ldr	w33, [x1, 128]
-ldr	w34, [x1, 132]
-ldr	w35, [x1, 136]
-ldr	w36, [x1, 140]
-ldr	w37, [x1, 144]
-ldr	w38, [x1, 148]
-ldr	w39, [x1, 152]
-ldr	w40, [x1, 156]
-ldr	w41, [x1, 160]
-ldr	w42, [x1, 164]
-ldr	w43, [x1, 168]
-ldr	w44, [x1, 172]
-ldr	w45, [x1, 176]
-ldr	w46, [x1, 180]
-ldr	w47, [x1, 184]
-ldr	w48, [x1, 188]
-ldr	w49, [x1, 192]
-ldr	w50, [x1, 196]
-ldr	w51, [x1, 200]
-ldr	w52, [x1, 204]
-ldr	w53, [x1, 208]
-ldr	w54, [x1, 212]
-ldr	w55, [x1, 216]
-ldr	w56, [x1, 220]
-ldr	w57, [x1, 224]
-ldr	w58, [x1, 228]
-ldr	w59, [x1, 232]
-ldr	w60, [x1, 236]
-ldr	w61, [x1, 240]
-ldr	w62, [x1, 244]
-ldr	w63, [x1, 248]
-ldr	w64, [x1, 252]
-ldr	w65, [x1, 256]
-ldr	w66, [x1, 260]
-ldr	w67, [x1, 264]
-ldr	w68, [x1, 268]
-ldr	w69, [x1, 272]
-ldr	w70, [x1, 276]
-ldr	w71, [x1, 280]
-ldr	w72, [x1, 284]
-ldr	w73, [x1, 288]
-ldr	w74, [x1, 292]
-ldr	w75, [x1, 296]
-ldr	w76, [x1, 300]
-ldr	w77, [x1, 304]
-ldr	w78, [x1, 308]
-ldr	w79, [x1, 312]
-ldr	w80, [x1, 316]
-ldr	w81, [x1, 320]
-ldr	w82, [x1, 324]
-ldr	w83, [x1, 328]
-ldr	w84, [x1, 332]
-ldr	w85, [x1, 336]
-ldr	w86, [x1, 340]
-ldr	w87, [x1, 344]
-ldr	w88, [x1, 348]
-ldr	w89, [x1, 352]
-ldr	w90, [x1, 356]
-ldr	w91, [x1, 360]
-ldr	w92, [x1, 364]
-ldr	w93, [x1, 368]
-ldr	w94, [x1, 372]
-ldr	w95, [x1, 376]
-ldr	w96, [x1, 380]
-ldr	w97, [x1, 384]
-ldr	w98, [x1, 388]
-ldr	w99, [x1, 392]
-ldr	w100, [x1, 396]
-ldr	w101, [x1, 400]
-ldr	w102, [x1, 404]
-ldr	w103, [x1, 408]
-ldr	w104, [x1, 412]
-ldr	w105, [x1, 416]
-ldr	w106, [x1, 420]
-ldr	w107, [x1, 424]
-ldr	w108, [x1, 428]
-ldr	w109, [x1, 432]
-ldr	w110, [x1, 436]
-ldr	w111, [x1, 440]
-ldr	w112, [x1, 444]
-ldr	w113, [x1, 448]
-ldr	w114, [x1, 452]
-ldr	w115, [x1, 456]
-ldr	w116, [x1, 460]
-ldr	w117, [x1, 464]
-ldr	w118, [x1, 468]
-ldr	w119, [x1, 472]
-ldr	w120, [x1, 476]
-ldr	w121, [x1, 480]
-ldr	w122, [x1, 484]
-ldr	w123, [x1, 488]
-ldr	w124, [x1, 492]
-ldr	w125, [x1, 496]
-ldr	w126, [x1, 500]
-ldr	w127, [x1, 504]
-ldr	w128, [x1, 508]
-ldr	w129, [x1, 512]
-ldr	w130, [x1, 516]
-ldr	w131, [x1, 520]
-ldr	w132, [x
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq`, `addq`, `subq`: Map directly to `mov`, `add`, `sub`.
+    *   `pushq`, `popq`: Map directly to `push`, `pop`.
+    *   `callq`, `retq`: Map directly to `bl`, `ret`.
+    *   `movl`, `movl`, `movslq`: These are 32-bit operations. In ARMv8-A, we use `movs` for signed 32-bit and `mrs`/`msr` for unsigned 32-bit. Since the original uses signed arithmetic (`addl`, `cmp` with signed logic), I will map them to `movs` where appropriate or keep the register usage consistent if the context implies signedness (though `movl` on a signed value usually means "move signed"). For this specific loop logic involving counters, standard practice often treats these as signed unless specified otherwise. However, strictly translating `movl` to ARMv8 requires using `movs` for signed values.
+    *   `cmp`: Maps to `cmp`.
+    *   `jge`, `jl`, `jle`: Map to `bgt`, `blt`, `ble`.
+    *   Labels like `LBB0_1`, `LBB0_5`, etc., are translated to their corresponding ARM labels (e.g., `loop_header`).
+    *   Register names remain largely the same (`%rbp`, `%rsp`, `%rdi`, `%esi`, `%eax`, `%ecx`, `%edx`) as they represent general-purpose registers which have direct equivalents in AArch64.
+
+2.  **Loop Logic Analysis**:
+    The code implements an inner loop that increments a counter (`%edx`) by 1 until it exceeds a threshold defined at `-28(%rbp)` (which is $-1 \times 32 = -32$ bytes from base).
+    *   It loads data from memory starting at offset `-32(%rbp)` (the start of the buffer).
+    *   It processes chunks of size 4 bytes per iteration.
+    *   It compares the current chunk sum against the target value stored at `-28(%rbp)`.
+    *   If the condition fails (`<`), it continues; if true (`>=`), it jumps back to the header.
+
+3.  **Specific Constraints**:
+    *   The original uses `movl` for loading/storeing. In ARMv8, `movs` is used for signed integers. Given the context of a loop counter and accumulation, treating inputs/outputs as signed integers is the most accurate functional equivalent.
+    *   Stack alignment: The original has `.p2align 4, 0x90`. This sets up the stack frame. We must ensure our stack pointer setup matches the expected layout.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0
+	.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$32, %rsp
+	movq	%rdi, -8(%rbp)
+	movl	%esi, -12(%rbp)
+	movs	lwz	-12(%rbp), %eax
+	adds	lwz	%eax, %eax
+	movs	lwz	%eax, %rdi
+	movs	lwz	%esi, %esi
+	callq	_calloc
+	movq	%rax, -24(%rbp)
+	movs	lwz	-28(%rbp), %eax
+	movs	lwz	%eax, %eax
+	movs	lwz	%eax, -32(%rbp)
+loop_header:
+	movs	lwz	-32(%rbp), %eax
+	cmps	lwz	-12(%rbp), %eax
+	bgt	loop_header
+## %bb.2:
+	movs	lwz	-24(%rbp), %rax
+	movs	lwz	-8(%rbp), %rcx
+	movs	lwz	-32(%rbp), %rdx
+	movs	lwz	(%rcx,%rdx,4), %rcx
+	movs	lwz	(%rax,%rcx,4), %edx
+	adds	lwz	%edx, %edx
+	movs	lwz	(%rax,%rcx,4), %edx
+	movs	lwz	-24(%rbp), %rax
+	movs	lwz	-8(%rbp), %rcx
+	movs	lwz	-32(%rbp), %rdx
+	movs	lwz	(%rcx,%rdx,4), %rcx
+	movs	lwz	(%rax,%rcx,4), %eax
+	movs	lwz	-8(%rbp), %rcx
+	movs	lwz	-32(%rbp), %rdx
+	cmps	(%rcx,%rdx,4), %eax
+	blt	loop_header
+## %bb.3:
+	movs	lwz	-8(%rbp), %rax
+	movs	lwz	-32(%rbp), %rcx
+	movs	lwz	(%rax,%rcx,4), %eax
+	cmps	-28(%rbp), %eax
+	ble	loop_header
+## %bb.4:
+	movs	lwz	-8(%rbp), %rax
+	movs	lwz	-32(%rbp), %rcx
+	movs	lwz	(%rax,%rcx,4), %eax
+	movs	lwz	%eax, -28(%rbp)
+loop_header:
+	jmp	loop_header
+loop_footer:
+	movs	lwz	-32(%rbp), %eax
+	adds	lwz	%eax, %eax
+	movs	lwz	%eax, -32(%rbp)
+	jmp	loop_header
+loop_footer:
+	movs	lwz	-24(%rbp), %rdi
+	callq	_free
+	movs	lwz	-28(%rbp), %eax
+	addq	$32, %rsp
+	popq	%rbp
+	retq
+	.cfi_endproc
+
+
+### Key Changes Explained
+*   **Registers**: Used `%rax`, `%rcx`, `%rdx`, `%edx` consistently throughout the loop body to match the original's register usage pattern.
+*   **Load/Store Instructions**: Replaced `movl` with `movs lwz` (Move Signed Word, Load Word) because the source operands were loaded via `movl` (signed) and compared using signed logic.
+*   **Comparison**: Replaced `cmp` with `cmps` (Signed Compare) to maintain sign extension behavior implied by `movl`.
+*   **Branches**:
+    *   `jge` -> `bgt` (Greater Than or Equal)
+    *   `jl` -> `blt` (Less Than or Equal)
+    *   `jle` -> `ble` (Less Than or Equal)
+*   **Alignment**: Added `.p2align` directive inside the section block to satisfy the original requirement, though modern compilers handle this automatically.
+*   **Labels**: Converted logical labels (`LBB0_1`, `LBB0_5`, etc.) to standard ARM labels (`loop_header`, `loop_footer`) while preserving the internal structure of the loops.
+*   **Stack Management**: Preserved the `subq $32, %rsp` and `addq $32, %rsp` adjustments exactly as they appear in the original logic flow.

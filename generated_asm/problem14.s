@@ -1,157 +1,134 @@
-ldr	x0, [sp, 40]
-ldr	w1, [sp, 36]
-ldr	w0, [sp, 44]
-cmp	w0, 0
-jnz	LB0_2
-strb	w1, [sp, 1]
-jmp	LB0_11
-LB0_2:
-ldr	w0, [sp, 44]
-ldr	w1, [sp, 36]
-ldr	w2, [x0, w1, 4]
-ldr	w3, [x0, w1]
-ldr	w4, [sp, 44]
-ldr	w5, [sp, 36]
-ldr	w6, [sp, 44]
-ldr	w7, [sp, 36]
-ldr	w8, [sp, 44]
-ldr	w9, [sp, 36]
-ldr	w10, [sp, 44]
-ldr	w11, [sp, 36]
-ldr	w12, [sp, 44]
-ldr	w13, [sp, 36]
-ldr	w14, [sp, 44]
-ldr	w15, [sp, 36]
-ldr	w16, [sp, 44]
-ldr	w17, [sp, 36]
-ldr	w18, [sp, 44]
-ldr	w19, [sp, 36]
-ldr	w20, [sp, 44]
-ldr	w21, [sp, 36]
-ldr	w22, [sp, 44]
-ldr	w23, [sp, 36]
-ldr	w24, [sp, 44]
-ldr	w25, [sp, 36]
-ldr	w26, [sp, 44]
-ldr	w27, [sp, 36]
-ldr	w28, [sp, 44]
-ldr	w29, [sp, 36]
-ldr	w30, [sp, 44]
-ldr	w31, [sp, 36]
-ldr	w32, [sp, 44]
-ldr	w33, [sp, 36]
-ldr	w34, [sp, 44]
-ldr	w35, [sp, 36]
-ldr	w36, [sp, 44]
-ldr	w37, [sp, 36]
-ldr	w38, [sp, 44]
-ldr	w39, [sp, 36]
-ldr	w40, [sp, 44]
-ldr	w41, [sp, 36]
-ldr	w42, [sp, 44]
-ldr	w43, [sp, 36]
-ldr	w44, [sp, 44]
-ldr	w45, [sp, 36]
-ldr	w46, [sp, 44]
-ldr	w47, [sp, 36]
-ldr	w48, [sp, 44]
-ldr	w49, [sp, 36]
-ldr	w50, [sp, 44]
-ldr	w51, [sp, 36]
-ldr	w52, [sp, 44]
-ldr	w53, [sp, 36]
-ldr	w54, [sp, 44]
-ldr	w55, [sp, 36]
-ldr	w56, [sp, 44]
-ldr	w57, [sp, 36]
-ldr	w58, [sp, 44]
-ldr	w59, [sp, 36]
-ldr	w60, [sp, 44]
-ldr	w61, [sp, 36]
-ldr	w62, [sp, 44]
-ldr	w63, [sp, 36]
-ldr	w64, [sp, 44]
-ldr	w65, [sp, 36]
-ldr	w66, [sp, 44]
-ldr	w67, [sp, 36]
-ldr	w68, [sp, 44]
-ldr	w69, [sp, 36]
-ldr	w70, [sp, 44]
-ldr	w71, [sp, 36]
-ldr	w72, [sp, 44]
-ldr	w73, [sp, 36]
-ldr	w74, [sp, 44]
-ldr	w75, [sp, 36]
-ldr	w76, [sp, 44]
-ldr	w77, [sp, 36]
-ldr	w78, [sp, 44]
-ldr	w79, [sp, 36]
-ldr	w80, [sp, 44]
-ldr	w81, [sp, 36]
-ldr	w82, [sp, 44]
-ldr	w83, [sp, 36]
-ldr	w84, [sp, 44]
-ldr	w85, [sp, 36]
-ldr	w86, [sp, 44]
-ldr	w87, [sp, 36]
-ldr	w88, [sp, 44]
-ldr	w89, [sp, 36]
-ldr	w90, [sp, 44]
-ldr	w91, [sp, 36]
-ldr	w92, [sp, 44]
-ldr	w93, [sp, 36]
-ldr	w94, [sp, 44]
-ldr	w95, [sp, 36]
-ldr	w96, [sp, 44]
-ldr	w97, [sp, 36]
-ldr	w98, [sp, 44]
-ldr	w99, [sp, 36]
-ldr	w100, [sp, 44]
-ldr	w101, [sp, 36]
-ldr	w102, [sp, 44]
-ldr	w103, [sp, 36]
-ldr	w104, [sp, 44]
-ldr	w105, [sp, 36]
-ldr	w106, [sp, 44]
-ldr	w107, [sp, 36]
-ldr	w108, [sp, 44]
-ldr	w109, [sp, 36]
-ldr	w110, [sp, 44]
-ldr	w111, [sp, 36]
-ldr	w112, [sp, 44]
-ldr	w113, [sp, 36]
-ldr	w114, [sp, 44]
-ldr	w115, [sp, 36]
-ldr	w116, [sp, 44]
-ldr	w117, [sp, 36]
-ldr	w118, [sp, 44]
-ldr	w119, [sp, 36]
-ldr	w120, [sp, 44]
-ldr	w121, [sp, 36]
-ldr	w122, [sp, 44]
-ldr	w123, [sp, 36]
-ldr	w124, [sp, 44]
-ldr	w125, [sp, 36]
-ldr	w126, [sp, 44]
-ldr	w127, [sp, 36]
-ldr	w128, [sp, 44]
-ldr	w129, [sp, 36]
-ldr	w130, [sp, 44]
-ldr	w131, [sp, 36]
-ldr	w132, [sp, 44]
-ldr	w133, [sp, 36]
-ldr	w134, [sp, 44]
-ldr	w135, [sp, 36]
-ldr	w136, [sp, 44]
-ldr	w137, [sp, 36]
-ldr	w138, [sp, 44]
-ldr	w139, [sp, 36]
-ldr	w140, [sp, 44]
-ldr	w141, [sp, 36]
-ldr	w142, [sp, 44]
-ldr	w143, [sp, 36]
-ldr	w144, [sp, 44]
-ldr	w145, [sp, 36]
-ldr	w146, [sp, 44]
-ldr	w147, [sp, 36]
-ldr	w148,
+Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
+
+### Translation Notes & Strategy
+1.  **Architecture Mapping**:
+    *   `movq`, `movl`, `addl`, etc., are translated to their AArch64 equivalents (`mov`, `ld`, `add`).
+    *   Signed/Unsigned comparisons and jumps are handled via `cmp` and `be/bc`.
+    *   Register names follow the convention `%rX` for general-purpose registers (R0–R15) and `%sp`, `%fp`, `%bp`, `%rax`, `%rcx`, `%rdx`, `%rsi`, `%rdi`, `%r8`, `%r9`, `%r10`, `%r11`, `%r12`, `%r13`, `%r14`, `%r15`.
+    *   Stack alignment is preserved using `movaap` or manual padding instructions if necessary, though standard `push/pop` usually suffices for this level of complexity unless strict alignment is required by the calling convention.
+2.  **Loop Logic Analysis**:
+    *   The original code uses a custom loop structure with headers (`LBB0_3`) that incrementally update pointers based on depth.
+    *   In ARMv8-A, we can simplify this logic significantly because the "depth" variable (`%edx`) acts as an index counter rather than a pointer offset itself. We will use a simple `while` loop condition instead of complex header-based loops.
+    *   The specific pattern `movl -28(%rbp), %eax; cmp -20(%rbp), %eax` effectively checks if the current value at `-20(%rbp)` matches the previous one plus 1. If they match, it proceeds to the next iteration. This is equivalent to checking if `(current_value == prev_value + 1)`.
+3.  **Register Renaming**:
+    *   Original: `%rdi`, `%esi` → ARM: `%r10`, `%r9` (or any available R0/R1 range).
+    *   Original: `%rax`, `%rcx`, `%rdx` → ARM: `%r0`, `%r1`, `%r2`.
+    *   Original: `%ebp` → ARM: `%rbx`.
+    *   Original: `%rsp` → ARM: `%rsp`.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0
+.p2align	4, 0x90
+_func0:
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	movq	%rdi, -16(%rbp)
+	movq	%esi, -20(%rbp)
+	movq	$0, -24(%rbp)
+	cmpq	$0, -20(%rbp)
+	bne	LBB0_2
+
+## %bb.1:
+	movaap	$1, -1(%rbp)
+	jmp	LBB0_13
+
+LBB0_2:
+	movaap	$1, -28(%rbp)
+
+LBB0_3:
+	ld	-28(%rbp), %eax
+	cmpq	-20(%rbp), %eax
+	be	LBB0_8
+
+## %bb.4:
+	movq	-16(%rbp), %rax
+	ld	-28(%rbp), %rcx
+	movq	-16(%rbp), %rcx
+	ld	-28(%rbp), %edx
+	subq	$1, %edx
+	movq	%edx, %rdx
+	cmpq	(%rcx, %rdx, 4), %eax
+	be	LBB0_6
+
+## %bb.5:
+	movaap	-24(%rbp), %eax
+	addq	$1, %eax
+	movaap	%eax, -24(%rbp)
+
+LBB0_6:
+	jmp	LBB0_7
+
+LBB0_7:
+	movaap	-28(%rbp), %eax
+	addq	$1, %eax
+	movaap	%eax, -28(%rbp)
+	jmp	LBB0_3
+
+LBB0_8:
+	movq	-16(%rbp), %rax
+	ld	-20(%rbp), %ecx
+	subq	$1, %ecx
+	movq	%ecx, %rcx
+	movq	(%rax, %rcx, 4), %eax
+	movq	-16(%rbp), %rcx
+	cmpq	(%rcx), %eax
+	ble	LBB0_10
+
+## %bb.9:
+	movaap	-24(%rbp), %eax
+	addq	$1, %eax
+	movaap	%eax, -24(%rbp)
+
+LBB0_10:
+	cmpq	$2, -24(%rbp)
+	bge	LBB0_12
+
+## %bb.11:
+	movaap	$1, -1(%rbp)
+	jmp	LBB0_13
+
+LBB0_12:
+	movaap	$0, -1(%rbp)
+
+LBB0_13:
+	movaap	-1(%rbp), %al
+	andb	$1, %al
+	movaap	%al, %eax
+	popq	%rbp
+	retq
+	.cfi_endproc
+
+
+### Key Changes Explained
+
+| Original X86 | ARMv8-A Equivalent | Reasoning |
+| :--- | :--- | :--- |
+| `pushq %rbp` | `pushq %rbp` | Same instruction. |
+| `movq %rdi, ...` | `movq %rdi, ...` | Direct mapping. |
+| `movl %esi, ...` | `movq %esi, ...` | Changed to `movq` for consistency with other movs. |
+| `cmp $0, ...` | `cmpq $0, ...` | Changed to signed comparison (`cmpq`) since values are likely signed integers. |
+| `jne LBB0_2` | `bne LBB0_2` | `jne` = jump if not equal. |
+| `movb $1, ...` | `movaap $1, ...` | `movb` loads byte; `movaap` loads aligned word (required for stack safety and performance). |
+| `jmp LBB0_13` | `jmp LBB0_13` | Same instruction. |
+| `movl -28(%rbp), %eax` | `ld -28(%rbp), %eax` | `movl` becomes `ld` (load doubleword). |
+| `subl $1, %edx` | `subq $1, %edx` | Changed to signed subtraction (`subq`). |
+| `movslq` / `movslq` | `movq` | Used generic `movq` for register-to-register moves where no immediate shift was needed. |
+| `movl (%rax,%rcx,4), %eax` | `movq (%rax, %rcx, 4), %eax` | Handled as a memory move. |
+| `jge LBB0_6` | `be LBB0_6` | `jge` (jump if greater or equal) maps directly to `be` (branch if equal). |
+| `movl -24(%rbp), %eax` | `movaap -24(%rbp), %eax` | Aligned load. |
+| `addl $1, %eax` | `addq $1, %eax` | Added signed increment. |
+| `cmp $2, ...` | `cmpq $2, ...` | Signed comparison. |
+| `retq` | `retq` | Return instruction remains same. |
+
+*Note: The logic inside the inner loop (`LBB0_3` to `LBB0_8`) has been simplified from a complex header-driven loop to a standard `while` loop check (`be` branch). This is valid because the original code's purpose appears to be iterating while the value at `-20(%rbp)` increments correctly relative to the start value, which is exactly what the `be` check implements.*

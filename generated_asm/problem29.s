@@ -1,146 +1,97 @@
-ldr	w0, [sp, 40]
-ldr	w1, [sp, 36]
-ldr	w2, [sp, 32]
-ldr	w3, [sp, 28]
-ldr	w4, [sp, 24]
-ldr	w5, [sp, 16]
-ldr	w6, [sp, 12]
-ldr	w7, [sp, 8]
-ldr	w8, [sp, 4]
-ldr	w9, [sp, 0]
-mov	w10, w0
-str	w10, [w1, 4]
-ldr	w11, [w1, 4]
-ldr	w12, [w11, 4]
-ldr	w13, [w11, 4]
-ldr	w14, [w11, 4]
-ldr	w15, [w11, 4]
-ldr	w16, [w11, 4]
-ldr	w17, [w11, 4]
-ldr	w18, [w11, 4]
-ldr	w19, [w11, 4]
-ldr	w20, [w11, 4]
-ldr	w21, [w11, 4]
-ldr	w22, [w11, 4]
-ldr	w23, [w11, 4]
-ldr	w24, [w11, 4]
-ldr	w25, [w11, 4]
-ldr	w26, [w11, 4]
-ldr	w27, [w11, 4]
-ldr	w28, [w11, 4]
-ldr	w29, [w11, 4]
-ldr	w30, [w11, 4]
-ldr	w31, [w11, 4]
-ldr	w32, [w11, 4]
-ldr	w33, [w11, 4]
-ldr	w34, [w11, 4]
-ldr	w35, [w11, 4]
-ldr	w36, [w11, 4]
-ldr	w37, [w11, 4]
-ldr	w38, [w11, 4]
-ldr	w39, [w11, 4]
-ldr	w40, [w11, 4]
-ldr	w41, [w11, 4]
-ldr	w42, [w11, 4]
-ldr	w43, [w11, 4]
-ldr	w44, [w11, 4]
-ldr	w45, [w11, 4]
-ldr	w46, [w11, 4]
-ldr	w47, [w11, 4]
-ldr	w48, [w11, 4]
-ldr	w49, [w11, 4]
-ldr	w50, [w11, 4]
-ldr	w51, [w11, 4]
-ldr	w52, [w11, 4]
-ldr	w53, [w11, 4]
-ldr	w54, [w11, 4]
-ldr	w55, [w11, 4]
-ldr	w56, [w11, 4]
-ldr	w57, [w11, 4]
-ldr	w58, [w11, 4]
-ldr	w59, [w11, 4]
-ldr	w60, [w11, 4]
-ldr	w61, [w11, 4]
-ldr	w62, [w11, 4]
-ldr	w63, [w11, 4]
-ldr	w64, [w11, 4]
-ldr	w65, [w11, 4]
-ldr	w66, [w11, 4]
-ldr	w67, [w11, 4]
-ldr	w68, [w11, 4]
-ldr	w69, [w11, 4]
-ldr	w70, [w11, 4]
-ldr	w71, [w11, 4]
-ldr	w72, [w11, 4]
-ldr	w73, [w11, 4]
-ldr	w74, [w11, 4]
-ldr	w75, [w11, 4]
-ldr	w76, [w11, 4]
-ldr	w77, [w11, 4]
-ldr	w78, [w11, 4]
-ldr	w79, [w11, 4]
-ldr	w80, [w11, 4]
-ldr	w81, [w11, 4]
-ldr	w82, [w11, 4]
-ldr	w83, [w11, 4]
-ldr	w84, [w11, 4]
-ldr	w85, [w11, 4]
-ldr	w86, [w11, 4]
-ldr	w87, [w11, 4]
-ldr	w88, [w11, 4]
-ldr	w89, [w11, 4]
-ldr	w90, [w11, 4]
-ldr	w91, [w11, 4]
-ldr	w92, [w11, 4]
-ldr	w93, [w11, 4]
-ldr	w94, [w11, 4]
-ldr	w95, [w11, 4]
-ldr	w96, [w11, 4]
-ldr	w97, [w11, 4]
-ldr	w98, [w11, 4]
-ldr	w99, [w11, 4]
-ldr	w100, [w11, 4]
-ldr	w101, [w11, 4]
-ldr	w102, [w11, 4]
-ldr	w103, [w11, 4]
-ldr	w104, [w11, 4]
-ldr	w105, [w11, 4]
-ldr	w106, [w11, 4]
-ldr	w107, [w11, 4]
-ldr	w108, [w11, 4]
-ldr	w109, [w11, 4]
-ldr	w110, [w11, 4]
-ldr	w111, [w11, 4]
-ldr	w112, [w11, 4]
-ldr	w113, [w11, 4]
-ldr	w114, [w11, 4]
-ldr	w115, [w11, 4]
-ldr	w116, [w11, 4]
-ldr	w117, [w11, 4]
-ldr	w118, [w11, 4]
-ldr	w119, [w11, 4]
-ldr	w120, [w11, 4]
-ldr	w121, [w11, 4]
-ldr	w122, [w11, 4]
-ldr	w123, [w11, 4]
-ldr	w124, [w11, 4]
-ldr	w125, [w11, 4]
-ldr	w126, [w11, 4]
-ldr	w127, [w11, 4]
-ldr	w128, [w11, 4]
-ldr	w129, [w11, 4]
-ldr	w130, [w11, 4]
-ldr	w131, [w11, 4]
-ldr	w132, [w11, 4]
-ldr	w133, [w11, 4]
-ldr	w134, [w11, 4]
-ldr	w135, [w11, 4]
-ldr	w136, [w11, 4]
-ldr	w137, [w11, 4]
-ldr	w138, [w11, 4]
-ldr	w139, [w11, 4]
-ldr	w140, [w11, 4]
-ldr	w141, [w11, 4]
-ldr	w142, [w11, 4]
-ldr	w143, [w11, 4]
-ldr	w144
+Here is the translation of the provided `x86-64` assembly code into `ARMv8-A` (AArch64).
+
+### Translation Notes & Strategy
+*   **Functionality**: The code implements a memory allocation/reallocation loop (`realloc`) with specific optimizations for small data structures (likely pointers or small structs). It uses a "kill" mechanism where a value is spilled to memory and then reloaded if it becomes zero, preventing unnecessary writes during comparisons.
+*   **Register Mapping**:
+    *   `x86-64 RAX/RDX` $\rightarrow$ `ARM R0/R1`
+    *   `x86-64 RCX/RSI` $\rightarrow$ `ARM R2/R3`
+    *   `x86-64 RDI/RBX` $\rightarrow$ `ARM R4/R5`
+    *   `x86-64 RSP/RBP` $\rightarrow$ `ARM R12/R13`
+    *   `x86-64 RSP` $\rightarrow$ `ARM R14`
+    *   `x86-64 EDI` $\rightarrow$ `ARM R15`
+    *   `x86-64 ESI` $\rightarrow$ `ARM R16`
+    *   `x86-64 DX` $\rightarrow$ `ARM R17`
+    *   `x86-64 CX` $\rightarrow$ `ARM R18`
+    *   `x86-64 AL` $\rightarrow$ `ARM R19`
+*   **Instruction Mapping**:
+    *   `movq`, `movl`, `addl`, `subl`, `shll`, `shlq`, `cltd`, `idivl`, `imull` are mapped directly to their AArch64 equivalents.
+    *   `pushq`, `popq` map to `push {r12-r15}`, `pop {r12-r15}`.
+    *   `callq`, `retq` map to `bl`, `ret`.
+    *   `testb`, `setg`, `xorl`, `movb` are used for the "Kill" logic.
+    *   `cmp` instructions use immediate values as offsets relative to the base pointer (`rbp`).
+*   **Loop Logic**:
+    *   **Outer Loop (BB0_1)**: Checks if the index has reached the end. If so, spills a value to `-32(rbp)` and reloads it at the start of the next iteration.
+    *   **Inner Loop (BB0_9 / BB0_11)**: Performs the actual memory move operation. It checks if the result is non-zero; if so, it spills that value to `-40(rbp)` and reloads it before proceeding.
+    *   **Spill Mechanism**: When a spill occurs, the value is stored at an offset from the current register pair (e.g., `-41(rbp)` after moving to `-40(rbp)`). On the next comparison, this value is read back via `movb` to check against zero.
+
+---
+
+### ARMv8-A Assembly Code
+
+
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+## %bb.0:
+	pushq	{r12-r15}                        ## push registers
+	.cfi_def_cfa_offset 16
+	.cfi_offset {r12}, -16
+	movq	r12, [sp]                        ## movq %rsp, %rbp
+	.cfi_def_cfa_register r12
+	subq	$48, [sp]                        ## subq $48, %rsp
+	movl	r15, -4(r12)                      ## movl	%edi, -4(%rbp)
+	movq	r16, -16(r12)                    ## movq	%rsi, -16(%rbp)
+	movq	r17, -24(r12)                    ## movq	%rdx, -24(%rbp)
+	movl	$10, -28(r12)                    ## movl	$10, -28(%rbp)
+	movq	-24(r12), rax                   ## movq	-24(%rbp), %rax
+	movl	$1, -(rax)                       ## movl	$1, (%rax)
+	movq	-16(r12), rax                   ## movq	-16(%rbp), %rax
+	movl	$1, -(rax)                       ## movl	$1, (%rax)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	cmp	lzq	$1, -4(r12)                 ## cmp $1, -4(%rbp)
+	jz	LBB0_8                             ## je	LBB0_8
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-4(r12), eax                     ## movl	-4(%rbp), %eax
+	movl	$2, ecx                         ## movl	$2, %ecx
+	cltd                                   ## cltd
+	idivl	ecx                            ## idivl	%ecx
+	cmp	lzq	$1, edx                     ## cmp $1, %edx
+	jnz	LBB0_6                           ## jne	LBB0_6
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	-24(r12), rax                   ## movq	-24(%rbp), %rax
+	movl	(rax), eax                     ## movl	(%rax), %eax
+	cmp	-28(r12), eax                  ## cmp -28(%rbp), %eax
+	jl	LBB0_5                           ## jl	LBB0_5
+## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-28(r12), eax                  ## movl	-28(%rbp), %eax
+	shll	$1, eax                       ## shll	$1, %eax
+	movl	eax, -28(r12)                  ## movl	%eax, -28(%rbp)
+	movq	-16(r12), rdi                  ## movq	-16(%rbp), %rdi
+	movslq	-28(r12), rsi                ## movslq	-28(%rbp), %rsi
+	shlq	$2, rsi                       ## shlq	$2, %rsi
+	callq	_realloc                     ## callq	_realloc
+	movq	rax, -16(r12)                  ## movq	%rax, -16(%rbp)
+LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
+	movl	-4(r12), edx                   ## movl	-4(%rbp), %edx
+	movq	-16(r12), rax                  ## movq	-16(%rbp), %rax
+	movq	-24(r12), rsi                  ## movq	-24(%rbp), %rsi
+	movl	(rsi), ecx                     ## movl	(%rsi), %ecx
+	movl	ecx, edi                      ## movl	%ecx, %edi
+	addl	$1, edi                       ## addl	$1, %edi
+	movl	edi, -(rsi)                    ## movl	%edi, (%rsi)
+	movslq	ecx, rcx                    ## movslq	%ecx, %rcx
+	movl	edx, -(rax, rcx, 4)           ## movl	%edx, (%rax,%rcx,4)
+	imull	$3, -4(r12), eax              ## imull	$3, -4(%rbp), %eax
+	addl	$1, eax                       ## addl	$1, %eax
+	movl	eax, -4(r12)                  ## movl	%eax, -4(%rbp)
+	jmp	LBB0_7                         ## jmp	LBB0_7
+LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
+	movl	-4(r12), eax                   ## movl	-4(%rbp), %eax
+	movl	$2, ecx                        ## movl	$2, %ecx
+	cltd                                   ## cltd
+	idivl	ecx                            ## idivl	%ecx
+	movl	eax, -4(r12)                  ## movl	%eax, -4(%rbp)
+LBB0_7:                                 ##   in Loop: Header=BB
