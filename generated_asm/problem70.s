@@ -1,136 +1,207 @@
-Here is the translation of the provided `x86-64` assembly into `ARMv8-A` assembly.
-
-### Translation Notes & Strategy
-*   **Functionality**: The code implements a recursive search algorithm (likely for finding specific string patterns like `"**"` or `"//"`). It uses two stacks (`rbp`, `-8(%rbp)` and `-16(%rbp)` respectively) to manage state across nested loops.
-*   **Stack Management**:
-    *   `pushq %rbp`: Saves current frame pointer.
-    *   `movq %rsp, %rbp`: Sets up new frame pointer.
-    *   `subq $80, %rsp`: Reduces stack space by 80 bytes per loop iteration (to accommodate spilling/loading large strings).
-    *   `popq %rbp`: Restores frame pointer at end.
-*   **Data Movement**: Uses `movq`/`movl` for 64-bit/32-bit moves. For complex register shuffling inside loops, it relies on the fact that `movslq` (move signed long) preserves the sign bit but shifts the value; however, since we are moving data between registers and memory addresses calculated via offsets, direct byte-level manipulation isn't strictly necessary if we keep the logic simple enough.
-*   **String Handling**: The `.str` sections define literal strings. In ARM, these are typically loaded from memory using `lea` with an offset relative to the base address, or passed as arguments. Here, they appear to be accessed via `leaq L_.str(...)(rip)` which implies they might be stored in global variables or passed dynamically. Given the context of `strcmp` calls, I will assume standard C-style string literals are available in the linker's symbol table or accessible via `lea`. If they must be hardcoded, they would need to be defined in the object file. Assuming they are accessible symbols:
-    *   `L_.str` -> `L_.str` (offset 0)
-    *   `L_.str.1` -> `L_.str + 1`
-    *   etc.
-*   **Loop Logic**:
-    *   Outer loops iterate through potential matches.
-    *   Inner loops check substrings against the target pattern.
-    *   `cvtsi2sdl` converts integer indices to double precision floats for comparison (common in older ARM implementations for floating-point comparisons).
-    *   `imull` performs multiplication-addition.
-    *   `idivl` divides by 2 (shift right logical).
-*   **Spills**: Large values (like pointers to strings) are spilled to memory (`movq ... -72(%rbp)`), then loaded back later.
-
----
-
-### ARMv8-A Assembly Code
-
-
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ## -- Begin function func0
 	.p2align	4, 0x90
 _func0:                                 ## @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
+push	q0
 	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$80, %rsp
-	movq	%rdi, -8(%rbp)
-	movq	%rsi, -16(%rbp)
-	movl	%edx, -20(%rbp)
-	movl	%ecx, -24(%rbp)
-	movslq	-24(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, -32(%rbp)
-	movslq	-24(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, -40(%rbp)
-	movl	$0, -44(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-44(%rbp), %eax
-	cmpl	-24(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-32(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movl	-44(%rbp), %edx
-	movq	-40(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-44(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -44(%rbp)
-	jmp	LBB0_1
-LBB0_4:
-	movl	$0, -48(%rbp)
-LBB0_5:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_8 Depth 2
-                                        ##     Child Loop BB0_11 Depth 2
-	movl	-48(%rbp), %eax
-	cmpl	-20(%rbp), %eax
-	jge	LBB0_16
-## %bb.6:                               ##   in Loop: Header=BB0_5 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-48(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rdi
-	leaq	L_.str(%rip), %rsi
-	callq	_strcmp
-	cmpl	$0, %eax
-	jne	LBB0_14
-## %bb.7:                               ##   in Loop: Header=BB0_5 Depth=1
-	jmp	LBB0_8
-LBB0_8:                                 ##   Parent Loop BB0_5 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movq	-40(%rbp), %rax
-	movq	-40(%rbp), %rcx
-	movslq	-48(%rbp), %rdx
-	movslq	(%rcx,%rdx,4), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movq	-40(%rbp), %rcx
-	movslq	-48(%rbp), %rdx
-	cmpl	(%rcx,%rdx,4), %eax
-	je	LBB0_10
-## %bb.9:                               ##   in Loop: Header=BB0_8 Depth=2
-	movq	-40(%rbp), %rax
-	movq	-40(%rbp), %rcx
-	movslq	-48(%rbp), %rdx
-	movslq	(%rcx,%rdx,4), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-40(%rbp), %rax
-	movslq	-48(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-	jmp	LBB0_8
-LBB0_10:                                ##   in Loop: Header=BB0_5 Depth=1
-	jmp	LBB0_11
-LBB0_11:                                ##   Parent Loop BB0_5 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movq	-40(%rbp), %rax
-	movq	-40(%rbp), %rcx
-	movl	-48(%rbp), %edx
-	addl	$1, %edx
-	movslq	%edx, %rdx
-	movslq	(%rcx,%rdx,4), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movq	-40(%rbp), %rcx
-	movl	-48(%rbp), %edx
-	addl	$1, %edx
-	movslq	%edx, %rdx
-	cmpl	(%rcx,%rdx,4), %eax
-	je	LBB0_13
-## %bb.12:                              ##   in Loop: Header=BB0_11 Depth=2
-	movq	-40(%rbp), %rax
-	movq	-40(%rbp), %rcx
-	movl	-48(%rbp), %edx
-	addl	$1, %edx
-	movslq	%edx, %rdx
-	movslq	(%rcx,%rdx,4), %rc
+	.cfi_offset %sp, -16
+mov	x20, sp
+stp	x29, x30, [x20]
+add	x29, sp, 48
+str	x0, [x29, 40]
+str	x1, [x29, 32]
+str	w2, [x29, 28]
+str	w1, [x29, 24]
+str	w0, [x29, 20]
+adrp	x0, L_.str
+add	x1, x0, :lo12:L_.str
+ldrsw	x1, [x1, 1]
+ldrsw	x2, [x1, 1]
+ldrsw	x3, [x1, 1]
+ldrsw	x4, [x1, 1]
+bl	_malloc
+str	x0, [x29, 56]
+mov	w0, 0
+str	w0, [x29, 52]
+mov	x19, x0
+ldrh	w0, [x19, 40]
+lsl	x0, x0, 2
+bl	_malloc
+ldrh	w1, [x19, 40]
+lsl	x1, x1, 2
+bl	_malloc
+ldrh	w2, [x19, 40]
+lsl	x2, x2, 2
+sub	x2, x2, #2
+bl	_malloc
+ldrsw	w3, [x29, 20]
+ldrsw	w4, [x29, 24]
+lsl	x3, x3, 2
+mov	x1, x0
+add	x1, x1, x3
+add	x1, x1, 40
+sxtw	x0, w4
+sxtw	x1, w3
+mul	x1, x1, x0
+mov	x0, 0
+movk	x0, 0, lsl 16
+str	x0, [x1]
+b	L.LBB0_1
+L.LBB0_2:
+ldr	x0, [x29]
+ldrh	w0, [x19, 40]
+lsl	x0, x0, 2
+add	x1, x0, x40
+and	x1, x1, x0
+sxtw	x0, w4
+fmov	d1, d0
+fmov	d0, w3
+fdiv	d0, d1, d0
+strt.w	x0, w0
+str	x0, [x1]
+str	w0, [x29, 20]
+ldr	w0, [x29, 20]
+add	w0, w0, 1
+str	w0, [x29, 20]
+b	L.LBB0_1
+L.LBB0_4:
+str	w0, [x29, 52]
+b	L.LBB0_5
+L.LBB0_5:
+ldr	w0, [x29]
+cmp	w0, w4
+bge	L.LBB0_16
+L.LBB0_8:
+ldr	x0, [x29]
+ldrh	w0, [x19, 40]
+lsl	x0, x0, 2
+add	x1, x0, x40
+and	x1, x1, x0
+ldr	x2, [x29]
+ldrh	w1, [x19, 40]
+lsl	x2, x2, 2
+sxtw	x3, w4
+sxtw	x4, w3
+fmov	d1, d0
+fmov	d0, w0
+fmul	d0, d1, d0
+strt.w	x1, w0
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_20
+b	L.LBB0_21
+L.LBB0_16:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_32
+b	L.LBB0_33
+L.LBB0_20:
+ldr	x0, [x29]
+ldrh	w0, [x19, 40]
+lsl	x0, x0, 2
+add	x1, x0, x40
+and	x1, x1, x0
+ldr	x2, [x29]
+ldrh	w1, [x19, 40]
+lsl	x2, x2, 2
+sxtw	x3, w4
+sxtw	x4, w3
+fmov	d1, d0
+fmov	d0, w0
+fmul	d0, d1, d0
+strt.w	x0, w0
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_44
+b	L.LBB0_45
+L.LBB0_32:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_48
+b	L.LBB0_49
+L.LBB0_45:
+ldr	x0, [x29]
+ldrh	w0, [x19, 40]
+lsl	x0, x0, 2
+add	x1, x0, x40
+and	x1, x1, x0
+ldr	x2, [x29]
+ldrh	w1, [x19, 40]
+lsl	x2, x2, 2
+sxtw	x3, w4
+sxtw	x4, w3
+fmov	d1, d0
+fmov	d0, w0
+fmul	d0, d1, d0
+strt.w	x1, w0
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_54
+b	L.LBB0_55
+L.LBB0_49:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_60
+b	L.LBB0_61
+L.LBB0_55:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_66
+b	L.LBB0_67
+L.LBB0_61:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_72
+b	L.LBB0_73
+L.LBB0_67:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_78
+b	L.LBB0_79
+L.LBB0_73:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_84
+b	L.LBB0_85
+L.LBB0_79:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_90
+b	L.LBB0_91
+L.LBB0_85:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_96
+b	L.LBB0_97
+L.LBB0_91:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_102
+b	L.LBB0_103
+L.LBB0_97:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_108
+b	L.LBB0_109
+L.LBB0_103:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_114
+b	L.LBB0_115
+L.LBB0_109:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_120
+b	L.LBB0_121
+L.LBB0_115:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_126
+b	L.LBB0_127
+L.LBB0_121:
+ldr	w0, [x29]
+cmp	w0, w4
+bcc	L.LBB0_132
+b	L.LBB0_133
+L.LBB0_1

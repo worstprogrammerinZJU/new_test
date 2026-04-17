@@ -1,153 +1,203 @@
-Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
-
-### Translation Notes & Strategy
-1.  **Architecture Mapping**:
-    *   `movq`, `movl`, `addl`, etc., are translated to `mov q`, `mov l`, and `add l`.
-    *   `pushq`, `popq` become `push r12`, `pop r12`.
-    *   `subq`, `cltd`, `idivl` require specific handling for alignment and division on ARM64.
-    *   `testb`, `cmp`, `jne`, `jle`, `jmp` remain largely similar but use `r12` as the general-purpose register for flags instead of `%eax`.
-    *   Memory addressing uses `[r12]` or `[r12:r13]` syntax.
-2.  **Loop Logic Preservation**: The nested loops (`LBB0_1`, `LBB0_5`, `LBB0_16`) and their inner logic (spilling registers, checking bounds, incrementing indices) have been mapped directly to equivalent ARM64 instructions while maintaining the control flow structure.
-3.  **Special Instructions**:
-    *   `shlq`: Translated to `shll` (shift left logical).
-    *   `cltd/idivl`: These are hardware extensions; in pure software emulation without a dedicated `clt` instruction, they are often approximated using `mul` with sign extension or manual shifting, though strictly speaking, `cltd` is an intrinsic. For this translation, I will use standard `mul` with proper sign extension logic where possible, or note that `cltd` is an intrinsic. Given the strict "assembly" request, I will simulate the behavior using `mul` and explicit shifts if needed, but primarily rely on standard arithmetic which behaves similarly for signed integers in this context.
-    *   `cld`/`cltd`: Not available in standard AArch64 ISA without specific intrinsics. I will replace them with equivalent signed multiplication checks (`mul` + comparison).
-
----
-
-### ARMv8-A Assembly Code
-
-
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0
+_build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ## -- Begin function func0
 	.p2align	4, 0x90
-_func0:
+_func0:                                 ## @func0
 	.cfi_startproc
-## %bb.0:
-	push	r12
-	.cfi_def_cfa_offset 16
-	.cfi_offset r12, -16
-	mov	r12, sp
-	.cfi_def_cfa_register r12
-	sub	r12, #64
-	mov	r12, [r12]
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, [r12+48]
-	mul	r12, [r12+16], r12
-	shll	r12, 2
-	call	_malloc
-	mov	r12, [r12]
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
-	mov	r12, [r12+48]
-	mov	r12, r12
-	mov	r12, [r12+16]
-	mov	r12, [r12+32]
-	mov	r12, r12
+	ldr	x19, [sp, 80]
+	ldp	x29, x30, [sp], 80
+	add	x12, sp, 32
+stp	x29, x30, [sp, 64]
+str	x19, [sp, 64]
+str	x0, [x12, 40]
+str	w1, [x12, 44]
+str	x2, [x12, 56]
+mov	x0, w0
+ldr	x1, [x0, 40]
+fmov	d0, d1
+shl	d0, d0, 2
+bl	_malloc
+mov	x1, x0
+ldr	x0, [x1, 56]
+str	x1, [x0]
+strb	w0, [sp, 60]
+cmp	w1, 0
+bge	LBB0_15
+.LBB0_15:
+.LBB0_16:
+.LBB0_17:
+.LBB0_18:
+.LBB0_19:
+.LBB0_20:
+.LBB0_21:
+.b	.LBB0_15
+cmp	w1, 0
+beq	LBB0_26
+.LBB0_22:
+.LBB0_23:
+.LBB0_24:
+.LBB0_25:
+.LBB0_26:
+ldr	w1, [sp, 60]
+and	w1, w1, 255
+sub	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+cmp	w1, 0
+bcs	LBB0_27
+.LBB0_27:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+eor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_28
+b	.LBB0_15
+.LBB0_28:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+ble	LBB0_29
+.LBB0_30:
+and	w1, w1, 255
+sub	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bne	LBB0_31
+b	.LBB0_15
+.LBB0_31:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+add	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_32
+b	.LBB0_15
+.LBB0_32:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+mov	w0, 1
+fmov	w1, w0
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+blt	LBB0_33
+b	.LBB0_15
+.LBB0_33:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+add	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+beq	LBB0_34
+b	.LBB0_15
+.LBB0_34:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+xor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_35
+b	.LBB0_15
+.LBB0_35:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bgt	LBB0_36
+b	.LBB0_15
+.LBB0_36:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bls	LBB0_37
+b	.LBB0_15
+.LBB0_37:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_38
+b	.LBB0_15
+.LBB0_38:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+eor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bgt	LBB0_39
+b	.LBB0_15
+.LBB0_39:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bls	LBB0_40
+b	.LBB0_15
+.LBB0_40:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_41
+b	.LBB0_15
+.LBB0_41:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+xor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bgt	LBB0_42
+b	.LBB0_15
+.LBB0_42:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bgt	LBB0_43
+b	.LBB0_15
+.LBB0_43:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_44
+b	.LBB0_15
+.LBB0_44:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+eor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bgt	LBB0_45
+b	.LBB0_15
+.LBB0_45:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 0
+bls	LBB0_46
+b	.LBB0_15
+.LBB0_46:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+cmp	w1, 1
+bne	LBB0_47
+b	.LBB0_15
+.LBB0_47:
+ldr	w1, [sp, 55]
+and	w1, w1, 255
+xor	w1, w1, #1
+and	w1, w1, 255
+strb	w1, [sp, 55]
+and	w1, w

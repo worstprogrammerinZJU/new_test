@@ -1,211 +1,185 @@
-Here is the translation of the provided x86-64 assembly code into ARMv8-A assembly.
-
-### Translation Notes & Strategy
-1.  **Architecture Mapping**:
-    *   `movq` (64-bit) $\rightarrow$ `mov q` (ARM64).
-    *   `movl` (32-bit) $\rightarrow$ `mov r` or `mov w`.
-    *   Register names are preserved where possible (`%rbp`, `%rsp`, `%rdi`, etc.), but standard ARM64 conventions apply (e.g., using `r0-r15`).
-    *   The stack pointer (`%rsp`) maps directly to `sp`.
-    *   The base register (`%rbp`) maps to `rbp`.
-    *   Negative offsets like `-8(%rbp)` translate to `sub sp, #8, rbp` followed by a load/store with an offset relative to `rbp`.
-2.  **Loop Logic**:
-    *   The original code uses a complex loop structure with multiple inner loops and conditional jumps based on signed comparisons (`jge`, `jle`). These are translated as direct `cmp` instructions followed by `b` (branch) instructions.
-    *   The logic inside the loops involves adding 1 to counters and comparing against loop headers.
-3.  **Specific Instructions**:
-    *   `pushq` / `popq`: `push {r0-r15}` / `pop {r0-r15}`.
-    *   `retq`: `ret`.
-    *   `cfi_startproc` / `cfi_endproc`: Removed for clean ARM syntax.
-    *   `@func0`: Renamed to `_func0`.
-    *   `__TEXT...`: Removed from final executable output.
-
-### ARMv8-A Assembly Code
-
-
-.section	_text, "reg", "progbits"
-.global	func0
-.func	func0
-.type	func0, @function
-
+.func0:
+	.size	func0, .loc(func0, .end(func0))
+	.loc	func0, .gotra .lo12(func0), .lo12(.sloc(func0, .end(func0)))
+	.globl	_func0
+	.type	_func0, .hidden
+	.cfi	def_cfa 24
 _func0:
-	.size	func0, .-func0
-
-_push_frame:
-	push {r0-r15}
-	sub sp, #16
-	mov sp, rsp
-	mov rbp, rsp
-	mov rdi, -8(rbp)
-	mov rsi, -12(rbp)
-	mov edx, -16(rbp)
-	mov rcx, -24(rbp)
-	mov rax, $0
-.LBB0_1:
-	mov rax, -28(rbp)
-	mov ecx, -12(rbp)
-	sub ecx, $1
-	cmp rax, ecx
-	bge LBB0_10
-
-	mov rax, $0
-.LBB0_3:
-	mov rax, -32(rbp)
-	mov ecx, -12(rbp)
-	sub ecx, -28(rbp)
-	sub ecx, $1
-	cmp rax, ecx
-	bge LBB0_8
-
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rdx, rdx
-	mov rax, -8(rbp)
-	mov ecx, -32(rbp)
-	add ecx, $1
-	mov rdx, ecx
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov ecx, -32(rbp)
-	add ecx, $1
-	mov rdx, ecx
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov ecx, -32(rbp)
-	add ecx, $1
-	mov rdx, ecx
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov ecx, -32(rbp)
-	add ecx, $1
-	mov rdx, ecx
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov rdx, -32(rbp)
-	add rdx, $1
-	mov rax, -8(rbp)
-	mov r
+	ldp	x19, x20, [sp, 48]
+stp	x19, x20, [sp]
+mv	v0.0, v0.1
+stp	q0, q1, [sp, 16]
+stp	q0, q1, [sp, 32]
+str	w0, [sp, 40]
+ldr	w1, [sp, 48]
+ldr	w2, [sp, 56]
+ldr	w3, [sp, 64]
+str	w0, [sp, 72]
+b	L._func0.14
+.L._func0.14:
+	b	L._func0.12
+.L._func0.12:
+	str	w0, [sp, 64]
+	b	L._func0.11
+.L._func0.11:
+	add	w0, w0, 1
+ldr	w1, [sp, 48]
+add	w1, w1, w0
+ldr	w2, [sp, 56]
+sub	w2, w2, w1
+ldr	w3, [sp, 64]
+cmp	w3, w2
+beq	L._func0.9
+b	L._func0.11
+.L._func0.9:
+	add	w0, w0, 1
+ldr	w1, [sp, 48]
+add	w1, w1, w0
+ldr	w2, [sp, 56]
+sub	w2, w2, w1
+ldr	w3, [sp, 64]
+cmp	w3, w2
+bgt	L._func0.8
+b	L._func0.7
+.L._func0.8:
+	str	w0, [sp, 72]
+b	L._func0.9
+.L._func0.7:
+	lsl	x0, x0, 2
+mov	x1, x0
+ldrh	w0, [sp, 48]
+and	w0, w0, 65535
+mov	w1, w0
+ldrh	w2, [sp, 56]
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w0, w2
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w2
+mov	w1, w0
+ldrh	w2, [sp, 64]
+and	w2, w2, 65535
+sub	w1, w1, w2
+asr	w1, w1, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w1, w1, 8
+and	w1, w1, 65535
+add	w0, w0, w1
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w1
+mov	w1, w0
+ldrh	w2, [sp, 72]
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w0, w2
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w2
+mov	w1, w0
+add	w0, w0, 1
+ldrh	w2, [sp, 48]
+and	w2, w2, 65535
+sub	w2, w2, w0
+asr	w0, w2, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w0, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w0, w2
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w2
+mov	w1, w0
+ldrh	w2, [sp, 56]
+and	w2, w2, 65535
+sub	w1, w1, w2
+asr	w1, w1, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w1, w1, 8
+and	w1, w1, 65535
+add	w0, w0, w1
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w1
+mov	w1, w0
+ldrh	w2, [sp, 64]
+and	w2, w2, 65535
+sub	w1, w1, w2
+asr	w1, w1, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w1, w1, 8
+and	w1, w1, 65535
+add	w0, w0, w1
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w1
+mov	w1, w0
+ldrh	w2, [sp, 72]
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w0, w2
+asr	w0, w0, 8
+asr	w1, w1, 8
+and	w1, w1, 65535
+add	w0, w0, w1
+asr	w0, w0, 8
+and	w0, w0, 65535
+orr	w0, w0, w1
+mov	w1, w0
+ldrh	w2, [sp, 80]
+and	w2, w2, 65535
+sub	w1, w1, w2
+asr	w1, w1, 8
+asr	w2, w2, 8
+and	w2, w2, 65535
+add	w0, w1, w2
+lsr	x0, x0, 2
+asr	w2, w0, 8
+sub	w0, w2, w0
+blsw	x0, w

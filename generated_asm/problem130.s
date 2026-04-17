@@ -1,182 +1,226 @@
-Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
-
-### Translation Notes & Strategy
-1.  **Architecture Differences**:
-    *   **Registers**: `movq` becomes `mov rax`, `movl` becomes `mov rax`. The stack pointer (`rsp`) maps directly to `sp`.
-    *   **Calling Convention**: The original uses a custom ABI with specific offsets for arguments and return values relative to `%rbp`. In standard AArch64, we use `r12-r15` for local variables and `r14`/`r15` for return values. However, since this is a direct translation preserving logic without changing the calling convention significantly (just adapting register names), I will map the logical variable positions to the standard AArch64 layout where possible, or keep them as named registers if they represent distinct data slots not easily mapped to the standard stack frame.
-    *   **Stack Alignment**: The original aligns at `0x90` (which is $0x10 \times 4 + 0$, i.e., aligned to 4 bytes). This translates to `.align 4` in ARM.
-    *   **Function Calls**: `callq` becomes `bl` (branch and link).
-    *   **String Operations**: `movslq` (signed long) becomes `mov rax, [rsi]` followed by `add rsi, #4`. `movsb` (unsigned byte) becomes `mov rax, [rsi]` followed by `add rsi, #1`.
-    *   **Loop Logic**: The loop structure remains largely similar, but branch labels are renamed to follow ARM naming conventions (e.g., `loop_label`).
-
-2.  **Register Mapping**:
-    *   Original: `%rbp` -> ARM: `%r12` (Local Frame Pointer).
-    *   Original: `%rsp` -> ARM: `%sp`.
-    *   Original: `%rdi`, `%esi`, `%edx` -> ARM: `%r12`, `%r13`, `%r14` respectively (standard argument/return slot mapping).
-    *   Original: `%rax` -> ARM: `%rax`.
-    *   Original: `%rcx` -> ARM: `%r11`.
-
-3.  **Specific Instructions**:
-    *   `xorl`: `xor rax, rax`.
-    *   `cmp`: `cmp rax, immediate`.
-    *   `je/jne/jle`: `jz/jnz/jz` (Zero/Negative flags).
-    *   `subl`: `sub rax, immediate`.
-    *   `addl`: `add rax, immediate`.
-    *   `movslq`: `mov rax, [rsi]`, `add rsi, #4`.
-    *   `movsb`: `mov rax, [rsi]`, `add rsi, #1`.
-    *   `cltq`: `clt rax` (Clear Top of Stack).
-    *   `atof` equivalent: `atoi` (since no C library is present, we assume a manual implementation or placeholder; the original calls `_atoi` which likely comes from libc. I will translate the instruction sequence assuming a basic integer parsing logic or note that it relies on external functions). *Correction*: Since `_atoi` is called, I must preserve the call. If this were pure assembly, one would implement atoi manually. Here, I will translate the instruction sequence exactly as written, assuming the environment has these symbols defined.
-
----
-
-### ARMv8-A Assembly Code
-
-
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.align 4
+.global	_func0
+.type	_func0, .type.object, @object
 _func0:
-        .cfi_startproc
-## %bb.0:
-        push {r12}          /* Save old frame pointer */
-        .cfi_def_cfa_offset 16
-        .cfi_offset %r12, -16
-        mov sp, rbp         /* Move current stack pointer to rbp */
-        .cfi_def_cfa_register %r12
-        sub sp, #80         /* Adjust stack size (original used 80 bytes) */
-        
-        /* Load guard address from GOTPCREL */
-        mov rax, __stack_chk_guard@GOTPCREL(%rip)
-        mov rax, [rax]      /* Load address of guard */
-        mov rax, -8(rbp)    /* Store address of guard below rbp */
-        
-        /* Argument 1: Input string start (rdi) */
-        mov rdi, -40(rbp)
-        
-        /* Argument 2: Output buffer end (esi) */
-        mov esi, -44(rbp)
-        
-        /* Initialize output buffer length to 10 */
-        leaq -18(rbp), rdi
-        xor rax, rax
-        
-        /* Call memset with length 10 */
-        mov edx, $10
-        call _memset
-        
-        /* Argument 3: Input string end (rdi) */
-        leaq -28(rbp), rdi
-        xor rax, rax
-        
-        /* Call memset with length 10 */
-        mov edx, $10
-        call _memset
-        
-        /* Set first null terminator */
-        mov rax, $0
-        mov -48(rbp), rax
-        
-        /* Set second null terminator */
-        mov rax, $0
-        mov -52(rbp), rax
-        
-        /* Set third null terminator */
-        mov rax, $0
-        mov -56(rbp), rax
-        
-LBB0_1:
-        /* Read char from input buffer */
-        mov rax, -40(rbp)
-        mov r11, -56(rbp)   /* Load length into rcx */
-        mov cl, [rax, r11]  /* Load character */
-        
-        cmp rax, $0
-        jz LBB0_13           /* If EOF, exit loop */
-        
-        /* Check next char against 'is_digit' */
-        mov rax, -40(rbp)
-        mov r11, -56(rbp)
-        mov cl, [rax, r11]
-        call _isdigit
-        cmp rax, $0
-        jz LBB0_7            /* If digit, continue loop */
-        
-        /* Next iteration check */
-        cmp rax, $0
-        jne LBB0_5
-            
-        /* ... Inner Loop Body ... */
-        
-        /* Read char again */
-        mov rax, -40(rbp)
-        mov r11, -56(rbp)
-        mov cl, [rax, r11]
-        
-        mov rax, -52(rbp)   /* Load previous value into eax */
-        mov rdx, rax
-        add rdx, $1         /* Increment counter */
-        mov -52(rbp), rdx   /* Store back */
-        
-        clt rax             /* Clear top of stack */
-        
-        /* Write char to output buffer */
-        mov cl, -18(rbp, rax)
-        jmp LBB0_6
-    
-LBB0_5:
-        /* Read char again */
-        mov rax, -40(rbp)
-        mov r11, -56(rbp)
-        mov cl, [rax, r11]
-        
-        mov rax, -52(rbp)
-        mov rdx, rax
-        add rdx, $1
-        mov -52(rbp), rdx
-        
-        clt rax
-        mov cl, -28(rbp, rax)
-        
-        jmp LBB0_6
-
-LBB0_6:
-        jmp LBB0_11
-
-LBB0_7:
-        cmp rax, $0
-        jne LBB0_10
-
-LBB0_8:
-        cmp rax, $0
-        jle LBB0_10
-
-LBB0_9:
-        mov rax, $1
-        mov rdx, $0
-
-LBB0_10:
-        jmp LBB0_11
-
-LBB0_11:
-        jmp LBB0_12
-
-LBB0_12:
-        mov rax, -56(rbp)
-        add rax, $1
-        mov -56(rbp), rax
-        
-        jmp LBB0_1
-
-LBB0_13:
-        mov rax, -44(rbp)
-        mov rax, -68(rbp)   /* Spill to memory */
-        leaq -18(rbp), rdi
-        call _atoi
-        mov rax, rax
-        mov r11, -68(rbp)   /* Reload */
-        sub rax, r11
-        mov -64(rbp), rax   /* Spill */
-        leaq -28(rbp), rdi
-        call _atoi
-        mov rax, rax
+	.size	_func0, .-func0
+push	q0
+mov	q0, sp
+add	sp, sp, 80
+mov	x19, x0
+ldr	x0, [sp, 48]
+ldrb	w0, [x0]
+cmp	w0, 0
+beq	L0_1
+ldrb	w0, [sp, 47]
+cmp	w0, 0
+beq	L0_2
+ldrb	w0, [sp, 46]
+cmp	w0, 0
+bne	L0_3
+ldrb	w0, [sp, 45]
+cmp	w0, 0
+bne	L0_4
+ldrb	w0, [sp, 44]
+cmp	w0, 0
+bne	L0_5
+ldrb	w0, [sp, 43]
+cmp	w0, 0
+bne	L0_6
+ldrb	w0, [sp, 42]
+cmp	w0, 0
+bne	L0_7
+ldrb	w0, [sp, 41]
+cmp	w0, 0
+bne	L0_8
+ldrb	w0, [sp, 40]
+cmp	w0, 0
+bne	L0_9
+ldrb	w0, [sp, 39]
+cmp	w0, 0
+bne	L0_10
+ldrb	w0, [sp, 38]
+cmp	w0, 0
+bne	L0_11
+ldrb	w0, [sp, 37]
+cmp	w0, 0
+bne	L0_12
+ldrb	w0, [sp, 36]
+cmp	w0, 0
+bne	L0_13
+ldrb	w0, [sp, 35]
+cmp	w0, 0
+bne	L0_14
+ldrb	w0, [sp, 34]
+cmp	w0, 0
+bne	L0_15
+ldrb	w0, [sp, 33]
+cmp	w0, 0
+bne	L0_16
+ldrb	w0, [sp, 32]
+cmp	w0, 0
+bne	L0_17
+ldrb	w0, [sp, 31]
+cmp	w0, 0
+bne	L0_18
+ldrb	w0, [sp, 30]
+cmp	w0, 0
+bne	L0_19
+ldrb	w0, [sp, 29]
+cmp	w0, 0
+bne	L0_20
+ldrb	w0, [sp, 28]
+cmp	w0, 0
+bne	L0_21
+ldrb	w0, [sp, 27]
+cmp	w0, 0
+bne	L0_22
+ldrb	w0, [sp, 26]
+cmp	w0, 0
+bne	L0_23
+ldrb	w0, [sp, 25]
+cmp	w0, 0
+bne	L0_24
+ldrb	w0, [sp, 24]
+cmp	w0, 0
+bne	L0_25
+ldrb	w0, [sp, 23]
+cmp	w0, 0
+bne	L0_26
+ldrb	w0, [sp, 22]
+cmp	w0, 0
+bne	L0_27
+ldrb	w0, [sp, 21]
+cmp	w0, 0
+bne	L0_28
+ldrb	w0, [sp, 20]
+cmp	w0, 0
+bne	L0_29
+ldrb	w0, [sp, 19]
+cmp	w0, 0
+bne	L0_30
+ldrb	w0, [sp, 18]
+cmp	w0, 0
+bne	L0_31
+ldrb	w0, [sp, 17]
+cmp	w0, 0
+bne	L0_32
+ldrb	w0, [sp, 16]
+cmp	w0, 0
+bne	L0_33
+ldrb	w0, [sp, 15]
+cmp	w0, 0
+bne	L0_34
+ldrb	w0, [sp, 14]
+cmp	w0, 0
+bne	L0_35
+ldrb	w0, [sp, 13]
+cmp	w0, 0
+bne	L0_36
+ldrb	w0, [sp, 12]
+cmp	w0, 0
+bne	L0_37
+ldrb	w0, [sp, 11]
+cmp	w0, 0
+bne	L0_38
+ldrb	w0, [sp, 10]
+cmp	w0, 0
+bne	L0_39
+ldrb	w0, [sp, 9]
+cmp	w0, 0
+bne	L0_40
+ldrb	w0, [sp, 8]
+cmp	w0, 0
+bne	L0_41
+ldrb	w0, [sp, 7]
+cmp	w0, 0
+bne	L0_42
+ldrb	w0, [sp, 6]
+cmp	w0, 0
+bne	L0_43
+ldrb	w0, [sp, 5]
+cmp	w0, 0
+bne	L0_44
+ldrb	w0, [sp, 4]
+cmp	w0, 0
+bne	L0_45
+ldrb	w0, [sp, 3]
+cmp	w0, 0
+bne	L0_46
+ldrb	w0, [sp, 2]
+cmp	w0, 0
+bne	L0_47
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_48
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_49
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+beq	L0_50
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_51
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_52
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_53
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_54
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_55
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_56
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_57
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_58
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_59
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_60
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_61
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_62
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_63
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_64
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_65
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_66
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_67
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_68
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_69
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_70
+ldrb	w0, [sp, 0]
+cmp	w0, 0
+bne	L0_71
+ldrb	w0, [sp, 1]
+cmp	w0, 0
+bne	L0_72
+ldrb	w0, [

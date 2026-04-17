@@ -1,75 +1,64 @@
-Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
-
-### Translation Notes & Strategy
-1.  **Architecture Differences**:
-    *   **Registers**: The source uses `%rbp`, `%rsp`, and general-purpose registers (`%rdi`, `%rsi`, etc.). In ARMv8-A, we use `$r0-r31`. We will map them as follows for clarity:
-        *   `%rbp` → `$r12` (Stack Frame Base)
-        *   `%rsp` → `$sp` (Stack Pointer)
-        *   `%rdi` → `$r0`
-        *   `%rsi` → `$r1`
-        *   `%rdx` → `$r2`
-        *   `%rcx` → `$r3`
-        *   `%r8` → `$r8`
-        *   `%r9` → `$r9`
-        *   `%r10` → `$r10`
-        *   `%r11` → `$r11`
-        *   `%rax` / `%rcx` / `%rdx` / `%rsi` / `%rdi` / `%r8`/`%r9`/`%r10`/`%r11` → `$r0`-$r11
-    *   **Data Types**:
-        *   `movq` (64-bit) → `mov q` (quad-word)
-        *   `movl` (32-bit) → `mov w` (word)
-        *   `shll` (shift left logical) → `sll $n, reg`
-        *   `shrq` (shift right logical) would be needed if present; none are here.
-        *   `addl` (signed add) → `add w`
-        *   `subl` (signed sub) → `sub w`
-        *   `xorl` (signed xor) → `xorw`
-        *   `movslq` (signed move long) → `mov w` (since destination is usually a register or immediate, but strictly speaking `mov slq` moves signed word. However, in this specific loop logic, it often acts like a load/store with immediate or register-to-register. Given the context of `movl` followed by arithmetic, treating it as a standard `mov w` is safe unless the destination requires a register. Here destinations are registers.)
-        *   `callq` → `bl` (branch and link)
-        *   `retq` → `ret`
-    *   **Memory Access**:
-        *   `movl %ecx, (%rax)` → `mov w [r0], r3`
-        *   `movl %edx, (%rax,%rcx,4)` → `mov w [r0, r3, #4]`
-        *   `movq %rax, -32(%rbp)` → `mov q [r0, #-32]`
-        *   `movq %rax, -8(%rbp)` → `mov q [r0, #-8]`
-        *   `movq %rax, -12(%rbp)` → `mov q [r0, #-12]`
-        *   `movq %rax, -16(%rbp)` → `mov q [r0, #-16]`
-        *   `movq %rax, -24(%rbp)` → `mov q [r0, #-24]`
-        *   `movq %rax, -32(%rbp)` → `mov q [r0, #-32]`
-        *   `movq %rax, -40(%rbp)` → `mov q [r0, #-40]`
-        *   `movq %rax, -44(%rbp)` → `mov q [r0, #-44]`
-        *   `movq %rax, -48(%rbp)` → `mov q [r0, #-48]`
-        *   `movq %rax, -56(%rbp)` → `mov q [r0, #-56]`
-        *   `movq %rax, -64(%rbp)` → `mov q [r0, #-64]`
-        *   `movq %rax, -72(%rbp)` → `mov q [r0, #-72]`
-        *   `movq %rax, -80(%rbp)` → `mov q [r0, #-80]`
-        *   `movq %rax, -88(%rbp)` → `mov q [r0, #-88]`
-        *   `movq %rax, -96(%rbp)` → `mov q [r0, #-96]`
-        *   `movq %rax, -104(%rbp)` → `mov q [r0, #-104]`
-        *   `movq %rax, -112(%rbp)` → `mov q [r0, #-112]`
-        *   `movq %rax, -120(%rbp)` → `mov q [r0, #-120]`
-        *   `movq %rax, -128(%rbp)` → `mov q [r0, #-128]`
-        *   `movq %rax, -136(%rbp)` → `mov q [r0, #-136]`
-        *   `movq %rax, -144(%rbp)` → `mov q [r0, #-144]`
-        *   `movq %rax, -152(%rbp)` → `mov q [r0, #-152]`
-        *   `movq %rax, -160(%rbp)` → `mov q [r0, #-160]`
-        *   `movq %rax, -168(%rbp)` → `mov q [r0, #-168]`
-        *   `movq %rax, -176(%rbp)` → `mov q [r0, #-176]`
-        *   `movq %rax, -184(%rbp)` → `mov q [r0, #-184]`
-        *   `movq %rax, -192(%rbp)` → `mov q [r0, #-192]`
-        *   `movq %rax, -200(%rbp)` → `mov q [r0, #-200]`
-        *   `movq %rax, -208(%rbp)` → `mov q [r0, #-208]`
-        *   `movq %rax, -216(%rbp)` → `mov q [r0, #-216]`
-        *   `movq %rax, -224(%rbp)` → `mov q [r0, #-224]`
-        *   `movq %rax, -232(%rbp)` → `mov q [r0, #-232]`
-        *   `movq %rax, -240(%rbp)` → `mov q [r0, #-240]`
-        *   `movq %rax, -248(%rbp)` → `mov q [r0, #-248]`
-        *   `movq %rax, -256(%rbp)` → `mov q [r0, #-256]`
-        *   `movq %rax, -264(%rbp)` → `mov q [r0, #-264]`
-        *   `movq %rax, -272(%rbp)` → `mov q [r0, #-272]`
-        *   `movq %rax, -280(%rbp)` → `mov q [r0, #-280]`
-        *   `movq %rax, -288(%rbp)` → `mov q [r0, #-288]`
-        *   `movq %rax, -296(%rbp)` → `mov q [r0, #-296]`
-        *   `movq %rax, -304(%rbp)` → `mov q [r0, #-304]`
-        *   `movq %rax, -312(%rbp)` → `mov q [r0, #-312]`
-        *   `movq %rax, -320(%rbp)` → `mov q [r0, #-320]`
-        *   `movq %rax, -328(%rbp)` → `mov q [r0, #-328]`
-        *   `movq %rax, -336(%rbp)` → `mov q [r0, #-336
+.func0:
+	.cfi_startproc
+	sub	sp, sp, 64
+	str	x0, [sp, 56]
+	str	w1, [sp, 52]
+	str	w2, [sp, 48]
+	str	x3, [sp, 40]
+ldr	w0, [sp, 44]
+cmp	w0, 0
+ble	LBB0_2
+LBB0_3:
+	b	LBB0_3
+LBB0_2:
+	str	wzr, [sp, 44]
+b	LBB0_3
+LBB0_3:
+ldr	w3, [sp, 44]
+ldr	x0, [sp, 56]
+ldrsw	x1, [x0, 44]
+mov	x2, x3
+lsl	x2, x2, 2
+bl	_malloc
+str	x0, [sp, 48]
+ldr	w0, [sp, 44]
+cmp	w0, 0
+ble	LBB0_5
+LBB0_6:
+	add	x1, sp, 64
+add	x0, sp, 56
+mov	w3, w0
+ldrs	x2, [x0, 44]
+ldrw	x1, [x1, 44]
+ldrh	w2, [x1, 45]
+ldr	x0, [sp, 56]
+ldrsw	x3, [x0, 44]
+mov	w1, w2
+mov	w0, w3
+lsl	x0, x0, 2
+sxtw	x2, w2
+mov	x4, x0
+mov	x1, x2
+adrp	x0, x1
+add	x1, x0, :lo12:x1
+mov	w2, w1
+ldr	w1, [sp, 40]
+ldrb	w0, [x1, 44]
+ldrb	w1, [x1, 45]
+ldrb	w2, [x1, 46]
+stp	x2, x1, x0, [sp, 40]
+ldrb	w3, [sp, 40]
+sub	w0, w0, #1
+and	w0, w0, 255
+and	w0, w0, 4095
+fmov	d1, w0
+fscv	x0, d1, d2, d3, d4, d5, d6, d7
+fmov	d2, w1
+fmov	d3, w0
+fmov	d4, w3
+fmov	d5, w2
+add	x0, sp, 64
+str	d0, [x0, 44]
+ret
+	.cfi_endproc
+	.size	func0, .func0:.func0+56

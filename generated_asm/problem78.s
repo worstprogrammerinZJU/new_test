@@ -1,165 +1,201 @@
-Here is the translation of the provided `x86-64` assembly into `ARMv8-A` (AArch64).
-
-### Translation Notes & Assumptions
-1.  **Architecture**: ARMv8-A uses a 64-bit register set (`r0-r15`) and a 64-bit stack pointer (`sp`). The instruction encoding differs significantly from x86-64 (e.g., `movq` becomes `mov q`, `addq` becomes `add q`, etc.).
-2.  **Stack Alignment**: The original code aligns the stack at `0x90`. In AArch64, this corresponds to an alignment of 16 bytes on the stack frame.
-3.  **Function Pointer**: The global symbol `_func0` is assumed to be defined elsewhere in the linker script or as a local variable passed by the caller. We assume it resides in the `.rodata` section with the name `func0`.
-4.  **Data Section**: The literal string literals are moved from the `.cstring` section to the `.data` section using `mov.w` for efficiency, though keeping them in `.cstring` is also valid if the linker handles relocation differently. For portability in this context, we move them to `.data` where they can be accessed directly without needing the `.cstring` section header during execution.
-5.  **Loop Logic**: The nested loops involving `memmove` and `memcmp` are translated line-by-line, preserving the logic flow exactly as written.
-
----
-
-### ARMv8-A Assembly Code
-
-
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	func0
-.p2align	4, 0x90
-func0:
-	.cfi_startproc
-## %bb.0:
-	pushq	rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset rbp, -16
-	movq	rsp, rbp
-	.cfi_def_cfa_register rbp
-	subq	$rsp, $160
-	movq	___stack_chk_guard@GOTPCREL(rip), rax
-	movq	[rax], rax
-	movq	rax, -8(rbp)
-	movq	[rdi], -136(rbp)
-	leaq	-48(rbp), rdi
-	xorl	rsi, rsi
-	movl	$40, edx
-	callq	memset
-	leaq	-128(rbp), rdi
-	leaq	l___const.func0.numto(rip), rsi
-	movl	$80, edx
-	callq	memcpy
-	movl	$0, -140(rbp)
-	movq	-136(rbp), rax
-	cmpb	$0, [rax]
-	je	LBB0_17
-## %bb.1:
-	jmp	LBB0_2
-LBB0_2:
-	## =>This Loop Header: Depth=1
-	##     Child Loop BB0_3 Depth 2
-	##     Child Loop BB0_9 Depth 2
-	movl	$0, -144(rbp)
-LBB0_3:
-	##   Parent Loop BB0_2 Depth=1
-	## =>  This Inner Loop Header: Depth=2
-	movq	-136(rbp), rax
-	movslq	-144(rbp), rcx
-	movsb	[(rax, rcx)], ecx
-	xorl	eax, eax
-	## kill: def $al killed $al killed $eax
-	cmpl	$32, ecx
-	movb	al, -159(rbp)
-	je	LBB0_5
-## %bb.4:
-	##   in Loop: Header=BB0_3 Depth=2
-	movq	-136(rbp), rax
-	movslq	-144(rbp), rcx
-	movsb	[(rax, rcx)], eax
-	cmpl	$0, eax
-	setne	al
-	movb	al, -159(rbp)
-LBB0_5:
-	##   in Loop: Header=BB0_3 Depth=2
-	movb	-159(rbp), al
-	testb	$1, al
-	jne	LBB0_6
-	jmp	LBB0_8
+._got:adrp	x0,x0 :lo12:x0
+ldr	x0,x0:lo12
+ldr	x19, [x0]
+mov	x2, 80
+mov	wd, w0
+bl	_memset
+add	x0, sp, 80
+add	x1, sp, 160
+mov	wd, w0
+movk	w0, 0x40, lsl 16
+bl	_memcpy
+str	d0, [sp, 40]
+ldrb	w0, [ldrb	w0, w1, w2]
+cmp	w0, 0
+cset	w0, ne
+strb	w0, [sp, 41]
+ldrb	w0, [sp, 41]
+and	w0, w0, 1
+cmp	w0, 0
+bne	LBB0_6
+b	LBB0_8
 LBB0_6:
-	##   in Loop: Header=BB0_3 Depth=2
-	movq	-136(rbp), rax
-	movslq	-144(rbp), rcx
-	movb	[(rax, rcx)], cl
-	movslq	-144(rbp), rax
-	movb	cl, -158(rbp, rax)
-## %bb.7:
-	##   in Loop: Header=BB0_3 Depth=2
-	movl	-144(rbp), eax
-	addl	$1, eax
-	movl	eax, -144(rbp)
-	jmp	LBB0_3
+ldr	x1, [sp, 40]
+ldrb	w0, [ldrb	w0, w1, w2]
+ldrb	w1, [sp, 41]
+and	w1, w1, 255
+and	w0, w0, 255
+cmp	w1, w0
+csel	w0, w1, w0, lt
+strb	w0, [sp, 41]
 LBB0_8:
-	##   in Loop: Header=BB0_2 Depth=1
-	movslq	-144(rbp), rax
-	movb	$0, -158(rbp, rax)
-	movl	$0, -148(rbp)
+ldrb	w0, [sp, 40]
+sub	w0, w0, 1
+strb	w0, [sp, 40]
+b	LBB0_3
+LBB0_3:
+ldr	x1, [sp, 40]
+ldrb	w0, [sp, 41]
+and	w0, w0, 255
+and	x1, x1, 65535
+and	w0, w0, 255
+cmp	w0, 32
+strb	w0, [sp, 38]
+b	LBB0_5
+LBB0_5:
+ldrb	w0, [sp, 38]
+and	w0, w0, 255
+cmp	w0, 0
+cset	w0, ne
+strb	w0, [sp, 38]
+b	LBB0_8
+LBB0_8:
+ldrb	w0, [sp, 40]
+and	w0, w0, 1
+bne	LBB0_9
+b	LBB0_10
 LBB0_9:
-	##   Parent Loop BB0_2 Depth=1
-	## =>  This Inner Loop Header: Depth=2
-	cmpl	$10, -148(rbp)
-	jge	LBB0_14
-## %bb.10:
-	##   in Loop: Header=BB0_2 Depth=1
-	leaq	-158(rbp), rdi
-	movslq	-148(rbp), rax
-	movq	-128(rbp, rax, 8), rsi
-	callq	strcmp
-	cmpl	$0, eax
-	jne	LBB0_12
-## %bb.11:
-	##   in Loop: Header=BB0_2 Depth=1
-	movslq	-148(rbp), rax
-	movl	-48(rbp, rax, 4), ecx
-	addl	$1, ecx
-	movl	ecx, -48(rbp, rax, 4)
-	jmp	LBB0_14
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 10
+bge	LBB0_15
+LBB0_10:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+beq	LBB0_16
+b	LBB0_17
+LBB0_11:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+cmp	w0, 1
+b	_loops
 LBB0_12:
-	##   in Loop: Header=BB0_2 Depth=1
-	jmp	LBB0_13
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	wzr, w0, [sp, 40]
+b	LBB0_13
 LBB0_13:
-	##   in Loop: Header=BB0_2 Depth=1
-	movl	-148(rbp), eax
-	addl	$1, eax
-	movl	eax, -148(rbp)
-	jmp	LBB0_9
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_12
 LBB0_14:
-	##   in Loop: Header=BB0_2 Depth=1
-	movl	-144(rbp), ecx
-	addl	$1, ecx
-	movq	-136(rbp), rax
-	movslq	ecx, rcx
-	addq	rcx, rax
-	movq	rax, -136(rbp)
-## %bb.15:
-	##   in Loop: Header=BB0_2 Depth=1
-	movq	-136(rbp), rax
-	cmpb	$0, -1(rax)
-	jne	LBB0_2
-## %bb.16:
-	jmp	LBB0_17
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+add	w0, w0, 1
+ldrb	w1, [sp, 41]
+and	w1, w1, 255
+and	w1, w1, 65535
+fdiv	w0, w1, w0
+add	w1, sp, 40
+strb	w0, [w1, w1]
+b	LBB0_15
+LBB0_15:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+sub	w0, w0, 1
+ldrb	w1, [sp, 41]
+and	w1, w1, 255
+and	w1, w1, 65535
+fdiv	w1, w1, w0
+add	w0, w1, w0
+fadd	w1, w1, w0
+sub	w1, w0, w1
+add	w0, sp, 48
+fmov	w0, w1
+strb	w0, [w0]
+b	LBB0_16
+LBB0_16:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+and	w0, w0, 1
+bne	LBB0_17
+b	LBB0_18
 LBB0_17:
-	movl	$0, -144(rbp)
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_19
 LBB0_18:
-	## =>This Loop Header: Depth=1
-	##     Child Loop BB0_20 Depth 2
-	##       Child Loop BB0_22 Depth 3
-	cmpl	$10, -144(rbp)
-	jge	LBB0_29
-## %bb.19:
-	##   in Loop: Header=BB0_18 Depth=1
-	movl	$0, -148(rbp)
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_18
+LBB0_19:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+cmp	w0, 1
+b	_loops
 LBB0_20:
-	##   Parent Loop BB0_18 Depth=1
-	## =>  This Loop Header: Depth=2
-	##       Child Loop BB0_22 Depth 3
-	movl	-148(rbp), eax
-	movslq	-144(rbp), rcx
-	cmpl	-48(rbp, rcx, 4), eax
-	jge	LBB0_27
-## %bb.21:
-	##   in Loop: Header=BB0_20 Depth=2
-	movl	$0, -152(rbp)
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_21
+LBB0_21:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_20
 LBB0_22:
-	##   Parent Loop BB0_18 Depth=1
-	##     Parent Loop BB0_20 Depth=2
-	## =>    This Inner Loop Header: Depth=3
-	movslq	-144(rbp), rax
-	movq	-128(rbp, r
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+cmp	w0, 1
+beq	LBB0_23
+b	LBB0_24
+LBB0_23:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_23
+LBB0_24:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_24
+LBB0_25:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+and	w0, w0, 1
+cmp	w0, 32
+udiv	w0, w0, 1
+fadd	w1, w0, w0
+fdiv	w0, w0, 32
+fcmp	w1, w0, rels
+cmp	w0, 0
+b	_loops
+LBB0_26:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+and	w0, w0, 1
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_27
+LBB0_27:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_28
+LBB0_28:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+stp	w0, w0, [sp, 40]
+b	LBB0_28
+LBB0_29:
+ldrb	w0, [sp, 40]
+and	w0, w0, 255
+cmp	w0, 0
+cmp	w0,

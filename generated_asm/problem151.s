@@ -1,52 +1,257 @@
-Here is the translation of the provided `x86-64` assembly code into **ARMv8-A** (AArch64).
-
-### Translation Notes & Strategy
-1.  **Architecture Differences**:
-    *   **Registers**: `movq` becomes `mov q`, `movl` becomes `mov r`.
-    *   **Stack Pointer**: `pushq`/`popq` become `push {r0-r3}` / `pop {r0-r3}`.
-    *   **Calling Convention**: The original uses a custom stack frame (`rbp`) with specific offsets for local variables and arguments. In ARMv8-A, we use `r0` as the base register for the stack pointer (`sp`). Arguments are passed on the stack from right-to-left (low address first).
-    *   **Loop Unrolling**: The complex nested loops in the original code are translated line-by-line using conditional jumps (`cmp`, `jz`, `jne`, etc.) to replicate the logic without explicit loop headers or counters, which is common in high-performance ARM code generation.
-    *   **Special Instructions**: `callq` becomes `bl`, `retq` becomes `br`, `movslq` becomes `mov r1, r0, #<val>`, `movsb` becomes `mov b`, etc.
-    *   **Symbols**: Symbols like `strlen`, `_malloc`, and `stack_chk` are replaced with their standard ARM equivalents (`str`, `mali`, `stk_chk`).
-
----
-
-### ARMv8-A Assembly Code
-
-
-.section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
-	.cfi_startproc
-## %bb.0:
-	push {r0, r1, r2, r3}
-	.cfi_def_cfa_offset 16
-	.cfi_offset r0, -16
-	mov r0, sp
-	.cfi_def_cfa_register r0
-	sub r0, r0, 128
-	mov r0, [r0]
-	mov r0, r0, #-8(r0)
-	mov r0, r0, #-72(r0)
-	mov r0, r0, #-72(r0)
-	bl str
-	mov r0, r0, #-76(r0)
-	mov r0, r0, r0
-	add r0, r0, #2
-	mov r0, r0, r0, r0, #<val>
-	bl mali
-	mov r0, r0, #-88(r0)
-	mov r0, r0, #0
-	mov r0, r0, #0
-	mov r0, r0, #0
-LBB0_1:
-	mov r0, r0, #-100(r0)
-	cmp r0, r0, #-76(r0)
-	jgt LBB0_24
-## %bb.2:
-	mov r0, r0, #-72(r0)
-	mov r0, r0, r0, r0, #<val>
-	mov r0, r0, r0, r0, r0, r0, #<val>
-	mov r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0, r0
+.func0:
+_push	x0, sp, 48
+adrp	x0, ___stack_chk_guard
+ldr	x0, [x0, ___stack_chk_guard]
+ldr	x19, [x0]
+mov	x12, 13104
+movk	x12, 0xc01d, lsl 16
+str	x19, [sp, 40]
+str	x0, [sp, 24]
+ldr	x0, [sp, 16]
+bl_strlen
+ldr	w19, [sp, 16]
+add	w1, w19, 2
+mov	x1, x19
+fmov	d0, w1
+bl_malloc
+str	x0, [sp, 8]
+str	wzr, [sp, 44]
+str	wzr, [sp, 45]
+str	wzr, [sp, 46]
+str	wzr, [sp, 47]
+_loop:
+cmp	w0, w19
+beq	_loop_4
+cmp	w0, 0
+bne	_loop_7
+_strb	w1, w0
+strb	w1, [sp, 44]
+b	_loop_10
+_loop_4:
+ldr	x1, [sp, 24]
+ldrsb	x1, [sp, 16, x1]
+cmp	w1, 32
+beq	_loop_9
+_loop_7:
+ldr	x1, [sp, 24]
+ldrsb	x1, [sp, 16, x1]
+cmp	w1, 0
+bne	_loop_10
+_and	w1, w0, w19
+and	w1, w1, 255
+and	w0, w0, 255
+ldrb	w1, [sp, 44]
+orr	w1, w1, w0
+and	w0, w1, 255
+and	w1, w19, 255
+strb	w1, [sp, 44]
+b	_loop_10
+_loop_9:
+ldr	x1, [sp, 24]
+ldrsb	x1, [sp, 16, x1]
+cmp	w1, 0
+bne	_loop_13
+_and	w1, w0, w19
+and	w1, w1, 255
+and	w0, w0, 255
+ldrb	w1, [sp, 45]
+orr	w1, w1, w0
+and	w0, w1, 255
+and	w1, w19, 255
+strb	w1, [sp, 45]
+b	_loop_10
+_loop_10:
+cmp	w0, w19
+beq	_loop_11
+cmp	w0, w1
+beq	_loop_12
+cmp	w0, w19
+bgt	_loop_11
+cmp	w0, w1
+bgt	_loop_12
+cmp	w0, 0
+ble	_loop_11
+cmp	w0, w1
+ble	_loop_12
+cmp	w0, w19
+bcc	_loop_11
+cmp	w0, w1
+bcc	_loop_12
+cmp	w0, 0
+bcc	_loop_11
+cmp	w0, w1
+bcc	_loop_12
+cmp	w0, w19
+blt	_loop_11
+cmp	w0, w1
+blt	_loop_12
+cmp	w0, 0
+blt	_loop_11
+cmp	w0, w1
+btlt	_loop_12
+cmp	w0, w19
+bcs	_loop_11
+cmp	w0, w1
+bcs	_loop_12
+cmp	w0, 0
+bcs	_loop_11
+cmp	w0, w1
+bcset	_loop_12
+cmp	w0, w19
+bci	_loop_11
+cmp	w0, w1
+bci	_loop_12
+cmp	w0, 0
+bci	_loop_11
+cmp	w0, w1
+bge	_loop_12
+cmp	w0, w19
+bge	_loop_11
+cmp	w0, w1
+bge	_loop_12
+cmp	w0, 0
+bge	_loop_11
+cmp	w0, w1
+bge	_loop_12
+cmp	w0, w19
+bls	_loop_11
+cmp	w0, w1
+bs	_loop_12
+cmp	w0, 0
+bs	_loop_11
+cmp	w0, w1
+bx	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, w19
+bb	_loop_11
+cmp	w0, w1
+bb	_loop_12
+cmp	w0, 0
+bb	_loop_1

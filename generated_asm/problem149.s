@@ -1,83 +1,188 @@
-Here is the translation of the provided `x86-64` assembly into `ARMv8-A` (AArch64).
-
-### Translation Notes & Assumptions
-1.  **Architecture**: ARMv8-A uses a 64-bit register set (`%r0-r%r15`) and a 32-bit stack pointer (`%sp`). The instruction encoding differs significantly from x86-64 (e.g., `movq` becomes `mov r0, r1`, `addq` becomes `add r0, r1`).
-2.  **Stack Frame**: In x86-64, `%rbp` was used as the base pointer. In ARMv8-A, we use `%sp` (stack pointer) directly for local variables unless explicitly saved/restored via `push/pop`. However, since this code manually saves `%rbp` at the start and restores it at the end, we must simulate that behavior using `push {r0-r15}` / `pop {r0-r15}` or simply manage the stack frame manually with `sub sp, ...` and `add sp, ...`. Given the complexity of the loop logic which relies on specific offsets relative to the saved frame, I will implement a manual stack frame management approach similar to x86's `pushq %rbp` but adapted for AArch64's calling convention where the caller typically passes arguments in registers. *Correction*: Standard ARM64 calling convention does not save `%rbp`. To faithfully translate the logic while adhering to ARM conventions, I will assume the caller has already pushed arguments onto the stack if needed, or handle the frame setup manually by adjusting `%sp`.
-    *   *Decision*: Since the original code pushes `%rbp` and sets up an offset `-16(%rbp)` (which corresponds to `offset + 16` in ARM addressing mode), I will treat the "saved frame" as a fixed location relative to the current stack pointer. This mimics the behavior of saving the old frame pointer before entering a new one.
-3.  **Calling Convention**: Assuming standard ARM64 ABI where callee-saved registers are preserved, but non-callee-saved ones might be modified. The code modifies `%rbp` (saved) and uses it for offsets.
-4.  **Specific Instructions**:
-    *   `movq` → `mov r0, r1`
-    *   `movl` → `mov r0, r1` (assuming 32-bit data)
-    *   `xorl` → `xor r0, r0`
-    *   `callq` → `bl` (Branch Link)
-    *   `pushq`/`popq` → `push {r0-r15}` / `pop {r0-r15}`
-    *   `cltd` → `clt d0` (Clear Low Byte of Double Word)
-    *   `idivl` → `div r0, r1` (Integer Division)
-    *   `addl` → `add r0, r1`
-    *   `subl` → `sub r0, r1`
-    *   `cmp` → `cmp r0, r1`
-    *   `je/jne/jle/jge` → `be/bne/bl` (Branch Equal/Not Equal/Less/Greater)
-    *   `movsb/movsw` → `mov b0, r0` (Store Byte)
-    *   `movsbl` → `mov b0, r0` (Move Byte)
-    *   `movslq` → `mov q0, r0` (Move Long Quadword)
-    *   `addq` → `add q0, r1`
-    *   `subq` → `sub q0, r1`
-    *   `lea` → `ldr r0, [r1]`
-    *   `ldrb` → `ldr b0, [r0]`
-    *   `ldhwb` → `ldh w0, [r0]`
-    *   `ldhwd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *   `ldhbw` → `ldh b0, [r0]`
-    *   `ldhbd` → `ldh d0, [r0]`
-    *   `ldhqd` → `ldh q0, [r0]`
-    *   `ldhqw` → `ldh w0, [r0]`
-    *
+.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+mov	x12, 12
+mov	w3, w0
+ldr	x19, [sp, 48]
+stp	x29, x30, [sp]
+add	sp, sp, 84
+str	w0, [sp, 56]
+adrp	x0, L_.str
+add	x3, x0, :lo12:L_.str
+mov	x2, x19
+ldr	w1, [sp, 44]
+ldrsb	w0, [sp, 44]
+bl	___sprintf_chk
+str	wzr, [sp, 40]
+str	wzr, [sp, 32]
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+ldrsw	x0, [sp, 32]
+ldr	w1, [sp, 44]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+cmp	w0, 0
+beq	LBB0_4
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+ldrsw	x0, [sp, 32]
+ldr	w1, [sp, 44]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+cmp	w0, 0
+b	LBB0_1
+LBB0_4:
+mov	w0, 33
+bl	_malloc
+str	x1, [sp, 16]
+str	wzr, [sp, 24]
+ldr	w0, [sp, 40]
+cmp	w0, 0
+bne	LBB0_6
+## %bb.5:
+ldr	x1, [sp, 16]
+ldr	w0, [sp, 24]
+sub	w1, w0, #1
+lsl	w1, w1, 16
+orr	w0, w0, w1
+strh	w0, [x1, w0]
+b	LBB0_10
+LBB0_6:
+b	LBB0_7
+LBB0_7:                                 ## =>This Inner Loop Header: Depth=1
+ldr	w0, [sp, 40]
+cmp	w0, 0
+ble	LBB0_9
+## %bb.8:                               ##   in Loop: Header=BB0_7 Depth=1
+ldr	w0, [sp, 40]
+mov	w2, 2
+scv	w0, w2, lsl 16
+udiv	w1, w0, w2
+lsl	w0, w0, 16
+add	x1, x3, x0
+mov	w0, w1
+ldrh	w1, [x1, w0]
+strb	w1, [x0, w1]
+ldr	w0, [sp, 40]
+mov	w2, 2
+scv	w0, w2, lsl 16
+udiv	w1, w0, w2
+lsl	w0, w0, 16
+add	x1, x3, x0
+mov	w0, w1
+ldrh	w1, [x1, w0]
+strb	w1, [x0, w1]
+ldr	w0, [sp, 40]
+mov	w2, 2
+scv	w0, w2, lsl 16
+udiv	w1, w0, w2
+lsl	w0, w0, 16
+add	x1, x3, x0
+mov	w0, w1
+ldrh	w1, [x1, w0]
+strb	w1, [x0, w1]
+ldr	w0, [sp, 40]
+and	w0, w0, 255
+strb	w0, [sp, 41]
+ldr	w0, [sp, 24]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+ldr	w0, [sp, 24]
+str	w0, [sp, 48]
+b	LBB0_11
+LBB0_11:                                ## =>This Inner Loop Header: Depth=1
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strb	w0, [x0, w0]
+ldr	w0, [sp, 48]
+str	w0, [sp, 48]
+b	LBB0_12
+LBB0_12:                                ## =>This Inner Loop Header: Depth=1
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strb	w0, [x0, w0]
+ldr	w0, [sp, 48]
+str	w0, [sp, 48]
+b	LBB0_13
+LBB0_13:                                ## =>This Inner Loop Header: Depth=1
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strh	w0, [x0, d0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strb	w0, [x0, w0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strb	w0, [x0, w0]
+ldr	w0, [sp, 48]
+ldr	w1, [sp, 32]
+fmov	d1, w1
+fmov	d0, d0
+sub	d0, d1, d0
+lsl	d0, d0, 16
+add	x0, x3, x0
+strb	w0, [x0, w0]
+ldr	w0, [sp, 48]
+str	w0, [sp,

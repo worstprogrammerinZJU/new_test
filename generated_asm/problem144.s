@@ -1,87 +1,204 @@
-Here is the translation of the provided `x86-64` assembly into **ARMv8-A** (AArch64).
-
-### Translation Notes & Assumptions
-1.  **Architecture**: ARMv8-A uses a 64-bit register set (`r0-r15`) and a 64-bit stack pointer (`sp`). The instruction encoding differs significantly from x86-64 (e.g., `movq` becomes `mov rX, rY`, `addl` becomes `add rX, rY`, etc.).
-2.  **Calling Convention**:
-    *   **System V AMD64 ABI**: Used by macOS.
-        *   Arguments passed via `%rdi`.
-        *   Return value in `%rax`.
-        *   Caller-saved registers are preserved on return; callee-saved must be saved/restored manually.
-3.  **Stack Layout**:
-    *   Original: `pushq %rbp`, `subq $48, %rsp`. Stack grows down.
-    *   Target: `push {r12-r15}`, `sub sp, #48`. Stack grows up.
-4.  **Memory Access**:
-    *   Original: `-12(%rbp)` (relative offset).
-    *   Target: `[sp] + 12` or `[sp] + 12 + offset`. We will use relative offsets for simplicity as they map directly to signed integers.
-5.  **Specific Instructions**:
-    *   `call`: `bl` (branch with link).
-    *   `ret`: `bx` (return).
-    *   `idivl`: `div rX, rY` (integer division).
-    *   `cltd`: `clt d0` (clear top of double word).
-    *   `movslq`: `movs rX, rY` (move signed long).
-    *   `movsb`: `mov bX, rY` (move byte).
-    *   `movznbw`: `movzb rX, rY` (zero extend byte).
-    *   `movzbd`: `movzd rX, rY` (zero extend double word).
-    *   `movzwd`: `movzw rX, rY` (zero extend word).
-    *   `movzwl`: `movzl rX, rY` (zero extend long).
-    *   `movzbl`: `movzl rX, rY` (zero extend byte).
-    *   `movzrw`: `movzl rX, rY` (zero extend word).
-    *   `movzrl`: `movzl rX, rY` (zero extend long).
-    *   `movzrq`: `movzl rX, rY` (zero extend quadword).
-    *   `movzrldq`: `movzl rX, rY` (zero extend long double).
-    *   `movzrldh`: `movzl rX, rY` (zero extend half-long double).
-    *   `movzrh`: `movzl rX, rY` (zero extend half-word).
-    *   `movzhr`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrhw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
-    *   `movzrlw`: `movzl rX, rY` (zero extend half-word).
+_func0:
+sub	sp, sp, #48
+mov	x1, 64
+ldr	w0, [sp, 36]
+bl	_malloc
+str	x0, [sp, 24]
+str	w0, [sp, 28]
+cmp	w0, 0
+bne	L2
+str	wzr, [sp, 28]
+mov	w0, 62
+str	w0, [sp, 24]
+ldr	x0, [sp, 24]
+ldrh	w1, [x0, 63]
+and	w1, w1, 255
+ldr	w2, [sp, 28]
+add	w1, w2, w1
+str	w1, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L1
+L2:
+mov	w0, 62
+str	w0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L3
+L1:
+cmp	w0, 0
+ble	L4
+ldr	w0, [sp, 28]
+mov	w2, 2
+mov	w1, w0
+scv	w1, w2, lsl 16
+mov	w0, w1
+mvn	w1, w0
+fmov	d0, w1
+fdiv	d0, d0, d0
+udiv	w1, w2, d0
+fadd	w0, w1, w2
+mov	w0, w0 + 48
+ldrsw	x0, [sp, 28]
+lsl	x0, x0, 1
+add	x1, x0, w0
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L5
+L3:
+cmp	w0, 0
+beq	L6
+ldr	w0, [sp, 28]
+b	L7
+L4:
+ldr	w0, [sp, 28]
+mov	w2, 2
+mov	w1, w0
+scv	w1, w2, lsl 16
+mov	w0, w1
+mvn	w1, w0
+fmov	d0, w1
+fdiv	d0, d0, d0
+udiv	w1, w2, d0
+fadd	w0, w1, w2
+mov	w0, w0 + 48
+ldrsw	x0, [sp, 28]
+lsl	x0, x0, 1
+add	x1, x0, w0
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L5
+L5:
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L6
+L6:
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L7
+L7:
+stp	x1, x0, [sp, 28]
+mov	w0, 62
+str	w0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L8
+L8:
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L9
+L9:
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L10
+L10:
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+b	L11
+L11:
+adrp	x0, L_.str
+add	x1, x0, :lo12:L_.str
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+mov	w0, 48
+ldrsw	x0, [sp, 28]
+add	w1, w0, w1
+ldrb	w0, [w1, w0]
+str	w0, [sp, 24]
+mov	w0, 62
+str	w0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+ldr	w0, [sp, 28]
+fmov	d0, w0
+sub	x1, x0, #8
+bl	_free
+stp	x1, x0, [sp, 24]
+mov	w0, 62
+str	w0, [sp, 24]
+ldr	x1, [sp, 24]
+ldr	w0, [sp, 28]
+sub	w0, w0, #1
+stp	x1, x0, [sp, 28]
+ldr	w0, [sp, 28]
+fmov	d0, w0
+sub	x1, x0, #8
+bl	___strcpy_chk
+adrp	x0, L_.str
+add	x1, x0, :lo12:L_.str
+ldr	x0, [sp, 24]
+fmov	d0, w0
+sub	x2, x0, #8
+bl	___strcat_chk
+stp	x1, x0, [sp, 24]
+bl	_free
+stp	x0, x1, [sp]
+mov	x0, x1
+str	x0, [sp, 48]
+mov	w0, 62
+str	w0, [sp, 48]
+ldr	w0, [sp, 48]
+add	w0, w0, 3
+movk	w0, 0xc004, lsl 16
+bl	_malloc
+ldr	x1, [sp, 48]
+ldr	x0, [sp]
+str	x1, [sp, x0]
+ldr	x0, [sp, 48]
+cmp	x0, 0
+bne	L12
+str	xzr, [sp
