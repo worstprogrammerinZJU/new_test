@@ -315,24 +315,36 @@ def try_compile_run(asm_path, driver_c):
     except: return False, "TIMEOUT"
 
 def main():
-    if not os.path.exists(JSONL_FILE): return
-    with open(JSONL_FILE, 'r') as f: tasks = [json.loads(line) for line in f]
-    asm_files = sorted([f for f in os.listdir(ASM_DIR) if f.endswith('.s')], key=lambda x: int(re.search(r'\d+', x).group()))
-
-    # 计算文件总量
-    total_files = len(asm_files)
-    passed = 0
+    if not os.path.exists(JSONL_FILE):
+        print(f"[-] 找不到文件: {JSONL_FILE}")
+        return
     
+    with open(JSONL_FILE, 'r') as f:
+        tasks = [json.loads(line) for line in f]
+    
+    asm_files = sorted(
+        [f for f in os.listdir(ASM_DIR) if f.endswith('.s')], 
+        key=lambda x: int(re.search(r'\d+', x).group())
+    )
+
+    total_files = len(asm_files)
+    compilation_passed_count = 0  # 编译通过总数
+    execution_passed_count = 0    # 逻辑执行通过总数
+    
+    print(f"[*] 开始评测，共扫描到 {total_files} 个汇编文件...")
+    print("-" * 50)
+
     for asm_f in asm_files:
         prob_num = int(re.search(r'\d+', asm_f).group())
-        task = tasks[prob_num - 1]
+        # 注意：HumanEval 索引通常从 0 开始，如果你的文件名从 1 开始，需减 1
+        task = tasks[prob_num - 1] 
         raw_test_code = task['test']
         asm_path = os.path.join(ASM_DIR, asm_f)
         
-        # --- 正则提取层 (保持你的所有分支) ---
-        if prob_num == 161: # 插入 161 提取
+        # --- 1. 动态提取测试断言 (保持你原有的分支逻辑) ---
+        if prob_num == 161:
             assert_orig = re.findall(r"assert candidate\(.*?\)\s*==\s*\d+", raw_test_code)
-        elif prob_num == 158: # 新增 158 提取
+        elif prob_num == 158:
             assert_orig = re.findall(r"assert candidate\(\d+,\s*\d+,\s*\d+\)\s*==\s*\w+", raw_test_code)
         elif prob_num == 152:
             assert_orig = re.findall(r"assert candidate\(\[.*?\]\)\s*==\s*\d+", raw_test_code)
@@ -370,14 +382,11 @@ def main():
             assert_orig = re.findall(r'assert candidate\(\d+,\s*\d+\)\s*==\s*".*?"', raw_test_code)
         else:
             assert_orig = re.findall(r'assert candidate\(.*?\)\s*==\s*[\w\d\.-]+', raw_test_code)
-        
-        print(f"[{asm_f}]", end=" ", flush=True)
-        found = False
-        
-        # --- 签名锁定层 ---
-        if prob_num == 161: # 插入 161 锁定
+
+        # --- 2. 确定候选签名 ---
+        if prob_num == 161: 
             sigs = ["extern int func0(char**, int*, int, int);"]
-        elif prob_num == 158: # 158 锁定 float 参数
+        elif prob_num == 158: 
             sigs = ["extern int func0(float, float, float);"]
         elif prob_num == 152:
             sigs = ["extern long long func0(float*, int);"]
@@ -396,27 +405,75 @@ def main():
         elif prob_num == 45: sigs = ["extern void func0(int, int, char*);"]
         elif prob_num in [33, 39]: sigs = ["extern void func0(char*, int);"]
         else: sigs = ["extern int func0(int*, int);", "extern int func0();"]
-        
+
+        # 状态标记
+        file_is_compiled = False
+        file_is_passed = False
+
+        print(f"[{asm_f:12}]", end=" ", flush=True)
+
+        # --- 3. 尝试 Original 逻辑 ---
         for decl in sigs + FALLBACK_SIGNATURES:
-            ok, err = try_compile_run(asm_path, build_test_code_original(decl, assert_orig, prob_num))
-            if ok: print("✅ OK (Base)"); found = True; break
-
-        if not found:
-            for decl in ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]:
-                ok, err = try_compile_run(asm_path, build_test_code_rescue(decl, raw_test_code, prob_num))
-                if ok: print("✅ OK (Rescue)"); found = True; break
-
-        if found: passed += 1
-        else: print(f"❌ FAIL")
+            driver_c = build_test_code_original(decl, assert_orig, prob_num)
+            with open("temp_tester.c", "w") as f: f.write(driver_c)
             
-    # --- 统计结果输出 ---
-    pass_rate = (passed / total_files) * 100 if total_files > 0 else 0
-    print("-" * 30)
-    print(f"Evaluation Results:")
-    print(f"Total Tasks:  {total_files}")
-    print(f"Passed:       {passed}")
-    print(f"Pass Rate:    {pass_rate:.2f}%")
-    print("-" * 30)
+            # 编译尝试
+            cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
+            comp_res = subprocess.run(cmd, shell=True, capture_output=True)
+            
+            if comp_res.returncode == 0:
+                file_is_compiled = True
+                # 编译成功，尝试运行
+                try:
+                    run_res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=1)
+                    if "PASS" in run_res.stdout:
+                        file_is_passed = True
+                        break # 已成功通过，跳出当前文件的签名尝试
+                except:
+                    pass # 运行超时或崩溃，尝试下一个签名
 
-if __name__ == "__main__":
-    main()
+        # --- 4. 如果 Original 未通过，尝试 Rescue 逻辑 ---
+        if not file_is_passed:
+            rescue_sigs = ["extern void func0(char*, int*, int*);", "extern int func0(char*);", "extern int func0();"]
+            for decl in rescue_sigs:
+                driver_c = build_test_code_rescue(decl, raw_test_code, prob_num)
+                with open("temp_tester.c", "w") as f: f.write(driver_c)
+                
+                cmd = f"clang -arch arm64 temp_tester.c {asm_path} -o tester -lm -Wno-everything"
+                if subprocess.run(cmd, shell=True, capture_output=True).returncode == 0:
+                    file_is_compiled = True
+                    try:
+                        run_res = subprocess.run("./tester", shell=True, capture_output=True, text=True, timeout=1)
+                        if "PASS" in run_res.stdout:
+                            file_is_passed = True
+                            break
+                    except:
+                        pass
+
+        # --- 5. 更新统计 ---
+        if file_is_compiled: compilation_passed_count += 1
+        if file_is_passed: execution_passed_count += 1
+        
+        # 实时打印结果
+        if file_is_passed:
+            print("✅ PASS")
+        elif file_is_compiled:
+            print("⚠️  COMPILE_ONLY (Logic Error)")
+        else:
+            print("❌ FAIL (Compile Error)")
+
+    # --- 6. 最终报表 ---
+    comp_rate = (compilation_passed_count / total_files * 100) if total_files > 0 else 0
+    exec_rate = (execution_passed_count / total_files * 100) if total_files > 0 else 0
+
+    print("\n" + "="*50)
+    print(f"{'Metric':<25} | {'Count':<10} | {'Rate':<10}")
+    print("-" * 50)
+    print(f"{'Total Scanned Files':<25} | {total_files:<10} | 100.00%")
+    print(f"{'Compilation Success':<25} | {compilation_passed_count:<10} | {comp_rate:.2f}%")
+    print(f"{'Execution Success (Pass)':<25} | {execution_passed_count:<10} | {exec_rate:.2f}%")
+    print("="*50)
+
+    # 清理临时文件
+    for tmp in ["temp_tester.c", "tester"]:
+        if os.path.exists(tmp): os.remove(tmp)
