@@ -477,3 +477,6 @@ def main():
     # 清理临时文件
     for tmp in ["temp_tester.c", "tester"]:
         if os.path.exists(tmp): os.remove(tmp)
+
+if __name__ == "__main__":
+    main()
