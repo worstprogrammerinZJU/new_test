@@ -1,71 +1,97 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%r0                         ## Save base pointer (simulating %rbp)
-	.cfi_def_cfa_offset 16
-	.cfi_offset %r0, -16
-	movq	%rsp, %r0
-	.cfi_def_cfa_register %r0
-	subq	$1072, %sp                     ## imm = 0x430
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	%rax, -8(%r0)
-	movq	%r13, -1048(%r0)             ## simulating %rdi
-	movl	$0, -1052(%r0)
-	leaq	-1040(%r0), %r13            ## simulating %rdi
-	xorl	%r15, %r15                   ## simulating %esi
-	movl	$1024, %r14                  ## simulating %edx
-	callq	_memset                    ## Call to memset
-	movl	$0, -1056(%r0)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-1048(%r0), %rax             ## simulating -1048(%rbp)
-	movslq	-1056(%r0), %rcx           ## simulating -1056(%rbp)
-	cmpb	$0, (%rax, %rcx)             ## simulating cmpb $0, (%rax,%rcx)
-	jne	LBB0_5                        ## Jump if not equal (0 != byte)
-	## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-1048(%r0), %rax
-	movslq	-1056(%r0), %rcx
-	movzbl	(%rax,%rcx), %r13           ## simulating movzbl %edi
-	callq	_tolower                    ## Call to tolower
-                                        ## kill: def $al killed $al killed $eax
-	## (In ARM, tolower usually sets $r0 or returns value. Assuming it returns value in %r0)
-	## Check if result was 0 (meaning original was lowercase)
-	cmpl	$0, %r13
-	je	LBB0_5
-	## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movzbl	-1057(%r0), %r13
-	callq	_isalpha                    ## Call to isalpha
-	cmpl	$0, %r13
-	je	LBB0_5
-	## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
-	movsbq	-1057(%r0), %rax
-	movl	$1, -1040(%r0,%rax,4)        ## simulating movl $1, -1040(%rbp,%rax,4)
-	movl	-1052(%r0), %r14             ## simulating movl %eax, -1052(%rbp)
-	addl	$1, %r14                     ## simulating addl $1, %eax
-	movl	%r14, -1052(%r0)            ## simulating movl %eax, -1052(%rbp)
-LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_6                        ## Jump to next iteration
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-1056(%r0), %r14
-	addl	$1, %r14
-	movl	%r14, -1056(%r0)
-	jmp	LBB0_1                        ## Jump back to start of loop
+; %bb.0:
+	stp	x28, x27, [sp, #-32]!           ; 16-byte Folded Spill
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	.cfi_offset w27, -24
+	.cfi_offset w28, -32
+	sub	sp, sp, #1056
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	stur	x8, [x29, #-24]
+	str	x0, [sp, #16]
+	mov	w1, #0
+	str	wzr, [sp, #8]
+	add	x0, sp, #24
+	mov	x2, #1024
+	bl	_memset
+	str	wzr, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #4]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #4]
+	ldrb	w0, [x8, x9]
+	bl	_tolower
+	strb	w0, [sp, #3]
+	ldrsb	x9, [sp, #3]
+	add	x8, sp, #24
+	add	x8, x8, x9, lsl #2
+	ldr	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w0, [sp, #3]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrsb	x10, [sp, #3]
+	add	x9, sp, #24
+	mov	w8, #1
+	str	w8, [x9, x10, lsl #2]
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
 LBB0_7:
-	movl	-1052(%r0), %r14
-	movl	%r14, -1064(%r0)              ## 4-byte Spill
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	-8(%r0), %rcx
-	cmpq	%rcx, %rax
-	jne	LBB0_9
-## %bb.8:
-	movl	-1064(%r0), %r14
-	addq	$1072, %sp                    ## imm = 0x430
-	popq	%r0
-	retq
+	ldr	w8, [sp, #8]
+	str	w8, [sp]                        ; 4-byte Folded Spill
+	ldur	x9, [x29, #-24]
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	subs	x8, x8, x9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:
+	bl	___stack_chk_fail
 LBB0_9:
-	callq
+	ldr	w0, [sp]                        ; 4-byte Folded Reload
+	add	sp, sp, #1056
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	ldp	x28, x27, [sp], #32             ; 16-byte Folded Reload
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

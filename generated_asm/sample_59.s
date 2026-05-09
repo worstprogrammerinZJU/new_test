@@ -1,135 +1,119 @@
-Converting this specific block of x86 assembly (likely from a specific compiler implementation like LLVM's `llvm-c`) to ARM assembly requires careful handling of:
-1.  **Register Renaming**: Mapping x86 registers (`%rax`, `%rbp`, `%rdi`, etc.) to ARM equivalents (`R0`, `%r0`, `%sp`, etc.).
-2.  **Float Semantics**: Handling `vzero` (zero), `vnan` (NaN), and `vneg` (negative zero) correctly in ARM.
-3.  **Floating Point Unit (FPU) Instructions**: Using ARM's `vadd`, `vround`, `vsub`, `vcmp`, `vld`, and `vst` instructions.
-4.  **Branching Logic**: Translating the conditional jumps (`jge`, `jbe`, `jne`, `jmp`) into ARM conditional branches (`BGE`, `BEQ`, `BNE`, `BL`).
-5.  **Data Layout**: Mapping the literal addresses and memory offsets correctly.
-
-Here is the converted ARM assembly code:
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-
-.section	__TEXT,__literal8,8byte_literals
-.p2align	3                               ## -- Begin function func0
-LCPI0_0:
-	.quad	0x3f1a36e2eb1c432d              ## double 1.0E-4
-	.section	__TEXT,__literal16,16byte_literals
-.p2align	4
-LCPI0_1:
-	.quad	0x7fffffffffffffff              ## double NaN
-	.quad	0x7fffffffffffffff              ## double NaN
-LCPI0_2:
-	.quad	0x8000000000000000              ## double -0
-	.quad	0x8000000000000000              ## double -0
-LCPI0_3:
-	.quad	0x3fdfffffffffffff              ## double 0.49999999999999994
-	.quad	0x3fdfffffffffffff              ## double 0.49999999999999994
-
-.section	__TEXT,__text,regular,pure_instructions
-.globl	_func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI0_0:
+	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	$0, -24(%rbp)
-	movl	$0, -28(%rbp)
-
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-28(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_9
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	cvtss2sd	%xmm0, %xmm1
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0
-	cvtss2sd	%xmm0, %xmm0
-	movaps	%xmm0, %xmm2
-	movaps	LCPI0_2(%rip), %xmm3            ## xmm3 = [-0.0E+0,-0.0E+0]
-	pand	%xmm3, %xmm2
-	movaps	LCPI0_3(%rip), %xmm3            ## xmm3 = [4.9999999999999994E-1,4.9999999999999994E-1]
-	por	%xmm3, %xmm2
-	addsd	%xmm2, %xmm0
-	roundsd	$11, %xmm0, %xmm0
-	subsd	%xmm0, %xmm1
-	movaps	LCPI0_1(%rip), %xmm0            ## xmm0 = [NaN,NaN]
-	pand	%xmm0, %xmm1
-	movsd	LCPI0_0(%rip), %xmm0            ## xmm0 = mem[0],zero
-	ucomisd	%xmm1, %xmm0
-	jbe	LBB0_7
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	xorps	%xmm1, %xmm1
-	ucomiss	%xmm1, %xmm0
-	jbe	LBB0_6
-## %bb.4:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	cvtss2sd	%xmm0, %xmm0
-	movaps	%xmm0, %xmm1
-	movaps	LCPI0_2(%rip), %xmm2            ## xmm2 = [-0.0E+0,-0.0E+0]
-	pand	%xmm2, %xmm1
-	movaps	LCPI0_3(%rip), %xmm2            ## xmm2 = [4.9999999999999994E-1,4.9999999999999994E-1]
-	por	%xmm2, %xmm1
-	addsd	%xmm1, %xmm0
-	roundsd	$11, %xmm0, %xmm0
-	cvttsd2si	%xmm0, %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	cmpl	$1, %edx
-	jne	LBB0_6
-## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0            ## xmm0 = mem[0],zero,zero,zero
-	cvtss2sd	%xmm0, %xmm0
-	movaps	%xmm0, %xmm1
-	movaps	LCPI0_2(%rip), %xmm2            ## xmm2 = [-0.0E+0,-0.0E+0]
-	pand	%xmm2, %xmm1
-	movaps	LCPI0_3(%rip), %xmm2            ## xmm2 = [4.9999999999999994E-1,4.9999999999999994E-1]
-	por	%xmm2, %xmm1
-	addsd	%xmm1, %xmm0
-	roundsd	$11, %xmm0, %xmm0
-	cvttsd2si	%xmm0, %ecx
-	imull	%ecx, %eax
-	cltq
-	addq	-24(%rbp), %rax
-	movq	%rax, -24(%rbp)
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_7
-LBB0_7:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_8
-LBB0_8:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-28(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -28(%rbp)
-	jmp	LBB0_1
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	xzr, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s1, [x8, x9, lsl #2]
+	fcvt	d1, s1
+	fabs	d1, d1
+	fmov	d2, #2.00000000
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d3, [x8, lCPI0_0@PAGEOFF]
+	orr	d2, d2, d3
+	fadd	d1, d1, d2
+	fsub	d1, d0, d1
+	fabs	d0, d0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, pl
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcmp	s0, #0.0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #2.00000000
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	orr	d2, d2, d0
+	fadd	d1, d1, d2
+	fcvtzs	w8, d1
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #2.00000000
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	orr	d2, d2, d0
+	fadd	d1, d1, d2
+	fcvtzs	w8, d1
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #4]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d0, #2.00000000
+	orr	d1, d1, d0
+	fadd	d0, d0, d1
+	fcvtzs	w8, d0
+	mul	w9, w8, w9
+	ldr	x8, [sp, #8]
+	add	x8, x8, w9, sxtw
+	str	x8, [sp, #8]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
 LBB0_9:
-	movq	-24(%rbp), %rax
-	popq	%rbp
-	retq
+	ldr	x0, [sp, #8]
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
-                                        ## -- End function
-
+                                        ; -- End function
 .subsections_via_symbols
-```
-
-### Key Conversion Notes:
-
-1.  **Registers**:

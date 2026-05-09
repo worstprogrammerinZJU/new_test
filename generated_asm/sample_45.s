@@ -1,33 +1,37 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	## %bb.0:
-	push	r16
+; %bb.0:
+	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	mov	sp, r15
-	mov	r0, sp
-	mov	r1, sp
-
-LBB0_1:
-	## %bb.2:
-	## in Loop: Header=BB0_1 Depth=1
-	mov	r0, r1
-	clt	d0
-	div	r1
-	mov	r2, r3
-	mov	r0, r1
-	mov	r0, r1
-	## jmp to LBB0_1
-	mov	r3, r0
-	jmp	LBB0_1
+	str	w0, [sp, #12]
+	str	w1, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w10, [sp, #8]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	str	w8, [sp, #4]
+	ldr	w8, [sp, #8]
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #4]
+	str	w8, [sp, #8]
+	b	LBB0_1
 LBB0_3:
-	mov	r0, r1
-	pop	r16
+	ldr	w0, [sp, #12]
+	add	sp, sp, #16
 	ret
 	.cfi_endproc
-
+                                        ; -- End function
 .subsections_via_symbols

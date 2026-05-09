@@ -1,201 +1,150 @@
-Converting this x86 assembly to ARM is a significant undertaking because x86 uses a 64-bit (x86_64) calling convention (passing arguments in registers `rdi`, `rsi`, etc.) and relies on specific instruction sets (like `movslq`, `idivl`, `cltd`) that are not native to ARM.
-
-To provide a working solution, I will perform the following transformations:
-1.  **Architecture Shift**: Convert x86_64 to ARM64 (AArch64), which is the standard for macOS ARM.
-2.  **Calling Convention**: Change from x86's `RBP` stack frame to ARM's `SP` (Stack Pointer).
-3.  **Instruction Mapping**:
-    *   `movq`, `movl`, `movb` $\rightarrow$ `movq`, `movl`, `movb`.
-    *   `callq` $\rightarrow$ `bl` (Branch and Link).
-    *   `strlen` $\rightarrow$ `bls` (Branch and Link String).
-    *   `strlen` (intrinsic) $\rightarrow$ `bls` or a custom loop if needed, but `bls` is the standard syscall equivalent.
-    *   `movslq` (move 64-bit signed) $\rightarrow$ `movq`.
-    *   `idivl` (integer divide) $\rightarrow$ `movq`, `movnq`, `clts`, `movq` (requires handling the remainder).
-    *   `cltd` (clear divide flag) $\rightarrow$ `clts` (Clear Trap Status).
-    *   `movzbl` $\rightarrow$ `movzbl` (already works, but I'll ensure context is clear).
-    *   `addl`, `subl`, `cmp` $\rightarrow$ `addq`, `subq`, `cmp`.
-
-Below is the converted ARM64 assembly code.
-
-### ARM64 Assembly Code
-
-```arm64
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0
-	.p2align	4, 0x90
-_func0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 32
-	.cfi_offset %sp, -32
-
-	// Initialize Stack Frame
-	movq	%sp, %rbp
-	movq	%rsp, %r12
-
-	// Save Arguments
-	// x86: %rdi = string start
-	movq	%r12, -16(%rbp)
-	
-	// Initialize Loop Counter
-	movl	$0, -20(%rbp)
-
-LBB0_1:
-	// Load char from string
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-	// Call strlen
-	bls	-16(%rbp)
-
-	// Check if string is empty (eax == 0)
-	cmpq	$0, %rax
-	je	LBB0_8
-
-	// Loop Logic
-	// Load next char
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-
-	// Check if ASCII value is >= 0x41 ('A')
-	movl	-16(%rbp), %eax
-	cmpge	$0x41, %eax
-	jge	LBB0_12
-
-	// Check if ASCII value is <= 0x5E ('~')
-	movl	-20(%rbp), %eax
-	cmple	$0x5E, %eax
-	jle	LBB0_12
-
-	// Loop: Check if char is alpha, upper, or lower
-	// Check if char is lowercase
-	movl	-20(%rbp), %eax
-	cmpge	$0x61, %eax
-	jge	LBB0_8
-
-	// Check if char is uppercase
-	movl	-24(%rbp), %eax
-	cmpge	$0x41, %eax
-	jge	LBB0_8
-
-	// Check if char is lowercase
-	movl	-28(%rbp), %eax
-	cmpge	$0x61, %eax
-	jge	LBB0_8
-
-	// Execute the appropriate action based on the condition
-	// LBB0_5: isupper
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	wzr, [x29, #-12]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #16]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
 	bl	_isupper
-	cmpq	$0, %rax
-	je	LBB0_12
-
-	// LBB0_7: islower
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_tolower
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	strb	w0, [x8, x9]
+	b	LBB0_8
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
 	bl	_islower
-	cmpq	$0, %rax
-	je	LBB0_12
-
-	// LBB0_10: isupper
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-	bl	_isupper
-	cmpq	$0, %rax
-	je	LBB0_12
-
-	// LBB0_13: islower
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-	bl	_islower
-	cmpq	$0, %rax
-	je	LBB0_12
-
-	// LBB0_16: isupper
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-	bl	_isupper
-	cmpq	$0, %rax
-	je	LBB0_12
-
-	// LBB0_19: islower
-	movq	-8(%rbp), %rax
-	movq	-20(%rbp), %rcx
-	movzbl	(%rax,%rcx), %edi
-	bl	_islower
-	cmpq	$0, %rax
-	je	LBB0_12
-
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_toupper
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	strb	w0, [x8, x9]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_10
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-12]
+	add	w8, w8, #1
+	stur	w8, [x29, #-12]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_12:
-	// Move result to %dl (lower nibble of %al)
-	movb	%al, %dl
-
-	// Move result back to memory
-	movq	-8(%rbp), %rax
-	movl	-20(%rbp), %ecx
-	subq	-20(%rbp), %ecx
-	subq	$1, %ecx
-	movq	%ecx, %rcx
-	movb	(%rax,%rcx), %dl
-
-	// Continue loop
-	jmp	LBB0_1
-
-LBB0_8:
-	// String is empty or whitespace
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_10:
-	// Check for next character (skip whitespace)
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_12:
-	// Check for end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_14:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_16:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
+	ldur	w8, [x29, #-12]
+	ldr	w9, [sp, #16]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_13
+LBB0_13:
+	str	wzr, [sp, #8]
+	b	LBB0_14
+LBB0_14:                                ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #16]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_14 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #7]
+	ldur	x8, [x29, #-8]
+	ldr	w9, [sp, #16]
+	ldr	w10, [sp, #8]
+	subs	w9, w9, w10
+	subs	w9, w9, #1
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
+	ldur	x9, [x29, #-8]
+	ldrsw	x10, [sp, #8]
+	add	x9, x9, x10
+	strb	w8, [x9]
+	ldrb	w8, [sp, #7]
+	ldur	x9, [x29, #-8]
+	ldr	w10, [sp, #16]
+	ldr	w11, [sp, #8]
+	subs	w10, w10, w11
+	subs	w10, w10, #1
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	b	LBB0_16
+LBB0_16:                                ;   in Loop: Header=BB0_14 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_14
+LBB0_17:
+	b	LBB0_18
 LBB0_18:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_20:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_22:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-
-LBB0_24:
-	// Check if we reached end of string
-	movl	-20(%rbp), %eax
-	addl
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,92 +1,153 @@
-This code implements a recursive descent parser for the grammar:
-`expr -> term ( '+' term )*`
-`term -> factor ( '*' factor )*`
-`factor -> NUMBER | IDENT`
-
-The logic is:
-1.  **Loop 1 (BB0_1)**: Parse `expr`. If we hit `EOF` (compare with -12), we stop. Otherwise, consume the `expr`, move to the next iteration.
-2.  **Loop 2 (BB0_3)**: Parse `term`. If we hit `EOF` (compare with -16), we stop. Otherwise, consume the `term`, move to the next iteration.
-3.  **Loop 3 (BB0_5)**: Parse `factor`. If we hit `EOF` (compare with -20), we stop. Otherwise, consume the `factor`, move to the next iteration.
-4.  **Loop 4 (BB0_8)**: Parse `factor` again.
-5.  **Loop 5 (BB0_10)**: Parse `expr` again (nested).
-6.  **Loop 6 (BB0_13)**: Parse `term` again.
-7.  **Loop 7 (BB0_14)**: Parse `factor` again.
-8.  **Loop 8 (BB0_16)**: Parse `expr` again.
-9.  **Loop 9 (BB0_18)**: Parse `term` again.
-
-The state machine uses a `rbp`-based stack to hold the remaining input for each recursive step.
--   **Stack Index 0**: Current `expr` (starts at -8(%rbp))
--   **Stack Index 1**: Current `term` (starts at -12(%rbp))
--   **Stack Index 2**: Current `factor` (starts at -32(%rbp))
-
-### ARM Assembly Conversion
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-
-	## State 0: Parse expr
-	movq	-8(%rbp), %rax
-	cmpl	-12(%rbp), %rax
-	jge	LBB0_18
-	movl	-8(%rbp), %r0
-	addq	$1, %r0
-	movq	-8(%rbp), %r1
-	addq	$1, %r1
-	movl	%r0, -12(%rbp)
-	movl	%r1, -20(%rbp)
-
-LBB0_1:
-	movq	-8(%rbp), %rax
-	cmpl	-12(%rbp), %rax
-	jge	LBB0_18
-	movl	-8(%rbp), %r0
-	addq	$1, %r0
-	movq	-8(%rbp), %r1
-	addq	$1, %r1
-	movl	%r0, -12(%rbp)
-	movl	%r1, -20(%rbp)
-	jmp	LBB0_1
-
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #40]
+	str	w1, [sp, #36]
+	str	wzr, [sp, #16]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+                                        ;       Child Loop BB0_5 Depth 3
+                                        ;       Child Loop BB0_8 Depth 3
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_5 Depth 3
+                                        ;       Child Loop BB0_8 Depth 3
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	str	wzr, [sp, #32]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #28]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #24]
+	b	LBB0_5
+LBB0_5:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ;     Parent Loop BB0_3 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=3
+	ldr	w8, [sp, #28]
+	and	w9, w8, #0x1
+	ldr	w8, [sp, #32]
+	add	w8, w8, w9
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #28]
+	asr	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_5
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #24]
+	str	wzr, [sp, #32]
+	b	LBB0_8
+LBB0_8:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ;     Parent Loop BB0_3 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=3
+	ldr	w8, [sp, #24]
+	and	w9, w8, #0x1
+	ldr	w8, [sp, #32]
+	add	w8, w8, w9
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #24]
+	asr	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_8
+LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #24]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #28]
+	subs	w8, w8, w9
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #28]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #16]
+	ldr	w9, [x9, x10, lsl #2]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #20]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #16]
+	str	w8, [x9, x10, lsl #2]
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #12]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_1
 LBB0_18:
-	popq	%rbp
-	retq
+	add	sp, sp, #48
+	ret
 	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols
-```
-
-### Explanation of the Conversion Logic
-
-1.  **Structure**:
-    *   The `p2align` directive is kept for code alignment.
-    *   The function prologue/epilogue (`pushq`, `movq`, `popq`, `retq`) remains exactly the same as the x86 version.
-
-2.  **State Machine Logic**:
-    *   Instead of a traditional loop header (`LBB`), we use a single loop (`LBB0_1`) that handles the first level of recursion (`expr`).
-    *   Inside the loop, we push the current pointer of `expr` onto the stack (`%r1`).
-    *   We increment the pointer (`%r0`).
-    *   We push the pointer of `term` onto the stack (`%r1`) and increment it (`%r1` -> `-20(%rbp)`).
-    *   We push the pointer of `factor` onto the stack (`%r1` -> `-20(%rbp)`).
-    *   The condition `cmp -12(%rbp), %rax` checks if we have reached the end of the input stream.
-
-3.  **Nested Loops**:
-    *   The subsequent loops (`LBB0_3`, `LBB0_5`, etc.) are implicitly handled by the continuation of the outer loop.
-    *   When the outer loop finishes, it pops the `term` pointer, increments it, and pushes the `factor` pointer.
-    *   When the inner loop finishes, it pops the `factor` pointer, increments it, and pops the `expr` pointer (via `retq`).
-    *   This mimics the stack unwinding behavior of the original recursive function.
-
-4.  **Termination**:
-    *   The original code uses `jmp LBB0_1` at the end of each inner loop body. In ARM, this is replaced by the `retq` instruction at the end of the outer loop, which naturally returns control to the caller.
-
-### Note on Compiler Implementation
-This assembly represents the **optimized loop version** of the recursive function, likely generated by a compiler like Clang/LLVM or GCC when optimizing for speed and stack usage efficiency. The original x86 code contained multiple branches and explicit jumps (`jge`, `jle`, `jmp`) for each level of recursion. The ARM version consolidates these into a single, efficient iterative loop with a stack-based state machine.

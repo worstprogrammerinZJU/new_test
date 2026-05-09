@@ -1,106 +1,75 @@
-Here is the conversion of the provided x86-64 assembly code into ARM assembly.
-
-### Conversion Notes & Architecture Mapping
-*   **Stack Direction**: x86 uses `RSP` (downwards) while ARM uses `SP` (upwards). The code explicitly pushes `RSP` to `RBP` and uses `RSP` as a base pointer (`rbp`).
-*   **Calling Convention**:
-    *   `RDI` = `rdi`
-    *   `RSI` = `esi`
-    *   `RCX` = `rcx`
-    *   `RDX` = `rdx`
-    *   `RAX` = `rax`
-    *   `R8` = `rcx`
-    *   `R9` = `rdx`
-    *   `R10` = `r10`
-    *   `R11` = `r11`
-*   **Registers**:
-    *   `movl %eax, -36(%rbp)`: In ARM, `movl %r0, -36(%r11)` is used.
-    *   `movq %rax, %rcx`: In ARM, `movq %r0, %r8` is used.
-    *   `movl %ecx, %esi`: In ARM, `movl %r9, %r10` is used.
-*   **Looping**: ARM uses `cmp` with a loop counter variable (e.g., `r1`) and jumps based on the result. The original x86 loop (`movl -44(%rbp), %eax; cmp -12(%rbp), %eax; jge LBB0_6`) maps to an ARM `cmp` loop with a `jge` (jump if greater or equal) condition.
-*   **String Functions**:
-    *   `strlen`: `movl %r0, %r1` (read length), `addl %r1, %r0` (add 1), `movl %r0, -1(%r11)` (write length).
-    *   `strncpy` (mapped from `memcpy`/`strncpy` pattern): `movq %r0, %r1` (source), `movq %r2, %r3` (dest), `movq %r4, %r5` (count), `movq %r6, %r7` (dest offset), `movq %r8, %r9` (source offset), `movq %r10, %r11` (count), `movq %r12, %r13` (dest base), `movq %r14, %r15` (source base), `movq %r16, %r17` (dest offset), `movq %r18, %r19` (source offset).
-*   **Memory Layout**: The x86 offsets are mapped to ARM registers. For example:
-    *   `-8(%rbp)` in x86 becomes `%r11 - 8(%r11)` in ARM.
-    *   `-24(%rbp)` in x86 becomes `%r11 - 24(%r11)` in ARM.
-    *   `-32(%rbp)` in x86 becomes `%r11 - 32(%r11)` in ARM.
-    *   `-40(%rbp)` in x86 becomes `%r11 - 40(%r11)` in ARM.
-
-### ARM Assembly Code
-
-```arm64
-.section __text, .text, regular, pure_instructions
-.build_version macOS, 13, 0, sdk_version 13, 3
-.globl _func0
-.p2align 4, 0x90
-
-_func0:
-        .cfi_startproc
-        pushq   %rbp
-        .cfi_def_cfa_offset 16
-        .cfi_offset %rbp, -16
-        movq    %rsp, %rbp
-        .cfi_def_cfa_register %rbp
-        subq    $48, %rsp
-        movq    %rdi, -8(%rbp)
-        movl    %esi, -12(%rbp)
-        movq    %rdx, -24(%rbp)
-        movq    %rcx, -32(%rbp)
-        movq    -24(%rbp), %rdi
-        callq   strlen
-        movl    %eax, -36(%rbp)
-        movslq  -12(%rbp), %rdi
-        shlq    $3, %rdi
-        callq   _malloc
-        movq    %rax, %rcx
-        movq    -32(%rbp), %rax
-        movq    %rcx, (%rax)
-        movl    $0, -40(%rbp)
-        movl    $0, -44(%rbp)
-
-LBB0_1:
-        movl    -44(%rbp), %eax
-        cmp     -12(%rbp), %eax
-        jge     LBB0_6
-
-LBB0_2:
-        movq    -8(%rbp), %rax
-        movslq  -44(%rbp), %rcx
-        movq    (%rax, %rcx, 8), %rdi
-        movq    -24(%rbp), %rsi
-        movslq  -36(%rbp), %rdx
-        callq   _strncmp
-        cmp     $0, %eax
-        jne     LBB0_4
-
-LBB0_3:
-        movq    -8(%rbp), %rax
-        movslq  -44(%rbp), %rcx
-        movq    (%rax, %rcx, 8), %rdx
-        movq    -32(%rbp), %rax
-        movq    (%rax), %rax
-        movl    -40(%rbp), %ecx
-        movl    %ecx, %esi
-        addl    $1, %esi
-        movl    %esi, -40(%rbp)
-        movslq  %ecx, %rcx
-        movq    %rdx, (%rax, %rcx, 8)
-
-LBB0_4:
-        jmp     LBB0_5
-
-LBB0_5:
-        movl    -44(%rbp), %eax
-        addl    $1, %eax
-        movl    %eax, -44(%rbp)
-        jmp     LBB0_1
-
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	str	x2, [sp, #24]
+	str	x3, [sp, #16]
+	ldr	x0, [sp, #24]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #12]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #3
+	bl	_malloc
+	ldr	x8, [sp, #16]
+	str	x0, [x8]
+	str	wzr, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #4]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	x1, [sp, #24]
+	ldrsw	x2, [sp, #12]
+	bl	_strncmp
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #4]
+	ldr	x8, [x8, x9, lsl #3]
+	ldr	x9, [sp, #16]
+	ldr	x9, [x9]
+	ldrsw	x10, [sp, #8]
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [sp, #8]
+	str	x8, [x9, x10, lsl #3]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
 LBB0_6:
-        movl    -40(%rbp), %eax
-        addq    $48, %rsp
-        popq    %rbp
-        retq
-        .cfi_endproc
-
+	ldr	w0, [sp, #8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols
-```

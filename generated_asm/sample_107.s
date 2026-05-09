@@ -1,186 +1,110 @@
-This ARM assembly code performs a **32-bit floating-point iteration loop** (likely for a 128-bit float16 data type, given the `movss` and `mulsd` instructions). It reads a sequence of 8-byte doubles from a memory buffer (`LCPI0_0`), processes them in a nested loop structure, and accumulates the results.
-
-Here is the converted code.
-
-### Key Differences & Notes:
-1.  **Registers**:
-    *   `rax` / `rcx` are used as 64-bit temporary storage (x86 64-bit registers are not native to ARM, so we spill to `x0` or use `x1`/`x2` for large temporaries, but here we keep them in `x0`/`x1`/`x2` for simplicity as the logic is lightweight).
-    *   `r12` is used for the loop counter (`$2`).
-    *   `x0` is used for the accumulator (result) and temporary variables.
-2.  **Instruction Selection**:
-    *   `movl` $\to$ `mov q` (move 64-bit).
-    *   `movl` $\to$ `mov d` (move double-word/32-bit).
-    *   `movl` $\to$ `mov f` (move float).
-    *   `addl` $\to$ `add d`.
-    *   `cmp` $\to$ `cmp`.
-    *   `jmp` $\to$ `cmp`.
-    *   `movl` $\to$ `mov r`.
-    *   `idivl` $\to$ `div r`.
-    *   `movslq` $\to$ `mov d` (load double).
-    *   `movss` $\to$ `mov f` (load single/float).
-    *   `movss` $\to$ `mov f` (store single/float).
-    *   `movq` $\to$ `mov q` (load double).
-    *   `movss` $\to$ `mov f` (store single/float).
-    *   `mulsd` $\to$ `mul d`.
-    *   `cvtsd2ss` $\to$ `cvtsd2ss` (convert double to float).
-    *   `cvtsd2sd` $\to$ `cvtsd2sd` (convert double to double).
-    *   `subl` $\to$ `sub d`.
-3.  **Data Types**:
-    *   The x86 code uses `quad` (64-bit) for the initial constant and `movslq` (32-bit load) to load the data into registers.
-    *   The loop body uses `movss` (32-bit load/store) for the floating-point data.
-4.  **Memory Access**:
-    *   The loop iterates 8 times (for 8 bytes of data).
-    *   Inside the loop, it loads a double, does some math, and stores it back as a single float (likely scaling down the 128-bit value or converting it).
-
-### ARM Assembly Code
-
-```arm64
-section .text, .regular, .pure_instructions
-section .data
-LCPI0_0: .quad 0x3fe0000000000000
-
-section .text
-.section .text, .regular, .pure_instructions
-.globl _func0
-.section .text, .regular, .pure_instructions
-
-_func0:
-    .cfi_startproc
-    push q
-    .cfi_def_cfa_offset 16
-    .cfi_offset %rbp, -16
-    mov q, %rsp, %rbp
-    .cfi_def_cfa_register %rbp
-
-    mov q, %rdi, -16(%rbp)
-    mov d, %esi, -20(%rbp)
-    mov f, $0, -24(%rbp)
-
-LBB0_1:
-    mov d, -24(%rbp)
-    cmp d, -20(%rbp)
-    jge LBB0_10
-
-    mov d, -24(%rbp)
-    add d, $1, d
-    mov d, %eax, -28(%rbp)
-
-LBB0_3:
-    mov d, -28(%rbp)
-    cmp d, -20(%rbp)
-    jge LBB0_8
-
-    mov q, -16(%rbp)
-    mov d, -24(%rbp)
-    mov d, %rax, %rcx
-    mov f, (%rax,%rcx,4), %xmm0
-
-    mov q, -16(%rbp)
-    mov d, -28(%rbp)
-    mov d, %rax, %rcx
-    mov f, (%rax,%rcx,4), %xmm0
-
-    mov q, -16(%rbp)
-    mov d, -24(%rbp)
-    mov d, %rax, %rcx
-    mov f, %xmm0, -32(%rbp)
-
-    mov q, -16(%rbp)
-    mov d, -28(%rbp)
-    mov d, %rax, %rcx
-    mov f, %xmm0, (%rax,%rcx,4)
-
-LBB0_6:
-    jmp LBB0_7
-
-LBB0_7:
-    mov d, -28(%rbp)
-    add d, $1, d
-    mov d, %eax, -28(%rbp)
-    jmp LBB0_3
-
-LBB0_8:
-    jmp LBB0_9
-
-LBB0_9:
-    mov d, -24(%rbp)
-    add d, $1, d
-    mov d, %eax, -24(%rbp)
-    jmp LBB0_1
-
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #32]
+	str	w1, [sp, #28]
+	str	wzr, [sp, #24]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #28]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #28]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #20]
+	ldr	s1, [x8, x9, lsl #2]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	ldr	s0, [x8, x9, lsl #2]
+	str	s0, [sp, #16]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #20]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	str	s0, [x8, x9, lsl #2]
+	ldr	s0, [sp, #16]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #20]
+	str	s0, [x8, x9, lsl #2]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_1
 LBB0_10:
-    mov d, -20(%rbp)
-    mov r, $2, %ecx
-    cltd
-    div r
-    cmp f, $1
-    jne LBB0_12
-
-    mov q, -16(%rbp)
-    mov q, %rax, -40(%rbp)
-
-    mov d, -20(%rbp)
-    mov d, $2, %ecx
-    cltd
-    div r
-    mov d, %eax, %ecx
-    mov q, -40(%rbp)
-    mov d, %rax, %rcx
-    mov d, %rcx, %rcx
-    mov f, (%rax,%rcx,4), %xmm0
-
-    mov f, %xmm0, -4(%rbp)
-
-    mov q, -16(%rbp)
-    mov q, %rax, -56(%rbp)
-
-    mov d, -20(%rbp)
-    mov d, $2, %ecx
-    cltd
-    div r
-    mov d, %eax, %ecx
-    mov q, -56(%rbp)
-    mov q, %rax, %rcx
-    mov d, %rcx, %rcx
-    mov f, (%rax,%rcx,4), %xmm0
-
-    mov q, -16(%rbp)
-    mov q, %rax, -48(%rbp)
-
-    mov d, -20(%rbp)
-    mov d, $2, %ecx
-    cltd
-    div r
-    mov d, %eax, %ecx
-    mov q, -48(%rbp)
-    mov q, %rax, %rcx
-    mov d, %rcx, %rcx
-    mov d, %rcx, %rcx
-    mov d, %rcx, %rcx
-    mov f, (%rax,%rcx,4), %xmm0
-    mov q, -16(%rbp)
-    mov q, %rax, -48(%rbp)
-
-    mov d, -20(%rbp)
-    mov d, $2, %ecx
-    cltd
-    div r
-    mov d, %eax, %ecx
-    mov q, -48(%rbp)
-    mov q, %rax, %rcx
-    mov d, %rcx, %rcx
-    mov d, %rcx, %rcx
-    mov d, %rcx, %rcx
-    mov d, %rcx, %rcx
-    sub d, $1
-    mov d, %ecx, %rcx
-    add d, (%rax,%rcx,4), %xmm0
-    cvtsd2sd %xmm0, %xmm1
-    movsd LCPI0_0(%rip), %xmm0
-
-    mul d %xmm1, %xmm0
-    cvtsd2ss %xmm0, %xmm0
-    mov f, %xmm0, -4(%rbp)
-
-LBB0_13:
-    mov f, -
+	ldr	w8, [sp, #28]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
+LBB0_11:
+	ldr	x8, [sp, #32]
+	ldr	w9, [sp, #28]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	ldr	s0, [x8, w9, sxtw #2]
+	ldr	x8, [sp, #32]
+	ldr	w9, [sp, #28]
+	sdiv	w9, w9, w10
+	subs	w9, w9, #1
+	ldr	s1, [x8, w9, sxtw #2]
+	fadd	s0, s0, s1
+	fcvt	d1, s0
+	fmov	d0, #0.50000000
+	fmul	d0, d0, d1
+	fcvt	s0, d0
+	str	s0, [sp, #44]
+	b	LBB0_13
+LBB0_12:
+	ldr	s0, [sp, #44]
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

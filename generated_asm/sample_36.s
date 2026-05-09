@@ -1,119 +1,109 @@
-Converting this specific x86 assembly code to ARM assembly requires careful handling of the calling convention (System V AMD64 ABI), register allocation, and the unique ARM instruction set for the `cltd` (clamp length and divide) and `idivl` (divide and load) instructions, which are essential for the inner loop logic.
-
-### Key Conversion Notes
-1.  **Calling Convention**:
-    *   `pushq %rbp` → `mov %r12, %rbp` (Standard ARM ABI).
-    *   `movq %rsp, %rbp` → `mov %r11, %r12` (Standard ARM ABI).
-    *   Arguments are passed in registers `r0` through `r11`.
-    *   Return value is in `r0`.
-2.  **Register Usage**:
-    *   `%edi` (x86 input) → `r0` (ARM input).
-    *   `%eax`, `%edx`, `%ecx`, `%rax` (x86 registers) → ARM general-purpose registers (`r0-r31`).
-    *   Stack pointer `rsp` → `r11`.
-    *   Base pointer `rbp` → `r12`.
-3.  **Special Instructions**:
-    *   `cltd` (ARM): Sets upper 8 bits of `rax` to `cl`, divides `rax` by `cl`, and moves quotient to `rax`.
-    *   `idivl` (ARM): Sets upper 8 bits of `rax` to `cl`, divides `rax` by `cl`, and moves quotient to `rax`.
-    *   `movl` / `movlq` / `movq` map directly to their ARM counterparts.
-
-### ARM Assembly Code
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	movq	%rsp, %r12                      ## Stack pointer to Base pointer
-	.cfi_def_cfa_offset 16
-	movq	%r12, %rbp                      ## Save Stack Pointer as Base Pointer
-	.cfi_def_cfa_register %rbp
-	subq	$32, %rsp
-	movl	%edi, -12(%rbp)                 ## Save x86 argument
-	movl	-12(%rbp), %eax                ## Load x86 argument
-	addl	$1, %eax
-	movslq	%eax, %rdi                    ## x86: shift left 2 (multiply by 4)
-	shlq	$2, %rdi                       ## x86: shift left 2
-	callq	_malloc                      ## Call malloc
-	movq	%rax, -24(%rbp)                ## Store malloc return address
-	movq	-24(%rbp), %rax               ## Reload return address
-	movl	$1, (%rax)                    ## Store 1 (size)
-	cmpl	$0, -12(%rbp)                 ## Compare with x86 argument
-	jne	LBB0_2                           ## Jump if not equal
-## %bb.1:
-	movq	-24(%rbp), %rax                ## Reload return address
-	movq	%rax, -8(%rbp)                 ## Store return address
-	jmp	LBB0_10                        ## Jump to end of loop
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-12]
+	ldur	w8, [x29, #-12]
+	mov	w9, #1
+	str	w9, [sp]                        ; 4-byte Folded Spill
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x0, x8, #2
+	bl	_malloc
+	ldr	w8, [sp]                        ; 4-byte Folded Reload
+	str	x0, [sp, #8]
+	ldr	x9, [sp, #8]
+	str	w8, [x9]
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	ldr	x8, [sp, #8]
+	stur	x8, [x29, #-8]
+	b	LBB0_10
 LBB0_2:
-	movq	-24(%rbp), %rax                ## Reload return address
-	movl	$3, 4(%rax)                   ## Set size to 3 (bytes)
-	movl	$2, -28(%rbp)                 ## Store size 2
-LBB0_3:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-28(%rbp), %eax                ## Load size
-	cmpl	-12(%rbp), %eax              ## Compare with x86 argument
-	jg	LBB0_9                          ## Jump if greater
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=1
-	movl	-28(%rbp), %eax                ## Load size
-	movl	$2, %ecx                      ## Set divisor
-	cltd                               ## Clamp length and divide (x86: cltd)
-	idivl	%ecx                         ## Divide and load (x86: idivl)
-	cmpl	$0, %edx                      ## Check if quotient is 0
-	jne	LBB0_6                         ## Jump if not zero
-## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=1
-	movl	-28(%rbp), %eax                ## Load size
-	movl	$2, %ecx                      ## Set divisor
-	cltd                               ## Clamp length and divide (x86: cltd)
-	idivl	%ecx                         ## Divide and load (x86: idivl)
-	movl	%eax, %edx                    ## Store quotient
-	addl	$1, %edx                      ## Increment quotient
-	movq	-24(%rbp), %rax               ## Reload return address
-	movslq	-28(%rbp), %rcx             ## Load size (clamped)
-	movl	%edx, (%rax,%rcx,4)           ## Store quotient at calculated offset
-	jmp	LBB0_7                         ## Jump to next iteration
-LBB0_6:                                 ##   in Loop: Header=BB0_3 Depth=1
-	movq	-24(%rbp), %rax                ## Reload return address
-	movl	-28(%rbp), %ecx               ## Load size
-	subl	$1, %ecx                      ## Subtract 1 (loop count)
-	movslq	%ecx, %rcx                 ## Clamp length and divide (x86: cltd)
-	movl	(%rax,%rcx,4), %eax           ## Load quotient at calculated offset
-	movq	-24(%rbp), %rcx               ## Reload return address
-	movl	-28(%rbp), %edx               ## Load size
-	subl	$2, %edx                      ## Subtract 2 (loop count)
-	movslq	%edx, %rdx                 ## Clamp length and divide (x86: cltd)
-	addl	(%rcx,%rdx,4), %eax           ## Load quotient at calculated offset
-	addl	$1, %eax                      ## Increment quotient
-	movl	%eax, -32(%rbp)               ## 4-byte Spill (align for next call)
-	movl	-28(%rbp), %eax               ## Load size
-	addl	$1, %eax                      ## Increment size
-	movl	$2, %ecx                      ## Set divisor
-	cltd                               ## Clamp length and divide (x86: cltd)
-	idivl	%ecx                         ## Divide and load (x86: idivl)
-	movl	-32(%rbp), %edx               ## Reload spilled value
-	addl	%eax, %edx                    ## Add incremented size
-	movq	-24(%rbp), %rax               ## Reload return address
-	movslq	-28(%rbp), %rcx             ## Load size (clamped)
-	movl	%edx, (%rax,%rcx,4)           ## Store result at calculated offset
-LBB0_7:                                 ##   in Loop: Header=BB0_3 Depth=1
-	jmp	LBB0_8                         ## Jump to next iteration
-LBB0_8:                                 ##   in Loop: Header=BB0_3 Depth=1
-	movl	-28(%rbp), %eax                ## Load size
-	addl	$1, %eax                      ## Increment size
-	movl	%eax, -28(%rbp)               ## Store size
-	jmp	LBB0_3                         ## Jump to next iteration
+	ldr	x9, [sp, #8]
+	mov	w8, #3
+	str	w8, [x9, #4]
+	mov	w8, #2
+	str	w8, [sp, #4]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #4]
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	add	w8, w8, #1
+	ldr	x9, [sp, #8]
+	ldrsw	x10, [sp, #4]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_7
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #8]
+	ldr	w9, [sp, #4]
+	subs	w10, w9, #1
+	ldr	w8, [x8, w10, sxtw #2]
+	ldr	x9, [sp, #8]
+	ldr	w11, [sp, #4]
+	subs	w11, w11, #2
+	ldr	w9, [x9, w11, sxtw #2]
+	add	w8, w8, w9
+	add	w8, w8, #1
+	ldr	w9, [sp, #4]
+	add	w9, w9, #1
+	sdiv	w8, w8, w9
+	ldr	w9, [sp, #4]
+	add	w8, w8, w9
+	ldr	x9, [sp, #8]
+	ldrsw	x10, [sp, #4]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_3
 LBB0_9:
-	movq	-24(%rbp), %rax                ## Reload return address
-	movq	%rax, -8(%rbp)                 ## Store return address
+	ldr	x8, [sp, #8]
+	stur	x8, [x29, #-8]
+	b	LBB0_10
 LBB0_10:
-	movq	-8(%rbp), %rax                ## Reload return address
-	addq	$32, %rsp                      ## Restore Stack Pointer
-	popq	%rbp                          ## Restore Base Pointer
-	retq
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
 	.cfi_endproc
-```
-
-### Explanation of Changes
-*   **Registers**: All x86 registers (`%rbp`, `%rbp`, `%rax`, `%rdi`, `%edi`, `%eax`, etc.) have been mapped to ARM general-purpose registers (`%r12` through `%r31`).
-*   **Stack Pointer**: `rsp` is now `%rsp` in x86, but `%r11` in ARM. `pushq` and `popq` are mapped to `movq` and `popq` respectively.
-*   **Memory Operations**: The x86 memory layout `-12(%rbp)`,
+                                        ; -- End function
+.subsections_via_symbols

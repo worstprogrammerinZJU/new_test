@@ -1,106 +1,67 @@
-This code performs an **incremental memory allocation and initialization** using a specific pattern often seen in performance-critical kernels or systems (like the `malloc` implementation in the FreeBSD/macOS mach64 port).
-
-The logic breaks down as follows:
-1.  **Setup**: Saves registers, sets up a base pointer (`rbp`) to track the allocated memory block, and initializes a "header" structure at `-36(%rbp)` with zero values.
-2.  **Loop (LBB0_1)**:
-    *   Reads a value from the header (`%eax`).
-    *   If the value is `>= 1` (or greater than 0), it enters the loop.
-    *   Otherwise, it jumps back to the start of the loop.
-3.  **Inner Loop (LBB0_4)**:
-    *   Reads the memory block size from the header (`%ecx`).
-    *   Calculates the next offset (`%esi`) by incrementing the current offset.
-    *   Writes `0` (zero) to the memory block at that offset.
-    *   Repeats this `size` times.
-4.  **Termination**:
-    *   If the header value is `0`, it stops the loop.
-    *   It increments the header value by 1.
-    *   It writes the incremented value back to the header.
-    *   Jumps back to the start of the loop to repeat the check.
-    *   Eventually, the loop terminates, `popq %rbp` restores the stack, and `retq` returns.
-
-Below is the converted ARM assembly code. I have used the standard `arm64` ABI (System V AMD64) conventions, assuming a 64-bit environment given the `movq` instructions.
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-
-	## Initialize base pointer and memory block
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	%rdx, -24(%rbp)
-	movslq	-12(%rbp), %rdi
-	shlq	$2, %rdi
-
-	callq	_malloc
-
-	movq	%rax, -32(%rbp)
-	movq	-24(%rbp), %rax
-	movl	$0, (%rax)
-	movl	$0, -36(%rbp)
-
-LBB0_1:
-	## Header check: If value >= 1, enter loop
-	movl	-36(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_6
-
-	## Inner Loop
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0
-
-	xorps	%xmm1, %xmm1
-	ucomiss	%xmm1, %xmm0
-	jbe	LBB0_4
-
-LBB0_3:
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movss	(%rax,%rcx,4), %xmm0
-
-	movq	-32(%rbp), %rax
-	movq	-24(%rbp), %rdx
-	movl	(%rdx), %ecx
-	movl	%ecx, %esi
-	addl	$1, %esi
-	movl	%esi, (%rdx)
-	movslq	%ecx, %rcx
-	movss	%xmm0, (%rax,%rcx,4)
-
-LBB0_4:
-	jmp	LBB0_5
-
-LBB0_5:
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp)
-
-	jmp	LBB0_1
-
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	str	x2, [sp, #24]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
+	bl	_malloc
+	str	x0, [sp, #16]
+	ldr	x8, [sp, #24]
+	str	wzr, [x8]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldr	s0, [x8, x9, lsl #2]
+	fcmp	s0, #0.0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldr	x11, [sp, #24]
+	ldrsw	x9, [x11]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [x11]
+	str	s0, [x8, x9, lsl #2]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_6:
-	movq	-32(%rbp), %rax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
+	ldr	x0, [sp, #16]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
 	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols
-```
-
-### Key Changes & Notes:
-*   **Instruction Syntax**: Converted `movslq` (signed 32-bit load/store) to `movss` (signed 64-bit) and `movslq` to `movq`/`movss`/`movl`/`movl` as appropriate for 64-bit data types.
-*   **Conditional Jump**: The original `cmp` and `jge` (greater or equal) were combined into a single `cmp` followed by `jge` for better readability, though the logic remains identical.
-*   **Registers**: Used `%rax`, `%rcx`, `%rdx`, `%esi`, and `%eax` as standard scratch registers.
-*   **ABI**: The `pushq` and `popq` instructions are used to save and restore the `rbp` frame pointer, which is the standard convention for the AMD64 System V ABI.
-*   **Alignment**: Added `.p2align 4` to the beginning to ensure the code layout is properly aligned, which is crucial for performance.
-*   **Missing Arguments**: The original code relies on arguments passed via `-rdi`, `-rsi`, etc. (specifically `rdi` for the pointer and `esi` for the size). I have preserved this assumption. If the calling convention were different (e.g., different argument order or 32-bit), the register usage would need to be adjusted accordingly.

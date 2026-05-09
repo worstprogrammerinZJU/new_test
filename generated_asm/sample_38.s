@@ -1,108 +1,105 @@
-To convert this x86-64 assembly to ARM assembly, we need to perform several key transformations:
-
-1.  **Architecture Differences**:
-    *   **Registers**: Use `r0-r15` for general-purpose registers instead of `rax`, `rcx`, etc.
-    *   **Stack Pointer**: Use `sp` instead of `rsp`.
-    *   **Pointers**: Use `lr` (Link Register) for function pointers instead of `rdi`.
-    *   **Instruction Set**: Use ARM instructions (e.g., `MOV`, `CMP`, `ADD`, `SUB`) instead of x86-64 instructions (e.g., `MOVQ`, `MOVSLQ`, `CMPQ`).
-    *   **Calling Convention**: x86-64 uses `pushq %rbp`, `movq %rsp, %rbp`, `popq %rbp`. ARM uses `push {r0-r15}`, `mov sp, rbp`, `pop {r0-r15}`.
-
-2.  **Code Optimization**:
-    *   x86-64 uses `movq` and `movl` with offsets (e.g., `-16(%rbp)`). ARM uses `movl` or `movw` with immediate offsets (e.g., `0x18(%sp)`).
-    *   x86-64 uses `pushq` (8 bytes). ARM uses `push {r0-r15}` (16 bytes).
-
-3.  **Function Mapping**:
-    *   `pushq %rbp` $\rightarrow$ `push {r0-r15}`
-    *   `movq %rsp, %rbp` $\rightarrow$ `mov sp, rbp`
-    *   `movq %rdi, -16(%rbp)` $\rightarrow$ `movl r0, 0x18(sp)`
-    *   `movq %rdi, %rdi` (for `strlen`) $\rightarrow$ `movl r0, r0`
-    *   `movq %rax, %rcx` $\rightarrow$ `movl r0, r1`
-    *   `movq %rax, %rcx` $\rightarrow$ `movl r0, r1`
-    *   `movq %rdi, -16(%rbp)` $\rightarrow$ `movl r0, 0x18(sp)`
-    *   `movl %eax, -20(%rbp)` $\rightarrow$ `movl r0, 0x1c(sp)`
-    *   `movl %eax, -24(%rbp)` $\rightarrow$ `movl r0, 0x20(sp)`
-    *   `movl %eax, -24(%rbp)` $\rightarrow$ `movl r0, 0x20(sp)`
-
-4.  **Loop Logic**:
-    *   The x86 loops check offsets like `-16(%rbp)` and `-28(%rbp)`. In ARM, these are calculated as `0x18(sp)`, `0x28(sp)`, etc.
-    *   The `cmp` instructions change from `cmpq` (signed) to `cmp` (unsigned).
-    *   The `jne` (jump if not equal) becomes `bne`.
-    *   The `jae` (jump if above/equal) becomes `beq`.
-
-### Step-by-Step Conversion
-
-**1. Function Start & Initialization**
-*   x86: `pushq %rbp`, `movq %rsp, %rbp`, `subq $48, %rsp`
-*   ARM: `push {r0-r15}`, `mov sp, rbp`, `sub sp, #48`
-
-**2. Pointer Setup**
-*   x86: `movq %rdi, -16(%rbp)`
-*   ARM: `movl r0, 0x18(sp)`
-
-**3. String Length Calculation**
-*   x86: `movq %rax, %rcx` (load return address), `movq %rax, %rcx` (reload), `cmpq %rcx, %rax`
-*   ARM: `movl r0, r0`, `movl r0, r0`, `cmp r0, r0` (equivalent to `cmp %rax, %rcx`)
-
-**4. Main Loop (BB0_1)**
-*   x86: `movslq -28(%rbp), %rax`, `movq %rax, -40(%rbp)` (spill), `movq -16(%rbp), %rdi`, `callq strlen`, `movq %rax, %rcx`, `movq -40(%rbp), %rax` (reload)
-*   ARM:
-    *   `movl r0, 0x28(sp)` (load -28)
-    *   `movl r0, 0x30(sp)` (spill to -40)
-    *   `movl r0, 0x18(sp)` (load -16)
-    *   `movl r0, r0` (call strlen, returns to r0)
-    *   `movl r0, r0` (reload -40)
-    *   `cmp r0, r0`
-
-**5. Inner Loop (BB0_2)**
-*   x86: `movq -16(%rbp), %rax`, `movslq -28(%rbp), %rcx`, `movsbl (%rax,%rcx), %eax`, `cmp $91, %eax`, `jne LBB0_4`
-*   ARM:
-    *   `movl r0, 0x18(sp)`
-    *   `movl r0, 0x28(sp)` (rcx)
-    *   `movsbl r0, r1` (load -16(%rbp), -28(%rbp))
-    *   `cmp r0, #91`
-    *   `bne LBB0_4`
-
-**6. Increment Loop (BB0_3)**
-*   x86: `movl -20(%rbp), %eax`, `addl $1, %eax`, `movl %eax, -20(%rbp)`
-*   ARM:
-    *   `movl r0, 0x1c(sp)`
-    *   `addl r0, #1`
-    *   `movl r0, 0x1c(sp)`
-
-**7. Loop Check (BB0_4)**
-*   x86: `movq -16(%rbp), %rax`, `movslq -28(%rbp), %rcx`, `movsbl (%rax,%rcx), %eax`, `cmp $93, %eax`, `jne LBB0_6`
-*   ARM:
-    *   `movl r0, 0x18(sp)`
-    *   `movl r0, 0x28(sp)` (rcx)
-    *   `movsbl r0, r1`
-    *   `cmp r0, #93`
-    *   `bne LBB0_6`
-
-**8. Decrement Loop (BB0_5)**
-*   x86: `movl -20(%rbp), %eax`, `subl $1, %eax`, `movl %eax, -20(%rbp)`
-*   ARM:
-    *   `movl r0, 0x1c(sp)`
-    *   `subl r0, #1`
-    *   `movl r0, 0x1c(sp)`
-
-**9. Loop End Check (BB0_6)**
-*   x86: `cmp $0, -20(%rbp)`, `jge LBB0_8`
-*   ARM:
-    *   `cmp r0, #0`
-    *   `bge LBB0_8`
-
-**10. Loop Continue (BB0_7)**
-*   x86: `movl $0, -20(%rbp)`
-*   ARM:
-    *   `movl r0, 0x1c(sp)`
-
-**11. Loop End (BB0_8)**
-*   x86: `movl -20(%rbp), %eax`, `cmp -24(%rbp), %eax`, `jle LBB0_10`
-*   ARM:
-    *   `movl r0, 0x1c(sp)`
-    *   `movl r0, 0x20(sp)` (offset -24)
-    *   `cmp r0, r0`
-    *   `ble LBB0_10`
-
-**12. Loop Continue (BB0_9)**
-*   x86: `movl -20(%rbp), %eax`, `movl %eax, -2
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-16]
+	stur	wzr, [x29, #-20]
+	str	wzr, [sp, #24]
+	str	wzr, [sp, #20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldrsw	x8, [sp, #20]
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	ldur	x0, [x29, #-16]
+	bl	_strlen
+	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	subs	x8, x8, x0
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #91
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	add	w8, w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #93
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	subs	w8, w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	subs	w8, w8, #0
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	stur	wzr, [x29, #-20]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	str	w8, [sp, #24]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	ldr	w9, [sp, #24]
+	subs	w9, w9, #2
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
+LBB0_11:
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_15
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_14:
+	stur	wzr, [x29, #-4]
+	b	LBB0_15
+LBB0_15:
+	ldur	w0, [x29, #-4]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

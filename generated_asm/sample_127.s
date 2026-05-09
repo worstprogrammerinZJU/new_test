@@ -1,125 +1,142 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$96, %rsp
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	%rax, -8(%rbp)
-	movl	%edi, -68(%rbp)
-	movl	%esi, -72(%rbp)
-	movl	-68(%rbp), %r8d
-	leaq	_func0.xs(%rip), %rdi
-	xorl	%esi, %esi
-	movl	$50, %edx
-	leaq	L_.str(%rip), %rcx
-	movb	$0, %al
-	callq	___sprintf_chk
-	leaq	_func0.xs(%rip), %rdi
-	callq	_strlen
-	## kill: def $eax killed $eax killed $rax
-	movl	%eax, -76(%rbp)
-	movl	-76(%rbp), %eax
-	cmpl	-72(%rbp), %eax
-	jge	LBB0_6
-
-## %bb.1:
-	movl	$0, -80(%rbp)
-LBB0_2:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-80(%rbp), %r0
-	movl	%r0, -88(%rbp)                 ## 4-byte Spill
-	movl	-76(%rbp), %r0
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	movl	%r0, %ecx
-	movl	-88(%rbp), %r0
-	cmpl	%ecx, %r0
-	jge	LBB0_5
-
-## %bb.3:                               ##   in Loop: Header=BB0_2 Depth=1
-	movslq	-80(%rbp), %r0
-	leaq	_func0.xs(%rip), %r1
-	movb	(%r1,%r0), %al
-	movb	%al, -81(%rbp)
-	movl	-76(%rbp), %r0
-	subl	$1, %r0
-	subl	-80(%rbp), %r0
-	movslq	%r0, %r0
-	leaq	_func0.xs(%rip), %r1
-	movb	(%r1,%r0), %dl
-	movslq	-80(%rbp), %r0
-	leaq	_func0.xs(%rip), %r1
-	movb	%dl, (%r1,%r0)
-	movb	-81(%rbp), %dl
-	movl	-76(%rbp), %r0
-	subl	$1, %r0
-	subl	-80(%rbp), %r0
-	movslq	%r0, %r0
-	leaq	_func0.xs(%rip), %r1
-	movb	%dl, (%r1,%r0)
-
-## %bb.4:                               ##   in Loop: Header=BB0_2 Depth=1
-	movl	-80(%rbp), %r0
-	addl	$1, %r0
-	movl	%r0, -80(%rbp)
-	jmp	LBB0_2
-
+; %bb.0:
+	sub	sp, sp, #128
+	.cfi_def_cfa_offset 128
+	stp	x29, x30, [sp, #112]            ; 16-byte Folded Spill
+	add	x29, sp, #112
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	stur	x8, [x29, #-8]
+	str	w0, [sp, #52]
+	str	w1, [sp, #48]
+	ldr	w9, [sp, #52]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x8, [x9]
+	adrp	x0, _func0.xs@PAGE
+	add	x0, x0, _func0.xs@PAGEOFF
+	str	x0, [sp, #24]                   ; 8-byte Folded Spill
+	mov	w1, #0
+	mov	x2, #50
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x0, [sp, #24]                   ; 8-byte Folded Reload
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #44]
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #48]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_1
+LBB0_1:
+	str	wzr, [sp, #40]
+	b	LBB0_2
+LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #40]
+	ldr	w9, [sp, #44]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldrsw	x8, [sp, #40]
+	adrp	x9, _func0.xs@PAGE
+	add	x9, x9, _func0.xs@PAGEOFF
+	mov	x10, x9
+	add	x10, x10, x8
+	ldrb	w8, [x10]
+	strb	w8, [sp, #39]
+	ldr	w8, [sp, #44]
+	subs	w8, w8, #1
+	ldr	w11, [sp, #40]
+	subs	w8, w8, w11
+	add	x10, x9, w8, sxtw
+	ldrb	w8, [x10]
+	ldrsw	x11, [sp, #40]
+	add	x10, x9, x11
+	strb	w8, [x10]
+	ldrb	w8, [sp, #39]
+	ldr	w10, [sp, #44]
+	subs	w10, w10, #1
+	ldr	w11, [sp, #40]
+	subs	w10, w10, w11
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #40]
+	add	w8, w8, #1
+	str	w8, [sp, #40]
+	b	LBB0_2
 LBB0_5:
-	jmp	LBB0_7
-
+	b	LBB0_7
 LBB0_6:
-	leaq	-64(%rbp), %r0
-	movslq	-76(%rbp), %r1
-	leaq	_func0.xs(%rip), %r2
-	addq	%r1, %r2
-	movslq	-72(%rbp), %r0
-	xorl	%r0, %r0
-	## kill: def $rax killed $eax
-	subq	%r0, %r1
-	addq	%r1, %r2
-	movl	$50, %edx
-	callq	___strcpy_chk
-	movslq	-72(%rbp), %r1
-	movb	$0, -64(%rbp,%r1)
-	leaq	-64(%rbp), %r0
-	movl	-76(%rbp), %r0
-	subl	-72(%rbp), %r0
-	movslq	%r0, %r1
-	leaq	_func0.xs(%rip), %r2
-	movl	$50, %ecx
-	callq	___strncat_chk
-	leaq	-64(%rbp), %r2
-	leaq	_func0.xs(%rip), %r0
-	movl	$50, %edx
-	callq	___strcpy_chk
+	ldrsw	x9, [sp, #44]
+	adrp	x8, _func0.xs@PAGE
+	add	x8, x8, _func0.xs@PAGEOFF
+	mov	x10, x8
+	add	x1, x8, x9
+	ldrsw	x8, [sp, #48]
+	mov	x9, #0
+	subs	x9, x9, x8
+	add	x1, x8, x9
+	mov	x0, x10
+	mov	x2, #50
+	str	x2, [sp, #16]                   ; 8-byte Folded Spill
+	bl	___strcpy_chk
+	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
+	ldrsw	x8, [sp, #44]
+	add	x8, sp, #52
+	strb	wzr, [x8, x8]
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #48]
+	subs	w9, w8, w9
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x2, w8
+	bl	___strncat_chk
+	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
+	ldr	x0, [sp, #24]                   ; 8-byte Folded Reload
+	ldr	x2, [sp, #16]                   ; 8-byte Folded Reload
+	bl	___strcpy_chk
+	b	LBB0_7
 LBB0_7:
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	-8(%rbp), %rcx
-	cmpq	%rcx, %rax
-	jne	LBB0_9
-## %bb.8:
-	leaq	_func0.xs(%rip), %r0
-	addq	$96, %rsp
-	popq	%rbp
-	retq
+	ldur	x9, [x29, #-8]
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	subs	x8, x8, x9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:
+	bl	___stack_chk_fail
 LBB0_9:
-	callq	___stack_chk_fail
-	ud2
+	adrp	x0, _func0.xs@PAGE
+	add	x0, x0, _func0.xs@PAGEOFF
+	ldp	x29, x30, [sp, #112]            ; 16-byte Folded Reload
+	add	sp, sp, #128
+	ret
 	.cfi_endproc
-	## -- End function
-.zerofill __DATA,__bss,_func0.xs,50,4   ## @func0.xs
+                                        ; -- End function
+.zerofill __DATA,__bss,_func0.xs,50,0   ; @func0.xs
 	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
+l_.str:                                 ; @.str
 	.asciz	"%d"
 
 .subsections_via_symbols

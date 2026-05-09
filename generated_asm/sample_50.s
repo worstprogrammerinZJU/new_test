@@ -1,140 +1,157 @@
-This is a complex x86 assembly code that performs a specific memory copying pattern (likely a memcpy) using a custom loop structure with multiple iterations. The logic involves checking for the presence of a delimiter byte (`$1`) at the end of the source and source+4 offset, then copying data based on the byte value at `(%rax,%rcx)` (which acts as a stride or step counter).
-
-Here is the translation to ARM assembly.
-
-### Key Observations & Strategy
-1.  **Registers**:
-    *   **RAX/RDX**: Used for the destination pointer and copying data.
-    *   **RDI/RSI**: Used as the base pointer and destination offset for the second loop iteration.
-    *   **RCX**: Used as a counter/pointer for the source pointer and stride calculation.
-    *   **RDX**: Holds the loop counter ($1, $32, $0, etc.).
-    *   **R12/R13**: Used for temporary storage of loop counters and offsets.
-    *   **R0/R1**: Used for the delimiter check (`$1`).
-    *   **R11**: Used for the final cleanup (copying the delimiter).
-    *   **R8/R9**: Used for the `imull` calculation.
-2.  **Loop Structure**:
-    *   **Outer Loop**: Runs while the delimiter byte at `R0` is not zero.
-    *   **Inner Loop**: Runs while the byte at `R0 + R12` is not zero.
-    *   **Stride Logic**: The operation `movb $32, (%rax, %rcx)` suggests that the copy size is determined by the byte at the calculated address. If that byte is non-zero, it copies; otherwise, it stops.
-3.  **Special Operations**:
-    *   `cltd`, `idivl`: Used to divide by 16 (or 2) depending on context. In this code, `idivl` is used to divide by 16 after clamping, likely to normalize the loop counter or handle specific alignment requirements of the memory layout.
-    *   `testb`: Checks if a byte is zero.
-    *   `je`, `jle`: Jump if Equal or Less Equal.
-4.  **Cleanup**:
-    *   Copies the delimiter byte back to `R11` and jumps to the start of the function to ensure the loop is terminated cleanly.
-
-### ARM Assembly Translation
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
-        .cfi_startproc
-
-        pushq	%rbp
-        .cfi_def_cfa_offset 16
-        .cfi_offset %rbp, -16
-
-        movq	%rsp, %rbp
-        .cfi_def_cfa_register %rbp
-
-        subq	$48, %rsp
-
-        movq	%rdi, -8(%rbp)       # Source Pointer Base
-        movq	%rsi, -16(%rbp)     # Destination Pointer Base
-        movl	$0, -20(%rbp)       # Delimiter Offset Base
-        movl	$0, -24(%rbp)       # Loop Counter Offset Base
-        movl	$0, -28(%rbp)       # Loop Counter Offset Base
-        movl	$0, -36(%rbp)       # Loop Counter Offset Base
-
-LBB0_1:
-        # Outer Loop Header: Check for delimiter at -8(%rbp)
-        movq	-8(%rbp), %rax      # Load Source Pointer
-        movsbl	-8(%rbp), %r0     # Load delimiter byte into R0 (R0 = $1)
-
-        # Inner Loop Header: Check for delimiter at -8(%rbp) + 12
-        movq	-8(%rbp), %rax
-        movsbl	-8(%rbp), %r0
-        addq	$12, %rax           # Pointer to Inner Loop Check
-        movsbl	%rax, %r12        # Load Inner Loop Check Byte into R12
-
-        # Inner Loop Logic
-        movslq	-36(%rbp), %rcx   # Load Source Pointer for Inner Loop
-        cmpb	%r12, %rcx          # Compare Inner Loop Check Byte
-        jne	LBB0_22              # If not zero, proceed to Inner Loop Body
-        jmp	LBB0_26              # If zero, stop inner loop
-
-LBB0_22:
-        # Inner Loop Body
-        movl	-24(%rbp), %eax     # Load Loop Counter
-        addl	$1, %eax            # Increment Loop Counter
-        movl	%eax, -24(%rbp)     # Store back to Offset Base
-
-        # Inner Loop Condition: Check if loop counter is 0
-        cmpb	$1, -24(%rbp)       # Compare Incremented Counter
-        jle	LBB0_28              # If <= 0, exit inner loop
-
-        # Calculate Stride/Size based on byte at (Source Pointer + Inner Pointer)
-        # Note: The source pointer here is -8(%rbp) + -36(%rbp) = -44(%rbp) effectively
-        # However, the code uses -40(%rbp) which corresponds to -8(%rbp) + -32(%rbp)
-        # Let's trace the address calculation:
-        # Current Source Ptr: -8(%rbp)
-        # Inner Ptr: -36(%rbp)
-        # Target Ptr: -40(%rbp) = -8(%rbp) - 32
-        movl	-40(%rbp), %eax      # Load Size Byte
-        imull	-40(%rbp), %eax     # Multiply by 65536 (2^16) to get bytes per word
-        movl	-24(%rbp), %r13      # Load Loop Counter for next iteration
-        cmpb	-24(%rbp), %eax      # Compare Size Byte with Loop Counter
-        jg	LBB0_29               # If Size > Loop Counter, continue
-        jmp	LBB0_30              # If Size <= Loop Counter, exit inner loop
-
-LBB0_29:
-        # Inner Loop Body (Repeat)
-        movl	-24(%rbp), %eax
-        cltd
-        idivl	-40(%rbp)          # Divide by 16 (2^4) to normalize counter
-        cmpb	$0, %edx             # Check if counter is 0
-        jne	LBB0_31              # If not zero, continue inner loop
-        jmp	LBB0_32              # If zero, exit inner loop
-
-LBB0_30:
-        # Inner Loop Body (Repeat)
-        movb	$0, -29(%rbp)       # Set delimiter byte to 0 (Cleanup marker)
-
-LBB0_31:
-        # Inner Loop Body (Repeat)
-        movb	$0, -29(%rbp)       # Set delimiter byte to 0
-
-LBB0_32:
-        # Inner Loop Body (Repeat)
-        movb	$0, -29(%rbp)       # Set delimiter byte to 0
-
-LBB0_33:
-        # Final Cleanup: Copy delimiter back to R11
-        movq	-16(%rbp), %rax
-        movslq	-28(%rbp), %rcx
-        movb	$0, (%rax,%rcx)     # Copy delimiter to R11
-        addq	$48, %rsp            # Restore stack pointer
-
-        # Final Cleanup: Copy delimiter back to R0
-        movq	-16(%rbp), %rdi
-        movslq	-28(%rbp), %rax
-        addq	%rax, %rdi
-        movq	-8(%rbp), %rsi
-        movslq	-36(%rbp), %rax
-        addq	%rax, %rsi
-        movslq	-24(%rbp), %rcx
-        xorl	%eax, %eax           # Clear RAX
-        subq	%rcx, %rax          # Adjust RAX to match RDX/R11 alignment
-        addq	%rax, %rsi          # Add offset to RDI
-        movslq	-24(%rbp), %rdx
-        movq	$-1, %rcx
-        callq	___memcpy_chk      # Perform the actual memcpy
-
-        movl	-24(%rbp), %eax
-        addl	-28(%rbp), %eax
-        movl	%eax, -28(%rbp)     # Restore loop counter
-
-LBB0_34:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	x1, [x29, #-16]
+	stur	wzr, [x29, #-20]
+	str	wzr, [sp, #24]
+	str	wzr, [sp, #20]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_6 Depth 2
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_20
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #32
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_18
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	strb	w8, [sp, #19]
+	mov	w8, #2
+	str	w8, [sp, #8]
+	b	LBB0_6
+LBB0_6:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=2
+	ldr	w8, [sp, #24]
+	ldr	w10, [sp, #8]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	strb	wzr, [sp, #19]
+	b	LBB0_11
+LBB0_9:                                 ;   in Loop: Header=BB0_6 Depth=2
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_6 Depth=2
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_6
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_13
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	strb	wzr, [sp, #19]
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #19]
+	tbz	w8, #0, LBB0_17
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [sp, #20]
+	add	x9, x8, x9
+	mov	w8, #32
+	strb	w8, [x9]
+	b	LBB0_16
+LBB0_16:
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	add	x0, x8, x9
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #24]
+	add	x1, x8, x9
+	ldrsw	x9, [sp, #24]
+	mov	x8, #-1
+	subs	x1, x8, x9
+	ldrsw	x2, [sp, #24]
+	bl	___memcpy_chk
+	ldr	w9, [sp, #20]
+	ldr	w8, [sp, #24]
+	add	w8, w8, w9
+	str	w8, [sp, #24]
+	b	LBB0_17
+LBB0_17:
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	add	x0, x8, x9
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #24]
+	add	x1, x8, x9
+	ldrsw	x9, [sp, #24]
+	mov	x8, #-1
+	subs	x1, x8, x9
+	ldrsw	x2, [sp, #24]
+	bl	___memcpy_chk
+	ldr	w9, [sp, #20]
+	ldr	w8, [sp, #24]
+	add	w8, w8, w9
+	str	w8, [sp, #24]
+	b	LBB0_18
+LBB0_18:
+	ldrb	w8, [sp, #19]
+	tbz	w8, #0, LBB0_23
+	b	LBB0_19
+LBB0_19:
+	ldrb	w8, [sp, #19]
+	strb	wzr, [x8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

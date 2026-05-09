@@ -1,166 +1,91 @@
-.section .text
-.global func0
-.type func0, @function
-func0:
-    push {r12}
-    push {r13}
-    push {r14}
-    push {r15}
-
-    mov r12, r13
-    mov r13, r14
-    mov r14, r15
-    mov r0, r13
-    mov r1, r14
-    mov r15, r15
-
-    ldr r0, [r0, #-16]
-    ldr r1, [r0, #-20]
-    ldr r2, [r0, #-24]
-    ldr r3, [r1, #-1]
-    ldr r4, [r1, #-2]
-
-loop_start:
-    ldr r0, [r0, #0]
-    ldr r1, [r1, #0]
-
-loop_body:
-    cmp r0, r1
-    blt loop_next
-    cmp r1, #60
-    bgt loop_increment
-    cmp r1, #62
-    bgt loop_increment
-
-loop_increment:
-    ldr r0, [r0, #0]
-    add r0, r0, #1
-    str r0, [r0, #-1]
-
-loop_next:
-    cmp r0, #60
-    bge loop_end
-    ldr r0, [r0, #-1]
-    str r0, [r0, #-1]
-
-loop_end:
-    mov r0, #0
-    str r0, [r1, #0]
-    mov r0, #1
-    str r0, [r1, #0]
-
-    pop {r15}
-    pop {r14}
-    pop {r13}
-    pop {r12}
-    ret
-
-.section .text
-.global func0
-.type func0, @function
-func0:
-    push {r12}
-    push {r13}
-    push {r14}
-    push {r15}
-
-    mov r12, r13
-    mov r13, r14
-    mov r14, r15
-    mov r0, r13
-    mov r1, r14
-    mov r15, r15
-
-    ldr r0, [r0, #-16]
-    ldr r1, [r0, #-20]
-    ldr r2, [r0, #-24]
-
-loop_start:
-    ldr r0, [r0, #0]
-    ldr r1, [r1, #0]
-
-loop_body:
-    cmp r0, r1
-    blt loop_next
-    cmp r1, #60
-    bgt loop_increment
-    cmp r1, #62
-    bgt loop_increment
-
-loop_increment:
-    ldr r0, [r0, #0]
-    add r0, r0, #1
-    str r0, [r0, #-1]
-
-loop_next:
-    cmp r0, #60
-    bge loop_end
-    ldr r0, [r0, #-1]
-    str r0, [r0, #-1]
-
-loop_end:
-    mov r0, #0
-    str r0, [r1, #0]
-    mov r0, #1
-    str r0, [r1, #0]
-
-    pop {r15}
-    pop {r14}
-    pop {r13}
-    pop {r12}
-    ret
-
-.section .text
-.global func0
-.type func0, @function
-func0:
-    push {r12}
-    push {r13}
-    push {r14}
-    push {r15}
-
-    mov r12, r13
-    mov r13, r14
-    mov r14, r15
-    mov r0, r13
-    mov r1, r14
-    mov r15, r15
-
-    ldr r0, [r0, #-16]
-    ldr r1, [r0, #-20]
-    ldr r2, [r0, #-24]
-
-loop_start:
-    ldr r0, [r0, #0]
-    ldr r1, [r1, #0]
-
-loop_body:
-    cmp r0, r1
-    blt loop_next
-    cmp r1, #60
-    bgt loop_increment
-    cmp r1, #62
-    bgt loop_increment
-
-loop_increment:
-    ldr r0, [r0, #0]
-    add r0, r0, #1
-    str r0, [r0, #-1]
-
-loop_next:
-    cmp r0, #60
-    bge loop_end
-    ldr r0, [r0, #-1]
-    str r0, [r0, #-1]
-
-loop_end:
-    mov r0, #0
-    str r0, [r1, #0]
-    mov r0, #1
-    str r0, [r1, #0]
-
-    pop {r15}
-    pop {r14}
-    pop {r13}
-    pop {r12}
-    ret
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	wzr, [sp, #12]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #60
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #62
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_12
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_9:
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_10
+LBB0_10:
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_12
+LBB0_11:
+	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_12
+LBB0_12:
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

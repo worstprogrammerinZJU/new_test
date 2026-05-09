@@ -1,87 +1,132 @@
-Converting x86 assembly (specifically the ARM64 version used in macOS 13/ARM64) to ARM assembly involves several key transformations:
-
-1.  **Architecture Switch**: x86 (`movq`, `subq`) becomes ARM64 (`mov`, `sub`).
-2.  **Register Preservation**: x86 uses `rbp` as the stack frame base. In ARM64, we use `r12` (or `r13`/`r14` depending on convention) as the stack pointer (`sp`).
-3.  **Calling Convention**:
-    *   x86: `push`/`pop` for stack frames, `call`/`ret` for calls.
-    *   ARM64: `push`/`pop` for stack frames, `call`/`ret` for calls.
-4.  **Data Access**: x86's `-8(%rbp)` (8 bytes below RBP) becomes `r12` (the stack pointer) + offset.
-5.  **Instruction Encoding**:
-    *   `pushq` → `push r13` (or `r12` in some conventions, but `r13` is standard for non-critical data; however, in `__TEXT` regions on ARM64, `r12` is often used for stack pointers in this specific context to avoid ambiguity, but strictly speaking, `push r13` is the canonical `pushq` equivalent). *Correction*: In macOS ARM64 for `__TEXT`, `r13` is typically used for the stack pointer (`sp`) to align with the `__attribute__((noinline))` stack frame.
-    *   `movslq` (move signed long long) → `movsxd` (move signed double-word) or `movsxd` (x86) maps to `movsxd` (ARM64) or `movsxd` (ARM32). Since this is `macos 13`, it is ARM64.
-    *   `movbl` (move signed byte) → `movs` (ARM64) or `movs` (ARM32).
-    *   `testb` → `test` (ARM64).
-6.  **String Literals**:
-    *   x86: `.asciz "True"` (ASCII string).
-    *   ARM64: `@.str` is for byte strings. The equivalent ASCII string literal is `@.str "True"`.
-
-### Key Differences & Notes for the Translation:
-
-*   **Stack Pointer**: x86 `rbp` becomes ARM64 `r13`.
-*   **64-bit Operations**: x86 `movq` (64-bit) becomes ARM64 `mov` (64-bit).
-*   **Signed Operations**: x86 `movslq` (signed 64-bit) becomes ARM64 `movsxd` (signed double-word).
-*   **Byte Operations**: x86 `movbl` (signed 8-bit) becomes ARM64 `movs` (signed byte).
-*   **String Literals**: x86 `.asciz` becomes ARM64 `@.str` followed by the literal.
-*   **Function Calls**: `callq` becomes `call`. `retq` becomes `ret`.
-
-### ARM64 Assembly Code
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp                          ## push r13 (ARM64 equivalent of pushq %rbp)
-	.cfi_def_cfa_offset 16               ## Define CFA offset as 16 bytes (4 registers)
-	.cfi_offset %rbp, -16                ## Offset of r13 in stack frame is -16
+; %bb.0:
+	sub	sp, sp, #112
+	.cfi_def_cfa_offset 112
+	stp	x29, x30, [sp, #96]             ; 16-byte Folded Spill
+	add	x29, sp, #96
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	x1, [x29, #-16]
+	stur	x2, [x29, #-24]
+	stur	x3, [x29, #-32]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	mov	x8, x0
+	stur	w8, [x29, #-36]
+	ldur	w8, [x29, #-36]
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsr	x0, x8, #0
+	bl	_malloc
+	str	x0, [sp, #48]
+	str	wzr, [sp, #44]
+	str	wzr, [sp, #40]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #40]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-16]
+	str	x8, [sp, #32]
+	strb	wzr, [sp, #31]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	x8, [sp, #32]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #40]
+	ldrsb	w8, [x8, x9]
+	ldr	x9, [sp, #32]
+	ldrsb	w9, [x9]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	strb	w8, [sp, #31]
+	b	LBB0_7
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	add	x8, x8, #1
+	str	x8, [sp, #32]
+	b	LBB0_3
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #31]
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_12 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #40]
+	ldrsb	w8, [x8, x9]
+	ldr	x9, [sp, #48]
+	ldrsw	x10, [sp, #44]
+	subs	x10, x10, #1
+	ldr	w11, [sp, #40]
+	subs	w10, w10, w11
+	ldrsb	w9, [x9, w10, sxtw]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_15
+	b	LBB0_14
+LBB0_9:                                 ;   in Loop: Header=BB0_12 Depth=1
+	strb	wzr, [sp, #31]
+	b	LBB0_15
+LBB0_10:                                ;   in Loop: Header=BB0_12 Depth=1
+	ldr	w8, [sp, #40]
+	add	w8, w8, #1
+	str	w8, [sp, #40]
+	b	LBB0_12
+LBB0_11:
+	ldur	x0, [x29, #-24]
+	ldr	x1, [sp, #48]
+	mov	x2, #-1
+	str	x2, [sp, #8]                    ; 8-byte Folded Spill
+	bl	___strcpy_chk
+	ldr	x2, [sp, #8]                    ; 8-byte Folded Reload
+	ldur	x0, [x29, #-32]
+	ldrb	w8, [sp, #31]
+	and	w10, w8, #0x1
+	adrp	x9, l_.str.1@PAGE
+	add	x9, x9, l_.str.1@PAGEOFF
+	adrp	x8, l_.str@PAGE
+	add	x8, x8, l_.str@PAGEOFF
+	ands	w10, w10, #0x1
+	csel	x1, x8, x9, ne
+	bl	___strcpy_chk
+	ldr	x0, [sp, #48]
+	bl	_free
+	ldp	x29, x30, [sp, #96]             ; 16-byte Folded Reload
+	add	sp, sp, #112
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"True"
 
-	movq	%rsp, %r13                      ## r13 = %rsp (Stack Pointer)
-	.cfi_def_cfa_register %r13            ## Define r13 as the register holding the CFA
+l_.str.1:                               ; @.str.1
+	.asciz	"False"
 
-	subq	$96, %rsp                       ## Stack allocation: 96 bytes (16 * 6)
-	movq	%rdi, -8(%r13)                   ## r13 - 8 = -8 (Address of %rdi)
-	movq	%rsi, -16(%r13)                  ## r13 - 16 = -16 (Address of %rsi)
-	movq	%rdx, -24(%r13)                  ## r13 - 24 = -24 (Address of %rdx)
-	movq	%rcx, -32(%r13)                  ## r13 - 32 = -32 (Address of %rcx)
-	movq	-8(%r13), %rdi                   ## r13 - 8 = -8 (Address of -8(%r13))
-	callq	_strlen                        ## Call strlen
-	## kill: def $eax killed $eax killed $rax
-	movl	%eax, -36(%r13)                   ## r13 - 36 = -36 (Address of -36(%r13))
-	movl	-36(%r13), %eax                  ## Load -36(%r13) into %eax
-	addl	$1, %eax                        ## Increment %eax
-	movslq	%eax, %rdi                    ## movslq: signed 64-bit move (ARM64 equivalent)
-	shlq	$0, %rdi                        ## Shift right by 0 (Identity)
-	callq	_malloc                        ## Call malloc
-	movq	%rax, -48(%r13)                  ## r13 - 48 = -48 (Address of -48(%r13))
-	movl	$0, -52(%r13)                    ## r13 - 52 = -52 (Address of -52(%r13))
-	movl	$0, -56(%r13)                    ## r13 - 56 = -56 (Address of -56(%r13))
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-	##     Child Loop BB0_3 Depth 2
-	movq	-8(%r13), %rax                   ## r13 - 8 = -8
-	movslq	-56(%r13), %rcx                ## r13 - 56 = -56
-	movsbl	(%rax,%rcx), %eax              ## movsbl: signed 8-bit load (ARM64 equivalent)
-	cmpl	$0, %eax                        ## Compare %eax with 0
-	je	LBB0_11                           ## Jump if Equal
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-16(%r13), %rax                  ## r13 - 16 = -16
-	movq	%rax, -64(%r13)                  ## r13 - 64 = -64
-	movb	$0, -65(%r13)                   ## movb: signed 8-bit move (ARM64 equivalent)
-LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
-	## =>  This Inner Loop Header: Depth=2
-	movq	-64(%r13), %rax                  ## r13 - 64 = -64
-	movsbl	(%rax), %eax                  ## movsbl: signed 8-bit load (ARM64 equivalent)
-	cmpl	$0, %eax                        ## Compare %eax with 0
-	je	LBB0_7                            ## Jump if Equal
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%r13), %rax                   ## r13 - 8 = -8
-	movslq	-56(%r13), %rcx                ## r13 - 56 = -56
-	movsbl	(%rax,%rcx), %eax              ## movsbl: signed 8-bit load (ARM64 equivalent)
-	movq	-64(%r13), %rcx                  ## r13 - 64 = -64
-	movsbl	(%rcx), %ecx                  ## movsbl: signed 8-bit load (ARM64 equivalent)
-	cmpl	%ecx, %eax                      ## Compare %ecx with %eax
-	jne	LBB0_6                           ## Jump if Not Equal
-## %bb.5:                               ##   in Loop: Header=BB0_1 Depth=1
-	movb	$1, -65(%r13)                   ## movb: signed 8-bit move (ARM
+.subsections_via_symbols

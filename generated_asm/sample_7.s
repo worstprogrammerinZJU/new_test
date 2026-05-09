@@ -1,130 +1,151 @@
-Converting this specific x86 assembly code to ARM is a significant challenge due to several fundamental differences in the instruction set architecture (ISA) and the nature of the code (specifically the use of `movslq`, `cltd`, `idivl`, and complex nested loops).
-
-### Key Challenges & Limitations
-
-1.  **SSE2 Instructions (`movslq`, `cltd`, `idivl`)**:
-    *   **x86**: `movslq` (Move 64-bit signed) and `idivl` (Divide Integer Long) are specific to SSE2.
-    *   **ARM**: ARM does not have native 64-bit integer division or SSE2 floating-point support. You must implement these using the `ddiv` (double precision divide) instruction combined with a loop, or use `mul` with sign extension (which is imprecise for division) or implement a software division.
-    *   **ARM64**: If the target is ARM64, `ddiv` is available, but it operates on 128-bit (double) registers. To simulate 64-bit division efficiently in ARM64, you typically need to use a specialized instruction set like `FMA` or `DFF` (Double Floating Point Multiply) combined with a lookup table or a custom loop for division, as there is no direct `div` instruction.
-    *   **ARM32**: If the target is ARM32, `ddiv` is not available. You would need to implement 64-bit division using `mul` and sign-extend logic manually, which is extremely slow and complex.
-
-2.  **Register Alignment**:
-    *   x86 uses 8-byte (64-bit) alignment for stack and local variables. ARM uses 4-byte (32-bit) alignment. The code relies heavily on 8-byte alignment (`movq`, `movslq`, `cltd`, `idivl`) which is impossible to achieve directly on standard ARM without breaking the 4-byte alignment rule.
-
-3.  **Loop Logic**:
-    *   The nested loops (`movslq`, `addl`, `cmp`, `jge`) mimic a complex pointer arithmetic pattern. Converting this exact logic to ARM requires rewriting the control flow and potentially using `adc` (add with carry) instead of `add` if the carry flag isn't used for the next iteration, though `adc` is usually available.
-
-4.  **Function Calling Convention**:
-    *   x86 uses `pushq` / `retq`.
-    *   ARM uses `push` / `pop`.
-    *   x86 uses `movq` (64-bit).
-    *   ARM uses `mov` (32-bit).
-
-### Solution Strategy
-
-To provide a working solution, I will assume the target architecture is **ARM64 (AArch64)** because it is the standard for modern macOS (M-series chips) and supports the necessary floating-point operations required to emulate the `idivl` behavior.
-
-I will implement a **software 64-bit division** using `ddiv` and a loop. Since `ddiv` takes 128-bit operands and produces a 128-bit result, I will need to manually handle the sign bit extraction and perform the division on the upper and lower 64-bit halves.
-
-**Note**: This conversion is an **educational demonstration** of how to translate logic, not a production-ready compiler conversion. The generated code will be significantly slower than native ARM64 due to the lack of hardware division.
-
-### ARM64 Assembly Conversion
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$64, %rsp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	%rdx, -24(%rbp)
-	movq	%rcx, -32(%rbp)
-	movslq	-12(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, %rcx
-	movq	-24(%rbp), %rax
-	movq	%rcx, (%rax)
-	movq	-32(%rbp), %rax
-	movl	$0, (%rax)
-	movl	$0, -36(%rbp)
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_5 Depth 2
-	movl	-36(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_15
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movl	%eax, -40(%rbp)
-	movb	$0, -41(%rbp)
-	cmpl	$0, -40(%rbp)
-	jne	LBB0_4
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movb	$1, -41(%rbp)
-LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_5
-LBB0_5:                                 ##   Parent Loop BB0_1 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	xorl	%eax, %eax
-                                        ## kill: def $al killed $al killed $eax
-	cmpl	$0, -40(%rbp)
-	movb	%al, -57(%rbp)                  ## 1-byte Spill
-	jle	LBB0_7
-## %bb.6:                               ##   in Loop: Header=BB0_5 Depth=2
-	movb	-41(%rbp), %al
-	xorb	$-1, %al
-	movb	%al, -57(%rbp)                  ## 1-byte Spill
-LBB0_7:                                 ##   in Loop: Header=BB0_5 Depth=2
-	movb	-57(%rbp), %al                  ## 1-byte Reload
-	testb	$1, %al
-	jne	LBB0_8
-	jmp	LBB0_11
-LBB0_8:                                 ##   in Loop: Header=BB0_5 Depth=2
-	movl	-40(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	idivl	%ecx
-	cmpl	$0, %edx
-	jne	LBB0_10
-## %bb.9:                               ##   in Loop: Header=BB0_5 Depth=2
-	movb	$1, -41(%rbp)
-LBB0_10:                                ##   in Loop: Header=BB0_5 Depth=2
-	movl	-40(%rbp), %eax
-	movl	$10, %ecx
-	cltd
-	idivl	%ecx
-	movl	%eax, -40(%rbp)
-	jmp	LBB0_5
-LBB0_11:                                ##   in Loop: Header=BB0_1 Depth=1
-	testb	$1, -41(%rbp)
-	jne	LBB0_13
-## %bb.12:                              ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-24(%rbp), %rax
-	movq	(%rax), %rax
-	movq	-32(%rbp), %rcx
-	movslq	(%rcx), %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movq	-32(%rbp), %rax
-	movl	(%rax), %ecx
-	addl	$1, %ecx
-	movl	%ecx, (%rax)
-LBB0_13:                                ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_14
-LBB0_14:                                ##   in Loop: Header=BB0_1 Depth=1
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	stur	x2, [x29, #-24]
+	str	x3, [sp, #32]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
+	bl	_malloc
+	ldur	x8, [x29, #-24]
+	str	x0, [x8]
+	ldr	x8, [sp, #32]
+	str	wzr, [x8]
+	str	wzr, [sp, #28]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_5 Depth 2
+	ldr	w8, [sp, #28]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_15
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #24]
+	strb	wzr, [sp, #23]
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	strb	w8, [sp, #23]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #0
+	cset	w8, le
+	mov	w9, #0
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldrb	w8, [sp, #23]
+	eor	w8, w8, #0x1
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	tbz	w8, #0, LBB0_11
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #24]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
+	mov	w8, #1
+	strb	w8, [sp, #23]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #24]
+	mov	w9, #10
+	sdiv	w8, w8, w9
+	str	w8, [sp, #24]
+	b	LBB0_5
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #23]
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-24]
+	ldr	x8, [x8]
+	ldrsw	x9, [sp, #23]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldr	w10, [sp, #23]
+	add	w10, w10, #1
+	ldr	w9, [x9, w10, sxtw #2]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_21
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_18 Depth=2
+	ldur	x8, [x29, #-24]
+	ldr	x8, [x8]
+	ldrsw	x9, [sp, #23]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldr	w10, [sp, #23]
+	add	w10, w10, #1
+	ldr	w9, [x9, w10, sxtw #2]
+	ldur	x10, [x29, #-24]
+	ldr	x10, [x10]
+	ldrsw	x11, [sp, #23]
+	str	w9, [x10, x11, lsl #2]
+	ldr	w8, [sp, #23]
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldr	w10, [sp, #23]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	b	LBB0_21
+LBB0_14:                                ;   in Loop: Header=BB0_18 Depth=2
+	ldr	w8, [sp, #23]
+	add	w8, w8, #1
+	str	w8, [sp, #23]
+	b	LBB0_18
+LBB0_15:                                ;   in Loop: Header=BB0_18 Depth=2
+	ldr	w8, [sp, #23]
+	add	w8, w8, #1
+	str	w8, [sp, #23]
+	b	LBB0_18
+LBB0_16:                                ;   in Loop: Header=BB0_18 Depth=2
+	ldr	w8, [sp, #23]
+	add	w8, w8, #1
+	str	w8, [sp, #23]
+	b	LBB0_18
+LBB0_17:
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

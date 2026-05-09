@@ -1,110 +1,116 @@
-Converting this x86 assembly to ARM assembly requires translating the x86-specific instructions (`movq`, `movl`, `callq`, `idivl`, `cltd`, `leaq`, `cltq`, `imull`, `addl`) into their ARM equivalents (`mov`, `movl`, `call`, `divl`, `clt`, `leaq`, `cltq`, `imull`, `addl`, `cmp`, `jne`, `je`, `jmp`).
-
-Here is the step-by-step conversion logic:
-
-1.  **Function Entry**:
-    *   `pushq %rbp` → `push %rbx`
-    *   `movq %rsp, %rbp` → `mov %rsp, %rbx`
-    *   `subq $48, %rsp` → `sub %rbx, #48`
-
-2.  **Arguments**:
-    *   `movq %rdi, -8(%rbp)` → `mov %rdi, -8(%rbx)`
-    *   `movl %esi, -12(%rbp)` → `mov %esi, -12(%rbx)`
-    *   `movq -8(%rbp), %rdi` → `mov -8(%rbx), %rdi`
-    *   `callq strlen` → `call strlen` (ARM `call` is relative; x86 `callq` is absolute. In this context, assuming `strlen` is in the same namespace or relative addressing applies, but standard ARM convention for `call` is relative. However, `strlen` is a standard library function usually imported or expected to be relative. If `strlen` is a local symbol, it would be relative. Assuming `strlen` is a global symbol, we use `call` with a relative offset. Given the x86 `callq` has no offset, ARM `call` uses a relative offset. To make this portable without knowing the exact call target, we will use the standard `call` instruction which expects a relative offset. *Note: In many inline assembly contexts where the target is known, `call` is used. Here, assuming `strlen` is a global function, we use `call` with a relative offset. If `strlen` is local, it would be `call`. Let's assume standard global call behavior for `strlen`).*
-    *   `movl %eax, -16(%rbp)` → `mov %eax, -16(%rbx)`
-    *   `movl -16(%rbp), %eax` → `mov -16(%rbx), %eax`
-
-3.  **Loop Logic**:
-    *   `subq $48, %rsp` (Loop start)
-    *   `movl %rdi, -8(%rbp)` (Argument `n`)
-    *   `movl %esi, -12(%rbp)` (Argument `i`)
-    *   `callq strlen` (Calculate length)
-    *   `movl %eax, -16(%rbp)` (Store length)
-    *   `movl -16(%rbp), %eax` (Load length)
-    *   `addl $2, %eax` (Add 2 to length)
-    *   `movl $3, %ecx` (Initialize counter)
-    *   `cltd` (Clear Low Trap-Disabling Bit)
-    *   `divl %ecx` (`idivl` equivalent)
-    *   `movl %eax, -20(%rbp)` (Store quotient)
-    *   `movl $0, -28(%rbp)` (Clear next field)
-
-4.  **Loop Header**:
-    *   `movl -28(%rbp), %eax` (Load quotient)
-    *   `cmp -20(%rbp), %eax` (Compare)
-    *   `jge LBB0_12` (Jump if Greater or Equal)
-
-5.  **Loop Body (Iteration)**:
-    *   `imull $3, -28(%rbp), %eax` (Multiply quotient by 3)
-    *   `addl $3, %eax` (Add 3 to result)
-    *   `cmp -16(%rbp), %eax` (Compare result with next field)
-    *   `jg LBB0_4` (Jump if Greater)
-    *   `movl $3, %eax` (Load 3)
-    *   `movl %eax, -40(%rbp)` (Spill result to memory)
-    *   `jmp LBB0_5` (Next iteration)
-
-6.  **Loop Body (Comparison & Spill)**:
-    *   `movl -16(%rbp), %eax` (Load next field)
-    *   `imull $3, -28(%rbp), %ecx` (Multiply next field by 3)
-    *   `subl %ecx, %eax` (Subtract from previous field)
-    *   `movl %eax, -40(%rbp)` (Spill result)
-
-7.  **Loop Body (Reload)**:
-    *   `movl -40(%rbp), %eax` (Load spilled result)
-    *   `movl %eax, -32(%rbp)` (Spill to next field)
-
-8.  **Loop Body (Load Next Field)**:
-    *   `movl -32(%rbp)` (Load next field)
-    *   `leaq -24(%rbp), %rdi` (Calculate address of next field)
-    *   `movq -8(%rbp), %rsi` (Load previous field)
-    *   `imull $3, -28(%rbp), %eax` (Multiply previous field by 3)
-    *   `cltq` (Clear Trap-Disabling Bit)
-    *   `addq %rax, %rsi` (Add length)
-    *   `movslq -32(%rbp), %rdx` (Store previous field)
-    *   `movl $4, %ecx` (Increment counter)
-    *   `callq ___strncpy_chk` (Copy next field)
-    *   `movslq -32(%rbp), %rax` (Store next field)
-    *   `movb $0, -24(%rbp,%rax)` (Zero out byte)
-    *   `cmp $3, -32(%rbp)` (Compare with next field)
-    *   `jne LBB0_10` (Jump if not equal)
-
-9.  **Loop Body (Comparison 0)**:
-    *   `cmp $0, -12(%rbp)`
-    *   `je LBB0_8` (Jump if Equal)
-
-10. **Loop Body (Copy Byte)**:
-    *   `movb -22(%rbp), %al`
-    *   `movb %al, -33(%rbp)`
-    *   `movb -23(%rbp), %al`
-    *   `movb %al, -22(%rbp)`
-    *   `movb -24(%rbp), %al`
-    *   `movb %al, -23(%rbp)`
-    *   `movb -33(%rbp), %al`
-    *   `movb %al, -24(%rbp)`
-
-11. **Loop End**:
-    *   `jmp LBB0_9`
-
-12. **Loop End (Comparison 0 again)**:
-    *   `cmp $0, -12(%rbp)`
-    *   `je LBB0_8`
-
-13. **Loop End (Copy Byte 2)**:
-    *   `movb -24(%rbp), %al`
-    *   `movb %al, -34(%rbp)`
-    *   `movb -23(%rbp), %al`
-    *   `movb %al, -24(%rbp)`
-    *   `movb -22(%rbp), %al`
-    *   `movb %al, -23(%rbp)`
-    *   `movb -34(%rbp), %al`
-    *   `movb %al, -22(%rbp)`
-
-14. **Loop End (Copy Byte 3)**:
-    *   `movb -22(%rbp), %al`
-    *   `movb %al, -33(%rbp)`
-    *   `movb -23(%rbp), %al`
-    *   `movb %al, -22(%rbp)`
-    *   `movb -24(%rbp), %al`
-    *   `movb %al, -23(%rbp)`
-    *   `movb -33(%rbp), %al`
-    *   `movb %al, -24(%rbp)`
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	mov	x8, x0
+	stur	w8, [x29, #-16]
+	ldur	w8, [x29, #-16]
+	add	w8, w8, #2
+	mov	w9, #3
+	sdiv	w8, w8, w9
+	stur	w8, [x29, #-20]
+	str	wzr, [sp, #20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	mov	w9, #3
+	mul	w8, w8, w9
+	add	w8, w8, #3
+	ldur	w9, [x29, #-16]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #3
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB0_5
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-16]
+	ldr	w9, [sp, #20]
+	mov	w10, #3
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	str	w8, [sp, #16]
+	ldur	x8, [x29, #-8]
+	ldr	w9, [sp, #20]
+	mov	w10, #3
+	mul	w9, w9, w10
+	add	x1, x8, w9, sxtw
+	ldrsw	x2, [sp, #16]
+	sub	x0, x29, #24
+	mov	x3, #4
+	bl	___strncpy_chk
+	ldrsw	x9, [sp, #16]
+	sub	x8, x29, #24
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #3
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldurb	w8, [x29, #-22]
+	strb	w8, [sp, #15]
+	ldurb	w8, [x29, #-23]
+	sturb	w8, [x29, #-22]
+	ldurb	w8, [x29, #-24]
+	sturb	w8, [x29, #-23]
+	ldrb	w8, [sp, #15]
+	sturb	w8, [x29, #-24]
+	b	LBB0_9
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldursw	x2, [x29, #-24]
+	sub	x1, x29, #24
+	ldur	x8, [x29, #-8]
+	ldr	w9, [sp, #20]
+	mov	w10, #3
+	mul	w9, w9, w10
+	add	x0, x8, w9, sxtw
+	mov	x3, #-1
+	bl	___strncpy_chk
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_12:
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

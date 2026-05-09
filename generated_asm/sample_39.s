@@ -1,101 +1,51 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movl	$0, -16(%rbp)
-	movl	$0, -20(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	## Note: ARM does not have direct 'movslq' or 'movss' for specific memory offsets like x86.
-	## We will assume the memory is accessible via registers or immediate for this translation.
-	## In a real ARM build, you might need to use a specific memory layout.
-	## Here we simulate the value retrieval logic.
-	movq	-8(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	## Simulating xmm0 = mem[0] ... (Using FPU for conversion logic)
-	## ARM equivalent for "convert double to int" is complex and hardware specific.
-	## We will use FPU instructions which are available on ARMv8.
-	fpu	mfpu
-	fpu	fadd	%xmm0, %xmm0, %xmm0
-	## Round to nearest integer using FPU
-	## Note: ARM does not have a single 'roundsd' instruction.
-	## We will use a combination of FPU instructions to approximate the logic.
-	## (This part is architecture-specific; standard ARMv7 lacks these FPU ops).
-	fpu	fsub	%xmm0, %xmm0, %xmm0
-	## Cast to signed integer
-	fpu	fmovsi	%eax, %xmm0
-	## Loop
-	fpu	fadd	%xmm0, %xmm0, %xmm0
-	## Round to nearest integer
-	fpu	fsub	%xmm0, %xmm0, %xmm0
-	## Cast to signed integer
-	fpu	fmovsi	%ecx, %xmm0
-	imull	%ecx, %eax
-	addl	-16(%rbp), %eax
-	movl	%eax, -16(%rbp)
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-	jmp	LBB0_1
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	frintp	d0, d0
+	fcvtzs	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	frintp	d0, d0
+	fcvtzs	w9, d0
+	mul	w9, w8, w9
+	ldr	w8, [sp, #16]
+	add	w8, w8, w9
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_4:
-	movl	-16(%rbp), %eax
-	popq	%rbp
-	retq
+	ldr	w0, [sp, #16]
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
-	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movl	$0, -16(%rbp)
-	movl	$0, -20(%rbp)
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_4
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	## Note: ARM does not have direct 'movslq' or 'movss' for specific memory offsets like x86.
-	## We will assume the memory is accessible via registers or immediate for this translation.
-	## In a real ARM build, you might need to use a specific memory layout.
-	## Here we simulate the value retrieval logic.
-	## In a real ARM build, you might need to use a specific memory layout.
-	## Here we simulate the value retrieval logic.
-	movq	-8(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	## Simulating xmm0 = mem[0] ... (Using FPU for conversion logic)
-	## ARM equivalent for "convert double to int" is complex and hardware specific.
-	## We will use FPU instructions which are available on ARMv8.
-	fpu	mfpu
-	fpu	fadd	%xmm0, %xmm0, %xmm0
-	## Round to nearest integer using FPU
-	## Note: ARM does not have a single 'roundsd' instruction.
-	## We will use a combination of FPU instructions to approximate the logic.
-	## (This part is architecture-specific; standard ARMv7 lacks these FPU ops).
-	fpu	fsub	%xmm0, %xmm0, %xmm0
-	## Cast to signed integer
-	fpu	fmovsi	%eax, %xmm0
-	## Loop
-	fpu	fadd	%xmm0, %xmm0, %xmm0
-	## Round to nearest integer
-	fpu	fsub	%xmm0, %xmm0, %xmm0
-	## Cast to signed integer
-	fpu	fmovsi	%ecx, %xmm0
-	imull
+                                        ; -- End function
+.subsections_via_symbols

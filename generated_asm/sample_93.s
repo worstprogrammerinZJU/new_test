@@ -1,158 +1,151 @@
-This is a complex nested loop from x86 assembly that performs memory allocation (`_malloc`), initializes a structure to zero, and then executes a highly optimized, multi-level loop to zero out a large array.
-
-Below is the equivalent **ARM assembly** implementation.
-
-### Key Observations & Translations:
-1.  **Call Stack & Registers**:
-    *   `pushq %rbp` / `movq %rsp, %rbp`: Standard stack frame setup.
-    *   `subq $64, %rsp`: 64-byte stack frame.
-    *   `movq %rdi, -8(%rbp)` / `movl %esi, -12(%rbp)`: Passing arguments.
-    *   `movq %rdx, -24(%rbp)`: Passing the pointer to the allocated memory.
-    *   **Note**: In ARM, function arguments are passed in `R0` to `Rn` registers (where $n$ is the number of arguments).
-        *   `R0` -> `-8(%rbp)`
-        *   `R1` -> `-12(%rbp)`
-        *   `R2` -> `-24(%rbp)`
-        *   `R3` -> `-32(%rbp)` (Return address)
-
-2.  **The Allocation Logic**:
-    *   `shlq $2, %rdi`: The `_malloc` function in x86 is often implemented as `malloc(size * 4)` (padding) or similar. Shifting left by 2 bits doubles the size before allocation.
-    *   `movq %rax, -32(%rbp)`: The pointer returned by `_malloc`.
-
-3.  **The Loop Logic**:
-    *   **Outer Loop (`LBB0_1`)**: Increments a counter.
-    *   **Inner Loop (`LBB0_3`)**: Checks if the inner counter is 0.
-    *   **Inner Loop 2 (`LBB0_6`)**: Checks if the inner counter is 1.
-    *   **Inner Loop 3 (`LBB0_13`)**: Checks if the inner counter is 2.
-    *   **Inner Loop 4 (`LBB0_15`)**: The heavy lifting loop. It performs 4 operations per iteration:
-        1.  `movslq` (Store Signed Long): `movq` to `R0`.
-        2.  `movl` (Load Signed Long): `movl` from `R0` (specifically `movl %0, %1`).
-        3.  `movl` (Load Signed Long): `movl` from `R0`.
-        4.  `movl` (Load Signed Long): `movl` from `R0`.
-    *   **Logic**: It reads the value, adds 1, and stores it back. This effectively implements `arr[i] = (arr[i] + 1)`.
-    *   **Termination**: It stops when `arr[i] == 0`.
-
-### ARM Assembly Code
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$64, %rsp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	%rdx, -24(%rbp)
-	movslq	-12(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, -32(%rbp)
-	movl	$0, -40(%rbp)
-	movl	$0, -44(%rbp)
-LBB0_1:
-	subq	$1, %rbx
-	cmpl	$0, -12(%rbp)
-	jge	LBB0_12
-## %bb.2:
-	subq	$1, %rbx
-	movl	$0, -36(%rbp)
-	movl	$0, -48(%rbp)
-LBB0_3:
-	subq	$1, %rbx
-	movl	-44(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_12
-## %bb.4:
-	subq	$1, %rbx
-	movl	-48(%rbp), %eax
-	cmpl	-40(%rbp), %eax
-	jge	LBB0_8
-## %bb.5:
-	subq	$1, %rbx
-	movq	-8(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movq	-32(%rbp), %rcx
-	movslq	-48(%rbp), %rdx
-	cmpl	(%rcx,%rdx,4), %eax
-	jne	LBB0_6
-## %bb.6:
-	subq	$1, %rbx
-	movl	$1, -36(%rbp)
-	jmp	LBB0_8
-LBB0_7:
-	subq	$1, %rbx
-	jmp	LBB0_8
-LBB0_8:
-	subq	$1, %rbx
-	cmpl	$0, -36(%rbp)
-	jne	LBB0_10
-## %bb.9:
-	subq	$1, %rbx
-	movq	-8(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-32(%rbp), %rax
-	movl	-40(%rbp), %ecx
-	movl	%ecx, %esi
-	addl	$1, %esi
-	movl	%esi, -40(%rbp)
-	movslq	%ecx, %rcx
-	movl	%edx, (%rax,%rcx,4)
-LBB0_10:
-	subq	$1, %rbx
-	jmp	LBB0_11
-LBB0_11:
-	subq	$1, %rbx
-	movl	-44(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -44(%rbp)
-	jmp	LBB0_1
-LBB0_12:
-	movl	$0, -44(%rbp)
-LBB0_13:
-	subq	$1, %rbx
-	movl	-44(%rbp), %eax
-	movl	-40(%rbp), %ecx
-	subl	$1, %ecx
-	cmpl	%ecx, %eax
-	jge	LBB0_22
-## %bb.14:
-	subq	$1, %rbx
-	movl	-44(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -48(%rbp)
-LBB0_15:
-	subq	$1, %rbx
-	movl	-48(%rbp), %eax
-	cmpl	-40(%rbp), %eax
-	jge	LBB0_20
-## %bb.16:
-	subq	$1, %rbx
-	movq	-32(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movq	-32(%rbp), %rcx
-	movslq	-48(%rbp), %rdx
-	cmpl	(%rcx,%rdx,4), %eax
-	jle	LBB0_18
-## %bb.17:
-	subq	$1, %rbx
-	movq	-32(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movl	%eax, -52(%rbp)
-	movq	-32(%rbp), %rax
-	movslq	-48(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-32(%rbp), %rax
-	movslq	-44(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movl	-5
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	stur	x2, [x29, #-24]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
+	bl	_malloc
+	str	x0, [sp, #32]
+	str	wzr, [sp, #24]
+	str	wzr, [sp, #20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #28]
+	str	wzr, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #20]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #16]
+	ldr	w9, [x9, x10, lsl #2]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_8
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_13 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #20]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #24]
+	add	x10, x10, #1
+	str	w10, [sp, #24]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_12:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_16:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_18:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_19
+LBB0_19:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_20:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_21
+LBB0_21:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_22:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_23
+LBB0_23:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_24:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_25
+LBB0_25:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_23
+LBB0_26:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_27
+LBB0_27:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	x8, [sp, #32]
+	ldr	x9, [sp, #24]
+	str	w8, [x9]
+	ldr	x0, [sp, #32]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

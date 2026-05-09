@@ -1,144 +1,108 @@
-Here is the conversion from the provided x86-64 assembly to ARM assembly.
-
-### Key Conversion Notes
-1.  **ABI Changes**:
-    *   **System V AMD64 ABI**: Uses `%rbp` (RBP) as the stack frame pointer.
-    *   **ARM ABI**: Uses `$sp` (Stack Pointer) as the frame pointer.
-    *   **Registers**: `RDI` (input) and `RSI` (input) are mapped to `$r0` and `$r1` respectively.
-    *   **Memory Addressing**: The x86 `(%rbp, offset)` addressing mode is translated to ARM's `$sp, offset` (where offset is in bytes).
-2.  **Loop Logic**:
-    *   The x86 loop calculates a loop counter based on the loop header offset (`-24(%rbp)`) and decrements it.
-    *   In ARM, we calculate the loop counter similarly: `(LoopHeader - CurrentIndex)`.
-    *   The condition checks if the loop header is less than the current index.
-    *   The loop body executes: `Add LoopCounter` then `Sub LoopCounter`.
-
-### ARM Assembly Code
-
-```arm64
-section .text, .regular, .pure_instructions
-.build_version macOS 13.0 sdk_version 13, 3
-.globl func0
-.p2align 4, 0x90
-
-func0:
-    # Frame pointer setup
-    movq  %rsp, %rbp
-    movq  %rdi, -16(%rbp)
-    movl  %esi, -20(%rbp)
-    
-    cmp   $0, -20(%rbp)
-    jne   LBB0_2
-
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_13
 LBB0_2:
-    # Loop Header 1: 1
-    movb  $1, -1(%rbp)
-    jmp   LBB0_13
-
-LBB0_3:
-    # Loop Header 2: 1
-    movl  -24(%rbp), %eax
-    cmp   -20(%rbp), %eax
-    jge   LBB0_12
-
-LBB0_4:
-    # Calculate loop counter: (Header - CurrentIndex)
-    # CurrentIndex is -16(%rbp)
-    movq  -16(%rbp), %rax
-    movslq -24(%rbp), %rcx
-    
-    # Calculate index in bytes: -16(%rbp)
-    movl  (%rax, %rcx, 4), %eax
-    
-    # Calculate loop counter in bytes: -24(%rbp)
-    movq  -16(%rbp), %rcx
-    movl  -24(%rbp), %edx
-    subl  $1, %edx
-    
-    movslq %edx, %rdx
-    
-    # Compare: (LoopHeader - CurrentIndex) >= 0
-    cmp   (%rcx, %rdx, 4), %eax
-    jge   LBB0_6
-
+	mov	w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
+	ldr	w9, [x9, w10, sxtw #2]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
 LBB0_5:
-    # Loop Header 3: 0
-    movb  $0, -1(%rbp)
-    jmp   LBB0_13
-
-LBB0_6:
-    # Loop Header 4: 2
-    cmp   $2, -24(%rbp)
-    jl    LBB0_10
-
-LBB0_7:
-    # Calculate loop counter
-    movq  -16(%rbp), %rax
-    movslq -24(%rbp), %rcx
-    movl  (%rax, %rcx, 4), %eax
-    movq  -16(%rbp), %rcx
-    movl  -24(%rbp), %edx
-    subl  $1, %edx
-    movslq %edx, %rdx
-    
-    # Compare: (LoopHeader - CurrentIndex) >= 0
-    cmp   (%rcx, %rdx, 4), %eax
-    jne   LBB0_10
-
-LBB0_8:
-    # Loop Header 5: 0
-    movb  $0, -1(%rbp)
-    jmp   LBB0_13
-
-LBB0_10:
-    # Loop Header 6: 1
-    jmp   LBB0_11
-
-LBB0_11:
-    # Calculate loop counter
-    movl  -24(%rbp), %eax
-    addl  $1, %eax
-    movl  %eax, -24(%rbp)
-    jmp   LBB0_3
-
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_13
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #2
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
+	ldr	w9, [x9, w10, sxtw #2]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #2
+	ldr	w9, [x9, w10, sxtw #2]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_13
+LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_3
 LBB0_12:
-    # Loop Header 7: 1
-    movb  $1, -1(%rbp)
-
+	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
+	b	LBB0_13
 LBB0_13:
-    # Output loop header
-    movb  -1(%rbp), %al
-    andb  $1, %al
-    movzbl %al, %eax
-    
-    popq  %rbp
-    retq
-```
-
-### Explanation of Key Transformations
-
-1.  **Stack Pointer**:
-    *   `pushq %rbp` $\rightarrow$ `movq %rsp, %rbp` (Setup RBP).
-    *   `popq %rbp` $\rightarrow$ `popq %rbp` (Restore RBP).
-    *   In ARM, the stack pointer is `$sp`. The frame pointer (`%rbp`) is just an alias for `$rbp` in x86, but we must explicitly move `$sp` to `$rbp` to save the caller's saved frame pointer, and then restore it at the end.
-
-2.  **Memory Addressing**:
-    *   x86: `(%rbp, 16)`
-    *   ARM: `$sp, 16` (Note: The offset is in bytes, not words, because `movq` loads 64-bit values).
-    *   x86: `-16(%rbp)`
-    *   ARM: `$sp, -16`
-
-3.  **Loop Counter Logic**:
-    *   **x86**: `movl(%rax, %rcx, 4)` gets the loop header value (e.g., 1). `subl $1, %edx` decrements the counter.
-    *   **ARM**: `%rax` holds the loop header. `%rcx` holds the current index.
-    *   Calculation: `(%rcx, %rdx, 4)` is equivalent to `(%rcx, %rdx)` where `%rdx` is decremented.
-    *   The comparison `jge` (Jump if Greater or Equal) in x86 checks `Header >= CurrentIndex`. In ARM, we compare `(Header - CurrentIndex) >= 0`, which effectively checks if `Header >= CurrentIndex`.
-
-4.  **Loop Header Values**:
-    *   The original code defines four loop headers: `1`, `0`, `2`, `1`.
-    *   These are stored at `-1(%rbp)`, `-24(%rbp)`, etc.
-    *   In ARM, these are stored at `-1($sp)`, `-24($sp)`, etc.
-
-5.  **Conditional Branches**:
-    *   `jne` (Jump if Not Equal) is used for the main loop exit.
-    *   `jl` (Jump if Less) is used for the secondary loop exit.
-    *   These correspond to `jne` and `jge` in the x86 source.
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

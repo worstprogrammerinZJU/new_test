@@ -1,129 +1,148 @@
-This ARM assembly code is a highly optimized, multi-level nested loop designed for floating-point operations (likely in an iOS/macOS build using `__TEXT` sections). It performs a complex calculation on a memory array (`LCPI0_0`, `LCPI0_1`, `LCPI0_2`) involving multiplications, additions, comparisons, and specific handling of NaN values.
-
-The key architectural changes required are:
-1.  **Register Renaming**: `x86` registers (`%rax`, `%rbx`, `%rdi`, `%esi`, `%xmm0`) are replaced with ARM registers (`%r0`, `%r1`, `%r10`, `%r11`, `%xmm0`).
-2.  **Memory Addressing**: `x86` `mem` addressing (`-8(%rbp)`, `(%rax,%rcx,8)`) is converted to ARM `str/dst` instructions using indices (e.g., `%r10`, `%r12`).
-3.  **Floating-Point Handling**: The `mulsd`, `divsd`, `addsd`, and `movsd` instructions are preserved.
-4.  **Loop Logic**: The nested structure is flattened into a linear sequence of branches (`jge`, `jbe`, `jmp`).
-
-Here is the converted code:
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.section	__TEXT,__literal8,8byte_literals
-.p2align	3                               ## -- Begin function func0
-LCPI0_0:
-	.quad	0x3eb0c6f7a0b5ed8d              ## double 9.9999999999999995E-7
-LCPI0_2:
-	.quad	0x3ff0000000000000              ## double 1
-	.section	__TEXT,__literal16,16byte_literals
-	.p2align	4
-LCPI0_1:
-	.quad	0x7fffffffffffffff              ## double NaN
-	.quad	0x7fffffffffffffff              ## double NaN
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI0_0:
+	.quad	0x3eb0c6f7a0b5ed8d              ; double 9.9999999999999995E-7
 	.section	__TEXT,__text,regular,pure_instructions
 	.globl	_func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	xorps	%xmm0, %xmm0
-	movsd	%xmm0, -24(%rbp)
-	movq	-8(%rbp), %rax
-	movsd	(%rax), %xmm0                   ## xmm0 = mem[0],zero
-	movsd	%xmm0, -32(%rbp)
-	movl	$1, -52(%rbp)
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_3 Depth 2
-	movl	-52(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_8
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movsd	LCPI0_2(%rip), %xmm0            ## xmm0 = mem[0],zero
-	movsd	%xmm0, -48(%rbp)
-	movl	$0, -56(%rbp)
-LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movl	-56(%rbp), %eax
-	cmpl	-52(%rbp), %eax
-	jge	LBB0_6
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
-	movsd	-24(%rbp), %xmm0                ## xmm0 = mem[0],zero
-	mulsd	-48(%rbp), %xmm0
-	movsd	%xmm0, -48(%rbp)
-## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=2
-	movl	-56(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -56(%rbp)
-	jmp	LBB0_3
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-52(%rbp), %rcx
-	movsd	(%rax,%rcx,8), %xmm0            ## xmm0 = mem[0],zero
-	movsd	-48(%rbp), %xmm2                ## xmm2 = mem[0],zero
-	movsd	-32(%rbp), %xmm1                ## xmm1 = mem[0],zero
-	mulsd	%xmm2, %xmm0
-	addsd	%xmm1, %xmm0
-	movsd	%xmm0, -32(%rbp)
-## %bb.7:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-52(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -52(%rbp)
-	jmp	LBB0_1
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	str	x0, [sp, #56]
+	str	w1, [sp, #52]
+	movi	d0, #0000000000000000
+	str	d0, [sp, #40]
+	ldr	x8, [sp, #56]
+	ldr	d0, [x8]
+	str	d0, [sp, #32]
+	mov	w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #52]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	fmov	d0, #1.00000000
+	str	d0, [sp, #16]
+	str	wzr, [sp, #8]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	d1, [sp, #40]
+	ldr	d0, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_3
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #12]
+	ldr	d0, [x8, x9, lsl #3]
+	ldr	d1, [sp, #16]
+	ldr	d2, [sp, #32]
+	fmadd	d0, d0, d1, d2
+	str	d0, [sp, #32]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
 LBB0_8:
-	jmp	LBB0_9
-LBB0_9:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_11 Depth 2
-                                        ##       Child Loop BB0_13 Depth 3
-                                        ##     Child Loop BB0_19 Depth 2
-                                        ##       Child Loop BB0_21 Depth 3
-	movsd	-32(%rbp), %xmm0                ## xmm0 = mem[0],zero
-	movaps	LCPI0_1(%rip), %xmm1            ## xmm1 = [NaN,NaN]
-	pand	%xmm1, %xmm0
-	movsd	LCPI0_0(%rip), %xmm1            ## xmm1 = mem[0],zero
-	ucomisd	%xmm1, %xmm0
-	jbe	LBB0_27
-## %bb.10:                              ##   in Loop: Header=BB0_9 Depth=1
-	xorps	%xmm0, %xmm0
-	movsd	%xmm0, -40(%rbp)
-	movl	$1, -52(%rbp)
-LBB0_11:                                ##   Parent Loop BB0_9 Depth=1
-                                        ## =>  This Loop Header: Depth=2
-                                        ##       Child Loop BB0_13 Depth 3
-	movl	-52(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_18
-## %bb.12:                              ##   in Loop: Header=BB0_11 Depth=2
-	movsd	LCPI0_2(%rip), %xmm0            ## xmm0 = mem[0],zero
-	movsd	%xmm0, -48(%rbp)
-	movl	$1, -60(%rbp)
-LBB0_13:                                ##   Parent Loop BB0_9 Depth=1
-                                        ##     Parent Loop BB0_11 Depth=2
-                                        ## =>    This Inner Loop Header: Depth=3
-	movl	-60(%rbp), %eax
-	cmpl	-52(%rbp), %eax
-	jge	LBB0_16
-## %bb.14:                              ##   in Loop: Header=BB0_13 Depth=3
-	movsd	-24(%rbp), %xmm0                ## xmm0 = mem[0],zero
-	mulsd	-48(%rbp), %xmm0
-	movsd	%xmm0, -48(%rbp)
-## %bb.15:                              ##   in Loop: Header=BB0_13 Depth=3
-	movl	-60(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -60(%rbp)
-	jmp	LBB0_13
-LBB0_16:                                ##   in Loop: Header=BB0_11 Depth=2
-	cvtsi2sdl	-52(%rbp), %xmm0
-	movq	-8(%rbp), %rax
-	movslq	-52(%rbp), %rcx
-	mulsd	(%rax,%rcx,8), %xmm0
-	movsd	-48(%rbp), %xmm2                ## xmm2 = mem[0],zero
-	movsd	-40(%rbp),
+	b	LBB0_9
+LBB0_9:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_11 Depth 2
+                                        ;       Child Loop BB0_13 Depth 3
+                                        ;     Child Loop BB0_19 Depth 2
+                                        ;       Child Loop BB0_21 Depth 3
+	ldr	d0, [sp, #32]
+	fabs	d0, d0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_27
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
+	movi	d0, #0000000000000000
+	str	d0, [sp, #24]
+	mov	w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_13 Depth 3
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #52]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
+	fmov	d0, #1.00000000
+	str	d0, [sp, #16]
+	str	wzr, [sp, #4]
+	b	LBB0_13
+LBB0_13:                                ;   Parent Loop BB0_9 Depth=1
+                                        ;     Parent Loop BB0_11 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	d1, [sp, #16]
+	ldr	d0, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_13
+LBB0_16:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #12]
+	ldr	d0, [x8, x9, lsl #3]
+	ldr	d1, [sp, #16]
+	ldr	d2, [sp, #32]
+	fmadd	d0, d0, d1, d2
+	str	d0, [sp, #32]
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_19
+LBB0_18:                                ;   in Loop: Header=BB0_9 Depth=1
+	b	LBB0_9
+LBB0_19:
+	ldr	d0, [sp, #40]
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

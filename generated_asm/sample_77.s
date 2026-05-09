@@ -1,134 +1,164 @@
-Here is the conversion of the provided x86-64 assembly code into ARM assembly.
-
-### Conversion Notes
-1.  **Architecture**: Converted to ARM64 (AArch64).
-2.  **Calling Convention**: Follows the ARM System V ABI (`aapcs` mode).
-3.  **Prologue/Eilogue**:
-    *   x86 `pushq %rbp` / `popq %rbp` becomes ARM `push {r0-r3, lr}` / `pop {r0-r3, pc}`.
-    *   x86 `movq %rsp, %rbp` becomes ARM `mov r0, sp`.
-    *   x86 `subq $160, %rsp` becomes ARM `sub sp, r0, #160`.
-    *   x86 `movq %rax, -8(%rbp)` (pointer to stack_chk_guard) becomes ARM `mov r0, r1` (where `r1` is the saved register holding the guard pointer).
-4.  **Register Mapping**:
-    *   x86 `%rbx` -> ARM `r1`
-    *   x86 `%rbp` -> ARM `r2`
-    *   x86 `%rsp` -> ARM `sp`
-    *   x86 `%rdi` -> ARM `r0`
-    *   x86 `%rsi` -> ARM `r1`
-    *   x86 `%rax` -> ARM `r0`
-    *   x86 `%rcx` -> ARM `r2`
-    *   x86 `%rdx` -> ARM `r3`
-    *   x86 `%esi` -> ARM `r4`
-    *   x86 `%eax` -> ARM `r5`
-    *   x86 `%ecx` -> ARM `r6`
-    *   x86 `%edx` -> ARM `r7`
-    *   x86 `%ebx` -> ARM `r8`
-    *   x86 `%esi` (loop counter) -> ARM `r9`
-5.  **Data Segments**:
-    *   `__TEXT` (code) is mapped to `.data`.
-    *   `__DATA` (strings) is mapped to `.rodata`.
-    *   `__const` (strings) is mapped to `.rodata`.
-    *   `L_.str` is mapped to `.rodata` (strings).
-    *   `l___const.func0.numto` (quad string) is mapped to `.rodata` (strings).
-    *   `LBB0_*` (loop headers) are mapped to `.data` (code).
-6.  **Special Instructions**:
-    *   `xorl %esi` -> `xor r9, r9`
-    *   `callq` -> `mov r0, sp` (call)
-    *   `leaq` -> `ldr r0, [sp, offset]`
-    *   `cmpb`, `setne`, `je`, `jne`, `jge`, `jle` -> Standard conditional jumps.
-    *   `cmpq`, `movslq`, `movsbl` -> Standard arithmetic/logic ops.
-    *   `ud2` (Stack Crash) -> `mov r0, sp` (call).
-7.  **Stack Alignment**: x86 `p2align` is not strictly required in ARM for standard code generation, but I will ensure the loop headers align to 4-byte boundaries if necessary.
-
-### ARM Assembly Code
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-
-	// Prologue: Save registers and set up stack frame
-	push {r0, r1, r2, r3, lr}
-
-	// Save stack pointer
-	mov r0, sp
-
-	// Adjust stack (160 bytes)
-	sub sp, r0, #160
-
-	// Load stack_chk_guard pointer from GOT (r1 in this context)
-	// Note: In x86, this is %rax. Here we assume r1 holds the guard pointer
-	// or we load it from a specific location. Based on x86: movq %rax, %rax (load %rax)
-	// In ARM, we load the value at the relative address.
-	// x86: movq ___stack_chk_guard@GOTPCREL(%rip), %rax
-	// ARM:    ldr r1, [r1]  (assuming r1 is the GOTPCREL offset relative to current frame)
-	// However, standard ARM64 uses GOTPCREL at offset 0x00000000 (rip).
-	// The x86 instruction loads the *address* of the guard into %rax.
-	// To replicate: ldr r1, [r1] is correct if r1 holds the RIP-relative offset.
-	// Given the x86 code `movq ...(%rip), %rax`, it loads the RIP-relative address.
-	// In ARM64, we do: ldr r1, [r1] (assuming r1 is the RIP-relative offset).
-	// BUT, usually in ARM64, the GOTPCREL is at 0. If x86 %rax holds the address, 
-	// we need to load that address.
-	// Let's assume the x86 code `movq ...(%rip), %rax` is meant to load the RIP-relative address.
-	// In ARM64, `ldr r1, [r1]` loads the value at the address in r1.
-	// We will use `ldr r1, [r1]`.
-
-	ldr r1, [r1]
-
-	// Load the guard pointer from the immediate 8-byte offset in rax (which is now r1)
-	// x86: movq %rax, -8(%rbp)
-	// ARM:    ldr r2, [r1, #-8] (using r2 as the register for the pointer to the guard)
-	ldr r2, [r1, #-8]
-
-	// Load the string data pointer (RDI)
-	// x86: movq %rdi, -136(%rbp)
-	// ARM:    ldr r3, [r0, #-136]
-	ldr r3, [r0, #-136]
-
-	// Load the next loop header (BB0_3)
-	// x86: leaq -48(%rbp), %rdi
-	// ARM:    ldr r0, [r0, #-48]
-	ldr r0, [r0, #-48]
-
-	// Initialize loop counter
-	xor r9, r9
-
-	// Prepare for memcpy
-	mov r7, #80
-
-	// Call memset
-	mov r0, sp
-	call r3
-
-	// Load the next loop header (BB0_2)
-	// x86: leaq -128(%rbp), %rdi
-	// ARM:    ldr r1, [r0, #-128]
-	ldr r1, [r0, #-128]
-
-	// Initialize loop counter for memcpy
-	ldr r2, [r1]
-
-	// Load the string data pointer (L___const.func0.numto)
-	// x86: leaq l___const.func0.numto(%rip), %rsi
-	// ARM:    ldr r3, [r1, #-16] (offset of the label in data segment)
-	// Wait, the x86 code says `leaq l___const.func0.numto(%rip), %rsi`.
-	// The offset is -16 (since LBB0_2 is at -128, and numto is usually 16 bytes after the label in data).
-	// Let's verify offsets.
-	// LBB0_2 is at -128(%rbp).
-	// numto is at -128 - 16 = -144.
-	// So the offset is -16 relative to the base of the loop? No, it's relative to the RIP.
-	// The x86 instruction `leaq ...(%rip), %rsi` uses the RIP-relative offset.
-	// In ARM64, we calculate the offset relative to the current frame base.
-	// Current base is `r0`. The label `l___const.func0.numto` is at address `r1 - 16`.
-	// So the instruction is `ldr r3, [r1, #-16]`.
-	ldr r3, [r1, #-16]
-
-	// Call memcpy
-	mov r7, #80
-	call r3
-
-	// Initialize the null terminator (BB0_3)
-	ldr r2, [r1]
-	ldr r0, [r2]
+; %bb.0:
+	sub	sp, sp, #176
+	.cfi_def_cfa_offset 176
+	stp	x29, x30, [sp, #160]            ; 16-byte Folded Spill
+	add	x29, sp, #160
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	stur	x8, [x29, #-8]
+	str	x0, [sp, #32]
+	sub	x8, x29, #40
+	stur	xzr, [x29, #-40]
+	stur	xzr, [x29, #-32]
+	add	x0, sp, #40
+	adrp	x1, l___const.func0.numto@PAGE
+	add	x1, x1, l___const.func0.numto@PAGEOFF
+	mov	x2, #80
+	bl	_memcpy
+	str	wzr, [sp, #28]
+	ldr	x8, [sp, #32]
+	ldrb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_1
+LBB0_1:
+	b	LBB0_2
+LBB0_2:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+                                        ;     Child Loop BB0_9 Depth 2
+	str	wzr, [sp, #24]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_2 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #32
+	cset	w8, eq
+	mov	w9, #0
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, ne
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	tbz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	ldrb	w8, [x8, x9]
+	ldrsw	x10, [sp, #24]
+	add	x9, sp, #51
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldrsw	x9, [sp, #24]
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	add	x8, x8, x9
+	ldrsw	x8, [sp, #28]
+	add	x8, x8, x8
+	ldrb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_26
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_2 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_10
+LBB0_10:                                ;   Parent Loop BB0_2 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_10 Depth=2
+	ldr	w8, [sp, #28]
+	add	x8, sp, #51
+	add	x8, x8, w8, sxtw
+	ldrb	w8, [x8]
+	ldrsw	x10, [sp, #28]
+	add	x10, x8, x10
+	adrp	x9, _func0.out@PAGE
+	add	x9, x9, _func0.out@PAGEOFF
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_10
+LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	adrp	x9, _func0.out@PAGE
+	add	x9, x9, _func0.out@PAGEOFF
+	add	x9, x9, w8, sxtw
+	strb	wzr, [x9]
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_16
+LBB0_16:
+	b	LBB0_17
+LBB0_17:
+	str	wzr, [sp, #28]
+	b	LBB0_18
+LBB0_18:                                ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_20 Depth 2
+                                        ;       Child Loop BB0_22 Depth 3
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_29
+	b	LBB0_19
+LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=1
+	str	wzr, [sp, #28]
+	b	LBB0_20
+LBB0_20:                                ;   Parent Loop BB0_18 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #10
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_27
+	b	LBB0_21
+LBB0_21:                                ;   in Loop: Header=BB0_20 Depth=2
+	ldr	w8,

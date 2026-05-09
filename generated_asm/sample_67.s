@@ -1,117 +1,126 @@
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:
-.cfi_startproc
-## %bb.0:
-	pushq	r13
-	.cfi_def_cfa_offset 16
-	.cfi_offset r13, -16
-	movq	r13, r12
-	.cfi_def_cfa_register r13
-	subq	r12, r12, #48
-	# Arguments: edi (offset -12), offset -16, offset -20
-
-	movq	r12, -12(r13)
-	movq	r13, #2
-	movq	r14, -16(r13)
-	movq	r15, -20(r13)
-
-LBB0_1:
-	movq	r13, -20(r13)
-	cmpq	r13, r12
-	bge	LBB0_4
-
-	movq	r13, -20(r13)
-	movq	r14, r14
-	movq	r15, r15
-	movq	-1(r13), r13
-	movq	#0, r8
-	movq	r13, r14
-	movq	r14, r15
-	movq	#0, r13
-	callq	___snprintf_chk
-
-	addq	r13, r13, #16
-	movq	r13, -16(r13)
-
-	movq	r13, -20(r13)
-	addq	r13, r13, #1
-	movq	r13, -20(r13)
-	jmp	LBB0_1
-
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #96
+	.cfi_def_cfa_offset 96
+	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
+	add	x29, sp, #80
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-12]
+	mov	w8, #2
+	stur	w8, [x29, #-16]
+	mov	w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-20]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w9, [x29, #-20]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	xzr, [x9]
+	mov	x1, #0
+	str	xzr, [x9, #8]
+	str	x8, [x9, #16]
+	mov	w2, #0
+	mov	x0, x2
+	mov	x3, #-1
+	adrp	x4, l_.str@PAGE
+	add	x4, x4, l_.str@PAGEOFF
+	bl	___snprintf_chk
+	ldur	w8, [x29, #-16]
+	add	w8, w8, w0
+	stur	w8, [x29, #-16]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-20]
+	add	w8, w8, #1
+	stur	w8, [x29, #-20]
+	b	LBB0_1
 LBB0_4:
-	movq	r13, -16(r13)
-	callq	_malloc
-	movq	r13, -32(r13)
-	cmpq	#0, -32(r13)
-	bne	LBB0_6
-
-## %bb.5:
-	movq	r13, #0
-	jmp	LBB0_11
-
+	ldursw	x0, [x29, #-16]
+	bl	_malloc
+	stur	x0, [x29, #-32]
+	ldur	x8, [x29, #-32]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_11
 LBB0_6:
-	movq	r13, -32(r13)
-	movq	r13, -40(r13)
-	movq	r13, -40(r13)
-	movq	r14, r14
-	movq	#0, r13
-	movq	#0, r14
-	movq	#0, r13
-	movq	#0, r14
-	movq	-1(r13), r13
-	leaq	L_.str.1(%rip), r13
-	movq	r13, r14
-	movq	r14, r15
-	movq	r13, r14
-	movb	#0, r13
-	callq	___sprintf_chk
-
-	movq	r13, r15
-	movq	r14, -40(r13)
-	movq	r13, r14
-	movq	r14, r15
-	movq	r13, r14
-	movq	r14, r15
-	movq	r13, r15
-	addq	r13, r13, #48
-	movq	r13, -40(r13)
-	movq	r13, -44(r13)
-
-LBB0_7:
-	movq	r13, -44(r13)
-	cmpq	r13, r12
-	bge	LBB0_10
-
-	movq	r13, -40(r13)
-	movq	r13, r14
-	movq	r13, r15
-	movq	r14, r15
-	movq	r13, r15
-	addq	r13, r13, #1
-	movq	r13, -44(r13)
-	jmp	LBB0_7
-
+	ldur	x8, [x29, #-32]
+	str	x8, [sp, #40]
+	ldr	x0, [sp, #40]
+	mov	w1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str.1@PAGE
+	add	x3, x3, l_.str.1@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x8, [sp, #40]
+	add	x8, x8, w0, sxtw
+	str	x8, [sp, #40]
+	mov	w8, #1
+	str	w8, [sp, #36]
+	b	LBB0_7
+LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #36]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	x0, [sp, #40]
+	ldr	w9, [sp, #36]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x8, [x9]
+	mov	w1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	bl	___sprintf_chk
+	ldr	x8, [sp, #40]
+	add	x8, x8, w0, sxtw
+	str	x8, [sp, #40]
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w8, [sp, #36]
+	add	w8, w8, #1
+	str	w8, [sp, #36]
+	b	LBB0_7
 LBB0_10:
-	movq	r13, -32(r13)
-	movq	r13, -8(r13)
-
+	ldur	x8, [x29, #-32]
+	stur	x8, [x29, #-8]
+	b	LBB0_11
 LBB0_11:
-	movq	r13, -8(r13)
-	addq	r13, r13, #48
-	popq	r13
-	retq
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
+	add	sp, sp, #96
+	ret
 	.cfi_endproc
-
+                                        ; -- End function
 	.section	__TEXT,__cstring,cstring_literals
-	.globl	_L_.str
-	.align	4
-	.string	"%d"
+l_.str:                                 ; @.str
+	.asciz	" %d"
 
-	.globl	_L_.str.1
-	.align	4
-	.string	"0"
+l_.str.1:                               ; @.str.1
+	.asciz	"0"
 
 .subsections_via_symbols

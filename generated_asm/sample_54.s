@@ -1,182 +1,162 @@
-This is a complex nested loop structure involving dynamic memory allocation (`malloc`, `calloc`) and a sophisticated use of SIMD registers (`%rcx`, `%rdx`, `%rax`) for pointer arithmetic and data movement.
-
-The logic relies on:
-1.  **Base Pointer (`%rbp`)**: Stores the base address of the allocated chunk (derived from the return of `malloc`).
-2.  **Offset Registers**: `%rcx` and `%rdx` hold the current offsets into the chunk.
-3.  **Loop Control**: Uses `cmp` and `jg/jl` to iterate while the pointer is less than the chunk size.
-4.  **SIMD Optimization**: Performs `movslq` (move signed long) for 4-byte operations to keep registers efficient.
-5.  **Spills**: Saves 4-byte and 8-byte values to memory when register space is exhausted.
-
-Below is the converted ARM assembly code.
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$96, %rsp
-
-	## --- Initial Allocation Loop ---
-	movl	%edi, -4(%rbp)
-	movslq	-4(%rbp), %rdi
-	shlq	$2, %rdi
-	callq	_malloc
-	movq	%rax, -16(%rbp)
-
-	movl	-4(%rbp), %eax
-	addl	$1, %eax
-	movslq	%eax, %rdi
-	shlq	$3, %rdi
-	callq	_malloc
-	movq	%rax, -24(%rbp)
-
-	movl	-4(%rbp), %eax
-	addl	$1, %eax
-	movslq	%eax, %rdi
-	shlq	$3, %rdi
-	callq	_malloc
-	movq	%rax, -32(%rbp)
-
-	movl	$0, -36(%rbp)
-
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-36(%rbp), %eax
-	cmpl	-4(%rbp), %eax
-	jg	LBB0_4
-
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	$3, %edi
-	movl	$4, %esi
-	callq	_calloc
-	movq	%rax, %rdx
-	movq	-24(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movq	%rdx, (%rax,%rcx,8)
-	movl	$3, %edi
-	movl	$4, %esi
-	callq	_calloc
-	movq	%rax, %rdx
-	movq	-32(%rbp), %rax
-	movslq	-36(%rbp), %rcx
-	movq	%rdx, (%rax,%rcx,8)
-
-## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp)
-	jmp	LBB0_1
-
+; %bb.0:
+	sub	sp, sp, #96
+	.cfi_def_cfa_offset 96
+	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
+	add	x29, sp, #80
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-4]
+	ldursw	x9, [x29, #-4]
+	mov	x8, #4
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	mul	x0, x8, x9
+	bl	_malloc
+	stur	x0, [x29, #-16]
+	ldur	w8, [x29, #-4]
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x0, x8, #3
+	bl	_malloc
+	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	stur	x0, [x29, #-24]
+	ldur	w9, [x29, #-4]
+	add	w9, w9, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x0, x8, #3
+	bl	_malloc
+	stur	x0, [x29, #-32]
+	stur	wzr, [x29, #-36]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-36]
+	ldur	w9, [x29, #-4]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	x0, #3
+	mov	x1, #4
+	str	x1, [sp, #16]                   ; 8-byte Folded Spill
+	bl	_calloc
+	ldr	x8, [sp, #16]                   ; 8-byte Folded Reload
+	ldur	x9, [x29, #-24]
+	ldursw	x10, [x29, #-36]
+	str	x0, [x9, x10, lsl #3]
+	mov	x0, x8
+	bl	_calloc
+	ldur	x8, [x29, #-32]
+	ldursw	x9, [x29, #-36]
+	str	x0, [x8, x9, lsl #3]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-36]
+	add	w8, w8, #1
+	stur	w8, [x29, #-36]
+	b	LBB0_1
 LBB0_4:
-	movq	-24(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, 8(%rax)
-	movq	-24(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, 4(%rax)
-	movq	-24(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, (%rax)
-	movq	-32(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, 8(%rax)
-	movq	-32(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, 4(%rax)
-	movq	-32(%rbp), %rax
-	movq	(%rax), %rax
-	movl	$0, (%rax)
-
-	movl	$1, -40(%rbp)
-
-LBB0_5:                                 ## =>This Loop Header: Depth=1
-	##     Child Loop BB0_7 Depth 2
-	movl	-40(%rbp), %eax
-	cmpl	-4(%rbp), %eax
-	jg	LBB0_12
-
-## %bb.6:                               ##   in Loop: Header=BB0_5 Depth=1
-	movl	-40(%rbp), %eax
-	imull	-40(%rbp), %eax
-	subl	-40(%rbp), %eax
-	addl	$1, %eax
-	movl	$3, %ecx
-	cltd
-	idivl	%ecx
-	movq	-16(%rbp), %rax
-	movl	-40(%rbp), %ecx
-	subl	$1, %ecx
-	movslq	%ecx, %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movl	$0, -44(%rbp)
-
-LBB0_7:                                 ##   Parent Loop BB0_5 Depth=1
-	## =>  This Inner Loop Header: Depth=2
-	cmpl	$3, -44(%rbp)
-	jge	LBB0_10
-
-## %bb.8:                               ##   in Loop: Header=BB0_7 Depth=2
-	movq	-24(%rbp), %rax
-	movl	-40(%rbp), %ecx
-	subl	$1, %ecx
-	movslq	%ecx, %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-44(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-24(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-44(%rbp), %rcx
-	movl	%edx, (%rax,%rcx,4)
-
-## %bb.9:                               ##   in Loop: Header=BB0_7 Depth=2
-	movl	-44(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -44(%rbp)
-	jmp	LBB0_7
-
-LBB0_10:                                ##   in Loop: Header=BB0_5 Depth=1
-	movq	-24(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movq	-16(%rbp), %rcx
-	movl	-40(%rbp), %edx
-	subl	$1, %edx
-	movslq	%edx, %rdx
-	movslq	(%rcx,%rdx,4), %rcx
-	movl	(%rax,%rcx,4), %edx
-	addl	$1, %edx
-	movl	%edx, (%rax,%rcx,4)
-
-## %bb.11:                              ##   in Loop: Header=BB0_5 Depth=1
-	movl	-40(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -40(%rbp)
-	jmp	LBB0_5
-
-LBB0_12:
-	movl	$1, -48(%rbp)
-
-LBB0_13:                                ## =>This Loop Header: Depth=1
-	##     Child Loop BB0_15 Depth 2
-	##       Child Loop BB0_17 Depth 3
-	##       Child Loop BB0_22 Depth 3
-	##     Child Loop BB0_29 Depth 2
-	##       Child Loop BB0_31 Depth 3
-	cmpl	$3, -48(%rbp)
-	jge	LBB0_38
-
-## %bb.14:                              ##   in Loop: Header=BB0_13 Depth=1
-	movl	$1, -52(%rbp)
-
-LBB0_15:                                ##   Parent Loop BB0_13 Depth=1
-	## =>  This Loop Header: Depth=2
-	##       Child Loop BB0_17 Depth 3
-	##       Child Loop
+	ldur	x8, [x29, #-24]
+	ldr	x8, [x8]
+	str	wzr, [x8, #8]
+	ldur	x8, [x29, #-24]
+	ldr	x8, [x8]
+	str	wzr, [x8, #4]
+	ldur	x8, [x29, #-24]
+	ldr	x8, [x8]
+	str	wzr, [x8]
+	ldur	x8, [x29, #-32]
+	ldr	x8, [x8]
+	str	wzr, [x8, #8]
+	ldur	x8, [x29, #-32]
+	ldr	x8, [x8]
+	str	wzr, [x8, #4]
+	ldur	x8, [x29, #-32]
+	ldr	x8, [x8]
+	str	wzr, [x8]
+	mov	w8, #1
+	stur	w8, [x29, #-40]
+	b	LBB0_5
+LBB0_5:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_7 Depth 2
+	ldur	w8, [x29, #-40]
+	ldur	w9, [x29, #-4]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
+	ldr	x8, [sp, #16]                   ; 8-byte Folded Reload
+	ldur	w9, [x29, #-40]
+	ldur	w10, [x29, #-40]
+	mul	w9, w9, w10
+	ldur	w10, [x29, #-40]
+	subs	w9, w9, w10
+	add	w9, w9, #1
+	mov	w10, #3
+	sdiv	w9, w9, w10
+	ldur	x10, [x29, #-16]
+	ldursw	x11, [x29, #-40]
+	subs	x11, x11, #1
+	str	w9, [x10, x11, lsl #2]
+	stur	wzr, [x29, #-44]
+	b	LBB0_7
+LBB0_7:                                 ;   Parent Loop BB0_5 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldur	w8, [x29, #-44]
+	subs	w8, w8, #3
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=2
+	ldur	x8, [x29, #-24]
+	ldur	w9, [x29, #-40]
+	subs	w9, w9, #1
+	ldr	x8, [x8, w9, sxtw #3]
+	ldursw	x9, [x29, #-44]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-24]
+	ldursw	x10, [x29, #-44]
+	ldr	x9, [x9, x10, lsl #3]
+	ldursw	x10, [x29, #-44]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=2
+	ldur	w8, [x29, #-44]
+	add	w8, w8, #1
+	stur	w8, [x29, #-44]
+	b	LBB0_7
+LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=1
+	ldur	x8, [x29, #-24]
+	ldrsw	x9, [sp, #24]
+	str	x8, [sp, #24]
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #1
+	str	w8, [sp, #32]
+	ldur	w8, [x29, #-44]
+	str	w8, [sp, #20]
+	b	LBB0_12
+LBB0_11:                                ;   in Loop: Header=BB0_5 Depth=1
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_12
+LBB0_12:                                ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_15 Depth 2
+	ldr	w8, [sp, #32]
+	ldur	w9, [x29, #-4]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_38
+	b	LBB0_13
+LBB0_13:                                ;   in

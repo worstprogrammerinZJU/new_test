@@ -1,172 +1,153 @@
-Converting this x86 assembly to ARM is a complex task because the original code uses **x86-specific instructions** (like `movq`, `cltd`, `idivl`, `shll`, `callq`, `retq`) and **ARM-specific calling conventions** (`$r0` as the frame pointer, `$r13` as the link register).
-
-Since the target is ARM, we must:
-1.  Replace x86 registers with ARM equivalents (e.g., `%rax` -> `$r0`, `%rsi` -> `$r1`, etc.).
-2.  Replace x86 arithmetic with ARM equivalents (e.g., `shll` -> `shl`, `cltd` -> `clt`).
-3.  Replace x86 calls with ARM `bl` (branch and link).
-4.  Replace x86 `retq` with `blr`.
-5.  Convert the **Stack Frame** from x86's `rbp` to ARM's `$r0`.
-6.  Convert the **Stack Pointer** to `$sp`.
-
-Below is the converted ARM assembly code. Note that `idiv` and `cltd` are **not native** ARM instructions; they require a `div` or `clt` instruction with a specific mode, or the assembly must be written to use a `div` instruction. To maintain the exact logic of the original code (handling the 32-bit dividend correctly), I will use the `div` instruction for `idivl` and `clt` for `cltd`.
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-
-	subq	$48, %rsp
-	movl	%edi, -4(%rbp)
-	movq	%rsi, -16(%rbp)
-	movq	%rdx, -24(%rbp)
-	movl	$10, -28(%rbp)
-
-	movq	-24(%rbp), %rax
-	movl	$1, (%rax)
-	movq	-16(%rbp), %rax
-	movl	$1, (%rax)
-
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	cmpl	$1, -4(%rbp)
-	je	LBB0_8
-
-	movl	-4(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	divl	%ecx
-	cmpl	$1, %edx
-	jne	LBB0_6
-
-	movq	-24(%rbp), %rax
-	movl	(%rax), %eax
-	cmpl	-28(%rbp), %eax
-	jl	LBB0_5
-
-	movl	-28(%rbp), %eax
-	shlq	$1, %eax
-	movl	%eax, -28(%rbp)
-	movq	-16(%rbp), %rdi
-	movslq	-28(%rbp), %rsi
-	shlq	$2, %rsi
-	blq	_realloc
-
-	movq	%rax, -16(%rbp)
-
-LBB0_5:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-4(%rbp), %edx
-	movq	-16(%rbp), %rax
-	movq	-24(%rbp), %rsi
-	movl	(%rsi), %ecx
-	movl	%ecx, %edi
-	addl	$1, %edi
-	movl	%edi, (%rsi)
-	movslq	%ecx, %rcx
-	movl	%edx, (%rax,%rcx,4)
-	imull	$3, -4(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -4(%rbp)
-	jmp	LBB0_7
-
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	-4(%rbp), %eax
-	movl	$2, %ecx
-	cltd
-	divl	%ecx
-	movl	%eax, -4(%rbp)
-
-LBB0_7:                                 ##   in Loop: Header=BB0_1 Depth=1
-	jmp	LBB0_1
-
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-4]
+	stur	x1, [x29, #-16]
+	str	x2, [sp, #24]
+	mov	w8, #10
+	str	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	mov	w8, #1
+	str	w8, [x9]
+	ldur	x9, [x29, #-16]
+	str	w8, [x9]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-4]
+	subs	w8, w8, #1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldr	w8, [x8]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	lsl	w8, w8, #1
+	str	w8, [sp, #20]
+	ldur	x0, [x29, #-16]
+	ldrsw	x8, [sp, #20]
+	lsl	x1, x8, #2
+	bl	_realloc
+	stur	x0, [x29, #-16]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	ldur	x9, [x29, #-16]
+	ldr	x12, [sp, #24]
+	ldrsw	x10, [x12]
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [x12]
+	str	w8, [x9, x10, lsl #2]
+	ldur	w8, [x29, #-4]
+	mov	w9, #3
+	mul	w8, w8, w9
+	add	w8, w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_7
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	stur	w8, [x29, #-4]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_1
 LBB0_8:
-	movl	$1, -32(%rbp)
-
-LBB0_9:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_11 Depth 2
-	movl	-32(%rbp), %eax
-	movq	-24(%rbp), %rcx
-	cmpl	(%rcx), %eax
-	jge	LBB0_17
-
-## %bb.10:                              ##   in Loop: Header=BB0_9 Depth=1
-	movq	-16(%rbp), %rax
-	movslq	-32(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	movl	%eax, -36(%rbp)
-	movl	-32(%rbp), %eax
-	subl	$1, %eax
-	movl	%eax, -40(%rbp)
-
-LBB0_11:                                ##   Parent Loop BB0_9 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	xorl	%eax, %eax
-                                        ## kill: def $al killed $al killed $eax
-	cmpl	$0, -40(%rbp)
-	movb	%al, -41(%rbp)                  ## 1-byte Spill
-	jl	LBB0_13
-
-## %bb.12:                              ##   in Loop: Header=BB0_11 Depth=2
-	movq	-16(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movl	(%rax,%rcx,4), %eax
-	cmpl	-36(%rbp), %eax
-	setg	%al
-	movb	%al, -41(%rbp)                  ## 1-byte Spill
-
-LBB0_13:                                ##   in Loop: Header=BB0_11 Depth=2
-	movb	-41(%rbp), %al                  ## 1-byte Reload
-	testb	$1, %al
-	jne	LBB0_14
-	jmp	LBB0_15
-
-LBB0_14:                                ##   in Loop: Header=BB0_11 Depth=2
-	movq	-16(%rbp), %rax
-	movslq	-40(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movq	-16(%rbp), %rax
-	movl	-40(%rbp), %ecx
-	addl	$1, %ecx
-	movslq	%ecx, %rcx
-	movl	%edx, (%rax,%rcx,4)
-	movl	-40(%rbp), %eax
-	subl	$1, %eax
-	movl	%eax, -40(%rbp)
-	jmp	LBB0_11
-
-LBB0_15:                                ##   in Loop: Header=BB0_9 Depth=1
-	movl	-36(%rbp), %edx
-	movq	-16(%rbp), %rax
-	movl	-40(%rbp), %ecx
-	addl	$1, %ecx
-	movslq	%ecx, %rcx
-	movl	%edx, (%rax,%rcx,4)
-
-## %bb.16:                              ##   in Loop: Header=BB0_9 Depth=1
-	movl	-32(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -32(%rbp)
-	jmp	LBB0_9
-
-LBB0_17:
-	addq	$48, %rsp
-	popq	%rbp
-	retq
+	mov	w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_9:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_11 Depth 2
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	ldr	w9, [x9]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #0
+	cset	w8, lt
+	mov	w9, #0
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #8]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_11
+LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	tbz	w8, #0, LBB0_15
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #8]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_11
+LBB0_15:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_16:
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
 	.cfi_endproc
-```
-
-### Key Conversion Details:
-
-1.  **Register Mapping**:
-    *   `rbp` → `$r0` (ARM uses `$r0` as the base pointer).
-    *   `rsi` → `$r1`.
-    *   `rdx` → `$r2`.
-    *   `edi` → `$r12`.
-    *   `rax` → `$r0` (or `$r1` if needed, but kept as `$r0` for consistency with
+                                        ; -- End function
+.subsections_via_symbols

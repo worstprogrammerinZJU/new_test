@@ -1,135 +1,175 @@
-To convert this x86_64 assembly code to ARM64 (AArch64), we need to address several key differences:
-1.  **Architecture**: x86-64 uses 64-bit registers (`%rax`, `%rbx`, `%rsp`, etc.), while ARM64 uses 64-bit registers (`%r0`, `%r1`, `%r2`, `%rsp`, etc.).
-2.  **Call Convention**: The x86 convention (`pushq %rbp` and `movq %rsp, %rbp`) is not directly compatible with the ARM64 convention (`pushq %r15`, `movq %sp, %r15`). We must implement a stack frame using the `r15` frame pointer.
-3.  **Register Renaming**: The symbols like `___stack_chk_guard@GOTPCREL` and `atoinf` are specific to macOS dynamic linking. In a standalone ARM64 conversion, we cannot use these exact symbols. Instead, we will simulate the call interface or use generic placeholders (e.g., `atoinf` is typically a C library function, but in assembly we might call a local stub or use a specific name if available. However, since the source code relies on specific macOS dynamic linker symbols, the most accurate "conversion" involves mapping the logic to standard ARM64 calling conventions while noting that the specific symbols would need to be defined or linked from macOS libraries).
-    *   *Note*: `atoinf` is a C function from `libm`. In ARM64, this is usually `@aiof` (from libc) or a custom stub. I will use `atoinf` as a placeholder name, but the logic remains the same.
-    *   `___stack_chk_guard` is a macOS runtime symbol. In pure ARM64 assembly without linking against macOS libraries, this is impossible. I will assume this is part of a macOS-specific toolchain and map the logic to standard ARM64 calling conventions, replacing the specific symbol references with generic ones or comments where appropriate.
-
-Here is the converted ARM64 assembly code.
-
-```assembly
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	pushq	%r15                          ## ARM64 convention: pushr15
-	.cfi_def_cfa_offset 16
-	.cfi_offset %r15, -16
-	movq	%sp, %r15                     ## Save stack pointer
-	.cfi_def_cfa_register %r15
-	subq	$288, %rsp                    ## imm = 0x120 (aligned)
-	movq	___stack_chk_guard@GOTPCREL(%rip), %rax
-	movq	(%rax), %rax
-	movq	%rax, -8(%rsp)               ## Save guard value
-	movq	%rdi, -240(%rsp)             ## Save %rdi (param 1)
-	movq	%rsi, -248(%rsp)             ## Save %rsi (param 2)
-	movl	$0, -268(%rsp)               ## Save %eax (result accumulator)
-
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-240(%rsp), %rax              ## Load param 1
-	movslq	-268(%rsp), %rcx            ## Load result accumulator
-	movsbl	(%rax,%rcx), %eax           ## Multiply %rax * %rcx (64-bit mul)
-	cmpl	$47, %eax                    ## Compare with 47
-	je	LBB0_4                         ## Jump if equal
-
-## %bb.2:
-	movq	-240(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movb	(%rax,%rcx), %cl              ## Load byte
-	movslq	-268(%rsp), %rax
-	movb	%cl, -112(%rsp,%rax)          ## Store byte to result
-
-## %bb.3:
-	movl	-268(%rsp), %eax              ## Load result accumulator
-	addl	$1, %eax                     ## Increment result
-	movl	%eax, -268(%rsp)             ## Store back to result
-	jmp	LBB0_1                         ## Jump back to loop
-
+; %bb.0:
+	sub	sp, sp, #320
+	.cfi_def_cfa_offset 320
+	stp	x28, x27, [sp, #288]            ; 16-byte Folded Spill
+	stp	x29, x30, [sp, #304]            ; 16-byte Folded Spill
+	add	x29, sp, #304
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	.cfi_offset w27, -24
+	.cfi_offset w28, -32
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	stur	x8, [x29, #-24]
+	str	x0, [sp, #56]
+	str	x1, [sp, #48]
+	str	wzr, [sp, #28]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #47
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldrsw	x10, [sp, #28]
+	sub	x9, x29, #124
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_1
 LBB0_4:
-	movslq	-268(%rsp), %rax
-	movb	$0, -112(%rsp,%rax)          ## Store zero to result
-	leaq	-112(%rsp), %rdi            ## Load address for call
-	callq	_atoinf                    ## Call atoinf (simulated)
-	movl	%eax, -252(%rsp)             ## Store result
-	movl	$0, -272(%rsp)               ## Clear next accumulator
-
-LBB0_5:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-240(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$0, %eax                     ## Compare with 0
-	je	LBB0_8                         ## Jump if zero
-
-## %bb.6:
-	movq	-240(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movb	(%rax,%rcx), %cl
-	movslq	-272(%rsp), %rax
-	movb	%cl, -224(%rsp,%rax)          ## Store byte
-## %bb.7:
-	movl	-268(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -268(%rsp)
-	movl	-272(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -272(%rsp)
-	jmp	LBB0_5                         ## Jump back to loop
-
+	ldrsw	x9, [sp, #28]
+	sub	x0, x29, #124
+	mov	x8, x0
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	bl	_atoi
+	str	w0, [sp, #52]
+	str	wzr, [sp, #32]
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_5
+LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldrsw	x10, [sp, #32]
+	add	x9, sp, #68
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_5
 LBB0_8:
-	movslq	-272(%rsp), %rax
-	movb	$0, -224(%rsp,%rax)
-	leaq	-224(%rsp), %rdi
-	callq	_atoinf
-	movl	%eax, -256(%rsp)
-	movl	$0, -268(%rsp)
-
-LBB0_9:                                 ## =>This Inner Loop Header: Depth=1
-	movq	-248(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$47, %eax
-	je	LBB0_12
-## %bb.10:
-	movq	-248(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movb	(%rax,%rcx), %cl
-	movslq	-268(%rsp), %rax
-	movb	%cl, -112(%rsp,%rax)
-## %bb.11:
-	movl	-268(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -268(%rsp)
-	jmp	LBB0_9
+	ldrsw	x9, [sp, #28]
+	sub	x0, x29, #124
+	mov	x8, x0
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	bl	_atoi
+	str	w0, [sp, #44]
+	str	wzr, [sp, #32]
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #40]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #44]
+	ldr	w10, [sp, #40]
+	mul	w9, w9, w10
+	sdiv	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_9
+LBB0_9:
+	mov	w8, #1
+	str	w8, [sp, #36]
+	b	LBB0_19
+LBB0_10:
+	str	wzr, [sp, #36]
+	b	LBB0_19
+LBB0_11:
+	ldr	w8, [sp, #36]
+	str	w8, [sp, #20]                   ; 4-byte Folded Spill
+	ldur	x9, [x29, #-24]
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	subs	x8, x8, x9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_12
 LBB0_12:
-	movslq	-268(%rsp), %rax
-	movb	$0, -112(%rsp,%rax)
-	leaq	-112(%rsp), %rdi
-	callq	_atoinf
-	movl	%eax, -260(%rsp)
-	movl	$0, -272(%rsp)
-	movl	-268(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -268(%rsp)
-
-LBB0_13:                                ## =>This Inner Loop Header: Depth=1
-	movq	-248(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$0, %eax
-	je	LBB0_16
-## %bb.14:
-	movq	-248(%rsp), %rax
-	movslq	-268(%rsp), %rcx
-	movb	(%rax,%rcx), %cl
-	movslq	-272(%rsp), %rax
-	movb	%cl, -224(%rsp,%rax)
-## %bb.15:
-	movl	-268(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -268(%rsp)
-	movl	-272(%rsp), %eax
-	addl	$1, %eax
-	movl	%eax, -272
+	bl	___stack_chk_fail
+LBB0_13:
+	ldr	w0, [sp, #20]                   ; 4-byte Folded Reload
+	ldp	x29, x30, [sp, #304]            ; 16-byte Folded Reload
+	ldp	x28, x27, [sp, #288]            ; 16-byte Folded Reload
+	add	sp, sp, #320
+	ret
+LBB0_14:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_15
+LBB0_15:                                 ;   in Loop: Header=BB0_14 Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #28]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldrsw	x10, [sp, #32]
+	add	x9, sp, #68
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_16
+LBB0_16:                                 ;   in Loop: Header=BB0_14 Depth=1
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_14
+LBB0_17:
+	ldrsw	x9, [sp, #28]
+	sub	x0, x29, #124
+	mov	x8, x0
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	bl	_atoi
+	str	w0, [sp, #48]
+	str	wzr, [sp, #32]
+	ldr	w8, [sp, #48]
+	ldr	w9, [sp, #44]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #48]
+	ldr	w10, [sp, #44]
+	mul	w9, w9, w10
+	s

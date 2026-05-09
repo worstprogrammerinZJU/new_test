@@ -1,60 +1,170 @@
-This is a complex function involving string copying, memory allocation, and a multi-level loop with specific memory management (spills, reloads, and `shll`/`addl` patterns).
-
-The logic breaks down as follows:
-1.  **Initialization**: Sets up the stack frame, copies the string to a buffer, and initializes a counter (`_count`) to 0.
-2.  **Allocation**: Calls `_malloc` to allocate 16 bytes (implied by the subtraction of 48 from RSP, assuming a 64-bit system where 48 bytes is 6*8, but looking closer at the pattern `subq $48, %rsp` followed by `movq $0, -8(%rbp)` suggests a 16-byte buffer, and the alignment is 4. Let's re-evaluate the size based on the loop logic).
-    *   The loop logic `movl -24(%rbp), %eax` reads a 4-byte value.
-    *   The `shll $1` and `addl $1` pattern is the classic "increment and check" optimization for `shll`.
-    *   The `idivl` instruction is used to calculate the count.
-    *   The buffer size appears to be 16 bytes based on the `movl $0, -8(%rbp)` at the start of the first loop.
-3.  **Looping**:
-    *   **Level 1**: Reads 16 bytes. Compares with 0. If `>=`, it increments the counter, then jumps to the next iteration.
-    *   **Level 2**: Reads the result from the counter (which holds the number of bytes to copy). If it is `>= 1`, it copies the 16 bytes again.
-    *   **Level 3**: Reads the result from the counter. If it is `>= 2`, it copies the 16 bytes again.
-    *   **Level 4**: Reads the result from the counter. If it is `>= 3`, it copies the 16 bytes again.
-    *   **Level 5**: Reads the result from the counter. If it is `>= 4`, it copies the 16 bytes again.
-    *   **Level 6**: Reads the result from the counter. If it is `>= 5`, it copies the 16 bytes again.
-    *   **Level 7**: Reads the result from the counter. If it is `>= 6`, it copies the 16 bytes again.
-    *   **Level 8**: Reads the result from the counter. If it is `>= 7`, it copies the 16 bytes again.
-    *   **Level 9**: Reads the result from the counter. If it is `>= 8`, it copies the 16 bytes again.
-    *   **Level 10**: Reads the result from the counter. If it is `>= 9`, it copies the 16 bytes again.
-    *   **Level 11**: Reads the result from the counter. If it is `>= 10`, it copies the 16 bytes again.
-    *   **Level 12**: Reads the result from the counter. If it is `>= 11`, it copies the 16 bytes again.
-    *   **Level 13**: Reads the result from the counter. If it is `>= 12`, it copies the 16 bytes again.
-    *   **Level 14**: Reads the result from the counter. If it is `>= 13`, it copies the 16 bytes again.
-    *   **Level 15**: Reads the result from the counter. If it is `>= 14`, it copies the 16 bytes again.
-    *   **Level 16**: Reads the result from the counter. If it is `>= 15`, it copies the 16 bytes again.
-    *   **Level 17**: Reads the result from the counter. If it is `>= 16`, it copies the 16 bytes again.
-    *   **Level 18**: Reads the result from the counter. If it is `>= 17`, it copies the 16 bytes again.
-    *   **Level 19**: Reads the result from the counter. If it is `>= 18`, it copies the 16 bytes again.
-    *   **Level 20**: Reads the result from the counter. If it is `>= 19`, it copies the 16 bytes again.
-    *   **Level 21**: Reads the result from the counter. If it is `>= 20`, it copies the 16 bytes again.
-    *   **Level 22**: Reads the result from the counter. If it is `>= 21`, it copies the 16 bytes again.
-    *   **Level 23**: Reads the result from the counter. If it is `>= 22`, it copies the 16 bytes again.
-    *   **Level 24**: Reads the result from the counter. If it is `>= 23`, it copies the 16 bytes again.
-    *   **Level 25**: Reads the result from the counter. If it is `>= 24`, it copies the 16 bytes again.
-    *   **Level 26**: Reads the result from the counter. If it is `>= 25`, it copies the 16 bytes again.
-    *   **Level 27**: Reads the result from the counter. If it is `>= 26`, it copies the 16 bytes again.
-    *   **Level 28**: Reads the result from the counter. If it is `>= 27`, it copies the 16 bytes again.
-    *   **Level 29**: Reads the result from the counter. If it is `>= 28`, it copies the 16 bytes again.
-    *   **Level 30**: Reads the result from the counter. If it is `>= 29`, it copies the 16 bytes again.
-    *   **Level 31**: Reads the result from the counter. If it is `>= 30`, it copies the 16 bytes again.
-    *   **Level 32**: Reads the result from the counter. If it is `>= 31`, it copies the 16 bytes again.
-    *   **Level 33**: Reads the result from the counter. If it is `>= 32`, it copies the 16 bytes again.
-    *   **Level 34**: Reads the result from the counter. If it is `>= 33`, it copies the 16 bytes again.
-    *   **Level 35**: Reads the result from the counter. If it is `>= 34`, it copies the 16 bytes again.
-    *   **Level 36**: Reads the result from the counter. If it is `>= 35`, it copies the 16 bytes again.
-    *   **Level 37**: Reads the result from the counter. If it is `>= 36`, it copies the 16 bytes again.
-    *   **Level 38**: Reads the result from the counter. If it is `>= 37`, it copies the 16 bytes again.
-    *   **Level 39**: Reads the result from the counter. If it is `>= 38`, it copies the 16 bytes again.
-    *   **Level 40**: Reads the result from the counter. If it is `>= 39`, it copies the 16 bytes again.
-    *   **Level 41**: Reads the result from the counter. If it is `>= 40`, it copies the 16 bytes again.
-    *   **Level 42**: Reads the result from the counter. If it is `>= 41`, it copies the 16 bytes again.
-    *   **Level 43**: Reads the result from the counter. If it is `>= 42`, it copies the 16 bytes again.
-    *   **Level 44**: Reads the result from the counter. If it is `>= 43`, it copies the 16 bytes again.
-    *   **Level 45**: Reads the result from the counter. If it is `>= 44`, it copies the 16 bytes again.
-    *   **Level 46**: Reads the result from the counter. If it is `>= 45`, it copies the 16 bytes again.
-    *   **Level 47**: Reads the result from the counter. If it is `>= 46`, it copies the 16 bytes again.
-    *   **Level 48**: Reads the result from the counter. If it is `>= 47`, it copies the 16 bytes again.
-    *   **Level 49**: Reads the result from the counter. If it is `>= 48`, it copies the 16 bytes again.
-    *   **Level 50**: Reads the result from the counter. If it is `>= 49`, it copies the
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-16]
+	ldur	x0, [x29, #-16]
+	bl	_strlen
+	mov	x8, x0
+	stur	w8, [x29, #-20]
+	ldur	w9, [x29, #-20]
+	mov	w8, #2
+	mul	w8, w8, w9
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
+	bl	_malloc
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_23
+LBB0_2:
+	str	wzr, [sp, #24]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_5 Depth 2
+	ldr	w8, [sp, #24]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #4]
+	str	wzr, [sp, #20]
+	b	LBB0_5
+LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-20]
+	ldr	w10, [sp, #24]
+	subs	w9, w9, w10
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldur	x8, [x29, #-16]
+	ldr	w9, [sp, #24]
+	ldr	w10, [sp, #20]
+	add	w9, w9, w10
+	ldrsb	w8, [x8, w9, sxtw]
+	ldur	x9, [x29, #-16]
+	ldur	w10, [x29, #-20]
+	subs	w10, w10, #1
+	ldr	w11, [sp, #20]
+	subs	w10, w10, w11
+	ldrsb	w9, [x9, w10, sxtw]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	str	wzr, [sp, #4]
+	b	LBB0_10
+LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_5
+LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_11
+LBB0_11:
+	ldr	x0, [sp, #8]
+	ldur	x1, [x29, #-16]
+	ldursw	x2, [x29, #-20]
+	mov	x3, #-1
+	bl	___strncpy_chk
+	str	wzr, [sp, #20]
+	b	LBB0_12
+LBB0_12:                                ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_15
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_12 Depth=1
+	ldur	x8, [x29, #-16]
+	ldur	w9, [x29, #-20]
+	ldr	w10, [sp, #20]
+	subs	w9, w9, w10
+	subs	w9, w9, #1
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
+	ldr	x9, [sp, #8]
+	ldur	w10, [x29, #-20]
+	ldr	w11, [sp, #20]
+	add	w10, w10, w11
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_12 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_12
+LBB0_15:
+	ldr	x8, [sp, #8]
+	ldur	x9, [x29, #-20]
+	ldrsw	x10, [sp, #20]
+	add	x9, x9, x10
+	strb	wzr, [x9]
+	ldr	x8, [sp, #8]
+	stur	x8, [x29, #-8]
+	b	LBB0_23
+LBB0_16:                                ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_3
+LBB0_18:
+	ldr	x0, [sp, #8]
+	ldur	x1, [x29, #-16]
+	ldursw	x2, [x29, #-20]
+	mov	x3, #-1
+	bl	___strncpy_chk
+	str	wzr, [sp, #20]
+	b	LBB0_19
+LBB0_19:                                ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_22
+	b	LBB0_20
+LBB0_20:                                ;   in Loop: Header=BB0_19 Depth=1
+	ldur	x8, [x29, #-16]
+	ldur	w9, [x29, #-20]
+	ldr	w10, [sp, #20]
+	subs	w9, w9, w10
+	subs	w9, w9, #1
+	add

@@ -1,147 +1,141 @@
-Here is the conversion from x86-64 assembly to ARM assembly.
-
-### Conversion Notes & Strategy
-1.  **Architecture**: x86-64 is converted to ARM64 (AArch64).
-2.  **Calling Convention**:
-    *   x86-64 `pushq %rbp` / `movq %rsp, %rbp` maps directly to ARM64 `mov %sp, %rbp` (saved stack frame).
-    *   x86-64 registers:
-        *   `%rsp` $\rightarrow$ `%rsp` (Stack Pointer)
-        *   `%rdi` $\rightarrow$ `$1` (First argument)
-        *   `%esi` $\rightarrow$ `$2` (Second argument)
-        *   `%rdx` $\rightarrow$ `$3` (Third argument)
-        *   `%rcx` $\rightarrow$ `$4` (Fourth argument)
-        *   `%r8` $\rightarrow$ `$5`
-        *   `%r9` $\rightarrow$ `$6`
-        *   `%rax` $\rightarrow$ `$7`
-3.  **SSE/AVX Instructions**:
-    *   `movslq` (Store Low 32-bit) $\rightarrow$ `movsbl` (Store Low 32-bit)
-    *   `shlq` (Shift Left) $\rightarrow$ `shl`
-    *   `idivl` (Divide and Remainder) $\rightarrow$ `div` (Requires `div` instruction, which requires `dividend` and `divisor` registers; here the divisor is a constant, so we use `mov` to load it).
-    *   `leaq` (Load Effective Address) $\rightarrow$ `ldr` (Load Register) with a relative offset.
-4.  **Loop Logic**: The nested loops (BB0_1, BB0_3, BB0_8, BB0_9) are preserved as sequential ARM64 loops using `mov`, `cmp`, and `jmp`.
-5.  **String Formatting**: The string literal `the number of odd elements %d in the string %d of the %d input.` is defined in a `.cstring_literals` section and passed as an argument.
-
-### ARM64 Assembly Code
-
-```arm64
 .section	__TEXT,__text,regular,pure_instructions
-.build_version macos, 13, 0	sdk_version 13, 3
-.globl	_func0                          ## -- Begin function func0
-.p2align	4, 0x90
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-## %bb.0:
-	movq	%sp, %rbp
-	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movslq	-12(%rbp), %rdi
-	shlq	$3, %rdi
-	callq	_malloc
-	movq	%rax, -24(%rbp)
-	movl	$0, -28(%rbp)
-LBB0_1:                                 ## =>This Loop Header: Depth=1
-                                        ##     Child Loop BB0_3 Depth 2
-	movl	-28(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	LBB0_12
-## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
-	movl	$0, -32(%rbp)
-	movl	$0, -36(%rbp)
-LBB0_3:                                 ##   Parent Loop BB0_1 Depth=1
-                                        ## =>  This Inner Loop Header: Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-36(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$0, %eax
-	je	LBB0_10
-## %bb.4:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-36(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$48, %eax
-	jl	LBB0_8
-## %bb.5:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-36(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	cmpl	$57, %eax
-	jg	LBB0_8
-## %bb.6:                               ##   in Loop: Header=BB0_3 Depth=2
-	movq	-8(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rax
-	movslq	-36(%rbp), %rcx
-	movsbl	(%rax,%rcx), %eax
-	subl	$48, %eax
-	movl	$2, %ecx
-	cltd
-	divl	%ecx
-	cmpl	$1, %edx
-	jne	LBB0_8
-## %bb.7:                               ##   in Loop: Header=BB0_3 Depth=2
-	movl	-32(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -32(%rbp)
-LBB0_8:                                 ##   in Loop: Header=BB0_3 Depth=2
-	jmp	LBB0_9
-LBB0_9:                                 ##   in Loop: Header=BB0_3 Depth=2
-	movl	-36(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -36(%rbp)
-	jmp	LBB0_3
-LBB0_10:                                ##   in Loop: Header=BB0_1 Depth=1
-	movl	$100, %edi
-	callq	_malloc
-	movq	%rax, %rdx
-	movq	-24(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	%rdx, (%rax,%rcx,8)
-	movq	-24(%rbp), %rax
-	movslq	-28(%rbp), %rcx
-	movq	(%rax,%rcx,8), %rdi
-	movl	-32(%rbp), %r8d
-	movl	-32(%rbp), %r9d
-	movl	-32(%rbp), %eax
-	xorl	%esi, %esi
-	movq	$-1, %rdx
-	ldr	L_.str, [rip]
-	movl	%eax, [%rsp]
-	movb	$0, %al
-	callq	___sprintf_chk
-## %bb.11:                              ##   in Loop: Header=BB0_1 Depth=1
-	movl	-28(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -28(%rbp)
-	jmp	LBB0_1
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	ldursw	x9, [x29, #-12]
+	mov	x8, #8
+	mul	x0, x8, x9
+	bl	_malloc
+	stur	x0, [x29, #-24]
+	stur	wzr, [x29, #-28]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldur	w8, [x29, #-28]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #32]
+	str	wzr, [sp, #28]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #48
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #57
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #48
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_3
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	mov	x0, #100
+	bl	_malloc
+	ldur	x8, [x29, #-24]
+	ldursw	x9, [x29, #-28]
+	str	x0, [x8, x9, lsl #3]
+	ldur	x8, [x29, #-24]
+	ldursw	x9, [x29, #-28]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	w8, [sp, #32]
+                                        ; implicit-def: $x10
+	mov	x10, x8
+	ldr	w9, [sp, #32]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	ldr	w9, [sp, #32]
+                                        ; implicit-def: $x11
+	mov	x11, x9
+	ldr	w9, [sp, #32]
+	mov	x9, sp
+	str	x10, [x9]
+	str	x8, [x9, #8]
+	str	x11, [x9, #16]
+	str	x10, [x9, #24]
+	str	x8, [x9, #32]
+	mov	w1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	bl	___sprintf_chk
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-28]
+	add	w8, w8, #1
+	stur	w8, [x29, #-28]
+	b	LBB0_1
 LBB0_12:
-	movq	-24(%rbp), %rax
-	addq	$48, %rsp
-	popq	%rbp
-	retq
+	ldur	x0, [x29, #-24]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
+l_.str:                                 ; @.str
 	.asciz	"the number of odd elements %d in the string %d of the %d input."
 
 .subsections_via_symbols
-```
-
-### Key Changes Explained
-
-1.  **Frame Setup**:
-    *   `pushq %rbp` becomes `movq %sp, %rbp`.
-    *   `movq %rsp, %rbp` is removed because we save the stack pointer directly to the frame pointer.
-    *   `subq $48, %rsp` is removed because `movq %rdi, -8(%rbp)` already pushes the first argument (`%rdi` from x86) onto the stack.
-
-2.  **Arguments Mapping**:
-    *   `movq %rdi, -8(%rbp)` $\rightarrow$ `movq %rdi, -8(%rbp)` (Argument 1).
-    *   `movl %esi, -12(%rbp)` $\rightarrow$ `movl %esi, -12(%rbp)` (Argument 2
