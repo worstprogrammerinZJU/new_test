@@ -20,71 +20,47 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #4]
 	ldr	w9, [sp, #28]
 	subs	w8, w8, w9
-	cmp	w8, #2147483647
-	bgt	LBB0_8
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl 2]
-	mov	w10, 2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	ldr	w8, [x8, x9, lsl #2]
+	mov	w9, #2
+	sdiv	w9, w8, w9
+	mul	w9, w9, w9
 	subs	w8, w8, w9
-	subs	w8, w8, 0
+	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl 2]
-	ldr	w9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #8]
 	subs	w8, w8, w9
-	cmp	w8, 0
-	b	LBB0_5
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	adds	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl 2]
-	str	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
 	ldr	w8, [sp, #4]
-	str	w8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	w8, [x9, #4]
+	ldr	x8, [sp, #16]
+	str	x8, [sp, #8]
 	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]
-	add	w8, w8, 1
+	add	w8, w8, #1
 	str	w8, [sp, #4]
 	b	LBB0_1
-LBB0_8:
-	ldr	w8, [sp, #8]
-	adds	w8, w8, #1
-	cset	w8, ne
-	b	LBB0_10
-LBB0_9:
-                                        ; kill: def $x8 killed $xzr
-	str	xzr, [sp, #40]
-	b	LBB0_11
-LBB0_10:
-	ldr	w8, [sp, #12]
-	ldr	x9, [sp, #16]
-	str	w8, [x9]
-	ldr	w8, [sp, #8]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, 4]
-	ldr	x8, [sp, #16]
-	str	x8, [sp, #40]
-	b	LBB0_11
-LBB0_11:
-	ldr	x0, [sp, #40]
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w0, [sp, #4]
 	add	sp, sp, #48
 	ret
 	.cfi_endproc

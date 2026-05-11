@@ -10,8 +10,7 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
+	.cfi_offset %w29, -16
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
@@ -20,14 +19,10 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	mov	x8, x29
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	orr	w8, w8, #0x1
-	sturb	w8, [x29, #-1]
+	sturb	wzr, [x29, #-1]
 	b	LBB0_10
 LBB0_2:
-	mov	w8, 2
+	mov	w8, #2
 	str	w8, [sp, #12]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
@@ -45,9 +40,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldrsb	w8, [x8, x9]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #1
-	ldrsb	w9, [x9, w10, sxtw]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #1
+	ldrsb	w9, [x9, w9, sxtw #1]
 	subs	w8, w8, w9
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_6
@@ -57,37 +52,34 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldrsb	w8, [x8, x9]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #2
-	ldrsb	w9, [x9, w10, sxtw]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #2
+	ldrsb	w9, [x9, w9, sxtw #1]
 	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:
-	mov	x8, x29
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	orr	w8, w8, #0x1
-	strb	w8, [x8]
+	mov	w8, #0
+	sturb	w8, [x29, #-1]
 	b	LBB0_10
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #12]
+	ldurb	w8, [x29, #-1]
+	and	w8, w8, #0x1
 	add	w8, w8, #1
-	str	w8, [sp, #12]
+	stur	w8, [x29, #-4]
 	b	LBB0_3
 LBB0_9:
-	mov	w8, 1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	orr	w8, w8, #0x1
-	strb	w8, [sp, #31]
+	mov	w8, #1
+	sturb	w8, [x29, #-1]
 	b	LBB0_10
 LBB0_10:
-	ldrb	w8, [sp, #31]
-	and	w0, w8, #0x1
+	ldurb	w8, [x29, #-1]
+	and	w8, w8, #0x1
+	and	w8, w8, #0xff
+	and	w0, w8, #0xff
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

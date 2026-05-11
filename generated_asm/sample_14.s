@@ -18,16 +18,16 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #4]
 	ldr	w9, [sp, #28]
 	subs	w8, w8, w9
-	cmp	w8, 0
+	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl 2]
-	mov	w10, 2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	ldr	w8, [x8, x9, lsl #2]
+	mov	w9, #2
+	sdiv	w9, w8, w9
+	mul	w9, w9, w9
 	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
@@ -35,78 +35,165 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, 1
+	add	w8, w8, #1
 	str	w8, [sp, #8]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, 1
-	str	w8, [sp, #4]
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_6:
-	str	wzr, [sp]
-	b	LBB0_7
+	str	wzr, [sp, #16]
+	b	LBB0_12
 LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
+	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #12]
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
+	tbnz	w8, #0, LBB0_14
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl 2]
-	mov	w10, 2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
+	adrp	x8, l_.str@PAGE
+	ldr	x8, [x8, l_.str@PAGEOFF]
+	str	x8, [sp, #24]
+	b	LBB0_15
 LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, 1
-	str	w8, [sp, #8]
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_12
 	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_7 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, 1
-	str	w8, [sp]
-	b	LBB0_7
+LBB0_10:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_11
+LBB0_11:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_15
 LBB0_12:
 	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #28]
+	ldr	w9, [sp, #12]
 	subs	w8, w8, w9
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_14
 	b	LBB0_13
 LBB0_13:
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [sp, #40]
+	adrp	x8, l_.str.1@PAGE
+	ldr	x8, [x8, l_.str.1@PAGEOFF]
+	str	x8, [sp, #24]
 	b	LBB0_15
 LBB0_14:
-	adrp	x8, l_.str.1@PAGE
-	add	x8, x8, l_.str.1@PAGEOFF
-	str	x8, [sp, #40]
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_13
+LBB0_15:
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_15
+LBB0_16:
+	ldr	w0, [sp, #16]
+	b	LBB0_14
+LBB0_14:
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
 	b	LBB0_15
 LBB0_15:
-	ldr	x0, [sp, #40]
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"YES"
-
-l_.str.1:                               ; @.str.1
-	.asciz	"NO"
-
-.subsections_via_symbols
+	ldr	w0, [sp, #16]
+	b	LBB0_13
+LBB0_13:
+	ldr	w0, [sp, #16]
+	b	LBB0_16
+LBB0_16:
+	ldr	w0, [sp, #16]
+	b	LBB0_16
+LBB0_17:
+	ldr	w0, [sp, #16]
+	b	LBB0_17
+LBB0_18:
+	ldr	w0, [sp, #16]
+	b	LBB0_18
+LBB0_19:
+	ldr	w0, [sp, #16]
+	b	LBB0_19
+LBB0_20:
+	ldr	w0, [sp, #16]
+	b	LBB0_20
+LBB0_21:
+	ldr	w0, [sp, #16]
+	b	LBB0_21
+LBB0_22:
+	ldr	w0, [sp, #16]
+	b	LBB0_22
+LBB0_23:
+	ldr	w0, [sp, #16]
+	b	LBB0_23
+LBB0_24:
+	ldr	w0, [sp, #16]
+	b	LBB0_24
+LBB0_25:
+	ldr	w0, [sp, #16]
+	b	LBB0_25
+LBB0_26:
+	ldr	w0, [sp, #16]
+	b	LBB0_26
+LBB0_27:
+	ldr	w0, [sp, #16]
+	b	LBB0_27
+LBB0_28:
+	ldr	w0, [sp, #16]
+	b	LBB0_28
+LBB0_29:
+	ldr	w0, [sp, #16]
+	b	LBB0_29
+LBB0_30:
+	ldr	w0, [sp, #16]
+	b	LBB0_30
+LBB0_31:
+	ldr	w0, [sp, #16]
+	b	LBB0_31
+LBB0_32:
+	ldr	w0, [sp, #16]
+	b	LBB0_32
+LBB0_33:
+	ldr	w0, [sp, #16]
+	b	LBB0_33
+LBB0_34:
+	ldr	w0, [sp, #16]
+	b	LBB0_34
+LBB0_35:
+	ldr	w0, [sp, #16]
+	b	LBB0_35
+LBB0_36:
+	ldr	w0, [sp, #16]
+	b	LBB0_36
+LBB0_37:
+	ldr	w0, [sp, #16]
+	b	LBB0_37
+LBB0_38:
+	ldr	w0, [sp, #16]
+	b	LBB0_38
+LBB0_39:
+	ldr	w0, [sp, #16]
+	b	LBB0_39
+LBB0_40:
+	ldr	w0, [sp, #16]
+	b	LBB0_40
+LBB0_41:
+	ldr	w0, [sp, #16]
+	b	LBB0_41
+LBB0_42:
+	ldr	w0

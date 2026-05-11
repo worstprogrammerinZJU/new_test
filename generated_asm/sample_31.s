@@ -16,12 +16,10 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	add	sp, sp, #32
-	ret
+	strb	w8, [sp, #30]
+	b	LBB0_13
 LBB0_2:
-	mov	w8, 1
+	mov	w8, #1
 	str	w8, [sp, #8]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
@@ -34,35 +32,36 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl 2]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #8]
-	subs	w10, w10, 1
-	ldr	w9, [x9, w10, sxtw 2]
+	ldr	w9, [sp, #8]
+	subs	w10, w9, #1
+                                        ; implicit-def: $x9
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, 0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	add	sp, sp, #32
-	ret
+	mov	w8, #0
+	strb	w8, [sp, #30]
+	b	LBB0_13
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #8]
 	subs	w8, w8, #2
 	cset	w8, lt
-	tbnz	w8, #0, LBB0_10
+	and	w8, w8, #0x1
+	str	w8, [sp, #8]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl 2]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #8]
-	subs	w10, w10, 1
-	ldr	w9, [x9, w10, sxtw 2]
+	ldr	w9, [sp, #8]
+	subs	w10, w9, #1
+                                        ; implicit-def: $x9
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_10
@@ -70,31 +69,31 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl 2]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #8]
-	subs	w10, w10, 2
-	ldr	w9, [x9, w10, sxtw 2]
-	cmp	w8, w9
-	bne	LBB0_10
+	ldr	w9, [sp, #8]
+	subs	w10, w9, #2
+                                        ; implicit-def: $x9
+	ldr	w9, [x9, w10, lsl #2]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:
-	mov	w8, 0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	add	sp, sp, #32
-	ret
+	mov	w8, #0
+	strb	w8, [sp, #30]
+	b	LBB0_13
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, 1
-	str	w8, [sp, 8]
-	b	LBB0_3
-LBB0_12:
-	mov	w8, 1
+	adrp	x8, _FUNC0_SIZEOF_WORDS@PAGE
+	ldr	w8, [x8, _FUNC0_SIZEOF_WORDS@PAGEOFF]
+	mov	w9, #1
+	and	w8, w8, w9
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
+	orr	w8, w8, w9
+	ldrb	w0, [sp, #30]
+	and	w0, w0, w8
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

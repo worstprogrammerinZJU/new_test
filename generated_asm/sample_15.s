@@ -10,22 +10,26 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #176]            ; 16-byte Folded Spill
 	add	x29, sp, #176
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
+	.cfi_offset %w9, -16
+	.cfi_offset %w8, -12
+	.cfi_offset %w7, -16
+	.cfi_offset %w6, -20
+	.cfi_offset %w5, -24
+	.cfi_offset %w4, -28
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
-	str	x0, [sp, #56]
-	str	x1, [sp, #48]
-	str	x2, [sp, #40]
-	str	x3, [sp, #32]
-	add	x0, sp, #64
-	mov	w1, 0
-	mov	x2, #104
+	str	x0, [sp, #48]
+	str	x1, [sp, #40]
+	str	x2, [sp, #32]
+	str	x3, [sp, #24]
+	add	x0, #112, x8
+	mov	w1, #0
+	mov	w2, #104
 	bl	_memset
-	str	wzr, [sp, #28]
-	ldr	x8, [sp, #56]
+	str	wzr, [sp, #16]
+	ldr	x8, [sp, #48]
 	str	x8, [sp, #16]
 	str	wzr, [sp, #12]
 	b	LBB0_1
@@ -47,92 +51,113 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsb	w8, [x8]
 	subs	w8, w8, #97
-	str	w8, [sp, #8]
-	ldrsw	x9, [sp, #8]
-	add	x8, sp, #64
-	add	x9, x9, x8, lsl 2
-	ldr	w3, [x9]
-	add	w3, w3, 1
-	str	w3, [x9]
-	ldrsw	x9, [sp, #8]
-	lsl	x10, x9, #2
-	ldr	w3, [x8, x10]
-	ldr	w5, [sp, #28]
-	cmp	w3, w5
-	cset	w3, ge
-	tbnz	w3, #0, LBB0_5
+	str	w8, [sp, #12]
+	ldrsw	x8, [sp, #12]
+	ldr	w9, [x8, #4]
+	ldr	w8, [sp, #12]
+	add	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsw	x9, [sp, #8]
-	add	x8, sp, #64
-	ldr	w3, [x8, x9, lsl 2]
-	str	w3, [sp, #28]
+	ldr	w8, [sp, #12]
+	ldr	x9, [sp, #48]
+	ldr	w10, [x9, #16]
+	ldr	w9, [sp, #12]
+	ldr	x11, [x9]
+	ldr	w10, [x10]
+	ldr	w12, [x11, #16]
+	add	w10, w10, w12
+	str	w10, [x9, #16]
+	add	x9, x9, #1
+	ldr	w9, [x9]
+	ldr	w10, [sp, #12]
+	ldr	w11, [x9, w10, sxtw #1]
+	adrp	x9, ___stack_chk_guard@GOTPAGE
+	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x9, [x9]
+	subs	x9, x9, x10
+	cset	w9, ne
+	tbnz	w9, #0, LBB0_11
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	add	x8, x8, 1
-	str	x8, [sp, #16]
-	b	LBB0_1
-LBB0_7:
-	str	wzr, [sp, #4]
-	b	LBB0_8
-LBB0_8:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #26
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=1
-	ldrsw	x9, [sp, #4]
-	add	x8, sp, #64
-	ldr	w3, [x8, x9, lsl 2]
-	ldr	x9, [sp, #40]
-	ldrsw	x10, [sp, #4]
-	str	w3, [x9, x10, lsl 2]
-	ldrsw	x9, [sp, #4]
-	lsl	x10, x9, #2
-	ldr	w3, [x8, x9]
-	ldr	w5, [sp, #28]
-	subs	w3, w3, w5
-	cset	w3, ne
-	tbnz	w3, #0, LBB0_11
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_8 Depth=1
-	ldr	w3, [sp, #4]
-	add	w3, w3, 1
-	str	w3, [sp, #4]
-	b	LBB0_8
-LBB0_11:                                ;   in Loop: Header=BB0_8 Depth=1
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_8 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, 1
-	str	w8, [sp, #4]
-	b	LBB0_8
-LBB0_13:
-	ldr	w8, [sp, #28]
-	ldr	x9, [sp, #40]
-	str	w8, [x9]
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #12]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_14
-LBB0_14:
-	bl	___stack_chk_fail
-LBB0_15:
-	ldp	x29, x30, [sp, #176]            ; 16-byte Folded Reload
-	add	sp, sp, #192
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	ldr	w9, [sp, #12]
+	ldr	x8, [sp, #48]
+	ldr	w10, [x8, #16]
+	ldr	w8, [sp, #12]
+	ldr	w11, [x8, w10, sxtw #1]
+	ldr	w10, [x9, #16]
+	ldr	w12, [x9, w10, sxtw #1]
+	add	w10, w10, w12
+	str	w10, [x9, #16]
+	add	x9, x9, #1
+	ldr	w0, [x9]
+	ldr	x9, [sp, #48]
+	ldr	x9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr	w9, [x9, #16]
+	ldr

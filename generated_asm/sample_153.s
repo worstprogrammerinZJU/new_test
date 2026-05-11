@@ -11,7 +11,7 @@ _func0:                                 ; @func0
 	str	w1, [sp, #36]
 	str	x2, [sp, #24]
 	str	wzr, [sp, #20]
-	mov	w8, 1
+	mov	w8, #1
 	str	w8, [sp, #16]
 	str	wzr, [sp, #12]
 	b	LBB0_1
@@ -25,29 +25,24 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #12]
-	ldr	w9, [x8, x9, lsl 2]
+	ldr	w9, [x8, x9, lsl #2]
 	ldr	w8, [sp, #20]
 	add	w8, w8, w9
 	str	w8, [sp, #20]
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #12]
-	ldr	w9, [x8, x9, lsl 2]
+	ldr	w9, [x8, x9, lsl #2]
 	ldr	w8, [sp, #16]
 	mul	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #12]
-	add	w8, w8, 1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_4:
-	ldr	w8, [sp, #20]
 	ldr	x9, [sp, #24]
 	str	w8, [x9]
 	ldr	w8, [sp, #16]
 	ldr	x9, [sp, #24]
-	str	w8, [x9, 4]
+	str	w8, [x9, #4]
 	add	sp, sp, #48
 	ret
 	.cfi_endproc
