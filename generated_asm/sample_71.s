@@ -46,35 +46,30 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp]
-	ldr	x12, [sp, #8]
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [x9]
-	adrp	x9, _PAGE_SIZE@GOTPAGE
-	ldr	x9, [x9, _PAGE_SIZE@GOTOFF]
-	ldr	x9, [x9, x10, lsl #2]
-	adrp	x11, _PAGE_OFFSET@GOTPAGE
-	ldr	x11, [x11, _PAGE_OFFSET@GOTOFF]
-	ldr	w10, [x11, x12, lsl #2]
-	mov	w9, #2
+	mov	w10, 2
+	sdiv	w9, w8, w10
 	mul	w9, w9, w10
-	add	w0, w8, w9
-	b	LBB0_7
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #8]
 	subs	w8, w8, w9
+	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_7
-	b	LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp]
+	ldr	x9, [sp, #16]
+	ldr	x12, [sp, #8]
+	ldrsw	x10, [x12]
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [x12]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp]
 	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w0, [sp, #8]
-	add	w8, w0, #1
-	str	w8, [sp, #8]
+	str	w8, [sp]
 	b	LBB0_3
 LBB0_9:
 	add	sp, sp, #32

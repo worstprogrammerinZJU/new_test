@@ -16,7 +16,9 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_2:
 	mov	w8, #1
@@ -34,8 +36,8 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldrsw	x9, [sp, #8]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w9, [sp, #8]
-	subs	w10, w9, #1
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
 	ldr	w9, [x9, w10, sxtw #2]
 	subs	w8, w8, w9
 	cset	w8, ge
@@ -43,7 +45,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_5
 LBB0_5:
 	mov	w8, #0
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #8]
@@ -56,8 +60,8 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldrsw	x9, [sp, #8]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #16]
-	ldr	w9, [sp, #8]
-	subs	w10, w9, #1
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
 	ldr	w9, [x9, w10, sxtw #2]
 	subs	w8, w8, w9
 	cset	w8, ne
@@ -77,7 +81,9 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_9
 LBB0_9:
 	mov	w8, #0
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_11
@@ -88,8 +94,15 @@ LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_12:
 	mov	w8, #1
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_13
+LBB0_13:
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols

@@ -1,6 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0
+	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -13,8 +13,7 @@ _func0:                                 ; @func0
 	ldr	s1, [sp, #8]
 	fmul	s0, s0, s1
 	fcvt	d0, s0
-	adrp	x8, lercp0@16
-	ldr	d1, [x8, lercp0@16#1]
+	fmov	d1, #0.50000000
 	fmul	d0, d0, d1
 	fcvt	s0, d0
 	add	sp, sp, #16

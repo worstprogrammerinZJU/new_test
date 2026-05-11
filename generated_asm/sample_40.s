@@ -10,12 +10,12 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, 16
-	.cfi_offset w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
-	mov	w8, x0
+	mov	x8, x0
 	str	w8, [sp, #12]
 	ldr	w8, [sp, #12]
 	subs	w8, w8, #0
@@ -29,7 +29,8 @@ LBB0_2:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
 	subs	w9, w9, #1
-	ldrb	w8, [x8, w9, sxtw]
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
 	strb	w8, [sp, #11]
 	ldrb	w0, [sp, #11]
 	bl	_isalpha
@@ -54,9 +55,10 @@ LBB0_6:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
 	subs	w9, w9, #2
-	ldrb	w8, [x8, w9, sxtw]
-	strb	w8, [sp, #13]
-	ldrb	w0, [sp, #13]
+	add	x8, x8, w9, sxtw
+	ldrb	w8, [x8]
+	strb	w8, [sp, #10]
+	ldrb	w0, [sp, #10]
 	bl	_isalpha
 	subs	w8, w0, #0
 	cset	w8, eq

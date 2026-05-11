@@ -16,6 +16,7 @@ _func0:                                 ; @func0
 	stur	w1, [x29, #-12]
 	str	x2, [sp, #24]
 	str	x3, [sp, #16]
+                                        ; kill: def $x8 killed $xzr
 	str	xzr, [sp, #8]
 	str	wzr, [sp, #4]
 	str	wzr, [sp]
@@ -43,7 +44,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9
-	sxtw	x1, x8
+	sxtw	x8, w8
+	lsl	x1, x8, #3
 	bl	_realloc
 	str	x0, [sp, #8]
 	ldur	x8, [x29, #-8]
@@ -65,14 +67,9 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_6:
 	ldr	w8, [sp, #4]
-	adrp	x9, ___stack_chk_guard@GOTPAGE
-	ldr	x9, [x9, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	w9, [x9]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
+	ldr	x9, [sp, #16]
+	str	w8, [x9]
+	ldr	x0, [sp, #8]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

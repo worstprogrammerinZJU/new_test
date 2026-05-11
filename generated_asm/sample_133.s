@@ -16,8 +16,8 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB0_3 Depth 2
 	ldr	w8, [sp, #20]
 	ldr	w9, [sp, #36]
+	subs	w9, w9, #1
 	subs	w8, w8, w9
-	subs	w8, w8, #1
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_2
@@ -47,142 +47,97 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #40]
-	ldr	w9, [sp, #16]
-	ldr	x10, [sp, #24]
-	add	w9, w9, w10
-	add	x9, x9, #1
-	str	w9, [sp, #12]
+	ldrsw	x9, [sp, #20]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #12]
-	ldr	w10, [x8, w9, lsl #2]
-	ldr	x9, [sp, #40]
-	ldr	w11, [sp, #16]
-	ldr	w11, [x9, w11, lsl #2]
-	ldr	x9, [sp, #40]
-	ldr	w12, [x9, w11, lsl #2]
-	add	x9, x9, #1
-	str	w9, [x8, x10, lsl #2]
-	ldr	w9, [sp, #12]
-	ldr	w10, [sp, #12]
-	str	w10, [x8, w9, lsl #2]
-	ldr	w0, [sp, #12]
-	b	LBB0_7
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
 	str	w8, [sp, #12]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #20]
+	str	w8, [x9, x10, lsl #2]
+	ldr	w8, [sp, #12]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #16]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
 	b	LBB0_1
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w0, [sp, #12]
-	ldr	w1, [sp, #16]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #16]
-	b	LBB0_15
 LBB0_10:
 	str	wzr, [sp, #8]
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
+	ldr	w8, [sp, #36]
 	subs	w8, w8, #1
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_13
+	str	w8, [sp, #4]
+	str	wzr, [sp]
 	b	LBB0_11
-LBB0_11:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w0, [sp, #12]
-	ldr	w1, [sp, #8]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #12]
+LBB0_11:                                ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #8]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #24]
+	ldr	w10, [sp]
+	add	w10, w10, #1
+	str	w10, [sp]
+	str	w8, [x9, w10, sxtw #2]
 	b	LBB0_15
-LBB0_12:                                 ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #12]
-	add	w1, w8, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
+LBB0_14:                                ;   in Loop: Header=BB0_11 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #8]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [sp, #8]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #24]
+	ldr	w10, [sp]
+	add	w10, w10, #1
+	str	w10, [sp]
+	str	w8, [x9, w10, sxtw #2]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #4]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [sp, #4]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #24]
+	ldr	w10, [sp]
+	add	w10, w10, #1
+	str	w10, [sp]
+	str	w8, [x9, w10, sxtw #2]
 	b	LBB0_15
-LBB0_13:                                 ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #12]
-	add	w1, w8, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_14:                                 ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w0, [sp, #8]
-	add	w1, w0, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_15:                                 ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w0, [sp, #8]
+LBB0_15:                                ;   in Loop: Header=BB0_11 Depth=1
 	b	LBB0_11
 LBB0_16:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #12]
-	b	LBB0_15
-LBB0_17:
-	ldr	w0, [sp, #12]
-	ldr	w1, [sp, #8]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_18:
-	ldr	w0, [sp, #12]
-	ldr	w1, [sp, #8]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_19:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_20:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_21:
-	ldr	w0, [sp, #12]
-	ldr	w1, [sp, #8]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_22:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_23:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_24:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #8]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_25:
-	ldr	w0, [sp, #8]
-	ldr	w1, [sp, #12]
-	add	w1, w1, #1
-	bl	_memcpy
-	ldr	w0, [sp, #8]
-	b	L
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

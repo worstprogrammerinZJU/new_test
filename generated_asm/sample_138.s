@@ -31,7 +31,7 @@ LBB0_3:                                 ; =>This Loop Header: Depth=1
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_4
-LBB0_4:                               ;   in Loop: Header=BB0_3 Depth=1
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
@@ -42,40 +42,39 @@ LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
 	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
-	and	w8, w8, #0x1
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp]
+	div	w8, w8, w9
 	str	w8, [sp, #8]
 	ldr	w8, [sp, #4]
 	add	w8, w8, #1
 	str	w8, [sp, #4]
 	b	LBB0_5
-LBB0_6:                               ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_5
-LBB0_7:                               ;   in Loop: Header=BB0_3 Depth=1
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_8
-LBB0_8:                               ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #4]
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_5
+	str	w8, [sp]
+	b	LBB0_3
 LBB0_9:
 	ldr	w8, [sp, #8]
 	subs	w8, w8, #1
 	cset	w8, le
-	and	w8, w8, #0x1
-	str	w8, [sp, #12]
-	b	LBB0_11
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_10
 LBB0_10:
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #4]
 	add	w8, w8, #1
-	str	w8, [sp, #8]
+	str	w8, [sp, #4]
 	b	LBB0_11
 LBB0_11:
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #4]
 	subs	w8, w8, #3
-	cset	w8, ne
+	cset	w8, eq
 	and	w8, w8, #0x1
 	str	w8, [sp, #12]
 	b	LBB0_12

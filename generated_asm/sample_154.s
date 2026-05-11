@@ -29,7 +29,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-	add	w8, w8, w10
+	add	w8, w8, #97
 	str	w8, [sp, #8]
 	ldr	w8, [sp, #8]
 	ldr	x9, [sp, #16]
@@ -44,7 +44,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	strb	wzr, [x8, x9]
+	add	x8, x8, x9
+	strb	0, [x8]
 	add	sp, sp, #32
 	ret
 	.cfi_endproc

@@ -12,8 +12,8 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	x8, [sp, #8]
-	ldr	w9, [sp, #4]
-	ldrsb	w8, [x8, w9]
+	ldrsw	x9, [sp, #4]
+	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_3

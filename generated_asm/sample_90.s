@@ -14,7 +14,10 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	strb	wzr, [sp, #30]
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_9
 LBB0_2:
 	mov	x8, #2
@@ -31,15 +34,21 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
-	sdiv	x9, x8, #16
-	mul	x8, x8, x9
-	subs	x8, x8, #0
+	ldr	x10, [sp, #8]
+	sdiv	x9, x8, x10
+	mul	x9, x9, x10
+	sshll	x9, x9, #1
+	eor	x9, x9, x10
+	subs	x8, x8, x9
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	strb	wzr, [sp, #30]
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_7
@@ -52,185 +61,13 @@ LBB0_8:
 	mov	w8, #1
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #30]
+	strb	w8, [sp, #31]
 	b	LBB0_9
 LBB0_9:
-	ldrb	w8, [sp, #30]
+	ldrb	w8, [sp, #31]
 	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-                                        ; -- Begin function func1
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	w0, [sp, #12]
-	str	x1, [sp, #8]
-	str	w2, [sp, #4]
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
-	ldr	x0, [sp, #8]
-	bl	_func0
+.subsections_via_symbols

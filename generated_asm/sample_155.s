@@ -35,23 +35,29 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #4]
+	ldr	w9, [sp, #8]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #4]
-	str	w8, [sp]
+	ldr	w8, [sp, #8]
+	str	w8, [sp, #4]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #8]
+	str	w8, [sp, #8]
+	b	LBB0_10
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #4]
 	subs	w8, w8, w9
-	cset	w8, gt
+	cset	w8, ge
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_7
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
 	ldr	w8, [x8, x9, lsl #2]
@@ -60,144 +66,40 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_8
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_9
+	str	w8, [sp, #4]
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_10
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #8]
+LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp]
 	add	w8, w8, #1
 	str	w8, [sp]
-	b	LBB0_10
-LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_11
-LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w0, [sp]
-	add	sp, sp, #32
-	ret
-LBB0_11:
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w0, [sp, #8]
-	add	w8, w0, #1
-	str	w8, [sp, #8]
-	b	LBB0_10
-LBB0_13:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #1
-	str	w9, [sp, #16]
-	b	LBB0_13
-LBB0_14:
+	b	LBB0_3
+LBB0_12:
 	ldr	w8, [sp, #4]
 	mov	w9, #2147483647
-	str	w9, [sp, #16]
-	b	LBB0_14
-LBB0_15:
-	ldr	w0, [sp, #16]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
 	subs	w8, w8, w9
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:
+	tbnz	w8, #0, LBB0_14
 	b	LBB0_13
 LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
+	mov	w8, #-1
+	str	w8, [sp, #28]
+	b	LBB0_15
 LBB0_14:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
-LBB0_15:
-	ldr	w0, [sp, #16]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
-LBB0_14:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_11
-LBB0_11:
-	b	LBB0_12
-LBB0_12:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #16]
-	b	LBB0_14
-LBB0_14:
-	ldr	w0, [sp, #8]
+	ldr	w8, [sp, #4]
+	str	w8, [sp, #28]
 	b	LBB0_15
 LBB0_15:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
-LBB0_14:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_11
-LBB0_11:
-	b	LBB0_12
-LBB0_12:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
-LBB0_14:
-	ldr	w0, [sp, #8]
-	b	LBB0_15
-LBB0_15:
-	ldr	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w9, #0
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:
-	b	LBB0_13
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_14
-LBB0_14:
-	ldr	w0, [
+	ldr	w0, [sp, #28]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

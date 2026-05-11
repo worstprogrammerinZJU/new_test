@@ -10,22 +10,23 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
 	add	x29, sp, #64
 	.cfi_def_cfa w29, 16
-	.cfi_offset %w29, -16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	x1, [x29, #-16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	mov	w8, x0
+	mov	x8, x0
 	stur	w8, [x29, #-20]
-	ldursw	x0, [x29, #-20]
-	lsl	x0, x0, #3
+	ldursw	x8, [x29, #-20]
+	lsl	x0, x8, #3
 	bl	_malloc
 	str	x0, [sp, #32]
 	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
-                                        ; implicit-def: $x9
-	mov	x9, x8
-	sxtw	x0, x9
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #24]
 	ldr	x8, [sp, #24]
@@ -44,45 +45,49 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	bl	_strlen
 	str	x0, [sp, #8]
 	ldr	x0, [sp, #24]
-	ldr	x1, [sp, #8]
-	add	x1, x1, #2
-	bl	_realloc
-	str	x0, [sp, #16]
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [x8, #-44]
-	add	x8, x8, #1
-	ldrb	w8, [x8]
-	strb	w8, [x8, #1]
 	ldr	x8, [sp, #8]
-	ldr	x9, [sp, #16]
-	add	x8, x8, x9, lsl #3
-	ldr	x0, [x8]
-	ldr	x1, [sp, #8]
-	mov	x2, #-1
+	add	x1, x8, #2
+	bl	_realloc
+	str	x0, [sp, #24]
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #20]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldr	x9, [sp, #24]
+	ldr	x10, [sp, #8]
+	add	x9, x9, x10
+	strb	w8, [x9]
+	ldr	x8, [sp, #24]
+	ldr	x9, [sp, #8]
+	add	x9, x9, #1
+	add	x8, x8, x9
+	ldrb	w8, [x8, #1]
+	ldr	x0, [sp, #24]
 	bl	_strlen
 	add	x0, x0, #1
 	bl	_malloc
-	mov	x0, x0
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #20]
+	str	x0, [x8, x9, lsl #3]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #20]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	x1, [sp, #24]
+	mov	x2, #-1
 	bl	___strcpy_chk
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
 	add	w8, w8, #1
 	str	w8, [sp, #20]
-	ldr	x0, [sp, #8]
-	ldr	x1, [sp, #16]
-	bl	_strlen
-	mov	x0, x0
-	mov	x2, #0
-	bl	_malloc
-	ldr	x0, [sp, #16]
-	ldrsw	x9, [sp, #20]
-	ldr	x8, [x0, x9, lsl #3]
-	ldr	x0, [sp, #8]
-	ldr	x1, [x0, #8]
-	mov	x2, #1
-	bl	___strcpy_chk
 	b	LBB0_1
+LBB0_4:
+	ldr	x0, [sp, #24]
+	bl	_free
+	ldur	w8, [x29, #-20]
+	ldur	x9, [x29, #-16]
+	str	w8, [x9]
+	ldr	x0, [sp, #32]
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
 	add	sp, sp, #80
 	ret

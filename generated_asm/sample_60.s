@@ -10,8 +10,8 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, 8
-	.cfi_offset w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	str	x1, [sp, #16]
 	str	x2, [sp, #8]

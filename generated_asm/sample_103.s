@@ -47,8 +47,8 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 LBB0_5:
 	mov	w8, #1
 	and	w8, w8, #0x1
-	and	w8, w8, #0xff
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_11
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_7
@@ -67,145 +67,14 @@ LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_10:
 	mov	w8, #0
 	and	w8, w8, #0x1
-	and	w8, w8, #0xff
-	strb	w8, [sp, #30]
+	and	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_11
 LBB0_11:
-	ldrb	w8, [sp, #30]
+	ldrb	w8, [sp, #31]
 	and	w0, w8, #0x1
-	b	LBB0_1
-LBB0_12:
-	ldr	w0, [sp, #12]
-	b	LBB0_11
-LBB0_13:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_14:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_15:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_16:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_17:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_18:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_19:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_20:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_21:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_22:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_23:
-	ldr	w0, [sp, #16]
-	b	LBB0_11
-LBB0_24:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_25:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_26:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_27:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_28:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_29:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_30:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_31:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_32:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_33:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_34:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_35:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_36:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_37:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_38:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_39:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_40:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_41:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_42:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_43:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_44:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_45:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_46:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_47:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_48:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_49:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_50:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_51:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_52:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_53:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_54:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_55:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
-LBB0_56:
-	ldr	w0, [sp, #8]
-	b	LBB0_11
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

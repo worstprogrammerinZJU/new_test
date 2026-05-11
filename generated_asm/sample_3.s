@@ -10,7 +10,8 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
-	.cfi_offset %w29, -16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
 	ldursw	x8, [x29, #-4]
 	lsl	x0, x8, #2
@@ -32,7 +33,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
+	add	x8, x8, x9, lsl #2
+	ldr	w8, [x8, #-4]
 	add	w8, w8, #2
 	ldr	x9, [sp, #16]
 	ldrsw	x10, [sp, #12]

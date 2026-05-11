@@ -10,8 +10,8 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
 	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, 12
-	.cfi_offset w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
@@ -23,7 +23,10 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	sturb	wzr, [x29, #-1]
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_2:
 	mov	w8, #2
@@ -49,7 +52,10 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	sturb	wzr, [x29, #-1]
+	mov	w8, #0
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
+	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_7
@@ -60,13 +66,13 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_8:
 	mov	w8, #1
+	and	w8, w8, #0x1
+	and	w8, w8, #0x1
 	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_9:
 	ldurb	w8, [x29, #-1]
-	and	w8, w8, #0x1
-	and	w8, w8, #0xff
-	and	w0, w8, #0xff
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

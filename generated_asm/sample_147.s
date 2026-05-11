@@ -40,8 +40,8 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w9, [sp, #4]
-	mov	w8, #10
+	ldr	w8, [sp, #4]
+	mov	w9, #10
 	mul	w8, w8, w9
 	str	w8, [sp, #4]
 	b	LBB0_7

@@ -10,12 +10,12 @@ _func0:                                 ; @func0
 	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
 	add	x29, sp, #48
 	.cfi_def_cfa w29, 16
-	.cfi_offset w30, 8
-	.cfi_offset w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
 	adrp	x8, l_.str@PAGE
-	ldr	x8, [x8, l_.str@PAGEOFF]
+	add	x8, x8, l_.str@PAGEOFF
 	str	x8, [sp, #24]
 	str	wzr, [sp, #20]
 	str	wzr, [sp, #16]
@@ -49,12 +49,14 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #20]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
 	add	w8, w8, #1
 	str	w8, [sp, #16]
 	b	LBB0_1
-LBB0_5:
-	ldr	w0, [sp, #24]
+LBB0_6:
+	ldr	x0, [sp, #24]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret
