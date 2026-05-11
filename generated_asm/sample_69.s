@@ -21,7 +21,7 @@ _func0:                                 ; @func0
 	bl	_malloc
 	str	x0, [sp, #32]
 	ldursw	x8, [x29, #-24]
-	lsl	x0, x8, #2
+	lsl	x0, x8, 2
 	bl	_malloc
 	str	x0, [sp, #24]
 	str	wzr, [sp, #20]
@@ -36,18 +36,18 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #20]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	ldr	x9, [sp, #32]
 	ldrsw	x10, [sp, #20]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	ldr	w8, [sp, #20]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #20]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #20]
 	b	LBB0_1
 LBB0_4:
@@ -65,13 +65,12 @@ LBB0_5:                                 ; =>This Loop Header: Depth=1
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #16]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	adrp	x1, l_.str@PAGE
 	add	x1, x1, l_.str@PAGEOFF
 	bl	_strcmp
-	subs	w8, w0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_14
+	cmp	w0, 0
+	bne	LBB0_14
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
 	b	LBB0_8
@@ -80,78 +79,79 @@ LBB0_8:                                 ;   Parent Loop BB0_5 Depth=1
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #16]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
+	ldrsw	x3, [x9, x10, lsl 2]
+	ldr	w8, [x8, x3, lsl 2]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #16]
-	ldr	w9, [x9, x10, lsl #2]
+	ldr	w9, [x9, x10, lsl 2]
 	subs	w8, w8, w9
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=2
 	ldr	x8, [sp, #24]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	add	x10, x9, x10, lsl #2
-	ldr	w9, [x10]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_8 Depth=2
-	b	LBB0_11
-LBB0_11:                                ;   Parent Loop BB0_8 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #24]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	add	x10, x9, x10, lsl #2
-	ldr	w9, [x10]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_8 Depth=2
-	ldr	x8, [sp, #24]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	add	x10, x9, x10, lsl #2
-	ldr	w9, [x10]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_8 Depth=2
-	b	LBB0_15
-LBB0_17:                                ;   in Loop: Header=BB0_8 Depth=2
-	ldr	x8, [sp, #24]
+	ldr	x0, [sp, #24]
 	ldrsw	x9, [sp, #16]
-	ldrsw	x10, [sp, #20]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
+	ldrsw	x3, [x8, x9, lsl 2]
+	ldr	w8, [x0, x3, lsl 2]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #16]
-	add	x10, x9, x10, lsl #2
-	ldr	w9, [x10]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_21
-LBB0_18:                                ;   in Loop: Header=BB0_8 Depth=2
+	add	w8, w8, w9, lsl 2
+	cmul	x3, x8, x10, lsl 1
+	ldr	x4, [sp, #32]
+	ldrsw	x6, [sp, #16]
+	mul	x3, x3, x6
+	sdiv	w8, w8, w3
+	str	w8, [x4, x3, lsl 2]
+	b	LBB0_8
+LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_5 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	x4, [sp, #24]
+	ldr	x5, [sp, #24]
+	ldrsw	x6, [sp, #16]
+	ldrsw	x3, [x4, x6, lsl 2]
+	ldr	w8, [x5, x3, lsl 2]
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #16]
+	add	w8, w8, w9, lsl 2
+	ldr	x5, [x4, x5, lsl 2]
+	ldr	w9, [x5, x10, lsl 2]
+	sub	w8, w8, w9
+	cmul	x3, x8, x6
+	ldr	x5, [sp, #24]
+	ldrsw	x6, [sp, #16]
+	mul	x3, x3, x6
+	sdiv	w8, w8, w3
+	str	w8, [x5, x6, lsl 2]
+	b	LBB0_19
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
 	ldr	x8, [sp, #24]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
-	ldrsw
+	ldrsw	x3, [sp, #16]
+	ldrsw	x4, [x8, x3, lsl 2]
+	ldr	w8, [x4, 0]
+	add	w8, w8, 1
+	ldr	x4, [sp, #24]
+	ldrsw	x6, [sp, #16]
+	add	w8, w8, w3, lsl 2
+	ldr	w5, [x4, x6, lsl 2]
+	ldr	x6, [sp, #24]
+	ldrsw	x3, [sp, #16]
+	add	w8, w8, w5, lsl 2
+	cmul	x3, x3, x6
+	sdiv	w8, w8, w3
+	str	w8, [x4, x6, lsl 2]
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	x4, [sp, #24]
+	ldrsw	x3, [sp, #16]
+	ldrsw	x4, [x4, x3, lsl 2]
+	ldr	w8, [x4, 0]
+	add	w8, w8, 1
+	ldr	x5, [sp, #24]
+	ldrsw	x6, [sp, #16]
+	add	w8, w8, w3, lsl 2
+	ldr	w3, [x5, x6, lsl 2]
+	ldr	x6, [sp, #24]
+	ldrsw	x4

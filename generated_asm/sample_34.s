@@ -24,13 +24,13 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #16]
 	ldur	w9, [x29, #-12]
 	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
+	cmp	w8, 0
+	tbnz	w8, #63, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #16]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	bl	_strlen
 	mov	x8, x0
 	str	w8, [sp, #12]
@@ -38,12 +38,12 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
 	cset	w8, le
-	tbnz	w8, #0, LBB0_4
+	tbnz	w8, #63, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #16]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	str	x8, [sp, #24]
 	ldr	w8, [sp, #12]
 	str	w8, [sp, #20]

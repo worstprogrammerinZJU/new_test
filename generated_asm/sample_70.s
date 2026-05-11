@@ -33,7 +33,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrb	w0, [x8, x9]
 	bl	_isalpha
 	subs	w8, w0, #0
-	cset	w8, eq
+	csetm	w8, eq
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -41,7 +41,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldrb	w0, [x8, x9]
 	bl	_isupper
-	subs	w8, w0, #0
+	cmp	w0, 0
+	insert	w8, w8, 31, lsl 1
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
@@ -59,7 +60,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldrb	w0, [x8, x9]
 	bl	_islower
-	subs	w8, w0, #0
+	cmp	w0, 0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
@@ -101,7 +102,7 @@ LBB0_13:
 LBB0_14:                                ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #8]
 	ldr	w9, [sp, #16]
-	mov	w10, #2
+	mov	w10, 2
 	sdiv	w9, w9, w10
 	subs	w8, w8, w9
 	cset	w8, ge
@@ -116,8 +117,8 @@ LBB0_15:                                ;   in Loop: Header=BB0_14 Depth=1
 	ldur	x8, [x29, #-8]
 	ldr	w9, [sp, #16]
 	ldr	w10, [sp, #8]
-	subs	w9, w9, w10
-	subs	w9, w9, #1
+	sub	w9, w9, w10
+	subs	w9, w9, 1
 	add	x8, x8, w9, sxtw
 	ldrb	w8, [x8]
 	ldur	x9, [x29, #-8]
@@ -128,8 +129,8 @@ LBB0_15:                                ;   in Loop: Header=BB0_14 Depth=1
 	ldur	x9, [x29, #-8]
 	ldr	w10, [sp, #16]
 	ldr	w11, [sp, #8]
-	subs	w10, w10, w11
-	subs	w10, w10, #1
+	sub	w10, w10, w11
+	subs	w10, w10, 1
 	add	x9, x9, w10, sxtw
 	strb	w8, [x9]
 	b	LBB0_16
@@ -137,7 +138,7 @@ LBB0_16:                                ;   in Loop: Header=BB0_14 Depth=1
 	ldr	w8, [sp, #8]
 	add	w8, w8, #1
 	str	w8, [sp, #8]
-	b	LBB0_14
+	b	LBB0_1
 LBB0_17:
 	b	LBB0_18
 LBB0_18:

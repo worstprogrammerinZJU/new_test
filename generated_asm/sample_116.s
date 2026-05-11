@@ -21,42 +21,41 @@ _func0:                                 ; @func0
 	stur	x8, [x29, #-24]
 	str	w0, [sp, #20]
 	add	x0, sp, #24
-	mov	x1, #4000
+	mov	x1, 4000
 	bl	_bzero
 	str	wzr, [sp, #24]
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #28]
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp, #16]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_4
+	cbnz	w8, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
-	subs	w8, w8, #1
+	subs	w8, w8, 1
 	add	x9, sp, #24
-	ldr	w8, [x9, w8, sxtw #2]
+	ldr	w8, [x9, w8, sxtw 2]
 	ldr	w10, [sp, #16]
-	subs	w10, w10, #2
-	ldr	w10, [x9, w10, sxtw #2]
-	add	w8, w8, w10
+	subs	w10, w10, 2
+	ldr	w3, [x9, w10, sxtw 2]
+	add	w8, w8, w3
 	ldrsw	x10, [sp, #16]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #16]
 	b	LBB0_1
 LBB0_4:
 	ldrsw	x9, [sp, #20]
 	add	x8, sp, #24
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	str	w8, [sp, #12]                   ; 4-byte Folded Spill
 	ldur	x9, [x29, #-24]
 	adrp	x8, ___stack_chk_guard@GOTPAGE

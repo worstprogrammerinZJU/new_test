@@ -25,7 +25,7 @@ LBB0_1:
 	b	LBB0_11
 LBB0_2:
 	str	wzr, [sp, #8]
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #4]
 	str	wzr, [sp]
 	b	LBB0_3
@@ -39,14 +39,14 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
-	ldr	w0, [x8, x9, lsl #2]
+	ldr	w0, [x8, x9, lsl 2]
 	bl	_abs
 	ldr	w8, [sp, #8]
 	add	w8, w8, w0
 	str	w8, [sp, #8]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
@@ -57,7 +57,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	subs	w8, w8, #0
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_8

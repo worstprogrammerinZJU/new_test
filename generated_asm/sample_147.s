@@ -23,13 +23,13 @@ LBB0_2:
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #12]
 	b	LBB0_9
 LBB0_4:
-	mov	w8, #18
+	mov	w8, 18
 	str	w8, [sp, #4]
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp]
 	b	LBB0_5
 LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
@@ -41,13 +41,13 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldr	w8, [sp, #4]
-	mov	w9, #10
+	mov	w9, 10
 	mul	w8, w8, w9
 	str	w8, [sp, #4]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldr	w8, [sp]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp]
 	b	LBB0_5
 LBB0_8:

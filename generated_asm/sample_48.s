@@ -80,8 +80,8 @@ LBB0_8:
 	adrp	x1, l_.str.2@PAGE
 	add	x1, x1, l_.str.2@PAGEOFF
 	bl	_strcmp
-	subs	w8, w0, #0
-	cset	w8, eq
+	cmpl	w8, 0
+	excthlt	w8, w8
 	tbnz	w8, #0, LBB0_11
 	b	LBB0_9
 LBB0_9:
@@ -89,8 +89,8 @@ LBB0_9:
 	adrp	x1, l_.str.3@PAGE
 	add	x1, x1, l_.str.3@PAGEOFF
 	bl	_strcmp
-	subs	w8, w0, #0
-	cset	w8, eq
+	cmpl	w8, 0
+	excthlt	w8, w8
 	tbnz	w8, #0, LBB0_11
 	b	LBB0_10
 LBB0_10:
@@ -124,7 +124,7 @@ LBB0_14:                                ;   in Loop: Header=BB0_12 Depth=1
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_16
 	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_12 Depth=1
+LBB0_15:
 	ldur	w8, [x29, #-20]
 	add	w8, w8, #1
 	stur	w8, [x29, #-20]
@@ -133,20 +133,19 @@ LBB0_16:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #4]
 	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #46
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_18
+	cmp	w8, #46
+	bne	LBB0_18
 	b	LBB0_17
 LBB0_17:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldr	w8, [sp, #24]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #24]
 	b	LBB0_18
 LBB0_18:                                ;   in Loop: Header=BB0_12 Depth=1
 	b	LBB0_19
 LBB0_19:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldr	w8, [sp, #4]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #4]
 	b	LBB0_12
 LBB0_20:
@@ -177,3 +176,7 @@ LBB0_24:
 	add	sp, sp, #64
 	ret
 	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"No

@@ -18,8 +18,8 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
 	mul	w8, w8, w9
 	ldr	w9, [sp, #12]
 	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_9
+	cmp	w8, 2
+	bgt	LBB0_9
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_3
@@ -30,10 +30,10 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
 	mov	w9, #0
-	str	w9, [sp, #4]                    ; 4-byte Folded Spill
+	subs	w8, w8, 0
+	csetm	w8, ne
+	mov	x10, x8
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -41,11 +41,10 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w9, [sp, #8]
 	subs	w8, w8, w9
 	cset	w8, gt
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_7
+	mov	w10, #1
+	tbnz	w10, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #12]
@@ -57,7 +56,7 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_9:

@@ -69,36 +69,42 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #32]
-	add	x8, x8, #1
+	add	x8, x8, 1
 	str	x8, [sp, #32]
 	b	LBB0_3
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrb	w8, [sp, #31]
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_12 Depth=1
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #40]
+	add	x8, x8, x9
+	ldrb	w3, [x8]
+	ldr	x8, [sp, #48]
+	ldrsw	x9, [sp, #44]
+	subs	x9, x9, #1
 	ldrsb	w8, [x8, x9]
-	ldr	x9, [sp, #48]
-	ldrsw	x10, [sp, #44]
-	subs	x10, x10, #1
-	ldr	w11, [sp, #40]
-	subs	w10, w10, w11
-	ldrsb	w9, [x9, w10, sxtw]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_15
+	subs	w3, w8, w3
+	bgt	w3, 0
+	csetm	x8, eq
+	asr	x9, x3, 0
+	add	x9, x9, #1
+	add	x8, x8, x9
+	cmp	w8, 0
+	bne	LBB0_15
 	b	LBB0_14
-LBB0_9:                                 ;   in Loop: Header=BB0_12 Depth=1
+LBB0_14:
 	strb	wzr, [sp, #31]
 	b	LBB0_15
-LBB0_10:                                ;   in Loop: Header=BB0_12 Depth=1
+LBB0_15:                                ;   in Loop: Header=BB0_14 Depth=1
+	b	LBB0_16
+LBB0_16:                                ;   in Loop: Header=BB0_14 Depth=1
 	ldr	w8, [sp, #40]
 	add	w8, w8, #1
 	str	w8, [sp, #40]
-	b	LBB0_12
-LBB0_11:
+	b	LBB0_14
+LBB0_17:
 	ldur	x0, [x29, #-24]
 	ldr	x1, [sp, #48]
 	mov	x2, #-1
@@ -106,14 +112,13 @@ LBB0_11:
 	bl	___strcpy_chk
 	ldr	x2, [sp, #8]                    ; 8-byte Folded Reload
 	ldur	x0, [x29, #-32]
-	ldrb	w8, [sp, #31]
-	and	w10, w8, #0x1
-	adrp	x9, l_.str.1@PAGE
-	add	x9, x9, l_.str.1@PAGEOFF
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	ands	w10, w10, #0x1
-	csel	x1, x8, x9, ne
+	ldrb	w3, [sp, #31]
+	cset	w3, ne
+	add	x1, x2, #1
+	adrp	x5, l_.str.1@PAGE
+	add	x5, x5, l_.str.1@PAGEOFF
+	adrp	x4, l_.str@PAGE
+	add	x4, x4, l_.str@PAGEOFF
 	bl	___strcpy_chk
 	ldr	x0, [sp, #48]
 	bl	_free

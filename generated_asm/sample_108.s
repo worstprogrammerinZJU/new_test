@@ -22,11 +22,11 @@ _func0:                                 ; @func0
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #8]
 	ldr	w9, [sp, #12]
-	mov	w10, #2
+	mov	w10, 2
 	sdiv	w9, w9, w10
 	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
+	cmp	w8, l2
+	bge	LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]
@@ -34,8 +34,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [x8, x9]
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #12]
-	subs	w10, w10, #1
-	ldr	w11, [sp, #8]
+	subs	w10, w10, 1
+	ldrsw	x11, [x9, -24]
 	subs	w10, w10, w11
 	ldrsb	w9, [x9, w10, sxtw]
 	subs	w8, w8, w9
@@ -43,7 +43,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	mov	w8, #0
+	mov	w8, 0
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	sturb	w8, [x29, #-1]
@@ -52,11 +52,11 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_6:
-	mov	w8, #1
+	mov	w8, 1
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	sturb	w8, [x29, #-1]

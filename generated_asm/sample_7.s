@@ -36,7 +36,7 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #28]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	str	w8, [sp, #24]
 	strb	wzr, [sp, #23]
 	ldr	w8, [sp, #24]
@@ -70,11 +70,11 @@ LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=2
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldr	w8, [sp, #24]
-	mov	w10, #2
+	mov	w10, 2
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-	subs	w8, w8, #0
+	cmp	w8, 0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
@@ -84,7 +84,7 @@ LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=2
 	ldr	w8, [sp, #24]
-	mov	w9, #10
+	mov	w9, 10
 	sdiv	w8, w8, w9
 	str	w8, [sp, #24]
 	b	LBB0_5
@@ -95,57 +95,67 @@ LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
 LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-24]
 	ldr	x8, [x8]
-	ldrsw	x9, [sp, #23]
-	ldr	w8, [x8, x9, lsl #2]
+	ldrsw	x3, [sp, #24]
+	ldr	w8, [x8, x3, lsl 2]
 	ldur	x9, [x29, #-24]
 	ldr	x9, [x9]
-	ldr	w10, [sp, #23]
-	add	w10, w10, #1
-	ldr	w9, [x9, w10, sxtw #2]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_21
+	ldr	w10, [sp, #24]
+	add	w10, w10, 1
+	ldr	w9, [x9, w10, sxtw 2]
+	add	w8, w8, w9
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldrsw	x10, [sp, #24]
+	str	w8, [x9, x10, lsl 2]
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	asr	w3, w8, #31
+	ldr	w8, [sp, #24]
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldr	w10, [sp, #24]
+	add	w10, w10, 1
+	ldr	w9, [x9, w10, sxtw 2]
+	add	w8, w8, w9
+	ldur	x9, [x29, #-24]
+	ldr	x9, [x9]
+	ldrsw	x10, [sp, #24]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_18 Depth=2
-	ldur	x8, [x29, #-24]
-	ldr	x8, [x8]
-	ldrsw	x9, [sp, #23]
-	ldr	w8, [x8, x9, lsl #2]
-	ldur	x9, [x29, #-24]
-	ldr	x9, [x9]
-	ldr	w10, [sp, #23]
-	add	w10, w10, #1
-	ldr	w9, [x9, w10, sxtw #2]
-	ldur	x10, [x29, #-24]
-	ldr	x10, [x10]
-	ldrsw	x11, [sp, #23]
-	str	w9, [x10, x11, lsl #2]
-	ldr	w8, [sp, #23]
-	ldur	x9, [x29, #-24]
-	ldr	x9, [x9]
-	ldr	w10, [sp, #23]
-	add	w10, w10, #1
-	str	w8, [x9, w10, sxtw #2]
-	b	LBB0_21
-LBB0_14:                                ;   in Loop: Header=BB0_18 Depth=2
-	ldr	w8, [sp, #23]
-	add	w8, w8, #1
-	str	w8, [sp, #23]
+LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, 1
+	str	w8, [sp, #24]
+	b	LBB0_1
+LBB0_15:
+	str	wzr, [sp, #20]
+	b	LBB0_16
+LBB0_16:                                ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_18 Depth 2
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #32]
+	ldr	w9, [x9]
+	subs	w9, w9, 1
+	cmp	w8, w9
+	bgt	LBB0_25
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_16 Depth=1
+	str	wzr, [sp, #16]
 	b	LBB0_18
-LBB0_15:                                ;   in Loop: Header=BB0_18 Depth=2
-	ldr	w8, [sp, #23]
-	add	w8, w8, #1
-	str	w8, [sp, #23]
-	b	LBB0_18
-LBB0_16:                                ;   in Loop: Header=BB0_18 Depth=2
-	ldr	w8, [sp, #23]
-	add	w8, w8, #1
-	str	w8, [sp, #23]
-	b	LBB0_18
-LBB0_17:
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+LBB0_18:                                ;   Parent Loop BB0_16 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #16]
+	ldr	x3, [sp, #32]
+	ldr	w3, [x3]
+	sdiv	w2, w8, w3
+	subs	w3, w8, w2
+	cset	w3, ge
+	tbnz	w3, #0, LBB0_23
+	b	LBB0_19
+LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=2
+	ldr	w8, [sp, #24]
+	asr	w3, w8, #31
+	ldr	w8, [sp, #32]
+	ldr	w3, [x8, w3, sxtw 2]
+	ldr	x9, [sp

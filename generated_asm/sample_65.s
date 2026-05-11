@@ -15,58 +15,61 @@ _func0:                                 ; @func0
 	str	s0, [sp, #8]
 	str	s1, [sp, #4]
 	str	s2, [sp]
+	ldr	s2, [sp, #8]
 	ldr	s0, [sp, #8]
-	ldr	s1, [sp, #8]
-	ldr	s2, [sp, #4]
+	ldr	s1, [sp, #4]
 	ldr	s3, [sp, #4]
-	fmul	s2, s2, s3
-	fmadd	s2, s0, s1, s2
-	ldr	s0, [sp]
+	fmul	s1, s1, s3
+	fmadd	s2, s2, s1, s3
+	ldr	s3, [sp]
 	ldr	s1, [sp]
-	fmsub	s0, s0, s1, s2
-	fcvt	d0, s0
+	fmsub	s1, s1, s3, s2
+	fcvt	d1, s1
+	fabs	d1, d1
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, mi
+	cset	w8, gt
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_1
 LBB0_1:
-	ldr	s0, [sp, #8]
-	ldr	s1, [sp, #8]
-	ldr	s2, [sp]
-	ldr	s3, [sp]
-	fmul	s2, s2, s3
-	fmadd	s2, s0, s1, s2
-	ldr	s0, [sp, #4]
+	ldr	s2, [sp, #8]
+	ldr	s3, [sp, #8]
+	ldr	s4, [sp]
+	ldr	s5, [sp]
+	fmul	s3, s3, s5
+	fmadd	s2, s2, s3, s4
+	ldr	s3, [sp, #4]
 	ldr	s1, [sp, #4]
-	fmsub	s0, s0, s1, s2
-	fcvt	d0, s0
+	fmsub	s1, s1, s3, s2
+	fcvt	d1, s1
+	fabs	d1, d1
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, mi
+	cset	w8, gt
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:
-	ldr	s0, [sp, #4]
-	ldr	s1, [sp, #4]
-	ldr	s2, [sp]
-	ldr	s3, [sp]
-	fmul	s2, s2, s3
-	fmadd	s2, s0, s1, s2
-	ldr	s0, [sp, #8]
+	ldr	s2, [sp, #4]
+	ldr	s3, [sp, #4]
+	ldr	s4, [sp]
+	ldr	s5, [sp]
+	fmul	s3, s3, s5
+	fmadd	s2, s2, s3, s4
+	ldr	s3, [sp, #8]
 	ldr	s1, [sp, #8]
-	fmsub	s0, s0, s1, s2
-	fcvt	d0, s0
+	fmsub	s1, s1, s3, s2
+	fcvt	d1, s1
+	fabs	d1, d1
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
 	cset	w8, le
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #12]
 	b	LBB0_5
 LBB0_4:

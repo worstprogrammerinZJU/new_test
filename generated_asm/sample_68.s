@@ -24,7 +24,7 @@ LBB0_1:
 	ldr	x9, [sp, #8]
 	str	w8, [x9]
 	ldr	x8, [sp, #8]
-	str	wzr, [x8, #4]
+	str	wzr, [x8, 4]
 	b	LBB0_3
 LBB0_2:
 	ldr	w8, [sp, #28]
@@ -36,7 +36,7 @@ LBB0_2:
 	ldr	w9, [sp, #24]
 	subs	w8, w8, w9
 	ldr	x9, [sp, #8]
-	str	w8, [x9, #4]
+	str	w8, [x9, 4]
 	b	LBB0_3
 LBB0_3:
 	add	sp, sp, #32

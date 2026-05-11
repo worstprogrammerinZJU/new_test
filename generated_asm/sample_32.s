@@ -60,7 +60,7 @@ LBB0_7:
 	str	x8, [sp, #40]
 	b	LBB0_15
 LBB0_8:
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp, #8]
 	b	LBB0_9
 LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
@@ -78,9 +78,8 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_12
+	cmp	w8, 0
+	bne	LBB0_12
 	b	LBB0_11
 LBB0_11:
 	adrp	x8, l_.str@PAGE
@@ -91,7 +90,7 @@ LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=1
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_9
 LBB0_14:

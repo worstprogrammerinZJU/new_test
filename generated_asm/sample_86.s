@@ -27,7 +27,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #20]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	bl	_strlen
 	ldrsw	x8, [sp, #24]
 	add	x8, x8, x0
@@ -36,12 +36,12 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #20]
 	b	LBB0_1
 LBB0_4:
 	ldr	w8, [sp, #24]
-	add	w9, w8, #1
+	add	w9, w8, 1
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x0, w8
@@ -72,13 +72,13 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	x0, [sp, #8]
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #4]
-	ldr	x1, [x8, x9, lsl #3]
+	ldr	x1, [x8, x9, lsl 3]
 	mov	x2, #-1
 	bl	___strcat_chk
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	w8, [sp, #4]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #4]
 	b	LBB0_7
 LBB0_10:

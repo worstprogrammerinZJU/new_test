@@ -12,16 +12,6 @@ _func0:                                 ; @func0
 	str	s2, [sp]
 	ldr	s0, [sp, #8]
 	fcvtas	x1, s0
-	ldr	s0, [sp, #4]
-	fcvtas	x2, s0
-	ldr	s0, [sp]
-	fcvtas	x3, s0
-	ldr	s0, [sp, #8]
-	fcvtas	x4, s0
-	ldr	s0, [sp, #4]
-	fcvtas	x5, s0
-	ldr	s0, [sp]
-	fcvtas	x6, s0
 	add	sp, sp, #16
 	ret
 	.cfi_endproc

@@ -14,7 +14,7 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	mov	w8, #0
+	mov	w8, -1
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
@@ -37,13 +37,14 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x10, [sp, #8]
 	sdiv	x9, x8, x10
 	mul	x9, x9, x10
+	eor	x9, x9, x10
 	subs	x8, x8, x9
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #0
+	mov	w8, -1
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
@@ -57,7 +58,7 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_8:
 	mov	w8, #1
-	and	w8, w8, #0x1
+	and	w8, w8, w9
 	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
 	b	LBB0_9

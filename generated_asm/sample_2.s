@@ -23,14 +23,14 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	ldr	d0, [sp, #16]
-	fmov	d1, #0.50000000
+	fmov	d1, 0.50000000
 	fsub	d0, d0, d1
 	frintp	d0, d0
 	str	d0, [sp, #8]                    ; 8-byte Folded Spill
 	b	LBB0_3
 LBB0_2:
 	ldr	d0, [sp, #16]
-	fmov	d1, #0.50000000
+	fmov	d1, 0.50000000
 	fadd	d0, d0, d1
 	frintm	d0, d0
 	str	d0, [sp, #8]                    ; 8-byte Folded Spill

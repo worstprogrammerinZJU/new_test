@@ -10,7 +10,7 @@ _func0:                                 ; @func0
 	str	w0, [sp, #24]
 	str	w1, [sp, #20]
 	str	w2, [sp, #16]
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #12]
 	ldr	w8, [sp, #24]
 	subs	w8, w8, #2
@@ -21,7 +21,7 @@ LBB0_1:
 	str	wzr, [sp, #12]
 	b	LBB0_2
 LBB0_2:
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp, #8]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
@@ -50,7 +50,7 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_3
 LBB0_8:

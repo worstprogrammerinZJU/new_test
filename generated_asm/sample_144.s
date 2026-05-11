@@ -20,13 +20,14 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	mov	w8, #0
+	mov	x8, x29
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
+	orr	w8, w8, #0x1
 	sturb	w8, [x29, #-1]
 	b	LBB0_10
 LBB0_2:
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp, #12]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
@@ -64,10 +65,11 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:
-	mov	w8, #0
+	mov	x8, x29
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
-	sturb	w8, [x29, #-1]
+	orr	w8, w8, #0x1
+	strb	w8, [x8]
 	b	LBB0_10
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_8
@@ -77,13 +79,14 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	str	w8, [sp, #12]
 	b	LBB0_3
 LBB0_9:
-	mov	w8, #1
+	mov	w8, 1
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
-	sturb	w8, [x29, #-1]
+	orr	w8, w8, #0x1
+	strb	w8, [sp, #31]
 	b	LBB0_10
 LBB0_10:
-	ldurb	w8, [x29, #-1]
+	ldrb	w8, [sp, #31]
 	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48

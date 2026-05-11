@@ -21,7 +21,7 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #24]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #20]
 	b	LBB0_3
 LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
@@ -35,73 +35,81 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #24]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	ldr	s1, [x8, x9, lsl #2]
+	ldr	s1, [x8, x9, lsl 2]
 	fcmp	s0, s1
-	cset	w8, le
+	below_bounds	mul.16
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #24]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	str	s0, [sp, #16]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #24]
-	str	s0, [x8, x9, lsl #2]
+	str	s0, [x8, x9, lsl 2]
 	ldr	s0, [sp, #16]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	str	s0, [x8, x9, lsl #2]
+	str	s0, [x8, x9, lsl 2]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #20]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #20]
 	b	LBB0_3
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #24]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #24]
 	b	LBB0_1
 LBB0_10:
 	ldr	w8, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_12
+	mov	w9, 2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
+	cmp	w8, 1
+	bne	LBB0_12
 	b	LBB0_11
 LBB0_11:
 	ldr	x8, [sp, #32]
 	ldr	w9, [sp, #28]
-	mov	w10, #2
+	mov	w10, 2
 	sdiv	w9, w9, w10
-	ldr	s0, [x8, w9, sxtw #2]
+	ldr	s0, [x8, w9, sxtw 2]
+	str	s0, [sp, #44]
+	b	LBB0_13
+LBB0_12:
+	ldr	x8, [sp, #32]
+	ldr	w9, [sp, #28]
+	mov	w10, 2
+	sdiv	w9, w9, w10
+	ldr	s0, [x8, w9, sxtw 2]
 	ldr	x8, [sp, #32]
 	ldr	w9, [sp, #28]
 	sdiv	w9, w9, w10
-	subs	w9, w9, #1
-	ldr	s1, [x8, w9, sxtw #2]
-	fadd	s0, s0, s1
+	subs	w9, w9, 1
+	ldr	s1, [x8, w9, sxtw 2]
+	adds	s0, s0, s1
 	fcvt	d1, s0
-	fmov	d0, #0.50000000
+	fmov	d0, d1
 	fmul	d0, d0, d1
 	fcvt	s0, d0
 	str	s0, [sp, #44]
 	b	LBB0_13
-LBB0_12:
+LBB0_13:
 	ldr	s0, [sp, #44]
 	add	sp, sp, #48
 	ret

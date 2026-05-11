@@ -27,78 +27,55 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	fcvt	d0, s0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s1, [x8, x9, lsl #2]
-	fcvt	d1, s1
-	fabs	d1, d1
-	fmov	d2, #2.00000000
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	orr	d2, d2, d3
-	fadd	d1, d1, d2
-	fsub	d1, d0, d1
-	fabs	d0, d0
+	ldr	s2, [x8, x9, lsl 2]
+	ucvtf	d2, s2
 	adrp	x8, lCPI0_0@PAGE
 	ldr	d1, [x8, lCPI0_0@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #2.00000000
+	orr	d2, d2, d1
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d0, [x8, lCPI0_0@PAGEOFF]
-	orr	d2, d2, d0
-	fadd	d1, d1, d2
-	fcvtzs	w8, d1
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	add	x8, x8, lCPI0_0@PAGEOFF
+	add.2s	v0, v0, d2
+	fadd	v0, v0, v0, v0
+	adrp	x8, lCPI0_0@PAGE
+	add	x8, x8, lCPI0_0@PAGEOFF
+	adrp	x4, lCPI0_0@PAGE
+	add	x4, x4, lCPI0_0@PAGEOFF
+	ldr	d2, [x8, lCPI0_0@PAGEOFF]
+	ldr	d3, [x4, lCPI0_0@PAGEOFF]
+	eor	d3, d3, d2
+	add.2s	v1, v1, d3
+	fdiv	v0, v0, v1
+	frintm	v0, v0
+	bl	_rnd
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #2.00000000
+	ldr	s0, [x8, x9, lsl 2]
+	fcvt	d0, s0
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s2, [x8, x9, lsl 2]
+	ucvtf	s2, s2
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d0, [x8, lCPI0_0@PAGEOFF]
-	orr	d2, d2, d0
-	fadd	d1, d1, d2
-	fcvtzs	w8, d1
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #4]
-	ldr	s0, [x9, x10, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d0, #2.00000000
-	orr	d1, d1, d0
-	fadd	d0, d0, d1
-	fcvtzs	w8, d0
-	mul	w9, w8, w9
-	ldr	x8, [sp, #8]
-	add	x8, x8, w9, sxtw
+	add	x8, x8, lCPI0_0@PAGEOFF
+	orr	s2, s2, d2
+	ldr	d3, [x8, lCPI0_0@PAGEOFF]
+	orr	d3, d3, d1
+	add.2s	v2, v2, d3
+	ldr	d3, [x4, lCPI0_0@PAGEOFF]
+	eor	d3, d3, d2
+	ldr	s4, [x8, lCPI0_0@PAGEOFF]
+	orr	s3, s3, d4
+	ldr	d3, [x4, lCPI0_0@PAGEOFF]
+	orr	d3, d3, d2
+	add.2s	v3, v3, d3
+	fmul	w9, w0, w3
+	mul	x3, x3, x4
+	add	x8, x8, x9
+	add	x8, x8, x3
 	str	x8, [sp, #8]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1

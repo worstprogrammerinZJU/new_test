@@ -26,8 +26,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	bl	_abs
 	ldr	w8, [sp, #16]                   ; 4-byte Folded Reload
 	subs	w8, w8, w0
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_6
+	cmp	w8, lsl 4
+	bgt	LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-12]
@@ -44,14 +44,14 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	mov	w8, #1
+	mov	w8, 1
 	stur	w8, [x29, #-4]
 	b	LBB0_7
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-12]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	stur	w8, [x29, #-12]
 	b	LBB0_1
 LBB0_6:

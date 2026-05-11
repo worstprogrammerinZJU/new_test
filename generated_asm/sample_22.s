@@ -44,7 +44,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
 	ldur	x8, [x29, #-16]
 	ldr	w9, [sp, #12]
-	add	w9, w9, #1
+	add	w9, w9, 1
 	ldrsb	w1, [x8, w9, sxtw]
 	bl	_strchr
 	subs	x8, x0, #0
@@ -68,9 +68,8 @@ LBB0_5:
 	add	x8, x8, x9
 	ldrb	w9, [x8]
 	adrp	x8, _func0.out@PAGE
-	adrp	x0, _func0.out@PAGE
-	add	x0, x0, _func0.out@PAGEOFF
-	strb	w9, [x0]
+	add	x8, x8, _func0.out@PAGEOFF
+	strb	w9, [x8]
 	stur	x8, [x29, #-8]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1

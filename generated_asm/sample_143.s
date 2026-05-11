@@ -26,7 +26,7 @@ LBB0_1:
 	stur	xzr, [x29, #-8]
 	b	LBB0_11
 LBB0_2:
-	mov	w8, #62
+	mov	w8, 62
 	stur	w8, [x29, #-28]
 	ldur	x8, [x29, #-24]
 	strb	wzr, [x8, #63]
@@ -39,10 +39,13 @@ LBB0_3:
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
 	mov	x10, x9
-	subs	w10, w10, #1
-	stur	w10, [x29, #-28]
-	add	x9, x8, x9
-	mov	w8, #48
+	str	w10, [sp, #20]                  ; 4-byte Folded Spill
+	sdiv	w10, w9, w8
+	mul	w10, w10, w8
+	subs	w9, w9, w10
+	str	w9, [sp, #20]                   ; 4-byte Folded Spill
+	add	x9, x8, w9, sxtw
+	mov	w8, 48
 	strb	w8, [x9]
 	b	LBB0_8
 LBB0_4:
@@ -55,20 +58,19 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldur	w8, [x29, #-12]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldur	x10, [x29, #-24]
+	mov	w10, 2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	add	w8, w8, 48
+	ldur	x9, [x29, #-24]
 	ldursw	x11, [x29, #-28]
 	mov	x12, x11
-	subs	w12, w12, #1
+	subs	w12, w12, 1
 	stur	w12, [x29, #-28]
-	add	x10, x10, x11
-	strb	w8, [x10]
+	strb	w8, [x9]
 	ldur	w8, [x29, #-12]
-	sdiv	w8, w8, w9
+	sdiv	w8, w8, w10
 	stur	w8, [x29, #-12]
 	b	LBB0_5
 LBB0_7:
@@ -77,31 +79,29 @@ LBB0_8:
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
 	mov	x10, x9
-	subs	w10, w10, #1
+	subs	w10, w10, 1
 	stur	w10, [x29, #-28]
 	add	x9, x8, x9
-	mov	w8, #98
+	mov	w8, 98
 	strb	w8, [x9]
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
 	mov	x10, x9
-	subs	w10, w10, #1
+	add	w10, w10, 1
 	stur	w10, [x29, #-28]
 	add	x9, x8, x9
-	mov	w8, #100
+	mov	w8, 100
 	strb	w8, [x9]
 	ldur	w8, [x29, #-28]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #32]
 	ldr	w9, [sp, #32]
 	mov	w8, #62
 	subs	w8, w8, w9
 	str	w8, [sp, #28]
 	ldr	w8, [sp, #28]
-	add	w9, w8, #3
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x0, w8
+	add	w8, w8, 3
+	mov	x0, x8
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]

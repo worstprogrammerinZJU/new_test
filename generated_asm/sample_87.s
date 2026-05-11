@@ -10,8 +10,8 @@ _func0:                                 ; @func0
 	str	s0, [sp, #12]
 	ldr	s0, [sp, #12]
 	ldr	s1, [sp, #12]
-	fcvtzs	w8, s1
-	scvtf	s1, w8
+	fcvtzs	s1, s1
+	ucvtf	s1, s1
 	fsub	s0, s0, s1
 	add	sp, sp, #16
 	ret

@@ -28,7 +28,7 @@ LBB0_1:
 LBB0_2:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
-	subs	w9, w9, #1
+	subs	w9, w9, 1
 	add	x8, x8, w9, sxtw
 	ldrb	w8, [x8]
 	strb	w8, [sp, #11]
@@ -48,13 +48,13 @@ LBB0_4:
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #1
+	mov	w8, 1
 	stur	w8, [x29, #-4]
 	b	LBB0_9
 LBB0_6:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
-	subs	w9, w9, #2
+	subs	w9, w9, 2
 	add	x8, x8, w9, sxtw
 	ldrb	w8, [x8]
 	strb	w8, [sp, #10]
@@ -68,7 +68,7 @@ LBB0_7:
 	stur	wzr, [x29, #-4]
 	b	LBB0_9
 LBB0_8:
-	mov	w8, #1
+	mov	w8, 1
 	stur	w8, [x29, #-4]
 	b	LBB0_9
 LBB0_9:

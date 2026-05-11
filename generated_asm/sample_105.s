@@ -13,7 +13,7 @@ _func0:                                 ; @func0
 	ldr	s1, [sp, #8]
 	fmul	s0, s0, s1
 	fcvt	d0, s0
-	fmov	d1, #0.50000000
+	fmov	d1, 0.50000000
 	fmul	d0, d0, d1
 	fcvt	s0, d0
 	add	sp, sp, #16

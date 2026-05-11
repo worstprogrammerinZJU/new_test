@@ -14,9 +14,8 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
-	ldursw	x9, [x29, #-12]
-	mov	x8, #8
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #3
 	bl	_malloc
 	stur	x0, [x29, #-24]
 	stur	wzr, [x29, #-28]
@@ -37,7 +36,7 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	ldur	x8, [x29, #-8]
 	ldursw	x9, [x29, #-28]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	ldrsw	x9, [sp, #28]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #0
@@ -47,17 +46,16 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-8]
 	ldursw	x9, [x29, #-28]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	ldrsw	x9, [sp, #28]
 	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #48
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_8
+	cmp	w8, 48
+	bgt	LBB0_8
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-8]
 	ldursw	x9, [x29, #-28]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	ldrsw	x9, [sp, #28]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #57
@@ -67,17 +65,18 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-8]
 	ldursw	x9, [x29, #-28]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	ldrsw	x9, [sp, #28]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #48
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w11, 2
+	sdiv	w10, w8, w11
+	mul	w10, w10, w11
+	subs	w9, w8, w9
+	sdiv	w8, w9, w11
 	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
+	csel	w9, w8, w9, le
+	bne	w9, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #32]
@@ -92,32 +91,21 @@ LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=2
 	str	w8, [sp, #28]
 	b	LBB0_3
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	mov	x0, #100
-	bl	_malloc
+	mov	x8, 48
+	mov	w0, 100
+	blr	x8
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
-	str	x0, [x8, x9, lsl #3]
+	str	x0, [x8, x9, lsl 3]
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
-	ldr	x0, [x8, x9, lsl #3]
-	ldr	w8, [sp, #32]
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	ldr	w9, [sp, #32]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	ldr	w9, [sp, #32]
-                                        ; implicit-def: $x11
-	mov	x11, x9
-	ldr	w9, [sp, #32]
-	mov	x9, sp
-	str	x10, [x9]
-	str	x8, [x9, #8]
-	str	x11, [x9, #16]
-	str	x10, [x9, #24]
-	str	x8, [x9, #32]
-	mov	w1, #0
-	mov	x2, #-1
+	ldr	x0, [x8, x9, lsl 3]
+	ldr	w4, [sp, #32]
+	ldr	w5, [sp, #32]
+	ldr	w6, [sp, #32]
+	mov	x8, sp
+	mov	x7, #-1
+	str	xzr, [x8]
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk

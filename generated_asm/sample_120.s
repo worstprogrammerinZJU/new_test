@@ -22,14 +22,13 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	ldur	w9, [x29, #-12]
-	mov	w8, #2
-	mul	w8, w8, w9
-	subs	w8, w8, #1
+	ldur	w8, [x29, #-12]
+	lsl	w8, w8, 1
+	subs	w8, w8, 1
 	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_3
 LBB0_2:
-	mov	w8, #0
+	mov	w8, 0
 	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_3
 LBB0_3:
@@ -37,12 +36,13 @@ LBB0_3:
 	ldr	x9, [sp, #24]
 	str	w8, [x9]
 	ldr	x8, [sp, #24]
-	ldrsw	x8, [x8]
-	lsl	x0, x8, #2
+	ldrsw	x9, [x8]
+	mov	x8, #4
+	mul	x0, x8, x9
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldur	w8, [x29, #-12]
-	subs	w8, w8, #0
+	subs	w8, w8, 0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
@@ -53,7 +53,7 @@ LBB0_4:
 	str	w8, [x9]
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #12]
 	str	w8, [sp, #8]
 	b	LBB0_6
@@ -69,22 +69,22 @@ LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ldr	x9, [sp, #16]
 	ldrsw	x10, [sp, #8]
 	mov	x11, x10
-	add	w11, w11, #1
+	add	w11, w11, 1
 	str	w11, [sp, #8]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	ldr	x9, [sp, #16]
 	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #8]
-	str	w8, [x9, x10, lsl #2]
+	mov	x12, x10
+	add	w12, w12, 1
+	str	w12, [sp, #8]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ldr	w8, [sp, #12]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #12]
 	b	LBB0_6
 LBB0_9:

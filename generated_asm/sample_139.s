@@ -9,7 +9,7 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 32
 	str	w0, [sp, #24]
 	str	w1, [sp, #20]
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #16]
 	str	wzr, [sp, #12]
 	b	LBB0_1
@@ -17,30 +17,27 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #24]
 	subs	w8, w8, w9
-	cset	w8, gt
-	mov	w9, #0
-	str	w9, [sp, #8]                    ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_3
+	cmp	w8, 100
+	bgt	LBB0_3
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #12]
 	subs	w8, w8, #100
-	cset	w8, lt
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	csetm	w8, lt
+	str	w8, [sp, #12]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_7
+	add	sp, sp, #32
+	tbnz	w8, #1, LBB0_7
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #24]
 	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
+	csetm	w8, ne
+	b	LBB0_6
 LBB0_5:
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #28]
 	b	LBB0_8
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -49,7 +46,7 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	mul	w8, w8, w9
 	str	w8, [sp, #16]
 	ldr	w8, [sp, #12]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #12]
 	b	LBB0_1
 LBB0_7:

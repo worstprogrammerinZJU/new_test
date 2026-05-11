@@ -15,7 +15,7 @@ _func0:                                 ; @func0
 	ldr	x8, [sp, #24]
 	ldr	s0, [x8]
 	str	s0, [sp, #12]
-	mov	w8, #1
+	mov	w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
@@ -28,7 +28,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	ldr	s1, [sp, #16]
 	fcmp	s0, s1
 	cset	w8, pl
@@ -37,13 +37,13 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	str	s0, [sp, #16]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	ldr	s1, [sp, #12]
 	fcmp	s0, s1
 	cset	w8, le
@@ -52,7 +52,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	str	s0, [sp, #12]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -75,7 +75,7 @@ LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	ldr	s1, [sp, #16]
 	fsub	s0, s0, s1
 	ldr	s1, [sp, #12]
@@ -84,7 +84,7 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	fdiv	s0, s0, s1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	str	s0, [x8, x9, lsl #2]
+	str	s0, [x8, x9, lsl 2]
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #4]

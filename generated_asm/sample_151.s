@@ -34,7 +34,7 @@ LBB0_1:                                 ; =>This Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-24]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	subs	w8, w8, #1
 	str	w8, [sp, #4]
 	b	LBB0_3
@@ -48,9 +48,9 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #8]
-	ldr	x8, [x8, x9, lsl #3]
+	ldr	x8, [x8, x9, lsl 3]
 	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
+	ldr	w8, [x8, x9, lsl 2]
 	ldur	w9, [x29, #-28]
 	subs	w8, w8, w9
 	cset	w8, ne
@@ -61,17 +61,17 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	bl	_malloc
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	str	x0, [x8, x9, lsl #3]
+	str	x0, [x8, x9, lsl 3]
 	ldr	w8, [sp, #8]
 	ldr	x9, [sp, #16]
 	ldrsw	x10, [sp, #12]
-	ldr	x9, [x9, x10, lsl #3]
+	ldr	x9, [x9, x10, lsl 3]
 	str	w8, [x9]
 	ldr	w8, [sp, #4]
 	ldr	x9, [sp, #16]
 	ldrsw	x10, [sp, #12]
-	ldr	x9, [x9, x10, lsl #3]
-	str	w8, [x9, #4]
+	ldr	x9, [x9, x10, lsl 3]
+	str	w8, [x9, 4]
 	ldr	w8, [sp, #12]
 	add	w8, w8, #1
 	str	w8, [sp, #12]
@@ -87,11 +87,11 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_10:
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, 12]
 	ldr	x9, [sp, #24]
 	str	w8, [x9]
 	ldr	x0, [sp, #16]

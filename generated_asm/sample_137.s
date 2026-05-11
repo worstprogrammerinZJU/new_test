@@ -30,7 +30,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #8]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	bl	_strlen
 	ldrsw	x8, [sp, #4]
 	add	x8, x8, x0
@@ -39,7 +39,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_4:
@@ -55,7 +55,7 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	bl	_strlen
 	ldrsw	x8, [sp]
 	add	x8, x8, x0
@@ -64,7 +64,7 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #8]
 	b	LBB0_5
 LBB0_8:

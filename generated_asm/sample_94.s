@@ -9,7 +9,8 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 32
 	str	x0, [sp, #24]
 	str	w1, [sp, #20]
-	mov	w8, #-1027862912
+	mov	w8, #-10000
+	movk	w8, #57050, lsl 16
 	fmov	s0, w8
 	str	s0, [sp, #16]
 	str	wzr, [sp, #12]
@@ -25,7 +26,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	s0, [sp, #16]
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	ldr	s1, [x8, x9, lsl #2]
+	ldr	s1, [x8, x9, lsl 2]
 	fcmp	s0, s1
 	cset	w8, pl
 	tbnz	w8, #0, LBB0_4
@@ -33,7 +34,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
+	ldr	s0, [x8, x9, lsl 2]
 	str	s0, [sp, #16]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1

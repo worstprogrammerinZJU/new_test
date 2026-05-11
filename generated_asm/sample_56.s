@@ -18,13 +18,12 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	stur	w8, [x29, #-20]
-	ldursw	x9, [x29, #-20]
-	mov	x8, #8
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-20]
+	lsl	x0, x8, 3
 	bl	_malloc
 	str	x0, [sp, #32]
 	ldur	w8, [x29, #-20]
-	add	w9, w8, #1
+	add	w9, w8, 1
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x0, w8
@@ -47,7 +46,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	x0, [sp, #8]
 	ldr	x0, [sp, #24]
 	ldr	x8, [sp, #8]
-	add	x1, x8, #2
+	add	x1, x8, 2
 	bl	_realloc
 	str	x0, [sp, #24]
 	ldur	x8, [x29, #-8]
@@ -60,26 +59,26 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	strb	w8, [x9]
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #8]
-	add	x9, x8, x9
-	mov	x8, #255
-	strb	wzr, [x9, x8]
+	add	x9, x9, 1
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldr	x0, [sp, #24]
 	bl	_strlen
-	add	x0, x0, #1
+	add	x0, x0, 1
 	bl	_malloc
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	str	x0, [x8, x9, lsl #3]
+	str	x0, [x8, x9, lsl 3]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	ldr	x0, [x8, x9, lsl #3]
+	ldr	x0, [x8, x9, lsl 3]
 	ldr	x1, [sp, #24]
 	mov	x2, #-1
 	bl	___strcpy_chk
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #20]
 	b	LBB0_1
 LBB0_4:

@@ -14,12 +14,12 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
 	str	x1, [sp, #16]
-	mov	w0, #256
+	mov	x0, #256
 	bl	_malloc
 	str	x0, [sp, #8]
 	ldr	x8, [sp, #16]
 	str	wzr, [x8]
-	mov	w8, #2
+	mov	w8, 2
 	str	w8, [sp, #4]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Loop Header: Depth=1
@@ -48,22 +48,22 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	w8, [x29, #-4]
 	ldr	w9, [sp, #4]
-	sdiv	w8, w8, w9
+	div	w8, w8, w9
 	stur	w8, [x29, #-4]
 	ldr	w8, [sp, #4]
 	ldr	x9, [sp, #8]
 	ldr	x12, [sp, #16]
 	ldrsw	x10, [x12]
 	mov	x11, x10
-	add	w11, w11, #1
+	add	w11, w11, 1
 	str	w11, [x12]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_3
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #4]
 	b	LBB0_1
 LBB0_7:
@@ -78,9 +78,9 @@ LBB0_8:
 	ldr	x12, [sp, #16]
 	ldrsw	x10, [x12]
 	mov	x11, x10
-	add	w11, w11, #1
+	add	w11, w11, 1
 	str	w11, [x12]
-	str	w8, [x9, x10, lsl #2]
+	str	w8, [x9, x10, lsl 2]
 	b	LBB0_9
 LBB0_9:
 	ldr	x0, [sp, #8]

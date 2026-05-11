@@ -18,7 +18,7 @@ _func0:                                 ; @func0
 	stur	x8, [x29, #-8]
 	str	w0, [sp, #20]
 	str	x1, [sp, #8]
-	add	x0, sp, #104
+	add	x0, sp, 104
 	adrp	x1, l___const.func0.rep@PAGE
 	add	x1, x1, l___const.func0.rep@PAGEOFF
 	mov	x2, #104
@@ -46,7 +46,7 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	ldr	w8, [sp, #20]
 	ldrsw	x10, [sp, #4]
 	add	x9, sp, #24
-	ldr	w9, [x9, x10, lsl #2]
+	ldr	w9, [x9, x10, lsl 2]
 	subs	w8, w8, w9
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_5
@@ -56,12 +56,12 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #4]
 	add	x8, sp, #104
 	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldr	x1, [x8, x9, lsl #3]
+	ldr	x1, [x8, x9, lsl 3]
 	mov	x2, #-1
 	bl	___strcat_chk
 	ldr	x9, [sp]                        ; 8-byte Folded Reload
 	ldrsw	x8, [sp, #4]
-	ldr	w9, [x9, x8, lsl #2]
+	ldr	w9, [x9, x8, lsl 2]
 	ldr	w8, [sp, #20]
 	subs	w8, w8, w9
 	str	w8, [sp, #20]
@@ -74,7 +74,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]
-	add	w8, w8, #1
+	add	w8, w8, 1
 	str	w8, [sp, #4]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -154,7 +154,7 @@ l___const.func0.rep:
 	.quad	l_.str.12
 
 	.section	__TEXT,__const
-	.p2align	3                               ; @__const.func0.num
+	.p2align	2                               ; @__const.func0.num
 l___const.func0.num:
 	.long	1000                            ; 0x3e8
 	.long	900                             ; 0x384

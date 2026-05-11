@@ -18,7 +18,7 @@ _func0:                                 ; @func0
 	stur	xzr, [x29, #-24]
 	stur	wzr, [x29, #-28]
 	stur	wzr, [x29, #-32]
-	stur	wzr, [x29, #-35]
+	sturh	wzr, [x29, #-36]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
 	add	x8, x0, #1
@@ -34,9 +34,9 @@ _func0:                                 ; @func0
 	ldr	x0, [sp, #32]
 	ldur	x1, [x29, #-8]
 	mov	x2, #-1
-	str	x2, [sp, #16]                   ; 8-byte Folded Spill
+	str	x2, [sp, #8]                    ; 8-byte Folded Spill
 	bl	___strcpy_chk
-	ldr	x2, [sp, #16]                   ; 8-byte Folded Reload
+	ldr	x2, [sp, #8]                    ; 8-byte Folded Reload
 	ldr	x0, [sp, #32]
 	adrp	x1, l_.str@PAGE
 	add	x1, x1, l_.str@PAGEOFF
@@ -53,17 +53,17 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #28]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #32
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_25
+	ldrsb	w9, [x8, x9]
+	subs	w9, w9, 32
+	cset	w9, ne
+	tbnz	w9, #0, LBB0_25
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	sub	x0, x29, #35
+	sub	x0, x29, #36
 	adrp	x1, l_.str.1@PAGE
 	add	x1, x1, l_.str.1@PAGEOFF
 	bl	_strcmp
-	subs	w8, w0, #0
+	subs	w8, w0, 0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_4
@@ -82,37 +82,36 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-32]
-	lsl	w8, w8, #1
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	lsl	w8, w8, 1
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_8
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	mov	w8, #4
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	mov	w8, 4
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
-	stur	w8, [x29, #-32]
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	stur	w8, [x29, #-36]
 	ldur	x0, [x29, #-24]
-	ldursw	x8, [x29, #-32]
-	lsl	x1, x8, #2
+	ldursw	x8, [x29, #-36]
+	lsl	x1, x8, 2
 	bl	_realloc
 	stur	x0, [x29, #-24]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x9, [x29, #-24]
-	ldursw	x10, [x29, #-28]
-	mov	x8, x10
-	add	w8, w8, #1
-	stur	w8, [x29, #-28]
-	mov	w8, #2
-	str	w8, [x9, x10, lsl #2]
+	ldur	x8, [x29, #-24]
+	ldur	w9, [x29, #-28]
+	add	w9, w9, 1
+	stur	w9, [x29, #-28]
+	mov	w9, 2
+	str	w9, [x8, w9, sxtw 2]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	sub	x0, x29, #35
+	sub	x0, x29, #36
 	adrp	x1, l_.str.2@PAGE
 	add	x1, x1, l_.str.2@PAGEOFF
 	bl	_strcmp
-	subs	w8, w0, #0
+	subs	w8, w0, 0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_24
 	b	LBB0_11
@@ -122,45 +121,40 @@ LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
 	add	x8, x8, x9
 	ldrb	w8, [x8]
 	ldr	x10, [sp, #32]
-	sub	x9, x29, #35
-	add	x9, x9, x10
+	sub	x9, x29, #36
 	strb	w8, [x9]
-	ldr	x9, [sp, #32]
-	add	x8, sp, #40
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	b	LBB0_12
+	ldr	x10, [sp, #32]
+	add	x9, x9, #24
+	add	x9, x9, x10
+	strb	wzr, [x9]
+	b	LBB0_24
 LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	sub	x0, x29, #36
+	adrp	x1, l_.str.3@PAGE
+	add	x1, x1, l_.str.3@PAGEOFF
+	bl	_strcmp
+	subs	w8, w0, 0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_23
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #28]
-	add	w8, w8, #1
-	str	w8, [sp, #28]
-	b	LBB0_1
-LBB0_13:
-	ldr	x0, [sp, #32]
-	bl	_free
-	ldur	w8, [x29, #-28]
-	ldur	x9, [x29, #-16]
-	str	w8, [x9]
-	ldur	x0, [x29, #-24]
-	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
-	add	sp, sp, #96
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	" "
-
-l_.str.1:                               ; @.str.1
-	.asciz	"o"
-
-l_.str.2:                               ; @.str.2
-	.asciz	"o|"
-
-l_.str.3:                               ; @.str.3
-	.asciz	".|"
-
-l_.str.4:                               ; @.str.4
-	.space	1
-
-.subsections_via_symbols
+	lsl	w8, w8, 1
+	str	w8, [sp]                        ; 4-byte Folded Spill
+	b	LBB0_15
+LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	sub	x0, x29, #36
+	adrp	x1, l_.str.4@PAGE
+	add	x1, x1, l_.str.4@PAGEOFF
+	bl	_strcmp
+	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	str	x0, [sp, #40]
+	ldr	w9, [sp, #40]
+	add	w9, w9, 1
+	stur	w9, [x29, #-36]
+	strb	w8, [x8, w9, sxtw 2]
+	b	LBB0_23
+LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
+	sub	x0, x29, #36
