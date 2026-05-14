@@ -1,46 +1,207 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	w0, [sp, #28]
-	str	w1, [sp, #24]
-	str	w2, [sp, #20]
-	str	x3, [sp, #8]
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #20]
-	add	w8, w8, w9
-	ldr	x9, [sp, #8]
-	str	w8, [x9]
-	ldr	x8, [sp, #8]
-	str	wzr, [x8, #4]
-	b	LBB0_3
-LBB0_2:
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #24]
-	add	w8, w8, w9
-	ldr	x9, [sp, #8]
-	str	w8, [x9]
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	ldr	x9, [sp, #8]
-	str	w8, [x9, #4]
-	b	LBB0_3
-LBB0_3:
-	add	sp, sp, #32
+.section	.__TEXT,__text,readonly,magic,pure_instructions
+	.balign 4, 0x90
+	.global	_func0                          ## -- Begin function func0
+	.align	2, 3
+_func0:                                 ## @func0
+.LFB0:
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	.cfi_def_cfa_register %rbp
+	mov	w2, w0
+	mov	w5, 0
+	mov	w7, 13
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
 	ret
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,     0x1c
+@@:                         ## After end of function
+	.cfi_def_cfa_offset 0
+	.cfi_reset_state
+	.cfi_offset %rbp, 16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	mov	w2, w0
+	mov	w5, 0
+	mov	w0, w2
+	add	w3, w2, 12
+	cmp	w2, w7
+	sub	w3, w3, #12
+	csel	w3, w3, w1, gt
+	mvn	w4, w2
+	madd	w0, w2, w1, w3
+	sxtw	x4, w4
+	mov	w3, 0
+	mov	w0, 4
+	sxtw	x0, w0
+	subs	w4, w4, #8
+	bfi	w0, w1, 17, 16
+	bfi	w0, w0, 55, 33
+	bfi	w0, w2, 29, 31
+	bfi	w0, w3, 52, 30
+	sxtw	x0, w0
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.size	_func0,

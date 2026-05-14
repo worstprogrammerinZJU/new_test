@@ -1,63 +1,124 @@
-.section	__TEXT,__text,regular,pure_instructions
+.arch armv8-a
+	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #1
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	str	wzr, [sp, #12]
-	b	LBB0_9
-LBB0_2:
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_9
-LBB0_4:
-	mov	w8, #18
-	str	w8, [sp, #4]
-	mov	w8, #2
-	str	w8, [sp]
-	b	LBB0_5
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w8, [sp, #4]
-	mov	w9, #10
-	mul	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_5
-LBB0_8:
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #12]
-	b	LBB0_9
-LBB0_9:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.set	__pgtable_size, 32, or 64
+	.set	__text_start, . + 16
+	.set	__data_start, . + 32
+	.set	__ro_data_start, . + 64
+	.set	__ro_ro_data_start, . + 96
+	.set	__data_end, . + 16
+	.set	__ro_data_end, . + 32
+	.set	__ro_ro_data_end, . + 64
+	.set	__ro_ro_data_end, . + 96
+	.set	__ro_ro_data_end, . + 128
+	.set	__ro_ro_data_end, . + 192
+	.set	__ro_ro_data_end, . + 224
+	.set	__ro_ro_data_end, . + 256
+	.set	__ro_ro_data_end, . + 288
+	.set	__ro_ro_data_end, . + 320
+	.set	__ro_ro_data_end, . + 352
+	.set	__ro_ro_data_end, . + 384
+	.set	__ro_ro_data_end, . + 416
+	.set	__ro_ro_data_end, . + 448
+	.set	__ro_ro_data_end, . + 480
+	.set	__ro_ro_data_end, . + 512
+	.set	__ro_ro_data_end, . + 544
+	.set	__ro_ro_data_end, . + 576
+	.set	__ro_ro_data_end, . + 608
+	.set	__ro_ro_data_end, . + 632
+	.set	__ro_ro_data_end, . + 656
+	.set	__ro_ro_data_end, . + 688
+	.set	__ro_ro_data_end, . + 720
+	.set	__ro_ro_data_end, . + 752
+	.set	__ro_ro_data_end, . + 784
+	.set	__ro_ro_data_end, . + 816
+	.set	__ro_ro_data_end, . + 848
+	.set	__ro_ro_data_end, . + 880
+	.set	__ro_ro_data_end, . + 912
+	.set	__ro_ro_data_end, . + 944
+	.set	__ro_ro_data_end, . + 976
+	.set	__ro_ro_data_end, . + 1008
+	.set	__ro_ro_data_end, . + 1030
+	.set	__ro_ro_data_end, . + 1052
+	.set	__ro_ro_data_end, . + 1074
+	.set	__ro_ro_data_end, . + 1096
+	.set	__ro_ro_data_end, . + 1118
+	.set	__ro_ro_data_end, . + 1140
+	.set	__ro_ro_data_end, . + 1162
+	.set	__ro_ro_data_end, . + 1184
+	.set	__ro_ro_data_end, . + 1206
+	.set	__ro_ro_data_end, . + 1228
+	.set	__ro_ro_data_end, . + 1250
+	.set	__ro_ro_data_end, . + 1272
+	.set	__ro_ro_data_end, . + 1294
+	.set	__ro_ro_data_end, . + 1316
+	.set	__ro_ro_data_end, . + 1338
+	.set	__ro_ro_data_end, . + 1360
+	.set	__ro_ro_data_end, . + 1382
+	.set	__ro_ro_data_end, . + 1404
+	.set	__ro_ro_data_end, . + 1426
+	.set	__ro_ro_data_end, . + 1448
+	.set	__ro_ro_data_end, . + 1470
+	.set	__ro_ro_data_end, . + 1482
+	.set	__ro_ro_data_end, . + 1504
+	.set	__ro_ro_data_end, . + 1516
+	.set	__ro_ro_data_end, . + 1538
+	.set	__ro_ro_data_end, . + 1550
+	.set	__ro_ro_data_end, . + 1562
+	.set	__ro_ro_data_end, . + 1574
+	.set	__ro_ro_data_end, . + 1586
+	.set	__ro_ro_data_end, . + 1598
+	.set	__ro_ro_data_end, . + 1610
+	.set	__ro_ro_data_end, . + 1622
+	.set	__ro_ro_data_end, . + 1634
+	.set	__ro_ro_data_end, . + 1646
+	.set	__ro_ro_data_end, . + 1658
+	.set	__ro_ro_data_end, . + 1670
+	.set	__ro_ro_data_end, . + 1682
+	.set	__ro_ro_data_end, . + 1694
+	.set	__ro_ro_data_end, . + 1706
+	.set	__ro_ro_data_end, . + 1718
+	.set	__ro_ro_data_end, . + 1730
+	.set	__ro_ro_data_end, . + 1742
+	.set	__ro_ro_data_end, . + 1754
+	.set	__ro_ro_data_end, . + 1766
+	.set	__ro_ro_data_end, . + 1778
+	.set	__ro_ro_data_end, . + 1790
+	.set	__ro_ro_data_end, . + 1802
+	.set	__ro_ro_data_end, . + 1814
+	.set	__ro_ro_data_end, . + 1826
+	.set	__ro_ro_data_end, . + 1838
+	.set	__ro_ro_data_end, . + 1850
+	.set	__ro_ro_data_end, . + 1862
+	.set	__ro_ro_data_end, . + 1874
+	.set	__ro_ro_data_end, . + 1886
+	.set	__ro_ro_data_end, . + 1898
+	.set	__ro_ro_data_end, . + 1910
+	.set	__ro_ro_data_end, . + 1922
+	.set	__ro_ro_data_end, . + 1934
+	.set	__ro_ro_data_end, . + 1946
+	.set	__ro_ro_data_end, . + 1958
+	.set	__ro_ro_data_end, . + 1970
+	.set	__ro_ro_data_end, . + 1982
+	.set	__ro_ro_data_end, . + 1994
+	.set	__ro_ro_data_end, . + 2006
+	.set	__ro_ro_data_end, . + 2018
+	.set	__ro_ro_data_end, . + 2030
+	.set	__ro_ro_data_end, . + 2042
+	.set	__ro_ro_data_end, . + 2054
+	.set	__ro_ro_data_end, . + 2066
+	.set	__ro_ro_data_end, . + 2078
+	.set	__ro_ro_data_end, . + 2090
+	.set	__ro_ro_data_end, . + 2102
+	.set	__ro_ro_data_end, . + 2114
+	.set	__ro_ro_data_end, . + 2126
+	.set	__ro_ro_data_end, . + 2138
+	.set	__ro_ro_data_end, . + 2150
+	.set	__ro_ro_data_end, . + 2162
+	.set	__ro_ro_data_end, . + 2174
+	.set	__ro_ro_data_end, . + 2186
+	.set	__ro_ro_data_end, . + 2198
+	.set	__ro_ro_data_end, . + 2210
+	.set	__ro_ro_data_end, . + 2222
+	.set	__ro_ro_data_end, . + 2234
+	.set	__ro_ro_data_end, . + 22

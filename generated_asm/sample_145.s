@@ -1,138 +1,182 @@
-.section	__TEXT,__text,regular,pure_instructions
+arm: .section	.__TEXT,__text,readonly,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal8,8byte_literals
-	.p2align	3                               ; -- Begin function func0
-lCPI0_0:
-	.quad	0x400d99ce075f6fd2              ; double 3.7000999999999999
-lCPI0_1:
-	.quad	0x400800346dc5d639              ; double 3.0001000000000002
-lCPI0_2:
-	.quad	0x400599ce075f6fd2              ; double 2.7000999999999999
-lCPI0_3:
-	.quad	0x4002669ad42c3c9f              ; double 2.3001
-lCPI0_4:
-	.quad	0x400000346dc5d639              ; double 2.0001000000000002
-lCPI0_5:
-	.quad	0x3ffb339c0ebedfa4              ; double 1.7000999999999999
-lCPI0_6:
-	.quad	0x3ff4cd35a858793e              ; double 1.3001
-lCPI0_7:
-	.quad	0x3ff00068db8bac71              ; double 1.0001
-lCPI0_8:
-	.quad	0x3fe667381d7dbf48              ; double 0.70009999999999994
-lCPI0_9:
-	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
-lCPI0_10:
-	.quad	0x400fffcb923a29c7              ; double 3.9998999999999998
-lCPI0_11:
-	.quad	0x400d99ce075f6fd2              ; double 3.7000999999999999
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	2
-_func0:                                 ; @func0
+	.align	2,[3]                    ## -- Begin function func0
+.LFB0:
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	ldursw	x8, [x29, #-12]
-	lsl	x0, x8, #3
-	bl	_malloc
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_40
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	adrp	x8, lCPI0_11@PAGE
-	ldr	d1, [x8, lCPI0_11@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	adrp	x10, l_.str@PAGE
-	add	x10, x10, l_.str@PAGEOFF
-	str	x10, [x8, x9, lsl #3]
-	b	LBB0_38
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	adrp	x8, lCPI0_7@PAGE
-	ldr	d1, [x8, lCPI0_7@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	adrp	x10, l_.str.1@PAGE
-	add	x10, x10, l_.str.1@PAGEOFF
-	str	x10, [x8, x9, lsl #3]
-	b	LBB0_37
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	adrp	x8, lCPI0_6@PAGE
-	ldr	d1, [x8, lCPI0_6@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	adrp	x10, l_.str.2@PAGE
-	add	x10, x10, l_.str.2@PAGEOFF
-	str	x10, [x8, x9, lsl #3]
-	b	LBB0_36
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	adrp	x8, lCPI0_5@PAGE
-	ldr	d1, [x8, lCPI0_5@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	adrp	x10, l_.str.3@PAGE
-	add	x10, x10, l_.str.3@PAGEOFF
-	str	x10, [x8, x9, lsl #3]
-	b	LBB0_35
-LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	adrp	x8, lCPI0_4@PAGE
-	ldr	d1, [x8, lCPI0_4@PAGEOFF]
-	fcmp	d0, d1
-	cset	w8, le
-	tbnz
+// %bb.0:
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	sub	sp 24 %sp
+	.cfi_def_cfa_register %rbp
+	stp	w12, w11, [sp, 8]
+	stp	w10, w9, [sp, 16]
+	stp	w8, w7, [sp, 24]
+	stp	w6, w5, [sp, 32]
+	stp	w4, w3, [sp, 40]
+	stp	w2, w1, [sp, 48]
+	.cfi_def_cfa_offset 0
+	mul	w12, w12, w0
+	mul	w10, w10, w1
+	mul	w9, w11, w0
+	mul	w8, w12, w2
+	mul	w7, w10, w3
+	mul	w6, w9, w4
+	mul	w5, w8, w5
+	mov	x2, sp
+	mov	x4, x0
+	mov	w3, 0
+	mov	w0, 0
+.LBB0_1:
+	add	x2, x2, 32
+	stp	w6, w5, [x2, 8]
+	str	w12, [x2, 16]
+	str	w10, [x2, 24]
+	str	w8, [x2, 32]
+	str	w7, [x2, 40]
+	tst	x2, 1
+	csel	w0, w0, w3, ne
+.LBB0_4:                                 ## =>This Inner Loop Header: Depth=1
+	ldr	x2, [x2, 8]
+	ldp	w6, w5, [x2]
+	cmp	w3, 4
+	bgt	.LBB0_40
+.LEND4:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_3:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_30
+.LEND3:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_2:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_20
+.LEND2:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_10
+.LEND1:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_0:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_0
+.LEND0:                                    ## =>End of this Iteration
+	add	w0, w0, w1
+	add	w0, w0, 1
+	str	w0, [sp, 24]
+	add	x2, x2, 32
+	cmp	w3, 10
+	bne	.LBB0_1
+	add	w0, w3, w3, lsl 1
+	str	w0, [sp, 24]
+	add	w3, w3, 1
+	str	w3, [sp, 8]
+	retv 24 %sp
+	.cfi_endproc
+                                        ## -- End function
+	.section	.__TEXT,__cstring,cstring_literals
+.L_.str:                                 ## @.str
+	.align	4,[3]                    ## -- Start function
+.LFB1:
+	.cfi_startproc
+// %bb.0:
+	.cfi_def_cfa_offset 16
+	.cfi_def_cfa_register %rbp
+	stp	w12, w11, [sp, 8]
+	stp	w10, w9, [sp, 16]
+	stp	w8, w7, [sp, 24]
+	stp	w6, w5, [sp, 32]
+	stp	w4, w3, [sp, 40]
+	stp	w2, w1, [sp, 48]
+	.cfi_def_cfa_offset 0
+	mul	w12, w12, w0
+	mul	w10, w10, w1
+	mul	w9, w11, w0
+	mul	w8, w12, w2
+	mul	w7, w10, w3
+	mul	w6, w9, w4
+	mul	w5, w8, w5
+	mov	x2, sp
+	mov	x4, x0
+	mov	w3, 0
+	mov	w0, 0
+.LBB0_1:
+	add	x2, x2, 32
+	stp	w6, w5, [x2, 8]
+	str	w12, [x2, 16]
+	str	w10, [x2, 24]
+	str	w8, [x2, 32]
+	str	w7, [x2, 40]
+	tst	x2, 1
+	csel	w0, w0, w3, ne
+.LEND4:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_3:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	cmp	w3, 4
+	bgt	.LBB0_40
+.LEND3:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_2:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_20
+.LEND2:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_10
+.LEND1:                                    ## =>End of this Iteration
+	lsl	w4, w0, 1
+	str	w4, [sp, 24]
+.LBB0_0:                                 ## =>This Inner Loop Header: Depth=1
+	ldp	w4, w5, [x2]
+	add	w4, w4, 32
+	str	w5, [x2, 16]
+	cmp	w3, 4
+	bgt	.LBB0_0
+.LEND0:                                    ## =>End of this Iteration
+	add	w0, w3, w3, lsl 1
+	add	w0, w0, 1
+	str	w0, [sp, 24]
+	add	x2, x2, 32
+	cmp	w3, 10
+	bne	.LBB0_1
+	add	w0, w3, w3, lsl 1
+	str	w0, [sp, 24]
+	add	w3, w3, 1
+	str	w3, [sp, 8]
+	retv 24 %sp
+	.cfi_endproc
+                                        ## -- End function
+	.section	.__TEXT,__cstring,cstring_literals
+.L_.str.1:                               ## @.str.1
+	.align	4,[3]                    ## -- Start function
+.LFB2:
+	.cfi_startproc
+// %bb.0:
+	.cfi_def_c

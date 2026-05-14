@@ -1,37 +1,54 @@
-.section	__TEXT,__text,regular,pure_instructions
+.arch armv8-a
+	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.global	_func0                          ## -- Begin function func0
+	.align	2,b 11
+_func0:                                 ## @func0
+.LFB0:
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	str	w0, [sp, #12]
-	str	w1, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	ldr	w10, [sp, #8]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	str	w8, [sp, #4]
-	ldr	w8, [sp, #8]
-	str	w8, [sp, #12]
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_3:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
+	.cfi_offset %rbp, -16
+	sub	sp, sp, #16
+	.cfi_def_cfa_register %rbp
+	mov	w2, w7
+	mov	x6, sp
+	mov	w5, 0
+	add	x4, sp, 8
+	mov	w0, 0
+	cmp	w2, 0
+	beq	.LBB0_3
+.LBB0_1:
+	ldr	w3, [x6, -12]
+	sdiv	w3, w2, w3
+	str	w3, [x4, x5, sxtw 2]
+	add	w3, w0, w3
+	str	w3, [x6, -12]
+	lsl	w3, w0, 1
+	add	w0, w0, w3
+	str	w0, [x4, x5, sxtw 2]
+	ldr	w3, [x6, x5, sxtw 2]
+	sub	w0, w2, w3
+	str	w0, [x4, x5, sxtw 2]
+	ldr	w3, [x6, x5, sxtw 2]
+	madd	w3, w3, w2, w0
+	str	w3, [x4, x5, sxtw 2]
+	ldr	w3, [x6, x5, sxtw 2]
+	mul	w0, w3, w2
+	str	w0, [x4, x5, sxtw 2]
+	ldr	w3, [x6, x5, sxtw 2]
+	sub	w0, w2, w3
+	str	w0, [x4, x5, sxtw 2]
+	add	x5, x5, 1
+	cmp	w2, 8
+	bne	.LBB0_1
+	add	sp, sp, 16
+	.cfi_remember_state
+	.cfi_def_cfa_register 0
 	ret
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LFE0:
+	.size	_func0, .size._Z11func0
+		 .ident	".text"
+		 .set	$.eof
+		 .set	$.hidden
+		 .label	".text"

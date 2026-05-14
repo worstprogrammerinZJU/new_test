@@ -1,158 +1,154 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	iosize 16k, 32k, /2
+	.set	fiqsize 16k, 32k, /2
+	.set	stacksize 64k, 32k, /2
+	.voption strict-align-in-functions
+	.voption build-version macos 13, 0	sdk_version 13, 3
+	.global	_func0                          ## -- Begin function func0
+	.align	10, 10b
+	.p2align	O, 2, 3
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	w0, [x29, #-4]
-	ldur	w9, [x29, #-4]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x9, sp
-	str	x8, [x9]
-	sub	x0, x29, #10
-	mov	w1, #0
-	mov	x2, #6
-	adrp	x3, l_.str@PAGE
-	add	x3, x3, l_.str@PAGEOFF
-	bl	___sprintf_chk
-	stur	wzr, [x29, #-16]
-	stur	wzr, [x29, #-20]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldursw	x9, [x29, #-20]
-	sub	x8, x29, #10
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldursw	x9, [x29, #-20]
-	sub	x8, x29, #10
-	ldrsb	w8, [x8, x9]
-	subs	w9, w8, #48
-	ldur	w8, [x29, #-16]
-	add	w8, w8, w9
-	stur	w8, [x29, #-16]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_1
-LBB0_4:
-	mov	x0, #33
-	bl	_malloc
-	str	x0, [sp, #32]
-	str	wzr, [sp, #28]
-	ldur	w8, [x29, #-16]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #28]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #28]
-	add	x9, x8, x9
-	mov	w8, #48
-	strb	w8, [x9]
-	b	LBB0_10
-LBB0_6:
-	b	LBB0_7
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	w8, [x29, #-16]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldur	w8, [x29, #-16]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
-	add	w8, w8, #1
-	ldr	x10, [sp, #32]
-	ldrsw	x11, [sp, #28]
-	mov	x12, x11
-	add	w12, w12, #1
-	str	w12, [sp, #28]
-	add	x10, x10, x11
-	strb	w8, [x10]
-	ldur	w8, [x29, #-16]
-	sdiv	w8, w8, w9
-	stur	w8, [x29, #-16]
-	b	LBB0_7
-LBB0_9:
-	b	LBB0_10
-LBB0_10:
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #28]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	str	wzr, [sp, #24]
-	b	LBB0_11
-LBB0_11:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	strb	w8, [sp, #23]
-	ldr	x8, [sp, #32]
-	ldr	w9, [sp, #28]
-	ldr	w10, [sp, #24]
-	subs	w9, w9, w10
-	subs	w9, w9, #1
-	add	x8, x8, w9, sxtw
-	ldrb	w8, [x8]
-	ldr	x9, [sp, #32]
-	ldrsw	x10, [sp, #24]
-	add	x9, x9, x10
-	strb	w8, [x9]
-	ldrb	w8, [sp, #23]
-	ldr	x9, [sp, #32]
-	ldr	w10, [sp, #28]
-	ldr	w11, [sp, #24]
-	subs	w10, w10, w11
-	subs	w10, w10, #1
-	add	x9, x9, w10, sxtw
-	strb	w8, [x9]
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_11
-LBB0_14:
-	ldr	x0, [sp, #32]
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"%d"
-
-.subsections_via_symbols
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	.cfi_def_cfa_register %rbp
+	sub	sp, sp, #64
+	.cfi_offset %sp, -64
+	.cfi_def_cfa_register %sp
+	ldr	q3, [x0, 48]
+	mov	w6, w0
+	mov	w2, 6
+	mov	w0, 0
+	str	w5, [sp]
+	mov	w5, 6
+	mov	w10, 33
+	.cfi_def_cfa_offset 32
+	mov	w9, 0
+	movi	w8, 13
+	.cfi_offset :r3, 8
+	.cfi_offset :lr, 12
+	.cfi_offset :sp, 20
+	.cfi_offset :x0, 24
+	.cfi_offset :x1, 28
+	.cfi_offset :x2, 32
+	.cfi_offset :x3, 36
+	.cfi_offset :x4, 40
+	.cfi_offset :x5, 44
+	.cfi_offset :x6, 48
+	.cfi_offset :x7, 52
+	.cfi_offset :x8, 56
+	.cfi_offset :x9, 60
+	.cfi_offset :x10, 64
+	.cfi_offset :x11, 68
+	.cfi_offset :x12, 72
+	.cfi_offset :x13, 76
+	.cfi_offset :x14, 80
+	.cfi_offset :x15, 84
+	.cfi_offset :x16, 88
+	.cfi_offset :x17, 92
+	.cfi_offset :x18, 96
+	.cfi_offset :x19, 100
+	.cfi_offset :x20, 104
+	.cfi_offset :x21, 108
+	.cfi_offset :x22, 112
+	.cfi_offset :x23, 116
+	.cfi_offset :x24, 120
+	.cfi_offset :x25, 124
+	.cfi_offset :x26, 128
+	.cfi_offset :x27, 132
+	.cfi_offset :x28, 136
+	.cfi_offset :x29, 140
+	.cfi_offset :x30, 144
+	.cfi_offset :x31, 148
+	.cfi_offset :x32, 152
+	.cfi_offset :x33, 156
+	.cfi_offset :x34, 160
+	.cfi_offset :x35, 164
+	.cfi_offset :x36, 168
+	.cfi_offset :x37, 172
+	.cfi_offset :x38, 176
+	.cfi_offset :x39, 180
+	.cfi_offset :x40, 184
+	.cfi_offset :x41, 188
+	.cfi_offset :x42, 192
+	.cfi_offset :x43, 196
+	.cfi_offset :x44, 200
+	.cfi_offset :x45, 204
+	.cfi_offset :x46, 208
+	.cfi_offset :x47, 212
+	.cfi_offset :x48, 216
+	.cfi_offset :x49, 219
+	.cfi_offset :x50, 223
+	.cfi_offset :x51, 227
+	.cfi_offset :x52, 231
+	.cfi_offset :x53, 235
+	.cfi_offset :x54, 239
+	.cfi_offset :x55, 243
+	.cfi_offset :x56, 247
+	.cfi_offset :x57, 251
+	.cfi_offset :x58, 255
+	.cfi_offset :x59, 259
+	.cfi_offset :x60, 263
+	.cfi_offset :x61, 267
+	.cfi_offset :x62, 271
+	.cfi_offset :x63, 275
+	.cfi_offset :x64, 279
+	.cfi_offset :x65, 283
+	.cfi_offset :x66, 287
+	.cfi_offset :x67, 291
+	.cfi_offset :x68, 295
+	.cfi_offset :x69, 300
+	.cfi_offset :x70, 304
+	.cfi_offset :x71, 308
+	.cfi_offset :x72, 312
+	.cfi_offset :x73, 316
+	.cfi_offset :x74, 319
+	.cfi_offset :x75, 323
+	.cfi_offset :x76, 327
+	.cfi_offset :x77, 331
+	.cfi_offset :x78, 335
+	.cfi_offset :x79, 339
+	.cfi_offset :x80, 343
+	.cfi_offset :x81, 347
+	.cfi_offset :x82, 351
+	.cfi_offset :x83, 355
+	.cfi_offset :x84, 359
+	.cfi_offset :x85, 363
+	.cfi_offset :x86, 367
+	.cfi_offset :x87, 371
+	.cfi_offset :x88, 375
+	.cfi_offset :x89, 379
+	.cfi_offset :x90, 383
+	.cfi_offset :x91, 387
+	.cfi_offset :x92, 391
+	.cfi_offset :x93, 395
+	.cfi_offset :x94, 399
+	.cfi_offset :x95, 403
+	.cfi_offset :x96, 407
+	.cfi_offset :x97, 411
+	.cfi_offset :x98, 415
+	.cfi_offset :x99, 419
+	.cfi_offset :x100, 423
+	.cfi_offset :x101, 427
+	.cfi_offset :x102, 431
+	.cfi_offset :x103, 435
+	.cfi_offset :x104, 439
+	.cfi_offset :x105, 443
+	.cfi_offset :x106, 447
+	.cfi_offset :x107, 451
+	.cfi_offset :x108, 455
+	.cfi_offset :x109, 459
+	.cfi_offset :x110, 463
+	.cfi_offset :x111, 467
+	.cfi_offset :x112, 471
+	.cfi_offset :x113, 475
+	.cfi_offset :x114, 479
+	.cfi_offset :x115, 483
+	.cfi_offset :x116, 487
+	.cfi_offset :x117, 491
+	.cfi_offset :x118, 495
+	.cfi_offset :x119, 499
+	.cfi_offset :x120, 503
+	.cfi_offset :x121, 507
+	.cfi_offset :x122, 511
+	.cfi_offset :x123

@@ -1,112 +1,129 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	str	x0, [sp, #32]
-	str	w1, [sp, #28]
-	str	x2, [sp, #16]
-	str	w3, [sp, #12]
-	str	wzr, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	mov	w10, 2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_6:
-	str	wzr, [sp]
-	b	LBB0_7
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	mov	w10, 2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_7 Depth=1
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_7 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_7
-LBB0_12:
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_13
-LBB0_13:
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [sp, #40]
-	b	LBB0_15
-LBB0_14:
-	adrp	x8, l_.str.1@PAGE
-	add	x8, x8, l_.str.1@PAGEOFF
-	str	x8, [sp, #40]
-	b	LBB0_15
-LBB0_15:
-	ldr	x0, [sp, #40]
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"YES"
-
-l_.str.1:                               ; @.str.1
-	.asciz	"NO"
-
-.subsections_via_symbols
+.arch armv8-a
+	.set	$13, 7, -24
+	.set	$4, 8, -24
+	.set	$k0, 16, .+28
+	.set	$k7, 17, .-28
+	.set	$k8, 1, .+40
+	.set	$k1, 0, .+52
+	.set	$k3, 0, .+54
+	.set	$k5, 0, .+56
+	.set	$k10, 2, .+60
+	.set	$k2, 2, .+62
+	.set	$k11, 0, .+64
+	.set	$k12, 0, .+66
+	.set	$k13, 0, .+70
+	.set	$k14, 0, .+72
+	.set	$k15, 0, .+74
+	.set	$k16, 0, .+76
+	.set	$k17, 0, .+78
+	.set	$k18, 0, .+80
+	.set	$k19, 0, .+82
+	.set	$k20, 0, .+84
+	.set	$k21, 0, .+86
+	.set	$k22, 0, .+88
+	.set	$k23, 0, .+90
+	.set	$k24, 0, .+92
+	.set	$k25, 0, .+94
+	.set	$k26, 0, .+96
+	.set	$k27, 0, .+98
+	.set	$k28, 0, .+100
+	.set	$k29, 0, .+102
+	.set	$k30, 0, .+104
+	.set	$k31, 0, .+106
+	.set	$k32, 0, .+108
+	.set	$k33, 0, .+110
+	.set	$k34, 0, .+112
+	.set	$k35, 0, .+114
+	.set	$k36, 0, .+116
+	.set	$k37, 0, .+118
+	.set	$k38, 0, .+120
+	.set	$k39, 0, .+122
+	.set	$k40, 0, .+124
+	.set	$k41, 0, .+126
+	.set	$k42, 0, .+128
+	.set	$k43, 0, .+130
+	.set	$k44, 0, .+132
+	.set	$k45, 0, .+134
+	.set	$k46, 0, .+136
+	.set	$k47, 0, .+138
+	.set	$k48, 0, .+140
+	.set	$k49, 0, .+142
+	.set	$k50, 0, .+144
+	.set	$k51, 0, .+146
+	.set	$k52, 0, .+148
+	.set	$k53, 0, .+150
+	.set	$k54, 0, .+152
+	.set	$k55, 0, .+154
+	.set	$k56, 0, .+156
+	.set	$k57, 0, .+158
+	.set	$k58, 0, .+160
+	.set	$k59, 0, .+162
+	.set	$k60, 0, .+164
+	.set	$k61, 0, .+166
+	.set	$k62, 0, .+168
+	.set	$k63, 0, .+170
+	.set	$k64, 0, .+172
+	.set	$k65, 0, .+174
+	.set	$k66, 0, .+176
+	.set	$k67, 0, .+178
+	.set	$k68, 0, .+180
+	.set	$k69, 0, .+182
+	.set	$k70, 0, .+184
+	.set	$k71, 0, .+186
+	.set	$k72, 0, .+188
+	.set	$k73, 0, .+190
+	.set	$k74, 0, .+192
+	.set	$k75, 0, .+194
+	.set	$k76, 0, .+196
+	.set	$k77, 0, .+198
+	.set	$k78, 0, .+200
+	.set	$k79, 0, .+202
+	.set	$k80, 0, .+204
+	.set	$k81, 0, .+206
+	.set	$k82, 0, .+208
+	.set	$k83, 0, .+210
+	.set	$k84, 0, .+212
+	.set	$k85, 0, .+214
+	.set	$k86, 0, .+216
+	.set	$k87, 0, .+218
+	.set	$k88, 0, .+220
+	.set	$k89, 0, .+222
+	.set	$k90, 0, .+224
+	.set	$k91, 0, .+226
+	.set	$k92, 0, .+228
+	.set	$k93, 0, .+230
+	.set	$k94, 0, .+232
+	.set	$k95, 0, .+234
+	.set	$k96, 0, .+236
+	.set	$k97, 0, .+238
+	.set	$k98, 0, .+240
+	.set	$k99, 0, .+242
+	.set	$k100, 0, .+244
+	.set	$k101, 0, .+246
+	.set	$k102, 0, .+248
+	.set	$k103, 0, .+250
+	.set	$k104, 0, .+252
+	.set	$k105, 0, .+254
+	.set	$k106, 0, .+256
+	.set	$k107, 0, .+258
+	.set	$k108, 0, .+260
+	.set	$k109, 0, .+262
+	.set	$k110, 0, .+264
+	.set	$k111, 0, .+266
+	.set	$k112, 0, .+268
+	.set	$k113, 0, .+270
+	.set	$k114, 0, .+272
+	.set	$k115, 0, .+274
+	.set	$k116, 0, .+276
+	.set	$k117, 0, .+278
+	.set	$k118, 0, .+280
+	.set	$k119, 0, .+282
+	.set	$k120, 0, .+284
+	.set	$k121, 0, .+286
+	.set	$k122, 0, .+288
+	.set	$k123, 0, .+290
+	.set	$k124, 0, .+292
+	.set	$k125, 0, .+294
+	.set	$k126, 0, .+296
+	.set	$k127, 0, .+298
+	.set	$k128, 0, .+300

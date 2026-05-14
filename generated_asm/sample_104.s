@@ -1,92 +1,182 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	$13, 7
+	.set	$3, 15
+	section	.__TEXT,__text,readonly,ipure_instructions
+	.vpc 2.16.0	macos	13, 0	sdk_version	13, 3
+	.global	_func0                          ## -- Begin function func0
+	.align	10
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
 	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	w0, [sp, #20]
-	str	w1, [sp, #16]
-	str	x2, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	ldr	w10, [sp, #16]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	add	w8, w8, 48
-	ldrsw	x10, [sp, #4]
-	mov	x9, x10
-	add	w9, w9, #1
-	str	w9, [sp, #4]
-	add	x9, sp, #24
-	strb	w8, [x9, x10]
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #16]
-	sdiv	w8, w8, w9
-	str	w8, [sp, #20]
-	b	LBB0_1
-LBB0_3:
-	str	wzr, [sp]
-	b	LBB0_4
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w8, [sp, #4]
-	subs	w9, w8, #1
-	str	w9, [sp, #4]
-	add	x8, sp, #24
-	ldrb	w8, [x8, w9, sxtw]
-	ldr	x9, [sp, #8]
-	ldrsw	x10, [sp]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp]
-	add	x9, x9, x10
-	strb	w8, [x9]
-	b	LBB0_4
-LBB0_6:
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	bl	___stack_chk_fail
-LBB0_8:
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	adrp	x2, .LC0
+	ldr	q3, [x2, #:lo12:.LC0]
+	mov	x4, sp
+	mov	x5, x4
+	mov	x3, x4
+	mov	x2, sp
+	mov	x0, 0
+	mov	w6, 0
+	str	q3, [x2]
+	stp	x4, x5, [sp, 16]
+	str	w0, [x2, 8]
+	str	w1, [x2, 24]
+.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	ldr	w0, [x2]
+	ldr	w2, [x4]
+	ldr	w0, [x3]
+	cmp	w0, 0
+	ble	.LBB0_3
+	mov	x3, x4
+	lsl	w4, w2, 3
+	add	w6, w6, 18
+	ldr	w2, [x3]
+	ldr	w4, [x2, 48]
+	hlt
+	add	w2, w2, w4
+	mov	w4, 0
+	str	w2, [x3], 48
+	clr	d9
+	ubfx	x2, x2, 1, 7
+	bfi	w2, w4, 4, 28
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	ubfx	x2, x2, 1, 7
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	lsl	w2, w2, 1
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str	w2, [x3], 48
+	str

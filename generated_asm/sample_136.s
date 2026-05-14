@@ -1,56 +1,50 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.section	.__TEXT,__text,readonly,magic,pure_instructions
+	.balign 4,3
+_func0:                           ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #24]
-	str	w1, [sp, #20]
-	str	wzr, [sp, #16]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #20]
-	mov	w10, 2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldr	w10, [sp, #20]
-	subs	w10, w10, #1
-	ldr	w11, [sp, #12]
-	subs	w10, w10, w11
-	ldr	w9, [x9, w10, sxtw #2]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_6:
-	ldr	w0, [sp, #16]
-	add	sp, sp, #32
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	mov	x8, x0
+	mov	x7, x0
+	mov	x2, x0
+	mov	x11, x0
+	mov	x0, zero
+	mov	w4, zero
+	mov	w10, 0
+	cfi_def_cfa_register x8
+	mov	x13, x0
+	mov	x12, x0
+	mov	w1, 0
+	str	x0, [x7, 8]
+	str	x0, [x11, 8]
+	str	x0, [x2, 8]
+.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	ldr	w0, [x8], 16
+	sub	w1, w1, #1
+	sub	w10, w10, w0, lsr 3
+	madd	w4, w0, w4, w1
+	str	x0, [x12, 12]
+	cmp	w0, w10
+	bgt	.LBB0_6
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	ldrb	w0, [x13], 4
+	ldr	w1, [x7], 16
+	ldr	w3, [x11], 4
+	ldr	w0, [x0, x1]
+	ldr	w2, [x12], 4
+	eor	w0, w4, w0
+	cmp	w2, w3
+	beq	.LBB0_4
+	add	w0, w0, w3, lsl 1
+	str	w0, [x12], 12
+.LBB0_4:                                 ##   in Loop: Header=BB0_1 Depth=1
+	lsl	w1, w1, 1
+	str	x1, [x7], 16
+	b	.LBB0_5
+.LBB0_6:
+	ldr	w0, [x8], 4
+	str	x0, x0, [x7]
 	ret
 	.cfi_endproc
-                                        ; -- End function
+                                        ## -- End function
 .subsections_via_symbols

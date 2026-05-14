@@ -1,99 +1,116 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	$13, 13, 15		// -- Define the architecture version
+	.set	$4, 4, 17		// -- Define the CFI (Call Frame Index) version
+	.set	$8, 8, 23		// -- Define the CFI (Call Frame Index) version
+	.set	$12, 12, 29		// -- Define the CFI (Call Frame Index) version
+	.set	$11, 11, 31		// -- Define the CFI (Call Frame Index) version
+	.set	$10, 10, 33		// -- Define the CFI (Call Frame Index) version
+	.set	$9, 9, 35		// -- Define the CFI (Call Frame Index) version
+	.set	$5, 5, 37		// -- Define the CFI (Call Frame Index) version
+	.set	$3, 3, 41		// -- Define the CFI (Call Frame Index) version
+	.set	$7, 7, 43		// -- Define the CFI (Call Frame Index) version
+	.set	$1, 1, 45		// -- Define the CFI (Call Frame Index) version
+	.set	$2, 2, 47		// -- Define the CFI (Call Frame Index) version
+	.set	$6, 6, 51		// -- Define the CFI (Call Frame Index) version
+	.set	$0, 0, 53		// -- Define the CFI (Call Frame Index) version
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #16]
-	str	w1, [sp, #12]
-	str	w2, [sp, #8]
-	str	wzr, [sp, #4]
-	str	wzr, [sp]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #12]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #1
-	ldr	w11, [sp]
-	subs	w10, w10, w11
-	ldr	w9, [x9, w10, sxtw #2]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	mov	w8, #0
-	and	d0, d0, #0x1
-	strb	w8, [sp, #31]
-	b	LBB0_9
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #1
-	ldr	w11, [sp]
-	subs	w10, w10, w11
-	ldr	w9, [x9, w10, sxtw #2]
-	add	w9, w8, w9
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_1
-LBB0_6:
-	ldr	w8, [sp, #12]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	ldr	w8, [x8, w9, sxtw #2]
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB0_8
-LBB0_8:
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, le
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
-	b	LBB0_9
-LBB0_9:
-	ldrb	w8, [sp, #31]
-	and	w0, w8, #0x1
-	add	sp, sp, #32
-	ret
+	.cfi_def_cfa_offset 16
+	.p2align 4, 0x90
+_func0:                                 ## @func0
+	.cfi_def_cfa_register %rbp, -16
+	.cfi_offset %rbp, -16
+	mov	qr, .LC0
+	.cfi_def_cfa_offset 16
+	load	q3, [x1]
+	ldp	q5, q4, [x0]
+	mov	x8, x1
+	mov	x7, x0
+	mov	w6, 0
+	mov	w11, 2
+	stp	q5, q4, [x0]
+	stp	q3, q1, [x1]
+	.cfi_def_cfa_offset -16
+	mov	x2, x8
+	mul	w9, w6, w4
+	ubfiz	w10, w6, 13, 1
+	add	w9, w9, w2->x[1]
+	add	w9, w9, w2->x[0]
+	cmp	w9, w10
+	bgt	.LBB0_6
+.LBB0_1:
+	add	x2, x8, w11
+	sub	w2, w2, #1
+	sub	w2, w2, #32
+	ldr	x2, [x2, -16]
+	ldr	w6, [x2, 8]
+	dup	v0.4s, w6
+	cdiv	w6, w9, w6
+	cmp	w6, w9
+	bgt	.LBB0_4
+.LBB0_2:
+	str	w6, [x2, 8]
+	ldr	x2, [x2, 8]
+	ldr	w6, [x2, 4]
+	ldr	w2, [x2, 4]
+	sub	w2, w2, #1
+	sub	w2, w2, #32
+	ldr	w2, [x2, -16]
+	ldr	w6, [x2, 8]
+	add	w2, w2, w6
+	str	w2, [x2, 8]
+	add	w2, w2, w6
+	str	w2, [x2, 8]
+.LBB0_4:
+	ldr	w2, [x2, 8]
+	add	w2, w2, w11
+	cmp	w2, 5
+	bne	.LBB0_8
+	sub	x2, x8, #1
+	ldr	x2, [x2, 8]
+	ldr	w2, [x2, 8]
+	ldr	w10, [x2, 4]
+	ldr	w6, [x2, 4]
+	ldr	w2, [x2, 4]
+	ldr	w1, [x2, 4]
+	ubfiz	w12, w1, 1, 1
+	ubfiz	w11, w2, 1, 1
+	add	w1, w1, w6
+	add	w1, w1, w2
+	orr	w1, w1, w2, asr 1
+	orr	w1, w1, w10
+	orr	w1, w1, w6
+	orr	w1, w1, w11
+	str	w1, [x2, 8]
+.LBB0_8:
+	ldr	w1, [x2, 8]
+	lsr	w0, w1, 1
+	tst	x1, 1
+	add	w1, w0, w1, uxtb
+	eor	w0, w1, w6, lsl 1
+	add	w1, w0, w2
+	cmp	w1, 24
+	csel	w0, w1, w2, gt
+	str	w0, [x2, 8]
+	add	w0, w0, w6
+	str	w0, [x2, 8]
+.LBB0_9:
+	ldr	w0, [x2, 8]
+	add	w0, w0, w11
+	cmp	w0, 24
+	csel	w0, w1, w2, ge
+	str	w0, [x2, 8]
+	add	w0, w0, w6
+	str	w0, [x2, 8]
+.LBB0_1:
+	add	w0, w5, w4
+	str	w0, [x8, x0, lsl 2]
+	retq
+	.cfi_def_cfa_offset 0
+	.cfi_restore_cfa_offset 16
+	subsection_via_symbols
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LFE0:
+	.size	._Z13_func0, .size.cfi_def_cfa_offset, .catch_area_page_size
+	.cfi_endproc
+.LFE0:
+	.size	._Z13_func0, .size.cfi_def_cfa_offset, .catch_area_page_size

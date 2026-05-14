@@ -1,105 +1,152 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	$13, 7, !selection constant for ziml-mode
+	section	.__TEXT,__text,readonly,ipure_instructions
+	.balign 4, 0x90
+	.global	_func0                          ## -- Begin function func0
+	.align	2, 3
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #16]
-	str	w1, [sp, #12]
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #2
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	mov	w8, #-1
-	str	w8, [sp, #28]
-	b	LBB0_15
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	sub	sp, sp, #16
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	ldp	q0, q1, [sp]
+	ldp	w2, w3, [sp, 8]
+	ldr	w4, [x1, #:lo12:.LC0]
+	mov	w6, -24(sp)
+	cmp	w4, 2
+	bls	.LBB0_2
+	mov	w0, 2147483647
+	stp	w6, w3, [sp]
+	b	.LBB0_15
 LBB0_2:
-	mov	w8, #2147483647
-	str	w8, [sp, #8]
-	str	w8, [sp, #4]
-	str	wzr, [sp]
-	b	LBB0_3
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #8]
-	str	w8, [sp, #4]
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #8]
-	b	LBB0_10
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #4]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #4]
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_3
-LBB0_12:
-	ldr	w8, [sp, #4]
-	mov	w9, #2147483647
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_13
-LBB0_13:
-	mov	w8, #-1
-	str	w8, [sp, #28]
-	b	LBB0_15
-LBB0_14:
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #28]
-	b	LBB0_15
+	str	w0, w4, [x1, #:lo12:.LC1]
+	mov	w0, 2147483647
+	stp	w0, w3, [sp]
+	b	.LBB0_15
 LBB0_15:
-	ldr	w0, [sp, #28]
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	ldr	w0, [x1, 8]
+	ldr	w4, [sp, 8]
+	ldr	w3, [sp]
+	lsl	w7, w4, 1
+	str	w0, [x1, #:lo12:.LC2]
+	str	w3, [x1, 8]
+	ldr	n0, [x1, 16]
+	str	n0, [x1, 24]
+	ldr	n1, [x1, 32]
+	str	n1, [x1, 40]
+	ldr	n2, [x1, 48]
+	str	n2, [x1, 48]
+	ldr	n3, [x1, 56]
+	str	n3, [x1, 56]
+	ldr	n4, [x1, 64]
+	str	n4, [x1, 64]
+	ldr	n5, [x1, 72]
+	str	n5, [x1, 72]
+	ldr	n6, [x1, 78]
+	str	n6, [x1, 78]
+	ldr	n7, [x1, 84]
+	str	n7, [x1, 84]
+	ldr	n8, [x1, 90]
+	str	n8, [x1, 90]
+	ldr	n9, [x1, 96]
+	str	n9, [x1, 96]
+	ldr	n10, [x1, 102]
+	str	n10, [x1, 102]
+	ldr	n11, [x1, 108]
+	str	n11, [x1, 108]
+	ldr	n12, [x1, 114]
+	str	n12, [x1, 114]
+	ldr	n13, [x1, 120]
+	str	n13, [x1, 120]
+	ldr	n14, [x1, 126]
+	str	n14, [x1, 126]
+	ldr	n15, [x1, 132]
+	str	n15, [x1, 132]
+	ldr	n16, [x1, 138]
+	str	n16, [x1, 138]
+	ldr	n17, [x1, 144]
+	str	n17, [x1, 144]
+	ldr	n18, [x1, 150]
+	str	n18, [x1, 150]
+	ldr	n19, [x1, 156]
+	str	n19, [x1, 156]
+	ldr	n20, [x1, 162]
+	str	n20, [x1, 162]
+	ldr	n21, [x1, 168]
+	str	n21, [x1, 168]
+	ldr	n22, [x1, 174]
+	str	n22, [x1, 174]
+	ldr	n23, [x1, 180]
+	str	n23, [x1, 180]
+	ldr	n24, [x1, 186]
+	str	n24, [x1, 186]
+	ldr	n25, [x1, 192]
+	str	n25, [x1, 192]
+	ldr	n26, [x1, 208]
+	str	n26, [x1, 208]
+	ldr	n27, [x1, 214]
+	str	n27, [x1, 214]
+	ldr	n28, [x1, 220]
+	str	n28, [x1, 220]
+	ldr	n29, [x1, 226]
+	str	n29, [x1, 226]
+	ldr	n30, [x1, 232]
+	str	n30, [x1, 232]
+	ldr	n31, [x1, 238]
+	str	n31, [x1, 238]
+	ldr	n32, [x1, 244]
+	str	n32, [x1, 244]
+	ldr	n33, [x1, 250]
+	str	n33, [x1, 250]
+	ldr	n34, [x1, 256]
+	str	n34, [x1, 256]
+	ldr	n35, [x1, 262]
+	str	n35, [x1, 262]
+	ldr	n36, [x1, 268]
+	str	n36, [x1, 268]
+	ldr	n37, [x1, 274]
+	str	n37, [x1, 274]
+	ldr	n38, [x1, 280]
+	str	n38, [x1, 280]
+	ldr	n39, [x1, 286]
+	str	n39, [x1, 286]
+	ldr	n40, [x1, 292]
+	str	n40, [x1, 292]
+	ldr	n41, [x1, 308]
+	str	n41, [x1, 308]
+	ldr	n42, [x1, 314]
+	str	n42, [x1, 314]
+	ldr	n43, [x1, 320]
+	str	n43, [x1, 320]
+	ldr	n44, [x1, 326]
+	str	n44, [x1, 326]
+	ldr	n45, [x1, 332]
+	str	n45, [x1, 332]
+	ldr	n46, [x1, 338]
+	str	n46, [x1, 338]
+	ldr	n47, [x1, 344]
+	str	n47, [x1, 344]
+	ldr	n48, [x1, 350]
+	str	n48, [x1, 350]
+	ldr	n49, [x1, 356]
+	str	n49, [x1, 356]
+	ldr	n50, [x1, 362]
+	str	n50, [x1, 362]
+	ldr	n51, [x1, 368]
+	str	n51, [x1, 368]
+	ldr	n52, [x1, 374]
+	str	n52, [x1, 374]
+	ldr	n53, [x1, 380]
+	str	n53, [x1, 380]
+	ldr	n54, [x1, 386]
+	str	n54, [x1, 386]
+	ldr	n55, [x1, 392]
+	str	n55, [x1, 392]
+	ldr	n56, [x1, 408]
+	str	n56, [x1, 408]
+	ldr	n57, [x1, 414]
+	str	n57, [x1, 414]
+	ldr	n58, [x1, 420]
+	str	n58, [x

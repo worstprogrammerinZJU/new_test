@@ -1,65 +1,153 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	iosize	31, 0x1b, 0x1f
+	.set	dpi_size	8, 17, 23
+	section	.__TEXT,__text,readonly,ipure_instructions
+	.balign 4, 0x90
+	.global	_func0                          ## -- Begin function func0
+	.align	2, 3
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [sp, #16]
-	str	wzr, [sp, #12]
-	str	wzr, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsw	x8, [sp, #8]
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldur	x0, [x29, #-8]
-	bl	_strlen
-	ldr	x8, [sp]                        ; 8-byte Folded Reload
-	subs	x8, x8, x0
-	cset	w8, hs
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #16]
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #8]
-	ldrsb	w1, [x8, x9]
-	bl	_strchr
-	subs	x8, x0, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_6:
-	ldr	w0, [sp, #12]
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"2357BD"
-
-.subsections_via_symbols
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	sub	sp, sp, #32
+	.cfi_def_cfa_register %rbp
+	.cfi_def_cfa_offset 16
+	stp	x29, x30, [sp]
+	.cfi_def_cfa_offset 16
+	mov	x7, 13
+	.cfi_def_cfa_offset 16
+	ldp	q0, q1, [sp]
+	ldp	w8, w9, [sp, 16]
+	ldp	q2, q3, [sp, 32]
+	ldp	w2, w3, [sp, 48]
+	ldp	q1, q0, [sp, 64]
+	ldp	w6, w5, [sp, 80]
+	ldp	q4, q5, [sp, 96]
+	ldp	w4, w5, [sp, 112]
+	ldp	q0, q1, [sp, 128]
+	ldp	w0, w1, [sp, 144]
+	ldp	q2, q3, [sp, 160]
+	ldp	w2, w3, [sp, 176]
+	ldp	q4, q5, [sp, 192]
+	ldp	w4, w5, [sp, 208]
+	ldp	q0, q1, [sp, 224]
+	ldp	w0, w1, [sp, 232]
+	.cfi_restore_cfa_offset 16
+	.cfi_def_cfa_register 0
+	sub	x28, x7, #3
+	mov	x27, sp
+	.cfi_def_cfa_offset 16
+	stp	w0, w1, [sp]
+	str	x28, [x7, 8]
+	mov	x26, x7
+	mov	x25, x7
+	mov	w24, 0
+	mov	w23, 0
+	stp	w8, w9, [x26, 32]
+	str	x27, [x25, 48]
+	str	x26, [x25, 8]
+	str	x27, [x25, 16]
+	str	x26, [x25, 24]
+	str	x27, [x25, 32]
+	str	x26, [x25, 40]
+	str	x27, [x25, 48]
+	str	x26, [x25, 56]
+	str	x27, [x25, 64]
+	str	x26, [x25, 72]
+	str	x27, [x25, 80]
+.LLoop_1:
+	ldr	w0, [x25, 32]
+	ldr	w0, [x25, x28, uxtw]
+	cmp	x27, x25
+	add	w0, w0, w24
+	tst	x0, 1
+	add	w3, w0, 1
+	str	w0, [x25, x28, uxtw]
+	csel	w0, w3, w0, ne
+	str	w0, [x26, x28, sxtw]
+	add	w0, w24, w0
+	str	w0, [x27, x28, sxtw]
+	add	w0, w24, w0
+	str	w0, [x7, x28, sxtw]
+	add	w0, w24, w1
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w1
+	str	w0, [x7, x28, sxtw]
+	add	w0, w24, w2
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w3
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w5
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w6
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w5
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w0, [x30, x28, sxtw]
+	add	w0, w24, w4
+	str	w

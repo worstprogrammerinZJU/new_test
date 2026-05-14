@@ -1,45 +1,149 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+	.set	__EXECSIZE equ 2**24         ## -- Define the maximum executable size
+	.set	$start, . + 4                  ## -- Define the entry point
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	w0, [sp, #28]
-	mov	x8, #1
-	str	x8, [sp, #16]
-	str	x8, [sp, #8]
-	mov	w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #4]
-	mul	x8, x8, x9
-	str	x8, [sp, #16]
-	ldr	x8, [sp, #8]
-	ldr	x9, [sp, #16]
-	mul	x8, x8, x9
-	str	x8, [sp, #8]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_4:
-	ldr	x0, [sp, #8]
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.cfi_offset %rbp, -8
+	.cfi_offset %xsp, -16
+	.cfi_offset %rsp, -32
+	.cfi_offset %r17, -48
+	.cfi_offset %r16, -64
+	.cfi_offset %r15, -72
+	.cfi_offset %r14, -80
+	.cfi_offset %r13, -88
+	.cfi_offset %r12, -96
+	.cfi_offset %r11, -104
+	.cfi_offset %r10, -112
+	.cfi_offset %rbx, -128
+	.cfi_offset %xval, -144
+	.cfi_offset %out, -160
+	.cfi_offset %in, -176
+	.cfi_offset %tmp, -192
+	.cfi_offset %base, -208
+	.cfi_offset %scale, -224
+	.cfi_offset %op, -232
+	.cfi_offset %addr, -240
+	.cfi_offset %data, -248
+	.cfi_offset %value, -256
+	.cfi_offset %size, -264
+	.cfi_offset %src, -272
+	.cfi_offset %dst, -288
+	.cfi_offset %cond, -304
+	.cfi_offset %fun, -312
+	.cfi_offset %arg, -320
+	.cfi_offset %tmp1, -328
+	.cfi_offset %tmp2, -336
+	.cfi_offset %tmp3, -344
+	.cfi_offset %tmp4, -352
+	.cfi_offset %tmp5, -360
+	.cfi_offset %tmp6, -368
+	.cfi_offset %tmp7, -376
+	.cfi_offset %tmp8, -384
+	.cfi_offset %tmp9, -392
+	.cfi_offset %tmp10, -400
+	.cfi_offset %tmp11, -408
+	.cfi_offset %tmp12, -416
+	.cfi_offset %tmp13, -424
+	.cfi_offset %tmp14, -432
+	.cfi_offset %tmp15, -436
+	.cfi_offset %tmp16, -440
+	.cfi_offset %tmp17, -444
+	.cfi_offset %tmp18, -448
+	.cfi_offset %tmp19, -452
+	.cfi_offset %tmp20, -456
+	.cfi_offset %tmp21, -460
+	.cfi_offset %tmp22, -464
+	.cfi_offset %tmp23, -468
+	.cfi_offset %tmp24, -472
+	.cfi_offset %tmp25, -476
+	.cfi_offset %tmp26, -480
+	.cfi_offset %tmp27, -484
+	.cfi_offset %tmp28, -488
+	.cfi_offset %tmp29, -492
+	.cfi_offset %tmp30, -496
+	.cfi_offset %tmp31, -500
+	.cfi_offset %tmp32, -504
+	.cfi_offset %tmp33, -508
+	.cfi_offset %tmp34, -512
+	.cfi_offset %tmp35, -516
+	.cfi_offset %tmp36, -520
+	.cfi_offset %tmp37, -524
+	.cfi_offset %tmp38, -528
+	.cfi_offset %tmp39, -532
+	.cfi_offset %tmp40, -536
+	.cfi_offset %tmp41, -540
+	.cfi_offset %tmp42, -544
+	.cfi_offset %tmp43, -548
+	.cfi_offset %tmp44, -552
+	.cfi_offset %tmp45, -556
+	.cfi_offset %tmp46, -560
+	.cfi_offset %tmp47, -564
+	.cfi_offset %tmp48, -568
+	.cfi_offset %tmp49, -572
+	.cfi_offset %tmp50, -576
+	.cfi_offset %tmp51, -580
+	.cfi_offset %tmp52, -584
+	.cfi_offset %tmp53, -588
+	.cfi_offset %tmp54, -592
+	.cfi_offset %tmp55, -596
+	.cfi_offset %tmp56, -600
+	.cfi_offset %tmp57, -604
+	.cfi_offset %tmp58, -608
+	.cfi_offset %tmp59, -612
+	.cfi_offset %tmp60, -616
+	.cfi_offset %tmp61, -610
+	.cfi_offset %tmp62, -604
+	.cfi_offset %tmp63, -608
+	.cfi_offset %tmp64, -612
+	.cfi_offset %tmp65, -616
+	.cfi_offset %tmp67, -620
+	.cfi_offset %tmp68, -624
+	.cfi_offset %tmp69, -628
+	.cfi_offset %tmp70, -632
+	.cfi_offset %tmp71, -636
+	.cfi_offset %tmp72, -640
+	.cfi_offset %tmp73, -644
+	.cfi_offset %tmp74, -648
+	.cfi_offset %tmp75, -652
+	.cfi_offset %tmp76, -656
+	.cfi_offset %tmp77, -660
+	.cfi_offset %tmp78, -664
+	.cfi_offset %tmp79, -668
+	.cfi_offset %tmp80, -672
+	.cfi_offset %tmp81, -676
+	.cfi_offset %tmp82, -680
+	.cfi_offset %tmp83, -684
+	.cfi_offset %tmp84, -688
+	.cfi_offset %tmp85, -692
+	.cfi_offset %tmp86, -696
+	.cfi_offset %tmp87, -700
+	.cfi_offset %tmp88, -704
+	.cfi_offset %tmp89, -708
+	.cfi_offset %tmp90, -712
+	.cfi_offset %tmp91, -716
+	.cfi_offset %tmp92, -720
+	.cfi_offset %tmp93, -724
+	.cfi_offset %tmp94, -728
+	.cfi_offset %tmp95, -732
+	.cfi_offset %tmp96, -736
+	.cfi_offset %tmp97, -740
+	.cfi_offset %tmp98, -744
+	.cfi_offset %tmp99, -748
+	.cfi_offset %tmp100, -752
+	.cfi_offset %tmp101, -756
+	.cfi_offset %tmp102, -760
+	.cfi_offset %tmp103, -764
+	.cfi_offset %tmp104, -768
+	.cfi_offset %tmp105, -772
+	.cfi_offset %tmp106, -776
+	.cfi_offset %tmp107, -780
+	.cfi_offset %tmp108, -784
+	.cfi_offset %tmp109, -788
+	.cfi_offset %tmp110, -792
+	.cfi_offset %tmp111, -796
+	.cfi_offset %tmp112, -800
+	.cfi_offset %tmp113, -804
+	.cfi_offset %tmp114, -808
+	.cfi_offset %tmp115, -812
+	.cfi_offset %tmp116, -816
+	.cfi_offset %tmp117, -820
+	.cfi_offset %tmp118, -824

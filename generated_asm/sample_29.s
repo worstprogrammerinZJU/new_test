@@ -1,177 +1,163 @@
-.section	__TEXT,__text,regular,pure_instructions
+.arch armv8-a
+	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.global	_func0                          ## -- Begin function func0
+	.align	2, 3
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-16]
-	ldur	x0, [x29, #-16]
-	bl	_strlen
-	subs	x8, x0, #10
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_2:
-	str	wzr, [sp, #32]
-	b	LBB0_3
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #32]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #32]
-	subs	w8, w8, #2
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #32]
-	subs	w8, w8, #5
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #32]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #45
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_13
-LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #32]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #48
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_11
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #32]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #57
-	cset	w8, le
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_12:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #32]
-	add	w8, w8, #1
-	str	w8, [sp, #32]
-	b	LBB0_3
-LBB0_15:
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8]
-	add	x0, sp, #29
-	strb	w8, [sp, #29]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #1]
-	add	x9, sp, #34
-	str	x9, [sp, #8]                    ; 8-byte Folded Spill
-	strb	w8, [sp, #34]
-	strb	wzr, [sp, #35]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #3]
-	add	x9, sp, #23
-	strb	w8, [sp, #23]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #4]
-	strb	w8, [sp, #24]
-	strb	wzr, [sp, #28]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #5]
-	add	x9, x9, #1
-	strb	w8, [sp, #29]
-	strb	wzr, [sp, #30]
-	strb	wzr, [sp, #26]
-	bl	_atoi
-	mov	x8, x0
-	ldr	x0, [sp, #8]                    ; 8-byte Folded Reload
-	stur	w8, [x29, #-20]
-	bl	_atoi
-	mov	x8, x0
-	str	w8, [sp, #40]
-	bl	_atoi
-	stur	w0, [x29, #-24]
-	bl	_atoi
-	stur	w0, [x29, #-28]
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #1
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_16
-LBB0_16:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #12
-	cset	w8, le
-	tbnz	w8, #0, LBB0_18
-	b	LBB0_17
-LBB0_17:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_18:
-	ldr	w8, [sp, #40]
-	subs	w8, w8, #1
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_19
-LBB0_19:
-	ldr	w8, [sp, #40]
-	subs	w8, w8, #31
-	cset	w8, le
-	tbnz	w8, #0, LBB0_21
-	b	LBB0_20
-LBB0_20:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_21:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #4
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_22
-LBB0_22:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #6
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_23
-LBB0_23:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_24
-LBB0_24:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #11
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_27
-	b	LBB0_25
-LBB0_25:
-	ldr	w8, [
+// %b.0:
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	.cfi_def_cfa_register %rbp
+	subsp [x]
+	.cfi_def_cfa_offset 16
+	mov	q0, .LC0
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rdi, -16
+	.cfi_offset %rsp, -32
+	.cfi_offset %rax, -4
+	.cfi_offset %rdx, -8
+	.cfi_offset %code, -12
+	.cfi_offset %stack_size, -16
+	.cfi_offset %buf_size, -20
+	.cfi_offset %buf, -24
+	.cfi_offset %buf_index, -28
+	.cfi_offset %buf_pos, -32
+	.cfi_offset %buf_end, -36
+	.cfi_offset %buf_pos, -40
+	.cfi_offset %buf_end, -44
+	.cfi_offset %buf_pos, -48
+	.cfi_offset %buf_end, -52
+	.cfi_offset %buf_pos, -56
+	.cfi_offset %buf_end, -60
+	.cfi_offset %buf_pos, -64
+	.cfi_offset %buf_end, -68
+	.cfi_offset %buf_pos, -72
+	.cfi_offset %buf_end, -76
+	.cfi_offset %buf_pos, -80
+	.cfi_offset %buf_end, -84
+	.cfi_offset %buf_pos, -88
+	.cfi_offset %buf_end, -92
+	.cfi_offset %buf_pos, -96
+	.cfi_offset %buf_end, -100
+	.cfi_offset %buf_pos, -104
+	.cfi_offset %buf_end, -108
+	.cfi_offset %buf_pos, -112
+	.cfi_offset %buf_end, -116
+	.cfi_offset %buf_pos, -120
+	.cfi_offset %buf_end, -124
+	.cfi_offset %buf_pos, -128
+	.cfi_offset %buf_end, -132
+	.cfi_offset %buf_pos, -136
+	.cfi_offset %buf_end, -140
+	.cfi_offset %buf_pos, -144
+	.cfi_offset %buf_end, -148
+	.cfi_offset %buf_pos, -152
+	.cfi_offset %buf_end, -156
+	.cfi_offset %buf_pos, -160
+	.cfi_offset %buf_end, -164
+	.cfi_offset %buf_pos, -168
+	.cfi_offset %buf_end, -172
+	.cfi_offset %buf_pos, -176
+	.cfi_offset %buf_end, -180
+	.cfi_offset %buf_pos, -184
+	.cfi_offset %buf_end, -188
+	.cfi_offset %buf_pos, -192
+	.cfi_offset %buf_end, -196
+	.cfi_offset %buf_pos, -200
+	.cfi_offset %buf_end, -204
+	.cfi_offset %buf_pos, -208
+	.cfi_offset %buf_end, -212
+	.cfi_offset %buf_pos, -216
+	.cfi_offset %buf_end, -220
+	.cfi_offset %buf_pos, -224
+	.cfi_offset %buf_end, -228
+	.cfi_offset %buf_pos, -232
+	.cfi_offset %buf_end, -236
+	.cfi_offset %buf_pos, -240
+	.cfi_offset %buf_end, -244
+	.cfi_offset %buf_pos, -248
+	.cfi_offset %buf_end, -252
+	.cfi_offset %buf_pos, -256
+	.cfi_offset %buf_end, -260
+	.cfi_offset %buf_pos, -264
+	.cfi_offset %buf_end, -268
+	.cfi_offset %buf_pos, -272
+	.cfi_offset %buf_end, -276
+	.cfi_offset %buf_pos, -280
+	.cfi_offset %buf_end, -284
+	.cfi_offset %buf_pos, -288
+	.cfi_offset %buf_end, -292
+	.cfi_offset %buf_pos, -296
+	.cfi_offset %buf_end, -300
+	.cfi_offset %buf_pos, -304
+	.cfi_offset %buf_end, -308
+	.cfi_offset %buf_pos, -312
+	.cfi_offset %buf_end, -316
+	.cfi_offset %buf_pos, -320
+	.cfi_offset %buf_end, -324
+	.cfi_offset %buf_pos, -328
+	.cfi_offset %buf_end, -332
+	.cfi_offset %buf_pos, -336
+	.cfi_offset %buf_end, -340
+	.cfi_offset %buf_pos, -344
+	.cfi_offset %buf_end, -348
+	.cfi_offset %buf_pos, -352
+	.cfi_offset %buf_end, -356
+	.cfi_offset %buf_pos, -360
+	.cfi_offset %buf_end, -364
+	.cfi_offset %buf_pos, -368
+	.cfi_offset %buf_end, -372
+	.cfi_offset %buf_pos, -376
+	.cfi_offset %buf_end, -380
+	.cfi_offset %buf_pos, -384
+	.cfi_offset %buf_end, -388
+	.cfi_offset %buf_pos, -392
+	.cfi_offset %buf_end, -396
+	.cfi_offset %buf_pos, -400
+	.cfi_offset %buf_end, -404
+	.cfi_offset %buf_pos, -408
+	.cfi_offset %buf_end, -412
+	.cfi_offset %buf_pos, -416
+	.cfi_offset %buf_end, -420
+	.cfi_offset %buf_pos, -424
+	.cfi_offset %buf_end, -428
+	.cfi_offset %buf_pos, -432
+	.cfi_offset %buf_end, -436
+	.cfi_offset %buf_pos, -440
+	.cfi_offset %buf_end, -444
+	.cfi_offset %buf_pos, -448
+	.cfi_offset %buf_end, -452
+	.cfi_offset %buf_pos, -456
+	.cfi_offset %buf_end, -460
+	.cfi_offset %buf_pos, -464
+	.cfi_offset %buf_end, -468
+	.cfi_offset %buf_pos, -472
+	.cfi_offset %buf_end, -476
+	.cfi_offset %buf_pos, -480
+	.cfi_offset %buf_end, -484
+	.cfi_offset %buf_pos, -488
+	.cfi_offset %buf_end, -492
+	.cfi_offset %buf_pos, -496
+	.cfi_offset %buf_end, -500
+	.cfi_offset %buf_pos, -504
+	.cfi_offset %buf_end, -508
+	.cfi_offset %buf_pos, -512
+	.cfi_offset %buf_end, -516
+	.cfi_offset %buf_pos, -520
+	.cfi_offset %buf_end, -524
+	.cfi_offset %buf_pos, -528
+	.cfi_offset %buf_end, -532
+	.cfi_offset %buf_pos, -536
+	.cfi_offset %buf_end, -540
+	.cfi_offset %buf_pos, -544
+	.cfi_offset %buf_end, -548
+	.cfi_offset %buf_pos, -552
+	.cfi_offset %buf_end, -556
+	.cfi_offset %buf_pos, -560
+	.cfi_offset %buf_end, -564
+	.cfi_offset %buf_pos, -568
+	.cfi_offset %buf_end, -572
+	.cfi_offset %buf_pos, -576
+	.cfi_offset %buf_end, -580
+	.cfi_offset %buf_pos, -584

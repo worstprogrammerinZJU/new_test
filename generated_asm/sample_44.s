@@ -1,39 +1,240 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
+.arch armv8-a
+	.set	__cfi_count, 101, or greater
+	section	.__TEXT,__text,readonly,iprefable
+	.balign 4, 0x90
+	.global	_func0                          ## -- Begin function func0
+	.align	2, 3
+_func0:                                 ## @func0
+.LFB0:
 	.cfi_def_cfa_offset 16
-	str	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_1
-LBB0_1:
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #8
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_4
-LBB0_3:
-	str	wzr, [sp, #12]
-	b	LBB0_4
-LBB0_4:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
+	.cfi_offset %rbp, -16
+	.cfi_def_cfa_register %rbp
+	mov	x6, x0
+	sdiv	w2, w0, w1
+	add	w0, w2, 2
+	cmp	w2, 0
+	bne	.LBB0_3
+	cmp	w5, 8
+	bls	.LBB0_4
+.LBB0_7:
+	sub	w0, w1, #1
+	add	w2, w5, 8
+	csel	w0, w0, w2, le
+	str	w0, [x6, 8]
 	ret
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.LFE0:
+	.size	_func0, .-lcii_size
+	.cfi_count, #16
+	.addrsize 4
+	.nop
+	.set	__cfi_count, .+1
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+2
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+3
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+4
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+5
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+6
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+7
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+8
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+9
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+10
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+11
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+12
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+13
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+14
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+15
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+16
+	.cfi_count, #16
+	.cfi_count, __cfi_count
+	.cfi_count, .-16
+	.cfi_def_cfa_offset 16
+	mov	w0, 0
+	.cfi_offset %rbp, -16
+	.cfi_def_cfa_register %rbp
+	ldp	q0, q1, [x6]
+	b	.LBB0_1
+.LendFunc0:
+	.cfi_def_cfa_offset 0
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	_func0, .-lcii_size
+	.cfi_count, #16
+	.addrsize 4
+	.nop
+	.set	__cfi_count, .+1
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+2
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+3
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+4
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+5
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+6
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+7
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+8
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+9
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+10
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+11
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+12
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+13
+	.cfi_count, .+14
+	.cfi_count, __cfi_count
+	.cfi_count, .-16
+	.cfi_def_cfa_offset 16
+	stp	q0, q1, [x6]
+	b	.LBB0_1
+.LendFunc0:
+	.cfi_def_cfa_offset 0
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	_func0, .-lcii_size
+	.cfi_count, #16
+	.addrsize 4
+	.nop
+	.set	__cfi_count, .+1
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+2
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+3
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+4
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+5
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+6
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+7
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+8
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+9
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+10
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+11
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+12
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+13
+	.cfi_count, .+14
+	.cfi_count, __cfi_count
+	.cfi_count, .-16
+	.cfi_def_cfa_offset 16
+	stp	q0, q1, [x6]
+	b	.LBB0_1
+.LEndFunc0:
+	.cfi_def_cfa_offset 0
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	_func0, .-lcii_size
+	.cfi_count, #16
+	.addrsize 4
+	.nop
+	.set	__cfi_count, .+1
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+2
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+3
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+4
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+5
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+6
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+7
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+8
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+9
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+10
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+11
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+12
+	.cfi_count, #16
+	.nop
+	.set	__cfi_count, .+13
+	.cfi_count, .+14
+	.cfi_count, __cfi_count
+	.cfi_count, .-16
+	.cfi_def_cfa_offset 16
+	stp	q

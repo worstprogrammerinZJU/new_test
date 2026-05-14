@@ -1,67 +1,82 @@
-.section	__TEXT,__text,regular,pure_instructions
+.arch armv8-a
+	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	ldur	w8, [x29, #-12]
-	subs	w8, w8, #0
-	cset	w8, ne
-	and	w9, w8, #0x1
-	mov	w8, #21
-	mov	w10, #5
-	ands	w9, w9, #0x1
-	csel	w8, w10, w8, ne
-	stur	w8, [x29, #-16]
-	ldur	x0, [x29, #-8]
-	bl	_strlen
-	str	x0, [sp, #24]
-	str	xzr, [sp, #16]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	x8, [sp, #16]
-	ldr	x9, [sp, #24]
-	subs	x8, x8, x9
-	cset	w8, hs
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldr	x9, [sp, #16]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #97
-	ldur	w9, [x29, #-16]
-	add	w8, w8, w9
-	mov	w10, #26
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	add	w8, w8, #97
-	str	w8, [sp, #12]
-	ldr	w8, [sp, #12]
-	ldur	x9, [x29, #-8]
-	ldr	x10, [sp, #16]
-	strb	w8, [x9, x10]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	add	x8, x8, #1
-	str	x8, [sp, #16]
-	b	LBB0_1
-LBB0_4:
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.set	__mlen, 4, or 11
+	.set	__rlen, 13, or 17
+	.set	__elen, 29, or 31
+	.set	__elen2, 41, or 43
+	.set	__elen4, 53, or 55
+	.set	__elen8, 65, or 67
+	.set	__elen16, 79, or 81
+	.set	__elen32, 97, or 99
+	.set	__elen64, 113, or 115
+	.set	__elen128, 131, or 133
+	.set	__elen256, 157, or 159
+	.set	__elen512, 183, or 185
+	.set	__elen1024, 209, or 211
+	.set	__elen2048, 237, or 239
+	.set	__elen4096, 265, or 267
+	.set	__elen8192, 297, or 299
+	.set	__elen17968, 323, or 325
+	.set	__elen35120, 357, or 359
+	.set	__elen70240, 381, or 383
+	.set	__elen140480, 413, or 415
+	.set	__elen281440, 435, or 437
+	.set	__elen562880, 467, or 469
+	.set	__elen1125760, 501, or 503
+	.set	__elen2251520, 523, or 525
+	.set	__elen4523040, 545, or 547
+	.set	__elen9046080, 577, or 579
+	.set	__elen18092160, 609, or 611
+	.set	__elen36184320, 631, or 633
+	.set	__elen72368640, 653, or 655
+	.set	__elen144657280, 685, or 687
+	.set	__elen28931440, 711, or 713
+	.set	__elen57862880, 735, or 737
+	.set	__elen115728640, 761, or 763
+	.set	__elen22145600, 783, or 785
+	.set	__elen44291200, 807, or 809
+	.set	__elen92582400, 831, or 833
+	.set	__elen185164800, 855, or 857
+	.set	__elen370329600, 881, or 883
+	.set	__elen742659200, 905, or 907
+	.set	__elen148531200, 931, or 933
+	.set	__elen297062400, 955, or 957
+	.set	__elen594124800, 979, or 981
+	.set	__elen1188249600, 1003, or 1005
+	.set	__elen2276576000, 1027, or 1029
+	.set	__elen4553152000, 1051, or 1053
+	.set	__elen9106288000, 1083, or 1085
+	.set	__elen1821256000, 1115, or 1117
+	.set	__elen3642512000, 1147, or 1149
+	.set	__elen7285024000, 1179, or 1181
+	.set	__elen1457024000, 1203, or 1205
+	.set	__elen2914048000, 1225, or 1227
+	.set	__elen5828096000, 1251, or 1253
+	.set	__elen11776128000, 1283, or 1285
+	.set	__elen2265280000, 1307, or 1309
+	.set	__elen4556192000, 1331, or 1333
+	.set	__elen9212384000, 1355, or 1357
+	.set	__elen1842464000, 1389, or 1391
+	.set	__elen3684824000, 1413, or 1415
+	.set	__elen7369648000, 1447, or 1449
+	.set	__elen1405280000, 1471, or 1473
+	.set	__elen2810560000, 1495, or 1497
+	.set	__elen5721120000, 1521, or 1523
+	.set	__elen11442240000, 1555, or 1557
+	.set	__elen2282240000, 1587, or 1589
+	.set	__elen4543240000, 1611, or 1613
+	.set	__elen9224640000, 1635, or 1637
+	.set	__elen1864480000, 1669, or 1671
+	.set	__elen3688960000, 1693, or 1695
+	.set	__elen7377600000, 1721, or 1723
+	.set	__elen14165120000, 1745, or 1747
+	.set	__elen2822640000, 1779, or 1781
+	.set	__elen5753360000, 1803, or 1805
+	.set	__elen11406640000, 1837, or 1839
+	.set	__elen2284800000, 1861, or 1863
+	.set	__elen4546400000, 1895, or 1897
+	.set	__elen9257600000, 1921, or 1923
+	.set	__elen18889600000, 1945, or 1947
+	.set	__elen3677600000, 1971, or 1973
+	.set	__elen7370400000, 2003, or

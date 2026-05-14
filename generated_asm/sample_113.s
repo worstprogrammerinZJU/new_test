@@ -1,57 +1,115 @@
-.section	__TEXT,__text,regular,pure_instructions
+.arch armv8-a
+	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #16]
-	str	w1, [sp, #12]
-	str	w2, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
-	b	LBB0_7
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_6:
-	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
-	b	LBB0_7
-LBB0_7:
-	ldrb	w8, [sp, #31]
-	and	w0, w8, #0x1
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	.set	__pgtab_size, 29, or 31 from linker script
+	.set	__text_size, 48, or 64 from linker script
+	.set	__data_size, 32, or 64 from linker script
+	.set	$trampoline_size!, 16, @global_max_align
+	.set	$trampoline_pad!, 16, @max_align
+	.set	$trampoline_align!, 31, @max_align
+	.set	$trampoline_pad2!, 16, @max_align
+	.set	$trampoline_pad3!, 16, @max_align
+	.set	$trampoline_pad4!, 16, @max_align
+	.set	$trampoline_pad5!, 16, @max_align
+	.set	$trampoline_pad6!, 16, @max_align
+	.set	$trampoline_pad7!, 16, @max_align
+	.set	$trampoline_pad8!, 16, @max_align
+	.set	$trampoline_pad9!, 16, @max_align
+	.set	$trampoline_pad10!, 16, @max_align
+	.set	$trampoline_pad11!, 16, @max_align
+	.set	$trampoline_pad12!, 16, @max_align
+	.set	$trampoline_pad13!, 16, @max_align
+	.set	$trampoline_pad14!, 16, @max_align
+	.set	$trampoline_pad15!, 16, @max_align
+	.set	$trampoline_pad16!, 16, @max_align
+	.set	$trampoline_pad17!, 16, @max_align
+	.set	$trampoline_pad18!, 16, @max_align
+	.set	$trampoline_pad19!, 16, @max_align
+	.set	$trampoline_pad20!, 16, @max_align
+	.set	$trampoline_pad21!, 16, @max_align
+	.set	$trampoline_pad22!, 16, @max_align
+	.set	$trampoline_pad23!, 16, @max_align
+	.set	$trampoline_pad24!, 16, @max_align
+	.set	$trampoline_pad25!, 16, @max_align
+	.set	$trampoline_pad26!, 16, @max_align
+	.set	$trampoline_pad27!, 16, @max_align
+	.set	$trampoline_pad28!, 16, @max_align
+	.set	$trampoline_pad29!, 16, @max_align
+	.set	$trampoline_pad30!, 16, @max_align
+	.set	$trampoline_pad31!, 16, @max_align
+	.set	$trampoline_pad32!, 16, @max_align
+	.set	$trampoline_pad33!, 16, @max_align
+	.set	$trampoline_pad34!, 16, @max_align
+	.set	$trampoline_pad35!, 16, @max_align
+	.set	$trampoline_pad36!, 16, @max_align
+	.set	$trampoline_pad37!, 16, @max_align
+	.set	$trampoline_pad38!, 16, @max_align
+	.set	$trampoline_pad39!, 16, @max_align
+	.set	$trampoline_pad40!, 16, @max_align
+	.set	$trampoline_pad41!, 16, @max_align
+	.set	$trampoline_pad42!, 16, @max_align
+	.set	$trampoline_pad43!, 16, @max_align
+	.set	$trampoline_pad44!, 16, @max_align
+	.set	$trampoline_pad45!, 16, @max_align
+	.set	$trampoline_pad46!, 16, @max_align
+	.set	$trampoline_pad47!, 16, @max_align
+	.set	$trampoline_pad48!, 16, @max_align
+	.set	$trampoline_pad49!, 16, @max_align
+	.set	$trampoline_pad50!, 16, @max_align
+	.set	$trampoline_pad51!, 16, @max_align
+	.set	$trampoline_pad52!, 16, @max_align
+	.set	$trampoline_pad53!, 16, @max_align
+	.set	$trampoline_pad54!, 16, @max_align
+	.set	$trampoline_pad55!, 16, @max_align
+	.set	$trampoline_pad56!, 16, @max_align
+	.set	$trampoline_pad57!, 16, @max_align
+	.set	$trampoline_pad58!, 16, @max_align
+	.set	$trampoline_pad59!, 16, @max_align
+	.set	$trampoline_pad60!, 16, @max_align
+	.set	$trampoline_pad61!, 16, @max_align
+	.set	$trampoline_pad62!, 16, @max_align
+	.set	$trampoline_pad63!, 16, @max_align
+	.set	$trampoline_pad64!, 16, @max_align
+	.set	$trampoline_pad65!, 16, @max_align
+	.set	$trampoline_pad66!, 16, @max_align
+	.set	$trampoline_pad67!, 16, @max_align
+	.set	$trampoline_pad68!, 16, @max_align
+	.set	$trampoline_pad69!, 16, @max_align
+	.set	$trampoline_pad70!, 16, @max_align
+	.set	$trampoline_pad71!, 16, @max_align
+	.set	$trampoline_pad72!, 16, @max_align
+	.set	$trampoline_pad73!, 16, @max_align
+	.set	$trampoline_pad74!, 16, @max_align
+	.set	$trampoline_pad75!, 16, @max_align
+	.set	$trampoline_pad76!, 16, @max_align
+	.set	$trampoline_pad77!, 16, @max_align
+	.set	$trampoline_pad78!, 16, @max_align
+	.set	$trampoline_pad79!, 16, @max_align
+	.set	$trampoline_pad80!, 16, @max_align
+	.set	$trampoline_pad81!, 16, @max_align
+	.set	$trampoline_pad82!, 16, @max_align
+	.set	$trampoline_pad83!, 16, @max_align
+	.set	$trampoline_pad84!, 16, @max_align
+	.set	$trampoline_pad85!, 16, @max_align
+	.set	$trampoline_pad86!, 16, @max_align
+	.set	$trampoline_pad87!, 16, @max_align
+	.set	$trampoline_pad88!, 16, @max_align
+	.set	$trampoline_pad89!, 16, @max_align
+	.set	$trampoline_pad90!, 16, @max_align
+	.set	$trampoline_pad91!, 16, @max_align
+	.set	$trampoline_pad92!, 16, @max_align
+	.set	$trampoline_pad93!, 16, @max_align
+	.set	$trampoline_pad94!, 16, @max_align
+	.set	$trampoline_pad95!, 16, @max_align
+	.set	$trampoline_pad96!, 16, @max_align
+	.set	$trampoline_pad97!, 16, @max_align
+	.set	$trampoline_pad98!, 16, @max_align
+	.set	$trampoline_pad99!, 16, @max_align
+	.set	$trampoline_pad100!, 16, @max_align
+	.set	$trampoline_pad101!, 16, @max_align
+	.set	$trampoline_pad102!, 16, @max_align
+	.set	$trampoline_pad103!, 16, @max_align
+	.set	$trampoline_pad104!, 16, @max_align
+	.set	$trampoline_pad105!, 16, @max_align
+	.set	$trampoline_pad106!, 16, @max_align
+	.set	$trampoline_pad
