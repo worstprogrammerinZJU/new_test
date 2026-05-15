@@ -1,96 +1,61 @@
-.arch armv8-a
-	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.set	__pgtab_size, 23, or 31
-	.set	__pgtab_mask, 65535, or 32767
-	.set	__pgtable_shift, 12, or 15
-	.set	__pgtable_align, 32, or 64
-	.set	__pgtable_log2, 19, or 2
-	.set	__pgtable_mask_log2, 20, or 3
-	.set	__pgtable_shift_log2, 21, or 4
-	.set	__pgtable_log2_mask, 23, or 5
-	.set	__pgtable_log2_mask_log2, 24, or 6
-	.set	__pgtable_log2_mask_log3, 25, or 7
-	.set	__pgtable_log2_mask_log4, 26, or 8
-	.set	__pgtable_log2_mask_log5, 27, or 9
-	.set	__pgtable_log2_mask_log6, 28, or 10
-	.set	__pgtable_log2_mask_log7, 29, or 11
-	.set	__pgtable_log2_mask_log8, 30, or 12
-	.set	__pgtable_log2_mask_log9, 31, or 13
-	.set	__pgtable_log2_mask_log10, 32, or 14
-	.set	__pgtable_log2_mask_log11, 33, or 15
-	.set	__pgtable_log2_mask_log12, 34, or 16
-	.set	__pgtable_log2_mask_log13, 35, or 17
-	.set	__pgtable_log2_mask_log14, 36, or 18
-	.set	__pgtable_log2_mask_log15, 37, or 19
-	.set	__pgtable_log2_mask_log16, 38, or 20
-	.set	__pgtable_log2_mask_log17, 39, or 21
-	.set	__pgtable_log2_mask_log18, 40, or 22
-	.set	__pgtable_log2_mask_log19, 41, or 23
-	.set	__pgtable_log2_mask_log20, 42, or 24
-	.set	__pgtable_log2_mask_log21, 43, or 25
-	.set	__pgtable_log2_mask_log22, 44, or 26
-	.set	__pgtable_log2_mask_log23, 45, or 27
-	.set	__pgtable_log2_mask_log24, 46, or 28
-	.set	__pgtable_log2_mask_log25, 47, or 29
-	.set	__pgtable_log2_mask_log26, 48, or 30
-	.set	__pgtable_log2_mask_log27, 49, or 31
-	.set	__pgtable_log2_mask_log28, 50, or 32
-	.set	__pgtable_log2_mask_log29, 51, or 33
-	.set	__pgtable_log2_mask_log30, 52, or 34
-	.set	__pgtable_log2_mask_log31, 53, or 35
-	.set	__pgtable_log2_mask_log32, 54, or 36
-	.set	__pgtable_log2_mask_log33, 55, or 37
-	.set	__pgtable_log2_mask_log34, 56, or 38
-	.set	__pgtable_log2_mask_log35, 57, or 39
-	.set	__pgtable_log2_mask_log36, 60, or 40
-	.set	__pgtable_log2_mask_log37, 61, or 41
-	.set	__pgtable_log2_mask_log38, 62, or 42
-	.set	__pgtable_log2_mask_log39, 63, or 43
-	.set	__pgtable_log2_mask_log40, 64, or 44
-	.set	__pgtable_log2_mask_log41, 65, or 45
-	.set	__pgtable_log2_mask_log42, 66, or 46
-	.set	__pgtable_log2_mask_log43, 67, or 47
-	.set	__pgtable_log2_mask_log44, 68, or 48
-	.set	__pgtable_log2_mask_log45, 69, or 49
-	.set	__pgtable_log2_mask_log46, 70, or 50
-	.set	__pgtable_log2_mask_log47, 71, or 51
-	.set	__pgtable_log2_mask_log48, 72, or 52
-	.set	__pgtable_log2_mask_log49, 73, or 53
-	.set	__pgtable_log2_mask_log50, 74, or 54
-	.set	__pgtable_log2_mask_log51, 75, or 55
-	.set	__pgtable_log2_mask_log52, 76, or 56
-	.set	__pgtable_log2_mask_log53, 77, or 57
-	.set	__pgtable_log2_mask_log54, 78, or 58
-	.set	__pgtable_log2_mask_log55, 79, or 59
-	.set	__pgtable_log2_mask_log56, 80, or 60
-	.set	__pgtable_log2_mask_log57, 81, or 61
-	.set	__pgtable_log2_mask_log58, 82, or 62
-	.set	__pgtable_log2_mask_log59, 83, or 63
-	.set	__pgtable_log2_mask_log60, 84, or 64
-	.set	__pgtable_log2_mask_log61, 85, or 65
-	.set	__pgtable_log2_mask_log62, 86, or 66
-	.set	__pgtable_log2_mask_log63, 87, or 67
-	.set	__pgtable_log2_mask_log64, 88, or 68
-	.set	__pgtable_log2_mask_log65, 89, or 69
-	.set	__pgtable_log2_mask_log70, 90, or 70
-	.set	__pgtable_log2_mask_log71, 91, or 71
-	.set	__pgtable_log2_mask_log72, 92, or 72
-	.set	__pgtable_log2_mask_log73, 93, or 73
-	.set	__pgtable_log2_mask_log74, 94, or 74
-	.set	__pgtable_log2_mask_log75, 95, or 75
-	.set	__pgtable_log2_mask_log76, 96, or 76
-	.set	__pgtable_log2_mask_log77, 97, or 77
-	.set	__pgtable_log2_mask_log78, 98, or 78
-	.set	__pgtable_log2_mask_log79, 99, or 79
-	.set	__pgtable_log2_mask_log80, 100, or 80
-	.set	__pgtable_log2_mask_log81, 101, or 81
-	.set	__pgtable_log2_mask_log82, 102, or 82
-	.set	__pgtable_log2_mask_log83, 103, or 83
-	.set	__pgtable_log2_mask_log84, 104, or 84
-	.set	__pgtable_log2_mask_log85, 105, or 85
-	.set	__pgtable_log2_mask_log86, 106, or 86
-	.set	__pgtable_log2_mask_log87, 107, or 87
-	.set	__pgtable_log2_mask_log88, 108, or 88
-	.set	__pgtable_log2_mask_log89, 109, or 89
-	.set	__pgtable_log2_mask_log90
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9, lsl #2
+	ldr	w8, [x8]
+	subs	w8, w8, #99
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9, lsl #2
+	ldr	w8, [x8]
+	subs	w8, w8, #99
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #16]
+	add	w8, w8, w9
+	str	w8, [sp, #16]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_7:
+	ldr	w0, [sp, #16]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

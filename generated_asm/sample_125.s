@@ -1,199 +1,97 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #416
-	.cfi_offset %sp, -416
-	.cfi_def_cfa_offset 16
-	mov	x8, x0
-	mov	x7, sp
-	adrp	x2, .LC0
-	add	x2, x2, :lo12:.LC0
-	mov	x6, 1
-	movk	x8, 0x5a5a, lsl 16
-	mov	x5, -420(sp)
-	movk	x7, 0x3c9e, lsl 16
-	mov	w4, 400
-	mov	w0, 0
-	str	w8, [x5]
-	mov	w10, 3
-	str	w4, [x5, 432]
-	stp	x6, x7, [sp, 16]
+; %bb.0:
+	stp	x28, x27, [sp, #-32]!           ; 16-byte Folded Spill
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	.cfi_offset w27, -24
+	.cfi_offset w28, -32
+	sub	sp, sp, #432
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	stur	x8, [x29, #-24]
+	str	w0, [sp, #20]
+	str	xzr, [sp, #24]
+	str	xzr, [sp, #32]
+	str	xzr, [sp, #40]
+	str	xzr, [sp, #48]
+	ldur	x8, [x29, #-24]
+	mov	w9, #0
+	str	w9, [sp, #12]                   ; 4-byte Folded Spill
+	str	wzr, [sp, #16]
+	ldr	w1, [sp, #12]                   ; 4-byte Folded Reload
+	mov	w2, #400
+	bl	_memset
+	ldr	w9, [sp, #12]                   ; 4-byte Folded Reload
+	ldr	w8, [sp, #16]
+	str	w8, [sp, #28]
+	mov	w8, #1
+	str	w8, [sp, #20]
+	mov	w8, #3
+	str	w8, [sp, #24]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	subs	w9, w8, #1
+	add	x8, sp, #28
+	ldr	w9, [x8, w9, sxtw #2]
+	ldr	w10, [sp, #24]
+	subs	w10, w10, #2
+	add	w9, w9, w10
+	ldr	w10, [x8, w9, sxtw #3]
+	subs	w10, w10, #3
+	add	w9, w9, w10
+	ldr	w10, [x8, w9, sxtw #4]
+	subs	w10, w10, #1
+	add	w9, w9, w10
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	str	w8, [x8, x8, lsl #2]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_1
+LBB0_4:
+	ldrsw	x9, [sp, #20]
+	add	x8, sp, #28
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	ldur	x9, [x29, #-24]
+	adrp	x8, ___stack_chk_guard@GOTPAGE
+	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
+	ldr	x8, [x8]
+	subs	x8, x8, x9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	bl	___stack_chk_fail
+LBB0_6:
+	ldr	w0, [sp, #12]                   ; 4-byte Folded Reload
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	ldp	x28, x27, [sp], #32             ; 16-byte Folded Reload
+	add	sp, sp, #432
 	.cfi_def_cfa_offset 0
-	cmn	w0, #4
-	bgt	.LBB0_4
-	dup	v2.4s, x2
-	mov	w0, 0
-	ldp	q2.4s, q3.4s, [x5, 8]
-	ldr	w2, [x5, q2.dddq]
-	ldr	w3, [x5, q3.dddq]
-	add	w2, w2, w3
-	sub	w2, w2, #2
-	stp	q2.4s, [x5, 8]
-	ldr	w2, [x5, q2.dddq]
-	sub	w2, w2, #3
-	stp	q2.4s, [x5, 8]
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w2, w3
-	add	w2, w
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

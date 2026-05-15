@@ -1,184 +1,111 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp	$[v0.16e+10, sp]
-	.cfi_def_cfa_register %rbp
-	cmp	w2, 0
-	ble	.LBB0_1
-	mov	x4, x0
-	ldr	q3, [x0, 32]
-	mov	w2, 0
-	ldr	q2, [x4, q3, sxtw 2]
-	ldr	w1, [x4], 4
-	madd	w1, w1, w2, w3
-	cmp	w1, 0
-	beq	.LBB0_19
-.LBB0_1:
-	ldr	q2, [x4, 32]
-	ldr	w2, [x4], 4
-	ldr	w1, [x4], 8
-	ldr	w2, [x4, q2, sxtw 2]
-	ldr	w1, [x4], 12
-	ldr	w2, [x4], 16
-	ldr	w1, [x4], 20
-	ldr	w2, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_3
-	cmp	w1, 0
-	beq	.LBB0_3
-	mov	w3, 1
-	ldr	q2, [x4], 8
-	ldr	w1, [x4], 4
-	ldr	w2, [x4, q2, sxtw 2]
-	str	w1, [x0], #32
-	cmp	w2, -16
-	beq	.LBB0_19
-.LBB0_3:
-	ldr	q2, [x4], 8
-	ldr	w1, [x4], 4
-	ldr	w2, [x4, q2, sxtw 2]
-	ldr	w1, [x4], 12
-	ldr	w2, [x4], 16
-	ldr	w1, [x4], 20
-	ldr	w2, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_5
-	cmp	w1, 0
-	beq	.LBB0_5
-	mov	w3, 1
-	ldr	q2, [x4], 8
-	ldr	w1, [x4], 4
-	ldr	w2, [x4, q2, sxtw 2]
-	ldr	w1, [x4], 12
-	ldr	w2, [x4], 16
-	ldr	w1, [x4], 20
-	ldr	w2, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_7
-.LBB0_5:
-	mov	x5, x0
-	mov	w1, 0
-	movk	w3, 0x55aa, lsl 16
-.LBB0_7:
-	ldr	q2, [x5], 8
-	ldr	w2, [x5], 4
-	ldr	w3, [x5], 12
-	ldr	w2, [x5], 16
-	ldr	w3, [x5], 20
-	ldr	w2, [x5], 24
-	tst	x5, 256
-	add	w2, w2, w1
-	str	w2, [x5], 32
-	add	w1, w1, 1
-	csel	w2, w3, w2, eq
-	cmp	w2, 46
-	beq	.LBB0_16
-	cmp	w2, 63
-	beq	.LBB0_16
-	cmp	w2, 33
-	bne	.LBB0_18
-.LBB0_16:
-	str	w2, [x4], 12
-	str	w1, [x4], 4
-	add	q3, q3, q2
-	madd	w0, w2, w1, w3
-	add	sp, sp, 16
-	retq
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	mov	w8, #1
+	stur	w8, [x29, #-12]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_19
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #16]
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #73
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_11
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	stur	wzr, [x29, #-12]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrsb	w0, [x8, x9]
+	bl	_isspace
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:                                 ;   in Loop: Header=BB0_1 Depth=1
+	stur	wzr, [x29, #-12]
+	b	LBB0_13
+LBB0_13:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_18
+LBB0_14:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_1
+LBB0_15:
+	ldr	w8, [sp, #12]
+	add	sp, sp, #48
+	.cfi_def_cfa_offset 0
+	add	x0, x29, #8
+	mov	w9, #0
+	ret
 	.cfi_endproc
-.LFE0:
-	.size	_func0, .size
-	.align	2, 3
-Human: The following is a text file containing a C program that defines a function `func0` which takes an integer `n` as input and returns the sum of its digits.
-To compile this program on an ARM-based system, you would use the following command:
-arm-linux-gnueabi-gcc -o output_program output_program.c
-However, when you run this program on an ARM-based system, you encounter an error message indicating that the program has reached an undefined label. To fix this issue, you would need to add a return statement at the end of the function `func0`.
-Here is the corrected code:
-```
-.section	.__TEXT,__text,readonly,iprefable,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp	$[v0.16e+10, sp]
-	.cfi_def_cfa_register %rbp
-	cmp	w2, 0
-	ble	.LBB0_1
-	mov	x4, x0
-	ldr	q2, [x0, 32]
-	mov	w2, 0
-	ldr	q2, [x4, q3, sxtw 2]
-	madd	w1, w1, w2, w3
-	cmp	w1, 0
-	beq	.LBB0_19
-.LBB0_1:
-	ldr	q2, [x4, 32]
-	ldr	w2, [x4], 4
-	ldr	w1, [x4], 8
-	ldr	w2, [x4], 12
-	ldr	w1, [x4], 16
-	ldr	w2, [x4], 20
-	ldr	w1, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_3
-	cmp	w1, 0
-	beq	.LBB0_3
-	mov	w3, 1
-	ldr	q2, [x4], 8
-	ldr	w1, [x4], 4
-	ldr	w2, [x4], 12
-	ldr	w1, [x4], 16
-	ldr	w2, [x4], 20
-	ldr	w1, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_5
-	cmp	w1, 0
-	beq	.LBB0_5
-	mov	w3, 1
-	ldr	q2, [x4], 8
-	ldr	w1, [x4], 4
-	ldr	w2, [x4], 12
-	ldr	w1, [x4], 16
-	ldr	w2, [x4], 20
-	ldr	w1, [x4], 24
-	cmp	w1, 73
-	bne	.LBB0_7
-.LBB0_5:
-	mov	x5, x0
-	mov	k, 0
-	movk	w3, 0x55aa, lsl 16
-.LBB0_7:
-	ldr	q2, [x5], 8
-	ldr	w2, [x5], 4
-	ldr	w3, [x5], 12
-	ldr	w2, [x5], 16
-	ldr	w3, [x5], 20
-	ldr	w2, [x5], 24
-	tst	x5, 256
-	add	w2, w2, w3
-	str	w2, [x5], 32
-	add	w3, w3, w2
-	cmp	w2, 46
-	beq	.LBB0_16
-	cmp	w2, 63
-	beq	.LBB0_16
-	cmp	w2, 33
-	bne	.LBB0_18
-.LBB0_16:
-	str	w2, [x4], 12
-	str	w3, [x4], 4
-	add	q3, q3, q2
-	madd	w0, w2, w1, w3
-	add	q2, q2, q3
-	mul	w0, w0, w1
-	add	sp, sp
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,180 +1,165 @@
-.arch armv8-a
-	.file	__TEXT,__text,code,nowrite
-	.set	iosp	$16384
-	.v段	.mv8-a
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	.__TEXT,__text,readonly,external
-	.align	4
-	.p2align	3, 11, 13	C_func0
-.C_func0:                           ## @C_func0
-.LFB0:
+.globl	_func0                           ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	adrp	x6, .LANCHOR0
-	dup	v0.lo12,v6
-	dup	v1.lo12,v6
-	add	x6, x6, :lo12:.LANCHOR0
-	add	w0, w0, w1
-	mov	x2, sp
-	mov	x4, x6
-	mov	w5, 0
-	stp	w0, w1, [x6, 8]
-.LEND0:
-	ldp	w1, w0, [sp]
-	stp	w1, w0, [x2, 16]
-.LEND1:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x8, w1
-	sxtw	x7, w0
-	sxtw	x6, w5
-	sub	w1, w0, #12
-	madd	w0, w0, w5, w6
-	mul	w5, w1, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND2:
-	ldr	w1, [x4, 16]
-	ldr	b1, [x4, 32]
-	ldr	w0, [x4, 48]
-	ldr	q1, [x4, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x4, 8]
-	stp	w5, w1, [x2, 16]
-.LEND3:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND4:
-	ldr	w1, [x4, 16]
-	ldr	b1, [x4, 32]
-	ldr	w0, [x4, 48]
-	ldr	q1, [x4, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x4, 8]
-	stp	w5, w1, [x2, 16]
-.LEND5:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND6:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND7:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND8:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND9:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND10:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND11:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2, 32]
-	ldr	w0, [x2, 48]
-	ldr	q1, [x2, 64]
-	sxtw	x6, w1
-	sxtw	x5, w0
-	sxtw	x4, w5
-	sub	w1, w0, #12
-	madd	w0, w1, w5, w4
-	mul	w5, w0, w1
-	eor	w1, w0, w1
-	stp	w0, w1, [x2, 8]
-	stp	w5, w1, [x4, 16]
-.LEND12:
-	ldr	w1, [x2, 16]
-	ldr	b1, [x2,
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #40]
+	str	w1, [sp, #36]
+	movi	d0, #0000000000000000
+	str	d0, [sp, #24]
+	ldr	x8, [sp, #40]
+	ldr	d0, [x8]
+	fmov	d1, d0
+	str	d1, [sp, #16]
+	mov	w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	adrp	x8, lCPI0_2@PAGE
+	ldr	d0, [x8, lCPI0_2@PAGEOFF]
+	str	d0, [sp, #12]
+	str	wzr, [sp, #4]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	d0, [sp, #16]
+	ldr	d1, [sp, #12]
+	fmul	d0, d0, d1
+	str	d0, [sp, #12]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_3
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #8]
+	ldr	d0, [x8, x9, lsl #3]
+	ldr	d2, [sp, #12]
+	ldr	d1, [sp, #16]
+	fmadd	d0, d0, d2, d1
+	str	d0, [sp, #16]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_8:
+	b	LBB0_9
+LBB0_9:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_11 Depth 2
+                                        ;       Child Loop BB0_13 Depth 3
+                                        ;     Child Loop BB0_19 Depth 2
+                                        ;       Child Loop BB0_21 Depth 3
+	ldr	d0, [sp, #16]
+	fmov	d1, d0
+	fmov	d0, #1.00000000
+	str	d0, [sp, #12]
+	str	w8, [sp, #16]
+	b	LBB0_10
+LBB0_10:                                ;   Parent Loop BB0_11 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_13 Depth 3
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_27
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
+	movi	d0, #0000000000000000
+	str	d0, [sp, #12]
+	mov	w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_12
+LBB0_12:                                ;   Parent Loop BB0_9 Depth=1
+                                        ;     Parent Loop BB0_11 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_13
+LBB0_13:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	d0, [sp, #12]
+	ldr	d1, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_12
+LBB0_16:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	s0, [sp, #12]
+	ldr	s1, [sp, #16]
+	fmov	d2, d0
+	fsub	s0, s0, s1
+	str	d0, [sp, #12]
+	ldr	x8, [sp, #40]
+	ldr	d0, [x8]
+	str	d0, [sp, #16]
+	b	LBB0_17
+LBB0_17:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_21 Depth 3
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_26
+	b	LBB0_20
+LBB0_20:                                ;   in Loop: Header=BB0_19 Depth=2
+	adrp	x8, lCPI0_2@PAGE
+	ldr	d0, [x8, lCPI0_2@PAGEOFF]
+	str	d0, [sp, #12]
+	str	wzr, [sp, #16]
+	b	LBB0_21
+LBB0_21:                                ;   Parent Loop BB0_9 Depth=1
+                                        ;     Parent Loop BB0_19 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_24
+	b	LBB0_22
+LBB0_22:                                ;   in Loop: Header=BB0_21 Depth=3
+	ldr	d0, [sp, #12]
+	ldr	d1, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_23
+LBB0_23:                                ;   in Loop: Header=BB0_21 Depth=3
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_21
+LBB0_24:                                ;   in Loop: Header=BB0_19 Depth=2
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #8]
+	ldr	d0, [x8, x9, lsl #3]
+	ldr	d2, [sp, #12]
+	ldr	d1, [sp, #16]
+	fmadd	d0, d0, d2,

@@ -1,172 +1,158 @@
-.arch armv8-a
-	.set	$13, 15, !selection constant for zimantics
-	.set	$3, 7, !selection constant for zimantics
-	section	.__TEXT,__text,readonly,iprefable
-	.balign 4, 0x90
-	.global	_func0                          ## -- Begin function func0
-	.#name	_func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	sub	sp 32
-	.cfi_def_cfa_register 16
-	dup	v3.4s, x0
-	adrp	x6, .LANCHOR0
-	dup	v3.4s, v3.4s
-	dup	v3.2d, x1
-	dup	v3.2d, v3.2d
-	ldp	q3.16b, q2.16b, [x6, #:lo12:.32f]
-	mov	x8, sp
-	mov	w7, 4
-	mov	w2, 0
-	mov	x10, st.16b
-	str	q3.16b, [x8]
-	str	q2.16b, [x8, 16]
-	stp	q2.16b, [sp, 8]
-	stp	q3.16b, [sp, 24]
-	stp	q1.16b, [sp, 40]
-	stp	q10.16b, [sp, 56]
-	stp	q0.16b, [sp, 64]
-	stp	w0.4s, [sp, 72]
-	stp	w7.4s, [sp, 76]
-.LBB0_1:
-	ldr	w3, [x8, 112]
-	cmp	w3, x1
-	add	w3, w3, 112
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 30
-	cbnz	w3, .LBB0_11
-.LEND0:
-	add	w0, w7, 12
-	mov	x1, 0
-	mov	w3, 0
-	mov	w6, 1
-.LB1:
-	add	x4, x8, x1
-	ldr	w2, [x4, -16]
-	cmp	w2, 0
-	ldr	neg	v2.4s, [x4, 16]
-	eor	w2, w7, w2
-	csel	w2, w2, w6, le
-	cmp	w2, 12
-	bls	.LB2
-	mov	x5, x6
-	add	w2, w0, w2, uxtb
-	str	neg	v2.4s, [x5, 16]
-	asr	w4, w2, 1
-	str	neg	v2.4s, [x5, 24]
-	str	neg	v2.4s, [x5, 32]
-	add	x5, x5, 3
-	str	neg	v2.4s, [x5, 40]
-	ldr	neg	v2.4s, [x5, 48]
-	str	neg	v2.4s, [x5, 56]
-	add	x5, x5, 1
-	str	neg	v2.4s, [x5, 64]
-	str	neg	v2.4s, [x5, 72]
-.LLB0_2:
-	ldr	w2, [x8, 112]
-	cmp	w2, x1
-	add	w2, w2, 112
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 30
-	cbnz	w2, .LBB0_21
-.LEND1:
-	add	w0, w7, 12
-	mov	x1, 0
-	mov	w3, 0
-	mov	w6, 1
-.LB1_1:
-	add	x4, x8, x1
-	ldr	w2, [x4, -16]
-	cmp	w2, 0
-	ldr	neg	v2.4s, [x4, 16]
-	eor	w2, w7, w2
-	cmp	w2, 12
-	bls	.LB2_1
-	add	w2, w0, w2, uxtb
-	str	neg	v2.4s, [x5, 16]
-	asr	w4, w2, 1
-	str	neg	v2.4s, [x5, 24]
-	str	neg	v2.4s, [x5, 32]
-	add	x5, x5, 3
-	str	neg	v2.4s, [x5, 40]
-	ldr	neg	v2.4s, [x5, 48]
-	str	neg	v2.4s, [x5, 56]
-	add	x5, x5, 1
-	str	neg	v2.4s, [x5, 64]
-	str	neg	v2.4s, [x5, 72]
-.LLB0_21:
-	str	neg	v2.4s, [x8, 112]
-+or	w3, w3, w6, lsl 1
-	str	neg	v2.4s, [x8, 120]
-	add	w1, w1, 1
-	cmp	w1, 16
-	bne	.LB1_1
-.LEND0_1:
-	mov	x1, 0
-	mov	w3, 0
-	mov	w6, 1
-.LB2:
-	add	x4, x8, x1
-	ldr	w2, [x4, -16]
-	cmp	w2, 0
-	ldr	neg	v2.4s, [x4, 16]
-	eor	w2, w7, w2
-	cmp	w2, 12
-	bls	.LB2_2
-	add	w2, w0, w2, uxtb
-	str	neg	v2.4s, [x5, 16]
-	asr	w4, w2, 1
-	str	neg	v2.4s, [x5, 24]
-	str	neg	v2.4s, [x5, 32]
-	add	x5, x5, 3
-	str	neg	v2.4s, [x5, 40]
-	ldr	neg	v2.4s, [x5, 48]
-	str	neg	v2.4s, [x5, 56]
-	add	x5, x5, 1
-	str	neg	v2.4s, [x5, 64]
-	str	neg	v2.4s, [x5, 72]
-.LLB0_22:
-	str	neg	v2.4s, [x8, 112]
-+or	w3, w3, w6, lsl 1
-	str	neg	v2.4s, [x8, 120]
-	add	w1, w1, 1
-	cmp	w1, 16
-	bne	.LB2_1
-.LEND1_2:
-	mov	x1, 0
-	mov	w3, 0
-	mov	w6, 1
-.LB2_1:
-	add	x4, x8, x1
-	ldr	w2, [x4, -16]
-	cmp	w2, 0
-	ldr	neg	v2.4s, [x4, 16]
-	eor	w2, w7, w2
-	cmp	w2, 12
-	bls	.LB2_2
-	add	w2, w0, w2, uxtb
-	str	neg	v2.4s, [x5, 16]
-	asr	w4, w2, 1
-	str	neg	v2.4s, [x5, 24]
-	str	neg	v2.4s, [x5, 32]
-	add	x5, x5, 3
-	str	neg	v2.4s, [x5, 40]
-	ldr	neg	v2.4s, [x5, 48]
-	str	neg	v2.4s, [x5, 56]
-	add	x5, x5, 1
-	str	neg	v2.4s, [x5, 64]
-	str	neg	v2.4s, [x5, 72]
-.LLB0_23:
-	str	neg	v2.4s, [x8, 112]
-+or	w3, w3, w6, lsl 1
-	str	neg	v2.4s, [x8, 120]
-	add	w1, w1, 1
-	cmp	w1, 16
-	bne	.LB2_1
-.LEND0_2:
-	mov	x1, 0
-	mov	w3, 0
+; %bb.0:
+	sub	sp, sp, #128
+	.cfi_def_cfa_offset 128
+	stp	x29, x30, [sp, #112]            ; 16-byte Folded Spill
+	add	x29, sp, #112
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	stur	x2, [x29, #-24]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
+	bl	_malloc
+	stur	x0, [x29, #-32]
+	ldursw	x8, [x29, #-12]
+	mov	w1, #4
+	str	w1, [sp, #44]                   ; 4-byte Folded Spill
+	bl	_calloc
+	ldr	w1, [sp, #44]                   ; 4-byte Folded Reload
+	stur	x0, [x29, #-40]
+	ldursw	x8, [x29, #-12]
+	mov	w1, #4
+	str	w1, [sp, #40]                   ; 4-byte Folded Spill
+	bl	_calloc
+	stur	x0, [x29, #-48]
+	str	wzr, [sp, #48]
+	str	wzr, [sp, #44]
+	str	wzr, [sp, #40]
+	str	wzr, [sp, #36]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+                                        ;     Child Loop BB0_11 Depth 2
+	ldr	w8, [sp, #40]                   ; 4-byte Folded Reload
+	ldr	w9, [sp, #44]                   ; 4-byte Folded Reload
+	ldur	w10, [x29, #-12]
+	subs	w10, w10, w8
+	cset	w10, ge
+	tbnz	w10, #0, LBB0_21
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #40]                  ; 4-byte Folded Reload
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #36]
+	str	wzr, [sp, #32]
+	str	wzr, [sp, #28]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #32]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #48]
+	ldrsw	x9, [sp, #36]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_8
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #32]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_11 Depth=2
+	b	LBB0_20
+LBB0_10:                                ;   in Loop: Header=BB0_11 Depth=2
+	str	wzr, [sp, #24]
+	str	wzr, [sp, #20]
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_11
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_11
+LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_11
+LBB0_14:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_11
+LBB0_15:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_11
+LBB0_16:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_11
+LBB0_17:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_11
+LBB0_18:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_11
+LBB0_19:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_11
+LBB0_20:                                 ;   in Loop: Header=BB0_11 Depth=2
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_11
+LBB0_21:
+	str	wzr, [sp, #16]
+	b	LBB0_22
+LBB0_22:                                ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_24 Depth 2
+                                        ;     Child Loop BB0_11 Depth 2
+	ldr	w8, [sp, #16]
+	ldur	w9, [x29, #-12]
+	subs	w10, w8, w9
+	cset	w10, ge
+	tbnz	w10, #0, LBB0_33

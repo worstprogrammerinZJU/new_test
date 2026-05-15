@@ -1,105 +1,85 @@
-.arch armv8-a
-	.set	iosize 231, 30, 47		// -- Define iOS version
-	.set	clz 1, 31
-	.set	neg 2, 4, 8
-	.set	mul 4, 13, 3
-	.set	div 5, 13, 5
-	.set	neg2 6, 2, 4
-	.set	neg4 7, 4, 8
-	.set	neg8 9, 8, 16
-	.set	neg10 11, 10, 20
-	.set	neg12 13, 12, 24
-	.set	neg14 14, 14, 28
-	.set	neg16 16, 16, 30
-	.set	neg18 18, 18, 32
-	.set	neg20 20, 20, 34
-	.set	neg22 22, 22, 36
-	.set	neg24 24, 24, 38
-	.set	neg26 26, 26, 40
-	.set	neg28 28, 28, 42
-	.set	neg30 30, 30, 44
-	.set	neg32 32, 32, 46
-	.set	neg34 34, 34, 48
-	.set	neg36 36, 36, 50
-	.set	neg38 38, 38, 52
-	.set	neg40 40, 40, 54
-	.set	neg42 42, 42, 56
-	.set	neg44 44, 44, 58
-	.set	neg46 46, 46, 60
-	.set	neg48 48, 48, 62
-	.set	neg50 50, 50, 64
-	.set	neg52 52, 52, 66
-	.set	neg54 54, 54, 68
-	.set	neg56 56, 56, 70
-	.set	neg58 58, 58, 72
-	.set	neg60 60, 60, 74
-	.set	neg62 62, 62, 76
-	.set	neg64 64, 64, 78
-	.set	neg66 66, 66, 80
-	.set	neg68 68, 68, 82
-	.set	neg70 70, 70, 84
-	.set	neg72 72, 72, 86
-	.set	neg74 74, 74, 88
-	.set	neg76 76, 76, 90
-	.set	neg78 78, 78, 92
-	.set	neg80 80, 80, 94
-	.set	neg82 82, 82, 96
-	.set	neg84 84, 84, 98
-	.set	neg86 86, 86, 100
-	.set	neg88 88, 88, 102
-	.set	neg90 90, 90, 104
-	.set	neg92 92, 92, 106
-	.set	neg94 94, 94, 108
-	.set	neg96 96, 96, 110
-	.set	neg98 98, 98, 112
-	.set	neg100 100, 100, 114
-	.set	neg102 102, 102, 116
-	.set	neg104 104, 104, 118
-	.set	neg106 106, 106, 120
-	.set	neg108 108, 108, 122
-	.set	neg110 110, 110, 124
-	.set	neg112 112, 112, 126
-	.set	neg114 114, 114, 128
-	.set	neg116 116, 116, 130
-	.set	neg118 118, 118, 132
-	.set	neg120 120, 120, 134
-	.set	neg122 122, 122, 136
-	.set	neg124 124, 124, 138
-	.set	neg126 126, 126, 140
-	.set	neg128 128, 128, 142
-	.set	neg130 130, 130, 144
-	.set	neg132 132, 132, 146
-	.set	neg134 134, 134, 148
-	.set	neg136 136, 136, 150
-	.set	neg138 138, 138, 152
-	.set	neg140 140, 140, 154
-	.set	neg142 142, 142, 156
-	.set	neg144 144, 144, 158
-	.set	neg146 146, 146, 160
-	.set	neg148 148, 148, 162
-	.set	neg150 150, 150, 164
-	.set	neg152 152, 152, 166
-	.set	neg154 154, 154, 168
-	.set	neg156 156, 156, 170
-	.set	neg158 158, 158, 172
-	.set	neg160 160, 160, 174
-	.set	neg162 162, 162, 176
-	.set	neg164 164, 164, 178
-	.set	neg166 166, 166, 180
-	.set	neg168 168, 168, 182
-	.set	neg170 170, 170, 184
-	.set	neg172 172, 172, 186
-	.set	neg174 174, 174, 188
-	.set	neg176 176, 176, 190
-	.set	neg178 178, 178, 192
-	.set	neg180 180, 180, 194
-	.set	neg182 182, 182, 196
-	.set	neg184 184, 184, 198
-	.set	neg186 186, 186, 200
-	.set	neg188 188, 188, 202
-	.set	neg190 190, 190, 204
-	.set	neg192 192, 192, 206
-	.set	neg194 194, 194, 208
-	.set	neg196 196, 196, 210
-	.set	neg198 198, 198, 212
-	.set	neg20
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	str	wzr, [sp, #8]
+	str	wzr, [sp, #4]
+	mov	w8, #1
+	str	w8, [sp]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp]
+	subs	w9, w9, #1
+	ldr	s1, [x8, w9, sxtw #2]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp]
+	subs	w9, w9, #1
+	ldr	s1, [x8, w9, sxtw #2]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_1
+LBB0_8:
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	add	w8, w8, w9
+	subs	w8, w8, #2
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:
+	strb	wzr, [sp, #29]
+	b	LBB0_11
+LBB0_10:
+	mov	w8, #1
+	strb	w8, [sp, #29]
+	b	LBB0_11
+LBB0_11:
+	ldrb	w0, [sp, #29]
+	and	w0, w0, #0x1
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

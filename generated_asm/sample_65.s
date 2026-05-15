@@ -1,117 +1,73 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.set	uncached_size, 32, or 64	## -- Define cache size
-	.set	local_size, 16, or 32	## -- Define local size
-	.set	cache_line_size, 64bits	## -- Define cache line size
-	.set	stack_size, 64, or 128	## -- Define stack size
-	.set	stack_pad, 16, or 32	## -- Define stack padding
-	.set	stack_align, 128bits	## -- Define stack alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad alignment
-	.set	stack_top, 16k	## -- Set stack top
-	.set	stack_bot, 16k	## -- Set stack bottom
-	.set	stack_pad_top, 16k	## -- Set stack pad top
-	.set	stack_pad_bot, 16k	## -- Set stack pad bottom
-	.set	stack_pad_size, 32k	## -- Set stack pad size
-	.set	stack_pad_align, 128bits	## -- Set stack pad
+; -- Begin function func0
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	s0, [sp, #24]
+	str	s1, [sp, #20]
+	str	s2, [sp, #16]
+	ldr	s0, [sp, #24]
+	ldr	s1, [sp, #20]
+	ldr	s2, [sp, #16]
+	fmul	s0, s0, s1
+	fmov	d1, d0
+	fmul	s1, s1, s2
+	fadd	s0, s0, s1
+	ldr	s0, [sp, #16]
+	fmov	d2, d0
+	fmul	d0, d0, d2
+	fadd	s0, s0, s1
+	fcvt	d0, s0
+	fmov	d1, #1.00000000
+	fcmp	d0, d1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_1
+LBB0_1:
+	ldr	s0, [sp, #24]
+	ldr	s1, [sp, #20]
+	ldr	s2, [sp, #16]
+	fmul	s0, s0, s1
+	ldr	s1, [sp, #16]
+	fmul	s1, s1, s2
+	fadd	s0, s0, s1
+	ldr	s0, [sp, #20]
+	fmov	d2, d0
+	fmul	d0, d0, d2
+	fadd	s0, s0, s1
+	fcvt	d0, s0
+	fmov	d1, #1.00000000
+	fcmp	d0, d1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:
+	ldr	s0, [sp, #20]
+	ldr	s1, [sp, #20]
+	ldr	s2, [sp, #16]
+	fmul	s0, s0, s1
+	ldr	s1, [sp, #16]
+	fmul	s1, s1, s2
+	fadd	s0, s0, s1
+	ldr	s0, [sp, #20]
+	fmov	d2, d0
+	fmul	d0, d0, d2
+	fadd	s0, s0, s1
+	fcvt	d0, s0
+	fmov	d1, #1.00000000
+	fcmp	d0, d1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:
+	mov	w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_6
+LBB0_4:
+	str	wzr, [sp, #28]
+	b	LBB0_6
+LBB0_5:
+	ldr	w0, [sp, #28]
+	add	sp, sp, #32
+	ret
+; -- End function
+.subsections_via_symbols

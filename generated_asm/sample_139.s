@@ -1,335 +1,64 @@
-.arch armv8-a
-	.section	.__TEXT,__text,dynamic,relocatable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.set	__pgtab_size, 23
-	.set	.upexts, .+4
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.p2align 4, 11
-_func0:                                 ## @func0
-	.cfi_def_cfa_register %rbp, 4
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_offset 16
-	mov	x8, x0
-	mov	x2, x0
-	mov	x11, x0
-	add	x0, x0, 16
-	adrp	x2, .LC0
-	add	x1, x0, 8
-	mov	x4, 1
-	mov	w4, 0
-	ldr	q3, [x2, #:lo12:.LC0]
-	stp	q3, x1, [x0]
-	ldr	q3, [x2, #:lo12:.LC0]
-	str	q3, [x11]
-	ldr	q3, [x11, 16]
-	str	q3, [x0, 8]
-	ldr	w3, [x11, 24]
-	str	q3, [x0, 20]
-	ldp	q3, q2, [x1]
-	ldp	q2, q1, [x0]
-	ldr	w2, [x1, 8]
-	ldr	w1, [x1, 16]
-	str	q2, [x0, 12]
-	str	q1, [x0, 8]
-.L5:
-	add	x2, x11, w4, lsl 3
-	mov	x3, x11
-	mov	w5, w4
-	ldr	w6, [x2, -8]
-	ldr	w0, [x3, -8]
-	tst	x4, 1
-	mvn	w0, w0
-	eor	w0, w0, w2, lsl 1
-	csel	w0, w0, w6, eq
-	cmp	w1, w2
-	add	w4, w4, 1
-	csel	w1, w1, w5, lt
-	cmp	w4, 100
-	bgt	.L5
-	mul	w0, w0, w3
-	str	w0, [x8, 4]
-	add	w4, w4, 1
-	mov	w0, 1
-	add	w4, w4, 1
-	str	w0, [x1, 4]
-	madd	w0, w2, w1, w4
-	str	w0, [x2, 4]
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #24]
+	str	w1, [sp, #20]
+	mov	w8, #1
+	str	w8, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, gt
+	mov	w9, #0
+	str	w9, [sp, #8]                    ; 4-byte Folded Spill
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #100
+	cset	w8, lt
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	tbz	w8, #0, LBB0_7
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	mov	w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_8
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #20]
+	mul	w8, w8, w9
+	str	w8, [sp, #16]
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_7:
+	str	wzr, [sp, #28]
+	b	LBB0_8
+LBB0_8:
+	ldr	w0, [sp, #28]
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
-.LFE0:
-	.size	._Z13_func0, .size .LC0, .after_init_array
-	.cfi_endstack
+                                        ; -- End function
 .subsections_via_symbols
-.LC0:
-	.align	4
-	.set	.LUWF, 0xFF
-	.space	32, .upexts, (.rodata|..|.text)
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	0

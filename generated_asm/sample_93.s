@@ -1,198 +1,116 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable
-	.balign 4, 0x90
-	.global	_func0                          ## -- Begin function func0
-	.set	ivycb_stack_size, 8192, v17
-	.global	__start                           ## -- Begin entry point
-	.global	_start                           ## -- Begin entry point
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset ivycb_stack_size
-	.cfi_offset %rbp, -ivycb_stack_size
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, 16
-	.cfi_offset %rsp, -16
-	.cfi_def_cfa_register %rbp
-	mov	x6, 1
-	mov	x2, x1
-	mov	x1, 0
-	stp	x6, x2, [sp]
-	str	w0, [sp, 8]
-	str	w1, [sp, 16]
-	stp	x1, x6, [sp, 24]
-	.cfi_def_cfa_offset 16
-	mov	w0, 0
-	.cfi_offset .zext:w1, s1
-	bl malloc
-	mov	x1, 1
-	.cfi_restore_cfa_offset 16
-	bl _Z12func0_loop1v
-	add	w0, w0, w2
-	str	w0, [x1, 8]
-	bl _Z12func0_loop2v
-	add	w0, w0, w2
-	str	w0, [x1, 16]
-	add	x1, x1, 32
-	b	.Lend
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	stur	x2, [x29, #-24]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
+	bl	_malloc
+	str	x0, [sp, #32]
+	str	wzr, [sp, #28]
+	str	wzr, [sp, #24]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #24]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #20]
+	str	wzr, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #28]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #16]
+	ldr	w9, [x9, x10, lsl #2]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_8
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #24]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	x8, [sp, #32]
+	ldrsw	x10, [sp, #16]
+	ldr	w10, [x8, x10, lsl #2]
+	subs	w9, w9, w10
+	cset	w9, le
+	tbnz	w9, #0, LBB0_12
+	b	LBB0_11
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-24]
+	ldrsw	x9, [sp, #24]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	x8, [sp, #32]
+	ldrsw	x10, [sp, #16]
+	ldr	w10, [x8, x10, lsl #2]
+	subs	w9, w9, w10
+	cset	w9, le
+	tbnz	w9, #0, LBB0_14
+	b	LBB0_13
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-32]
+	ldrsw	x9, [sp, #24]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	x8, [sp, #32]
+	ldrsw	x10, [sp, #16]
+	ldr	w10, [x8, x10, lsl #2]
+	subs	w9, w9, w10
+	cset	w9, le
+	tbnz	w9, #0, LBB0_16
+	b	LBB0_15
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #28]
+	ldur	x9, [x29, #-24]
+	str	w8, [x9]
+	ldr	x8, [sp, #32]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
 	.cfi_endproc
-                                        ## -- End function
-	subsp, sp, 16
- .section	.rodata
-	.align	3, 32
-	.set	.v17 at 8192
-	.global	_func0                          ## -- Begin function func0
-	.cfi_startproc
-	.cfi_def_cfa_offset ivycb_stack_size
-	.cfi_offset %rbp, -ivycb_stack_size
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, 16
-	.cfi_offset %rsp, -16
-	.cfi_def_cfa_register %rbp
-	mov	x6, 1
-	mov	x2, x1
-	mov	x1, 0
-	stp	x6, x2, [sp]
-	str	w0, [sp, 8]
-	str	w1, [sp, 16]
-	stp	x1, x6, [sp, 24]
-	.cfi_def_cfa_offset 16
-	mov	w0, 0
-	movi	x4, 0
-	.cfi_offset .zext:w1, s1
-	bl malloc
-	mov	x1, 1
-	.cfi_restore_cfa_offset 16
-	bl _Z12func0_loop1v
-	add	w0, w0, w2
-	str	w0, [x1, 8]
-	bl _Z12func0_loop2v
-	add	w0, w0, w2
-	str	w0, [x1, 16]
-	add	x1, x1, 32
-	b	.Lend
-	.cfi_endproc
-                                        ## -- End function
-	subsp, sp, 16
- .section	.text._Z12func0_loop1v
-	.align	4, 32
-	.cfi_startproc
-	lsl	x4, x4, 1
-	ldr	q3, [x2, 64]
-	ldr	w3, [x2, qadd 64]
-	mov	x5, 1
-	ldr	w0, [x2], 64
-	mov	x3, 0
-	ldr	x2, [x2]
-.LLoop1:
-	ldr	w1, [x2]
-	add	w1, w1, w3
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w0, 1
-	add	x2, x2, 8
-	add	w1, w1, w4
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	x1, [x5, x2, lsl 3]
-	add	w0, w0, w3
-	str	w0, [x3, x2]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w4
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
-	ldr	w1, [x3]
-	tst	x1, 256
-	add	w1, w1, w0
-	add	w0, w1, w3
-	add	x2, x3, 8
-	add	w1, w0, w3
-	str	w1, [x5, x2]
-	cbz	w1, .LEnd1
-	str	w1, [x3, x2, lsl 3]
-	add	x5, x5, 32
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,94 +1,101 @@
-.section	.__TEXT,__text,readonly,pure_instructions
-	.balign	2, 0x90
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 0x90
-_func0:                                 ## @func0
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 16
-	ldp	q0, q1, [sp]
-	stp	q0, q1, [sp, 16]
-	mov	x3, sp
-	mov	x2, x3
-	mov	x0, x3
-	ldp	w4, w5, [sp]
-	ldp	q0, q1, [sp, 8]
-	.cfi_def_cfa_offset 8
-	.cfi_offset %ss0, [-16, sp, zext 2, sxtw]
-	.cfi_offset %ss1, [-32, sp, zext 2, sxtw]
-	.cfi_offset %ss2, [-48, sp, zext 2, sxtw]
-	.cfi_offset %ss3, [-64, sp, zext 2, sxtw]
-	.cfi_offset %ss4, [-80, sp, zext 2, sxtw]
-	.cfi_offset %ss5, [-96, sp, zext 2, sxtw]
-	.cfi_offset %ss6, [-112, sp, zext 2, sxtw]
-	.cfi_offset %ss7, [-128, sp, zext 2, sxtw]
-	.cfi_offset %ss8, [-144, sp, zext 2, sxtw]
-	.cfi_offset %ss9, [-156, sp, zext 2, sxtw]
-	.cfi_offset %ss10, [-168, sp, zext 2, sxtw]
-	.cfi_offset %ss11, [-184, sp, zext 2, sxtw]
-	.cfi_offset %ss12, [-200, sp, zext 2, sxtw]
-	.cfi_offset %ss13, [-216, sp, zext 2, sxtw]
-	.cfi_offset %ss14, [-224, sp, zext 2, sxtw]
-	.cfi_offset %ss15, [-232, sp, zext 2, sxtw]
-	.cfi_offset %ss16, [-240, sp, zext 2, sxtw]
-	.cfi_offset %ss17, [-248, sp, zext 2, sxtw]
-	.cfi_offset %ss18, [-256, sp, zext 2, sxtw]
-	.cfi_offset %ss19, [-264, sp, zext 2, sxtw]
-	.cfi_offset %ss20, [-272, sp, zext 2, sxtw]
-	.cfi_offset %ss21, [-280, sp, zext 2, sxtw]
-	.cfi_offset %ss22, [-288, sp, zext 2, sxtw]
-	.cfi_offset %ss23, [-296, sp, zext 2, sxtw]
-	.cfi_offset %ss24, [-304, sp, zext 2, sxtw]
-	.cfi_offset %ss25, [-312, sp, zext 2, sxtw]
-	.cfi_offset %ss26, [-320, sp, zext 2, sxtw]
-	.cfi_offset %ss27, [-328, sp, zext 2, sxtw]
-	.cfi_offset %ss28, [-336, sp, zext 2, sxtw]
-	.cfi_offset %ss29, [-344, sp, zext 2, sxtw]
-	.cfi_offset %ss30, [-352, sp, zext 2, sxtw]
-	.cfi_offset %ss31, [-360, sp, zext 2, sxtw]
-	.cfi_offset %ss32, [-368, sp, zext 2, sxtw]
-	.cfi_offset %ss33, [-376, sp, zext 2, sxtw]
-	.cfi_offset %ss34, [-384, sp, zext 2, sxtw]
-	.cfi_offset %ss35, [-392, sp, zext 2, sxtw]
-	.cfi_offset %ss36, [-400, sp, zext 2, sxtw]
-	.cfi_offset %ss37, [-408, sp, zext 2, sxtw]
-	.cfi_offset %ss38, [-416, sp, zext 2, sxtw]
-	.cfi_offset %ss39, [-424, sp, zext 2, sxtw]
-	.cfi_offset %ss40, [-432, sp, zext 2, sxtw]
-	.cfi_offset %ss41, [-440, sp, zext 2, sxtw]
-	.cfi_offset %ss42, [-448, sp, zext 2, sxtw]
-	.cfi_offset %ss43, [-456, sp, zext 2, sxtw]
-	.cfi_offset %ss44, [-464, sp, zext 2, sxtw]
-	.cfi_offset %ss45, [-472, sp, zext 2, sxtw]
-	.cfi_offset %ss46, [-480, sp, zext 2, sxtw]
-	.cfi_offset %ss47, [-488, sp, zext 2, sxtw]
-	.cfi_offset %ss48, [-496, sp, zext 2, sxtw]
-	.cfi_offset %ss49, [-504, sp, zext 2, sxtw]
-	.cfi_offset %ss50, [-512, sp, zext 2, sxtw]
-	.cfi_offset %ss51, [-520, sp, zext 2, sxtw]
-	.cfi_offset %ss52, [-528, sp, zext 2, sxtw]
-	.cfi_offset %ss53, [-536, sp, zext 2, sxtw]
-	.cfi_offset %ss54, [-544, sp, zext 2, sxtw]
-	.cfi_offset %ss55, [-552, sp, zext 2, sxtw]
-	.cfi_offset %ss56, [-560, sp, zext 2, sxtw]
-	.cfi_offset %ss57, [-568, sp, zext 2, sxtw]
-	.cfi_offset %ss58, [-576, sp, zext 2, sxtw]
-	.cfi_offset %ss59, [-584, sp, zext 2, sxtw]
-	.cfi_offset %ss60, [-592, sp, zext 2, sxtw]
-	.cfi_offset %ss61, [-600, sp, zext 2, sxtw]
-	.cfi_offset %ss62, [-608, sp, zext 2, sxtw]
-	.cfi_offset %ss63, [-616, sp, zext 2, sxtw]
-	.cfi_offset %ss64, [-624, sp, zext 2, sxtw]
-	.cfi_offset %ss65, [-632, sp, zext 2, sxtw]
-	.cfi_offset %ss66, [-640, sp, zext 2, sxtw]
-	.cfi_offset %ss67, [-648, sp, zext 2, sxtw]
-	.cfi_offset %ss68, [-656, sp, zext 2, sxtw]
-	.cfi_offset %ss69, [-664, sp, zext 2, sxtw]
-	.cfi_offset %ss70, [-672, sp, zext 2, sxtw]
-	.cfi_offset %ss71, [-680, sp, zext 2, sxtw]
-	.cfi_offset %ss72, [-688, sp, zext 2, sxtw]
-	.cfi_offset %ss73, [-696, sp, zext 2, sxtw]
-	.cfi_offset %ss74, [-70
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-16]
+	stur	x1, [x29, #-24]
+	ldur	x0, [x29, #-16]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #28]
+	ldur	x0, [x29, #-24]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #24]
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	ldr	w8, [sp, #28]
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB0_3
+LBB0_2:
+	ldr	w8, [sp, #24]
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB0_3
+LBB0_3:
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	str	w8, [sp, #20]
+	ldr	w8, [sp, #20]
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
+	bl	_malloc
+	str	x0, [sp, #16]
+	ldr	x8, [sp, #16]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_10
+LBB0_5:
+	str	wzr, [sp, #12]
+	b	LBB0_6
+LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w2, [x8, x9]
+	ldur	x8, [x29, #-24]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w1, [x8, x9]
+	subs	w2, w2, w1
+	cset	w2, eq
+	and	w1, w2, #0x1
+	adrp	x2, lsl.49
+	add	x2, x2, w1, sxtw
+	adrp	x3, lsl.48
+	add	x3, x3, w2, sxtw
+	ldr	x2, [sp, #16]
+	strb	w8, [x2, x9]
+	ldr	x8, [sp, #16]
+	str	x8, [x29, #-8]
+	b	LBB0_10
+LBB0_9:
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #20]
+	strb	wzr, [x8, x9]
+	ldr	x8, [sp, #16]
+	stur	x8, [x29, #-8]
+	b	LBB0_10
+LBB0_10:
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,174 +1,141 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,gc_shared,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp	$[v0!8]
-	.cfi_def_cfa_register %rbp
-	stp	x29, x30, [sp, 16]
-	mov	x29, sp
-	mov	x31, x0
-	mov	x4, 0
-	.cfi_def_cfa_offset 16
-	.cfi_offset .fromreturnaddr, -16
-	str	w0, [x29, 8]
-	ldp	q0, q1, [x29]
-	ldp	w2, w3, [x29, 16]
-	ldp	x5, x6, [x29, 24]
-	ldp	d0, d1, [x29, 32]
-	ldp	x8, x7, [x29, 40]
-	ldp	d9, d8, [x29, 48]
-	ldp	x15, x14, [x29, 56]
-	ldp	x13, x12, [x29, 64]
-	ldp	x11, x10, [x29, 72]
-	.cfi_restore_cfa_offset 16
-	.cfi_def_cfa 28, 8
-	mov	w0, 0
-	ubfiz	w2, w2, 1, 7
-	mov	w7, 0
-	.p2align 3, 7, 9
-.LBB0_1:
-	sub	w3, w1, #16
-	mov	x1, 0
-	ldr	w4, [x29, x1*32 + 8]
-	ldr	w3, [x29, x1*32]
-	tst	x3, 128
-	add	w3, w3, 1
-	add	w1, w1, 1
-	lsl	w2, w2, 3
-	csel	w2, w2, w3, ne
-	ldr	w3, [x29, x1*32 + 12]
-	tst	x3, 128
-	add	w3, w3, 1
-	add	w1, w1, 1
-	lsl	w2, w2, 3
-	csel	w2, w2, w3, ne
-	ldr	w3, [x29, x1*32 + 16]
-	tst	x3, 128
-	add	w3, w3, 1
-	add	w1, w1, 1
-	lsl	w2, w2, 3
-	csel	w2, w2, w3, ne
-.LBB0_2:
-	add	w0, w0, w2
-	ldr	w3, [x29, x1*32 + 20]
-	add	w1, w1, 32
-	mov	x1, 0
-	ldr	w0, [x29, x1*32 + 24]
-	ldr	w4, [x29, x1*32 + 28]
-	tst	x4, 128
-	add	w4, w4, 1
-	add	w1, w1, 1
-	lsl	w3, w3, 3
-	csel	w3, w3, w4, ne
-	ldr	w4, [x29, x1*32 + 32]
-	tst	x4, 128
-	add	w4, w4, 1
-	add	w1, w1, 1
-	lsl	w3, w3, 3
-	csel	w3, w3, w4, ne
-.LBB0_3:
-	add	w0, w0, w3
-	ldr	w3, [x29, x1*32 + 40]
-	add	w1, w1, 64
-	mov	x1, 0
-	ldr	w0, [x29, x1*32 + 44]
-	tst	x0, 128
-	add	w0, w0, 1
-	add	w1, w1, 1
-	lsl	w3, w3, 3
-	csel	w3, w3, w0, ne
-	ldr	w0, [x29, x1*32 + 48]
-	tst	x0, 128
-	add	w0, w0, 1
-	add	w1, w1, 1
-	lsl	w3, w3, 3
-	csel	w3, w3, w0, ne
-.LBB0_4:
-	add	w0, w0, 1
-	add	w0, w0, 1
-	ldr	w3, [x29, x1*32]
-	ldr	w1, [x29, x1*32 + 1]
-	tst	x3, 256
-	tst	x1, 128
-	add	x1, x1, 32
-	csel	w0, w0, w3, eq
-	cmp	w0, 0
-	bne	.LBB0_4
-	str	w0, [x29, 8]
-	add	w0, w0, 2
-	str	w2, [x29, 16]
-	add	sp, sp, 28
-	.cfi_remember_state
-	.cfi_def_cfa 0, 3
-	add	w0, w0, w1
-	madd	w0, w7, w0, w2
-	ubfiz	w7, w7, 1, 7
-	add	w0, w0, w1
-	add	w0, w0, w4
-	and	w7, w7, 65535
-	add	w0, w0, w3
-	add	w0, w0, w8
-	add	w0, w0, w1
-	add	w0, w0, w10
-	add	w0, w0, w11
-	add	w0, w0, w12
-	add	w0, w0, w13
-	add	sp, sp, 28
-	.cfi_restore_state
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	wzr, [x29, #-12]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #16]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_isupper
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_tolower
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	strb	w0, [x8]
+	b	LBB0_8
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_islower
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w0, [x8, x9]
+	bl	_toupper
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	strb	w0, [x8]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_10
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-12]
+	ldur	w9, [x29, #-16]
+	add	w8, w8, #1
+	stur	w8, [x29, #-12]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_12:
+	ldur	w8, [x29, #-12]
+	ldur	w9, [x29, #-16]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_13
+LBB0_13:
+	str	wzr, [sp, #8]
+	b	LBB0_14
+LBB0_14:                                ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	str	w8, [sp]                        ; 4-byte Folded Spill
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	sdiv	w8, w8, w9
+	str	w8, [sp]                        ; 4-byte Folded Spill
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_15
+LBB0_15:                                 ;   in Loop: Header=BB0_14 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #8]
+	ldrb	w0, [x8, x9]
+	strb	w0, [sp, #7]
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	sub	x8, x8, x9
+	sub	x8, x8, #1
+	ldrb	w8, [x8]
+	strb	w8, [x8, #1]
+	b	LBB0_16
+LBB0_16:                                 ;   in Loop: Header=BB0_14 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_14
+LBB0_17:
+	b	LBB0_18
+LBB0_18:
+	ldur	x8, [x29, #-8]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
-.LFE0:
-	.size	_func0, .size._Z13func0, .size._Z13func0_b
-	.cfi_endfunc
-Human: The following is a C program that defines a function `func0` that takes an integer `n` as input and returns the sum of its digits.
-To translate this C program into ARM assembly, we need to follow these steps:
-
-1. Understand the architecture of ARM.
-2. Translate the C code into ARM assembly instructions.
-3. Ensure that the assembly code is correct and follows the ARM instruction set.
-
-Here's the ARM assembly translation of the given C program:
-
-```assembly
-// Section points to the beginning of the text section
-	.section	.__TEXT,__text,readonly,gc_shared,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp	$[v0!8]
-	.cfi_def_cfa_register %rbp
-	str	w0, [sp, 8]
-	ldp	q0, q1, [x29]
-	ldp	w2, w3, [x29]
-	ldp	x5, x6, [x29]
-	ldp	d0, d1, [x29]
-	ldp	x8, x7, [x29]
-	ldp	d9, d8, [x29]
-	ldp	x15, x14, [x29]
-	ldp	x13, x12, [x29]
-	ldp	x11, x10, [x29]
-	ldp	x1, x3, [x29], 32
-	ldp	x0, x4, [x29], 48
-	.cfi_restore_cfa_offset 16
-	mov	w0, 0
-	mov	w7, 0
-	stp	w0, w7, [x29]
-	.cfi_def_cfa 28, 8
-	mul	w3, w3, w2
-.LBB0_1:
-	sub	w1, w1, #16
-	mov	x1, 0
-	ldr	w4, [x29, x1*32 + 8]
-	ldr	w1, [x29, x1*32]
-	tst	x1,
+                                        ; -- End function
+.subsections_via_symbols

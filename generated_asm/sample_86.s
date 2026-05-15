@@ -1,200 +1,95 @@
-.section	.__TEXT,__text,readonly,magic,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 16
-	mksw
-	.cfi_def_cfa_register 17, sp
-	mov	w7, w0
-	add	x10, sp, 16
-	mov	x6, sp
-	mov	x8, 17
-	sub	sp, sp, sp_plus_16
-	.cfi_def_cfa_offset -sp_plus_16
-	dup	v0.4s, w7
-	mov	x2, sp
-	mov	w0, 0
-	mov	w4, 0
-
-## %bb.0:                               ## =>This Inner Loop Header: Depth=1
-	ldr	x1, [x8, -16]
-	ldr	w3, [x2]
-	cmp	w1, 40
-	bls	.LBB0_4
-	ldr	x1, [x2], 16
-	mov	x5, x6
-	ldr	x1, [x1, x10]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 1
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND0:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	ldr	x1, [x2]
-	add	x2, x2, 1
-	ldr	x1, [x1, x10]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 1
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND1:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	add	x2, x2, 32
-	ldr	x1, [x2]
-	add	x2, x2, 32
-	ldr	x1, [x1, x10]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 32
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND2:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	add	x2, x2, 48
-	add	x1, x6, x0, lsl 8
-	str	w3, [x1, 8]
-	cbnz	w4, .LEND0
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-16]
+	stur	w1, [x29, #-20]
+	str	wzr, [sp, #24]
+	str	wzr, [sp, #20]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #20]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	ldr	x0, [x8, x9, lsl #3]
+	bl	_strlen
+	ldrsw	x8, [sp, #24]
+	add	x8, x8, x0
+                                        ; kill: def $w8 killed $w8 killed $x8
+	str	w8, [sp, #24]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_4:
+	ldr	w8, [sp, #24]
+	add	w0, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x0
+	sxtw	x8, w8
+	bl	_malloc
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_11
+LBB0_6:
+	ldr	x8, [sp, #8]
+	strb	wzr, [x8]
+	str	wzr, [sp, #4]
+	b	LBB0_7
+LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldur	w9, [x29, #-20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	x0, [sp, #8]
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #4]
+	ldr	x1, [x8, x9, lsl #3]
+	mov	x2, #-1
+	bl	___strcat_chk
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_7
+LBB0_10:
+	ldr	x8, [sp, #8]
+	stur	x8, [x29, #-8]
+	b	LBB0_11
+LBB0_11:
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
 	ret
 	.cfi_endproc
-                                        ## -- End function
-.cfi_endheader
-disassembly for machine code:
- .align	3, 3
-.func0:                                 ## @func0
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register 17, sp
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset -sp_plus_16
-	mksw
-	.cfi_def_cfa_offset 16
-	dup	v0.4s, w7
-	mov	x7, x6
-	add	x6, x6, 16
-	sub	sp, sp, sp_plus_16
-	.cfi_def_cfa_offset -sp_plus_16
-	.cfi_def_cfa_register 17, sp
-	mov	w4, 0
-
-## %bb.0:                               ## =>This Inner Loop Header: Depth=1
-	ldr	x1, [x7]
-	ldr	w3, [x2]
-	cmp	w3, 40
-	bls	.LBB0_4
-	ldr	x1, [x2], 16
-	mov	x5, x6
-	ldr	x1, [x1]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 1
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND0:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	ldr	x1, [x2]
-	add	x2, x2, 32
-	ldr	x1, [x1, x10]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 32
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND2:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	add	x2, x2, 48
-	add	x1, x6, x0, lsl 8
-	str	w3, [x1, 8]
-	cbnz	w4, .LEND0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.cfi_endheader
-disassembly for machine code:
- .align	3, 3
-.func0:                                 ## @func0
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register 17, sp
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset -sp_plus_16
-	mksw
-	.cfi_def_cfa_offset 16
-	dup	v0.4s, w7
-	mov	x7, x6
-	add	x6, x6, 16
-	sub	sp, sp, sp_plus_16
-	.cfi_def_cfa_offset -sp_plus_16
-	.cfi_def_cfa_register 17, sp
-	mov	w4, 0
-
-## %bb.0:                               ## =>This Inner Loop Header: Depth=1
-	ldr	x1, [x7]
-	ldr	w3, [x2]
-	cmp	w3, 40
-	bls	.LBB0_4
-	ldr	x1, [x2], 16
-	mov	x5, x6
-	ldr	x1, [x1]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 1
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND0:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	ldr	x1, [x2]
-	add	x2, x2, 32
-	ldr	x1, [x1, x10]
-	str	w3, [x1, x4, sxtw 2]
-	add	x4, x4, 32
-	add	x1, x1, x10
-	stp	x1, x5, [x2]
-	ldr	x1, [x2]
-	ldr	w3, [x1]
-	cmp	w3, -20
-	bgt	.LBB0_1
-.LEND2:
-	add	w0, w0, 1
-	str	w0, [x2], 16
-	add	x2, x2, 48
-	add	x1, x6, x0, lsl 8
-	str	w3, [x1, 8]
-	cbnz	w4, .LEND0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-Human: I'm sorry, but I can't assist with that request.
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,193 +1,134 @@
-.arch armv8-a
-	.set	$17, 3, -24
-	.set	$4, 7, -24
-	.set	$12, 11, -24
-	.set	$3, 9, -24
-	.set	$8, 13, -24
-	.set	$5, 15, -24
-	.set	$1, 17, -24
-	.set	$10, 23, -24
-	.set	$14, 29, -24
-	.set	$16, 31, -24
-	section	.__TEXT,__text,readonly
-	.align	2, 3
-	.global	_func0
-	.set	$_Z from_w
-	.balign	4, 0x90
-._Z:                                                                                                              ## -- Begin function _Z
-.LFB0:
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	sub	sp, sp, #48
-	.cfi_def_cfa_register %rbp
-	.cfi_def_cfa_offset 16
-	movi	w2, 64
-	.cfi_def_cfa_offset 16
-	getpagesize()
-	ble	x0, 31, 31
-	mov	x3, x14
-	mov	x14, sp
-	mov	x15, sp
-	.cfi_def_cfa_offset 16
-	malloc	32, 4, .LC0
-	str	x3, [x14]
-	dup	v0.2d, 0
-	mov	x16, sp
-	mov	w4, 0
-	cmp	x14, x3
-	bne	.LBB0_2
-.LLB0_2:
-	ldp	q0.2d, q1.2d, [x14]
-	mov	x13, x15
-	add	w0, w0, 1
-	mov	w7, 62
-	str	q0.2d, [x13]
-	str	q1.2d, [x13, 8]
-	stp	q0.2d, q1.2d, [x13, 24]
-	cmp	w0, -12
-	add	w0, w0, 48
-	lsl	x13, x13, 1
-	add	w0, w0, w7
-	str	w0, [x13]
-	bne	.LBB0_4
-.LLB0_4:
-	ldr	x13, [x14]
-	mov	x6, x15
-	mov	w5, 6
-	ldr	w0, [x13]
-	ldr	w12, [x13, 8]
-	add	w0, w0, w5
-	str	w0, [x13]
-	mov	x5, x15
-	mov	w4, 2
-	ldr	w0, [x13]
-	ldr	w1, [x13, 8]
-	add	w0, w0, w5
-	str	w0, [x13]
-	mov	x5, x15
-	mov	w4, 2
-	ldr	w0, [x13]
-	ldr	w1, [x13, 8]
-	add	w0, w0, w5
-	str	w0, [x13]
-	str	w1, [x13, 16]
-	add	sp, sp, 48
-	.cfi_def_cfa_offset 0
-.LFE0:
-	.size	._Z, .LC0.-_Z
-	.section	.__TEXT,__code_to_string,cstring_literals
-.L_.LC0:
-	.align	4, 0x90
-	.set	$_Z from_w
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_offset 16
-	.c
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-12]
+	mov	x0, #64
+	bl	_malloc
+	str	x0, [sp, #24]
+	ldr	x8, [sp, #24]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_11
+LBB0_2:
+	mov	x8, #62
+	str	x8, [sp, #20]
+	ldr	x9, [sp, #24]
+	strb	wzr, [x9, #63]
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	ldr	x8, [sp, #24]
+	ldr	w9, [sp, #20]
+	mov	x10, x9
+	subs	w10, w10, #1
+	str	w10, [sp, #20]
+	mov	w9, #48
+	strb	w9, [x8]
+	b	LBB0_8
+LBB0_4:
+	b	LBB0_5
+LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
+	ldur	w8, [x29, #-12]
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
+	add	x9, sp, #24
+	str	w8, [x9]
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #20]
+	mov	x10, x9
+	subs	x10, x10, #1
+	str	w10, [sp, #20]
+	strb	w8, [x8, x9]
+	ldur	w8, [x29, #-12]
+	sdiv	w8, w8, w9
+	stur	w8, [x29, #-12]
+	b	LBB0_5
+LBB0_7:
+	b	LBB0_8
+LBB0_8:
+	ldr	x8, [sp, #24]
+	ldr	w9, [sp, #20]
+	mov	x10, x9
+	subs	w10, w10, #1
+	str	w10, [sp, #20]
+	mov	w9, #98
+	strb	w9, [x8, x9]
+	ldr	x8, [sp, #24]
+	ldr	w9, [sp, #20]
+	mov	x10, x9
+	subs	w10, w10, #1
+	str	w10, [sp, #20]
+	mov	w9, #100
+	strb	w9, [x8, x9]
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #3
+	mov	x9, sp
+	str	w8, [x9]
+	blr	_malloc
+	str	x0, [sp, #16]
+	ldr	x8, [sp, #16]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:
+	ldr	x0, [sp, #24]
+	bl	_free
+                                        ; kill: def $x8 killed $xzr
+	stur	xzr, [x29, #-8]
+	b	LBB0_11
+LBB0_10:
+	ldr	x0, [sp, #16]
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #16]
+	add	x1, x8, x9
+	mov	x2, #-1
+	bl	___strcpy_chk
+	ldr	x0, [sp, #16]
+	mov	x2, #-1
+	bl	___strcat_chk
+	ldr	x0, [sp, #24]
+	bl	_free
+	ldr	x8, [sp, #16]
+	stur	x8, [x29, #-8]
+	b	LBB0_11
+LBB0_11:
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"db"

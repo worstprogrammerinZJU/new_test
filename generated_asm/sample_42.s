@@ -1,144 +1,100 @@
-.arch armv8-a
-	.set	$13, 7
-	.set	$3, 5, -.
-	section	.__TEXT,__text,readonly,global
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.p2align	4, 11
-_func0:
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	sub	sp, sp, #16
-	.cfi_def_cfa_register %rbp
-	ldr	q3, [x1]
-	ldr	q5, [x0]
-	mov	x7, 0
-	mov	w3, 0
-	mov	w10, 0
-	blex	x1, x0, [x3, !madd]
-	mov	x3, sp
-	ldr	q0, [x7, -8]
-	ldr	q2, [x7, 8]
-	ldr	w6, [x7, 16]
-	ldr	w11, [x7, 24]
-	ldr	w12, [x7, 32]
-	ldr	w13, [x7, 36]
-.LBB0_1:								/* =>This Inner Loop Header: Depth=1 */
-	str	q0, [x3], 16
-	cmp	w2, w6
-	bhi	.LBB0_12
-	str	q2, [x3], 7
-	cmp	w11, w12
-	bceq	.LBB0_6
-	str	q1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	cmp	w10, 0
-	bls	.LBB0_5
-.LBB0_5:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=BB0_1 Depth=1 */
-	str	q1, [x3], 7
-	str	w1, [x3], 14
-.LBB0_6:								/*   in Loop: Header=
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #40]
+	str	w1, [sp, #36]
+	str	x2, [sp, #24]
+	str	wzr, [sp, #20]
+	str	wzr, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	subs	w8, w8, #0
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #20]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #16]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #16]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_12:
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	str	w8, [x9]
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	str	w8, [x9, #4]
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

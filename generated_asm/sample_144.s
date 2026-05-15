@@ -1,191 +1,83 @@
-.arch armv8-a
-	.set	__cfi_config_version, 4
-	.p2align 4, 0x90
-.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #32
-	.cfi_def_cfa_pos 16
-	.cfi_offset %sp, 0
-	mov	x10, xbp
-	mov	x3, x10
-	ldp	q0, q1, [x3]
-	mov	x2, sp
-	ldp	q4, q5, [x3, 16]
-	ldrb	w4, [x3, 28]
-	ldrb	w5, [x3, 44]
-	ldp	q4, q5, [x3, 60]
-	ldp	q5, q4, [x3, 76]
-	stp	q4, q5, [x3]
-	mov	w6, 2
-	str	w4, [x2, 8]
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #16]
+	ldr	x0, [sp, #16]
 	bl	_strlen
-	cmp	w0, 3
-	ble	.LBB0_2
-	.cfi_def_cfa_pos 15
-	stp	q0, q1, [x2]
-	mov	w0, 0
-	ldp	q0, q1, [x2]
-	ldp	q4, q5, [x2, 16]
-	add	w0, w0, w1, uxtb
-	ldp	q4, q5, [x2]
-	add	w0, w0, w2, uxtb
-	cmp	w0, w5
-	bhi	.LBB0_9
-.LBB0_3:
-	ldp	q4, q5, [x2]
-	ubfiz	x0, x2, 1, 7
-	mov	x7, x2
-	add	x0, x2, 8
-	add	w0, w0, 1
-	mov	x1, 0
-	ldr	q4, [x0, -32]
-	ldr	q5, [x0, x0, lsl 2]
-	ldr	w1, [x4, x5]
-	str	w1, [x0, 8]
-	ldr	w1, [x4, x5]
-	cmp	w1, w4
-	ldr	w1, [x7, x7, lsl 1]
-	sub	w1, w1, #1
-	str	w1, [x0, 8]
-	str	w1, [x7, x7, lsr 1]
-	cmp	w1, w4
-	str	w1, [x4, x4, lsl 1]
-	csel	w1, w0, w1, ne
-	str	w1, [x2]
-.LBB0_6:
-	str	w1, [x2, 8]
-	mov	x0, 0
-	add	w1, w2, 1
-	add	x2, x2, 32
-	ldr	w1, [x2, -32]
-	ldr	w2, [x2, x1, lsl 2]
-	ldr	w1, [x1, x1, lsl 1]
-	str	w1, [x2, 8]
-	str	w1, [x0, x0, lsr 1]
-	cmp	w2, w1
-	str	w1, [x2]
-	bne	.LBB0_6
-	str	w6, [x3, 24]
-	add	sp, sp, 32
-	.cfi_def_cfa_pos 0
+	subs	x8, x0, #3
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	sturb	wzr, [x29, #-1]
+	b	LBB0_10
+LBB0_2:
+	mov	w8, #2
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
+	ldrsw	x8, [sp, #12]
+	str	x8, [sp]                        ; 8-byte Folded Spill
+	ldr	x0, [sp, #16]
+	bl	_strlen
+	ldr	x8, [sp]                        ; 8-byte Folded Reload
+	subs	x8, x8, x0
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #12]
+	ldrsb	w10, [x9, x10]
+	subs	w10, w8, w10
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w8, [x8, x9]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #12]
+	ldrsb	w10, [x9, x10]
+	subs	w8, w8, w10
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:
+	sturb	wzr, [x29, #-1]
+	b	LBB0_10
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_9:
+	mov	w8, #1
+	sturb	w8, [x29, #-1]
+	b	LBB0_10
+LBB0_10:
+	ldur	w0, [x29, #-1]
+	and	w0, w0, #0x1
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 .subsections_via_symbols
-	.global _func0                          ## -- Begin function
-	.align	11
-_func0:                                 ## @func0
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #32
-	.cfi_def_cfa_pos 16
-	.cfi_offset %sp, 0
-	mov	x10, xbp
-	mov	x3, x10
-	ldp	q0, q1, [x3]
-	mov	x2, sp
-	ldp	q4, q5, [x3, 16]
-	ldp	q4, q5, [x3, 28]
-	ldp	q5, q4, [x3, 44]
-	ldp	q4, q5, [x3, 60]
-	ldp	q5, q4, [x3, 76]
-	stp	q4, q5, [x3]
-	str	w0, [x2, 8]
-	bl	_strlen
-	cmp	w0, 3
-	ble	.LBB0_2
-	.cfi_def_cfa_pos 15
-	stp	q0, q1, [x2]
-	mov	w0, 0
-	ldp	q0, q1, [x2]
-	ldp	q4, q5, [x2]
-	add	w0, w0, w1, uxtb
-	ldp	q4, q5, [x2]
-	add	w0, w0, w2, uxtb
-	cmp	w0, w5
-	bhi	.LBB0_9
-.LBB0_3:
-	ldp	q4, q5, [x2]
-	ubfiz	x0, x2, 1, 7
-	mov	x7, x2
-	add	x0, x2, 8
-	add	w0, w0, 1
-	mov	x1, 0
-	ldr	q4, [x0, -32]
-	ldr	q5, [x0, x0, lsl 2]
-	ldr	w1, [x4, x5]
-	str	w1, [x0, 8]
-	str	w1, [x7, x7, lsr 1]
-	ldr	w1, [x4, x5]
-	cmp	w1, w4
-	ldr	w1, [x7, x7, lsl 1]
-	sub	w1, w1, #1
-	str	w1, [x0, 8]
-	str	w1, [x7, x7, lsr 1]
-	cmp	w1, w4
-	str	w1, [x2]
-.LBB0_6:
-	str	w1, [x2, 8]
-	add	w1, w2, 1
-	add	x2, x2, 32
-	ldr	w1, [x2, -32]
-	ldr	w2, [x2, x1, lsl 2]
-	ldr	w1, [x1, x1, lsl 1]
-	str	w1, [x2, 8]
-	str	w1, [x2]
-	bne	.LBB0_6
-	str	w6, [x3, 24]
-	add	sp, sp, 32
-	.cfi_def_cfa_pos 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.subsections_via_symbols
-	.global _func0                          ## -- Begin function
-	.align	11
-_func0:                                 ## @func0
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #32
-	.cfi_def_cfa_pos 16
-	.cfi_offset %sp, 0
-	mov	x10, xbp
-	mov	x3, x10
-	ldp	q0, q1, [x3]
-	mov	x2, sp
-	ldp	q4, q5, [x3, 16]
-	ldp	q4, q5, [x3, 28]
-	ldp	q5, q4, [x3, 44]
-	ldp	q4, q5, [x3, 60]
-	stp	q4, q5, [x3]
-	str	w0, [x2, 8]
-	bl	_strlen
-	cmp	w0, 3
-	ble	.LBB0_2
-	.cfi_def_cfa_pos 15
-	stp	q0, q1, [x2]
-	mov	w0, 0
-	ldp	q0, q1, [x2]
-	add	w0, w0, w1, uxtb
-	ldp	q4, q5, [x2]
-	add	w0, w0, w2, uxtb
-	cmp	w0, w5
-	bhi	.LBB0_9
-.LBB0_3:
-	ldp	q4, q5, [x2]
-	ubfiz	x0, x2, 1, 7
-	mov	x7, x2
-	add	x0, x2, 8
-	add	w0, w0, 1
-	mov	x1, 0
-	ldr	q4, [x0, -32]
-	ldr	q5, [x0, x0, lsl 2]
-	ldr	w1

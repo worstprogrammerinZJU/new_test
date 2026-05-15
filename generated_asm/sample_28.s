@@ -1,210 +1,135 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp  [32,:$sp]
-	.cfi_def_cfa_register 16
-	mov	w2, w0
-	mov	x6, x1
-	mov	x10, x1
-	mov	x8, x2
-	mov	w0, 10
-	mov	w7, 1
-	mov	w11, 13
-	str	w0, [sp, 12]
-	str	w2, [sp, 8]
-	str	x10, [sp, 20]
-	str	x8, [sp, 28]
-	mov	w1, 1
-	stp	x6, x10, [sp, 24]
-	str	x8, [sp, 32]
-.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	str	w2, [sp, 20]
-	ldr	w2, [sp, 20]
-	ldr	w3, [x10]
-	ldr	w1, [x10], 48
-	ldr	w1, [x10, 48]
-	mov	w4, 2
-	ldr	w2, [x10, 80]
-	madd	w2, w2, w7, w11
-	str	w2, [x10]
-	ldr	w2, [x10, 128]
-	sdiv	w2, w2, w4
-	cmp	w1, 1
-	bne	.LBB0_7
-	str	w2, [x10]
-.LBB0_7:
-	cmp	w2, 1
-	bne	.LBB0_1
-	cmp	w3, 48
-	beq	.LBB0_9
-	add	w0, w0, 4
-	str	w2, [x10], 48
-.LEND0_1:
-	.cfi_def_cfa 8
-	b	.L loop
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-4]
+	stur	x1, [x29, #-16]
+	str	x2, [sp, #24]
+	mov	w8, #10
+	str	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	mov	w8, #1
+	str	w8, [x9]
+	ldur	x9, [x29, #-16]
+	str	w8, [x9]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-4]
+	subs	w8, w8, #1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldr	w8, [x8]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	lsl	w8, w8, #1
+	str	w8, [sp, #20]
+	ldur	x0, [x29, #-16]
+	ldrsw	x8, [sp, #20]
+	lsl	x1, x8, #2
+	bl	_realloc
+	stur	x0, [x29, #-16]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	ldur	x9, [x29, #-16]
+	ldr	x10, [sp, #24]
+	ldr	w10, [x10]
+	add	w0, w10, #1
+	str	w0, [x10]
+	ldur	w8, [x29, #-4]
+	mul	w8, w8, w0
+	add	w8, w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_7
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-4]
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_8:
+	mov	w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_9:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_11 Depth 2
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	ldr	w9, [x9]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	subs	w8, w8, #1
+	str	w8, [x8, #4]
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #0
+	cset	w8, lt
+	mov	w9, #0
+	str	w9, [sp, #12]                   ; 4-byte Folded Spill
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #16]
+	subs	w9, w9, #1
+	str	w8, [x8, w9, sxtw #2]
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #1
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	b	LBB0_11
+LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_17:
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
 	.cfi_endproc
-.LFE0:
-	.size	_func0, .size
-	.align	2, 3
-_func0:                                 ## -- Begin function func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp  [32,:$sp]
-	.cfi_def_cfa_register 16
-	mov	w2, w0
-	mov	x6, x1
-	mov	x10, x2
-	mov	x8, x2
-	str	w0, [sp, 8]
-	str	w2, [sp, 8]
-	str	x10, [sp, 20]
-	str	x8, [sp, 28]
-.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	str	w2, [sp, 20]
-	ldr	w2, [x10]
-	ldr	w1, [x10], 48
-	ldr	w1, [x10, 48]
-	mov	w4, 2
-	ldr	w2, [x10, 80]
-	madd	w2, w2, w7, w11
-	str	w2, [x10]
-	ldr	w2, [x10]
-	add	w1, w1, 4
-	str	w2, [x10], 48
-.LBB0_7:
-	cmp	w2, 1
-	bne	.LBB0_1
-	cmp	w1, 48
-	beq	.LBB0_9
-	add	w0, w0, 4
-	str	w2, [x10], 48
-.LEND0_1:
-	.cfi_def_cfa 8
-	b	.L loop
-	.cfi_endproc
-.LFE0:
-	.size	_func0, .size
-	.align	2, 3
-_func0:                                 ## -- Begin function func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp  [32,:$sp]
-	.cfi_def_cfa_register 16
-	mov	w2, w0
-	mov	x6, x1
-	mov	x10, x2
-	mov	x8, x2
-	str	w0, [sp, 8]
-	str	w2, [sp, 8]
-	str	x10, [sp, 20]
-	str	x8, [sp, 28]
-.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	str	w2, [sp, 20]
-	ldr	w2, [x10]
-	ldr	w1, [x10], 48
-	ldr	w1, [x10, 48]
-	mov	w4, 2
-	ldr	w2, [x10, 80]
-	madd	w2, w2, w7, w11
-	str	w2, [x10]
-	ldr	w2, [x10]
-	add	w1, w1, 4
-	str	w2, [x10], 48
-.LBB0_7:
-	cmp	w2, 1
-	bne	.LBB0_1
-	cmp	w1, 48
-	beq	.LBB0_9
-	add	w0, w0, 4
-	str	w2, [x10], 48
-.LEND0_1:
-	.cfi_def_cfa 8
-	b	.L loop
-	.cfi_endproc
-.LFE0:
-	.size	_func0, .size
-	.align	2, 3
-_func0:                                 ## -- Begin function func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp  [32,:$sp]
-	.cfi_def_cfa_register 16
-	mov	w2, w0
-	mov	x6, x1
-	mov	x10, x2
-	mov	x8, x2
-	str	w0, [sp, 8]
-	str	w2, [sp, 8]
-	str	x10, [sp, 20]
-	str	x8, [sp, 28]
-.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	str	w2, [sp, 20]
-	ldr	w2, [x10]
-	ldr	w1, [x10], 48
-	ldr	w1, [x10, 48]
-	mov	w4, 2
-	ldr	w2, [x10, 80]
-	madd	w2, w2, w7, w11
-	str	w2, [x10]
-	ldr	w2, [x10]
-	add	w1, w1, 4
-	str	w2, [x10], 48
-.LBB0_7:
-	cmp	w2, 1
-	bne	.LBB0_1
-	cmp	w1, 48
-	beq	.LBB0_9
-	add	w0, w0, 4
-	str	w2, [x10], 48
-.LEND0_1:
-	.cfi_def_cfa 8
-	b	.L loop
-	.cfi_endproc
-.LFE0:
-	.size	_func0, .size
-	.align	2, 3
-_func0:                                 ## -- Begin function func0
-.LFB0:
-	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp  [32,:$sp]
-	.cfi_def_cfa_register 16
-	mov	w2, w0
-	mov	x6, x1
-	mov	x10, x2
-	mov	x8, x2
-	str	w0, [sp, 8]
-	str	w2, [sp, 8]
-	str	x10, [sp, 20]
-	str	x8, [sp, 28]
-.LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	str	w2, [sp, 20]
-	ldr	w2, [x10]
-	ldr	w1, [x10], 48
-	ldr	w1, [x10, 48]
-	mov	w4, 2
-	ldr	w2, [x10, 80]
-	madd	w2, w2, w7, w11
-	str	w2, [x10]
-	ldr	w2, [x10]
-	add	w1, w1, 4
-	str	w2, [x10], 48
-.LBB0_7:
-	cmp	w2, 1
-	bne	.LBB0_1
-	cmp	w1, 48
-	beq	.LBB0_9
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,166 +1,67 @@
-.arch armv8-a
-	.set	iosdk_version 13, 3
-	.set	macos_version 13, 0x13, 17
-	section	.__TEXT,__text,readonly,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #48
-	.cfi_offset %sp, -48
-	stp	x29, x30, [sp]
-	ldr	q3, [x1, 48]
-	ldp	q2, q1, [x1]
-	adrp	x0, .LCDICT
-	add	x2, sp, 16
-	mov	x4, sp
-	mov	w2, 0
-	mov	w7, 0
-	stps	w2, 8, :lo12:.LCDICT
-.L entend:                                 ## =>This Inner Loop Header: Depth=1
-	sub	x3, x4, #48
-	ldr	w2, [x0, x2, lsl 2]
-	ldr	w2, [x3, x2, lsl 2]
-	cmp	w2, -12
-	ble	.Lloop1
-	mov	x3, x4
-	ldr	w2, [x0, x2, lsl 2]
-	ldr	w2, [x3, x2, lsl 2]
-	cmp	w2, -12
-	ble	.Lloop1
-.L loop1:                                 ##   in Loop: Header=ENT Wend Depth=1
-	ldr	x3, [x4, x2, lsl 2]
-	str	w2, [x2, x3, lsl 2]
-	ldr	x2, [x4, x2, ror 3]
-	ldr	x3, [x4, x2, lsl 2]
-	str	w2, [x2, x3, lsl 2]
-.L loop1:                                 ##   in Loop: Header=ENT Wend Depth=1
-	add	w2, w2, 1
-	str	w2, [x4, x2, lsl 2]
-	b	.Lloop1
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	adrp	x8, l_.str@PAGE
+	add	x8, x8, l_.str@PAGEOFF
+	str	x8, [sp, #24]
+	str	wzr, [sp, #20]
+	str	wzr, [sp, #16]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #16]
+	ldr	x0, [x8, x9, lsl #3]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #16]
+	ldr	x8, [x8, x9, lsl #3]
+	str	x8, [sp, #24]
+	ldr	w8, [sp, #12]
+	str	w8, [sp, #20]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_1
+LBB0_6:
+	ldr	x0, [sp, #24]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
 	.cfi_endproc
-	.cfi_startproc
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_offset 16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #48
-	.cfi_offset %sp, -48
-	.cfi_def_cfa_register 32
-	.cfi_def_cfa_offset 4
-	.cfi_reset_state
-	ldp	q0, q1, [sp]
-	ldris	x2, [sp]
-	mov	w0, 0
-	ldrsd	x3, x1, 16
-.L body:                                 ## =>This Inner Loop Header: Depth=2
-	add	w1, w0, w3
-	add	w0, w0, 1
-	str	w1, [sp], 4
-	cmp	w0, 25
-	bgt	.Lnext
-.L loop2:                                 ##   in Loop: Header=ENT Wend Depth=2
-	ldr	w1, [x2, x1, lsl 2]
-	str	w1, [x1, x2, ror 3]
-	ldr	w1, [x2, x1, lsl 2]
-	str	w1, [x1, x2, ror 3]
-.L loop2:                                 ##   in Loop: Header=ENT Wend Depth=2
-	add	w1, w0, w1
-	str	w1, [x2, x1, lsl 2]
-	cmp	w0, 25
-	bgt	.Lnext
-.L next:                                 ##   in Loop: Header=LOOP
-	add	x2, x2, 48
-	add	x1, x4, x2, sxtw 2
-	add	x0, x4, x2, sxth
-	ldr	w1, [x0, 16]
-	str	w1, [x2, 16]
-	ldr	w1, [x0, 16]
-	str	w1, [x2, 16]
-.L body:                                 ## =>This Inner Loop Header: Depth=1
-	add	w1, w0, w1
-	add	w0, w0, 1
-	str	w1, [sp], 4
-	cmp	w0, 25
-	bgt	.Lnext
-.L loop3:                                 ##   in Loop: Header=ENT Wend Depth=1
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-.L loop3:                                 ##   in Loop: Header=ENT Wend Depth=1
-	add	w1, w0, w1
-	str	w1, [x3, x1, lsl 2]
-	cmp	w0, 25
-	bgt	.Lnext
-.L next:                                 ##   in Loop: Header=LOOP
-	add	x3, x3, 48
-	add	x2, x4, x3, sxtw 2
-	add	x1, x4, x3
-	add	x0, x4, x3, sxth
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-.L body:                                 ## =>This Inner Loop Header: Depth=1
-	add	w1, w0, w1
-	add	w0, w0, 1
-	str	w1, [sp], 4
-	cmp	w0, 25
-	bgt	.Lnext
-.L loop4:                                 ##   in Loop: Header=ENT Wend Depth=1
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-.L loop4:                                 ##   in Loop: Header=ENT Wend Depth=1
-	add	w1, w0, w1
-	str	w1, [x3, x1, lsl 2]
-	cmp	w0, 25
-	bgt	.Lnext
-.L next:                                 ##   in Loop: Header=LOOP
-	add	x3, x3, 48
-	add	x2, x4, x3, sxtw 2
-	add	x1, x4, x3
-	add	x0, x4, x3, sxth
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-.L body:                                 ## =>This Inner Loop Header: Depth=1
-	add	w1, w0, w1
-	add	w0, w0, 1
-	str	w1, [sp], 4
-	cmp	w0, 25
-	bgt	.Lnext
-.L loop5:                                 ##   in Loop: Header=ENT Wend Depth=1
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-.L loop5:                                 ##   in Loop: Header=ENT Wend Depth=1
-	add	w1, w0, w1
-	str	w1, [x3, x1, lsl 2]
-	cmp	w0, 25
-	bgt	.Lnext
-.L next:                                 ##   in Loop: Header=LOOP
-	add	x3, x3, 48
-	add	x2, x4, x3, sxtw 2
-	add	x1, x4, x3
-	add	x0, x4, x3, sxth
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-	ldr	w1, [x0, 16]
-	str	w1, [x3, 16]
-.L body:                                 ## =>This Inner Loop Header: Depth=1
-	add	w1, w0, w1
-	add	w0, w0, 1
-	str	w1, [sp], 4
-	cmp	w0, 25
-	bgt	.Lnext
-.L loop6:                                 ##   in Loop: Header=ENT Wend Depth=1
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-	ldr	w1, [x3, x1, lsl 2]
-	str	w1, [x1, x3, ror 3]
-.L loop6:                                 ##   in Loop: Header=ENT Wend Depth=1
-	add	w1, w
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.space	1

@@ -1,154 +1,105 @@
-.arch armv8-a
-	.set	$13, 7, 4		// -- Define the architecture version
-	.set	$3, 3, 4		// -- Define the SDK version
-	.set	$4, 4, 4		// -- Define the CFI (Call Frame Index) version
-	.set	$5, 5, 4		// -- Define the CFI (Call Frame Index) version
-	.set	$0, 0, -16		// -- Define the CFI (Call Frame Index) offset
-	section	.__TEXT,__text,readonly,relaxable
-	.valign	4, 0x90
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	.cfi_def_cfa_register %rbp
-	sub	sp, sp, #48
-	.cfi_offset %rsp, -48
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rax, -16
-	.cfi_offset %rbp, -32
-	.cfi_offset %rdx, -4
-	.cfi_offset %upl, -40
-	.cfi_offset %vnm, -32
-	.cfi_offset %vnp, -28
-	.cfi_offset %vnt, -24
-	.cfi_offset %vns, -20
-	.cfi_offset %vnt, -16
-	.cfi_offset %vnt, -12
-	.cfi_offset %vnt, -8
-	.cfi_offset %vnt, -4
-	.cfi_offset %vnt, -0
-	.cfi_offset %vnt, 0
-	.cfi_offset %vnt, 16
-	.cfi_offset %vnt, 32
-	.cfi_offset %vnt, 48
-	.cfi_offset %vnt, 64
-	.cfi_offset %vnt, 80
-	.cfi_offset %vnt, 96
-	.cfi_offset %vnt, 112
-	.cfi_offset %vnt, 128
-	.cfi_offset %vnt, 144
-	.cfi_offset %vnt, 160
-	.cfi_offset %vnt, 176
-	.cfi_offset %vnt, 192
-	.cfi_offset %vnt, 208
-	.cfi_offset %vnt, 224
-	.cfi_offset %vnt, 240
-	.cfi_offset %vnt, 256
-	.cfi_offset %vnt, 272
-	.cfi_offset %vnt, 288
-	.cfi_offset %vnt, 304
-	.cfi_offset %vnt, 320
-	.cfi_offset %vnt, 336
-	.cfi_offset %vnt, 352
-	.cfi_offset %vnt, 368
-	.cfi_offset %vnt, 384
-	.cfi_offset %vnt, 400
-	.cfi_offset %vnt, 416
-	.cfi_offset %vnt, 432
-	.cfi_offset %vnt, 448
-	.cfi_offset %vnt, 464
-	.cfi_offset %vnt, 480
-	.cfi_offset %vnt, 496
-	.cfi_offset %vnt, 512
-	.cfi_offset %vnt, 528
-	.cfi_offset %vnt, 544
-	.cfi_offset %vnt, 560
-	.cfi_offset %vnt, 576
-	.cfi_offset %vnt, 592
-	.cfi_offset %vnt, 608
-	.cfi_offset %vnt, 624
-	.cfi_offset %vnt, 640
-	.cfi_offset %vnt, 656
-	.cfi_offset %vnt, 672
-	.cfi_offset %vnt, 688
-	.cfi_offset %vnt, 704
-	.cfi_offset %vnt, 720
-	.cfi_offset %vnt, 736
-	.cfi_offset %vnt, 752
-	.cfi_offset %vnt, 768
-	.cfi_offset %vnt, 784
-	.cfi_offset %vnt, 800
-	.cfi_offset %vnt, 816
-	.cfi_offset %vnt, 832
-	.cfi_offset %vnt, 848
-	.cfi_offset %vnt, 864
-	.cfi_offset %vnt, 880
-	.cfi_offset %vnt, 896
-	.cfi_offset %vnt, 912
-	.cfi_offset %vnt, 928
-	.cfi_offset %vnt, 944
-	.cfi_offset %vnt, 960
-	.cfi_offset %vnt, 976
-	.cfi_offset %vnt, 992
-	.cfi_offset %vnt, 1008
-	.cfi_offset %vnt, 1024
-	.cfi_offset %vnt, 1032
-	.cfi_offset %vnt, 1040
-	.cfi_offset %vnt, 1048
-	.cfi_offset %vnt, 1056
-	.cfi_offset %vnt, 1064
-	.cfi_offset %vnt, 1072
-	.cfi_offset %vnt, 1080
-	.cfi_offset %vnt, 1088
-	.cfi_offset %vnt, 1096
-	.cfi_offset %vnt, 1104
-	.cfi_offset %vnt, 1112
-	.cfi_offset %vnt, 1120
-	.cfi_offset %vnt, 1128
-	.cfi_offset %vnt, 1136
-	.cfi_offset %vnt, 1144
-	.cfi_offset %vnt, 1152
-	.cfi_offset %vnt, 1160
-	.cfi_offset %vnt, 1168
-	.cfi_offset %vnt, 1176
-	.cfi_offset %vnt, 1184
-	.cfi_offset %vnt, 1192
-	.cfi_offset %vnt, 1200
-	.cfi_offset %vnt, 1208
-	.cfi_offset %vnt, 1216
-	.cfi_offset %vnt, 1224
-	.cfi_offset %vnt, 1232
-	.cfi_offset %vnt, 1240
-	.cfi_offset %vnt, 1248
-	.cfi_offset %vnt, 1256
-	.cfi_offset %vnt, 1264
-	.cfi_offset %vnt, 1272
-	.cfi_offset %vnt, 1280
-	.cfi_offset %vnt, 1288
-	.cfi_offset %vnt, 1296
-	.cfi_offset %vnt, 1304
-	.cfi_offset %vnt, 1312
-	.cfi_offset %vnt, 1320
-	.cfi_offset %vnt, 1328
-	.cfi_offset %vnt, 1336
-	.cfi_offset %vnt, 1344
-	.cfi_offset %vnt, 1352
-	.cfi_offset %vnt, 1360
-	.cfi_offset %vnt, 1368
-	.cfi_offset %vnt, 1376
-	.cfi_offset %vnt, 1384
-	.cfi_offset %vnt, 1392
-	.cfi_offset %vnt, 1400
-	.cfi_offset %vnt, 1408
-	.cfi_offset %vnt, 1416
-	.cfi_offset %vnt, 1424
-	.cfi_offset %vnt, 1432
-	.cfi_offset %vnt, 1440
-	.cfi_offset %vnt, 1448
-	.cfi_offset %vnt, 1456
-	.cfi_offset %vnt, 1464
-	.cfi_offset %vnt, 1472
-	.cfi_offset %vnt, 1480
-	.cfi_offset %vnt
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	w0, [x29, #-4]
+	mov	w0, #8
+	bl	_malloc
+	str	x0, [sp, #16]
+	ldr	x8, [sp, #16]
+	str	wzr, [x8]
+	ldr	x8, [sp, #16]
+	str	wzr, [x8, #4]
+	mov	w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #12]
+	ldur	w9, [x29, #-4]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #8]
+	ldr	w8, [sp, #12]
+	str	w8, [sp, #4]
+	ldr	w8, [sp, #12]
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #8]
+	mov	w9, #10
+	mul	w8, w8, w9
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	ldr	w8, [sp]
+	sdiv	w8, w8, w9
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	add	w8, w8, w0
+	str	w8, [sp, #8]
+	ldr	w8, [sp]
+	sdiv	w8, w8, w9
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x9, [sp, #16]
+	ldr	w8, [x9]
+	add	w8, w8, #1
+	str	w8, [x9]
+	b	LBB0_9
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x9, [sp, #16]
+	ldr	w8, [x9, #4]
+	add	w8, w8, #1
+	str	w8, [x9, #4]
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_12:
+	ldr	x0, [sp, #16]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

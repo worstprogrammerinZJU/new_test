@@ -1,239 +1,44 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	sub	sp, sp, #16
-	.cfi_def_cfa_register %rbp
-	adrp	x2, .LC0
-	mov	x4, sp
-	ldr	q3, [x2, #:lo12:.LC0]
-	sub	x5, x4, #1
-	mov	x3, x4
-	mov	w6, 1
-	str	w0, [x4, 8]
-	stp	x5, x3, [sp]
-	.cfi_def_cfa_offset 0
-	mov	x2, 1
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x5, x3, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 16
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	x2, [sp, #8]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	s0, [sp, #4]
+	scvtf	s0, s0
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	fmul	x8, x8, x9
+	ldr	x9, [sp, #8]
+	ldr	w10, [sp, #4]
+	subs	w10, w10, #1
+	str	s0, [x9, w10, sxtw #2]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_4:
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w0, w1
-	neg	w3, w1
-	sub	w2, w2, #1
-	madd	w0, w0, w1, w2
-	str	w3, [x2], 8
-	str	w0, [x1, 8]
-	.cfi_def_cfa_offset 0
-.L2:
-	ldr	w0, [x4, 8]
-	madd	w0, w0, w6, w2
-	str	w0, [x4, 8]
-	ldp	x3, x5, [sp]
-	b	L2
-	.cfi_restore_cfa_offset 0
-	ret
-	.cfi_endproc
-                                        ## -- End function
-.internal_call
-	.global _func0
-	.align	4, 3
-._func0:                                 ## @_func0
-	.cfi_startproc
-	mov	w0, 0
-	cmp	w1, 13
-	beq	.L1
-	mul	w2, w
+                                        ; -- End function
+.subsections_via_symbols

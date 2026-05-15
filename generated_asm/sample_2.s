@@ -1,67 +1,46 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.set	uncached_size., 48 /*! number of words in the cache line */
-	.set	local_size., 32 	/*! number of words in each cache line */
-	.set	word_size., 16 	/*! number of bits in each word */
-	.set	word_align., 32 	/*! number of bits in a word boundary */
-	.set	word_mask., 255 	/*! mask for extracting a word from a double word */
-	.set	cache_line_size., 64 	/*! size of a cache line in bytes */
-	.set	stack_size., 8192		/*! size of the stack in bytes */
-	.set	stack_pad., 128		/*! amount of padding to add to the stack */
-	.set	stack_top., 16		/*! top of the stack in words */
-	.set	stack_bot., 32		/*! bottom of the stack in words */
-	.set	stack_mask., 255 << 16		/*! mask for extracting a word from a double word */
-	.set	stack_shift., 16		/*! shift amount for shifting a word to the left */
-	.set	stack_add., 32		/*! amount to add to the stack pointer */
-	.set	stack_base., 16		/*! base address of the stack */
-	.set	stack_top_addr., .+stack_top		## set the address of the top of the stack
-	.set	stack_bot_addr., .+stack_bot		## set the address of the bottom of the stack
-	.set	stack_ptr_addr., .+stack_pad		## set the address of the stack pointer
-	.set	stack_ptr_mask., 255 << 16		## mask for extracting a word from a double word
-	.set	stack_ptr_shift., 16		## shift amount for shifting a word to the left
-	.set	stack_add_mask., 255 << 32		## mask for extracting a word from a double word
-	.set	stack_add_shift., 32		## shift amount for shifting a word to the left
-	.set	stack_add_add., 32		## amount to add to the stack pointer
-	.set	stack_add_base., 16		## base address of the stack
-	.set	stack_add_addr., .+stack_pad		## set the address of the stack pointer
-	.set	stack_add_ptr_addr., .+stack_pad		## set the address of the stack pointer
-	.set	stack_add_ptr_mask., 255 << 48		## mask for extracting a word from a double word
-	.set	stack_add_ptr_shift., 48		## shift amount for shifting a word to the left
-	.set	stack_add_add_mask., 255 << 64		## mask for extracting a word from a double word
-	.set	stack_add_add_shift., 64		## shift amount for shifting a word to the left
-	.set	stack_add_add_add., 64		## amount to add to the stack pointer
-	.set	stack_add_add_ptr_addr., .+stack_pad		## set the address of the stack pointer
-	.set	stack_add_add_ptr_mask., 255 << 80		## mask for extracting a word from a double word
-	.set	stack_add_add_ptr_shift., 80		## shift amount for shifting a word to the left
-	.set	stack_add_add_add_add., 80		## amount to add to the stack pointer
-	.set	stack_add_add_add_ptr_addr., .+stack_pad		## set the address of the stack pointer
-	.set	stack_add_add_add_ptr_mask., 255 << 100		## mask for extracting a word from a double word
-	.set	stack_add_add_add_ptr_shift., 100		## shift amount for shifting a word to the left
-	.set	stack_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add., 100		## amount to add to the stack pointer
-	.set	stack_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add_add
+	.globl	_func0                           ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	ldur	x0, [x29, #-8]
+	bl	_atof
+	str	d0, [sp, #16]
+	ldr	d0, [sp, #16]
+	fcmp	d0, #0.0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	ldr	d0, [sp, #16]
+	fmov	d1, #0.50000000
+	fsub	d0, d0, d1
+	fcvtzs	d0, d0
+	str	d0, [sp, #8]                    ; 8-byte Folded Spill
+	b	LBB0_3
+LBB0_2:
+	ldr	d0, [sp, #8]                    ; 8-byte Folded Reload
+	fmov	d1, #0.50000000
+	fadd	d0, d0, d1
+	fcvtzs	d0, d0
+	str	d0, [sp, #8]                    ; 8-byte Folded Spill
+	b	LBB0_3
+LBB0_3:
+	ldr	d0, [sp, #8]                    ; 8-byte Folded Reload
+	fcvtzs	w0, d0
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

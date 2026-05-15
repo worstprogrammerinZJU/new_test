@@ -1,236 +1,79 @@
-.arch armv8-a
-	.section	.__TEXT,__text,readonly,iprefable,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0                          ## -- Begin function func0
-	.align	2, 3
-_func0:                                 ## @func0
-.LFB0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	subsp	$^L
-	.cfi_def_cfa_register %rbp
-	stp	x29, x30, [sp, -16]!
-	ldp	q3, q2, [sp]
-	.cfi_def_cfa_offset 0
-	mov	w5, w0
-	.cfi_def_cfa 16
-	str	w5, [sp, 8]
-	cmp	w5, 0
-	ble	.LBB0_2
-	mov	w4, 0
-	ldrh	w3, [sp]
-	ldrb	w2, [sp], 2
-	.p2align 3, 7, 9
-.LBB0_2:
-	sub	w2, w2, #1
-	str	w3, [sp]
-	ldrsh	w2, [sp, 2]
-	add	w2, w2, w1
-	str	w2, [sp]
-	add	w3, w3, w2
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str	w3, [sp]
-	add	w3, w3, w1
-	str
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #16]
+	ldr	x0, [sp, #16]
+	bl	_strlen
+	mov	x8, x0
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
+LBB0_2:
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #1
+	ldrb	w8, [x8, w9, sxtw]
+	str	w8, [sp, #10]
+	ldrb	w0, [sp, #10]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
+LBB0_4:
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_9
+LBB0_6:
+	ldr	x8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #2
+	ldrb	w8, [x8, w9, sxtw]
+	str	w8, [sp, #8]
+	ldrb	w0, [sp, #8]
+	bl	_isalpha
+	subs	w8, w0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:
+	stur	wzr, [x29, #-4]
+	b	LBB0_9
+LBB0_8:
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_9
+LBB0_9:
+	ldur	w0, [x29, #-4]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
