@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -47,17 +46,15 @@ LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #4]
-	add	x8, x8, x9
-	ldr	x8, [x8]
-	str	x8, [sp]
-	str	wzr, [sp, #12]
+	ldrb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_16
 	b	LBB0_6
-LBB0_6:                                 ;   Parent Loop BB0_3 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #4]
-	add	x8, x8, x9
-	ldrb	w0, [x8]
+	ldrb	w0, [x8, x9]
 	bl	_isalpha
 	subs	w8, w0, #0
 	cset	w8, ne
@@ -69,8 +66,7 @@ LBB0_7:
 LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #4]
-	add	x8, x8, x9
-	ldrb	w0, [x8]
+	ldrb	w0, [x8, x9]
 	bl	_isupper
 	subs	w8, w0, #0
 	cset	w8, eq
@@ -81,11 +77,12 @@ LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
 	str	w8, [sp, #20]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #24]
-	add	w8, w8, w9
-	subs	w8, w8, #2
-	cset	w8, ne
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	ldrb	w0, [x8, x9]
+	bl	_islower
+	subs	w8, w0, #0
+	cset	w8, eq
 	tbnz	w8, #0, LBB0_12
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_5 Depth=2
@@ -93,34 +90,32 @@ LBB0_11:                                ;   in Loop: Header=BB0_5 Depth=2
 	str	w8, [sp, #24]
 	b	LBB0_12
 LBB0_12:                                ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_5
-LBB0_13:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_5
-LBB0_15:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_5
-LBB0_16:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #24]
+	add	w8, w8, w9
 	subs	w8, w8, #2
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_14
-	b	LBB0_17
+	b	LBB0_13
+LBB0_13:
+	stur	wzr, [x29, #-4]
+	b	LBB0_19
+LBB0_14:                                ;   in Loop: Header=BB0_5 Depth=2
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_3
+LBB0_16:
+	mov	w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_19
 LBB0_17:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_18
 LBB0_18:                                ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #16]
-	add	w8, w8, #48
+	add	w8, w8, #1
 	str	w8, [sp, #16]
 	b	LBB0_3
 LBB0_19:
@@ -130,4 +125,5 @@ LBB0_19:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+To translate this x86-64 assembly code into ARMv8-A assembly, I'll follow these steps:

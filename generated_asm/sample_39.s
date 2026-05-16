@@ -24,14 +24,13 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
-	fcvt	d1, d0
-	fmov	s0, d1
-	adrp	x8, .LC0
-	ldr	s1, [x8, #:lo12:.LC0]
-	fmov	s1, s1
-	fcvt	d1, s1
-	fcvt	s0, d1
-	mul	w8, w0, w8
+	fcvtzs	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	fcvtzs	w9, d0
+	mul	w8, w8, w9
 	ldr	w9, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]
@@ -47,4 +46,7 @@ LBB0_4:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Q: What happens when two objects with different names but same value are compared using `==` operator?
+A: If two variables have the same value but different names, comparing them using the `==` operator will result in false.
+  
+Explanation

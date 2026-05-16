@@ -29,7 +29,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	strb	wzr, [sp, #29]
+	strb	wzr, [sp, #31]
 	b	LBB0_7
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
@@ -40,13 +40,13 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_6:
 	mov	w8, #1
-	strb	w8, [sp, #29]
+	strb	w8, [sp, #31]
 	b	LBB0_7
 LBB0_7:
-	ldrb	w0, [sp, #29]
+	ldrb	w0, [sp, #31]
 	and	w0, w0, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: I have translated the provided x86-64 assembly code into ARMv8-A assembly. The output contains only the pure assembly code without any additional explanations, markdown formatting, or comments.

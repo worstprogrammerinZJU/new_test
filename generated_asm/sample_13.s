@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -17,7 +16,7 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	strb	w8, [sp, #29]
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_2:
 	mov	w8, #1
@@ -78,16 +77,15 @@ LBB0_10:
 	b	LBB0_11
 LBB0_11:
 	mov	w8, #1
-	strb	w8, [sp, #29]
+	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_12:
-	strb	wzr, [sp, #29]
+	strb	wzr, [sp, #31]
 	b	LBB0_13
 LBB0_13:
-	ldrb	w0, [sp, #29]
-	and	w0, w0, #0x1
+	ldrb	w0, [sp, #31]
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Given the following C program:

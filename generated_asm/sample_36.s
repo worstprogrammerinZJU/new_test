@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -12,19 +11,16 @@ _func0:                                 ; @func0
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	str	w0, [sp, #12]
-	ldr	w8, [sp, #12]
-	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	lsl	x0, x8, #2
+	stur	w0, [x29, #-12]
+	ldur	w8, [x29, #-12]
+	add	w0, w8, #1
+	lsl	w0, w0, #2
 	bl	_malloc
 	str	x0, [sp, #8]
 	ldr	x9, [sp, #8]
 	mov	w8, #1
 	str	w8, [x9]
-	ldr	w8, [sp, #12]
+	ldur	w8, [x29, #-12]
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_2
@@ -42,7 +38,7 @@ LBB0_2:
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #12]
+	ldur	w9, [x29, #-12]
 	subs	w8, w8, w9
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_9
@@ -66,7 +62,8 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	add	w8, w8, #1
 	ldr	x9, [sp, #8]
 	ldrsw	x10, [sp, #4]
-	str	w8, [x9, x10, lsl #2]
+	add	x9, x9, x10, lsl #2
+	str	w8, [x9]
 	b	LBB0_7
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #8]
@@ -76,12 +73,12 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x9, [sp, #8]
 	ldr	w10, [sp, #4]
 	subs	w10, w10, #2
-	add	w8, w8, w10
-	str	w8, [sp]                        ; 4-byte Folded Spill
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	sdiv	w9, w8, w10
+	ldr	w9, [x9, w10, sxtw #2]
 	add	w8, w8, w9
+	add	w8, w8, #1
+	ldr	w9, [sp, #4]
+	sdiv	w10, w9, w10
+	add	w8, w8, w10
 	ldr	x9, [sp, #8]
 	ldrsw	x10, [sp, #4]
 	str	w8, [x9, x10, lsl #2]

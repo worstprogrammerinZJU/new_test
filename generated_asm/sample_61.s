@@ -1,5 +1,4 @@
-; -- Begin function func0
-; -- End function
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -15,9 +14,9 @@ _func0:                                 ; @func0
 	stur	x0, [x29, #-8]
 	stur	x1, [x29, #-16]
 	stur	w2, [x29, #-20]
-	stur	x3, [x29, #-32]
+	str	x3, [sp, #48]
 	mov	w8, #-1000
-	str	w8, [sp, #40]
+	str	w8, [sp, #44]
 	str	xzr, [sp, #32]
 	str	wzr, [sp, #28]
 	b	LBB0_1
@@ -51,11 +50,14 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #8]
 	add	x8, x8, x9
 	ldrsb	w8, [x8]
+	strb	w8, [sp, #7]
+	ldrsb	w8, [sp, #7]
+	subs	w8, w8, #65
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldrsb	w8, [sp, #8]
+	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #90
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_7
@@ -66,13 +68,13 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	str	w8, [sp, #12]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldrsb	w8, [sp, #8]
+	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #97
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldrsb	w8, [sp, #8]
+	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #122
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_10
@@ -85,21 +87,21 @@ LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=2
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #28]
+	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	str	w8, [sp, #28]
+	str	w8, [sp, #8]
 	b	LBB0_3
 LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-68]
-	ldur	w9, [x29, #-36]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #44]
 	subs	w8, w8, w9
 	cset	w8, le
 	tbnz	w8, #0, LBB0_14
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #28]
-	str	w8, [sp, #32]
-	ldur	x8, [x29, #-48]
+	ldr	w8, [sp, #12]
+	str	w8, [sp, #44]
+	ldr	x8, [sp, #16]
 	str	x8, [sp, #32]
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
@@ -108,11 +110,12 @@ LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #28]
 	add	w8, w8, #1
 	str	w8, [sp, #28]
-	b	LBB0_3
+	b	LBB0_1
 LBB0_16:
-	ldur	x0, [x29, #-32]
+	ldr	x0, [sp, #48]
 	ldur	x4, [x29, #-8]
-	ldr	x9, [sp, #32]
+	ldr	x5, [sp, #32]
+	mov	w1, #0
 	mov	x2, #-1
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF

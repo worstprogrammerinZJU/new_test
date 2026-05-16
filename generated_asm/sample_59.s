@@ -1,163 +1,197 @@
-.globl	_func0                           ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #24]
-	str	w1, [sp, #20]
-	str	xzr, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fmov	d2, #-0.00000000
-	fcmp	d0, d2
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_17
-LBB0_17:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_18
-LBB0_18:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8
+.syntax unified
+	.lcomm	d0, 8
+	.lcomm	d1, 8
+	.lcomm	d2, 8
+	.lcomm	d3, 8
+	.lcomm	d4, 8
+	.lcomm	d5, 8
+	.lcomm	d6, 8
+	.lcomm	d7, 8
+	.lcomm	d8, 8
+	.lcomm	d9, 8
+	.lcomm	d10, 8
+	.lcomm	d11, 8
+	.lcomm	d12, 8
+	.lcomm	d13, 8
+	.lcomm	d14, 8
+	.lcomm	d15, 8
+	.lcomm	d16, 8
+	.lcomm	d17, 8
+	.lcomm	d18, 8
+	.lcomm	d19, 8
+	.lcomm	d20, 8
+	.lcomm	d21, 8
+	.lcomm	d22, 8
+	.lcomm	d23, 8
+	.lcomm	d24, 8
+	.lcomm	d25, 8
+	.lcomm	d26, 8
+	.lcomm	d27, 8
+	.lcomm	d28, 8
+	.lcomm	d29, 8
+	.lcomm	d30, 8
+	.lcomm	d31, 8
+	.lcomm	d32, 8
+	.lcomm	d33, 8
+	.lcomm	d34, 8
+	.lcomm	d35, 8
+	.lcomm	d36, 8
+	.lcomm	d37, 8
+	.lcomm	d38, 8
+	.lcomm	d39, 8
+	.lcomm	d40, 8
+	.lcomm	d41, 8
+	.lcomm	d42, 8
+	.lcomm	d43, 8
+	.lcomm	d44, 8
+	.lcomm	d45, 8
+	.lcomm	d46, 8
+	.lcomm	d47, 8
+	.lcomm	d48, 8
+	.lcomm	d49, 8
+	.lcomm	d50, 8
+	.lcomm	d51, 8
+	.lcomm	d52, 8
+	.lcomm	d53, 8
+	.lcomm	d54, 8
+	.lcomm	d55, 8
+	.lcomm	d56, 8
+	.lcomm	d57, 8
+	.lcomm	d58, 8
+	.lcomm	d59, 8
+	.lcomm	d60, 8
+	.lcomm	d61, 8
+	.lcomm	d62, 8
+	.lcomm	d63, 8
+	.lcomm	d64, 8
+	.lcomm	d65, 8
+	.lcomm	d66, 8
+	.lcomm	d67, 8
+	.lcomm	d68, 8
+	.lcomm	d69, 8
+	.lcomm	d70, 8
+	.lcomm	d71, 8
+	.lcomm	d72, 8
+	.lcomm	d73, 8
+	.lcomm	d74, 8
+	.lcomm	d75, 8
+	.lcomm	d76, 8
+	.lcomm	d77, 8
+	.lcomm	d78, 8
+	.lcomm	d79, 8
+	.lcomm	d80, 8
+	.lcomm	d81, 8
+	.lcomm	d82, 8
+	.lcomm	d83, 8
+	.lcomm	d84, 8
+	.lcomm	d85, 8
+	.lcomm	d86, 8
+	.lcomm	d87, 8
+	.lcomm	d88, 8
+	.lcomm	d89, 8
+	.lcomm	d90, 8
+	.lcomm	d91, 8
+	.lcomm	d92, 8
+	.lcomm	d93, 8
+	.lcomm	d94, 8
+	.lcomm	d95, 8
+	.lcomm	d96, 8
+	.lcomm	d97, 8
+	.lcomm	d98, 8
+	.lcomm	d99, 8
+	.lcomm	d100, 8
+	.lcomm	d101, 8
+	.lcomm	d102, 8
+	.lcomm	d103, 8
+	.lcomm	d104, 8
+	.lcomm	d105, 8
+	.lcomm	d106, 8
+	.lcomm	d107, 8
+	.lcomm	d108, 8
+	.lcomm	d109, 8
+	.lcomm	d110, 8
+	.lcomm	d111, 8
+	.lcomm	d112, 8
+	.lcomm	d113, 8
+	.lcomm	d114, 8
+	.lcomm	d115, 8
+	.lcomm	d116, 8
+	.lcomm	d117, 8
+	.lcomm	d118, 8
+	.lcomm	d119, 8
+	.lcomm	d120, 8
+	.lcomm	d121, 8
+	.lcomm	d122, 8
+	.lcomm	d123, 8
+	.lcomm	d124, 8
+	.lcomm	d125, 8
+	.lcomm	d126, 8
+	.lcomm	d127, 8
+	.lcomm	d128, 8
+	.lcomm	d129, 8
+	.lcomm	d130, 8
+	.lcomm	d131, 8
+	.lcomm	d132, 8
+	.lcomm	d133, 8
+	.lcomm	d134, 8
+	.lcomm	d135, 8
+	.lcomm	d136, 8
+	.lcomm	d137, 8
+	.lcomm	d138, 8
+	.lcomm	d139, 8
+	.lcomm	d140, 8
+	.lcomm	d141, 8
+	.lcomm	d142, 8
+	.lcomm	d143, 8
+	.lcomm	d144, 8
+	.lcomm	d145, 8
+	.lcomm	d146, 8
+	.lcomm	d147, 8
+	.lcomm	d148, 8
+	.lcomm	d149, 8
+	.lcomm	d150, 8
+	.lcomm	d151, 8
+	.lcomm	d152, 8
+	.lcomm	d153, 8
+	.lcomm	d154, 8
+	.lcomm	d155, 8
+	.lcomm	d156, 8
+	.lcomm	d157, 8
+	.lcomm	d158, 8
+	.lcomm	d159, 8
+	.lcomm	d160, 8
+	.lcomm	d161, 8
+	.lcomm	d162, 8
+	.lcomm	d163, 8
+	.lcomm	d164, 8
+	.lcomm	d165, 8
+	.lcomm	d166, 8
+	.lcomm	d167, 8
+	.lcomm	d168, 8
+	.lcomm	d169, 8
+	.lcomm	d170, 8
+	.lcomm	d171, 8
+	.lcomm	d172, 8
+	.lcomm	d173, 8
+	.lcomm	d174, 8
+	.lcomm	d175, 8
+	.lcomm	d176, 8
+	.lcomm	d177, 8
+	.lcomm	d178, 8
+	.lcomm	d179, 8
+	.lcomm	d180, 8
+	.lcomm	d181, 8
+	.lcomm	d182, 8
+	.lcomm	d183, 8
+	.lcomm	d184, 8
+	.lcomm	d185, 8
+	.lcomm	d186, 8
+	.lcomm	d187, 8
+	.lcomm	d188, 8
+	.lcomm	d189, 8
+	.lcomm	d190, 8
+	.lcomm	d191, 8
+	.lcomm	d192, 8
+	.lcomm	d193, 8
+	.lcomm	d194, 8
+	.lcomm	d195,

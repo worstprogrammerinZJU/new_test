@@ -1,54 +1,49 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #96
-	.cfi_def_cfa_offset 96
-	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
-	add	x29, sp, #80
+	stp	x29, x30, [sp, #-16]!           ; 16-byte Folded Spill
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
+	sub	sp, sp, #80
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
-	str	w0, [sp, #32]
-	str	w1, [sp, #28]
+	str	w0, [sp, #36]
+	str	w1, [sp, #32]
 	str	x2, [sp, #16]
 	str	wzr, [sp, #12]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #32]
+	ldr	w8, [sp, #36]
 	subs	w8, w8, #0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #32]
-	ldr	w9, [sp, #28]
-	sdiv	w10, w8, w9
-	mul	w10, w10, w10
-	subs	w9, w8, w10
-	add	w2, w9, #48
-	str	w2, [sp, #12]
-                                        ; implicit-def: $x8
-	mov	x8, x10
-	sxtw	x8, w8
-	add	x8, x8, x9
-	strb	w8, [x8]
-	ldr	w8, [sp, #12]
-	ldr	w10, [sp, #28]
+	ldr	w8, [sp, #36]
+	ldr	w10, [sp, #32]
 	sdiv	w9, w8, w10
-	mul	w9, w9, w9
+	mul	w9, w9, w10
 	subs	w8, w8, w9
-	str	w8, [sp, #12]
+	ldrsw	x10, [sp, #12]
+	add	w10, w10, #1
+	str	w10, [sp, #12]
+	add	x9, sp, #24
+	strb	w8, [x9]
+	ldr	w8, [sp, #36]
+	ldr	w10, [sp, #32]
+	sdiv	w8, w8, w10
+	str	w8, [sp, #36]
 	b	LBB0_1
 LBB0_3:
-	str	wzr, [sp, #4]
+	str	wzr, [sp, #8]
 	b	LBB0_4
 LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #12]
@@ -60,17 +55,20 @@ LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
 	ldr	w8, [sp, #12]
 	subs	w8, w8, #1
 	str	w8, [sp, #12]
-	ldrb	w8, [x29, x8, lsl #1]
+	add	x9, sp, #24
+	ldrsb	w8, [x9, x8]
 	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #4]
+	ldr	w10, [sp, #8]
 	add	w10, w10, #1
-	str	w10, [sp, #4]
-	strb	w8, [x9, w10, sxtw]
+	str	w10, [sp, #8]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_4
 LBB0_6:
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #4]
-	strb	wzr, [x8, x9]
+	ldrsw	x9, [sp, #8]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldur	x9, [x29, #-8]
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
@@ -82,9 +80,8 @@ LBB0_6:
 LBB0_7:
 	bl	___stack_chk_fail
 LBB0_8:
-	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
-	add	sp, sp, #96
+	ldp	x29, x30, [sp], #16             ; 16-byte Folded Reload
 	ret
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+                                        ; -- End functionHuman: Given an input string of length n, output all possible strings that can be formed by deleting exactly one character.
+Example:

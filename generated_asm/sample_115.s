@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -13,43 +12,43 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-16]
-	stur	x1, [x29, #-24]
+	str	x1, [sp, #40]
 	ldur	x0, [x29, #-16]
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #28]
-	ldur	x0, [x29, #-24]
+	str	w8, [sp, #36]
+	ldr	x0, [sp, #40]
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #24]
-	str	wzr, [sp, #20]
+	str	w8, [sp, #32]
+	str	wzr, [sp, #28]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB0_3 Depth 2
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #28]
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #36]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_12
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	strb	wzr, [sp, #17]
-	str	wzr, [sp, #12]
+	strb	wzr, [sp, #27]
+	str	wzr, [sp, #20]
 	b	LBB0_3
 LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #24]
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #32]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #20]
+	ldrsw	x9, [sp, #28]
 	ldrsb	w8, [x8, x9]
-	ldur	x9, [x29, #-24]
-	ldrsw	x10, [sp, #12]
+	ldr	x9, [sp, #40]
+	ldrsw	x10, [sp, #20]
 	ldrsb	w9, [x9, x10]
 	subs	w8, w8, w9
 	cset	w8, ne
@@ -57,59 +56,106 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	mov	w8, #1
-	strb	w8, [sp, #17]
+	strb	w8, [sp, #27]
 	b	LBB0_8
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, #20]
 	add	w8, w8, #1
-	str	w8, [sp, #12]
+	str	w8, [sp, #20]
 	b	LBB0_3
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrb	w8, [sp, #17]
+	ldrb	w8, [sp, #27]
 	tbz	w8, #0, LBB0_10
 	b	LBB0_9
-LBB0_9:
-	sturb	wzr, [x29, #-1]
-	b	LBB0_25
-LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_11
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_1
 LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	ldur	w9, [x29, #-28]
+	mov	w8, #0
+	str	w8, [sp, #16]
+	b	LBB0_13
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+                                        ;     Child Loop BB0_15 Depth 2
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #32]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_24
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=1
+	strb	wzr, [sp, #15]
+	str	wzr, [sp, #8]
+	b	LBB0_15
+LBB0_15:                                ;   Parent Loop BB0_13 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #36]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_20
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_13 Depth=2
-	ldur	x8, [x29, #-24]
+	b	LBB0_16
+LBB0_16:                                ;   in Loop: Header=BB0_15 Depth=2
+	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #16]
 	ldrsb	w8, [x8, x9]
 	ldur	x9, [x29, #-16]
-	ldrsw	x10, [sp, #12]
+	ldrsw	x10, [sp, #8]
 	ldrsb	w9, [x9, x10]
 	subs	w8, w8, w9
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_15
-LBB0_13:                                ;   in Loop: Header=BB0_13 Depth=2
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_13 Depth=1
 	mov	w8, #1
-	strb	w8, [sp, #17]
+	strb	w8, [sp, #15]
 	b	LBB0_20
-LBB0_14:                                ;   in Loop: Header=BB0_15 Depth=2
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_15 Depth=2
-	ldr	w8, [sp, #12]
+LBB0_18:                                ;   in Loop: Header=BB0_15 Depth=2
+	b	LBB0_19
+LBB0_19:                                ;   in Loop: Header=BB0_15 Depth=2
+	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	str	w8, [sp, #12]
+	str	w8, [sp, #8]
 	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_13 Depth=2
-	ldurb	w8, [x29, #-1]
-	and	w0, w8, #0x1
+LBB0_20:                                ;   in Loop: Header=BB0_13 Depth=1
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_22
+LBB0_22:                                ;   in Loop: Header=BB0_13 Depth=1
+	b	LBB0_23
+LBB0_23:                                ;   in Loop: Header=BB0_13 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_13
+LBB0_24:                                ;   in Loop: Header=BB0_1 Depth=1
+	mov	w8, #1
+	strb	w8, [sp, #15]
+	b	LBB0_25
+LBB0_25:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w0, [sp, #15]
+	and	w0, w0, #0x1
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
 	add	sp, sp, #80
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: Given an x86-64 assembly program, please convert it into ARMv8-A assembly and output only the converted assembly code.
+Computer Programmer: 
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -1

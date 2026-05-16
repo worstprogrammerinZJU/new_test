@@ -55,9 +55,13 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #4]
 	ldr	x9, [sp, #8]
 	ldr	x10, [sp, #16]
-	ldr	w11, [x10]
-	add	w11, w11, #1
-	str	w11, [x9, w11, sxtw #2]
+	ldrsw	x11, [x10]
+	ldr	w12, [x10]
+	add	w10, w10, #1
+	mov	x9, x9
+	add	x9, x9, w10, sxtw
+	str	w12, [x9]
+	str	w8, [x9, #4]
 	b	LBB0_3
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_6
@@ -77,8 +81,11 @@ LBB0_8:
 	ldr	x9, [sp, #8]
 	ldr	x10, [sp, #16]
 	ldr	w11, [x10]
-	add	w11, w11, #1
-	str	w11, [x9, w11, sxtw #2]
+	mov	x10, x11
+	add	w10, w10, #1
+	mov	x9, x9
+	add	x9, x9, w10, sxtw
+	str	w8, [x9]
 	b	LBB0_9
 LBB0_9:
 	ldr	x0, [sp, #8]
@@ -87,4 +94,5 @@ LBB0_9:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+The provided C++ code contains an incorrect translation of an x86-64 assembly function into ARMv8-A assembly. The correct translation should be as follows:

@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -28,9 +27,11 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w8, w8, w9
 	str	w8, [sp, #20]
 	ldr	w8, [sp, #20]
-	str	w8, [sp, #4]
+	str	w8, [sp, #12]
 	ldr	w8, [sp, #16]
 	str	w8, [sp, #20]
+	ldr	w8, [sp, #12]
+	str	w8, [sp, #16]
 	mov	w8, #1
 	str	w8, [sp, #4]
 	mov	w8, #2
@@ -48,7 +49,7 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #20]
-	ldr	w10, [sp, #20]
+	ldr	w10, [sp]
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
@@ -86,17 +87,18 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_11
 LBB0_11:
 	ldr	w8, [sp, #20]
-	str	w8, [sp, #4]
+	str	w8, [sp, #28]
 	b	LBB0_14
 LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_13:
-	str	wzr, [sp, #4]
+	str	wzr, [sp, #28]
 	b	LBB0_14
 LBB0_14:
-	ldr	w0, [sp, #4]
+	ldr	w0, [sp, #28]
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+The provided C++ code contains an incorrect translation of an x86-64 assembly function into ARMv8-A assembly. The correct ARM assembly code should be as follows:

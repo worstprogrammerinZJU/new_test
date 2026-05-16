@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -22,13 +21,12 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	str	w8, [sp, #16]
-	ldr	w9, [sp, #16]
-	mov	w8, #2
-	mul	w8, w8, w9
-	subs	w9, w8, #0
+	ldr	w8, [sp, #16]
+	lsl	w8, w8, #1
+	add	w8, w8, #1
                                         ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
+	mov	x8, x8
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #8]
 	str	wzr, [sp, #4]
@@ -48,28 +46,26 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #4]
 	subs	w8, w8, w9
-                                        ; implicit-def: $x8
-	mov	x8, x8
-	sxtw	x8, w8
-	mov	x9, #-1
-	str	x9, [sp]                        ; 8-byte Folded Spill
-	bl	___strncpy_chk
-	ldr	x8, [sp]                        ; 8-byte Folded Reload
-	ldr	x9, [sp, #8]
-	ldrsw	x10, [sp, #16]
-	ldrsw	x11, [sp, #4]
-	subs	x10, x10, x11
-	eor	w10, w10, w8
-	add	x0, x9, x10
-	ldr	x1, [sp, #24]
-	ldrsw	x2, [sp, #4]
-	mov	x9, #-1
-	str	x9, [sp, #16]                   ; 8-byte Folded Spill
+	mov	x9, sp
+	str	x8, [x9]
+	mov	w8, #-1
+	str	w8, [x9, #8]
 	bl	___strncpy_chk
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #16]
-	ldrb	w9, [x8, x9]
-	strb	w9, [x8, x9]
+	add	x8, x8, x9
+	ldrsw	x9, [sp, #4]
+	mov	x10, #0
+	subs	x9, x9, x10
+	add	x0, x8, x9
+	ldr	x1, [sp, #24]
+	ldrsw	x2, [sp, #4]
+	mov	x3, #-1
+	bl	___strncpy_chk
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #16]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldur	x0, [x29, #-16]
 	ldr	x1, [sp, #8]
 	bl	_strstr
@@ -97,7 +93,6 @@ LBB0_6:
 	b	LBB0_7
 LBB0_7:
 	ldurb	w0, [x29, #-1]
-	and	w0, w0, #0x1
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

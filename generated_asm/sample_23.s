@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -17,33 +16,34 @@ _func0:                                 ; @func0
 	ldur	x0, [x29, #-16]
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #28]
+	str	w8, [sp, #36]
 	ldur	x0, [x29, #-24]
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #24]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #24]
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #36]
+	ldr	w9, [sp, #32]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	ldr	w8, [sp, #28]
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	ldr	w8, [sp, #36]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
 	b	LBB0_3
 LBB0_2:
-	ldr	w8, [sp, #24]
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
 	b	LBB0_3
 LBB0_3:
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
-	str	w8, [sp, #20]
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
+	str	w8, [sp, #28]
+	ldr	w8, [sp, #28]
 	add	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9
-	sxtw	x0, w8
+	sxtw	x8, w8
+	lsl	x0, x8, #0
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]
@@ -60,7 +60,7 @@ LBB0_5:
 	b	LBB0_6
 LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #20]
+	ldr	w9, [sp, #28]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_9
@@ -68,26 +68,30 @@ LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #12]
-	ldrsb	w2, [x8, x9]
-	ldur	x8, [x29, #-24]
-	ldrsw	x9, [sp, #12]
-	ldrsb	w1, [x8, x9]
-	subs	w2, w2, w1
-	cset	w2, eq
-	and	w1, w2, #0x1
-	adrp	x2, lsl.49
-	add	x2, x2, w1, sxtw
-	adrp	x3, lsl.48
-	add	x3, x3, w2, sxtw
-	ldr	x2, [sp, #16]
-	strb	w8, [x2, x9]
-	ldr	x8, [sp, #16]
-	str	x8, [x29, #-8]
-	b	LBB0_10
+	ldrsb	w8, [x8, x9]
+	ldur	x9, [x29, #-24]
+	ldrsh	w9, [x9, x8]
+	subs	w8, w8, w9
+	cset	w8, eq
+	and	w9, w8, #0x1
+	mov	w8, #49
+	mov	w10, #48
+	ands	w9, w9, #0x1
+	csinc	w8, w8, wzr, ne
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #12]
+	strb	w8, [x9, x10]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_6 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_6
 LBB0_9:
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #20]
-	strb	wzr, [x8, x9]
+	ldrsw	x9, [sp, #28]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldr	x8, [sp, #16]
 	stur	x8, [x29, #-8]
 	b	LBB0_10

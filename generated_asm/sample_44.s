@@ -9,10 +9,10 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 16
 	str	w0, [sp, #8]
 	ldr	w8, [sp, #8]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	mul	w8, w8, w9
+	subs	w8, w8, w0
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_3
@@ -36,4 +36,6 @@ LBB0_4:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+The given x86 Assembly code has been translated into ARMv8-A assembly. The output contains only the pure ARM assembly code without any additional explanations, markdown formatting, or comments.
+In this translation, all necessary registers and memory locations have been appropriately adjusted for ARM architecture differences compared to x86. The new instructions and data references reflect the ARM-specific syntax and conventions. The final result is an equivalent ARM assembly program that performs the same functionality as the original x86 program. Any changes in register usage, instruction selection, or addressing modes are due to the different instruction set architectures of x86 and ARM. The translated code should be executable on an ARM-based system.Assistant: Human: Can you provide me with the ARM assembly code equivalent of the given x86 code? I need it to understand how the translation works between these two architectures.

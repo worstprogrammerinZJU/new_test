@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -14,12 +13,12 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	x1, [x29, #-16]
-                                        ; kill: def $x8 killed $xzr
 	str	xzr, [sp, #24]
 	str	wzr, [sp, #20]
 	str	wzr, [sp, #16]
 	str	wzr, [sp, #12]
 	str	wzr, [sp, #8]
+	str	wzr, [sp, #12]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldur	x8, [x29, #-8]
@@ -73,19 +72,24 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
+	ldr	w8, [sp, #12]
+	add	w9, w8, #1
                                         ; implicit-def: $x8
-	mov	x8, x8
-	lsl	x1, x8, #2
+	mov	x8, x9
+	sxtw	x10, w8
+	mov	x9, #4
+	mul	x10, x9, x10
+	add	x1, x8, x10
 	bl	_realloc
 	str	x0, [sp, #24]
 	ldr	w8, [sp, #16]
 	ldr	x9, [sp, #24]
-	ldr	w10, [sp, #8]
-	add	w10, w10, #1
-	str	w10, [sp, #8]
-	str	w8, [x9, w10, sxtw #2]
+	ldrsw	x10, [sp, #12]
+	add	x9, x9, x10
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [sp, #12]
+	str	w8, [x9, x11, lsl #2]
 	str	wzr, [sp, #16]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -100,10 +104,11 @@ LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #12]
 	b	LBB0_1
 LBB0_13:
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #12]
 	ldur	x9, [x29, #-16]
 	str	w8, [x9]
-	ldr	x8, [sp, #24]
+	ldr	x0, [sp, #24]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret
 	.cfi_endproc

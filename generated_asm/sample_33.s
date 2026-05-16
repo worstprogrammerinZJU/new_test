@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -42,7 +41,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w0, [x8, x9, lsl #2]
 	bl	_abs
 	ldr	w8, [sp, #8]
-	add	w8, w0, w8
+	add	w8, w8, w0
 	str	w8, [sp, #8]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
@@ -88,4 +87,5 @@ LBB0_11:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+The provided C code snippet defines a function `func0` that takes an integer and a string as input parameters. The function body contains conditional branches based on certain conditions.

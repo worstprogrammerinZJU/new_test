@@ -1,6 +1,11 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                           ; -- Begin function func0
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI0_0:
+	.lit8	#0.50000000000000000000        ; 8-byte LIT
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -40,7 +45,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #4]
 	ldr	s1, [x8, x9, lsl #2]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -50,11 +55,13 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	str	s0, [sp]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #4]
-	ldr	s1, [x8, x9, lsl #2]
-	ldr	x8, [sp, #16]
 	ldr	s0, [x8, x9, lsl #2]
-	subs	x8, x8, x9, lsl #2
-	str	s0, [x8, #4]
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
+	ldr	s1, [x8, x9, lsl #2]
+	fmov	s0, s1.0
+	fcvt	s0, s0
+	str	s0, [sp, #12]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_7
@@ -62,7 +69,7 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #4]
 	add	w8, w8, #1
 	str	w8, [sp, #4]
-	b	LBB0_1
+	b	LBB0_3
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -74,43 +81,41 @@ LBB0_10:
 	ldr	w8, [sp, #12]
 	mov	w9, #2
 	sdiv	w8, w8, w9
+	mul	w8, w8, w9
+	subs	w8, w8, #1
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_12
 	b	LBB0_11
 LBB0_11:
 	ldr	x8, [sp, #16]
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldr	w8, [sp, #12]
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	ldr	x9, [sp]                        ; 8-byte Folded Reload
-	ldr	s0, [x9, w8, sxtw #2]
-	str	s0, [sp, #12]
+	ldr	w9, [sp, #12]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	ldr	s0, [x8, w9, sxtw #2]
+	stur	s0, [x8, w9, sxtw #2]
 	b	LBB0_13
 LBB0_12:
 	ldr	x8, [sp, #16]
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
-	ldr	w8, [sp, #12]
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	ldr	x9, [sp, #8]                    ; 8-byte Folded Reload
-	ldr	s0, [x9, w8, sxtw #2]
-	ldr	x8, [sp, #16]
-	str	x8, [sp, #16]                   ; 8-byte Folded Spill
-	ldr	w8, [sp, #12]
-	sdiv	w8, w8, w9
-	ldr	x9, [sp, #16]                   ; 8-byte Folded Reload
-	subs	w8, w8, #1
-	fmov	s0, s0
-	fmadd	s0, s0, s1, s0
-	fcvt	d0, s0
-	str	d0, [sp]
+	ldr	w9, [sp, #12]
+	mov	w10, #2
+	sdiv	w9, w9, w10
+	ldr	s0, [x8, w9, sxtw #2]
+	ldr	x8, [sp]
+	ldr	w9, [sp, #12]
+	sdiv	w9, w9, w10
+	ldur	s1, [x8, w9, sxtw #2]
+	fcvt	s0, s1
+	fmov	d1, #0.50000000000000000000
+	fmul	s0, s0, d1
+	fcvt	s0, s0
+	stur	s0, [x8, w9, sxtw #2]
 	b	LBB0_13
 LBB0_13:
-	ldr	d0, [sp]                        ; d0 = mem[0],zero,zero,zero
+	ldur	s0, [x8, w9, sxtw #2]
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: 
+Computer:

@@ -1,5 +1,4 @@
-; -- Begin function func0
-; -- End function
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -12,7 +11,7 @@ _func0:                                 ; @func0
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	str	x0, [sp, #24]
+	stur	x0, [x29, #-8]
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
 	str	x8, [sp, #16]
@@ -22,7 +21,7 @@ _func0:                                 ; @func0
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldrsw	x8, [sp, #8]
 	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldr	x0, [sp, #24]
+	ldur	x0, [x29, #-8]
 	bl	_strlen
 	ldr	x8, [sp]                        ; 8-byte Folded Reload
 	subs	x8, x8, x0
@@ -31,7 +30,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #16]
-	ldr	x8, [sp, #24]
+	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #8]
 	ldrsb	w1, [x8, x9]
 	bl	_strchr

@@ -95,7 +95,7 @@ LBB0_12:
 	b	LBB0_13
 LBB0_13:
 	ldur	x0, [x29, #-8]
-	ldp	x0, x3, [sp, #48]                ; 16-byte Folded Reload
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret
 	.cfi_endproc

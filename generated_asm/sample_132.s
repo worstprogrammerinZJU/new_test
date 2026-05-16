@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -15,10 +14,7 @@ _func0:                                 ; @func0
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
 	ldur	w8, [x29, #-12]
-	add	w8, w8, #1
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	sxtw	x10, w10
+	add	w0, w8, #1
 	mov	w1, #4
 	bl	_calloc
 	str	x0, [sp, #8]
@@ -37,21 +33,18 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	ldrsw	x11, [x9, x10, lsl #2]
-	ldr	w9, [x8, x11, lsl #2]
-	add	w9, w9, #1
-	str	w9, [x8, x11, lsl #2]
+	ldrsw	x9, [x9, x10, lsl #2]
+	ldr	w8, [x8, x9, lsl #2]
+	add	w8, w8, #1
+	str	w8, [x8, x9, lsl #2]
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	ldrsw	x11, [x9, x10, lsl #2]
-	ldr	w9, [x8, x11, lsl #2]
-	ldur	x10, [x29, #-8]
-	ldrsw	x9, [x10, x9, lsl #2]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	subs	x8, x8, x10, lsl #2
-	ldr	w9, [x10, x8, lsl #2]
+	ldrsw	x9, [x9, x10, lsl #2]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-8]
+	ldrsw	x10, [sp]
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_5
@@ -87,4 +80,5 @@ LBB0_7:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: 
+Human: Translate the following x86-64 assembly code into ARMv8-A assembly:

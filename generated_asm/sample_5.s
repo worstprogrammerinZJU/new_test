@@ -28,8 +28,10 @@ LBB0_2:
 	b	LBB0_3
 LBB0_3:
 	ldr	w8, [sp, #4]
-	mov	w9, #2
-	sdiv	w8, w8, w9
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_5
@@ -40,8 +42,10 @@ LBB0_4:
 	b	LBB0_8
 LBB0_5:
 	ldr	w8, [sp, #4]
-	mov	w9, #2
-	sdiv	w8, w8, w9
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_7
@@ -61,4 +65,4 @@ LBB0_8:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Q: What is the value of register r8 after executing this assembly code?

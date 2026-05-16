@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -26,8 +25,8 @@ LBB0_1:
 	stur	xzr, [x29, #-8]
 	b	LBB0_11
 LBB0_2:
-	mov	x8, #62
-	str	x8, [sp, #20]
+	mov	w8, #62
+	str	w8, [sp, #20]
 	ldr	x9, [sp, #24]
 	strb	wzr, [x9, #63]
 	ldur	w8, [x29, #-12]
@@ -37,12 +36,12 @@ LBB0_2:
 	b	LBB0_3
 LBB0_3:
 	ldr	x8, [sp, #24]
-	ldr	w9, [sp, #20]
-	mov	x10, x9
-	subs	w10, w10, #1
-	str	w10, [sp, #20]
-	mov	w9, #48
-	strb	w9, [x8]
+	ldrsw	x9, [sp, #20]
+	subs	x9, x9, #1
+	str	w9, [sp, #20]
+	add	x9, x8, x9
+	mov	w8, #48
+	strb	w8, [x9]
 	b	LBB0_8
 LBB0_4:
 	b	LBB0_5
@@ -54,49 +53,49 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldur	w8, [x29, #-12]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
-	add	x9, sp, #24
-	str	w8, [x9]
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	subs	x10, x10, #1
-	str	w10, [sp, #20]
-	strb	w8, [x8, x9]
-	ldur	w8, [x29, #-12]
-	sdiv	w8, w8, w9
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w10, w8, #1
+	ldr	x9, [sp, #24]
+	ldrsw	x8, [sp, #20]
+	subs	x8, x8, w10
+	add	x8, x8, x9
+	str	w8, [sp, #20]
+	ldursw	x9, [x29, #-12]
+	mov	w10, #2
+	sdiv	w8, w9, w10
+	mul	w8, w8, w10
+	subs	w8, w8, w9
 	stur	w8, [x29, #-12]
 	b	LBB0_5
 LBB0_7:
 	b	LBB0_8
 LBB0_8:
 	ldr	x8, [sp, #24]
-	ldr	w9, [sp, #20]
-	mov	x10, x9
-	subs	w10, w10, #1
-	str	w10, [sp, #20]
-	mov	w9, #98
-	strb	w9, [x8, x9]
-	ldr	x8, [sp, #24]
-	ldr	w9, [sp, #20]
-	mov	x10, x9
-	subs	w10, w10, #1
-	str	w10, [sp, #20]
-	mov	w9, #100
-	strb	w9, [x8, x9]
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	ldr	w8, [sp, #16]
-	add	w8, w8, #3
-	mov	x9, sp
-	str	w8, [x9]
-	blr	_malloc
-	str	x0, [sp, #16]
-	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #20]
+	subs	x9, x9, #1
+	str	w9, [sp, #20]
+	ldrsw	x9, [sp, #24]
+	subs	x9, x9, #1
+	str	w9, [sp, #20]
+	ldrsw	x9, [sp, #24]
+	add	x0, x8, x9
+	mov	w8, #98
+	strb	w8, [x8]
+	ldrsw	x9, [sp, #24]
+	ldrsw	x8, [sp, #20]
+	add	x8, x8, #1
+	strb	w8, [x9]
+	ldrsw	x9, [sp, #24]
+	ldrsw	x8, [sp, #20]
+	add	x0, x8, #100
+	mov	x8, x0
+	add	x0, x8, #3
+	bl	_malloc
+	str	x0, [sp]
+	ldr	x8, [sp]
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_10
@@ -108,18 +107,20 @@ LBB0_9:
 	stur	xzr, [x29, #-8]
 	b	LBB0_11
 LBB0_10:
-	ldr	x0, [sp, #16]
+	ldr	x0, [sp]
 	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #16]
+	ldrsw	x9, [sp]
 	add	x1, x8, x9
 	mov	x2, #-1
 	bl	___strcpy_chk
-	ldr	x0, [sp, #16]
+	ldr	x0, [sp]
+	adrp	x1, l_.str@PAGE
+	add	x1, x1, l_.str@PAGEOFF
 	mov	x2, #-1
 	bl	___strcat_chk
 	ldr	x0, [sp, #24]
 	bl	_free
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp]
 	stur	x8, [x29, #-8]
 	b	LBB0_11
 LBB0_11:

@@ -1,5 +1,5 @@
-; -- Begin function func0
-; -- End function
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -13,11 +13,13 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
-	sub	x8, x29, #10
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
-	ldur	w4, [x29, #-4]
+	ldur	w8, [x29, #-4]
+	sub	x9, x29, #10
+	str	x9, [sp]                        ; 8-byte Folded Spill
+	mov	x9, sp
+	str	x8, [x9]
 	mov	w1, #0
-	mov	x2, #6
+	mov	w2, #6
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
@@ -25,19 +27,19 @@ _func0:                                 ; @func0
 	stur	wzr, [x29, #-20]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsw	x9, [sp, #20]
-	sub	x8, x29, #10
+	ldursw	x9, [x29, #-20]
+	add	x8, sp, #36
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsw	x9, [sp, #20]
-	sub	x8, x29, #10
+	ldursw	x9, [x29, #-20]
+	add	x8, sp, #36
 	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #48
-	ldur	w9, [x29, #-16]
+	subs	w9, w8, #48
+	ldur	w8, [x29, #-16]
 	add	w8, w8, w9
 	stur	w8, [x29, #-16]
 	b	LBB0_3
@@ -58,11 +60,11 @@ LBB0_4:
 	b	LBB0_5
 LBB0_5:
 	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
+	ldrsw	x9, [sp, #12]
 	mov	x10, x9
 	add	w10, w10, #1
 	str	w10, [sp, #12]
-	add	x8, x8, w9, sxtw
+	add	x8, x8, x9
 	mov	w9, #48
 	strb	w9, [x8]
 	b	LBB0_10
@@ -80,87 +82,68 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
 	subs	w8, w8, w9
-                                        ; kill: def $w8 killed $w8 killed $w8 killed $x8
-	str	w8, [sp, #12]
-	b	LBB0_10
+	add	w10, w8, #48
+	ldr	x9, [sp, #16]
+	ldrsw	x8, [sp, #12]
+	add	x9, x9, x8
+	mov	x8, x10
+	str	w8, [x9]
+	ldur	w8, [x29, #-16]
+	sdiv	w8, w8, w10
+	stur	w8, [x29, #-16]
+	b	LBB0_7
 LBB0_9:
 	b	LBB0_10
 LBB0_10:
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	strb	wzr, [x8, x9]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	str	wzr, [sp, #8]
 	b	LBB0_11
 LBB0_11:                                ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #8]
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
-	ldr	w8, [sp, #12]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
+	ldr	w9, [sp, #12]
+	mov	w10, #2
+	sdiv	w9, w9, w10
 	subs	w8, w8, w9
-	subs	w8, w8, #1
-	ldrb	w9, [x8]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
-	str	w8, [x8]
-	b	LBB0_11
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_12
 LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	add	x9, x9, #48
-	ldrb	w9, [x8, x9]
-	strb	w9, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #7]
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	add	x9, x9, x8
-	ldrb	w9, [x8, x9]
-	strb	w9, [x8, x9]
+	ldrsw	x9, [sp, #12]
+	ldr	w9, [sp, #8]
+	subs	w9, w9, w9
+	subs	w8, w8, #1
+	add	x9, x8, w9, sxtw
+	ldr	x8, [sp, #16]
+	ldrsw	x10, [sp, #8]
+	add	x8, x8, x10
+	ldrb	w8, [x8]
+	strb	w8, [x9]
+	ldrb	w8, [sp, #7]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #8]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, w9
+	subs	w8, w8, #1
+	add	x9, x8, w9, sxtw
+	ldrb	w8, [x9]
+	strb	w8, [x8]
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
-	ldr	w9, [sp, #8]
+	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_14
-LBB0_14:                                 ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	ldrb	w9, [x8, x9]
-	sdiv	w10, w8, w10
-	mul	w10, w10, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	ldrb	w9, [x8]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	str	w8, [x8]
-	b	LBB0_14
-LBB0_15:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #16]
-	ldr	w0, [sp, #4]                    ; 4-byte Folded Reload
-	ldr	w9, [sp, #8]
-	add	w0, w0, #1
-	str	w0, [sp, #4]                    ; 4-byte Folded Spill
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	ldrb	w9, [x8]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	str	w8, [x8]
-	b	LBB0_15
-LBB0_16:
+	str	w8, [sp, #8]
+	b	LBB0_11
+LBB0_14:
+	ldr	x0, [sp, #16]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

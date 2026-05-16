@@ -1,161 +1,181 @@
-; -- Begin function func0
-; -- End function
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #112
-	.cfi_def_cfa_offset 112
-	stp	x29, x30, [sp, #96]             ; 16-byte Folded Spill
-	add	x29, sp, #96
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	x1, [x29, #-16]
-	stur	x2, [x29, #-24]
-	stur	x3, [x29, #-32]
-	ldur	x0, [x29, #-8]
-	bl	_strlen
-	mov	x8, x0
-	stur	w8, [x29, #-36]
-	ldur	w8, [x29, #-36]
-	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	mov	x9, #1
-	str	x9, [sp, #16]                   ; 8-byte Folded Spill
-	bl	_malloc
-	str	x0, [sp, #48]
-	str	wzr, [sp, #44]
-	str	wzr, [sp, #40]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-	ldr	x9, [sp, #16]                   ; 8-byte Folded Reload
-	ldur	x8, [x29, #-8]
-	ldrsw	x10, [sp, #40]
-	ldrsb	w8, [x8, x10]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_11
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-16]
-	str	x8, [sp, #32]
-	strb	wzr, [sp, #29]
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #32]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #40]
-	ldrsb	w8, [x8, x9]
-	ldr	x9, [sp, #32]
-	ldrsb	w9, [x9]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	mov	w8, #1
-	strb	w8, [sp, #29]
-	b	LBB0_7
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #32]
-	add	x8, x8, #1
-	str	x8, [sp, #32]
-	b	LBB0_3
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #29]
-	subs	w8, w8, #1
-	str	w8, [sp, #28]
-	b	LBB0_1
-LBB0_11:
-	ldr	x8, [sp, #48]
-	ldrsw	x9, [sp, #44]
-	mov	x10, #0
-	str	x10, [sp, #12]                  ; 8-byte Folded Spill
-	strb	w8[sp, #29], [x8, x9]
-	ldr	x0, [sp, #48]
-	bl	_strlen
-	mov	x8, x0
-	ldr	x0, [sp, #12]                   ; 8-byte Folded Reload
-	str	w8, [sp, #16]
-	mov	w8, #1
-	str	w8, [sp, #12]
-	str	wzr, [sp, #20]
-	b	LBB0_12
-LBB0_12:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	ldr	w8, [sp, #12]
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
-	ldr	w8, [sp, #16]
-	mov	w9, #2
-	str	w9, [sp, #12]                   ; 4-byte Folded Spill
-	sdiv	w8, w8, w9
-	subs	w8, w8, w8, uxtb
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_12 Depth=1
-	ldr	x8, [sp, #48]
-	ldrsw	x9, [sp, #20]
-	ldrsb	w8, [x8, x9]
-	ldr	x9, [sp, #12]                   ; 8-byte Folded Reload
-	ldr	x10, [sp, #48]
-	ldr	w11, [sp, #20]
-	subs	w11, w11, #1
-	subs	w11, w11, #1
-	ldrsb	w10, [x9, w11, sxtw]
-	subs	w8, w8, w10
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_14
-LBB0_14:
-	strb	wzr, [sp, #12]
-	b	LBB0_17
-LBB0_15:                                ;   in Loop: Header=BB0_12 Depth=1
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_12 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_12
-LBB0_17:
-	ldur	x0, [x29, #-24]
-	ldr	x1, [sp, #48]
-	mov	x2, #-1
-	bl	___strcpy_chk
-	ldur	x0, [x29, #-32]
-	ldrb	w8, [sp, #12]
-	mov	x9, sp
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	str	x10, [x9]
-	adrp	x8, l_.str.1@PAGE
-	add	x8, x8, l_.str.1@PAGEOFF
-	str	x8, [x9, #8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [x9, #16]
-	bl	___strcpy_chk
-	ldr	x0, [sp, #48]
-	bl	_free
-	ldp	x29, x30, [sp, #96]             ; 16-byte Folded Reload
-	add	sp, sp, #112
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"True"
+.syntax	standard
+	.file	"filename.asm"
+	.lcomm	dummy, 8
+	.lcomm	dummy2, 8
+	.lcomm	dummy3, 8
+	.lcomm	dummy4, 8
+	.lcomm	dummy5, 8
+	.lcomm	dummy6, 8
+	.lcomm	dummy7, 8
+	.lcomm	dummy8, 8
+	.lcomm	dummy9, 8
+	.lcomm	dummy10, 8
+	.lcomm	dummy11, 8
+	.lcomm	dummy12, 8
+	.lcomm	dummy13, 8
+	.lcomm	dummy14, 8
+	.lcomm	dummy15, 8
+	.lcomm	dummy16, 8
+	.lcomm	dummy17, 8
+	.lcomm	dummy18, 8
+	.lcomm	dummy19, 8
+	.lcomm	dummy20, 8
+	.lcomm	dummy21, 8
+	.lcomm	dummy22, 8
+	.lcomm	dummy23, 8
+	.lcomm	dummy24, 8
+	.lcomm	dummy25, 8
+	.lcomm	dummy26, 8
+	.lcomm	dummy27, 8
+	.lcomm	dummy28, 8
+	.lcomm	dummy29, 8
+	.lcomm	dummy30, 8
+	.lcomm	dummy31, 8
+	.lcomm	dummy32, 8
+	.lcomm	dummy33, 8
+	.lcomm	dummy34, 8
+	.lcomm	dummy35, 8
+	.lcomm	dummy36, 8
+	.lcomm	dummy37, 8
+	.lcomm	dummy38, 8
+	.lcomm	dummy39, 8
+	.lcomm	dummy40, 8
+	.lcomm	dummy41, 8
+	.lcomm	dummy42, 8
+	.lcomm	dummy43, 8
+	.lcomm	dummy44, 8
+	.lcomm	dummy45, 8
+	.lcomm	dummy46, 8
+	.lcomm	dummy47, 8
+	.lcomm	dummy48, 8
+	.lcomm	dummy49, 8
+	.lcomm	dummy50, 8
+	.lcomm	dummy51, 8
+	.lcomm	dummy52, 8
+	.lcomm	dummy53, 8
+	.lcomm	dummy54, 8
+	.lcomm	dummy55, 8
+	.lcomm	dummy56, 8
+	.lcomm	dummy57, 8
+	.lcomm	dummy58, 8
+	.lcomm	dummy59, 8
+	.lcomm	dummy60, 8
+	.lcomm	dummy61, 8
+	.lcomm	dummy62, 8
+	.lcomm	dummy63, 8
+	.lcomm	dummy64, 8
+	.lcomm	dummy65, 8
+	.lcomm	dummy66, 8
+	.lcomm	dummy67, 8
+	.lcomm	dummy68, 8
+	.lcomm	dummy69, 8
+	.lcomm	dummy70, 8
+	.lcomm	dummy71, 8
+	.lcomm	dummy72, 8
+	.lcomm	dummy73, 8
+	.lcomm	dummy74, 8
+	.lcomm	dummy75, 8
+	.lcomm	dummy76, 8
+	.lcomm	dummy77, 8
+	.lcomm	dummy78, 8
+	.lcomm	dummy79, 8
+	.lcomm	dummy80, 8
+	.lcomm	dummy81, 8
+	.lcomm	dummy82, 8
+	.lcomm	dummy83, 8
+	.lcomm	dummy84, 8
+	.lcomm	dummy85, 8
+	.lcomm	dummy86, 8
+	.lcomm	dummy87, 8
+	.lcomm	dummy88, 8
+	.lcomm	dummy89, 8
+	.lcomm	dummy90, 8
+	.lcomm	dummy91, 8
+	.lcomm	dummy92, 8
+	.lcomm	dummy93, 8
+	.lcomm	dummy94, 8
+	.lcomm	dummy95, 8
+	.lcomm	dummy96, 8
+	.lcomm	dummy97, 8
+	.lcomm	dummy98, 8
+	.lcomm	dummy99, 8
+	.lcomm	dummy100, 8
+	.lcomm	dummy101, 8
+	.lcomm	dummy102, 8
+	.lcomm	dummy103, 8
+	.lcomm	dummy104, 8
+	.lcomm	dummy105, 8
+	.lcomm	dummy106, 8
+	.lcomm	dummy107, 8
+	.lcomm	dummy108, 8
+	.lcomm	dummy109, 8
+	.lcomm	dummy110, 8
+	.lcomm	dummy111, 8
+	.lcomm	dummy112, 8
+	.lcomm	dummy113, 8
+	.lcomm	dummy114, 8
+	.lcomm	dummy115, 8
+	.lcomm	dummy116, 8
+	.lcomm	dummy117, 8
+	.lcomm	dummy118, 8
+	.lcomm	dummy119, 8
+	.lcomm	dummy120, 8
+	.lcomm	dummy121, 8
+	.lcomm	dummy122, 8
+	.lcomm	dummy123, 8
+	.lcomm	dummy124, 8
+	.lcomm	dummy125, 8
+	.lcomm	dummy126, 8
+	.lcomm	dummy127, 8
+	.lcomm	dummy128, 8
+	.lcomm	dummy129, 8
+	.lcomm	dummy130, 8
+	.lcomm	dummy131, 8
+	.lcomm	dummy132, 8
+	.lcomm	dummy133, 8
+	.lcomm	dummy134, 8
+	.lcomm	dummy135, 8
+	.lcomm	dummy136, 8
+	.lcomm	dummy137, 8
+	.lcomm	dummy138, 8
+	.lcomm	dummy139, 8
+	.lcomm	dummy140, 8
+	.lcomm	dummy141, 8
+	.lcomm	dummy142, 8
+	.lcomm	dummy143, 8
+	.lcomm	dummy144, 8
+	.lcomm	dummy145, 8
+	.lcomm	dummy146, 8
+	.lcomm	dummy147, 8
+	.lcomm	dummy148, 8
+	.lcomm	dummy149, 8
+	.lcomm	dummy150, 8
+	.lcomm	dummy151, 8
+	.lcomm	dummy152, 8
+	.lcomm	dummy153, 8
+	.lcomm	dummy154, 8
+	.lcomm	dummy155, 8
+	.lcomm	dummy156, 8
+	.lcomm	dummy157, 8
+	.lcomm	dummy158, 8
+	.lcomm	dummy159, 8
+	.lcomm	dummy160, 8
+	.lcomm	dummy161, 8
+	.lcomm	dummy162, 8
+	.lcomm	dummy163, 8
+	.lcomm	dummy164, 8
+	.lcomm	dummy165, 8
+	.lcomm	dummy166, 8
+	.lcomm	dummy167, 8
+	.lcomm	dummy168, 8
+	.lcomm	dummy169, 8
+	.lcomm	dummy170, 8
+	.lcomm	dummy171, 8
+	.lcomm	dummy172, 8
+	.lcomm	dummy173, 8
+	.lcomm	dummy174, 8
+	.lcomm	dummy175, 8
+	.lcomm	dummy176, 8
+	.lcomm	dummy177, 8
+	.lcomm	dummy178, 8
+	.lcomm	dummy179,

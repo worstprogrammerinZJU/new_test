@@ -42,12 +42,11 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
-	ldr	x9, [sp, #16]
+	ldr	x8, [sp, #16]
 	ldr	x10, [sp, #24]
-	ldr	w8, [x10]
-	add	w1, w8, #1
-	str	w1, [x10]
-	str	s0, [x9, x10, lsl #2]
+	ldr	w9, [x10]
+                                        ; kill: def $x9 killed $xzr
+	str	s0, [x8, x9, lsl #2]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5

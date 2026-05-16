@@ -28,6 +28,7 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	ldr	w8, [sp, #12]
 	ldr	w9, [sp, #8]
 	sdiv	w8, w8, w9
+	mvn	w8, w8
 	subs	w8, w8, #0
 	cset	w8, ne
 	mov	w9, #0

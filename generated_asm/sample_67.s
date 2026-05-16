@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -26,16 +25,14 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w9, [x29, #-20]
-                                        ; implicit-def: $x8
-	mov	x8, x9
+	ldur	w5, [x29, #-20]
+	mov	x1, #0
+	mov	x8, #-1
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
 	mov	x9, sp
 	str	x8, [x9]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	str	x8, [x9, #8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
 	bl	___snprintf_chk
 	ldur	w8, [x29, #-16]
 	add	w8, w8, w0
@@ -47,7 +44,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	stur	w8, [x29, #-20]
 	b	LBB0_1
 LBB0_4:
-	ldur	w0, [x29, #-16]
+	ldursw	x0, [x29, #-16]
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]
@@ -63,7 +60,8 @@ LBB0_6:
 	ldr	x8, [sp, #16]
 	str	x8, [sp, #8]
 	ldr	x0, [sp, #8]
-	mov	x1, #0
+	mov	w1, #0
+	mov	x2, #-1
 	adrp	x3, l_.str.1@PAGE
 	add	x3, x3, l_.str.1@PAGEOFF
 	bl	___sprintf_chk
@@ -82,16 +80,11 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	x0, [sp, #8]
-	ldr	w4, [sp, #4]
-                                        ; implicit-def: $x8
-	mov	x8, x4
-	mov	x9, sp
-	str	x8, [x9]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	str	x8, [x9, #8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
+	ldr	w8, [sp, #4]
+	mov	x1, #0
+	mov	x2, #-1
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
 	ldr	x8, [sp, #8]
 	add	x8, x8, w0, sxtw

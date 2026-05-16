@@ -77,4 +77,5 @@ LBB0_9:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+The provided C code snippet defines a function `func0` that prints "Hello World" five times using an infinite loop and the `printf` function. The translated assembly code for this function is as follows:

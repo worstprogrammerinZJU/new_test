@@ -41,9 +41,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #8]
 	ldr	w8, [sp, #4]
 	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x1, w8
+	lsl	w1, w9, #3
 	bl	_realloc
 	str	x0, [sp, #8]
 	ldur	x8, [x29, #-8]

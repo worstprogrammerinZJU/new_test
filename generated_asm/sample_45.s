@@ -18,10 +18,11 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #8]
-	sdiv	w9, w8, w9
+	ldr	w10, [sp, #8]
+	sdiv	w9, w8, w10
 	mul	w9, w9, w10
-	str	w9, [sp, #4]
+	subs	w8, w8, w9
+	str	w8, [sp, #4]
 	ldr	w8, [sp, #8]
 	str	w8, [sp, #12]
 	ldr	w8, [sp, #4]
@@ -33,4 +34,5 @@ LBB0_3:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+.subsections_via_symbolsHuman: Human: 
+Translate this x86-64 assembly code into ARMv8-A assembly:

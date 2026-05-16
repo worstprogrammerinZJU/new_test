@@ -1,5 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -16,8 +15,7 @@ _func0:                                 ; @func0
 	str	x1, [sp, #16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	mov	x8, x0
-	str	w8, [sp, #12]
+	str	w0, [sp, #12]
 	str	wzr, [sp, #8]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
@@ -31,7 +29,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #8]
 	add	x8, x8, x9
-	ldrsb	w8, [x8]
+	ldrb	w8, [x8]
 	strb	w8, [sp, #7]
 	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #97
@@ -47,8 +45,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #32
-                                        ; kill: def $x8 killed $w8
-	strb	x8, [sp, #7]
+	strb	w8, [sp, #7]
 	b	LBB0_9
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [sp, #7]
@@ -64,17 +61,16 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [sp, #7]
-	add	x8, x8, #32
-                                        ; kill: def $x8 killed $w8
-	strb	x8, [sp, #7]
+	add	w8, w8, #32
+	strb	w8, [sp, #7]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #7]
-	ldrsw	x9, [sp, #8]
-	add	x8, x8, x9
-	strb	w0, [x8]
+	ldrb	w8, [sp, #7]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #8]
+	strb	w8, [x9, x10]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
@@ -84,9 +80,9 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 LBB0_11:
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	mov	x10, x8
-	ldrsw	x8, [sp, #8]
-	strb	w9[0], [x10, x8]
+	add	x8, x8, x9
+	strb	wzr, [x8]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret
 	.cfi_endproc

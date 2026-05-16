@@ -1,99 +1,102 @@
-; -- Begin function func0
-; -- End function
-; -- Begin .data
-; @.str: AEIOUaeiou
-; -- End .data
-; -- Begin .idata
-; _func0.out: .asciz	"AEIOUaeiou"
-; -- End .idata
-; _func0.out@PAGE:0	; @.str: AEIOUaeiou
-; _func0.out@PAGE:1	; @.str: AEIOUaeiou
-; _func0.out@PAGE:2	; @.str: AEIOUaeiou
-; _func0.out@PAGE:3	; @.str: AEIOUaeiou
-; _func0.out@PAGE:4	; @.str: AEIOUaeiou
-; _func0.out@PAGE:5	; @.str: AEIOUaeiou
-; _func0.out@PAGE:6	; @.str: AEIOUaeiou
-; _func0.out@PAGE:7	; @.str: AEIOUaeiou
-; _func0.out@PAGE:8	; @.str: AEIOUaeiou
-; _func0.out@PAGE:9	; @.str: AEIOUaeiou
-; _func0.out@PAGE:10	; @.str: AEIOUaeiou
-; _func0.out@PAGE:11	; @.str: AEIOUaeiou
-; _func0.out@PAGE:12	; @.str: AEIOUaeiou
-; _func0.out@PAGE:13	; @.str: AEIOUaeiou
-; _func0.out@PAGE:14	; @.str: AEIOUaeiou
-; _func0.out@PAGE:15	; @.str: AEIOUaeiou
-; _func0.out@PAGE:16	; @.str: AEIOUaeiou
-; _func0.out@PAGE:17	; @.str: AEIOUaeiou
-; _func0.out@PAGE:18	; @.str: AEIOUaeiou
-; _func0.out@PAGE:19	; @.str: AEIOUaeiou
-; _func0.out@PAGE:20	; @.str: AEIOUaeiou
-; _func0.out@PAGE:21	; @.str: AEIOUaeiou
-; _func0.out@PAGE:22	; @.str: AEIOUaeiou
-; _func0.out@PAGE:23	; @.str: AEIOUaeiou
-; _func0.out@PAGE:24	; @.str: AEIOUaeiou
-; _func0.out@PAGE:25	; @.str: AEIOUaeiou
-; _func0.out@PAGE:26	; @.str: AEIOUaeiou
-; _func0.out@PAGE:27	; @.str: AEIOUaeiou
-; _func0.out@PAGE:28	; @.str: AEIOUaeiou
-; _func0.out@PAGE:29	; @.str: AEIOUaeiou
-; _func0.out@PAGE:30	; @.str: AEIOUaeiou
-; _func0.out@PAGE:31	; @.str: AEIOUaeiou
-; _func0.out@PAGE:32	; @.str: AEIOUaeiou
-; _func0.out@PAGE:33	; @.str: AEIOUaeiou
-; _func0.out@PAGE:34	; @.str: AEIOUaeiou
-; _func0.out@PAGE:35	; @.str: AEIOUaeiou
-; _func0.out@PAGE:36	; @.str: AEIOUaeiou
-; _func0.out@PAGE:37	; @.str: AEIOUaeiou
-; _func0.out@PAGE:38	; @.str: AEIOUaeiou
-; _func0.out@PAGE:39	; @.str: AEIOUaeiou
-; _func0.out@PAGE:40	; @.str: AEIOUaeiou
-; _func0.out@PAGE:41	; @.str: AEIOUaeiou
-; _func0.out@PAGE:42	; @.str: AEIOUaeiou
-; _func0.out@PAGE:43	; @.str: AEIOUaeiou
-; _func0.out@PAGE:44	; @.str: AEIOUaeiou
-; _func0.out@PAGE:45	; @.str: AEIOUaeiou
-; _func0.out@PAGE:46	; @.str: AEIOUaeiou
-; _func0.out@PAGE:47	; @.str: AEIOUaeiou
-; _func0.out@PAGE:48	; @.str: AEIOUaeiou
-; _func0.out@PAGE:49	; @.str: AEIOUaeiou
-; _func0.out@PAGE:50	; @.str: AEIOUaeiou
-; _func0.out@PAGE:51	; @.str: AEIOUaeiou
-; _func0.out@PAGE:52	; @.str: AEIOUaeiou
-; _func0.out@PAGE:53	; @.str: AEIOUaeiou
-; _func0.out@PAGE:54	; @.str: AEIOUaeiou
-; _func0.out@PAGE:55	; @.str: AEIOUaeiou
-; _func0.out@PAGE:56	; @.str: AEIOUaeiou
-; _func0.out@PAGE:57	; @.str: AEIOUaeiou
-; _func0.out@PAGE:58	; @.str: AEIOUaeiou
-; _func0.out@PAGE:59	; @.str: AEIOUaeiou
-; _func0.out@PAGE:60	; @.str: AEIOUaeiou
-; _func0.out@PAGE:61	; @.str: AEIOUaeiou
-; _func0.out@PAGE:62	; @.str: AEIOUaeiou
-; _func0.out@PAGE:63	; @.str: AEIOUaeiou
-; _func0.out@PAGE:64	; @.str: AEIOUaeiou
-; _func0.out@PAGE:65	; @.str: AEIOUaeiou
-; _func0.out@PAGE:66	; @.str: AEIOUaeiou
-; _func0.out@PAGE:67	; @.str: AEIOUaeiou
-; _func0.out@PAGE:68	; @.str: AEIOUaeiou
-; _func0.out@PAGE:69	; @.str: AEIOUaeiou
-; _func0.out@PAGE:70	; @.str: AEIOUaeiou
-; _func0.out@PAGE:71	; @.str: AEIOUaeiou
-; _func0.out@PAGE:72	; @.str: AEIOUaeiou
-; _func0.out@PAGE:73	; @.str: AEIOUaeiou
-; _func0.out@PAGE:74	; @.str: AEIOUaeiou
-; _func0.out@PAGE:75	; @.str: AEIOUaeiou
-; _func0.out@PAGE:76	; @.str: AEIOUaeiou
-; _func0.out@PAGE:77	; @.str: AEIOUaeiou
-; _func0.out@PAGE:78	; @.str: AEIOUaeiou
-; _func0.out@PAGE:79	; @.str: AEIOUaeiou
-; _func0.out@PAGE:80	; @.str: AEIOUaeiou
-; _func0.out@PAGE:81	; @.str: AEIOUaeiou
-; _func0.out@PAGE:82	; @.str: AEIOUaeiou
-; _func0.out@PAGE:83	; @.str: AEIOUaeiou
-; _func0.out@PAGE:84	; @.str: AEIOUaeiou
-; _func0.out@PAGE:85	; @.str: AEIOUaeiou
-; _func0.out@PAGE:86	; @.str: AEIOUaeiou
-; _func0.out@PAGE:87	; @.str: AEIOUaeiou
-; _func0.out@PAGE:88	; @.str: AEIOUaeiou
-; _func0.out@PAGE:89	; @.str: AEIOUaeiou
-; _func0.out@PAGE:90	; @.
+.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-16]
+	adrp	x8, l_.str@PAGE
+	add	x8, x8, l_.str@PAGEOFF
+	str	x8, [sp, #24]
+	ldur	x0, [x29, #-16]
+	bl	_strlen
+	str	x0, [sp, #16]
+	ldr	x8, [sp, #16]
+	subs	x8, x8, #2
+                                        ; kill: def $w8 killed $w8 killed $x8
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #24]
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #12]
+	ldrsb	w1, [x8, x9]
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #24]
+	ldur	x8, [x29, #-16]
+	ldr	w9, [sp, #12]
+	add	w9, w9, #1
+	ldrsb	w1, [x8, w9, sxtw]
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #24]
+	ldur	x8, [x29, #-16]
+	ldr	w9, [sp, #12]
+	subs	w9, w9, #1
+	ldrsb	w1, [x8, w9, sxtw]
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	add	x8, x8, #1
+	ldrb	w8, [x8]
+	adrp	x9, _func0.out@PAGE
+	add	x9, x9, _func0.out@PAGEOFF
+	strb	w8, [x9]
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	stur	x8, [x29, #-8]
+	b	LBB0_9
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_8:
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	strb	wzr, [x8]
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	stur	x8, [x29, #-8]
+	b	LBB0_9
+LBB0_9:
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.zerofill __DATA,__bss,_func0.out,2,0   ; @func0.out
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"AEIOUaeiou"

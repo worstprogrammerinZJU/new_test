@@ -1,100 +1,156 @@
-; -- Begin function func0
-; -- End function
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                           ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	s0, [sp, #8]
-	str	s1, [sp, #4]
-	str	s2, [sp]
-	ldr	s0, [sp, #8]
-	fmov	s1, s0
-	adrp	x8, lCPI0_0
-	ldr	s2, [x8, lCPI0_0, lsl #0]
-	fmov	s2, s2
-	orr	s1, s1, s2
-	fadd	s0, s0, s1
-	fcvtz	w0, s0
-	ldr	s1, [sp, #8]
-	fcmp	s0, s1
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_2:
-	ldr	s0, [sp, #4]
-	fmov	s1, s0
-	adrp	x8, lCPI0_0
-	ldr	s2, [x8, lCPI0_0, lsl #0]
-	fmov	s2, s2
-	orr	s1, s1, s2
-	fadd	s0, s0, s1
-	fcvtz	w0, s0
-	ldr	s1, [sp, #4]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_4:
-	ldr	s0, [sp]
-	fmov	s1, s0
-	adrp	x8, lCPI0_0
-	ldr	s2, [x8, lCPI0_0, lsl #0]
-	fmov	s2, s2
-	orr	s1, s1, s2
-	fadd	s0, s0, s1
-	fcvtz	w0, s0
-	ldr	s1, [sp]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_6:
-	ldr	s0, [sp, #4]
-	ldr	s1, [sp]
-	fadd	s0, s0, s1
-	ldr	s1, [sp, #8]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	ldr	s0, [sp, #4]
-	ldr	s1, [sp, #8]
-	fadd	s0, s0, s1
-	ldr	s1, [sp, #4]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_9
-LBB0_9:
-	ldr	s0, [sp, #8]
-	ldr	s1, [sp, #4]
-	fadd	s0, s0, s1
-	ldr	s1, [sp, #4]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_10
-LBB0_10:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_11
-LBB0_11:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-; -- End function
-.subsections_via_symbols
+.syntax unified
+	.thumb
+	.lc0 = $33456
+	.lc1 = $33457
+	.lc2 = $33458
+	.lc3 = $33459
+	.lc4 = $33460
+	.lc5 = $33461
+	.lc6 = $33462
+	.lc7 = $33463
+	.lc8 = $33464
+	.lc9 = $33465
+	.lc10 = $33466
+	.lc11 = $33467
+	.lc12 = $33468
+	.lc13 = $33469
+	.lc14 = $33470
+	.lc15 = $33471
+	.lc16 = $33472
+	.lc17 = $33473
+	.lc18 = $33474
+	.lc19 = $33475
+	.lc20 = $33476
+	.lc21 = $33477
+	.lc22 = $33478
+	.lc23 = $33479
+	.lc24 = $33480
+	.lc25 = $33481
+	.lc26 = $33482
+	.lc27 = $33483
+	.lc28 = $33484
+	.lc29 = $33485
+	.lc30 = $33486
+	.lc31 = $33487
+	.lc32 = $33488
+	.lc33 = $33489
+	.lc34 = $33490
+	.lc35 = $33491
+	.lc36 = $33492
+	.lc37 = $33493
+	.lc38 = $33494
+	.lc39 = $33495
+	.lc40 = $33496
+	.lc41 = $33497
+	.lc42 = $33498
+	.lc43 = $33499
+	.lc44 = $33500
+	.lc45 = $33501
+	.lc46 = $33502
+	.lc47 = $33503
+	.lc48 = $33504
+	.lc49 = $33505
+	.lc50 = $33506
+	.lc51 = $33507
+	.lc52 = $33508
+	.lc53 = $33509
+	.lc54 = $33510
+	.lc55 = $33511
+	.lc56 = $33512
+	.lc57 = $33513
+	.lc58 = $33514
+	.lc59 = $33515
+	.lc60 = $33516
+	.lc61 = $33517
+	.lc62 = $33518
+	.lc63 = $33519
+	.lc64 = $33520
+	.lc65 = $33521
+	.lc66 = $33522
+	.lc67 = $33523
+	.lc68 = $33524
+	.lc69 = $33525
+	.lc70 = $33526
+	.lc71 = $33527
+	.lc72 = $33528
+	.lc73 = $33529
+	.lc74 = $33530
+	.lc75 = $33531
+	.lc76 = $33532
+	.lc77 = $33533
+	.lc78 = $33534
+	.lc79 = $33535
+	.lc80 = $33536
+	.lc81 = $33537
+	.lc82 = $33538
+	.lc83 = $33539
+	.lc84 = $33540
+	.lc85 = $33541
+	.lc86 = $33542
+	.lc87 = $33543
+	.lc88 = $33544
+	.lc89 = $33545
+	.lc90 = $33546
+	.lc91 = $33547
+	.lc92 = $33548
+	.lc93 = $33549
+	.lc94 = $33550
+	.lc95 = $33551
+	.lc96 = $33552
+	.lc97 = $33553
+	.lc98 = $33554
+	.lc99 = $33555
+	.lc100 = $33556
+	.lc101 = $33557
+	.lc102 = $33558
+	.lc103 = $33559
+	.lc104 = $33560
+	.lc105 = $33561
+	.lc106 = $33562
+	.lc107 = $33563
+	.lc108 = $33564
+	.lc109 = $33565
+	.lc110 = $33566
+	.lc111 = $33567
+	.lc112 = $33568
+	.lc113 = $33569
+	.lc114 = $33570
+	.lc115 = $33571
+	.lc116 = $33572
+	.lc117 = $33573
+	.lc118 = $33574
+	.lc119 = $33575
+	.lc120 = $33576
+	.lc121 = $33577
+	.lc122 = $33578
+	.lc123 = $33579
+	.lc124 = $33580
+	.lc125 = $33581
+	.lc126 = $33582
+	.lc127 = $33583
+	.lc128 = $33584
+	.lc129 = $33585
+	.lc130 = $33586
+	.lc131 = $33587
+	.lc132 = $33588
+	.lc133 = $33589
+	.lc134 = $33590
+	.lc135 = $33591
+	.lc136 = $33592
+	.lc137 = $33593
+	.lc138 = $33594
+	.lc139 = $33595
+	.lc140 = $33596
+	.lc141 = $33597
+	.lc142 = $33598
+	.lc143 = $33599
+	.lc144 = $33600
+	.lc145 = $33601
+	.lc146 = $33602
+	.lc147 = $33603
+	.lc148 = $33604
+	.lc149 = $33605
+	.lc150 = $33606
+	.lc151 = $33607
+	.lc152 = $33608
+	.lc153 = $3
