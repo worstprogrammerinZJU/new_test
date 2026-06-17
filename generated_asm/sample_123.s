@@ -73,14 +73,14 @@ LBB0_10:
 	subs	w8, w8, #0
 	cset	w8, eq
 	and	w8, w8, #0x1
-	sturh	w8, [x29, #-1]
+	sturb	w8, [x29, #-1]
 	b	LBB0_11
 LBB0_11:
-	ldurb	w0, [x29, #-1]
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-To translate the given x86-64 assembly code into ARMv8-A assembly, I will follow these steps:
+.subsections_via_symbols

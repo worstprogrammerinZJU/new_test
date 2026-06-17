@@ -15,30 +15,29 @@ _func0:                                 ; @func0
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldr	w9, [sp, #12]
 	ldr	w8, [sp, #20]
-	lsl	w8, w8, #1
 	subs	w8, w8, w9, lsl #1
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	lsl	x9, x9, #1
-	ldr	w8, [x8, x9, lsl #2]
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, w0
+	ldr	w9, [sp, #12]
+	lsl	w9, w9, #1
+	ldr	w8, [x8, w9, sxtw #2]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	lsl	x9, x9, #1
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #16]
+	ldr	w9, [sp, #12]
+	lsl	w9, w9, #1
+	ldr	w9, [x8, w9, sxtw #2]
+	ldr	w8, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_4
@@ -55,5 +54,4 @@ LBB0_6:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: 
-Computer:
+.subsections_via_symbols

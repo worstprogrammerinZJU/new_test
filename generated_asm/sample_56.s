@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -15,13 +16,17 @@ _func0:                                 ; @func0
 	stur	x1, [x29, #-16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	stur	w0, [x29, #-20]
-	ldursw	x9, [x29, #-20]
-	lsl	x0, x9, #3
+	mov	x8, x0
+	stur	w8, [x29, #-20]
+	ldursw	x8, [x29, #-20]
+	lsl	x0, x8, #3
 	bl	_malloc
 	str	x0, [sp, #32]
 	ldur	w8, [x29, #-20]
-	add	w0, w8, #1
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #24]
 	ldr	x8, [sp, #24]
@@ -47,14 +52,14 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #20]
 	add	x8, x8, x9
-	ldr	w9, [x8]
-	ldr	x8, [sp, #24]
+	ldrb	w8, [x8]
+	ldr	x9, [sp, #24]
 	ldr	x10, [sp, #8]
-	add	x9, x8, x10
-	strb	w9, [x9]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #8]
-	add	x8, x8, #1
+	add	x8, x8, x9, lsl #3
 	strb	wzr, [x8]
 	ldr	x0, [sp, #24]
 	bl	_strlen
@@ -87,14 +92,4 @@ LBB0_4:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: 
-Human: Given an input string of length n, write a C++ program that prints each character of the string on a new line.
-Example:
-Input: "hello"
-Output:
-h
-e
-l
-l
-o
-Explanation
+.subsections_via_symbols

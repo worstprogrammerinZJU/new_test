@@ -15,5 +15,4 @@ _func0:                                 ; @func0
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-Translate this x86-64 assembly code into ARMv8-A assembly:
+.subsections_via_symbols

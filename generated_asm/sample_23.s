@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -16,19 +17,19 @@ _func0:                                 ; @func0
 	ldur	x0, [x29, #-16]
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #36]
+	stur	w8, [x29, #-28]
 	ldur	x0, [x29, #-24]
 	bl	_strlen
 	mov	x8, x0
 	str	w8, [sp, #32]
-	ldr	w8, [sp, #36]
+	ldur	w8, [x29, #-28]
 	ldr	w9, [sp, #32]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	ldr	w8, [sp, #36]
+	ldur	w8, [x29, #-28]
 	str	w8, [sp, #12]                   ; 4-byte Folded Spill
 	b	LBB0_3
 LBB0_2:
@@ -56,10 +57,10 @@ LBB0_4:
 	stur	xzr, [x29, #-8]
 	b	LBB0_10
 LBB0_5:
-	str	wzr, [sp, #12]
+	str	wzr, [sp, #20]
 	b	LBB0_6
 LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, #20]
 	ldr	w9, [sp, #28]
 	subs	w8, w8, w9
 	cset	w8, ge
@@ -67,25 +68,26 @@ LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #12]
+	ldrsw	x9, [sp, #20]
 	ldrsb	w8, [x8, x9]
 	ldur	x9, [x29, #-24]
-	ldrsh	w9, [x9, x8]
+	ldrsw	x10, [sp, #20]
+	ldrsb	w9, [x9, x10]
 	subs	w8, w8, w9
 	cset	w8, eq
-	and	w9, w8, #0x1
-	mov	w8, #49
-	mov	w10, #48
-	ands	w9, w9, #0x1
-	csinc	w8, w8, wzr, ne
+	and	w10, w8, #0x1
+	mov	w9, #49
+	mov	w8, #48
+	ands	w10, w10, #0x1
+	csel	w8, w8, w9, ne
 	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #12]
+	ldrsw	x10, [sp, #20]
 	strb	w8, [x9, x10]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_6 Depth=1
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, #20]
 	add	w8, w8, #1
-	str	w8, [sp, #12]
+	str	w8, [sp, #20]
 	b	LBB0_6
 LBB0_9:
 	ldr	x8, [sp, #16]

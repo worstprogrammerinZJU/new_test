@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -26,8 +27,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #24]
 	ldr	w10, [sp, #20]
-	ldr	w11, [sp, #12]
 	subs	w10, w10, #1
+	ldr	w11, [sp, #12]
 	subs	w10, w10, w11
 	ldr	w9, [x9, w10, sxtw #2]
 	subs	w8, w8, w9
@@ -52,5 +53,4 @@ LBB0_6:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: 
-Computer:
+.subsections_via_symbols

@@ -1,156 +1,75 @@
-.syntax unified
-	.thumb
-	.lcomm	lc0, lsl #0
-	.lcomm	lc1, lsl #0
-	.lcomm	lc2, lsl #0
-	.lcomm	lc3, lsl #0
-	.lcomm	lc4, lsl #0
-	.lcomm	lc5, lsl #0
-	.lcomm	lc6, lsl #0
-	.lcomm	lc7, lsl #0
-	.lcomm	lc8, lsl #0
-	.lcomm	lc9, lsl #0
-	.lcomm	lc10, lsl #0
-	.lcomm	lc11, lsl #0
-	.lcomm	lc12, lsl #0
-	.lcomm	lc13, lsl #0
-	.lcomm	lc14, lsl #0
-	.lcomm	lc15, lsl #0
-	.lcomm	lc16, lsl #0
-	.lcomm	lc17, lsl #0
-	.lcomm	lc18, lsl #0
-	.lcomm	lc19, lsl #0
-	.lcomm	lc20, lsl #0
-	.lcomm	lc21, lsl #0
-	.lcomm	lc22, lsl #0
-	.lcomm	lc23, lsl #0
-	.lcomm	lc24, lsl #0
-	.lcomm	lc25, lsl #0
-	.lcomm	lc26, lsl #0
-	.lcomm	lc27, lsl #0
-	.lcomm	lc28, lsl #0
-	.lcomm	lc29, lsl #0
-	.lcomm	lc30, lsl #0
-	.lcomm	lc31, lsl #0
-	.lcomm	lc32, lsl #0
-	.lcomm	lc33, lsl #0
-	.lcomm	lc34, lsl #0
-	.lcomm	lc35, lsl #0
-	.lcomm	lc36, lsl #0
-	.lcomm	lc37, lsl #0
-	.lcomm	lc38, lsl #0
-	.lcomm	lc39, lsl #0
-	.lcomm	lc40, lsl #0
-	.lcomm	lc41, lsl #0
-	.lcomm	lc42, lsl #0
-	.lcomm	lc43, lsl #0
-	.lcomm	lc44, lsl #0
-	.lcomm	lc45, lsl #0
-	.lcomm	lc46, lsl #0
-	.lcomm	lc47, lsl #0
-	.lcomm	lc48, lsl #0
-	.lcomm	lc49, lsl #0
-	.lcomm	lc50, lsl #0
-	.lcomm	lc51, lsl #0
-	.lcomm	lc52, lsl #0
-	.lcomm	lc53, lsl #0
-	.lcomm	lc54, lsl #0
-	.lcomm	lc55, lsl #0
-	.lcomm	lc56, lsl #0
-	.lcomm	lc57, lsl #0
-	.lcomm	lc58, lsl #0
-	.lcomm	lc59, lsl #0
-	.lcomm	lc60, lsl #0
-	.lcomm	lc61, lsl #0
-	.lcomm	lc62, lsl #0
-	.lcomm	lc63, lsl #0
-	.lcomm	lc64, lsl #0
-	.lcomm	lc65, lsl #0
-	.lcomm	lc66, lsl #0
-	.lcomm	lc67, lsl #0
-	.lcomm	lc68, lsl #0
-	.lcomm	lc69, lsl #0
-	.lcomm	lc70, lsl #0
-	.lcomm	lc71, lsl #0
-	.lcomm	lc72, lsl #0
-	.lcomm	lc73, lsl #0
-	.lcomm	lc74, lsl #0
-	.lcomm	lc75, lsl #0
-	.lcomm	lc76, lsl #0
-	.lcomm	lc77, lsl #0
-	.lcomm	lc78, lsl #0
-	.lcomm	lc79, lsl #0
-	.lcomm	lc80, lsl #0
-	.lcomm	lc81, lsl #0
-	.lcomm	lc82, lsl #0
-	.lcomm	lc83, lsl #0
-	.lcomm	lc84, lsl #0
-	.lcomm	lc85, lsl #0
-	.lcomm	lc86, lsl #0
-	.lcomm	lc87, lsl #0
-	.lcomm	lc88, lsl #0
-	.lcomm	lc89, lsl #0
-	.lcomm	lc90, lsl #0
-	.lcomm	lc91, lsl #0
-	.lcomm	lc92, lsl #0
-	.lcomm	lc93, lsl #0
-	.lcomm	lc94, lsl #0
-	.lcomm	lc95, lsl #0
-	.lcomm	lc96, lsl #0
-	.lcomm	lc97, lsl #0
-	.lcomm	lc98, lsl #0
-	.lcomm	lc99, lsl #0
-	.lcomm	lc100, lsl #0
-	.lcomm	lc101, lsl #0
-	.lcomm	lc102, lsl #0
-	.lcomm	lc103, lsl #0
-	.lcomm	lc104, lsl #0
-	.lcomm	lc105, lsl #0
-	.lcomm	lc106, lsl #0
-	.lcomm	lc107, lsl #0
-	.lcomm	lc108, lsl #0
-	.lcomm	lc109, lsl #0
-	.lcomm	lc110, lsl #0
-	.lcomm	lc111, lsl #0
-	.lcomm	lc112, lsl #0
-	.lcomm	lc113, lsl #0
-	.lcomm	lc114, lsl #0
-	.lcomm	lc115, lsl #0
-	.lcomm	lc116, lsl #0
-	.lcomm	lc117, lsl #0
-	.lcomm	lc118, lsl #0
-	.lcomm	lc119, lsl #0
-	.lcomm	lc120, lsl #0
-	.lcomm	lc121, lsl #0
-	.lcomm	lc122, lsl #0
-	.lcomm	lc123, lsl #0
-	.lcomm	lc124, lsl #0
-	.lcomm	lc125, lsl #0
-	.lcomm	lc126, lsl #0
-	.lcomm	lc127, lsl #0
-	.lcomm	lc128, lsl #0
-	.lcomm	lc129, lsl #0
-	.lcomm	lc130, lsl #0
-	.lcomm	lc131, lsl #0
-	.lcomm	lc132, lsl #0
-	.lcomm	lc133, lsl #0
-	.lcomm	lc134, lsl #0
-	.lcomm	lc135, lsl #0
-	.lcomm	lc136, lsl #0
-	.lcomm	lc137, lsl #0
-	.lcomm	lc138, lsl #0
-	.lcomm	lc139, lsl #0
-	.lcomm	lc140, lsl #0
-	.lcomm	lc141, lsl #0
-	.lcomm	lc142, lsl #0
-	.lcomm	lc143, lsl #0
-	.lcomm	lc144, lsl #0
-	.lcomm	lc145, lsl #0
-	.lcomm	lc146, lsl #0
-	.lcomm	lc147, lsl #0
-	.lcomm	lc148, lsl #0
-	.lcomm	lc149, lsl #0
-	.lcomm	lc150, lsl #0
-	.lcomm	lc151, lsl #0
-	.lcomm	lc152, lsl #0
-	.lcomm	lc153,
+.globl	_func0                         ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	s0, [sp, #24]
+	str	s1, [sp, #20]
+	str	s2, [sp, #16]
+	ldr	s0, [sp, #24]
+	ldr	s1, [sp, #20]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #16]
+	fcmp	s0, s1
+	cset	w8, mi
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_1
+LBB0_1:
+	ldr	s0, [sp, #24]
+	ldr	s1, [sp, #16]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #20]
+	fcmp	s0, s1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_2
+LBB0_2:
+	ldr	s0, [sp, #20]
+	ldr	s1, [sp, #16]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #24]
+	fcmp	s0, s1
+	cset	w8, hi
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	fmov	s0, #-0.00000000
+	str	s0, [sp, #28]
+	b	LBB0_5
+LBB0_4:
+	ldr	s0, [sp, #24]
+	ldr	s1, [sp, #20]
+	fadd	s0, s0, s1
+	ldr	s1, [sp, #16]
+	fadd	s0, s0, s1
+	fmov	s1, #11.00000000
+	fmul	s0, s0, s1
+	ldr	s1, [sp, #24]
+	ldr	s2, [sp, #20]
+	fsub	s1, s1, s2
+	fmadd	s0, s0, s1, s2
+	fsqrt	s0, s0
+	str	s0, [sp, #12]
+	ldr	s0, [sp, #12]
+	ldr	s1, [sp, #12]
+	ldr	s2, [sp, #24]
+	fsub	s1, s1, s2
+	fmadd	s0, s0, s1, s2
+	fsqrt	s0, s0
+	str	s0, [sp, #16]
+	ldr	s0, [sp, #16]
+	ldr	s1, [sp, #16]
+	fsub	s1, s1, s0
+	fmadd	s0, s0, s1, s2
+	fsqrt	s0, s0
+	str	s0, [sp, #12]
+	b	LBB0_5
+LBB0_5:
+	ldr	s0, [sp, #28]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

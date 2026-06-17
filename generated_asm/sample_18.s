@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -34,7 +35,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #40]
 	ldrsw	x10, [sp, #12]
-	ldr	x9, [x9, x10, lsl #3]
+	lsl	x10, x10, #3
+	ldr	x9, [x9, x10]
 	add	x8, x8, x9
 	str	x8, [sp]                        ; 8-byte Folded Spill
 	b	LBB0_5
@@ -70,4 +72,4 @@ LBB0_9:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman resources department:
+.subsections_via_symbols

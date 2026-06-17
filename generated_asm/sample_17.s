@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -13,8 +14,8 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
-	ldursw	x9, [x29, #-12]
-	lsl	x0, x9, #3
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #3
 	bl	_malloc
 	str	x0, [sp, #24]
 	str	wzr, [sp, #20]
@@ -71,8 +72,6 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	subs	w8, w8, #48
 	mov	w9, #2
 	sdiv	w8, w8, w9
-	mul	w8, w8, w9
-	subs	w8, w8, #1
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_8
@@ -101,8 +100,9 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w4, [sp, #16]
 	ldr	w5, [sp, #16]
 	ldr	w6, [sp, #16]
-	mov	x8, #-1
-	mov	x2, x8
+	mov	x8, sp
+	str	xzr, [x8]
+	mov	w1, #0
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk

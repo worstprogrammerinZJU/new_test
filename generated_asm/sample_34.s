@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -63,4 +64,4 @@ LBB0_6:
                                         ; -- End function
 	.section	__TEXT,__cstring,cstring_literals
 l_.str:                                 ; @.str
-	.space	1Human: What is the purpose of the `sub` instruction at the beginning of the ARM assembly code? How does it affect the stack?
+	.space	1

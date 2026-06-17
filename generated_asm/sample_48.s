@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -98,10 +99,10 @@ LBB0_10:
 	stur	x8, [x29, #-8]
 	b	LBB0_24
 LBB0_11:
-	str	wzr, [sp, #4]
+	str	wzr, [sp, #24]
 	b	LBB0_12
 LBB0_12:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
+	ldr	w8, [sp, #24]
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
 	cset	w8, ge
@@ -109,7 +110,7 @@ LBB0_12:                                ; =>This Inner Loop Header: Depth=1
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #4]
+	ldrsw	x9, [sp, #24]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #48
 	cset	w8, lt
@@ -117,7 +118,7 @@ LBB0_13:                                ;   in Loop: Header=BB0_12 Depth=1
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #4]
+	ldrsw	x9, [sp, #24]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #57
 	cset	w8, gt
@@ -130,7 +131,7 @@ LBB0_15:                                ;   in Loop: Header=BB0_12 Depth=1
 	b	LBB0_16
 LBB0_16:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #4]
+	ldrsw	x9, [sp, #24]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #46
 	cset	w8, ne
@@ -144,9 +145,9 @@ LBB0_17:                                ;   in Loop: Header=BB0_12 Depth=1
 LBB0_18:                                ;   in Loop: Header=BB0_12 Depth=1
 	b	LBB0_19
 LBB0_19:                                ;   in Loop: Header=BB0_12 Depth=1
-	ldr	w8, [sp, #4]
+	ldr	w8, [sp, #24]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
+	str	w8, [sp, #24]
 	b	LBB0_12
 LBB0_20:
 	ldur	w8, [x29, #-20]
@@ -155,7 +156,7 @@ LBB0_20:
 	tbnz	w8, #0, LBB0_22
 	b	LBB0_21
 LBB0_21:
-	ldr	w8, [sp, #24]
+	ldur	w8, [x29, #-24]
 	subs	w8, w8, #1
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_23
@@ -173,8 +174,4 @@ LBB0_23:
 LBB0_24:
 	ldur	x0, [x29, #-8]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__
+	add	sp, sp, #6

@@ -9,14 +9,13 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 16
 	str	w0, [sp, #12]
 	ldr	w8, [sp, #12]
-	ldr	w10, [sp, #12]
-	add	w10, w10, #1
-	mul	w8, w8, w10
+	ldr	w9, [sp, #12]
+	add	w9, w9, #1
+	mul	w8, w8, w9
 	mov	w9, #2
 	sdiv	w0, w8, w9
 	add	sp, sp, #16
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-Translate this x86-64 assembly code into ARMv8-A assembly:
+.subsections_via_symbols

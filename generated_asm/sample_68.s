@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -17,8 +18,8 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	ldr	w9, [sp, #28]
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #20]
 	add	w8, w8, w9
 	ldr	x9, [sp, #8]
 	str	w8, [x9]
@@ -26,9 +27,9 @@ LBB0_1:
 	str	wzr, [x8, #4]
 	b	LBB0_3
 LBB0_2:
-	ldr	w10, [sp, #28]
-	ldr	w8, [sp, #24]
-	add	w8, w8, w10
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #24]
+	add	w8, w8, w9
 	ldr	x9, [sp, #8]
 	str	w8, [x9]
 	ldr	w8, [sp, #20]
@@ -42,5 +43,4 @@ LBB0_3:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-Translate this x86-64 assembly code into ARMv8-A assembly:
+.subsections_via_symbols

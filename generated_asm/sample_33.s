@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -87,5 +88,4 @@ LBB0_11:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-The provided C code snippet defines a function `func0` that takes an integer and a string as input parameters. The function body contains conditional branches based on certain conditions.
+.subsections_via_symbols

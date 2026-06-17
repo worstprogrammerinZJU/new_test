@@ -43,10 +43,10 @@ LBB0_6:
 	strb	w8, [sp, #31]
 	b	LBB0_7
 LBB0_7:
-	ldrb	w0, [sp, #31]
-	and	w0, w0, #0x1
+	ldrb	w8, [sp, #31]
+	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: I have translated the provided x86-64 assembly code into ARMv8-A assembly. The output contains only the pure assembly code without any additional explanations, markdown formatting, or comments.
+.subsections_via_symbols

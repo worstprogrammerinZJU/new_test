@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -32,7 +33,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #12]
 	add	x8, x8, x9
-	ldrsb	w8, [x8]
+	ldrb	w8, [x8]
 	strb	w8, [sp, #7]
 	ldrsb	w8, [sp, #7]
 	subs	w8, w8, #40
@@ -72,24 +73,23 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
-	ldr	w8, [sp, #12]
-	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x10, w8
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+                                        ; implicit-def: $x10
+	mov	x10, x8
 	mov	x9, #4
 	mul	x10, x9, x10
+	mov	x8, #4
 	add	x1, x8, x10
 	bl	_realloc
 	str	x0, [sp, #24]
 	ldr	w8, [sp, #16]
 	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #12]
-	add	x9, x9, x10
+	ldrsw	x10, [sp, #8]
 	mov	x11, x10
 	add	w11, w11, #1
-	str	w11, [sp, #12]
-	str	w8, [x9, x11, lsl #2]
+	str	w11, [sp, #8]
+	str	w8, [x9, x10, lsl #2]
 	str	wzr, [sp, #16]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -104,7 +104,7 @@ LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #12]
 	b	LBB0_1
 LBB0_13:
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, #8]
 	ldur	x9, [x29, #-16]
 	str	w8, [x9]
 	ldr	x0, [sp, #24]

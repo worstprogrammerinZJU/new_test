@@ -1,212 +1,169 @@
-.syntax unified
-	.lcomm	a, 16
-	.lcomm	b, 16
-	.lcomm	c, 16
-	.lcomm	d, 16
-	.lcomm	e, 16
-	.lcomm	f, 16
-	.lcomm	g, 16
-	.lcomm	h, 16
-	.lcomm	i, 16
-	.lcomm	j, 16
-	.lcomm	k, 16
-	.lcomm	l, 16
-	.lcomm	m, 16
-	.lcomm	n, 16
-	.lcomm	o, 16
-	.lcomm	p, 16
-	.lcomm	q, 16
-	.lcomm	r, 16
-	.lcomm	s, 16
-	.lcomm	t, 16
-	.lcomm	u, 16
-	.lcomm	v, 16
-	.lcomm	w, 16
-	.lcomm	x, 16
-	.lcomm	y, 16
-	.lcomm	z, 16
-	.lcomm	aa, 16
-	.lcomm	ab, 16
-	.lcomm	ac, 16
-	.lcomm	ad, 16
-	.lcomm	ae, 16
-	.lcomm	af, 16
-	.lcomm	ag, 16
-	.lcomm	ah, 16
-	.lcomm	ai, 16
-	.lcomm	aj, 16
-	.lcomm	ak, 16
-	.lcomm	al, 16
-	.lcomm	am, 16
-	.lcomm	ao, 16
-	.lcomm	ap, 16
-	.lcomm	av, 16
-	.lcomm	bv, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm	ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	hv, 16
-	.lcomm	iv, 16
-	.lcomm	jv, 16
-	.lcomm	kv, 16
-	.lcomm	lv, 16
-	.lcomm	mv, 16
-	.lcomm	nv, 16
-	.lcomm	ov, 16
-	.lcomm	pv, 16
-	.lcomm	qv, 16
-	.lcomm	rv, 16
-	.lcomm	sw, 16
-	.lcomm	th, 16
-	.lcomm	uh, 16
-	.lcomm	vh, 16
-	.lcomm	wk, 16
-	.lcomm	xk, 16
-	.lcomm	yk, 16
-	.lcomm	zk, 16
-	.lcomm	ak, 16
-	.lcomm	av, 16
-	.lcomm	bk, 16
-	.lcomm	cv, 16
-	.lcomm	dv, 16
-	.lcomm,ev, 16
-	.lcomm	fv, 16
-	.lcomm	gv, 16
-	.lcomm	h
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                         ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	str	x0, [sp, #56]
+	str	w1, [sp, #52]
+	movi	d0, #0000000000000000
+	str	d0, [sp, #24]
+	ldr	x8, [sp, #56]
+	ldr	d0, [x8]
+	str	d0, [sp, #16]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #52]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	fmov	d0, #1.00000000
+	str	d0, [sp, #8]
+	str	wzr, [sp]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp]
+	ldr	w9, [sp, #4]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	d0, [sp, #24]
+	ldr	d1, [sp, #8]
+	fmul	d0, d0, d1
+	str	d0, [sp, #8]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #4]
+	ldr	d0, [x8, x9, lsl #3]
+	ldr	d1, [sp, #8]
+	fmadd	d0, d0, d1, d2
+	str	d0, [sp, #8]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_8:
+	b	LBB0_9
+LBB0_9:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_11 Depth 2
+                                        ;       Child Loop BB0_13 Depth 3
+                                        ;     Child Loop BB0_19 Depth 2
+                                        ;       Child Loop BB0_21 Depth 3
+	ldr	d0, [sp, #16]
+	fabs	d0, d0
+	fcmp	d0, d1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_27
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
+	movi	d0, #0000000000000000
+	str	d0, [sp, #16]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_11
+LBB0_11:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_13 Depth 3
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #52]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
+	fmov	d0, #1.00000000
+	str	d0, [sp, #16]
+	mov	w8, #0
+	str	w8, [sp, #4]
+	b	LBB0_13
+LBB0_13:                                ;   Parent Loop BB0_9 Depth=1
+                                        ;     Parent Loop BB0_11 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #4]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	d0, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_15
+LBB0_15:                                ;   in Loop: Header=BB0_13 Depth=3
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_13
+LBB0_16:                                ;   in Loop: Header=BB0_19 Depth=2
+	ldr	d0, [sp, #16]
+	ldr	d1, [sp, #8]
+	fdiv	d0, d0, d1
+	fsub	d0, d0, d1
+	str	d0, [sp, #16]
+	ldr	x8, [sp, #56]
+	ldr	d0, [x8]
+	str	d0, [sp, #16]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_19
+LBB0_17:                                ;   Parent Loop BB0_9 Depth=1
+                                        ; =>  This Loop Header: Depth=2
+                                        ;       Child Loop BB0_21 Depth 3
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #52]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_26
+	b	LBB0_28
+LBB0_28:                                ;   in Loop: Header=BB0_19 Depth=2
+	fmov	d0, #1.00000000
+	str	d0, [sp, #16]
+	mov	w8, #0
+	str	w8, [sp, #4]
+	b	LBB0_29
+LBB0_29:                                ;   Parent Loop BB0_9 Depth=1
+                                        ;     Parent Loop BB0_19 Depth=2
+                                        ; =>    This Inner Loop Header: Depth=3
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #4]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_24
+	b	LBB0_30
+LBB0_30:                                ;   in Loop: Header=BB0_21 Depth=3
+	ldr	d0, [sp, #16]
+	fmul	d0, d0, d1
+	str	d0, [sp, #16]
+	b	LBB0_31
+LBB0_31:                                ;   in Loop: Header=BB0_21 Depth=3
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_39
+LBB0_32:                                ;   in Loop: Header=BB0_19 Depth=2
+	ldr	d0, [sp, #16]
+	ldr	d1, [sp, #8]
+	fdiv	d0, d0, d1
+	fsub	d0, d0, d1
+	str	d0, [sp, #1

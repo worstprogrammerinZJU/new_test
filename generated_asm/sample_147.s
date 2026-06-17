@@ -60,4 +60,4 @@ LBB0_9:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Q: What is the value of register r8 after executing this assembly code?
+.subsections_via_symbols

@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -14,7 +15,8 @@ _func0:                                 ; @func0
 	str	x0, [sp, #16]
 	ldr	x0, [sp, #16]
 	bl	_strlen
-	str	w0, [sp, #12]
+	mov	x8, x0
+	str	w8, [sp, #12]
 	str	wzr, [sp, #8]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
@@ -33,8 +35,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #12]
 	subs	w10, w10, #1
-	ldr	w9, [sp, #8]
-	subs	w10, w9, w10
+	ldr	w11, [sp, #8]
+	subs	w10, w10, w11
 	ldrsb	w9, [x9, w10, sxtw]
 	subs	w8, w8, w9
 	cset	w8, eq
@@ -55,13 +57,11 @@ LBB0_6:
 	sturb	w8, [x29, #-1]
 	b	LBB0_7
 LBB0_7:
-	ldurb	w0, [x29, #-1]
-	and	w0, w0, #0x1
+	ldurb	w8, [x29, #-1]
+	and	w0, w8, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-The provided x86 Assembly code has been translated into ARMv8-A assembly code. The output contains only the pure ARM assembly code without any additional explanations, markdown formatting, or comments.
-In this translation, all registers and memory locations have been appropriately converted from their x86 counterparts to their ARM equivalents. Additionally, the stack frame setup and cleanup have been adjusted to match ARM calling conventions. The loop optimizations and conditional branches have also been adapted accordingly for ARM architecture. Finally, the return type of the function has been changed from `int` to `void`.
+.subsections_via_symbols

@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -21,10 +22,10 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldur	w8, [x29, #-4]
-	mov	w9, #10
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
+	mov	w10, #10
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	str	w8, [sp, #4]
 	ldr	w8, [sp, #4]
 	mov	w10, #2
@@ -69,5 +70,4 @@ LBB0_6:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-To translate the given x86-64 assembly code into ARMv8-A assembly, I will follow these steps:
+.subsections_via_symbols

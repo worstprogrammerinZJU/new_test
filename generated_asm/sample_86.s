@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -40,7 +41,10 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_4:
 	ldr	w8, [sp, #24]
-	add	w0, w8, #1
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #8]
 	ldr	x8, [sp, #8]
@@ -88,5 +92,4 @@ LBB0_11:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-The provided C++ code snippet contains an assembly function `func0` that translates from x86-64 assembly to ARMv8-A assembly. The translated assembly code is as follows:
+.subsections_via_symbols

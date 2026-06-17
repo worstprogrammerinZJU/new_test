@@ -17,12 +17,12 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #20]
 	ldur	x0, [x29, #-16]
 	bl	_strlen
-                                        ; kill: def $w0 killed $w0 killed $x0
-	str	w0, [sp, #16]
+	mov	x8, x0
+	str	w8, [sp, #16]
 	ldr	x0, [sp, #24]
 	bl	_strlen
-                                        ; kill: def $w0 killed $w0 killed $x0
-	str	w0, [sp, #12]
+	mov	x8, x0
+	str	w8, [sp, #12]
 	mov	w8, #1
 	str	w8, [sp, #4]
 	str	wzr, [sp, #8]
@@ -81,13 +81,13 @@ LBB0_10:
 	b	LBB0_11
 LBB0_11:                                ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #12]
+	ldr	w9, [sp, #16]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_20
 	b	LBB0_12
 LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #24]
+	ldur	x8, [x29, #-24]
 	ldrsw	x9, [sp, #8]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #40
@@ -96,15 +96,13 @@ LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
 	ldr	w8, [sp, #20]
-	add	w8, w8, #1
+	subs	w8, w8, #1
 	str	w8, [sp, #20]
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #8]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #41
-	cset	w8, ne
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, ge
 	tbnz	w8, #0, LBB0_16
 	b	LBB0_15
 LBB0_15:                                ;   in Loop: Header=BB0_11 Depth=1
@@ -113,56 +111,47 @@ LBB0_15:                                ;   in Loop: Header=BB0_11 Depth=1
 	str	w8, [sp, #20]
 	b	LBB0_16
 LBB0_16:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #0
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_18
-	b	LBB0_17
-LBB0_17:                                ;   in Loop: Header=BB0_11 Depth=1
-	str	wzr, [sp, #4]
-	b	LBB0_18
-LBB0_18:                                ;   in Loop: Header=BB0_11 Depth=1
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_11 Depth=1
 	ldr	w8, [sp, #8]
 	add	w8, w8, #1
 	str	w8, [sp, #8]
-	b	LBB0_20
-LBB0_20:
+	b	LBB0_11
+LBB0_17:
 	ldr	w8, [sp, #20]
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_23
-	b	LBB0_21
-LBB0_21:
+	b	LBB0_18
+LBB0_18:
 	ldr	w8, [sp, #4]
 	subs	w8, w8, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_23
-	b	LBB0_22
-LBB0_22:
+	b	LBB0_19
+LBB0_19:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
 	stur	x8, [x29, #-8]
 	b	LBB0_47
-LBB0_23:
-	mov	w8, #1
-	str	w8, [sp, #4]
+LBB0_20:
 	ldr	w8, [sp, #8]
-	str	w8, [sp, #8]
-	stur	wzr, [x29, #-16]
-	b	LBB0_24
-LBB0_24:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_33
-	b	LBB0_25
-LBB0_25:                                ;   in Loop: Header=BB0_24 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #8]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #40
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_27
+	subs	w8, w8, #1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_23
+	b	LBB0_21
+LBB0_21:
+	adrp	x8, l_.str.1@PAGE
+	add	x8, x8, l_.str.1@PAGEOFF
+	stur	x8, [x29, #-8]
+	b	LBB0_47
+LBB0_22:
+	ldur	x8, [x29, #-8]
+	add	x8, x8, #48
+	str	x8, [sp]                        ; 8-byte Folded Spill
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"Yes"

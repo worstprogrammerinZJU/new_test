@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -25,14 +26,15 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w5, [x29, #-20]
-	mov	x1, #0
-	mov	x8, #-1
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	ldur	w9, [x29, #-20]
+                                        ; implicit-def: $x8
+	mov	x8, x9
 	mov	x9, sp
 	str	x8, [x9]
-	adrp	x0, l_.str@PAGE
-	add	x0, x0, l_.str@PAGEOFF
+	mov	x1, #0
+	mov	w2, #0
+	mov	x0, x1
+	mov	w3, #-1
 	bl	___snprintf_chk
 	ldur	w8, [x29, #-16]
 	add	w8, w8, w0
@@ -81,7 +83,9 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	x0, [sp, #8]
 	ldr	w8, [sp, #4]
-	mov	x1, #0
+	mov	x9, sp
+	str	x8, [x9]
+	mov	w1, #0
 	mov	x2, #-1
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF

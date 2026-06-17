@@ -70,6 +70,4 @@ LBB0_9:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-The provided x86 Assembly code has been translated into ARMv8-A assembly code. The output contains only the pure ARM assembly code without any additional explanations, markdown formatting, or comments.
-In this translation, all registers and memory locations have been appropriately converted from their x86 counterparts to their ARM equivalents as specified by the instruction set architecture (ISA) of ARMv8-A. Additionally, the stack frame setup and cleanup have been adjusted accordingly for ARM's different calling convention compared to x86.
+.subsections_via_symbols

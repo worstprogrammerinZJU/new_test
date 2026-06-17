@@ -17,20 +17,22 @@ _func0:                                 ; @func0
 	ldur	w0, [x29, #-4]
 	bl	_abs
 	mov	w9, #10
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
 	sdiv	w8, w0, w9
 	mul	w8, w8, w9
 	subs	w8, w0, w8
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	str	w8, [sp]                        ; 4-byte Folded Spill
 	ldr	w0, [sp, #8]
 	bl	_abs
-	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
-	sdiv	w9, w0, w9
-	mul	w9, w9, w8
-	subs	w0, w8, w9
+	ldr	w10, [sp]                       ; 4-byte Folded Reload
+	ldr	w9, [sp, #4]                    ; 4-byte Folded Reload
+	sdiv	w8, w0, w9
+	mul	w8, w8, w9
+	subs	w8, w0, w8
+	mul	w0, w8, w10
 	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-Translate this x86-64 assembly code into ARMv8-A assembly:
+.subsections_via_symbols

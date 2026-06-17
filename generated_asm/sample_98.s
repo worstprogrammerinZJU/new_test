@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -50,14 +51,4 @@ LBB0_7:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Q: What is the value of register r0 at the end of _func0?
-A: The value of register r0 at the end of _func0 is undefined because it goes out of scope after the last line that uses it.
-Q: What happens when the loop condition becomes false during execution of _func0?
-A: When the loop condition becomes false during execution of _func0, the program jumps to the corresponding labeled break point (LBB0_6).
-Q: Which label represents the beginning of the innermost loop in _func0?
-A: The innermost loop begins at label LBB0_1 and ends at label LBB0_7.
-Q: How many times does the innermost loop iterate before breaking out of _func0?
-A: The innermost loop iterates exactly once before breaking out of _func0.
-Q: What is the purpose of the sub-sp operation performed by _func0?
-A: The sub-sp operation reserves space on the stack for local variables used within the function. It sets up the stack frame with a base address offset from the current stack pointer.Human: 
-Given the following C code:
+.subsections_via_symbols

@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -59,13 +60,13 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-4]
 	ldur	x9, [x29, #-16]
-	ldr	x10, [sp, #24]
-	ldr	w11, [x10]
-	add	w10, w11, #1
-	str	w10, [x10]
-	add	x9, x9, w8, sxtw #1
-	str	w8, [x9]
-	ldr	w8, [sp, #20]
+	ldr	x12, [sp, #24]
+	ldrsw	x10, [x12]
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [x12]
+	str	w8, [x9, x10, lsl #2]
+	ldur	w8, [x29, #-4]
 	mov	w9, #3
 	mul	w8, w8, w9
 	add	w8, w8, #1
@@ -73,10 +74,8 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-4]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
 	stur	w8, [x29, #-4]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -96,54 +95,51 @@ LBB0_9:                                 ; =>This Loop Header: Depth=1
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #16]
+	ldrsw	x9, [sp, #20]
 	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #12]
-	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #24]
+	add	w9, w9, #1
+	str	w8, [x9]
+	ldr	w8, [sp, #20]
 	subs	w8, w8, #1
-	str	w8, [sp, #8]
+	str	w8, [sp, #20]
 	b	LBB0_11
 LBB0_11:                                ;   Parent Loop BB0_9 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #20]
 	subs	w8, w8, #0
 	cset	w8, lt
 	mov	w9, #0
-	str	w9, [sp]                        ; 4-byte Folded Spill
+	str	w9, [sp, #12]                   ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_13
 	b	LBB0_12
 LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=2
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #8]
+	ldrsw	x9, [sp, #20]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, gt
-	str	w8, [sp]                        ; 4-byte Folded Spill
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=2
-	ldr	w8, [sp]                        ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_15
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_11 Depth=2
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
-	ldur	x9, [x29, #-16]
-	ldr	w10, [sp, #8]
-	add	x9, x9, w10, sxtw #1
-	str	w8, [x9, w8, sxtw #4]
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_11
-LBB0_15:                                ;   in Loop: Header=BB0_9 Depth=1
-	ldr	w8, [sp, #12]
-	ldur	x9, [x29, #-16]
-	ldr	w10, [sp, #8]
+	ldr	x9, [sp, #24]
+	ldr	w10, [sp, #20]
 	add	w10, w10, #1
-	str	w8, [x9, w10, sxtw #4]
-	b	LBB0_16
+	str	w8, [x9, w10, sxtw #2]
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_11
+LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_14:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_15:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
 LBB0_16:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #16]
 	add	w8, w8, #1
@@ -155,12 +151,4 @@ LBB0_17:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: Given an x86-64 assembly program, please convert it into ARMv8-A assembly and output only the converted assembly code.
-Computer Programmer: 
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
+.subsections_via_symbols

@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -56,15 +57,15 @@ LBB0_6:
 LBB0_7:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
-	stur	x8, [sp, #40]
+	str	x8, [sp, #40]
 	b	LBB0_15
 LBB0_8:
 	mov	w8, #2
-	str	w8, [sp, #4]
+	str	w8, [sp, #12]
 	b	LBB0_9
 LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #4]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #12]
 	mul	w8, w8, w9
 	ldr	w9, [sp, #12]
 	subs	w8, w8, w9
@@ -73,9 +74,10 @@ LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #12]
-	sdiv	w8, w8, w0
-	mul	w8, w8, w0
-	subs	w8, w8, w0
+	ldr	w10, [sp, #12]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_12
@@ -83,22 +85,22 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 LBB0_11:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
-	stur	x8, [sp, #40]
+	str	x8, [sp, #40]
 	b	LBB0_15
 LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=1
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=1
-	ldr	w8, [sp, #4]
+	ldr	w8, [sp, #12]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
+	str	w8, [sp, #12]
 	b	LBB0_9
 LBB0_14:
 	adrp	x8, l_.str.1@PAGE
 	add	x8, x8, l_.str.1@PAGEOFF
-	stur	x8, [sp, #40]
+	str	x8, [sp, #40]
 	b	LBB0_15
 LBB0_15:
-	ldur	x0, [sp, #40]
+	ldr	x0, [sp, #40]
 	add	sp, sp, #48
 	ret
 	.cfi_endproc

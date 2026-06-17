@@ -1,14 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal16,16byte_literals
-	.p2align	2                               ; -- Begin function func0
-lCPI0_0:
-	.lit8	#0000000000000000
-	.lit8	#0000000000000000
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	2
-_func0:                                 ; @func0
+; -- Begin function func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
@@ -47,10 +37,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp]
 	ldr	s1, [x8, x9, lsl #2]
 	fsub	s0, s0, s1
-	fcvt	d1, s0
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d0, [x8, lCPI0_0@PAGEOFF]
-	ands	d0, d0, d1
+	fcvt	d0, s0
+	fmov	d1, #0.00000000
+	fcmp	d0, d1
 	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
@@ -82,5 +71,4 @@ LBB0_11:
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbolsHuman: Human: 
-To translate the given x86-64 assembly code into ARMv8-A assembly, I will follow these steps:
+.subsections_via_symbols

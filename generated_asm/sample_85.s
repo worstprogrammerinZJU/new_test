@@ -1,4 +1,5 @@
-.build_version macos, 13, 0	sdk_version 13, 3
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
@@ -15,7 +16,8 @@ _func0:                                 ; @func0
 	str	x1, [sp, #16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	str	w0, [sp, #12]
+	mov	x8, x0
+	str	w8, [sp, #12]
 	str	wzr, [sp, #8]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
