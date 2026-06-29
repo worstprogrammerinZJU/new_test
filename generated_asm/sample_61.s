@@ -92,12 +92,10 @@ LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=2
 	add	w8, w8, #1
 	str	w8, [sp, #28]
 	b	LBB0_3
-LBB0_12:
-	ldur	x0, [x29, #-32]
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #16]
 	ldur	x4, [x29, #-8]
-	ldr	x8, [sp, #32]
-	mov	x9, sp
-	str	x8, [x9]
+	ldr	x5, [sp, #32]
 	mov	w1, #0
 	mov	x2, #-1
 	adrp	x3, l_.str@PAGE

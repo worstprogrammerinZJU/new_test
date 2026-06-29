@@ -7,7 +7,7 @@ _func0:                                 ; @func0
 ; %bb.0:
 	sub	sp, sp, #32
 	.cfi_def_cfa_offset 32
-	str	x0, [sp, #16]
+	str	x0, [sp]
 	str	w1, [sp, #12]
 	str	wzr, [sp, #4]
 	str	wzr, [sp, #8]
@@ -22,10 +22,10 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp]
 	ldrsw	x9, [sp]
 	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp]
 	ldr	w9, [sp]
 	subs	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
@@ -38,10 +38,10 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #8]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp]
 	ldrsw	x9, [sp]
 	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp]
 	ldr	w9, [sp]
 	subs	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]

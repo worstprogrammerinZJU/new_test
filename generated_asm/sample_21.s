@@ -23,7 +23,6 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #36]
 	str	wzr, [sp, #32]
 	str	wzr, [sp, #28]
-	str	wzr, [sp, #24]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
 	str	x0, [sp, #16]
@@ -67,33 +66,19 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #8]
 	ldr	w9, [sp, #4]
-	ldr	w10, [sp, #28]
+	ldr	w10, [sp, #32]
 	subs	w9, w9, w10
-	add	x8, x8, w9, sxtw #3
-	strb	wzr, [x8]
+	add	x9, x8, w9, sxtw #3
+	strb	wzr, [x9]
 	ldr	x0, [sp, #40]
 	ldr	w8, [sp, #32]
 	add	w8, w8, #1
-                                        ; implicit-def: $x11
-	mov	x11, x8
-	mov	x8, #8
-	sxtw	x8, w8
-	lsl	x11, x11, #3
-	add	x10, x10, x8
-	mov	x8, sp
-	str	x11, [x8]
-	str	x10, [x8, #8]
-	adrp	x10, ___strcpy_chk@PAGE
-	add	x10, x10, ___strcpy_chk@PAGEOFF
-	bl	___strcpy_chk
-	ldr	w8, [sp, #32]
-	add	w8, w8, #1
 	str	w8, [sp, #32]
-	b	LBB0_6
+	b	LBB0_11
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]
 	add	w8, w8, #1
-	str	w8, [sp, #32]
+	str	w8, [sp, #4]
 	b	LBB0_11
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
@@ -114,9 +99,9 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #36]
+	ldr	w8, [sp, #4]
 	add	w8, w8, #1
-	str	w8, [sp, #36]
+	str	w8, [sp, #4]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_11

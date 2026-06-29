@@ -31,7 +31,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
 	ldr	w8, [x8, x9, lsl #2]
-	subs	w8, w8, #99
+	adds	w8, w8, #99
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4

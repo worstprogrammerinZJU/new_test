@@ -65,17 +65,14 @@ LBB0_6:                                 ;   Parent Loop BB0_1 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=2
 	ldr	w8, [sp, #24]
-	ldrsw	x10, [sp, #8]
-	mov	x9, x8
-	add	x9, x9, #1
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
+	ldr	w9, [sp, #8]
+	sdiv	w8, w8, w9
+	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	mov	w8, #0
-	strb	w8, [sp, #11]
+	strb	wzr, [sp, #11]
 	b	LBB0_11
 LBB0_9:                                 ;   in Loop: Header=BB0_6 Depth=2
 	b	LBB0_10
@@ -91,75 +88,57 @@ LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldrb	w8, [sp, #11]
-	tbz	w8, #0, LBB0_17
+	subs	w8, w8, #1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_17
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #24]
 	subs	w8, w8, #0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_16
 	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_22 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	add	x10, x10, #1
-	ldrsw	x9, [sp, #12]
-	add	x10, x10, x9
-	mov	x9, x8
-	ldrsw	x10, [sp, #12]
-	subs	x10, x10, x9
-	mov	x9, #48
-	str	x9, [sp]                        ; 8-byte Folded Spill
-	add	x1, x10, x10
-	mov	x2, x9
-	bl	___memcpy_chk
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #24]
-	add	w8, w8, w9
-	str	w8, [sp, #24]
-	b	LBB0_18
+LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
+	strb	wzr, [sp, #11]
+	b	LBB0_17
 LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #20]
-	b	LBB0_18
+	b	LBB0_17
 LBB0_17:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_19
-LBB0_18:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #11]
+	ldrb	w8, [sp, #11]
 	subs	w8, w8, #1
 	cset	w8, eq
-	tbnz	w8, #0, LBB0_23
-	b	LBB0_20
-LBB0_20:                                ;   in Loop: Header=BB0_1 Depth=1
+	tbnz	w8, #0, LBB0_20
+	b	LBB0_21
+LBB0_21:
 	ldr	w8, [sp, #24]
 	subs	w8, w8, #0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_24
-	b	LBB0_21
-LBB0_21:                                ;   in Loop: Header=BB0_22 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	add	x10, x10, #1
-	ldrsw	x9, [sp, #12]
-	add	x10, x10, x9
+	b	LBB0_22
+LBB0_22:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
 	mov	x9, x8
 	ldrsw	x10, [sp, #12]
-	subs	x10, x10, x9
-	mov	x9, #48
-	str	x9, [sp, #8]                    ; 8-byte Folded Spill
-	add	x1, x10, x10
-	mov	x2, x9
+	mov	x8, x9
+	str	x8, [x9, x10]
+	ldrsw	x10, [sp, #20]
+	mov	x8, x10
+	mov	x10, #-1
+	str	x10, [x8, x10]
 	bl	___memcpy_chk
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #24]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #20]
 	add	w8, w8, w9
-	str	w8, [sp, #24]
-	b	LBB0_25
-LBB0_22:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, L
+	str	w8, [sp, #20]
+	b	LBB0_24
+LBB0_23:
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #20]
+	mov	x10, x8
+	strb	wzr, [x10, x9]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

@@ -53,7 +53,14 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #8]
 	ldr	s0, [x8, x9, lsl #2]
-	str	s0, [sp, #12]
+	ldr	s1, [sp, #16]
+	fsub	s0, s0, s1
+	ldr	s1, [sp, #16]
+	fsub	s1, s1, s0
+	fdiv	s0, s0, s1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #8]
+	str	s0, [x8, x9, lsl #2]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
@@ -80,7 +87,7 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	fsub	s0, s0, s1
 	ldr	s1, [sp, #16]
 	ldr	s2, [sp, #16]
-	fdiv	s0, s0, s1
+	fdiv	s0, s0, s2
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	str	s0, [x8, x9, lsl #2]

@@ -16,7 +16,7 @@ _func0:                                 ; @func0
 	stur	w1, [x29, #-12]
 	str	x2, [sp, #24]
 	ldursw	x8, [x29, #-12]
-	lsl	x0, x8, #2
+	lsl	x8, x8, #2
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #24]
@@ -43,12 +43,12 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
 	ldr	x8, [sp, #16]
-	ldr	x10, [sp, #24]
-	ldrsw	x11, [x10]
-	mov	x12, x11
-	add	w12, w12, #1
-	str	w12, [x10]
-	str	s0, [x8, x11, lsl #2]
+	ldr	x11, [sp, #24]
+	ldrsw	x9, [x11]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [x11]
+	str	s0, [x8, x9, lsl #2]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5

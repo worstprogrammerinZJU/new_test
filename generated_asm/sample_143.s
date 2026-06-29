@@ -59,14 +59,14 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	sdiv	w10, w8, w9
 	mul	w10, w10, w9
 	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #20]
-	mov	x11, x10
+	add	w10, w8, #48
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #20]
+	mov	x11, x9
 	subs	w11, w11, #1
 	str	w11, [sp, #20]
-	add	x9, x9, x10
-	strb	w8, [x9]
+	add	x9, x8, x9
+	strb	w10, [x9]
 	ldur	w8, [x29, #-12]
 	sdiv	w8, w8, w9
 	stur	w8, [x29, #-12]
@@ -76,54 +76,39 @@ LBB0_7:
 LBB0_8:
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	subs	x10, x10, #1
-	str	x10, [sp, #20]
-	add	x9, x8, x9
-	mov	w8, #98
-	strb	w8, [x9]
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	subs	x10, x10, #1
-	str	x10, [sp, #20]
-	add	x9, x8, x9
-	mov	w8, #100
-	strb	w8, [x9]
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	ldr	w8, [sp, #16]
-	add	w8, w8, #3
-	bl	_malloc
-	str	x0, [sp]
-	ldr	x8, [sp]
-	subs	x8, x8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-	ldr	x0, [sp, #24]
-	bl	_free
-                                        ; kill: def $x8 killed $xzr
-	stur	xzr, [x29, #-8]
-	b	LBB0_11
-LBB0_10:
-	ldr	x0, [sp]
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #16]
 	add	x1, x8, x9
 	mov	x2, #-1
-	str	x2, [sp, #8]                    ; 8-byte Folded Spill
+	str	x2, [sp]                        ; 8-byte Folded Spill
 	bl	___strcpy_chk
-	ldr	x2, [sp, #8]                    ; 8-byte Folded Reload
-	ldr	x0, [sp]
+	ldr	x2, [sp]                        ; 8-byte Folded Reload
+	ldr	x0, [sp, #24]
 	adrp	x1, l_.str@PAGE
 	add	x1, x1, l_.str@PAGEOFF
 	bl	___strcat_chk
 	ldr	x0, [sp, #24]
 	bl	_free
-	ldr	x8, [sp]
+	ldr	x8, [sp, #24]
+	stur	x8, [x29, #-8]
+	b	LBB0_11
+LBB0_9:
+	ldur	x0, [x29, #-8]
+	bl	_free
+	b	LBB0_11
+LBB0_10:
+	ldr	x0, [sp, #24]
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #20]
+	add	x1, x8, x9
+	mov	x2, #-1
+	bl	___strcpy_chk
+	ldr	x2, [sp]                        ; 8-byte Folded Reload
+	ldr	x0, [sp, #24]
+	adrp	x1, l_.str@PAGE
+	add	x1, x1, l_.str@PAGEOFF
+	bl	___strcat_chk
+	ldr	x0, [sp, #24]
+	bl	_free
+	ldr	x8, [sp, #24]
 	stur	x8, [x29, #-8]
 	b	LBB0_11
 LBB0_11:

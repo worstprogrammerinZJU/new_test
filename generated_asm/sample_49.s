@@ -71,9 +71,8 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #16]
-	add	w8, w8, w9
-	str	w8, [sp, #16]
+	add	w8, w8, w16
+	str	w8, [sp, #12]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_8

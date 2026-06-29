@@ -11,7 +11,6 @@ _func0:                                 ; @func0
 	mov	x8, #1
 	str	x8, [sp, #16]
 	str	x8, [sp, #8]
-	mov	w8, #1
 	str	w8, [sp, #4]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
@@ -26,8 +25,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	mul	x8, x8, x9
 	str	x8, [sp, #16]
-	ldr	x9, [sp, #8]
-	ldr	x8, [sp, #16]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
 	mul	x8, x8, x9
 	str	x8, [sp, #8]
 	b	LBB0_3

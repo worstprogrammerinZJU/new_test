@@ -92,10 +92,7 @@ LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_14:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
+	strb	wzr, [sp, #31]
 	b	LBB0_15
 LBB0_15:
 	ldrb	w8, [sp, #31]

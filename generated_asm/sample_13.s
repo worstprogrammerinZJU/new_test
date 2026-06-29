@@ -17,7 +17,7 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	strb	w8, [sp, #31]
+	strb	w8, [sp, #29]
 	b	LBB0_13
 LBB0_2:
 	mov	w8, #1
@@ -78,13 +78,14 @@ LBB0_10:
 	b	LBB0_11
 LBB0_11:
 	mov	w8, #1
-	strb	w8, [sp, #31]
+	and	w8, w8, #0x1
+	strb	w8, [sp, #29]
 	b	LBB0_13
 LBB0_12:
-	strb	wzr, [sp, #31]
+	strb	wzr, [sp, #29]
 	b	LBB0_13
 LBB0_13:
-	ldrb	w8, [sp, #31]
+	ldrb	w8, [sp, #29]
 	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret

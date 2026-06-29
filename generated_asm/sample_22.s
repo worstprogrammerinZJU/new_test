@@ -66,12 +66,11 @@ LBB0_5:
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #12]
 	add	x8, x8, x9
+	ldrb	w8, [x8]
 	adrp	x9, _func0.out@PAGE
 	add	x9, x9, _func0.out@PAGEOFF
+	str	x9, [sp, #8]                    ; 8-byte Folded Spill
 	strb	w8, [x9]
-	adrp	x8, _func0.out@PAGE
-	add	x8, x8, _func0.out@PAGEOFF
-	stur	x8, [x29, #-8]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
@@ -83,13 +82,11 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_8:
 	adrp	x8, _func0.out@PAGE
 	add	x8, x8, _func0.out@PAGEOFF
-	strb	w8, [x8]
-	adrp	x8, _func0.out@PAGE
-	add	x8, x8, _func0.out@PAGEOFF
-	stur	x8, [x29, #-8]
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	str	x8, [sp, #24]
 	b	LBB0_9
 LBB0_9:
-	ldur	x0, [x29, #-8]
+	ldr	x0, [sp, #8]                    ; 8-byte Folded Reload
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

@@ -37,7 +37,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:
-	strb	wzr, [sp, #29]
+	mov	w8, #0
+	strb	w8, [sp, #31]
 	b	LBB0_9
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]
@@ -61,21 +62,19 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_6:
 	ldr	w8, [sp, #12]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:
 	ldr	x8, [sp, #16]
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
-	ldr	w8, [sp, #12]
-	mov	w9, #2
-	sdiv	w9, w8, w9
-	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	ldr	w9, [sp, #12]
+	mov	w10, #2
+	sdiv	w9, w9, w10
 	ldr	w9, [x8, w9, sxtw #2]
 	ldr	w8, [sp, #4]
 	add	w8, w8, w9
@@ -87,10 +86,10 @@ LBB0_8:
 	subs	w8, w8, w9
 	cset	w8, le
 	and	w8, w8, #0x1
-	strb	w8, [sp, #29]
+	strb	w8, [sp, #31]
 	b	LBB0_9
 LBB0_9:
-	ldrb	w8, [sp, #29]
+	ldrb	w8, [sp, #31]
 	and	w0, w8, #0x1
 	add	sp, sp, #32
 	ret

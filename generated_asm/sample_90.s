@@ -31,10 +31,8 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
-	ldr	x10, [sp, #8]
-	sdiv	x9, x8, x10
-	mul	x9, x9, x10
-	subs	x8, x8, x9
+	ldr	x9, [sp, #8]
+	sdiv	x8, x8, x9
 	subs	x8, x8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6

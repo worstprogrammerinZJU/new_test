@@ -48,7 +48,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldur	w8, [x29, #-28]
+	ldr	w8, [sp, #32]
 	str	w8, [sp, #28]
 	ldr	w8, [sp, #32]
 	str	w8, [sp, #24]
@@ -56,33 +56,32 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #32]
+	ldr	w8, [sp, #28]
 	add	w8, w8, #1
-	str	w8, [sp, #32]
+	str	w8, [sp, #28]
 	b	LBB0_3
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-28]
+	ldr	w8, [sp, #28]
 	add	w8, w8, #1
-	stur	w8, [x29, #-28]
+	str	w8, [sp, #28]
 	b	LBB0_1
 LBB0_10:
 	ldur	w8, [x29, #-12]
 	ldur	w9, [x29, #-12]
 	mul	w8, w8, w9
 	str	w8, [sp, #20]
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #0
+	ldr	w8, [sp, #32]
+	subs	w8, w8, #1
 	cset	w8, le
 	tbnz	w8, #0, LBB0_13
 	b	LBB0_11
 LBB0_11:
 	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	subs	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
 	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
@@ -91,77 +90,78 @@ LBB0_11:
 	b	LBB0_12
 LBB0_12:
 	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	add	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
 	ldrsw	x9, [sp, #32]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #20]
-	b	LBB0_13
-LBB0_13:
-	ldr	w8, [sp, #28]
-	ldur	w9, [x29, #-12]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_16
-	b	LBB0_14
-LBB0_14:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
 	ldr	x8, [x8, x9, lsl #3]
-	ldrsw	x9, [sp, #32]
+	ldrsw	x9, [sp, #28]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_16
+	tbnz	w8, #0, LBB0_13
 	b	LBB0_15
-LBB0_15:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #28]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	str	w8, [sp, #20]
-	b	LBB0_16
-LBB0_16:
-	ldr	w8, [sp, #28]
-	ldur	w9, [x29, #-12]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_17
-LBB0_17:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
+LBB0_13:
+	ldr	x8, [sp, #56]
 	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
 	ldr	w8, [x8, x9, lsl #2]
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
 	cset	w8, ge
+	tbnz	w8, #0, LBB0_15
+	b	LBB0_16
+LBB0_14:
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_17
+LBB0_15:
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_18
+LBB0_16:
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_19
+LBB0_17:
+	ldr	w8, [sp, #20]
+	mov	w9, #1
+	subs	w8, w8, #1
+	cset	w8, eq
 	tbnz	w8, #0, LBB0_20
 	b	LBB0_21
-LBB0_21:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
+LBB0_19:
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #32]
 	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #28]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	str	w8, [sp, #20]
-	b	LBB0_22
-LBB0_22:
-	ldr	w8, [sp, #28]
-	ldur	w9, [x29, #-12]
-	subs	w9, w9, #1
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_23
-LBB0_23:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28
+	tbnz	w8, #0, LBB0_21
+	b	LBB0_22
+LBB0_20:
+	ldr	x8, [sp, #56]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, l

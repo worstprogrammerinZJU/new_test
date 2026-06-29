@@ -1,11 +1,4 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal8,8byte_literals
-	.p2align	3                               ; -- Begin function func0
-lCPI0_0:
-	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
+.globl	_func0                         ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -28,188 +21,201 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
+	fcvt	d1, s0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #-0.00000000
-	fsub	d1, d1, d2
-	frintm	d1, d1
-	frinta	d1, d1
-	frintp	d1, d1
-	frintp	d0, d1
+	fcvt	d0, s0
+	fabs	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
-	frintp	d0, d0
+	frintm	d0, d0
+	frintn	d0, d0
 	frintp	d0

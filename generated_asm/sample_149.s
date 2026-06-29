@@ -13,9 +13,8 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #12]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w9, [sp, #12]
-	mov	w8, #2
-	mul	w8, w8, w9
+	ldr	w8, [sp, #12]
+	lsl	w8, w8, #1
 	add	w8, w8, #1
 	ldr	w9, [sp, #20]
 	subs	w8, w8, w9

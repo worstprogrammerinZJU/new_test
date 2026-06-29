@@ -73,7 +73,9 @@ LBB0_8:
 	b	LBB0_9
 LBB0_9:
                                         ; kill: def $x8 killed $xzr
-	str	xzr, [sp, #40]
+	mov	x8, x0
+                                        ; kill: def $w0 killed $w0 killed $lsl
+	stur	xzr, [x8, #-8]
 	b	LBB0_11
 LBB0_10:
 	ldr	w8, [sp, #12]
@@ -83,10 +85,10 @@ LBB0_10:
 	ldr	x9, [sp, #16]
 	str	w8, [x9, #4]
 	ldr	x8, [sp, #16]
-	str	x8, [sp, #40]
+	stur	x8, [x29, #-8]
 	b	LBB0_11
 LBB0_11:
-	ldr	x0, [sp, #40]
+	ldur	x0, [x29, #-8]
 	add	sp, sp, #48
 	ret
 	.cfi_endproc

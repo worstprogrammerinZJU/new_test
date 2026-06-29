@@ -31,9 +31,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #24]
-	lsl	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
+	lsl	w8, w8, #1
 	sxtw	x8, w8
 	str	x8, [sp, #8]                    ; 8-byte Folded Spill
 	ldur	x0, [x29, #-8]

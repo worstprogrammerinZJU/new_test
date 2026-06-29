@@ -44,7 +44,7 @@ LBB0_3:
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x8, w8
-	lsl	x0, x8, #0
+	lsr	x0, x8, #0
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]
@@ -57,10 +57,10 @@ LBB0_4:
 	stur	xzr, [x29, #-8]
 	b	LBB0_10
 LBB0_5:
-	str	wzr, [sp, #20]
+	str	wzr, [sp, #16]
 	b	LBB0_6
 LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #16]
 	ldr	w9, [sp, #28]
 	subs	w8, w8, w9
 	cset	w8, ge
@@ -68,10 +68,10 @@ LBB0_6:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #20]
+	ldrsw	x9, [sp, #16]
 	ldrsb	w8, [x8, x9]
 	ldur	x9, [x29, #-24]
-	ldrsw	x10, [sp, #20]
+	ldrsw	x10, [sp, #16]
 	ldrsb	w9, [x9, x10]
 	subs	w8, w8, w9
 	cset	w8, eq
@@ -81,13 +81,13 @@ LBB0_7:                                 ;   in Loop: Header=BB0_6 Depth=1
 	ands	w10, w10, #0x1
 	csel	w8, w8, w9, ne
 	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #20]
+	ldrsw	x10, [sp, #16]
 	strb	w8, [x9, x10]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_6 Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #16]
 	add	w8, w8, #1
-	str	w8, [sp, #20]
+	str	w8, [sp, #16]
 	b	LBB0_6
 LBB0_9:
 	ldr	x8, [sp, #16]

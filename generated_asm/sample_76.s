@@ -9,10 +9,14 @@ _func0:                                 ; @func0
 	.cfi_def_cfa_offset 16
 	str	s0, [sp, #12]
 	ldr	s0, [sp, #12]
-	fcvtzs	x8, s0
+	fcvtzs	s1, s0
 	ldr	s0, [sp, #12]
-	fcvtzu	w9, s0
-	subs	w0, w0, w9
+	fmov	s2, s0
+	fcmp	s1, s2
+	cset	w8, eq
+	and	w8, w8, #0x1
+	ands	w8, w8, #0x1
+	cset	w0, eq
 	add	sp, sp, #16
 	ret
 	.cfi_endproc

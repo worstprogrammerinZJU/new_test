@@ -37,7 +37,6 @@ LBB0_2:
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]
 	strb	wzr, [x8]
-	mov	w8, #32
 	str	w8, [sp, #12]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
@@ -53,14 +52,14 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	sdiv	w10, w8, w9
 	mul	w10, w10, w9
 	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #12]
-	mov	x11, x10
-	subs	w11, w11, #1
-	str	w11, [sp, #12]
-	add	x9, x9, x10
-	strb	w8, [x9]
+	add	w2, w8, #48
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	mov	x10, x9
+	subs	w10, w10, #1
+	str	w10, [sp, #12]
+	add	x8, x8, x9
+	strb	w2, [x8]
 	ldur	w8, [x29, #-20]
 	sdiv	w8, w8, w9
 	stur	w8, [x29, #-20]
@@ -73,10 +72,9 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_5
 LBB0_5:
 	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	add	w9, w9, #1
-	add	x8, x8, w9, sxtw
-	stur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	add	x9, x8, x9
+	stur	x9, [x29, #-8]
 	b	LBB0_6
 LBB0_6:
 	ldur	x0, [x29, #-8]

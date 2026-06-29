@@ -25,8 +25,7 @@ _func0:                                 ; @func0
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x8, w8
-	mov	x9, #1
-	mul	x0, x8, x9
+	lsr	x0, x8, #0
 	bl	_malloc
 	str	x0, [sp, #48]
 	str	wzr, [sp, #44]
@@ -71,49 +70,43 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #32]
 	add	x8, x8, #1
-	str	x8, [sp, #32]
-	b	LBB0_3
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrb	w8, [sp, #31]
-	subs	w8, w8, #1
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_12 Depth=1
-	ldur	x8, [x29, #-48]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #40]
+	ldr	w11, [sp, #44]
+	subs	w11, w11, #1
+	subs	w10, w10, w11
+	ldrsb	w9, [x9, x10]
+	subs	w9, w9, w8
+	cset	w9, eq
+	tbnz	w9, #0, LBB0_13
+	b	LBB0_14
+LBB0_7:                                 ;   in Loop: Header=BB0_12 Depth=1
+	ldr	x8, [sp, #48]
 	ldrsw	x9, [sp, #40]
-	ldrsb	w8, [x8, x9]
-	ldur	x9, [x29, #-48]
-	ldr	w10, [sp, #44]
-	subs	w10, w10, #1
-	subs	w10, w10, #1
-	ldrsb	w9, [x9, w10, sxtw]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_9
-LBB0_9:
-	mov	w8, #0
-	strb	w8, [sp, #31]
-	b	LBB0_17
-LBB0_10:
-	ldur	x0, [x29, #-48]
-	ldr	x1, [sp, #32]
-	mov	x2, #-1
+	ldr	x10, [sp, #48]
+	ldr	x11, [sp, #44]
+	subs	x11, x11, #1
+	subs	x10, x10, x11
+	ldrsb	w9, [x9, x10]
+                                        ; implicit-def: $x10
+	mov	x10, x9
+	adrp	x9, l_.str.1@PAGE
+	add	x9, x9, l_.str.1@PAGEOFF
+	adrp	x12, l_.str@PAGE
+	add	x12, x12, l_.str@PAGEOFF
+	ands	w9, w9, #0x1
+	csel	x1, x9, x12, ne
+	mov	x2, #0
 	bl	___strcpy_chk
-	ldur	x0, [x29, #-32]
+	ldr	x0, [sp, #48]
 	ldrb	w8, [sp, #31]
-	and	w10, w8, #0xff
-	mov	x9, sp
-                                        ; implicit-def: $x8
-	mov	x8, x10
-	str	x8, [x9]
+	mov	x9, x0
 	adrp	x1, l_.str.1@PAGE
 	add	x1, x1, l_.str.1@PAGEOFF
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	ands	w10, w10, #0x1
-	csel	x1, x8, x9, ne
+	adrp	x12, l_.str@PAGE
+	add	x12, x12, l_.str@PAGEOFF
+	ands	w8, w8, #0x1
+	csel	x1, x9, x12, ne
 	bl	___strcpy_chk
 	ldr	x0, [sp, #48]
 	bl	_free

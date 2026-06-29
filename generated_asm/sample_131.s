@@ -19,7 +19,7 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #16]
 	str	wzr, [sp, #12]
 	str	wzr, [sp, #8]
-	str	wzr, [sp, #12]
+	str	wzr, [sp, #4]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	ldur	x8, [x29, #-8]
@@ -74,13 +74,9 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
 	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	mov	x9, #4
-	mul	x10, x9, x10
-	mov	x8, #4
-	add	x1, x8, x10
+	add	w9, w8, #1
+	mov	x1, x9
+	add	x1, x1, #4
 	bl	_realloc
 	str	x0, [sp, #24]
 	ldr	w8, [sp, #16]

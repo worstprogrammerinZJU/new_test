@@ -5,16 +5,16 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x28, x27, [sp, #-32]!           ; 16-byte Folded Spill
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
+	sub	sp, sp, #4032
+	.cfi_def_cfa_offset 4032
+	stp	x28, x27, [sp, #3840]            ; 16-byte Folded Spill
+	stp	x29, x30, [sp, #3848]            ; 16-byte Folded Spill
+	add	x29, sp, #3848
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	.cfi_offset w27, -24
 	.cfi_offset w28, -32
-	sub	sp, sp, #4032
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
@@ -39,15 +39,15 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
-	subs	w9, w8, #1
-	add	x8, sp, #24
-	ldr	w8, [x8, w9, sxtw #2]
+	subs	w8, w8, #1
+	add	x9, sp, #24
+	ldr	w8, [x9, w8, sxtw #2]
 	ldr	w9, [sp, #16]
 	subs	w9, w9, #2
-	add	x9, x8, w9, sxtw #2
-	ldr	w8, [x9]
-	add	x9, sp, #24
-	str	w8, [x9]
+	ldr	w9, [x9, w8, sxtw #2]
+	ldrsw	x10, [sp, #24]
+	add	x9, x9, x10, lsl #2
+	str	w9, [sp, #24]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
@@ -71,9 +71,9 @@ LBB0_5:
 	bl	___stack_chk_fail
 LBB0_6:
 	ldr	w0, [sp, #12]                   ; 4-byte Folded Reload
+	ldp	x29, x30, [sp, #3848]            ; 16-byte Folded Reload
+	ldp	x28, x27, [sp, #3840]            ; 16-byte Folded Reload
 	add	sp, sp, #4032
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	ldp	x28, x27, [sp], #32             ; 16-byte Folded Reload
 	ret
 	.cfi_endproc
                                         ; -- End function

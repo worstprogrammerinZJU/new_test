@@ -71,15 +71,14 @@ LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldur	x9, [x29, #-16]
 	ldur	w10, [x29, #-20]
 	subs	w10, w10, #1
-	ldrsw	x11, [x9, w10, sxtw]
-                                        ; kill: def $w8 killed $w8 killed $x8
-	subs	w8, w8, w11
+	ldrsw	x9, [x9, w10, sxtw]
+	subs	w8, w8, w9
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	mov	w8, #0
-	str	w8, [sp, #4]
+	ldr	w8, [sp, #20]
+	str	wzr, [sp, #4]
 	b	LBB0_10
 LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
 	b	LBB0_9
@@ -89,7 +88,7 @@ LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
 	str	w8, [sp, #20]
 	b	LBB0_5
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #24]
 	subs	w8, w8, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_16
@@ -110,12 +109,13 @@ LBB0_12:                                ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_15
 	b	LBB0_13
 LBB0_13:                                ;   in Loop: Header=BB0_12 Depth=1
-	ldur	x8, [x29, #-16]
+	ldr	x8, [sp, #8]
 	ldur	w9, [x29, #-20]
 	ldr	w10, [sp, #20]
-	subs	w10, w10, #1
-	add	w9, w9, w10
-	strb	w8, [x9]
+	subs	w9, w9, w10
+	subs	w9, w9, #1
+	add	x9, x8, w9, sxtw
+	strb	w0, [x9]
 	ldr	x8, [sp, #8]
 	stur	x8, [x29, #-8]
 	b	LBB0_23
@@ -126,25 +126,33 @@ LBB0_14:
 	mov	x3, #-1
 	bl	___strncpy_chk
 	str	wzr, [sp, #20]
-	b	LBB0_19
+	b	LBB0_15
 LBB0_15:                                ; =>This Inner Loop Header: Depth=1
 	ldr	w8, [sp, #20]
 	ldur	w9, [x29, #-20]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_22
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_19 Depth=1
-	ldur	x8, [x29, #-16]
-	ldur	w9, [x29, #-20]
-	ldr	w10, [sp, #20]
-	subs	w10, w10, #1
-	add	w9, w9, w10
-	strb	w8, [x9]
+	b	LBB0_21
+LBB0_21:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldr	x8, [sp, #8]
-	stur	x8, [x29, #-8]
+	ldur	w9, [x29, #-20]
+	add	w9, w9, #1
+	ldr	w10, [sp, #20]
+	add	x9, x8, w9, sxtw
+	ldrsb	w8, [x9]
+	ldr	x9, [sp, #8]
+	stur	x9, [x29, #-8]
 	b	LBB0_23
-LBB0_17:
+LBB0_22:
+	ldr	x8, [sp, #8]
+	ldur	x1, [x29, #-16]
+	ldursw	x2, [x29, #-20]
+	mov	x3, #-1
+	bl	___strncpy_chk
+	str	wzr, [sp, #20]
+	b	LBB0_23
+LBB0_23:
 	ldur	x0, [x29, #-8]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64

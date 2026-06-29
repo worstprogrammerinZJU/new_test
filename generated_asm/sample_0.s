@@ -1,4 +1,7 @@
-; -- Begin function func0
+.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0                         ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
@@ -40,7 +43,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	fcvt	d0, s0
 	fmov	d1, #0.00000000
 	fcmp	d0, d1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:

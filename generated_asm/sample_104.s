@@ -16,60 +16,62 @@ _func0:                                 ; @func0
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
-	str	w0, [sp, #36]
-	str	w1, [sp, #32]
-	str	x2, [sp, #24]
-	str	wzr, [sp, #20]
+	str	w0, [sp, #32]
+	str	w1, [sp, #28]
+	str	x2, [sp, #16]
+	str	wzr, [sp, #12]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #36]
+	ldr	w8, [sp, #32]
 	subs	w8, w8, #0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #36]
-	ldr	w9, [sp, #32]
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
+	ldr	w8, [sp, #32]
+	ldr	w10, [sp, #28]
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	add	w10, w8, #48
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #12]
 	add	w9, w8, #1
-	str	w9, [sp, #20]
-	add	x9, sp, #48
-	strb	w8, [x9, w10, sxtw]
-	ldr	w8, [sp, #36]
-	ldr	w9, [sp, #32]
-	sdiv	w8, w8, w9
-	str	w8, [sp, #36]
+	str	w9, [sp, #12]
+	add	x9, sp, #32
+	add	x8, x9, w8, sxtw
+	strb	w8, [x8]
+	ldr	w8, [sp, #32]
+	ldr	w10, [sp, #28]
+	sdiv	w8, w8, w10
+	str	w8, [sp, #32]
 	b	LBB0_1
 LBB0_3:
-	str	wzr, [sp, #16]
+	str	wzr, [sp, #8]
 	b	LBB0_4
 LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #12]
 	subs	w8, w8, #0
 	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w8, [sp, #20]
+	ldr	w8, [sp, #12]
 	subs	w8, w8, #1
-	str	w8, [sp, #20]
-	add	x9, sp, #48
-	ldrb	w8, [x9, x8]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #16]
+	str	w8, [sp, #12]
+	add	x9, sp, #32
+	add	x8, x9, w8, sxtw
+	ldrb	w8, [x8]
+	ldr	x9, [sp, #16]
+	ldrsw	x10, [sp, #8]
 	mov	x11, x10
 	add	w11, w11, #1
-	str	w11, [sp, #16]
+	str	w11, [sp, #8]
 	add	x9, x9, x10
 	strb	w8, [x9]
 	b	LBB0_4
 LBB0_6:
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #16]
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #8]
 	add	x8, x8, x9
 	strb	wzr, [x8]
 	ldur	x9, [x29, #-8]

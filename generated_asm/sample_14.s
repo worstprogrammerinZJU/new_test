@@ -89,15 +89,15 @@ LBB0_12:
 LBB0_13:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [sp, #40]
+	str	x8, [sp, #24]
 	b	LBB0_15
 LBB0_14:
 	adrp	x8, l_.str.1@PAGE
 	add	x8, x8, l_.str.1@PAGEOFF
-	str	x8, [sp, #40]
+	str	x8, [sp, #24]
 	b	LBB0_15
 LBB0_15:
-	ldr	x0, [sp, #40]
+	ldr	x0, [sp, #24]
 	add	sp, sp, #48
 	ret
 	.cfi_endproc
