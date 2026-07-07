@@ -1,197 +1,46 @@
-.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #28]
+	str	w1, [sp, #24]
+	str	w2, [sp, #20]
+	str	x3, [sp, #8]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #20]
 	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	add	sp, sp, #16
+	ldr	x9, [sp, #8]
+	str	w8, [x9]
+	ldr	x8, [sp, #8]
+	str	wzr, [x8, #4]
+	b	LBB0_3
+LBB0_2:
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #24]
+	add	w8, w8, w9
+	ldr	x9, [sp, #8]
+	str	w8, [x9]
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	ldr	x9, [sp, #8]
+	str	w8, [x9, #4]
+	b	LBB0_3
+LBB0_3:
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 .subsections_via_symbols
-.armasm:
-	.p2align	2                               ; -- Begin function func0
-.func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ## -- End function
-	.p2align	2                               ; -- Begin function func1
-.func1:                                 ; @func1
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ## -- End function
-	.p2align	2                               ; -- Begin function func2
-.func2:                                 ; @func2
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ## -- End function
-	.p2align	2                               ; -- Begin function func3
-.func3:                                 ; @func3
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ## -- End function
-	.p2align	2                               ; -- Begin function func4
-.func4:                                 ; @func4
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w9, [x8, x9, lsl #2]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_

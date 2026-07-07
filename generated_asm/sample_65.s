@@ -1,208 +1,71 @@
-.globl	_func0
+.globl	_func0                         ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	str	w0, [sp, #12]
-	str	d0, [sp]
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_2
-	b	LBB1_1
-LBB1_1:
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fadd	d0, d0, d1
-	str	d0, [sp]
-	b	LBB1_2
-LBB1_2:
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fsub	d0, d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fmul	d0, d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fdiv	d0, d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
+	str	s0, [sp, #8]
+	str	s1, [sp, #4]
+	str	s2, [sp]
+	ldr	s0, [sp, #8]
+	ldr	s1, [sp, #8]
+	ldr	s2, [sp, #4]
+	ldr	s3, [sp, #4]
+	fmsub	s0, s0, s1, s2
+	fmsub	s0, s0, s3, s2
+	ldr	s1, [sp]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, ne
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_3
-LBB1_3:
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fneg	d0, d0
-	str	d0, [sp]
-	b	LBB1_4
-LBB1_4:
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d0
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fsqrt	d0, d0
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d0
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d1, #1.00000000
-	fabs	d0, d1
-	str	d0, [sp]
-	ldr	d0, [sp]
-	fmov	d
+	cset	w8, mi
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_1
+LBB0_1:
+	ldr	s0, [sp, #8]
+	ldr	s1, [sp, #8]
+	ldr	s2, [sp]
+	ldr	s3, [sp]
+	fmsub	s0, s0, s1, s2
+	fmsub	s0, s0, s3, s2
+	ldr	s1, [sp, #4]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, mi
+	tbnz	w8, #0, LBB0_3
+	b	LBB0_2
+LBB0_2:
+	ldr	s0, [sp, #4]
+	ldr	s1, [sp, #4]
+	ldr	s2, [sp]
+	ldr	s3, [sp]
+	fmsub	s0, s0, s1, s2
+	fmsub	s0, s0, s3, s2
+	ldr	s1, [sp, #8]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	mov	w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_5
+LBB0_4:
+	str	wzr, [sp, #12]
+	b	LBB0_5
+LBB0_5:
+	ldr	w0, [sp, #12]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
