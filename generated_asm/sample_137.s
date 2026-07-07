@@ -1,103 +1,181 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	stur	x0, [x29, #-16]
-	stur	w1, [x29, #-20]
-	str	x2, [sp, #16]
-	str	w3, [sp, #12]
-	str	wzr, [sp, #4]
-	str	wzr, [sp]
-	str	wzr, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldur	w9, [x29, #-20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #8]
-	ldr	x0, [x8, x9, lsl #3]
-	bl	_strlen
-	ldrsw	x8, [sp, #4]
-	add	x8, x8, x0
-                                        ; kill: def $w8 killed $w8 killed $x8
-	str	w8, [sp, #4]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_4:
-	str	wzr, [sp, #8]
-	b	LBB0_5
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
+	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	ldr	x0, [x8, x9, lsl #3]
-	bl	_strlen
-	ldrsw	x8, [sp]
-	add	x8, x8, x0
-                                        ; kill: def $w8 killed $w8 killed $x8
-	str	w8, [sp]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_5
-LBB0_8:
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-	ldur	x8, [x29, #-16]
-	stur	x8, [x29, #-8]
-	b	LBB0_13
-LBB0_10:
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_2
+	b	LBB1_1
+LBB1_1:
 	ldr	x8, [sp, #16]
-	stur	x8, [x29, #-8]
-	b	LBB0_13
-LBB0_12:
-	ldur	x8, [x29, #-16]
-	stur	x8, [x29, #-8]
-	b	LBB0_13
-LBB0_13:
-	ldur	x0, [x29, #-8]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_3
+	b	LBB1_2
+LBB1_2:
+	mov	w8, #-1
+	stur	w8, [x29, #-4]
+	b	LBB1_14
+LBB1_3:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_5
+	b	LBB1_4
+LBB1_4:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_6
+	b	LBB1_5
+LBB1_5:
+	mov	w8, #-1
+	stur	w8, [x29, #-4]
+	b	LBB1_14
+LBB1_6:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_8
+	b	LBB1_7
+LBB1_7:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_9
+	b	LBB1_8
+LBB1_8:
+	mov	w8, #-1
+	stur	w8, [x29, #-4]
+	b	LBB1_14
+LBB1_9:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_11
+	b	LBB1_10
+LBB1_10:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_12
+	b	LBB1_11
+LBB1_11:
+	mov	w8, #-1
+	stur	w8, [x29, #-4]
+	b	LBB1_14
+LBB1_12:
+	ldr	x8, [sp, #16]
+	ldrsb	w8, [x8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_14
+	b	LBB1_13
+LBB1_13:
+	mov	w8, #-1
+	stur	w8, [x29, #-4]
+	b	LBB1_14
+LBB1_14:
+	ldur	w0, [x29, #-4]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function main
+lCPI1_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	wzr, [x29, #-4]
+	stur	w0, [x29, #-8]
+	stur	x1, [x29, #-16]
+	bl	_func0
+	mov	x9, sp
+                                        ; implicit-def: $x8
+	mov	x8, x0
+	str	x8, [x9]
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_printf
+	ldur	w0, [x29, #-4]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+lCPI1_1:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring
+lCPI2_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI3_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI4_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI5_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI6_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI7_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI8_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI9_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI10_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI11_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI12_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI13_0:
+	.quad	0x401f000000000000              ; double 1
+	.section	__TEXT,__cstring,cstring_literals
+lCPI14_0:
+	.quad	0x401f0000000000

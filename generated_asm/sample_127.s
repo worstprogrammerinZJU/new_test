@@ -1,127 +1,170 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.p2align 2
+_func0:                                 ## @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #112
-	.cfi_def_cfa_offset 112
-	stp	x29, x30, [sp, #96]             ; 16-byte Folded Spill
-	add	x29, sp, #96
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	w0, [sp, #36]
-	str	w1, [sp, #32]
-	ldr	w8, [sp, #36]
-	mov	x9, sp
-	str	x8, [x9]
-	adrp	x0, _func0.xs@PAGE
-	add	x0, x0, _func0.xs@PAGEOFF
-	str	x0, [sp, #16]                   ; 8-byte Folded Spill
-	mov	w1, #0
-	mov	x2, #50
-	bl	___sprintf_chk
-	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
-	bl	_strlen
-	mov	x8, x0
-	str	w8, [sp, #28]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #32]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_1
-LBB0_1:
-	str	wzr, [sp, #24]
-	b	LBB0_2
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	x8, [sp, #16]                   ; 8-byte Folded Reload
-	ldrsw	x9, [sp, #24]
-	add	x10, x8, x9
-	adrp	x9, _func0.xs@PAGE
-	add	x9, x9, _func0.xs@PAGEOFF
-	ldrb	w9, [x9, x10]
-	strb	w9, [sp, #23]
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #1
-	ldr	w10, [sp, #24]
-	subs	w8, w8, w10
-	add	x9, x8, #1
-	strb	w9, [x9]
-	ldrb	w8, [sp, #23]
-	ldr	w9, [sp, #28]
-	subs	w9, w9, #1
-	add	x9, x9, #1
-	strb	w8, [x9]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_2
-LBB0_5:
-	b	LBB0_7
-LBB0_6:
-	ldrsw	x9, [sp, #28]
-	add	x8, sp, #40
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
-	add	x1, x8, x9
-	ldrsw	x10, [sp, #32]
-	mov	x9, #0
-	subs	x9, x9, x10
-	add	x1, x8, x9
-	mov	w2, #50
-	str	w2, [sp, #20]                   ; 4-byte Folded Spill
-	bl	___strcpy_chk
-	ldr	x10, [sp, #8]                   ; 8-byte Folded Reload
-	ldr	w2, [sp, #20]                   ; 4-byte Folded Reload
-	ldrsw	x9, [sp, #32]
-	add	x8, sp, #40
-	add	x0, x8, x9
-	ldrb	w8, [x10, x9]
-	strb	w8, [x0]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #32]
-	subs	w8, w8, w9
-	subs	w9, w8, #1
-	add	x8, x8, #1
-	strb	w9, [x8]
-	b	LBB0_7
-LBB0_7:
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #28]
+	str	w1, [sp, #24]
+	str	wzr, [sp, #16]
+	b	LBB1_1
+LBB1_1:                                 ## =>This Loop Header: Depth=1
+                                        ; kill: def $x8 killed $xzr
+	str	xzr, [sp, #8]
+	b	LBB1_2
+LBB1_2:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #16]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
 	cset	w8, eq
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:
-	bl	___stack_chk_fail
-LBB0_9:
-	b	LBB0_10
-LBB0_10:
-	ldp	x29, x30, [sp, #96]             ; 16-byte Folded Reload
-	add	sp, sp, #112
-	ret
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_3
+LBB1_3:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #16]
+	ldrsb	w8, [x8, x9]
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB1_5
+LBB1_4:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	str	w8, [sp, #16]
+	b	LBB1_5
+LBB1_5:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	add	x9, x8, #1
+	str	x9, [sp, #8]
+	ldr	w8, [x8]
+	add	w8, w8, #1
+	str	w8, [x8]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB1_6
+LBB1_6:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	add	x9, x8, #1
+	str	x9, [sp, #8]
+	ldr	w8, [x8]
+	add	w8, w8, #1
+	str	w8, [x8]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB1_7
+LBB1_7:                                 ##   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	add	x9, x8, #1
+	str	x9, [sp, #8]
+	ldr	w8, [x8]
+	add	w8, w8, #1
+	str	w8, [x8]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB1_1
 	.cfi_endproc
                                         ; -- End function
-.zerofill __DATA,__bss,_func0.xs,50,0   ; @func0.xs
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"%d"
+	.p2align 2                               ## @.str.1
+_func0.xs:
+	.long	1                               ; 0x1
+	.long	2                               ; 0x2
+	.long	3                               ; 0x3
+	.long	4                               ; 0x4
+	.long	5                               ; 0x5
+	.long	6                               ; 0x6
+	.long	7                               ; 0x7
+	.long	8                               ; 0x8
+	.long	9                               ; 0x9
+	.long	10                              ; 0xa
+	.long	11                              ; 0xb
+	.long	12                              ; 0xc
+	.long	13                              ; 0xd
+	.long	14                              ; 0xe
+	.long	15                              ; 0xf
+	.long	16                              ; 0x10
+	.long	17                              ; 0x11
+	.long	18                              ; 0x12
+	.long	19                              ; 0x13
+	.long	20                              ; 0x14
+	.long	21                              ; 0x15
+	.long	22                              ; 0x16
+	.long	23                              ; 0x17
+	.long	24                              ; 0x18
+	.long	25                              ; 0x19
+	.long	26                              ; 0x1a
+	.long	27                              ; 0x1b
+	.long	28                              ; 0x1c
+	.long	29                              ; 0x1d
+	.long	30                              ; 0x1e
+	.long	31                              ; 0x1f
+	.long	32                              ; 0x20
+	.long	33                              ; 0x21
+	.long	34                              ; 0x22
+	.long	35                              ; 0x23
+	.long	36                              ; 0x24
+	.long	37                              ; 0x25
+	.long	38                              ; 0x26
+	.long	39                              ; 0x27
+	.long	40                              ; 0x28
+	.long	41                              ; 0x29
+	.long	42                              ; 0x2a
+	.long	43                              ; 0x2b
+	.long	44                              ; 0x2c
+	.long	45                              ; 0x2d
+	.long	46                              ; 0x2e
+	.long	47                              ; 0x2f
+	.long	48                              ; 0x30
+	.long	49                              ; 0x31
+	.long	50                              ; 0x32
+	.long	51                              ; 0x33
+	.long	52                              ; 0x34
+	.long	53                              ; 0x35
+	.long	54                              ; 0x36
+	.long	55                              ; 0x37
+	.long	56                              ; 0x38
+	.long	57                              ; 0x39
+	.long	58                              ; 0x3a
+	.long	59                              ; 0x3b
+	.long	60                              ; 0x3c
+	.long	61                              ; 0x3d
+	.long	62                              ; 0x3e
+	.long	63                              ; 0x3f
+	.long	64                              ; 0x40
+	.long	65                              ; 0x41
+	.long	66                              ; 0x42
+	.long	67                              ; 0x43
+	.long	68                              ; 0x44
+	.long	69                              ; 0x45
+	.long	70                              ; 0x46
+	.long	71                              ; 0x47
+	.long	72                              ; 0x48
+	.long	73                              ; 0x49
+	.long	74                              ; 0x4a
+	.long	75                              ; 0x4b
+	.long	76                              ; 0x4c
+	.long	77                              ; 0x4d
+	.long	78                              ; 0x4e
+	.long	79                              ; 0x4f
+	.long	80                              ; 0x50
+	.long	81                              ; 0x51
+	.long	82                              ; 0x52
+	.long	83                              ; 0x53
+	.long	84                              ; 0x54
+	.long	85                              ; 0x55
+	.long	86                              ; 0x56
+	.long	87                              ; 0x57
+	.long	88                              ; 0x58
+	.long	89                              ; 0x59
+	.long	90                              ; 0x5a
+	.long	91                              ; 0x5b
+	.long	92                              ; 0x5c
+	.long	93                              ; 0x5d
+	.long	94                              ; 0x5e
+	.long	95                              ; 0x5f
+	.long	96                              ; 0x60
+	.long	97                              ; 0x61
+	.long	98                              ; 0x62
+	.long	99                              ; 0x63
+	.long	100                             ; 0x64
+	.long

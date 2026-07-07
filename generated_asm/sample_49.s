@@ -1,92 +1,189 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
 	.cfi_def_cfa_offset 32
-	str	x0, [sp, #24]
-	str	w1, [sp, #20]
-	str	wzr, [sp, #16]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	mov	w10, #3
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #12]
-	ldr	w9, [x9, x10, lsl #2]
-	mul	w9, w8, w9
-	ldr	w8, [sp, #16]
-	add	w8, w8, w9
-	str	w8, [sp, #16]
-	b	LBB0_8
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	mov	w10, #4
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #12]
-	ldr	w9, [x9, x10, lsl #2]
-	mul	w8, w8, w9
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #12]
-	ldr	w9, [x9, x10, lsl #2]
-	mul	w9, w8, w9
-	ldr	w8, [sp, #16]
-	add	w8, w8, w9
-	str	w8, [sp, #16]
-	b	LBB0_7
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
-	add	w8, w8, w16
-	str	w8, [sp, #12]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_10:
-	ldr	w0, [sp, #16]
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
+.subsections_via_symbols:               ; -- Begin function func1
+	.section	__TEXT,__text,regular,pure_instructions
+	.p2align	2
+_func1:                                 ; @func1
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func1
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @f
+_func0:                                 ; @f
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @g
+_func0:                                 ; @g
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @h
+_func0:                                 ; @h
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @i
+_func0:                                 ; @i
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @j
+_func0:                                 ; @j
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @k
+_func0:                                 ; @k
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @l
+_func0:                                 ; @l
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__text,"raw",@progbits
+	.p2align	2                               ; @m
+_func0:                                 ; @m
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset

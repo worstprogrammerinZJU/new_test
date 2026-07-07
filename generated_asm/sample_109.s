@@ -7,77 +7,43 @@ _func0:                                 ; @func0
 	sub	sp, sp, #32
 	.cfi_def_cfa_offset 32
 	str	x0, [sp, #24]
-	str	w1, [sp, #20]
-	movi	d0, #0000000000000000
-	str	s0, [sp, #16]
-	str	wzr, [sp]
-	str	wzr, [sp]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #20]
+	str	wzr, [sp, #16]
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	ldrsb	w9, [x9]
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	tbnz	w8, #0, LBB1_3
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
 	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	s1, [sp, #16]
-	fadd	s0, s0, s1
-	str	s0, [sp, #16]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_1
-LBB0_4:
-	ldr	s0, [sp, #16]
-	ldr	s1, [sp, #20]
-	scvtf	s1, s1
-	fdiv	s0, s0, s1
-	str	s0, [sp, #12]
-	movi	d0, #0000000000000000
-	str	s0, [sp, #8]
-	str	wzr, [sp]
-	b	LBB0_5
-LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #20]
+	ldrsb	w8, [x8]
+	str	w8, [sp, #12]
+	b	LBB1_1
+LBB1_3:
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #24]
+	ldrsb	w9, [x9]
 	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	s1, [sp, #12]
-	fsub	s0, s0, s1
-	fcvt	d1, s0
-	fmov	d0, #NaN
-	fcmp	d0, d1
-	cset	w8, eq
-	ldr	s0, [sp, #8]
-	fcvt	d0, s0
-	fadd	d0, d0, d1
-	fcvt	s0, d0
-	str	s0, [sp, #8]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_5
-LBB0_8:
-	ldr	s0, [sp, #8]
-	ldr	s1, [sp, #20]
-	scvtf	s1, s1
-	fdiv	s0, s0, s1
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_5
+	b	LBB1_4
+LBB1_4:
+	adrp	x8, ___stderrp@GOTPAGE
+	ldr	x8, [x8, ___stderrp@GOTPAGEOFF]
+	ldr	x0, [x8]
+	adrp	x1, l_.str@PAGE
+	add	x1, x1, l_.str@PAGEOFF
+	bl	_fprintf
+	mov	w0, #1
+	bl	_exit
+LBB1_5:
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
-.subsections_via_symbols
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"nan\n"

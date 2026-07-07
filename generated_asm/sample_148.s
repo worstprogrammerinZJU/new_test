@@ -1,152 +1,178 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.p2align	2
+_func0:                                 ## @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	w0, [x29, #-4]
-	ldur	w8, [x29, #-4]
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	ldur	w9, [x29, #-4]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x9, sp
-	str	x10, [x9]
-	str	x8, [x9, #8]
-	str	xzr, [x9, #16]
-	str	xzr, [x9, #24]
-	str	xzr, [x9, #32]
-	str	xzr, [x9, #40]
-	str	xzr, [x9, #48]
-	str	xzr, [x9, #56]
-	str	xzr, [x9, #64]
-	str	xzr, [x9, #72]
-	str	xzr, [x9, #80]
-	str	xzr, [x9, #88]
-	str	xzr, [x9, #96]
-	str	xzr, [x9, #104]
-	str	xzr, [x9, #112]
-	str	xzr, [x9, #120]
-	str	xzr, [x9, #128]
-	str	xzr, [x9, #136]
-	str	xzr, [x9, #144]
-	str	xzr, [x9, #152]
-	str	xzr, [x9, #160]
-	str	xzr, [x9, #168]
-	str	xzr, [x9, #176]
-	str	xzr, [x9, #184]
-	str	xzr, [x9, #192]
-	str	xzr, [x9, #200]
-	str	xzr, [x9, #208]
-	str	xzr, [x9, #216]
-	str	xzr, [x9, #224]
-	str	xzr, [x9, #232]
-	str	xzr, [x9, #240]
-	str	xzr, [x9, #248]
-	str	xzr, [x9, #256]
-	str	xzr, [x9, #264]
-	str	xzr, [x9, #272]
-	str	xzr, [x9, #280]
-	str	xzr, [x9, #288]
-	str	xzr, [x9, #320]
-	str	xzr, [x9, #328]
-	str	xzr, [x9, #336]
-	str	xzr, [x9, #344]
-	str	xzr, [x9, #352]
-	str	xzr, [x9, #360]
-	str	xzr, [x9, #368]
-	str	xzr, [x9, #376]
-	str	xzr, [x9, #384]
-	str	xzr, [x9, #392]
-	str	xzr, [x9, #400]
-	str	xzr, [x9, #408]
-	str	xzr, [x9, #416]
-	str	xzr, [x9, #424]
-	str	xzr, [x9, #432]
-	str	xzr, [x9, #440]
-	str	xzr, [x9, #448]
-	str	xzr, [x9, #456]
-	str	xzr, [x9, #464]
-	str	xzr, [x9, #472]
-	str	xzr, [x9, #480]
-	str	xzr, [x9, #488]
-	str	xzr, [x9, #496]
-	str	xzr, [x9, #504]
-	str	xzr, [x9, #512]
-	str	xzr, [x9, #520]
-	str	xzr, [x9, #528]
-	str	xzr, [x9, #536]
-	str	xzr, [x9, #544]
-	str	xzr, [x9, #552]
-	str	xzr, [x9, #560]
-	str	xzr, [x9, #568]
-	str	xzr, [x9, #576]
-	str	xzr, [x9, #584]
-	str	xzr, [x9, #592]
-	str	xzr, [x9, #600]
-	str	xzr, [x9, #608]
-	str	xzr, [x9, #616]
-	str	xzr, [x9, #624]
-	str	xzr, [x9, #632]
-	str	xzr, [x9, #640]
-	str	xzr, [x9, #648]
-	str	xzr, [x9, #656]
-	str	xzr, [x9, #664]
-	str	xzr, [x9, #672]
-	str	xzr, [x9, #680]
-	str	xzr, [x9, #688]
-	str	xzr, [x9, #704]
-	str	xzr, [x9, #712]
-	str	xzr, [x9, #720]
-	str	xzr, [x9, #728]
-	str	xzr, [x9, #736]
-	str	xzr, [x9, #744]
-	str	xzr, [x9, #752]
-	str	xzr, [x9, #760]
-	str	xzr, [x9, #768]
-	str	xzr, [x9, #776]
-	str	xzr, [x9, #784]
-	str	xzr, [x9, #792]
-	str	xzr, [x9, #800]
-	str	xzr, [x9, #808]
-	str	xzr, [x9, #816]
-	str	xzr, [x9, #824]
-	str	xzr, [x9, #832]
-	str	xzr, [x9, #840]
-	str	xzr, [x9, #848]
-	str	xzr, [x9, #856]
-	str	xzr, [x9, #864]
-	str	xzr, [x9, #872]
-	str	xzr, [x9, #880]
-	str	xzr, [x9, #888]
-	str	xzr, [x9, #896]
-	str	xzr, [x9, #904]
-	str	xzr, [x9, #912]
-	str	xzr, [x9, #920]
-	str	xzr, [x9, #928]
-	str	xzr, [x9, #936]
-	str	xzr, [x9, #944]
-	str	xzr, [x9, #952]
-	str	xzr, [x9, #960]
-	str	xzr, [x9, #968]
-	str	xzr, [x9, #976]
-	str	xzr, [x9, #984]
-	str	xzr, [x9, #992]
-	str	xzr, [x9, #996]
-	str	xzr, [x9, #998]
-	str	xzr, [x9, #1004]
-	str	xzr, [x9, #1012]
-	str	xzr, [x9, #1020]
-	str	xzr, [x9, #1028]
-	str	xzr, [x9, #1036]
-	str	xzr, [x9, #1044]
-	str
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	w0, [sp, #44]
+	str	w1, [sp, #40]
+	str	wzr, [sp, #36]
+	str	wzr, [sp, #32]
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_3
+LBB1_3:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #28]                   ; 4-byte Folded Spill
+	b	LBB1_5
+LBB1_4:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #28]                   ; 4-byte Folded Spill
+	b	LBB1_5
+LBB1_5:
+	ldr	w8, [sp, #28]                   ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_7
+	b	LBB1_6
+LBB1_6:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #24]                   ; 4-byte Folded Spill
+	b	LBB1_8
+LBB1_7:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #24]                   ; 4-byte Folded Spill
+	b	LBB1_8
+LBB1_8:
+	ldr	w8, [sp, #24]                   ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_10
+	b	LBB1_9
+LBB1_9:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #20]                   ; 4-byte Folded Spill
+	b	LBB1_11
+LBB1_10:
+	ldr	w8, [sp, #20]                   ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_13
+	b	LBB1_11
+LBB1_11:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #16]                   ; 4-byte Folded Spill
+	b	LBB1_12
+LBB1_12:
+	ldr	w8, [sp, #16]                   ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_15
+	b	LBB1_13
+LBB1_13:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB1_14
+LBB1_14:
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_16
+	b	LBB1_15
+LBB1_15:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB1_16
+LBB1_16:
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_18
+	b	LBB1_17
+LBB1_17:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	b	LBB1_19
+LBB1_18:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	b	LBB1_19
+LBB1_19:
+	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_21
+	b	LBB1_20
+LBB1_20:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB1_21
+LBB1_21:
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_23
+	b	LBB1_22
+LBB1_22:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB1_24
+LBB1_23:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	b	LBB1_24
+LBB1_24:
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #44]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_26
+	b	LBB1_25
+LBB1_25:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
+	b	LBB1_26
+LBB1_26:
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
+	str	w8, [sp, #32]
+	ldr	w8, [sp, #32]
+	ldr	w9, [sp, #40]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_28
+	b	LBB1_27
+LBB1_27:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #16]                   ; 4-byte Folded Spill
+	b	LBB1_29
+LBB1_28:
+	ldr	w8, [sp, #32]
+	str	w8, [sp, #16]                   ; 4

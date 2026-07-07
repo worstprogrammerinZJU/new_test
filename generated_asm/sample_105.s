@@ -1,22 +1,189 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
 	.p2align	2
-_func0:                                 ; @func0
+_func0:                                 ## @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	s0, [sp, #12]
-	str	s1, [sp, #8]
-	ldr	s0, [sp, #12]
-	ldr	s1, [sp, #8]
-	fmul	s0, s0, s1
-	fcvt	d0, s0
-	fmov	d1, #0.50000000
-	fmul	d0, d0, d1
-	fcvt	s0, d0
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	d0, [sp, #24]
+	str	d1, [sp, #16]
+	str	d2, [sp, #8]
+	str	d3, [sp]
+	str	d4, [sp, #8]
+	str	d5, [sp, #16]
+	str	d6, [sp, #24]
+	str	d7, [sp]
+	ldr	d0, [sp, #24]
+	ldr	d1, [sp, #16]
+	ldr	d2, [sp, #8]
+	ldr	d3, [sp]
+	ldr	d4, [sp, #8]
+	ldr	d5, [sp, #16]
+	ldr	d6, [sp, #24]
+	ldr	d7, [sp]
+	fmul d0, d0, d1
+	fmul d1, d2, d3
+	fmul d2, d4, d5
+	fmul d3, d6, d7
+	fadd d0, d0, d2
+	fadd d1, d1, d3
+	fadd d2, d2, d4
+	fadd d3, d3, d5
+	fadd d4, d4, d6
+	fadd d5, d5, d7
+	fadd d6, d6, d0
+	fadd d7, d7, d1
+	fsub d0, d0, d2
+	fsub d1, d1, d3
+	fsub d2, d2, d4
+	fsub d3, d3, d5
+	fsub d4, d4, d6
+	fsub d5, d5, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3, d3
+	fadd d4, d4, d4
+	fadd d5, d5, d5
+	fadd d6, d6, d6
+	fadd d7, d7, d7
+	fsub d0, d0, d0
+	fsub d1, d1, d1
+	fsub d2, d2, d2
+	fsub d3, d3, d3
+	fsub d4, d4, d4
+	fsub d5, d5, d5
+	fsub d6, d6, d6
+	fsub d7, d7, d7
+	fadd d0, d0, d0
+	fadd d1, d1, d1
+	fadd d2, d2, d2
+	fadd d3, d3,

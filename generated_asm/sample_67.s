@@ -1,111 +1,61 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+.subsections_via_symbols
+	.section	__TEXT,__text,regular,pure_instructions
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	stur	w0, [x29, #-12]
-	mov	w8, #2
-	stur	w8, [x29, #-16]
-	mov	w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	w8, [x29, #-20]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w9, [x29, #-20]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x1, #0
-	mov	w2, #0
-	mov	x0, x1
-	mov	x3, #-1
-	adrp	x4, l_.str@PAGE
-	add	x4, x4, l_.str@PAGEOFF
-	bl	___snprintf_chk
-	ldur	w8, [x29, #-16]
-	add	w8, w8, w0
-	stur	w8, [x29, #-16]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_1
-LBB0_4:
-	ldursw	x0, [x29, #-16]
-	bl	_malloc
 	str	x0, [sp, #16]
-	ldr	x8, [sp, #16]
-	subs	x8, x8, #0
+	ldr	x0, [sp, #16]
+	bl	_strlen
+	str	w0, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_2
+	b	LBB1_1
+LBB1_1:
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-                                        ; kill: def $x8 killed $xzr
-	stur	xzr, [x29, #-8]
-	b	LBB0_11
-LBB0_6:
-	ldr	x8, [sp, #16]
-	str	x8, [sp, #8]
-	ldr	x0, [sp, #8]
-	mov	w1, #0
-	mov	x2, #-1
-	adrp	x3, l_.str.1@PAGE
-	add	x3, x3, l_.str.1@PAGEOFF
-	bl	___sprintf_chk
-	ldr	x8, [sp, #8]
-	add	x8, x8, w0, sxtw
-	str	x8, [sp, #8]
-	b	LBB0_9
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	x0, [sp, #8]
-	ldr	w4, [sp, #8]
-	mov	w1, #0
-	mov	x2, #-1
-	adrp	x3, l_.str.1@PAGE
-	add	x3, x3, l_.str.1@PAGEOFF
-	bl	___sprintf_chk
-	ldr	x8, [sp, #8]
-	add	x8, x8, w0, sxtw
-	str	x8, [sp, #8]
-	b	LBB0_11
-LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_7
-LBB0_10:
-	ldr	x8, [sp, #16]
-	stur	x8, [x29, #-8]
-	b	LBB0_11
-LBB0_11:
-	ldur	x0, [x29, #-8]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
+	tbnz	w8, #0, LBB1_3
+	b	LBB1_2
+LBB1_2:
+	adrp	x8, _stderr@GOTPAGE
+	ldr	x8, [x8, _stderr@GOTPAGEOFF]
+	ldr	w0, [x8]
+	adrp	x1, l_.str@PAGE
+	add	x1, x1, l_.str@PAGEOFF
+	bl	_fprintf
+	b	LBB1_4
+LBB1_3:
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_5
+	b	LBB1_4
+LBB1_4:
+	adrp	x8, _stdout@GOTPAGE
+	ldr	x8, [x8, _stdout@GOTPAGEOFF]
+	ldr	w0, [x8]
+	adrp	x1, l_.str.1@PAGE
+	add	x1, x1, l_.str.1@PAGEOFF
+	bl	_fprintf
+	b	LBB1_5
+LBB1_5:
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function
+	.comm	_stderr,4,2                     ; @stderr
+	.comm	_stdout,4,2                     ; @stdout
 	.section	__TEXT,__cstring,cstring_literals
 l_.str:                                 ; @.str
 	.asciz	" %d"

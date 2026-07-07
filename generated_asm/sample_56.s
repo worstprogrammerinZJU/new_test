@@ -1,95 +1,156 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	x1, [x29, #-16]
-	ldur	x0, [x29, #-8]
-	bl	_strlen
-	mov	x8, x0
-	stur	w8, [x29, #-20]
-	ldursw	x8, [x29, #-20]
-	lsl	x0, x8, #3
-	bl	_malloc
-	str	x0, [sp, #32]
-	ldur	w8, [x29, #-20]
-	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x0, w8
-	bl	_malloc
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
 	str	x0, [sp, #24]
-	ldr	x8, [sp, #24]
-	strb	wzr, [x8]
-	str	wzr, [sp, #20]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #20]
-	ldur	w9, [x29, #-20]
+	str	x1, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	mov	x11, x10
+	add	x10, x9, x10, lsl #2
+	ldr	w9, [x10, #4]
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #24]
-	bl	_strlen
-	str	x0, [sp, #8]
-	ldr	x0, [sp, #24]
-	ldr	x8, [sp, #8]
-	add	x1, x8, #2
-	bl	_realloc
-	str	x0, [sp, #24]
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #20]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
+	tbnz	w8, #0, LBB1_3
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
 	ldr	x9, [sp, #24]
-	ldr	x10, [sp, #8]
-	add	x9, x9, x10
-	strb	w8, [x9]
-	ldr	x8, [sp, #24]
-	ldr	x9, [sp, #8]
-	add	x8, x8, x9, lsl #3
-	strb	wzr, [x8]
-	ldr	x0, [sp, #24]
-	bl	_strlen
-	add	x0, x0, #1
-	bl	_malloc
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #20]
-	str	x0, [x8, x9, lsl #3]
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #20]
-	ldr	x0, [x8, x9, lsl #3]
-	ldr	x1, [sp, #24]
-	mov	x2, #-1
-	bl	___strcpy_chk
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_1
-LBB0_4:
-	ldr	x0, [sp, #24]
-	bl	_free
-	ldur	w8, [x29, #-20]
-	ldur	x9, [x29, #-16]
-	str	w8, [x9]
-	ldr	x0, [sp, #32]
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
+	ldrsw	x10, [sp, #12]
+	mov	x11, x10
+	add	x10, x9, x10, lsl #2
+	ldr	w9, [x10, #4]
+	ldr	x10, [sp, #16]
+	ldrsw	x11, [sp, #12]
+	add	x11, x10, x11, lsl #2
+	str	w9, [x11, #4]
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	mov	x11, x10
+	add	x10, x9, x10, lsl #2
+	ldr	w9, [x10, #4]
+	ldr	x10, [sp, #16]
+	ldrsw	x11, [sp, #12]
+	add	x11, x10, x11, lsl #2
+	str	w9, [x11, #4]
+	b	LBB1_1
+LBB1_3:
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	mov	x10, x9
+	add	x9, x8, x9, lsl #2
+	ldr	w8, [x9, #4]
+	add	w8, w8, w8, lsl #1
+	str	w8, [x9, #4]
+	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function main
+lCPI1_0:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	wzr, [x29, #-4]
+	stur	wzr, [x29, #-8]
+	bl	_func0
+	mov	x9, sp
+                                        ; implicit-def: $x8
+	mov	x8, x0
+	str	x8, [x9]
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_printf
+	ldur	w0, [x29, #-4]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+lCPI1_1:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring
+lCPI2_0:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_1:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_2:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_3:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_4:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_5:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_6:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_7:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_8:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_9:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_10:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_11:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_12:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_13:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_14:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_15:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_16:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_17:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_18:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_19:
+	.quad	0x401e7f0000000000              ; double 1.0
+	.section	__TEXT,__cstring,cstring_literals
+lCPI2_20:
+	.quad	0

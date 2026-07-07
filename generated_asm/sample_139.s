@@ -1,64 +1,60 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
 	.cfi_def_cfa_offset 32
-	str	w0, [sp, #24]
-	str	w1, [sp, #20]
-	mov	w8, #1
-	str	w8, [sp, #16]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	cset	w8, gt
-	mov	w9, #0
-	str	w9, [sp, #8]                    ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #100
-	cset	w8, lt
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_7
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-	mov	w8, #1
-	str	w8, [sp, #28]
-	b	LBB0_8
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #20]
-	mul	w8, w8, w9
-	str	w8, [sp, #16]
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_7:
-	str	wzr, [sp, #28]
-	b	LBB0_8
-LBB0_8:
-	ldr	w0, [sp, #28]
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
+.subsections_via_symbols:
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; @__str
+.lCPI0_0:
+	.quad	0x4007f00000000000              ; double 1.0000000000000000
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	mov	w8, #0
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	stur	wzr, [x29, #-4]
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_printf
+	mov	x9, sp
+	sub	x8, x29, #8
+	str	x8, [x9]
+	adrp	x0, l_.str.1@PAGE
+	add	x0, x0, l_.str.1@PAGEOFF
+	bl	_scanf
+	ldur	w0, [x29, #-8]
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"Hello, World!\n"

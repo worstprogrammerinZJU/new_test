@@ -1,67 +1,176 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	str	x2, [sp, #24]
-	ldursw	x8, [x29, #-12]
-	lsl	x8, x8, #2
-	bl	_malloc
 	str	x0, [sp, #16]
-	ldr	x8, [sp, #24]
-	str	wzr, [x8]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #16]
-	ldr	x11, [sp, #24]
-	ldrsw	x9, [x11]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [x11]
-	str	s0, [x8, x9, lsl #2]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_6:
 	ldr	x0, [sp, #16]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	bl	_malloc
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	subs	x8, x8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_2
+	b	LBB1_1
+LBB1_1:
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_printf
+	b	LBB1_3
+LBB1_2:
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #8]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #16]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #24]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #32]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #40]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #48]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #56]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #64]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #72]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #80]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #88]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #96]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #104]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #112]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #120]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #128]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #136]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #144]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #152]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #160]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #168]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #176]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #184]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #192]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #200]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #208]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #216]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #224]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #232]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #240]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #248]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #256]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #264]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #272]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #280]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #288]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #304]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #312]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #320]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #328]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #336]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #344]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #352]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #360]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #368]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #376]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #384]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #16]
+	str	x8, [x9, #392]
+	ldr	x8, [sp, #8]
+	ldr	x9, [sp, #1

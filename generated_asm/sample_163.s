@@ -1,80 +1,156 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
+	.p2align	2                               ; -- Begin function func0
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	stur	x8, [x29, #-16]
-	stur	wzr, [x29, #-20]
-	str	wzr, [sp, #24]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #24]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, eq
-	mov	w9, #0
-	str	w9, [sp, #20]                   ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #24]
-	lsl	w8, w8, #1
-	sxtw	x8, w8
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
-	ldur	x0, [x29, #-8]
-	bl	_strlen
-	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
-	subs	x8, x8, x0
-	cset	w8, lo
-	str	w8, [sp, #20]                   ; 4-byte Folded Spill
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]                   ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_8
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x0, [x29, #-16]
-	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #24]
-	lsl	w9, w9, #1
-	ldrsb	w1, [x8, w9, sxtw]
-	bl	_strchr
-	subs	x8, x0, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_1
-LBB0_8:
-	ldur	w0, [x29, #-20]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"AEIOU"
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #28]
+	str	x1, [sp, #16]
+	str	q0, [sp, #8]
+	ldr	w8, [sp, #28]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #28]
+	ldr	w11, [sp, #28]
+	ldr	w12, [sp, #28]
+	ldr	w13, [sp, #28]
+	ldr	w14, [sp, #28]
+	ldr	w15, [sp, #28]
+	ldr	w16, [sp, #28]
+	ldr	w17, [sp, #28]
+	ldr	w18, [sp, #28]
+	ldr	w19, [sp, #28]
+	ldr	w20, [sp, #28]
+	ldr	w21, [sp, #28]
+	ldr	w22, [sp, #28]
+	ldr	w23, [sp, #28]
+	ldr	w24, [sp, #28]
+	ldr	w25, [sp, #28]
+	ldr	w26, [sp, #28]
+	ldr	w27, [sp, #28]
+	ldr	w28, [sp, #28]
+	ldr	w29, [sp, #28]
+	ldr	w30, [sp, #28]
+	ldr	w31, [sp, #28]
+	ldr	w32, [sp, #28]
+	ldr	w33, [sp, #28]
+	ldr	w34, [sp, #28]
+	ldr	w35, [sp, #28]
+	ldr	w36, [sp, #28]
+	ldr	w37, [sp, #28]
+	ldr	w38, [sp, #28]
+	ldr	w39, [sp, #28]
+	ldr	w40, [sp, #28]
+	ldr	w41, [sp, #28]
+	ldr	w42, [sp, #28]
+	ldr	w43, [sp, #28]
+	ldr	w44, [sp, #28]
+	ldr	w45, [sp, #28]
+	ldr	w46, [sp, #28]
+	ldr	w47, [sp, #28]
+	ldr	w48, [sp, #28]
+	ldr	w49, [sp, #28]
+	ldr	w50, [sp, #28]
+	ldr	w51, [sp, #28]
+	ldr	w52, [sp, #28]
+	ldr	w53, [sp, #28]
+	ldr	w54, [sp, #28]
+	ldr	w55, [sp, #28]
+	ldr	w56, [sp, #28]
+	ldr	w57, [sp, #28]
+	ldr	w58, [sp, #28]
+	ldr	w59, [sp, #28]
+	ldr	w60, [sp, #28]
+	ldr	w61, [sp, #28]
+	ldr	w62, [sp, #28]
+	ldr	w63, [sp, #28]
+	ldr	w64, [sp, #28]
+	ldr	w65, [sp, #28]
+	ldr	w66, [sp, #28]
+	ldr	w67, [sp, #28]
+	ldr	w68, [sp, #28]
+	ldr	w69, [sp, #28]
+	ldr	w70, [sp, #28]
+	ldr	w71, [sp, #28]
+	ldr	w72, [sp, #28]
+	ldr	w73, [sp, #28]
+	ldr	w74, [sp, #28]
+	ldr	w75, [sp, #28]
+	ldr	w76, [sp, #28]
+	ldr	w77, [sp, #28]
+	ldr	w78, [sp, #28]
+	ldr	w79, [sp, #28]
+	ldr	w80, [sp, #28]
+	ldr	w81, [sp, #28]
+	ldr	w82, [sp, #28]
+	ldr	w83, [sp, #28]
+	ldr	w84, [sp, #28]
+	ldr	w85, [sp, #28]
+	ldr	w86, [sp, #28]
+	ldr	w87, [sp, #28]
+	ldr	w88, [sp, #28]
+	ldr	w89, [sp, #28]
+	ldr	w90, [sp, #28]
+	ldr	w91, [sp, #28]
+	ldr	w92, [sp, #28]
+	ldr	w93, [sp, #28]
+	ldr	w94, [sp, #28]
+	ldr	w95, [sp, #28]
+	ldr	w96, [sp, #28]
+	ldr	w97, [sp, #28]
+	ldr	w98, [sp, #28]
+	ldr	w99, [sp, #28]
+	ldr	w100, [sp, #28]
+	ldr	w101, [sp, #28]
+	ldr	w102, [sp, #28]
+	ldr	w103, [sp, #28]
+	ldr	w104, [sp, #28]
+	ldr	w105, [sp, #28]
+	ldr	w106, [sp, #28]
+	ldr	w107, [sp, #28]
+	ldr	w108, [sp, #28]
+	ldr	w109, [sp, #28]
+	ldr	w110, [sp, #28]
+	ldr	w111, [sp, #28]
+	ldr	w112, [sp, #28]
+	ldr	w113, [sp, #28]
+	ldr	w114, [sp, #28]
+	ldr	w115, [sp, #28]
+	ldr	w116, [sp, #28]
+	ldr	w117, [sp, #28]
+	ldr	w118, [sp, #28]
+	ldr	w119, [sp, #28]
+	ldr	w120, [sp, #28]
+	ldr	w121, [sp, #28]
+	ldr	w122, [sp, #28]
+	ldr	w123, [sp, #28]
+	ldr	w124, [sp, #28]
+	ldr	w125, [sp, #28]
+	ldr	w126, [sp, #28]
+	ldr	w127, [sp, #28]
+	ldr	w128, [sp, #28]
+	ldr	w129, [sp, #28]
+	ldr	w130, [sp, #28]
+	ldr	w131, [sp, #28]
+	ldr	w132, [sp, #28]
+	ldr	w133, [sp, #28]
+	ldr	w134, [sp, #28]
+	ldr	w135, [sp, #28]
+	ldr	w136, [sp, #28]
+	ldr	w137, [sp, #28]
+	ldr	w138, [sp, #28]
+	ldr	w139, [sp, #28]
+	ldr	w140, [sp, #28]
+	ldr	w141, [sp, #28]
+	ldr	w142, [sp, #28]
+	ldr	w143, [sp, #28]
+	ldr	w144, [sp, #28]
+	ldr	w145, [sp, #28]
+	ldr	w146, [sp, #28]
+	ldr	w147, [sp, #28]
+	ldr	w148, [sp, #28]
+	ldr	w149, [sp, #28]
+	ldr	w150, [sp, #28]
+	ldr	w151, [sp, #28]
+	ldr	w152, [sp, #28]
+	ldr	w153, [sp, #2
