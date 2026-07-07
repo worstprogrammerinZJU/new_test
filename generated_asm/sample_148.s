@@ -1,152 +1,71 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
+.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.armasm:
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	stur	w0, [x29, #-4]
-	ldur	w8, [x29, #-4]
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	ldur	w9, [x29, #-4]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x9, sp
-	str	x10, [x9]
-	str	x8, [x9, #8]
-	str	xzr, [x9, #16]
-	str	xzr, [x9, #24]
-	str	xzr, [x9, #32]
-	str	xzr, [x9, #40]
-	str	xzr, [x9, #48]
-	str	xzr, [x9, #56]
-	str	xzr, [x9, #64]
-	str	xzr, [x9, #72]
-	str	xzr, [x9, #80]
-	str	xzr, [x9, #88]
-	str	xzr, [x9, #96]
-	str	xzr, [x9, #104]
-	str	xzr, [x9, #112]
-	str	xzr, [x9, #120]
-	str	xzr, [x9, #128]
-	str	xzr, [x9, #136]
-	str	xzr, [x9, #144]
-	str	xzr, [x9, #152]
-	str	xzr, [x9, #160]
-	str	xzr, [x9, #168]
-	str	xzr, [x9, #176]
-	str	xzr, [x9, #184]
-	str	xzr, [x9, #192]
-	str	xzr, [x9, #200]
-	str	xzr, [x9, #208]
-	str	xzr, [x9, #216]
-	str	xzr, [x9, #224]
-	str	xzr, [x9, #232]
-	str	xzr, [x9, #240]
-	str	xzr, [x9, #248]
-	str	xzr, [x9, #256]
-	str	xzr, [x9, #264]
-	str	xzr, [x9, #272]
-	str	xzr, [x9, #280]
-	str	xzr, [x9, #288]
-	str	xzr, [x9, #320]
-	str	xzr, [x9, #328]
-	str	xzr, [x9, #336]
-	str	xzr, [x9, #344]
-	str	xzr, [x9, #352]
-	str	xzr, [x9, #360]
-	str	xzr, [x9, #368]
-	str	xzr, [x9, #376]
-	str	xzr, [x9, #384]
-	str	xzr, [x9, #392]
-	str	xzr, [x9, #400]
-	str	xzr, [x9, #408]
-	str	xzr, [x9, #416]
-	str	xzr, [x9, #424]
-	str	xzr, [x9, #432]
-	str	xzr, [x9, #440]
-	str	xzr, [x9, #448]
-	str	xzr, [x9, #456]
-	str	xzr, [x9, #464]
-	str	xzr, [x9, #472]
-	str	xzr, [x9, #480]
-	str	xzr, [x9, #488]
-	str	xzr, [x9, #496]
-	str	xzr, [x9, #504]
-	str	xzr, [x9, #512]
-	str	xzr, [x9, #520]
-	str	xzr, [x9, #528]
-	str	xzr, [x9, #536]
-	str	xzr, [x9, #544]
-	str	xzr, [x9, #552]
-	str	xzr, [x9, #560]
-	str	xzr, [x9, #568]
-	str	xzr, [x9, #576]
-	str	xzr, [x9, #584]
-	str	xzr, [x9, #592]
-	str	xzr, [x9, #600]
-	str	xzr, [x9, #608]
-	str	xzr, [x9, #616]
-	str	xzr, [x9, #624]
-	str	xzr, [x9, #632]
-	str	xzr, [x9, #640]
-	str	xzr, [x9, #648]
-	str	xzr, [x9, #656]
-	str	xzr, [x9, #664]
-	str	xzr, [x9, #672]
-	str	xzr, [x9, #680]
-	str	xzr, [x9, #688]
-	str	xzr, [x9, #704]
-	str	xzr, [x9, #712]
-	str	xzr, [x9, #720]
-	str	xzr, [x9, #728]
-	str	xzr, [x9, #736]
-	str	xzr, [x9, #744]
-	str	xzr, [x9, #752]
-	str	xzr, [x9, #760]
-	str	xzr, [x9, #768]
-	str	xzr, [x9, #776]
-	str	xzr, [x9, #784]
-	str	xzr, [x9, #792]
-	str	xzr, [x9, #800]
-	str	xzr, [x9, #808]
-	str	xzr, [x9, #816]
-	str	xzr, [x9, #824]
-	str	xzr, [x9, #832]
-	str	xzr, [x9, #840]
-	str	xzr, [x9, #848]
-	str	xzr, [x9, #856]
-	str	xzr, [x9, #864]
-	str	xzr, [x9, #872]
-	str	xzr, [x9, #880]
-	str	xzr, [x9, #888]
-	str	xzr, [x9, #896]
-	str	xzr, [x9, #904]
-	str	xzr, [x9, #912]
-	str	xzr, [x9, #920]
-	str	xzr, [x9, #928]
-	str	xzr, [x9, #936]
-	str	xzr, [x9, #944]
-	str	xzr, [x9, #952]
-	str	xzr, [x9, #960]
-	str	xzr, [x9, #968]
-	str	xzr, [x9, #976]
-	str	xzr, [x9, #984]
-	str	xzr, [x9, #992]
-	str	xzr, [x9, #996]
-	str	xzr, [x9, #998]
-	str	xzr, [x9, #1004]
-	str	xzr, [x9, #1012]
-	str	xzr, [x9, #1020]
-	str	xzr, [x9, #1028]
-	str	xzr, [x9, #1036]
-	str	xzr, [x9, #1044]
-	str
+	str	x0, [sp, #8]
+	ldr	x0, [sp, #8]
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.globl	_main                           ; -- Begin function main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	wzr, [x29, #-4]
+	mov	w0, #1
+	mov	w1, #2
+	bl	_func0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+	.section	__DATA,__data
+	.globl	_a                              ; @a
+	.p2align	2
+_a:
+	.long	1                               ; 0x1

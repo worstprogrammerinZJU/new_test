@@ -1,21 +1,235 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	str	w0, [sp, #12]
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #12]
-	add	w9, w9, #1
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w0, w8, w9
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
 	add	sp, sp, #16
 	ret
 	.cfi_endproc
-                                        ; -- End function
+                                        ## -- End function
 .subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	ldr	x8, [sp, #8]
+	ldrh	w8, [x8]
+	strh	w8, [sp, #6]
+	ldrsh	w8, [sp, #6]
+	ldr	x9, [sp, #8]
+	strh	w8, [x9]
+	add	sp,

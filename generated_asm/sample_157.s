@@ -1,222 +1,79 @@
-.globl	_func0                         ; -- Begin function func0
+.globl	_func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	str	s0, [sp, #8]
-	str	s1, [sp, #4]
-	str	s2, [sp]
-	ldr	s0, [sp, #8]
-	fabs	s0, s0
-	ldr	s1, [sp, #4]
-	fabs	s1, s1
-	ldr	s2, [sp]
-	fabs	s2, s2
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0, s0
-	ldr	s1, [sp]
-	fabs	s1, s1
-	fadd	s0, s0, s1
-	fcvtzs	s0,
+	str	x0, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	w8, [sp, #4]
+	add	w8, w8, w9
+	str	w8, [sp, #4]
+	b	LBB1_3
+LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB1_1
+LBB1_4:
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.armasm:
+	.p2align	2                               ; -- Begin function func0
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	x0, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	ldr	w9, [x8, x9, lsl #2]
+	ldr	w8, [sp, #4]
+	add	w8, w8, w9
+	str	w8, [sp, #4]
+	b	LBB1_3
+LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB1_1
+LBB1_4:
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ## -- End function
+	.no_dead_strip	_func0
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+	.section	__DATA,__data
+	.globl	_a                              ; @a
+	.p2align	3
+_a:
+	.quad	LCPI0_0
+	.quad	0x3ff0000000000000              ; double 1.0E+10
