@@ -1,6 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.p2align	2
-_func0:                                 ## @func0
+_func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
@@ -9,181 +9,154 @@ _func0:                                 ## @func0
 	str	d1, [sp, #16]
 	str	d2, [sp, #8]
 	str	d3, [sp]
-	str	d4, [sp, #8]
-	str	d5, [sp, #16]
-	str	d6, [sp, #24]
-	str	d7, [sp]
 	ldr	d0, [sp, #24]
 	ldr	d1, [sp, #16]
 	ldr	d2, [sp, #8]
 	ldr	d3, [sp]
-	ldr	d4, [sp, #8]
-	ldr	d5, [sp, #16]
-	ldr	d6, [sp, #24]
-	ldr	d7, [sp]
-	fmul d0, d0, d1
-	fmul d1, d2, d3
-	fmul d2, d4, d5
-	fmul d3, d6, d7
-	fadd d0, d0, d2
-	fadd d1, d1, d3
-	fadd d2, d2, d4
-	fadd d3, d3, d5
-	fadd d4, d4, d6
-	fadd d5, d5, d7
-	fadd d6, d6, d0
-	fadd d7, d7, d1
-	fsub d0, d0, d2
-	fsub d1, d1, d3
-	fsub d2, d2, d4
-	fsub d3, d3, d5
-	fsub d4, d4, d6
-	fsub d5, d5, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3, d3
-	fadd d4, d4, d4
-	fadd d5, d5, d5
-	fadd d6, d6, d6
-	fadd d7, d7, d7
-	fsub d0, d0, d0
-	fsub d1, d1, d1
-	fsub d2, d2, d2
-	fsub d3, d3, d3
-	fsub d4, d4, d4
-	fsub d5, d5, d5
-	fsub d6, d6, d6
-	fsub d7, d7, d7
-	fadd d0, d0, d0
-	fadd d1, d1, d1
-	fadd d2, d2, d2
-	fadd d3, d3,
+	fmul	d0, d0, d1
+	fmul	d0, d0, d2
+	fmul	d0, d0, d3
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.globl	_main                           ; -- Begin function main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	wzr, [x29, #-4]
+	bl	_func0
+	mov	w0, #0
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.subsections_via_functions
+.subsections_via_symbols
+.subsections_via_functions
+.section	__TEXT,__cstring,cstring_literals
+lCSTRING0 = .L.CSTRING.0
+lCSTRING1 = .L.CSTRING.1
+lCSTRING2 = .L.CSTRING.2
+lCSTRING3 = .L.CSTRING.3
+lCSTRING4 = .L.CSTRING.4
+lCSTRING5 = .L.CSTRING.5
+lCSTRING6 = .L.CSTRING.6
+lCSTRING7 = .L.CSTRING.7
+lCSTRING8 = .L.CSTRING.8
+lCSTRING9 = .L.CSTRING.9
+lCSTRING10 = .L.CSTRING.10
+lCSTRING11 = .L.CSTRING.11
+lCSTRING12 = .L.CSTRING.12
+lCSTRING13 = .L.CSTRING.13
+lCSTRING14 = .L.CSTRING.14
+lCSTRING15 = .L.CSTRING.15
+lCSTRING16 = .L.CSTRING.16
+lCSTRING17 = .L.CSTRING.17
+lCSTRING18 = .L.CSTRING.18
+lCSTRING19 = .L.CSTRING.19
+lCSTRING20 = .L.CSTRING.20
+lCSTRING21 = .L.CSTRING.21
+lCSTRING22 = .L.CSTRING.22
+lCSTRING23 = .L.CSTRING.23
+lCSTRING24 = .L.CSTRING.24
+lCSTRING25 = .L.CSTRING.25
+lCSTRING26 = .L.CSTRING.26
+lCSTRING27 = .L.CSTRING.27
+lCSTRING28 = .L.CSTRING.28
+lCSTRING29 = .L.CSTRING.29
+lCSTRING30 = .L.CSTRING.30
+lCSTRING31 = .L.CSTRING.31
+lCSTRING32 = .L.CSTRING.32
+lCSTRING33 = .L.CSTRING.33
+lCSTRING34 = .L.CSTRING.34
+lCSTRING35 = .L.CSTRING.35
+lCSTRING36 = .L.CSTRING.36
+lCSTRING37 = .L.CSTRING.37
+lCSTRING38 = .L.CSTRING.38
+lCSTRING39 = .L.CSTRING.39
+lCSTRING40 = .L.CSTRING.40
+lCSTRING41 = .L.CSTRING.41
+lCSTRING42 = .L.CSTRING.42
+lCSTRING43 = .L.CSTRING.43
+lCSTRING44 = .L.CSTRING.44
+lCSTRING45 = .L.CSTRING.45
+lCSTRING46 = .L.CSTRING.46
+lCSTRING47 = .L.CSTRING.47
+lCSTRING48 = .L.CSTRING.48
+lCSTRING49 = .L.CSTRING.49
+lCSTRING50 = .L.CSTRING.50
+lCSTRING51 = .L.CSTRING.51
+lCSTRING52 = .L.CSTRING.52
+lCSTRING53 = .L.CSTRING.53
+lCSTRING54 = .L.CSTRING.54
+lCSTRING55 = .L.CSTRING.55
+lCSTRING56 = .L.CSTRING.56
+lCSTRING57 = .L.CSTRING.57
+lCSTRING58 = .L.CSTRING.58
+lCSTRING59 = .L.CSTRING.59
+lCSTRING60 = .L.CSTRING.60
+lCSTRING61 = .L.CSTRING.61
+lCSTRING62 = .L.CSTRING.62
+lCSTRING63 = .L.CSTRING.63
+lCSTRING64 = .L.CSTRING.64
+lCSTRING65 = .L.CSTRING.65
+lCSTRING66 = .L.CSTRING.66
+lCSTRING67 = .L.CSTRING.67
+lCSTRING68 = .L.CSTRING.68
+lCSTRING69 = .L.CSTRING.69
+lCSTRING70 = .L.CSTRING.70
+lCSTRING71 = .L.CSTRING.71
+lCSTRING72 = .L.CSTRING.72
+lCSTRING73 = .L.CSTRING.73
+lCSTRING74 = .L.CSTRING.74
+lCSTRING75 = .L.CSTRING.75
+lCSTRING76 = .L.CSTRING.76
+lCSTRING77 = .L.CSTRING.77
+lCSTRING78 = .L.CSTRING.78
+lCSTRING79 = .L.CSTRING.79
+lCSTRING80 = .L.CSTRING.80
+lCSTRING81 = .L.CSTRING.81
+lCSTRING82 = .L.CSTRING.82
+lCSTRING83 = .L.CSTRING.83
+lCSTRING84 = .L.CSTRING.84
+lCSTRING85 = .L.CSTRING.85
+lCSTRING86 = .L.CSTRING.86
+lCSTRING87 = .L.CSTRING.87
+lCSTRING88 = .L.CSTRING.88
+lCSTRING89 = .L.CSTRING.89
+lCSTRING90 = .L.CSTRING.90
+lCSTRING91 = .L.CSTRING.91
+lCSTRING92 = .L.CSTRING.92
+lCSTRING93 = .L.CSTRING.93
+lCSTRING94 = .L.CSTRING.94
+lCSTRING95 = .L.CSTRING.95
+lCSTRING96 = .L.CSTRING.96
+lCSTRING97 = .L.CSTRING.97
+lCSTRING98 = .L.CSTRING.98
+lCSTRING99 = .L.CSTRING.99
+lCSTRING100 = .L.CSTRING.100
+lCSTRING101 = .L.CSTRING.101
+lCSTRING102 = .L.CSTRING.102
+lCSTRING103 = .L.CSTRING.103
+lCSTRING104 = .L.CSTRING.104
+lCSTRING105 = .L.CSTRING.105
+lCSTRING106 = .L.CSTRING.106
+lCSTRING107 = .L.CSTRING.107
+lCSTRING108 = .L.CSTRING.108
+lCSTRING109 = .L.CSTRING.109
+lCSTRING110 = .L.CSTRING.110
+lCSTRING111 = .L.CSTRING.111
+lCSTRING112 = .L.CSTRING.112
+lCSTRING113 = .L.CSTRING.113
+lCSTRING1

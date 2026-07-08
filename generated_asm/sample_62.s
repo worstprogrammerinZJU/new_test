@@ -1,5 +1,5 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.p2align	2                               ; -- Begin function func0
+	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
@@ -11,46 +11,187 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	str	x0, [sp, #16]
-	str	wzr, [sp, #12]
+	str	w1, [sp, #12]
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	str	x8, [sp]
+	ldr	x8, [sp]
+	subs	x8, x8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_2
 	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x0, [sp, #16]
-	ldrsw	x8, [sp, #12]
-	lsl	x8, x8, #2
-	mov	x1, x8
-	bl	_strlen
-	ldrsw	x8, [sp, #12]
-	add	x8, x8, x0
-                                        ; kill: def $w8 killed $w8 killed $x8
-	str	w8, [sp, #12]
+LBB1_1:
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
 	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB1_1
-LBB1_4:
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #10
-	cset	w8, ne
-	tbnz	w8, #0, LBB1_6
-	b	LBB1_5
-LBB1_5:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB1_6
-LBB1_6:
-	ldr	w0, [sp, #12]
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
-.subsections_via_symbols:
+LBB1_2:
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	b	LBB1_3
+LBB1_3:
+	ldr	x0, [sp]
+	bl	_strlen
+	ldr	x8, [sp]
+	add	x8, x8, x0
+	str	x8, [sp]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	strb	w8, [sp, #11]
+	ldr	x8, [sp]
+	ldrsw	x9, [sp, #12]
+	add	x8, x8, x9
+	ldrb

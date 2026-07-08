@@ -1,5 +1,5 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.p2align	2                               ; -- Begin function func0
+	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
@@ -11,7 +11,9 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	str	x0, [sp, #8]
+	str	w1, [sp, #4]
 	ldr	x0, [sp, #8]
+	ldr	w1, [sp, #4]
 	bl	_func0
 	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #32
@@ -19,7 +21,3 @@ _func0:                                 ; @func0
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
-	.no_dead_strip	_func0
-.subsections_via_symbols
-	.ident	"GCC: (Ubuntu 13.3.0-6ubuntu2~2lib1.0.1) 13.3.0"
-	.section	.note.GNU-stack,"",@progbits

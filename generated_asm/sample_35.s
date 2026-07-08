@@ -1,178 +1,357 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.p2align	2                               ; -- Begin function func0
-_func0:                                 ; @func0
+.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI2_0:
+	.quad	0x3f40000000000000              ; double 1.0000000000000000
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0                           ; @func0
+	.p2align	2
+_func0:                                  ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	d0, [sp, #8]
+	str	d1, [sp, #16]
+	ldr	d0, [sp, #8]
+	ldr	d1, [sp, #16]
+	fadd	d0, d0, d1
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.globl	_main                           ; @main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
+	add	x29, sp, #16
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	str	x0, [sp, #16]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8]
-	str	w8, [sp, #12]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB1_3 Depth 2
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_10
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #12]
-	m
+	mov	w8, #0
+	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	stur	wzr, [x29, #-4]
+	bl	_func0
+	ldr	w0, [sp, #8]                    ; 4-byte Folded Reload
+	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols

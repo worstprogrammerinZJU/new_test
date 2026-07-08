@@ -1,168 +1,98 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.p2align	2                               ; -- Begin function func0
-_func0:                                 ; @func0
+.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI2_0:
+	.quad	0x3f40000000000000              ; double 1.0000000000000000
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	2
+_func0:                                ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	w0, [sp, #28]
-	str	x1, [sp, #16]
-	str	q0, [sp, #8]
-	ldr	w8, [sp, #28]
-	ldr	x9, [sp, #16]
-	str	w8, [x9]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #4]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #4]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #8]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #8]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #12]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #12]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #16]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #16]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #20]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #20]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #24]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #24]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #28]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #28]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #32]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #32]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #36]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #36]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #40]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #40]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #44]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #44]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #48]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #48]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #52]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #52]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #56]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #56]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #60]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #60]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #64]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #64]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #68]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #68]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #72]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #72]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #76]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #76]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #80]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #80]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #84]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #84]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #88]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #88]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #92]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #92]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #96]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #96]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #100]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #100]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #104]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #104]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #108]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #108]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #112]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #112]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #116]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #116]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #120]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #120]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #124]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #124]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #128]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #128]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #132]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #132]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #136]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #136]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #140]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #140]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #144]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #144]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #148]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #148]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #152]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #152]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #156]
-	ldr	x9
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	d0, [sp, #8]
+	str	d1, [sp, #16]
+	ldr	d0, [sp, #8]
+	ldr	d1, [sp, #16]
+	fadd	d0, d0, d1
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.subsections_via_symbols:
+	.section	__TEXT,__literal8,8byte_literals
+	.p2align	3                               ; -- Begin function func1
+lCPI2_1:
+	.quad	0x3f40000000000000              ; double 1.0000000000000000
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func1
+	.p2align	2
+_func1:                                ; @func1
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	d0, [sp, #8]
+	str	d1, [sp, #16]
+	ldr	d0, [sp, #8]
+	ldr	d1, [sp, #16]
+	fadd	d0, d0, d1
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.globl	_main                           ; -- Begin function main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	wzr, [x29, #-4]
+	mov	x9, sp
+	mov	x8, #1
+	str	x8, [x9]
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_scanf
+	b	LBB1_1
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	w8, [x29, #-4]
+	subs	w8, w8, #10
+	cset	w8, gt
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldur	w8, [x29, #-4]
+                                        ; implicit-def: $x10
+	mov	x10, x8
+	ldur	w9, [x29, #-4]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	mov	x9, sp
+	str	x10, [x9]
+	str	x8, [x9, #8]
+	adrp	x0, l_.str.1@PAGE
+	add	x0, x0, l_.str.1@PAGEOFF
+	bl	_printf
+	b	LBB1_3
+LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldur	w8, [x29, #-4]
+	add	w8, w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB1_1
+LBB1_4:
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"%d"

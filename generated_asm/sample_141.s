@@ -1,7 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0                          ## -- Begin function func0
-	.p2align	4, 0x90
-_func0:                                 ## @func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
 	sub	sp, sp, #32
@@ -12,31 +11,43 @@ _func0:                                 ## @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	str	x0, [sp, #8]
-	ldr	x0, [sp, #8]
-	bl	_strlen
-	str	w0, [sp, #4]
-	ldr	w8, [sp, #4]
-	mov	w9, #20
-	sdiv	w0, w8, w9
-	bl	_malloc
-	str	x0, [sp]
-	ldr	x8, [sp]
-	subs	x8, x8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB1_2
+	str	wzr, [sp, #4]
 	b	LBB1_1
-LBB1_1:
+LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_2
+LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB1_4
+	b	LBB1_3
+LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #4]
+	ldrsb	w8, [x8, x9]
+	str	w8, [sp, #4]
+	b	LBB1_1
+LBB1_4:
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB1_6
+	b	LBB1_5
+LBB1_5:
 	adrp	x0, l_.str@PAGE
 	add	x0, x0, l_.str@PAGEOFF
 	bl	_printf
-	b	LBB1_2
-LBB1_2:
-	ldr	x0, [sp]
+	b	LBB1_6
+LBB1_6:
 	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	add	sp, sp, #32
 	ret
 	.cfi_endproc
-                                        ## -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ## @.str
-	.asciz	"2357BD"
+                                        ; -- End function
+.subsections_via_symbols

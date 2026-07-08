@@ -1,200 +1,106 @@
-.p2align 2
-_func0:                                 ## @func0
+.globl	_func0                          ; @func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	x0, [sp, #16]
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_2
-	b	LBB1_1
-LBB1_1:
-	adrp	x0, l_.str.5@PAGE
-	add	x0, x0, l_.str.5@PAGEOFF
-	bl	_printf
-	b	LBB1_2
-LBB1_2:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #4]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_3
-LBB1_3:
-	adrp	x0, l_.str.6@PAGE
-	add	x0, x0, l_.str.6@PAGEOFF
-	bl	_printf
-	b	LBB1_4
-LBB1_4:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_6
-	b	LBB1_5
-LBB1_5:
-	adrp	x0, l_.str.7@PAGE
-	add	x0, x0, l_.str.7@PAGEOFF
-	bl	_printf
-	b	LBB1_6
-LBB1_6:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #12]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_8
-	b	LBB1_7
-LBB1_7:
-	adrp	x0, l_.str.8@PAGE
-	add	x0, x0, l_.str.8@PAGEOFF
-	bl	_printf
-	b	LBB1_8
-LBB1_8:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #16]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_10
-	b	LBB1_9
-LBB1_9:
-	adrp	x0, l_.str.9@PAGE
-	add	x0, x0, l_.str.9@PAGEOFF
-	bl	_printf
-	b	LBB1_10
-LBB1_10:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #20]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_12
-	b	LBB1_11
-LBB1_11:
-	adrp	x0, l_.str.10@PAGE
-	add	x0, x0, l_.str.10@PAGEOFF
-	bl	_printf
-	b	LBB1_12
-LBB1_12:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #24]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_14
-	b	LBB1_13
-LBB1_13:
-	adrp	x0, l_.str.11@PAGE
-	add	x0, x0, l_.str.11@PAGEOFF
-	bl	_printf
-	b	LBB1_14
-LBB1_14:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #28]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_16
-	b	LBB1_15
-LBB1_15:
-	adrp	x0, l_.str.12@PAGE
-	add	x0, x0, l_.str.12@PAGEOFF
-	bl	_printf
-	b	LBB1_16
-LBB1_16:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #32]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_18
-	b	LBB1_17
-LBB1_17:
-	adrp	x0, l_.str.13@PAGE
-	add	x0, x0, l_.str.13@PAGEOFF
-	bl	_printf
-	b	LBB1_18
-LBB1_18:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #36]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_20
-	b	LBB1_19
-LBB1_19:
-	adrp	x0, l_.str.14@PAGE
-	add	x0, x0, l_.str.14@PAGEOFF
-	bl	_printf
-	b	LBB1_20
-LBB1_20:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #40]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_22
-	b	LBB1_21
-LBB1_21:
-	adrp	x0, l_.str.15@PAGE
-	add	x0, x0, l_.str.15@PAGEOFF
-	bl	_printf
-	b	LBB1_22
-LBB1_22:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #44]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_24
-	b	LBB1_23
-LBB1_23:
-	adrp	x0, l_.str.16@PAGE
-	add	x0, x0, l_.str.16@PAGEOFF
-	bl	_printf
-	b	LBB1_24
-LBB1_24:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #48]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_26
-	b	LBB1_25
-LBB1_25:
-	adrp	x0, l_.str.17@PAGE
-	add	x0, x0, l_.str.17@PAGEOFF
-	bl	_printf
-	b	LBB1_26
-LBB1_26:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #52]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_28
-	b	LBB1_27
-LBB1_27:
-	adrp	x0, l_.str.18@PAGE
-	add	x0, x0, l_.str.18@PAGEOFF
-	bl	_printf
-	b	LBB1_28
-LBB1_28:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #60]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_30
-	b	LBB1_29
-LBB1_29:
-	adrp	x0, l_.str.19@PAGE
-	add	x0, x0, l_.str.19@PAGEOFF
-	bl	_printf
-	b	LBB1_30
-LBB1_30:
-	ldr	x8, [sp, #16]
-	ldr	w8, [x8, #64]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_32
-	b	LBB1_31
-LBB1_31:
-	adr
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #12]
+	str	x1, [sp]
+	ldr	w8, [sp, #12]
+	ldr	x9, [sp]
+	str	w8, [x9]
+	ldr	x8, [sp]
+	str	xzr, [x8]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
+.subsections_via_symbols
+.subsections_via_symbols
+.section	__TEXT,__literal16,16byte_literals
+p0:
+	.quad	l_.str.5
+l_.str.5:
+	.quad	0x4000000000000000
+	.quad	0x4000000000000001
+	.quad	0x4000000000000002
+	.quad	0x4000000000000003
+	.quad	0x4000000000000004
+	.quad	0x4000000000000005
+	.quad	0x4000000000000006
+	.quad	0x4000000000000007
+	.quad	0x4000000000000008
+	.quad	0x4000000000000009
+	.quad	0x400000000000000a
+	.quad	0x400000000000000b
+	.quad	0x400000000000000c
+	.quad	0x400000000000000d
+	.quad	0x400000000000000e
+	.quad	0x400000000000000f
+	.quad	0x4000000000000010
+	.quad	0x4000000000000011
+	.quad	0x4000000000000012
+	.quad	0x4000000000000013
+	.quad	0x4000000000000014
+	.quad	0x4000000000000015
+	.quad	0x4000000000000016
+	.quad	0x4000000000000017
+	.quad	0x4000000000000018
+	.quad	0x4000000000000019
+	.quad	0x400000000000001a
+	.quad	0x400000000000001b
+	.quad	0x400000000000001c
+	.quad	0x400000000000001d
+	.quad	0x400000000000001e
+	.quad	0x400000000000001f
+	.quad	0x4000000000000020
+	.quad	0x4000000000000021
+	.quad	0x4000000000000022
+	.quad	0x4000000000000023
+	.quad	0x4000000000000024
+	.quad	0x4000000000000025
+	.quad	0x4000000000000026
+	.quad	0x4000000000000027
+	.quad	0x4000000000000028
+	.quad	0x4000000000000029
+	.quad	0x400000000000002a
+	.quad	0x400000000000002b
+	.quad	0x400000000000002c
+	.quad	0x400000000000002d
+	.quad	0x400000000000002e
+	.quad	0x400000000000002f
+	.quad	0x4000000000000030
+	.quad	0x4000000000000031
+	.quad	0x4000000000000032
+	.quad	0x4000000000000033
+	.quad	0x4000000000000034
+	.quad	0x4000000000000035
+	.quad	0x4000000000000036
+	.quad	0x4000000000000037
+	.quad	0x4000000000000038
+	.quad	0x4000000000000039
+	.quad	0x400000000000003a
+	.quad	0x400000000000003b
+	.quad	0x400000000000003c
+	.quad	0x400000000000003d
+	.quad	0x400000000000003e
+	.quad	0x400000000000003f
+	.quad	0x4000000000000040
+	.quad	0x4000000000000041
+	.quad	0x4000000000000042
+	.quad	0x4000000000000043
+	.quad	0x4000000000000044
+	.quad	0x4000000000000045
+	.quad	0x4000000000000046
+	.quad	0x4000000000000047
+	.quad	0x4000000000000048
+	.quad	0x4000000000000049
+	.quad	0x400000000000004a
+	.quad	0x400000000000004b
+	.quad	0x400000000000004c
+	.quad	0x400000000000004d
+	.quad	0x400000000000004e
+	.quad	0x400000000000004f
+	.quad	0x400000000

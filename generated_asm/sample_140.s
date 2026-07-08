@@ -1,5 +1,5 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.p2align	2                               ; -- Begin function func0
+	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
@@ -10,186 +10,193 @@ _func0:                                 ; @func0
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	str	x0, [sp, #8]
-	ldr	x0, [sp, #8]
-	bl	_abs
-	str	w0, [sp, #4]
-	ldr	w8, [sp, #4]
-	mov	w9, #12
+	str	w0, [sp, #8]
+	str	w1, [sp, #4]
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
 	mul	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add	w8, w8, w9
-	ldr	w9, [sp, #4]
-	add
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp]
+	ldr	w8, [sp]
+	ldr	w9, [sp, #4]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #4]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #4]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #4]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w8, w8, w9
+	str	w8, [sp, #8]
+	ldr	w8, [sp, #4]
+	ldr	w9
