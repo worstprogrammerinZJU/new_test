@@ -1,181 +1,65 @@
 .section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	adrp	x9, _21@PAGE
-	ldr	w9, [x9, _21@PAGEOFF]
-	subs	w8, w8, w9
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	ldur	w8, [x29, #-12]
+	subs	w8, w8, #0
 	cset	w8, ne
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	adrp	x9, _5@PAGE
-	ldr	w9, [x9, _5@PAGEOFF]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB1_5
-	b	LBB1_4
-LBB1_4:
-	adrp	x8, _1@PAGE
-	ldr	w8, [x8, _1@PAGEOFF]
-	str	w8, [sp, #4]
-	b	LBB1_5
-LBB1_5:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-	.cfi_endproc
-                                        ; -- End function
-	.globl	_main                           ; -- Begin function main
-	.p2align	2
-_main:                                  ; @main
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	mov	w8, #0
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	stur	wzr, [x29, #-4]
-	bl	_func0
-	ldr	w0, [sp, #8]                    ; 4-byte Folded Reload
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	add	sp, sp, #32
+	and	w10, w8, #0x1
+	mov	w9, #21
+	mov	w8, #5
+	ands	w10, w10, #0x1
+	csel	w8, w8, w9, ne
+	stur	w8, [x29, #-16]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	str	x0, [sp, #24]
+	str	xzr, [sp, #16]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	x8, [sp, #16]
+	ldr	x9, [sp, #24]
+	subs	x8, x8, x9
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldr	x9, [sp, #16]
+	ldrsb	w8, [x8, x9]
+	subs	w9, w8, #97
+	ldur	w8, [x29, #-16]
+	add	w8, w8, w9
+	mov	w9, #26
+	sdiv	w8, w8, w9
+	add	w8, w8, #97
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #12]
+	ldur	x9, [x29, #-8]
+	ldr	x10, [sp, #16]
+	strb	w8, [x9, x10]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	add	x8, x8, #1
+	str	x8, [sp, #16]
+	b	LBB0_1
+LBB0_4:
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
 	ret
 	.cfi_endproc
                                         ; -- End function
-	.p2align	2                               ; -- Begin function strlen
-_strlen:                                ; @strlen
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB2_1
-LBB2_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB2_4
-	b	LBB2_2
-LBB2_2:                                 ;   in Loop: Header=BB2_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #8]
-	ldrsw	x10, [sp, #4]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB2_3
-LBB2_3:                                 ;   in Loop: Header=BB2_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB2_1
-LBB2_4:
-	ldr	w0, [sp, #4]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.p2align	2                               ; -- Begin function func0
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB3_1
-LBB3_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB3_4
-	b	LBB3_2
-LBB3_2:                                 ;   in Loop: Header=BB3_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	adrp	x9, _21@PAGE
-	ldr	w9, [x9, _21@PAGEOFF]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB3_4
-	b	LBB3_3
-LBB3_3:                                 ;   in Loop: Header=BB3_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	adrp	x9, _5@PAGE
-	ldr	w9, [x9, _5@PAGEOFF]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB3_5
-	b	LBB3_4
-LBB3_4:
-	adrp	x8, _1@PAGE
-	ldr	w8, [x8, _1@PAGEOFF]
-	str	w8, [sp, #4]
-	b	LBB3_5
-LBB3_5:                                 ;   in Loop: Header=BB3_1 Depth=1
-	ldr	w0, [sp, #4]
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.p2align	2                               ; -- Begin function func1
-_func1:                                 ; @func1
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB4_1
-LBB4_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB4_4
-	b	LBB4_2
-LBB
+.subsections_via_symbols

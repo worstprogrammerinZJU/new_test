@@ -1,201 +1,21 @@
 .section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	w0, [sp, #8]
-	str	w1, [sp, #4]
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #4]
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #12]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #12]
+	add	w9, w9, #1
 	mul	w8, w8, w9
 	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp]
-	ldr	w8, [sp]
-	ldr	w9, [sp, #4]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #4]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #4]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #4]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #4]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
-	mov	w9, #2
-	sdiv	w8, w8, w9
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #
+	sdiv	w0, w8, w9
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,179 +1,117 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
-	.p2align	2, 0x90
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                        ; -- Begin function func0
+	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB1_1
-LBB1_1:                                 ; =>This Loop Header has been marked
-                                        ;    by the compiler.
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #10
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	str	x0, [sp, #40]
+	str	w1, [sp, #36]
+	str	x2, [sp, #24]
+	fmov	s0, #3.40282347E+38
+	str	s0, [sp, #20]
+	ldr	x8, [sp, #40]
+	ldr	s0, [x8]
+	ldr	x8, [sp, #24]
+	str	s0, [x8]
+	ldr	x8, [sp, #40]
+	ldr	s0, [x8, #4]
+	ldr	x8, [sp, #24]
+	str	s0, [x8, #4]
+	str	wzr, [sp, #16]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB1_4
-	b	LBB1_2
-LBB1_2:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #4]
-	ldr	d0, [x8, x9, lsl #3]
-	fmov	d1, #3.00000000
-	fadd	d0, d0, d1
-	str	d0, [x8, x9, lsl #3]
-	b	LBB1_3
-LBB1_3:                                 ;   in Loop: Header=BB1_1 Depth=1
-	ldr	w8, [sp, #4]
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB1_1
-LBB1_4:
-	ldr	w0, [sp, #4]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.globl	_main                           ; -- Begin function main
-	.p2align	2
-_main:                                  ; @main
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	stp	x29, x30, [sp, #16]             ; 16-byte Folded Spill
-	add	x29, sp, #16
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	mov	w8, #0
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	stur	wzr, [x29, #-4]
-	bl	_func0
-	ldr	w0, [sp, #8]                    ; 4-byte Folded Reload
-	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
-	add	sp, sp, #32
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #36]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #16]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	s1, [x8, x9, lsl #2]
+	fsub	s0, s0, s1
+	fcvt	s0, s0
+	fabs	s0, s0
+	str	s0, [sp, #8]
+	ldr	s0, [sp, #8]
+	ldr	s1, [sp, #20]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	s0, [sp, #8]
+	str	s0, [sp, #20]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #16]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #24]
+	str	s0, [x8]
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #12]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #24]
+	str	s0, [x8, #4]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_1
+LBB0_10:
+	ldr	x8, [sp, #24]
+	ldr	s0, [x8]
+	ldr	x8, [sp, #24]
+	ldr	s1, [x8, #4]
+	fcmp	s0, s1
+	cset	w8, pl
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
+LBB0_11:
+	ldr	x8, [sp, #24]
+	ldr	s0, [x8]
+	str	s0, [sp, #4]
+	ldr	x8, [sp, #24]
+	ldr	s0, [x8, #4]
+	ldr	x8, [sp, #24]
+	str	s0, [x8]
+	ldr	s0, [sp, #4]
+	ldr	x8, [sp, #24]
+	str	s0, [x8, #4]
+	b	LBB0_12
+LBB0_12:
+	add	sp, sp, #48
 	ret
 	.cfi_endproc
                                         ; -- End function
 .subsections_via_symbols
-.subsections_via_symbols
-.subsections_via_functions
-.subsections_via_names
-.section	__TEXT,__cstring,cstring_literals
-lCSTRING0 = .LSTRING0
-lCSTRING1 = .LSTRING1
-lCSTRING2 = .LSTRING2
-lCSTRING3 = .LSTRING3
-lCSTRING4 = .LSTRING4
-lCSTRING5 = .LSTRING5
-lCSTRING6 = .LSTRING6
-lCSTRING7 = .LSTRING7
-lCSTRING8 = .LSTRING8
-lCSTRING9 = .LSTRING9
-lCSTRING10 = .LSTRING10
-lCSTRING11 = .LSTRING11
-lCSTRING12 = .LSTRING12
-lCSTRING13 = .LSTRING13
-lCSTRING14 = .LSTRING14
-lCSTRING15 = .LSTRING15
-lCSTRING16 = .LSTRING16
-lCSTRING17 = .LSTRING17
-lCSTRING18 = .LSTRING18
-lCSTRING19 = .LSTRING19
-lCSTRING20 = .LSTRING20
-lCSTRING21 = .LSTRING21
-lCSTRING22 = .LSTRING22
-lCSTRING23 = .LSTRING23
-lCSTRING24 = .LSTRING24
-lCSTRING25 = .LSTRING25
-lCSTRING26 = .LSTRING26
-lCSTRING27 = .LSTRING27
-lCSTRING28 = .LSTRING28
-lCSTRING29 = .LSTRING29
-lCSTRING30 = .LSTRING30
-lCSTRING31 = .LSTRING31
-lCSTRING32 = .LSTRING32
-lCSTRING33 = .LSTRING33
-lCSTRING34 = .LSTRING34
-lCSTRING35 = .LSTRING35
-lCSTRING36 = .LSTRING36
-lCSTRING37 = .LSTRING37
-lCSTRING38 = .LSTRING38
-lCSTRING39 = .LSTRING39
-lCSTRING40 = .LSTRING40
-lCSTRING41 = .LSTRING41
-lCSTRING42 = .LSTRING42
-lCSTRING43 = .LSTRING43
-lCSTRING44 = .LSTRING44
-lCSTRING45 = .LSTRING45
-lCSTRING46 = .LSTRING46
-lCSTRING47 = .LSTRING47
-lCSTRING48 = .LSTRING48
-lCSTRING49 = .LSTRING49
-lCSTRING50 = .LSTRING50
-lCSTRING51 = .LSTRING51
-lCSTRING52 = .LSTRING52
-lCSTRING53 = .LSTRING53
-lCSTRING54 = .LSTRING54
-lCSTRING55 = .LSTRING55
-lCSTRING56 = .LSTRING56
-lCSTRING57 = .LSTRING57
-lCSTRING58 = .LSTRING58
-lCSTRING59 = .LSTRING59
-lCSTRING60 = .LSTRING60
-lCSTRING61 = .LSTRING61
-lCSTRING62 = .LSTRING62
-lCSTRING63 = .LSTRING63
-lCSTRING64 = .LSTRING64
-lCSTRING65 = .LSTRING65
-lCSTRING66 = .LSTRING66
-lCSTRING67 = .LSTRING67
-lCSTRING68 = .LSTRING68
-lCSTRING69 = .LSTRING69
-lCSTRING70 = .LSTRING70
-lCSTRING71 = .LSTRING71
-lCSTRING72 = .LSTRING72
-lCSTRING73 = .LSTRING73
-lCSTRING74 = .LSTRING74
-lCSTRING75 = .LSTRING75
-lCSTRING76 = .LSTRING76
-lCSTRING77 = .LSTRING77
-lCSTRING78 = .LSTRING78
-lCSTRING79 = .LSTRING79
-lCSTRING80 = .LSTRING80
-lCSTRING81 = .LSTRING81
-lCSTRING82 = .LSTRING82
-lCSTRING83 = .LSTRING83
-lCSTRING84 = .LSTRING84
-lCSTRING85 = .LSTRING85
-lCSTRING86 = .LSTRING86
-lCSTRING87 = .LSTRING87
-lCSTRING88 = .LSTRING88
-lCSTRING89 = .LSTRING89
-lCSTRING90 = .LSTRING90
-lCSTRING91 = .LSTRING91
-lCSTRING92 = .LSTRING92
-lCSTRING93 = .LSTRING93
-lCSTRING94 = .LSTRING94
-lCSTRING95 = .LSTRING95
-lCSTRING96 = .LSTRING96
-lCSTRING97 = .LSTRING97
-lCSTRING98 = .LSTRING98
-lCSTRING99 = .LSTRING99
-lCSTRING100 = .LSTRING100
-lCSTRING101 = .LSTRING101
-lCSTRING102 = .LSTRING102
-lCSTRING103 = .LSTRING103
-lCSTRING104 = .LSTRING104
-lCSTRING105 = .LSTRING105
-lCSTRING106 = .LSTRING106
-lCSTRING107 = .LSTRING107
-lCSTRING108 = .LSTRING108
-lCSTRING109 = .LSTRING109
-lCSTRING110 = .LSTRING110
-lCSTRING111 = .LSTRING111
-lCSTRING112 = .LSTRING112
-lCSTRING113 = .LSTRING113
-l
