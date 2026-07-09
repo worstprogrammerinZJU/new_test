@@ -46,10 +46,8 @@ LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldr	w8, [sp, #8]
-	ldr	w10, [sp]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	ldr	w9, [sp]
+	sdiv	w8, w8, w9
 	str	w8, [sp, #8]
 	ldr	w8, [sp, #4]
 	add	w8, w8, #1

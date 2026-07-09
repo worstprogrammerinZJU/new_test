@@ -76,14 +76,14 @@ LBB0_9:
 LBB0_10:                                ;   in Loop: Header=BB0_13 Depth=1
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_13 Depth=1
-	ldr	w8, [sp, #28]
+	ldr	w8, [sp, #20]
 	add	w8, w8, #1
-	str	w8, [sp, #28]
+	str	w8, [sp, #20]
 	b	LBB0_1
 LBB0_12:
 	mov	w8, #1
 	sturb	w8, [x29, #-1]
-	b	LBB0_25
+	b	LBB0_20
 LBB0_13:
 	ldurb	w8, [x29, #-1]
 	and	w0, w8, #0x1

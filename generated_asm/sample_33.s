@@ -42,7 +42,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w0, [x8, x9, lsl #2]
 	bl	_abs
 	ldr	w8, [sp, #8]
-	add	w8, w0, w8
+	add	w8, w8, w0
 	str	w8, [sp, #8]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]

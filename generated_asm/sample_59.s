@@ -28,18 +28,18 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
+	fcvt	d0, s0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fabs	d2, d0
-	fmov	d0, #-0.0000000000000000
-	fadd	d0, d0, d2
-	fcvt	d0, d0
+	ldr	s1, [x8, x9, lsl #2]
+	fcvt	d1, s1
+	fabs	d1, d1
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d2, [x8, lCPI0_0@PAGEOFF]
+	fadd	d1, d1, d2
+	frintm	d1, d1
 	fsub	d0, d0, d1
-	fabs	d0, d0
-	fmov	d1, #-0.0000000000000000
+	fmov	d1, #-0.00000000
 	fcmp	d0, d1
 	cset	w8, pl
 	tbnz	w8, #0, LBB0_7
@@ -57,60 +57,32 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #-0.0000000000000000
-	fadd	d0, d0, d2
-	fcvt	d0, d0
-	fsub	d0, d0, d1
-	fabs	d0, d0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d2, [x8, lCPI0_0@PAGEOFF]
+	fmul	d2, d2, d1
+	fmov	d1, #-0.00000000
+	fadd	d0, d0, d1
+	frintm	d0, d0
 	fcvtzs	w8, d0
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #4]
 	ldr	s0, [x9, x10, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #-0.0000000000000000
-	fadd	d0, d0, d2
-	fcvt	d0, d0
-	fsub	d0, d0, d1
-	round	d0, d0
-	fcvtzs	w8, d0
+	fcvt	d0, s0
+	fmul	d1, d0, d2
+	fmov	d2, #-0.00000000
+	fmul	d2, d2, d1
+	fmov	d1, #-0.00000000
+	fadd	d0, d0, d1
+	frintm	d0, d0
+	fcvtzs	w9, d0
 	mul	w9, w8, w9
 	ldr	x8, [sp, #8]
 	add	x8, x8, w9, sxtw
 	str	x8, [sp, #8]
 	b	LBB0_6
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #-0.0000000000000000
-	fadd	d0, d0, d2
-	fcvt	d0, d0
-	fsub	d0, d0, d1
-	fabs	d0, d0
-	fcvtzs	w8, d0
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #4]
-	ldr	s0, [x9, x10, lsl #2]
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d2, #-0.0000000000000000
-	fadd	d0, d0, d2
-	fcvt	d0, d0
-	fsub	d0, d0, d1
-	round	d0, d0
-	fcvtzs	w8, d0
-	mul	w9, w8, w9
-	ldr	x8, [sp, #8]
-	add	x8, x8, w9, sxtw
-	str	x8, [sp, #8]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]

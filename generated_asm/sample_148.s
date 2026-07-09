@@ -5,19 +5,22 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
-	ldur	w8, [x29, #-4]
+	ldur	w9, [x29, #-4]
+                                        ; implicit-def: $x8
+	mov	x8, x9
 	mov	x9, sp
-	str	w8, [x9]
+	str	x8, [x9]
+	sub	x0, x29, #10
 	mov	w1, #0
-	mov	w2, #6
+	mov	x2, #6
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
@@ -49,21 +52,23 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:
 	mov	w0, #33
 	bl	_malloc
-	str	x0, [sp, #16]
-	str	wzr, [sp, #12]
+	str	x0, [sp, #32]
+	str	wzr, [sp, #28]
 	ldur	w8, [x29, #-16]
 	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #12]
-	add	x10, x8, x9
-	mov	x8, x10
-	mov	w9, #48
-	strb	w9, [x8]
-	b	LBB0_12
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #28]
+	mov	x10, x9
+	add	w10, w10, #1
+	str	w10, [sp, #28]
+	add	x9, x8, x9
+	mov	w8, #48
+	strb	w8, [x9]
+	b	LBB0_10
 LBB0_6:
 	b	LBB0_7
 LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
@@ -74,54 +79,37 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldur	w8, [x29, #-16]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
 	add	w8, w8, #48
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #12]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #12]
-	strb	w8, [x9, x10]
-	ldur	w8, [x29, #-16]
-	sdiv	w8, w8, w10
-	stur	w8, [x29, #-16]
+	ldr	x10, [sp, #32]
+	ldrsw	x11, [sp, #28]
+	mov	x12, x11
+	add	w12, w12, #1
+	str	w12, [sp, #28]
+	strb	w8, [x10, x11]
+	ldurb	w8, [x29, #-16]
+	ldr	x10, [sp, #32]
+	ldrsw	x11, [sp, #28]
+	add	x10, x10, x11
+	strb	w8, [x10]
+	ldrb	w8, [sp, #27]
+	ldr	x10, [sp, #32]
+	ldr	w11, [sp, #28]
+	ldr	w12, [sp, #28]
+	subs	w11, w11, w12
+	subs	w11, w11, #1
+	add	x10, x10, w11, sxtw
+	strb	w8, [x10]
 	b	LBB0_7
 LBB0_9:
 	b	LBB0_10
 LBB0_10:
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #12]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	strb	w8, [sp, #11]
-	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	ldr	w10, [sp, #12]
-	subs	w9, w9, w10
-	subs	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw]
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #12]
-	strb	w8, [x9, x10]
-	ldrb	w8, [sp, #11]
-	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, w10
-	subs	w10, w10, #1
-	strb	w8, [x9, w10, sxtw]
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_11
-LBB0_14:
-	ldr	x0, [sp, #16]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
+	ldr	x0, [sp, #32]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
 	ret
 	.cfi_endproc
                                         ; -- End function

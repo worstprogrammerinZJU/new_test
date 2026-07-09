@@ -39,11 +39,13 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldr	x9, [sp, #16]
 	ldrsb	w8, [x8, x9]
-	subs	w9, w8, #97
-	ldur	w8, [x29, #-16]
+	subs	w8, w8, #97
+	ldur	w9, [x29, #-16]
 	add	w8, w8, w9
-	mov	w9, #26
-	sdiv	w8, w8, w9
+	mov	w10, #26
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	add	w8, w8, #97
 	str	w8, [sp, #12]
 	ldr	w8, [sp, #12]

@@ -94,8 +94,8 @@ LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
 	ldr	x8, [sp, #40]
 	ldr	w9, [sp, #36]
 	ldr	w10, [sp, #32]
-	subs	w10, w9, w10
-	ldr	w9, [sp, #8]
+	subs	w9, w9, w10
+	ldr	w10, [sp, #8]
 	add	w9, w9, w10
 	ldr	w8, [x8, w9, sxtw #2]
 	ldr	x9, [sp, #24]

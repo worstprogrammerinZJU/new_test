@@ -33,8 +33,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_12
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w9, [sp, #20]
-	mov	w8, #3
+	ldr	w8, [sp, #20]
+	mov	w9, #3
 	mul	w8, w8, w9
 	add	w8, w8, #3
 	ldur	w9, [x29, #-16]
@@ -49,7 +49,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-16]
 	ldr	w9, [sp, #20]
-	mul	w9, w8, w9
+	mov	w10, #3
+	mul	w9, w9, w10
 	subs	w8, w8, w9
 	str	w8, [sp, #8]                    ; 4-byte Folded Spill
 	b	LBB0_5
@@ -62,12 +63,14 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	mul	w9, w9, w10
 	add	x1, x8, w9, sxtw
 	ldrsw	x2, [sp, #16]
+	add	x0, sp, #24
+	str	x0, [sp]                        ; 8-byte Folded Spill
 	mov	w3, #4
 	bl	___strncpy_chk
-	ldrsw	x10, [sp, #16]
-	add	x9, sp, #24
-	mov	x8, x9
-	strb	wzr, [x8, x10]
+	ldr	x8, [sp]                        ; 8-byte Folded Reload
+	ldrsw	x9, [sp, #16]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldr	w8, [sp, #16]
 	subs	w8, w8, #3
 	cset	w8, ne
@@ -80,20 +83,24 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldurb	w8, [x29, #-22]
-	strb	w8, [sp, #15]
-	ldurb	w8, [x29, #-23]
-	strb	w8, [sp, #22]
 	ldrb	w8, [sp, #24]
-	strb	w8, [sp, #23]
+	strb	w8, [sp, #15]
+	ldrb	w8, [sp, #25]
+	strb	w8, [sp, #24]
+	ldrb	w8, [sp, #24]
+	strb	w8, [sp, #25]
+	ldrb	w8, [sp, #15]
+	strb	w8, [sp, #24]
 	b	LBB0_9
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrb	w8, [sp, #24]
-	strb	w8, [sp, #15]
-	ldurb	w8, [x29, #-23]
-	strb	w8, [sp, #22]
-	ldrb	w8, [sp, #15]
-	strb	w8, [sp, #23]
+	strb	w8, [sp, #14]
+	ldrb	w8, [sp, #25]
+	strb	w8, [sp, #24]
+	ldrb	w8, [sp, #22]
+	strb	w8, [sp, #25]
+	ldrb	w8, [sp, #14]
+	strb	w8, [sp, #24]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_10
@@ -104,6 +111,7 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	mul	w9, w9, w10
 	add	x0, x8, w9, sxtw
 	ldrsw	x2, [sp, #16]
+	add	x1, sp, #24
 	mov	x3, #-1
 	bl	___strncpy_chk
 	b	LBB0_11

@@ -82,8 +82,8 @@ LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
 	str	w8, [sp]
 	b	LBB0_3
 LBB0_12:
-	ldr	w8, [sp, #8]
-	mov	w9, #-2147483647
+	ldr	w8, [sp, #4]
+	mov	w9, #2147483647
 	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_14
@@ -93,7 +93,7 @@ LBB0_13:
 	str	w8, [sp, #28]
 	b	LBB0_15
 LBB0_14:
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #4]
 	str	w8, [sp, #28]
 	b	LBB0_15
 LBB0_15:

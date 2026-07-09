@@ -68,14 +68,15 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w9, [sp, #4]
 	ldr	w10, [sp, #28]
 	subs	w9, w9, w10
-	add	x8, x8, w9, sxtw #3
+	add	x8, x8, w9, sxtw
 	strb	wzr, [x8]
 	ldr	x0, [sp, #40]
 	ldr	w8, [sp, #32]
-	add	w8, w8, #1
-                                        ; implicit-def: $x9
-	mov	x9, x8
-	sxtw	x1, w9
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x1, x8, #3
 	bl	_realloc
 	str	x0, [sp, #40]
 	ldr	x0, [sp, #8]
@@ -87,10 +88,8 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	x0, [x8, x9, lsl #3]
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #32]
-	ldr	x0, [x8, x9, lsl #3]
-	ldr	x1, [sp, #8]
-	mov	x2, #-1
-	bl	___strcpy_chk
+	ldr	x0, [x8, x9]
+	bl	_strchr
 	ldr	w8, [sp, #32]
 	add	w8, w8, #1
 	str	w8, [sp, #32]
@@ -98,22 +97,32 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #4]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_7
+	str	w8, [sp, #32]
+	b	LBB0_10
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_13
-LBB0_13:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #4]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldr	x9, [sp, #8]
+	ldr	w10, [sp, #4]
+	ldr	w11, [sp, #32]
+	subs	w10, w10, w11
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	ldur	x0, [x29, #-32]
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #4]
+	ldrsb	w1, [x8, x9]
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #8]
-	bl	_free
 	ldr	w8, [sp, #32]
-	ldur	x9, [x29, #-24]
+	ldr	x9, [sp, #40]
 	str	w8, [x9]
 	ldr	x0, [sp, #40]
 	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload

@@ -19,17 +19,16 @@ _func0:                                 ; @func0
 	ldr	s1, [sp, #8]
 	ldr	s2, [sp, #4]
 	ldr	s3, [sp, #4]
-	fmul	s1, s1, s3
-	fmadd	s1, s0, s1, s2
+	fmul	s2, s2, s3
+	fmadd	s2, s0, s1, s2
 	ldr	s0, [sp]
-	ldr	s2, [sp]
-	fmov	d0, #0.0
-	fmadd	s0, s0, d0, s2
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d0, #-1.00000000
+	ldr	s1, [sp]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, hi
+	cset	w8, mi
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_1
 LBB0_1:
@@ -37,16 +36,16 @@ LBB0_1:
 	ldr	s1, [sp, #8]
 	ldr	s2, [sp]
 	ldr	s3, [sp]
-	fmul	s1, s1, s3
-	fmadd	s1, s0, s1, s2
+	fmul	s2, s2, s3
+	fmadd	s2, s0, s1, s2
 	ldr	s0, [sp, #4]
-	ldr	s2, [sp, #4]
-	fmadd	s0, s0, d0, s2
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d0, #-1.00000000
+	ldr	s1, [sp, #4]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, hi
+	cset	w8, mi
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:
@@ -54,16 +53,16 @@ LBB0_2:
 	ldr	s1, [sp, #4]
 	ldr	s2, [sp]
 	ldr	s3, [sp]
-	fmul	s1, s1, s3
-	fmadd	s1, s0, s1, s2
+	fmul	s2, s2, s3
+	fmadd	s2, s0, s1, s2
 	ldr	s0, [sp, #8]
-	ldr	s2, [sp, #8]
-	fmadd	s0, s0, d0, s2
-	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d0, #-1.00000000
+	ldr	s1, [sp, #8]
+	fmsub	s0, s0, s1, s2
+	fcvt	d0, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
 	fcmp	d0, d1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:

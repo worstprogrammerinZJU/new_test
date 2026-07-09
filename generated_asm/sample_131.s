@@ -14,6 +14,7 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	x0, [x29, #-8]
 	stur	x1, [x29, #-16]
+                                        ; kill: def $x8 killed $xzr
 	str	xzr, [sp, #24]
 	str	wzr, [sp, #20]
 	str	wzr, [sp, #16]
@@ -67,15 +68,18 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	subs	w8, w8, #1
 	str	w8, [sp, #20]
 	ldr	w8, [sp, #20]
-	subs	w9, w8, #0
+	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_9
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
-	ldrsw	x8, [sp, #8]
-	add	x8, x8, #1
-	lsl	x8, x8, #2
+	ldr	w8, [sp, #8]
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	lsl	x1, x8, #2
 	bl	_realloc
 	str	x0, [sp, #24]
 	ldr	w8, [sp, #16]

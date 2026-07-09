@@ -52,20 +52,19 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	lsl	w8, w8, #1
 	str	w8, [sp, #20]
 	ldur	x0, [x29, #-16]
-	ldrsw	x9, [sp, #20]
-	mov	x8, #4
-	mul	x1, x8, x9
+	ldrsw	x8, [sp, #20]
+	lsl	x1, x8, #2
 	bl	_realloc
 	stur	x0, [x29, #-16]
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-4]
 	ldur	x9, [x29, #-16]
-	ldr	x11, [sp, #24]
-	ldrsw	x10, [x11]
+	ldr	x12, [sp, #24]
+	ldrsw	x10, [x12]
 	mov	x11, x10
-	add	w10, w11, #1
-	str	w10, [x11]
+	add	w11, w11, #1
+	str	w11, [x12]
 	str	w8, [x9, x10, lsl #2]
 	ldur	w8, [x29, #-4]
 	mov	w9, #3
@@ -99,44 +98,65 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldrsw	x9, [sp, #16]
 	ldr	w8, [x8, x9, lsl #2]
 	str	w8, [sp, #12]
-	ldr	w8, [sp, #16]
-	subs	w8, w8, #1
-	str	w8, [sp, #8]
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
-	ldr	w8, [sp, #12]
+	ldr	w8, [sp, #16]
 	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_11
+	str	w8, [sp, #16]
+	b	LBB0_9
 LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #16]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
 	ldr	w8, [sp, #16]
-	add	w8, w8, #1
+	subs	w8, w8, #1
 	str	w8, [sp, #16]
-	b	LBB0_9
-LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=2
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_9
-LBB0_14:                                ;   in Loop: Header=BB0_9 Depth=2
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_9
-LBB0_15:                                ;   in Loop: Header=BB0_9 Depth=1
+	b	LBB0_11
+LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_9
-LBB0_16:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #16]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_9 Depth=1
 	ldr	w8, [sp, #16]
 	add	w8, w8, #1
 	str	w8, [sp, #16]
 	b	LBB0_9
-LBB0_17:
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+LBB0_15:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #16]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	ldr	w8, [sp, #16]
+	subs	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_11
+LBB0_16:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #12]
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #16]
+	add	w10, w10, #1
+	str	w8, [x9, w10, sxtw #2]
+	b	LBB0_17
+LBB0_17:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_9
+LBB0_18:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	ldur	x9, [x29, #-16]
+	ldr	w10, [sp, #16]
+	add	w10, w10, #1
+	str	w8, [x

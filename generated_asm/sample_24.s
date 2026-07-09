@@ -53,40 +53,40 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #41
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
+	tbnz	w8, #0, LBB0_29
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
 	subs	w8, w8, #1
 	str	w8, [sp, #20]
-	b	LBB0_6
+	b	LBB0_29
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #20]
 	subs	w8, w8, #0
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
+	tbnz	w8, #0, LBB0_41
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	wzr, [sp, #4]
-	b	LBB0_8
+	b	LBB0_41
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #8]
 	add	w8, w8, #1
 	str	w8, [sp, #8]
-	b	LBB0_1
+	b	LBB0_41
 LBB0_10:
 	ldr	w8, [sp, #20]
 	subs	w8, w8, #0
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_23
+	tbnz	w8, #0, LBB0_46
 	b	LBB0_11
 LBB0_11:
 	ldr	w8, [sp, #4]
 	subs	w8, w8, #0
 	cset	w8, eq
-	tbnz	w8, #0, LBB0_23
+	tbnz	w8, #0, LBB0_46
 	b	LBB0_12
 LBB0_12:
 	adrp	x8, l_.str@PAGE
@@ -99,77 +99,17 @@ LBB0_13:
 	stur	x8, [x29, #-8]
 	b	LBB0_47
 LBB0_14:
-	ldur	x8, [x29, #-8]
-	add	x9, sp, #16
-	add	x8, x8, x9
-	ldrsb	w8, [x8]
-	subs	w8, w8, #40
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_37
-	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_14 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_14 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #8]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #41
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_39
-	b	LBB0_17
-LBB0_17:                                ;   in Loop: Header=BB0_14 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_18
-LBB0_18:                                ;   in Loop: Header=BB0_14 Depth=1
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #0
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_41
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_14 Depth=1
-	str	wzr, [sp, #4]
-	b	LBB0_20
-LBB0_20:                                ;   in Loop: Header=BB0_14 Depth=1
-	b	LBB0_21
-LBB0_21:                                ;   in Loop: Header=BB0_14 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_24
-LBB0_22:
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_46
-	b	LBB0_23
-LBB0_23:
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_46
-	b	LBB0_24
-LBB0_24:
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	stur	x8, [x29, #-8]
-	b	LBB0_47
-LBB0_25:
-	adrp	x8, l_.str.1@PAGE
-	add	x8, x8, l_.str.1@PAGEOFF
-	stur	x8, [x29, #-8]
-	b	LBB0_47
-LBB0_26:
-	ldur	x8, [x29, #-8]
-	add	x9, sp, #16
-	add	x8, x8, x9
-	ldrsb	w8, [x8]
-	subs	w8, w8, #40
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_49
-	b	LBB0_27
-LBB0_27
+	ldur	x0, [x29, #-8]
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"Yes"
+
+l_.str.1:                               ; @.str.1
+	.asciz	"No"
+
+.subsections_via_symbols

@@ -19,7 +19,7 @@ _func0:                                 ; @func0
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x0, w8
-	mov	w1, #4
+	mov	x1, #4
 	bl	_calloc
 	str	x0, [sp, #8]
 	mov	w8, #-1
@@ -37,15 +37,16 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	add	x9, x9, x10, lsl #2
-	ldr	w8, [x8, x9, lsl #2]
+	ldrsw	x9, [x9, x10, lsl #2]
+	add	x9, x8, x9, lsl #2
+	ldr	w8, [x9]
 	add	w8, w8, #1
-	str	w8, [x9, x8, lsl #2]
+	str	w8, [x9]
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	lsl	x10, x10, #2
-	ldr	w8, [x8, x10]
+	ldrsw	x9, [x9, x10, lsl #2]
+	ldr	w8, [x8, x9, lsl #2]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
 	ldr	w9, [x9, x10, lsl #2]

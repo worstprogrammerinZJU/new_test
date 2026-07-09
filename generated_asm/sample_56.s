@@ -23,9 +23,9 @@ _func0:                                 ; @func0
 	bl	_malloc
 	str	x0, [sp, #32]
 	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
+	add	w9, w8, #1
                                         ; implicit-def: $x8
-	mov	x8, x8
+	mov	x8, x9
 	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp, #24]
@@ -59,7 +59,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	strb	w8, [x9]
 	ldr	x8, [sp, #24]
 	ldr	x9, [sp, #8]
-	add	x8, x8, #1
+	add	x9, x9, #1
+	add	x8, x8, x9
 	strb	wzr, [x8]
 	ldr	x0, [sp, #24]
 	bl	_strlen

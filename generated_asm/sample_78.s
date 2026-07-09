@@ -1,6 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                        ; -- Begin function func0
+	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -51,13 +51,14 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #12]
 	ldr	s1, [x8, x9, lsl #2]
 	fsub	s0, s0, s1
-	fcvt	s0, s0
-	fabs	s0, s0
+	fcvt	d0, s0
+	fabs	d0, d0
+	fcvt	s0, d0
 	str	s0, [sp, #8]
 	ldr	s0, [sp, #8]
 	ldr	s1, [sp, #20]
 	fcmp	s0, s1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -94,7 +95,7 @@ LBB0_10:
 	ldr	x8, [sp, #24]
 	ldr	s1, [x8, #4]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_12
 	b	LBB0_11
 LBB0_11:
