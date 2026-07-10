@@ -64,12 +64,12 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-28]
-	add	w9, w8, #1
-	str	w9, [sp, #32]
+	add	w8, w8, #1
+	stur	w8, [x29, #-28]
 	b	LBB0_1
 LBB0_10:
 	ldur	w8, [x29, #-12]
-	ldur	w9, [x29, #-16]
+	ldur	w9, [x29, #-12]
 	mul	w8, w8, w9
 	str	w8, [sp, #20]
 	ldr	w8, [sp, #28]
@@ -79,27 +79,88 @@ LBB0_10:
 	b	LBB0_11
 LBB0_11:
 	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	mov	x10, #1
-	str	w10, [x8, x9, lsl #2]
-	b	LBB0_27
-LBB0_12:                                ;   in Loop: Header=BB0_10 Depth=1
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_12
+LBB0_12:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #20]
+	b	LBB0_13
+LBB0_13:
 	ldr	w8, [sp, #20]
-	ldr	x9, [sp, #24]
-	ldursw	x10, [x29, #-28]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_27
-LBB0_13:                                ;   in Loop: Header=BB0_10 Depth=1
-	ldr	w8, [sp, #20]
-	ldr	x9, [sp, #24]
-	ldursw	x10, [x29, #-28]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_27
+	ldur	w9, [x29, #-12]
+	subs	w9, w9, #1
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_14
 LBB0_14:
-	ldr	x0, [sp, #24]
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_16
+	b	LBB0_15
+LBB0_15:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #20]
+	b	LBB0_16
+LBB0_16:
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_22
+	b	LBB0_27
+LBB0_27:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_22
+	b	LBB0_28
+LBB0_28:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	str	w8, [sp, #20]
+	b	LBB0_22
+LBB0_29:
+	ldr	w8, [sp, #20]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_22
+	b	LBB0_30
+LBB0_30:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #24]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_22

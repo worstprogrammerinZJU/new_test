@@ -95,7 +95,6 @@ LBB0_9:
 	b	LBB0_10
 LBB0_10:
 	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
 	stur	x8, [x29, #-8]
 	b	LBB0_24
 LBB0_11:
@@ -130,7 +129,7 @@ LBB0_15:                                ;   in Loop: Header=BB0_12 Depth=1
 	stur	w8, [x29, #-20]
 	b	LBB0_16
 LBB0_16:                                ;   in Loop: Header=BB0_12 Depth=1
-	ldur	x8, [x29, #-16]
+	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #4]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #46
@@ -177,3 +176,6 @@ LBB0_24:
 	add	sp, sp, #64
 	ret
 	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l

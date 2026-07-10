@@ -33,29 +33,29 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #20]
 	add	x8, x8, x9
 	ldrb	w8, [x8]
-	strb	w8, [sp, #15]
-	ldrsb	w0, [sp, #15]
+	strb	w8, [sp, #17]
+	ldrsb	w0, [sp, #17]
 	bl	_islower
 	subs	w8, w0, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsb	w0, [sp, #15]
+	ldrsb	w0, [sp, #17]
 	bl	_toupper
-	strb	w0, [sp, #15]
+	strb	w0, [sp, #17]
 	b	LBB0_7
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsb	w0, [sp, #15]
+	ldrsb	w0, [sp, #17]
 	bl	_isupper
 	subs	w8, w0, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsb	w0, [sp, #15]
+	ldrsb	w0, [sp, #17]
 	bl	_tolower
-	strb	w0, [sp, #15]
+	strb	w0, [sp, #17]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7
@@ -72,24 +72,25 @@ LBB0_8:                                 ;   Parent Loop BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_15
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=2
-	ldrsb	w8, [sp, #15]
+	ldrsb	w8, [sp, #17]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #16]
-	ldrsb	w9, [x9, x10]
-	subs	w8, w8, w9
+	add	x9, x9, x10
+	ldrb	w8, [x9]
+	subs	w8, w8, w8
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_13
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
+	add	w8, w8, #2
+	subs	w8, w8, #2
+	strb	w8, [sp, #16]
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldrsb	w8, [sp, #15]
+	ldrsb	w8, [sp, #17]
 	add	w8, w8, #2
-	strb	w8, [sp, #15]
+	strb	w8, [sp, #17]
 	b	LBB0_12
 LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_15
@@ -101,7 +102,7 @@ LBB0_14:                                ;   in Loop: Header=BB0_8 Depth=2
 	str	w8, [sp, #16]
 	b	LBB0_8
 LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldrb	w8, [sp, #15]
+	ldrb	w8, [sp, #17]
 	ldur	x9, [x29, #-16]
 	ldrsw	x10, [sp, #20]
 	add	x9, x9, x10

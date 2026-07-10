@@ -16,16 +16,16 @@ _func0:                                 ; @func0
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
-	str	x0, [sp, #32]
-	stur	xzr, [x29, #-40]
-	stur	xzr, [x29, #-32]
-	add	x0, sp, #40
+	str	x0, [sp, #48]
+	str	xzr, [sp, #56]
+	str	xzr, [sp, #64]
+	str	xzr, [sp, #72]
 	adrp	x1, l___const.func0.numto@PAGE
 	add	x1, x1, l___const.func0.numto@PAGEOFF
 	mov	x2, #80
 	bl	_memcpy
-	str	wzr, [sp, #28]
-	ldr	x8, [sp, #32]
+	str	wzr, [sp, #44]
+	ldr	x8, [sp, #48]
 	ldrb	w8, [x8]
 	subs	w8, w8, #0
 	cset	w8, eq
@@ -36,65 +36,99 @@ LBB0_1:
 LBB0_2:                                 ; =>This Loop Header: Depth=1
                                         ;     Child Loop BB0_3 Depth 2
                                         ;     Child Loop BB0_9 Depth 2
-	str	wzr, [sp, #24]
+	str	wzr, [sp, #40]
 	b	LBB0_3
 LBB0_3:                                 ;   Parent Loop BB0_2 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
+	ldr	x8, [sp, #48]
+	ldrsw	x9, [sp, #40]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #32
 	cset	w8, eq
 	mov	w9, #0
-	str	w9, [sp, #12]                   ; 4-byte Folded Spill
+	str	w9, [sp, #36]                   ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
+	ldr	x8, [sp, #48]
+	ldrsw	x9, [sp, #40]
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #0
 	cset	w8, ne
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	str	w8, [sp, #36]                   ; 4-byte Folded Spill
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
+	ldr	w8, [sp, #36]                   ; 4-byte Folded Reload
 	tbz	w8, #0, LBB0_8
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
+	ldr	x8, [sp, #48]
+	ldrsw	x9, [sp, #40]
 	add	x8, x8, x9
 	ldrb	w8, [x8]
-	ldrsw	x10, [sp, #24]
-	add	x9, sp, #20
-	add	x9, x9, x10
-	strb	w8, [x9]
+	strb	w8, [sp, #35]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #24]
+	ldr	w8, [sp, #44]
 	add	w8, w8, #1
-	str	w8, [sp, #24]
-	ldrsw	x8, [sp, #28]
+	str	w8, [sp, #44]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_2 Depth=1
+	ldrsw	x8, [sp, #40]
 	add	x8, x8, #1
-	str	w8, [sp, #28]
-	b	LBB0_22
-LBB0_8:                                 ;   in Loop: Header=BB0_20 Depth=2
-	ldr	w8, [sp, #28]
-	add	w9, w8, #1
-	str	w9, [sp, #28]
+	str	x8, [sp, #40]
+	b	LBB0_3
+LBB0_9:                                 ;   Parent Loop BB0_2 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #44]
+	subs	w8, w8, #10
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_14
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldrsw	x9, [sp, #40]
+	add	x8, sp, #56
+	add	x8, x8, x9, lsl #3
 	adrp	x9, _func0.out@PAGE
 	add	x9, x9, _func0.out@PAGEOFF
-	add	x8, sp, #20
 	add	x8, x8, x9
-	ldrb	w8, [x8]
+	strb	wzr, [x8]
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_2 Depth=2
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	b	LBB0_14
+LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=2
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	adrp	x8, _func0.out@PAGE
+	add	x8, x8, _func0.out@PAGEOFF
+	strb	wzr, [x8]
+	b	LBB0_14
+LBB0_13:                                ;   in Loop: Header=BB0_2 Depth=2
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	b	LBB0_14
+LBB0_14:                                ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	b	LBB0_18
+LBB0_15:                                ;   in Loop: Header=BB0_2 Depth=1
+	ldr	w8, [sp, #44]
 	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_24
-	b	LBB0_9
-LBB0_9:
+	cset	w8, le
+	tbnz	w8, #0, LBB0_27
+	b	LBB0_16
+LBB0_16:
 	bl	___stack_chk_fail
-LBB0_10:
+LBB0_17:
 	adrp	x0, _func0.out@PAGE
 	add	x0, x0, _func0.out@PAGEOFF
 	ldp	x29, x30, [sp, #160]            ; 16-byte Folded Reload
@@ -147,5 +181,4 @@ l___const.func0.numto:
 	.quad	l_.str.8
 	.quad	l_.str.9
 
-.zerofill __DATA,__bss,_func0.out,1000,0 ; @func0.out
-.subsections_via_symbols
+.zerofill

@@ -37,16 +37,15 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	ldrsw	x9, [x9, x10, lsl #2]
-	add	x9, x8, x9, lsl #2
-	ldr	w8, [x9]
+	add	x9, x9, x10, lsl #2
+	ldr	w8, [x8, x9, lsl #2]
 	add	w8, w8, #1
-	str	w8, [x9]
+	str	w8, [x9, x8, lsl #2]
 	ldr	x8, [sp, #8]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
-	ldrsw	x9, [x9, x10, lsl #2]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x10, x10, #2
+	ldr	w8, [x8, x10]
 	ldur	x9, [x29, #-8]
 	ldrsw	x10, [sp]
 	ldr	w9, [x9, x10, lsl #2]

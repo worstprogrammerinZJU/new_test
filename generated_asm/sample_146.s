@@ -23,7 +23,8 @@ _func0:                                 ; @func0
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	sturb	wzr, [x29, #-1]
+	mov	w8, #0
+	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_2:
 	mov	w8, #2

@@ -31,7 +31,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	s0, [x8, x9, lsl #2]
 	ldr	s1, [sp, #16]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1

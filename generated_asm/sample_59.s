@@ -3,7 +3,7 @@
 	.section	__TEXT,__literal8,8byte_literals
 	.p2align	3                               ; -- Begin function func0
 lCPI0_0:
-	.quad	0x3fdfffffffffffff              ; double 0.49999999999999994
+	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
 	.section	__TEXT,__text,regular,pure_instructions
 	.globl	_func0
 	.p2align	2
@@ -28,17 +28,18 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
+	fcvt	d1, s0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	ldr	s1, [x8, x9, lsl #2]
-	fcvt	d1, s1
-	fmov	d2, #-0.00000000
-	fand	d2, d2, d1
-	fmov	d1, #-0.00000000
-	fadd	d0, d0, d1
-	frintm	d0, d0
-	fmov	d1, #1.00000000
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d0, s0
+	fabs	d2, d0
+	fmov	d0, #-0.0000000000000000
+	fadd	d0, d0, d2
+	fcvt	d0, d0
+	fsub	d0, d0, d1
+	fabs	d0, d0
+	fmov	d1, #-0.0000000000000000
 	fcmp	d0, d1
 	cset	w8, pl
 	tbnz	w8, #0, LBB0_7
@@ -55,22 +56,53 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fmov	d2, #-0.00000000
-	fand	d2, d2, d0
-	fmov	d1, #1.00000000
-	fadd	d0, d0, d1
-	frintm	d0, d0
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #-0.0000000000000000
+	fadd	d0, d0, d2
+	fcvt	d0, d0
+	fsub	d0, d0, d1
+	fabs	d0, d0
 	fcvtzs	w8, d0
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #4]
 	ldr	s0, [x9, x10, lsl #2]
-	fcvt	d0, s0
-	fmov	d2, #1.00000000
-	fand	d2, d2, d0
-	fadd	d0, d0, d1
-	frintm	d0, d0
-	fcvtzs	w9, d0
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #-0.0000000000000000
+	fadd	d0, d0, d2
+	fcvt	d0, d0
+	fsub	d0, d0, d1
+	round	d0, d0
+	fcvtzs	w8, d0
+	mul	w9, w8, w9
+	ldr	x8, [sp, #8]
+	add	x8, x8, w9, sxtw
+	str	x8, [sp, #8]
+	b	LBB0_6
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #-0.0000000000000000
+	fadd	d0, d0, d2
+	fcvt	d0, d0
+	fsub	d0, d0, d1
+	fabs	d0, d0
+	fcvtzs	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #4]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, #-0.0000000000000000
+	fadd	d0, d0, d2
+	fcvt	d0, d0
+	fsub	d0, d0, d1
+	round	d0, d0
+	fcvtzs	w8, d0
 	mul	w9, w8, w9
 	ldr	x8, [sp, #8]
 	add	x8, x8, w9, sxtw

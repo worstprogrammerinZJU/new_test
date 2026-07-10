@@ -22,9 +22,11 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	str	w8, [sp, #16]
-	ldr	w8, [sp, #16]
-	lsl	w8, w8, #1
-	add	w9, w8, #1
+	ldr	w9, [sp, #16]
+	mov	w8, #2
+	mul	w9, w8, w9
+	mov	w8, #1
+	add	w9, w9, #1
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x0, w8
@@ -53,17 +55,17 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	mov	x3, #-1
 	str	x3, [sp]                        ; 8-byte Folded Spill
 	bl	___strncpy_chk
-	ldr	x3, [sp]                        ; 8-byte Folded Reload
 	ldr	x8, [sp, #8]
 	ldrsw	x9, [sp, #16]
 	add	x8, x8, x9
 	ldrsw	x9, [sp, #4]
-	subs	x0, x8, x9
+	subs	x8, x8, x9
 	ldr	x1, [sp, #24]
 	ldrsw	x2, [sp, #4]
+	add	x0, x8, x9
 	bl	___strncpy_chk
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp, #16]
+	ldr	x9, [sp, #8]
+	ldrsw	x8, [sp, #16]
 	add	x8, x8, x9
 	strb	wzr, [x8]
 	ldur	x0, [x29, #-16]

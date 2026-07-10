@@ -19,47 +19,47 @@ _func0:                                 ; @func0
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-24]
-	str	w0, [sp, #20]
-	add	x0, sp, #24
+	str	w0, [sp, #32]
+	add	x0, sp, #36
 	mov	w1, #0
-	mov	x2, #4000
+	mov	w2, #4000
 	bl	_memset
-	str	wzr, [sp, #24]
+	str	wzr, [sp, #36]
 	mov	w8, #1
-	str	w8, [sp, #28]
+	str	w8, [sp, #40]
 	mov	w8, #2
-	str	w8, [sp, #16]
+	str	w8, [sp, #24]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #20]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #32]
 	subs	w8, w8, w9
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
+	ldr	w8, [sp, #24]
 	subs	w9, w8, #1
-	add	x8, sp, #24
-	ldr	w9, [x8, w9, sxtw #2]
-	ldr	w10, [sp, #16]
-	subs	w10, w10, #2
-	add	x8, x8, w10, sxtw #2
-	ldr	w10, [x8, w9, sxtw #2]
-	add	w9, w9, w10
-	ldrsw	x10, [sp, #16]
-	str	w9, [x8, x10, lsl #2]
+	add	x8, sp, #36
+	ldr	w8, [x8, w9, sxtw #2]
+	ldr	w9, [sp, #24]
+	subs	w9, w9, #2
+	add	x9, sp, #36
+	ldr	w8, [x8, w9, sxtw #2]
+	subs	w8, w8, w8, sxtw
+	ldrsw	x10, [sp, #24]
+	str	w8, [x8, x10, lsl #2]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
+	ldr	w8, [sp, #24]
 	add	w8, w8, #1
-	str	w8, [sp, #16]
+	str	w8, [sp, #24]
 	b	LBB0_1
 LBB0_4:
-	ldrsw	x9, [sp, #20]
-	add	x8, sp, #24
+	ldrsw	x9, [sp, #32]
+	add	x8, sp, #36
 	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	str	w8, [sp, #20]                   ; 4-byte Folded Spill
 	ldur	x9, [x29, #-24]
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
@@ -71,10 +71,10 @@ LBB0_4:
 LBB0_5:
 	bl	___stack_chk_fail
 LBB0_6:
-	ldr	w0, [sp, #12]                   ; 4-byte Folded Reload
-	add	sp, sp, #4032
+	ldr	w0, [sp, #20]                   ; 4-byte Folded Reload
 	ldp	x29, x30, [sp, #16]             ; 16-byte Folded Reload
 	ldp	x28, x27, [sp], #32             ; 16-byte Folded Reload
+	add	sp, sp, #4032
 	ret
 	.cfi_endproc
                                         ; -- End function

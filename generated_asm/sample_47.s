@@ -70,14 +70,8 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w10, w10, #1
 	str	w10, [sp, #24]
 	add	x9, x8, x9
-	mov	w8, #95
-	strb	w8, [x9]
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #24]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #24]
-	strb	w8, [x8, x9]
+	add	x8, x8, x9
+	strb	w8, [x8]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-20]
@@ -85,14 +79,15 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	cset	w8, le
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
-LBB0_9:
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #24]
 	mov	x10, x9
 	add	w10, w10, #1
 	str	w10, [sp, #24]
+	add	x9, x8, x9
 	add	x8, x8, x9
-	strb	wzr, [x8]
+	strb	w8, [x8]
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-16]

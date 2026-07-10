@@ -55,13 +55,13 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
+	ldrsw	x10, [sp]
 	ldr	x9, [sp, #16]
-	ldr	x12, [sp, #8]
-	ldrsw	x10, [x12]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [x12]
+	ldr	x11, [sp, #8]
+	ldrsw	x12, [x11]
+	mov	x10, x10
+	add	w10, w10, #1
+	str	w10, [x11]
 	str	w8, [x9, x10, lsl #2]
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1

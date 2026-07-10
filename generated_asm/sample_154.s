@@ -25,10 +25,10 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #97
 	add	w8, w8, #4
-	mov	w10, #26
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #26
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
 	add	w8, w8, #97
 	str	w8, [sp, #8]
 	ldr	w8, [sp, #8]

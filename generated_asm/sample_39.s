@@ -24,15 +24,15 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #12]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
-	frintm	d0, d0
-	ldr	d1, [sp, #24]
-	ldrsw	x8, [sp, #12]
-	ldr	s1, [x8, x9, lsl #2]
-	fcvt	d1, s1
-	frintm	d1, d1
-	fmul	d1, d0, d1
-	ldr	w8, [sp, #16]
-	add	w8, w8, d1
+	fcvtpu	w8, d0
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #12]
+	ldr	s0, [x9, x10, lsl #2]
+	fcvt	d0, s0
+	fcvtpu	w8, d0
+	mul	w8, w8, w9
+	ldr	w9, [sp, #16]
+	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1

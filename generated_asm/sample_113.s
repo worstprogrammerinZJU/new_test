@@ -40,6 +40,7 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_6:
 	mov	w8, #1
+	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
 	b	LBB0_7
 LBB0_7:

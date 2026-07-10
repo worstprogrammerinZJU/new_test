@@ -41,20 +41,17 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #4]
+	ldrsw	x9, [sp, #8]
 	ldr	s0, [x8, x9, lsl #2]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp]
 	ldr	s1, [x8, x9, lsl #2]
 	fsub	s0, s0, s1
-	fcvt	d0, s0
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d1, [x8, lCPI0_0@PAGEOFF]
-	fand	d0, d0, d1
-	ldr	s1, [sp, #8]
-	fcvt	d1, s1
-	fcmp	d0, d1
-	cset	w8, pl
+	fcvt	d1, s0
+	fabs	d1, d1
+	ldr	s0, [sp, #8]
+	fcmp	s0, d1
+	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
@@ -71,9 +68,9 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
+	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	str	w8, [sp, #4]
+	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_10:
 	mov	w8, #10
