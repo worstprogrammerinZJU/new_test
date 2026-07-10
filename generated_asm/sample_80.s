@@ -36,7 +36,7 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	subs	w8, w8, #0
 	cset	w8, eq
 	mov	w9, #0
-	str	w9, [sp, #12]                   ; 4-byte Folded Spill
+	str	w9, [sp, #16]                   ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -46,7 +46,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	subs	w8, w0, #0
 	cset	w8, ne
 	mov	w9, #0
-	str	w9, [sp, #12]                   ; 4-byte Folded Spill
+	str	w9, [sp, #16]                   ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -54,10 +54,10 @@ LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsb	w8, [x8]
 	subs	w8, w8, #45
 	cset	w8, ne
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	str	w8, [sp, #16]                   ; 4-byte Folded Spill
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
+	ldr	w8, [sp, #16]                   ; 4-byte Folded Reload
 	tbz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -76,6 +76,7 @@ LBB0_9:
 	b	LBB0_21
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #32]
+	adrp	x1, l0, lsl #12            ; 4-byte Folded Spill
 	add	x1, sp, #24
 	mov	w2, #10
 	bl	_strtol
@@ -87,18 +88,18 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_14
 	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+LBB0_11:                                ;   in Loop: Header=BB0_15 Depth=2
 	ldr	x8, [sp, #24]
 	ldrsb	w8, [x8]
 	subs	w8, w8, #44
-	cset	w8, eq
+	cset	w8, ne
 	str	w8, [sp, #20]                   ; 4-byte Folded Spill
 	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+LBB0_12:                                ;   in Loop: Header=BB0_15 Depth=2
 	ldr	w8, [sp, #20]                   ; 4-byte Folded Reload
 	tbz	w8, #0, LBB0_19
 	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=2
+LBB0_13:                                ;   in Loop: Header=BB0_15 Depth=2
 	ldr	x8, [sp, #24]
 	add	x8, x8, #1
 	str	x8, [sp, #24]

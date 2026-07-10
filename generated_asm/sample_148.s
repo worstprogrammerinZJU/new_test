@@ -20,7 +20,7 @@ _func0:                                 ; @func0
 	str	x8, [x9]
 	sub	x0, x29, #10
 	mov	w1, #0
-	mov	x2, #6
+	mov	w2, #6
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
@@ -79,31 +79,29 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldur	w8, [x29, #-16]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldr	x10, [sp, #32]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	add	x9, x8, #1
+	ldrb	w8, [x9]
+	ldr	x9, [sp, #32]
 	ldrsw	x11, [sp, #28]
-	mov	x12, x11
-	add	w12, w12, #1
-	str	w12, [sp, #28]
-	strb	w8, [x10, x11]
-	ldurb	w8, [x29, #-16]
-	ldr	x10, [sp, #32]
-	ldrsw	x11, [sp, #28]
-	add	x10, x10, x11
-	strb	w8, [x10]
-	ldrb	w8, [sp, #27]
-	ldr	x10, [sp, #32]
+	mov	x10, x11
+	add	w10, w10, #1
+	str	w10, [sp, #28]
+	add	x9, x9, x11
+	strb	w8, [x9]
+	ldrb	w8, [sp, #28]
+	ldr	x9, [sp, #32]
+	ldur	w10, [x29, #-16]
 	ldr	w11, [sp, #28]
-	ldr	w12, [sp, #28]
-	subs	w11, w11, w12
-	subs	w11, w11, #1
-	add	x10, x10, w11, sxtw
-	strb	w8, [x10]
-	b	LBB0_7
+	subs	w10, w10, w11
+	subs	w10, w10, #1
+	add	x9, x9, w10, sxtw
+	strb	w8, [x9]
+	b	LBB0_13
 LBB0_9:
 	b	LBB0_10
 LBB0_10:

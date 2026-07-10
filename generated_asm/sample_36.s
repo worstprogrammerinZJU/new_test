@@ -74,14 +74,14 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	subs	w9, w9, #1
 	ldr	w8, [x8, w9, sxtw #2]
 	ldr	x9, [sp, #8]
-	ldr	w11, [sp, #4]
-	mov	w10, #2
-	subs	w11, w11, #2
-	ldr	w9, [x9, w11, sxtw #2]
+	ldr	w10, [sp, #4]
+	subs	w10, w10, #2
+	ldr	w9, [x9, w10, sxtw #2]
 	add	w8, w8, w9
 	add	w8, w8, #1
 	ldr	w9, [sp, #4]
 	add	w9, w9, #1
+	mov	w10, #2
 	sdiv	w9, w9, w10
 	add	w8, w8, w9
 	ldr	x9, [sp, #8]

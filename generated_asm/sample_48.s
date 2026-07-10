@@ -132,8 +132,7 @@ LBB0_15:                                ;   in Loop: Header=BB0_12 Depth=1
 LBB0_16:                                ;   in Loop: Header=BB0_12 Depth=1
 	ldur	x8, [x29, #-16]
 	ldrsw	x9, [sp, #4]
-	add	x8, x8, x9
-	ldrsb	w8, [x8]
+	ldrsb	w8, [x8, x9]
 	subs	w8, w8, #46
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_18
@@ -161,7 +160,7 @@ LBB0_21:
 	subs	w8, w8, #1
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_23
-	b	LBB0_9
+	b	LBB0_22
 LBB0_22:
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
@@ -177,3 +176,4 @@ LBB0_24:
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret
+	.cfi_endproc

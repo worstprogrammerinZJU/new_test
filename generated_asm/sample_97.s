@@ -83,24 +83,24 @@ LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrb	w8, [sp, #24]
+	ldrb	w8, [sp, #22]
 	strb	w8, [sp, #15]
-	ldrb	w8, [sp, #25]
-	strb	w8, [sp, #24]
+	ldrb	w8, [sp, #23]
+	strb	w8, [sp, #22]
 	ldrb	w8, [sp, #24]
-	strb	w8, [sp, #25]
+	strb	w8, [sp, #23]
 	ldrb	w8, [sp, #15]
 	strb	w8, [sp, #24]
 	b	LBB0_9
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrb	w8, [sp, #24]
 	strb	w8, [sp, #14]
-	ldrb	w8, [sp, #25]
+	ldrb	w8, [sp, #23]
 	strb	w8, [sp, #24]
 	ldrb	w8, [sp, #22]
-	strb	w8, [sp, #25]
+	strb	w8, [sp, #23]
 	ldrb	w8, [sp, #14]
-	strb	w8, [sp, #24]
+	strb	w8, [sp, #22]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_10

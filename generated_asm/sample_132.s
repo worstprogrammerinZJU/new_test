@@ -19,7 +19,7 @@ _func0:                                 ; @func0
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x0, w8
-	mov	x1, #4
+	mov	w1, #4
 	bl	_calloc
 	str	x0, [sp, #8]
 	mov	w8, #-1

@@ -87,63 +87,75 @@ LBB0_14:                                ;   in Loop: Header=BB0_3 Depth=1
 LBB0_15:
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8]
-	add	x0, sp, #28
-	strb	w8, [sp, #28]
+	add	x0, sp, #29
+	str	x0, [sp, #8]                    ; 8-byte Folded Spill
+	strb	w8, [sp, #29]
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8, #1]
-	strb	w8, [sp, #29]
-	strb	wzr, [sp, #30]
+	strb	w8, [sp, #30]
+	strb	wzr, [sp, #31]
+	ldur	x8, [x29, #-16]
+	ldrb	w8, [x8, #3]
+	strb	w8, [sp, #32]
+	ldur	x8, [x29, #-16]
+	ldrb	w8, [x8, #4]
+	strb	w8, [sp, #33]
+	strb	wzr, [sp, #34]
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8, #6]
-	strb	w8, [sp, #27]
+	strb	w8, [sp, #35]
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8, #7]
-	strb	w8, [sp, #26]
+	strb	w8, [sp, #36]
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8, #8]
-	strb	w8, [sp, #25]
+	strb	w8, [sp, #37]
 	ldur	x8, [x29, #-16]
 	ldrb	w8, [x8, #9]
-	strb	w8, [sp, #24]
-	strb	wzr, [sp, #23]
+	strb	w8, [sp, #38]
+	strb	wzr, [sp, #39]
 	bl	_atoi
-	stur	w0, [x29, #-20]
+	mov	x8, x0
+	ldr	x0, [sp, #8]                    ; 8-byte Folded Reload
+	stur	w8, [x29, #-20]
 	bl	_atoi
-	stur	w0, [x29, #-24]
+	mov	x8, x0
+	ldr	x0, [sp, #8]                    ; 8-byte Folded Reload
+	stur	w8, [x29, #-24]
 	bl	_atoi
 	stur	w0, [x29, #-28]
 	ldur	w8, [x29, #-20]
 	subs	w8, w8, #1
 	cset	w8, lt
-	tbnz	w8, #0, LBB0_27
-	b	LBB0_24
-LBB0_24:
+	tbnz	w8, #0, LBB0_17
+	b	LBB0_16
+LBB0_16:
 	ldur	w8, [x29, #-20]
-	subs	w8, w8, #29
+	subs	w8, w8, #12
 	cset	w8, le
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_25
-LBB0_25:
+	tbnz	w8, #0, LBB0_18
+	b	LBB0_17
+LBB0_17:
 	stur	wzr, [x29, #-4]
 	b	LBB0_31
-LBB0_26:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #2
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_30
-	b	LBB0_27
-LBB0_27:
+LBB0_18:
 	ldur	w8, [x29, #-24]
-	subs	w8, w8, #29
+	subs	w8, w8, #1
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_20
+	b	LBB0_19
+LBB0_19:
+	ldur	w8, [x29, #-24]
+	subs	w8, w8, #31
 	cset	w8, le
-	tbnz	w8, #0, LBB0_30
-	b	LBB0_28
-LBB0_28:
+	tbnz	w8, #0, LBB0_20
+	b	LBB0_20
+LBB0_20:
 	stur	wzr, [x29, #-4]
 	b	LBB0_31
-LBB0_30:
+LBB0_21:
 	mov	w8, #1
-	stur	w8, [x29, #-4]
+	sturb	w8, [x29, #-4]
 	b	LBB0_31
 LBB0_31:
 	ldur	w0, [x29, #-4]

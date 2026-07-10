@@ -14,7 +14,7 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
 	str	x1, [sp, #16]
-	mov	x0, #256
+	mov	w0, #256
 	bl	_malloc
 	str	x0, [sp, #8]
 	ldr	x8, [sp, #16]

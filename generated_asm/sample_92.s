@@ -21,9 +21,8 @@ _func0:                                 ; @func0
 	add	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9
-	sxtw	x9, w8
-	mov	x8, #4
-	mul	x0, x8, x9
+	sxtw	x8, w8
+	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #32]
 	str	wzr, [sp, #24]
@@ -31,8 +30,8 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #28]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #28]
-	mov	w9, #3
+	ldr	w9, [sp, #28]
+	mov	w8, #3
 	mul	w8, w8, w9
 	ldur	w9, [x29, #-12]
 	subs	w8, w8, w9
@@ -67,18 +66,23 @@ LBB0_5:                                 ; =>This Loop Header: Depth=1
 	subs	w9, w9, #1
 	subs	w8, w8, w9
 	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
+	tbnz	w8, #0, LBB0_16
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #28]
-	mov	w10, #3
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
+	str	w8, [sp, #16]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #28]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #28]
+	str	w8, [x9, x10, lsl #2]
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #28]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_14
+LBB0_7:                                 ;   in Loop: Header=BB0_17 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #28]
 	ldr	w8, [x8, x9, lsl #2]
@@ -86,22 +90,14 @@ LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldrsw	x10, [sp, #28]
 	str	w8, [x9, x10, lsl #2]
 	b	LBB0_21
-LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	w8, [x8, x9, lsl #2]
-	ldur	x9, [x29, #-24]
-	ldrsw	x10, [sp, #28]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_21
-LBB0_9:                                 ;   in Loop: Header=BB0_17 Depth=1
-	b	LBB0_17
-LBB0_10:                                ;   in Loop: Header=BB0_17 Depth=1
+LBB0_8:                                 ;   in Loop: Header=BB0_17 Depth=1
+	b	LBB0_22
+LBB0_22:                                ;   in Loop: Header=BB0_17 Depth=1
 	ldr	w8, [sp, #28]
 	add	w8, w8, #1
 	str	w8, [sp, #28]
 	b	LBB0_17
-LBB0_11:
+LBB0_23:
 	ldr	x0, [sp, #32]
 	bl	_free
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload

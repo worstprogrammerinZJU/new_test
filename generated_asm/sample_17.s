@@ -91,7 +91,7 @@ LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=2
 	str	w8, [sp, #28]
 	b	LBB0_3
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	mov	x0, #100
+	mov	w0, #100
 	bl	_malloc
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
@@ -99,25 +99,15 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-24]
 	ldursw	x9, [x29, #-28]
 	ldr	x0, [x8, x9, lsl #3]
-	ldr	w8, [sp, #32]
-                                        ; implicit-def: $x12
-	mov	x12, x8
-	ldr	w8, [sp, #32]
-                                        ; implicit-def: $x11
-	mov	x11, x8
-	ldr	w8, [sp, #32]
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	ldr	w9, [sp, #32]
-                                        ; implicit-def: $x8
-	mov	x8, x9
+	ldr	w4, [sp, #32]
+	ldr	w5, [sp, #32]
+	ldr	w6, [sp, #32]
 	mov	x9, sp
-	str	x12, [x9]
-	str	x11, [x9, #8]
-	str	x10, [x9, #16]
-	str	x8, [x9, #24]
-	mov	w1, #0
-	mov	x2, #-1
+	str	xzr, [x9]
+	str	xzr, [x9, #8]
+	str	xzr, [x9, #16]
+	str	xzr, [x9, #24]
+	str	xzr, [x9, #32]
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk

@@ -1,6 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
+	.globl	_func0                       ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -32,7 +32,7 @@ LBB0_2:
 	ldr	d0, [sp, #16]
 	fmov	d1, #0.50000000
 	fadd	d0, d0, d1
-	frintp	d0, d0
+	frintm	d0, d0
 	str	d0, [sp, #8]                    ; 8-byte Folded Spill
 	b	LBB0_3
 LBB0_3:

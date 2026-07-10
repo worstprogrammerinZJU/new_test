@@ -35,7 +35,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	str	w8, [sp, #8]                    ; 4-byte Folded Spill
 	ldur	x0, [x29, #-8]
 	bl	_strlen
-	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
 	subs	x8, x8, x0
 	cset	w8, lo
 	str	w8, [sp, #20]                   ; 4-byte Folded Spill

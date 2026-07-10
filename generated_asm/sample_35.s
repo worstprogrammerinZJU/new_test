@@ -64,50 +64,39 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-28]
-	ldr	x9, [sp, #32]
-	ldur	w10, [x29, #-28]
-	lsl	w10, w10, #2
-	str	w8, [x9, w10, sxtw #2]
-	b	LBB0_20
-LBB0_10:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldr	x9, [sp, #32]
-	ldursw	x8, [x29, #-28]
-	ldr	w8, [x9, x8, lsl #2]
-	ldr	w9, [sp, #24]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_22
+	add	w9, w8, #1
+	str	w9, [sp, #32]
+	b	LBB0_1
+LBB0_10:
+	ldur	w8, [x29, #-12]
+	ldur	w9, [x29, #-16]
+	mul	w8, w8, w9
+	str	w8, [sp, #20]
+	ldr	w8, [sp, #28]
+	subs	w8, w8, #0
+	cset	w8, le
+	tbnz	w8, #0, LBB0_13
 	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldr	x9, [sp, #32]
-	ldursw	x8, [x29, #-28]
-	ldr	w8, [x9, x8, lsl #2]
-	add	w8, w8, #1
-	ldr	w8, [x8]
-	ldr	w9, [sp, #24]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	str	w8, [sp, #24]
-	b	LBB0_23
-LBB0_12:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldr	w8, [sp, #24]
-	ldr	x9, [sp, #32]
-	ldur	w10, [x29, #-28]
-	add	w10, w10, #1
-	str	w10, [sp, #24]
-	b	LBB0_23
-LBB0_13:                                ;   in Loop: Header=BB0_23 Depth=1
-	b	LBB0_28
-LBB0_14:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldur	w8, [x29, #-28]
-	add	w8, w8, #1
-	stur	w8, [x29, #-28]
-	b	LBB0_23
-LBB0_15:
-	ldr	x0, [sp, #32]
+LBB0_11:
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #28]
+	mov	x10, #1
+	str	w10, [x8, x9, lsl #2]
+	b	LBB0_27
+LBB0_12:                                ;   in Loop: Header=BB0_10 Depth=1
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	ldursw	x10, [x29, #-28]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_27
+LBB0_13:                                ;   in Loop: Header=BB0_10 Depth=1
+	ldr	w8, [sp, #20]
+	ldr	x9, [sp, #24]
+	ldursw	x10, [x29, #-28]
+	str	w8, [x9, x10, lsl #2]
+	b	LBB0_27
+LBB0_14:
+	ldr	x0, [sp, #24]
 	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
 	add	sp, sp, #80
 	ret

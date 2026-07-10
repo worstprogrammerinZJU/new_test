@@ -83,11 +83,17 @@ LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=2
 LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #16]
 	subs	w8, w8, #10
-	str	w8, [sp, #20]
-	b	LBB0_1
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldrsb	w8, [sp, #15]
+	add	w8, w8, #2
+	strb	w8, [sp, #15]
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_15
-LBB0_12:                                ;   in Loop: Header=BB0_8 Depth=2
+LBB0_13:                                ;   in Loop: Header=BB0_8 Depth=2
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_8 Depth=2
 	ldr	w8, [sp, #16]
@@ -100,6 +106,17 @@ LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x10, [sp, #20]
 	add	x9, x9, x10
 	strb	w8, [x9]
+	b	LBB0_16
+LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	add	w8, w8, #1
+	str	w8, [sp, #20]
+	b	LBB0_1
+LBB0_17:
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #20]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

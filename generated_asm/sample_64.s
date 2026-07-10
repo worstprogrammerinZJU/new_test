@@ -18,7 +18,7 @@ _func0:                                 ; @func0
 	stur	x8, [x29, #-8]
 	str	w0, [sp, #36]
 	str	x1, [sp, #24]
-	sub	x0, x29, #124
+	add	x0, sp, #88
 	adrp	x1, l___const.func0.rep@PAGE
 	add	x1, x1, l___const.func0.rep@PAGEOFF
 	mov	x2, #104
@@ -26,7 +26,7 @@ _func0:                                 ; @func0
 	add	x0, sp, #40
 	adrp	x1, l___const.func0.num@PAGE
 	add	x1, x1, l___const.func0.num@PAGEOFF
-	mov	x2, #52
+	mov	w2, #52
 	bl	_memcpy
 	str	wzr, [sp, #20]
 	ldr	x8, [sp, #24]
@@ -54,10 +54,12 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x0, [sp, #24]
 	ldrsw	x9, [sp, #20]
-	sub	x8, x29, #124
+	add	x8, sp, #48
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
 	ldr	x1, [x8, x9, lsl #3]
 	mov	x2, #-1
 	bl	___strcat_chk
+	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
 	ldrsw	x9, [sp, #20]
 	ldr	w9, [x8, x9, lsl #2]
 	ldr	w8, [sp, #36]

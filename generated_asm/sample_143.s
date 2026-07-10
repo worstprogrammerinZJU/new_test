@@ -13,7 +13,7 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-12]
-	mov	x0, #64
+	mov	w0, #64
 	bl	_malloc
 	stur	x0, [x29, #-24]
 	ldur	x8, [x29, #-24]
@@ -86,9 +86,9 @@ LBB0_8:
 	mov	x10, x9
 	subs	w10, w10, #1
 	stur	w10, [x29, #-28]
-	add	x9, x8, x9
-	mov	w8, #100
-	strb	w8, [x9]
+	add	x8, x8, x9
+	mov	w9, #100
+	strb	w9, [x8]
 	ldur	w8, [x29, #-28]
 	add	w8, w8, #1
 	str	w8, [sp, #32]
@@ -119,13 +119,14 @@ LBB0_10:
 	ldur	x8, [x29, #-24]
 	ldrsw	x9, [sp, #32]
 	add	x1, x8, x9
-	mov	x2, #-1
-	str	x2, [sp, #8]                    ; 8-byte Folded Spill
+	mov	w9, #0
+	movk	w9, #65535, lsl #16
+	subs	w2, w9, w1
 	bl	___strcpy_chk
-	ldr	x2, [sp, #8]                    ; 8-byte Folded Reload
 	ldr	x0, [sp, #16]
 	adrp	x1, l_.str@PAGE
 	add	x1, x1, l_.str@PAGEOFF
+	mov	x2, x1
 	bl	___strcat_chk
 	ldur	x0, [x29, #-24]
 	bl	_free

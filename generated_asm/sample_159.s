@@ -113,8 +113,6 @@ LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=1
 	ldr	w8, [sp, #32]
 	mov	w9, #10
 	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w10, w8, w10
 	ldr	w8, [sp, #28]
 	add	w8, w8, w10
 	str	w8, [sp, #28]

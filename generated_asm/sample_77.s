@@ -17,9 +17,9 @@ _func0:                                 ; @func0
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
 	str	x0, [sp, #32]
-	stur	xzr, [x29, #-48]
 	stur	xzr, [x29, #-40]
-	sub	x0, x29, #56
+	stur	xzr, [x29, #-32]
+	add	x0, sp, #40
 	adrp	x1, l___const.func0.numto@PAGE
 	add	x1, x1, l___const.func0.numto@PAGEOFF
 	mov	x2, #80
@@ -59,60 +59,42 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
-	subs	w8, w8, #1
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
-	b	LBB0_8
+	tbz	w8, #0, LBB0_8
+	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #24]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
+	ldrsw	x10, [sp, #24]
+	add	x9, sp, #20
+	add	x9, x9, x10
+	strb	w8, [x9]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	ldrsw	x8, [sp, #28]
+	add	x8, x8, #1
+	str	w8, [sp, #28]
+	b	LBB0_22
+LBB0_8:                                 ;   in Loop: Header=BB0_20 Depth=2
+	ldr	w8, [sp, #28]
 	add	w9, w8, #1
-	str	w9, [sp, #24]
+	str	w9, [sp, #28]
 	adrp	x9, _func0.out@PAGE
 	add	x9, x9, _func0.out@PAGEOFF
-	add	x8, x8, w9, sxtw
-	strb	w8, [x8]
-	b	LBB0_25
-LBB0_7:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_25
-LBB0_8:                                 ;   in Loop: Header=BB0_18 Depth=1
-	b	LBB0_28
-LBB0_9:                                ;   in Loop: Header=BB0_18 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_18
-LBB0_10:
-	ldr	w8, [sp, #28]
+	add	x8, sp, #20
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_31
-	b	LBB0_11
-LBB0_11:
-	ldr	w8, [sp, #28]
-	subs	w9, w8, #1
-	adrp	x8, _func0.out@PAGE
-	add	x8, x8, _func0.out@PAGEOFF
-	add	x8, x8, w9, sxtw
-	strb	wzr, [x8]
-	b	LBB0_12
-LBB0_12:
-	adrp	x8, _func0.out@PAGE
-	strb	wzr, [x8, _func0.out@PAGEOFF]
-	b	LBB0_13
-LBB0_13:
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_14
-LBB0_14:
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_24
+	b	LBB0_9
+LBB0_9:
 	bl	___stack_chk_fail
-LBB0_15:
+LBB0_10:
 	adrp	x0, _func0.out@PAGE
 	add	x0, x0, _func0.out@PAGEOFF
 	ldp	x29, x30, [sp, #160]            ; 16-byte Folded Reload

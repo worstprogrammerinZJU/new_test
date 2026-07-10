@@ -27,8 +27,10 @@ _func0:                                 ; @func0
 	fcvt	d0, s0
 	adrp	x8, lCPI0_0@PAGE
 	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fand	d0, d0, d1
+	fmov	d1, #1.00000000
 	fcmp	d0, d1
-	cset	w8, mi
+	cset	w8, gt
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_1
 LBB0_1:
@@ -44,8 +46,10 @@ LBB0_1:
 	fcvt	d0, s0
 	adrp	x8, lCPI0_0@PAGE
 	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fand	d0, d0, d1
+	fmov	d1, #1.00000000
 	fcmp	d0, d1
-	cset	w8, mi
+	cset	w8, gt
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:
@@ -61,8 +65,10 @@ LBB0_2:
 	fcvt	d0, s0
 	adrp	x8, lCPI0_0@PAGE
 	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	fand	d0, d0, d1
+	fmov	d1, #1.00000000
 	fcmp	d0, d1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:

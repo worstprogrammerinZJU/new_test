@@ -17,7 +17,7 @@ _func0:                                 ; @func0
 	stur	x2, [x29, #-24]
 	stur	w3, [x29, #-28]
 	str	x4, [sp, #24]
-	mov	x0, #800
+	mov	w0, #800
 	bl	_malloc
 	str	x0, [sp, #16]
 	str	wzr, [sp, #12]
@@ -57,7 +57,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	mov	x0, #8
+	mov	w0, #8
 	bl	_malloc
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]

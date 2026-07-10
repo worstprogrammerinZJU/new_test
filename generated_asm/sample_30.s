@@ -16,8 +16,6 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_2:
@@ -44,10 +42,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
+	strb	wzr, [sp, #31]
 	b	LBB0_13
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	w8, [sp, #8]
@@ -80,10 +75,7 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
+	strb	wzr, [sp, #31]
 	b	LBB0_13
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_11
@@ -94,8 +86,6 @@ LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_3
 LBB0_12:
 	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_13:

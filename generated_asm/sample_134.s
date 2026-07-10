@@ -1,6 +1,6 @@
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
+	.globl	_func0                       ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -24,7 +24,7 @@ LBB0_1:
 	fadd	s0, s0, s1
 	ldr	s1, [sp, #20]
 	fcmp	s0, s1
-	cset	w8, mi
+	cset	w8, ls
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:
@@ -65,12 +65,16 @@ LBB0_4:
 	fsqrt	s0, s0
 	str	s0, [sp, #8]
 	ldr	s0, [sp, #8]
-	mov	w8, #1112014848
-	fmov	s1, w8
+	fmov	s1, #1000000000
 	fmul	s0, s0, s1
-	frintm	s0, s0
-	fdiv	s0, s0, s1
-	str	s0, [sp, #28]
+	fcvtas	x8, s0
+	adrp	x9, lCPI0_0@PAGE
+	ldr	s2, [x9, lCPI0_0@PAGEOFF]
+	fmul	s2, s2, s1
+	fcvtas	x8, s2
+	ands	x8, x8, #0x1
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_5
 	b	LBB0_5
 LBB0_5:
 	ldr	s0, [sp, #28]

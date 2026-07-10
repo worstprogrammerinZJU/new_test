@@ -18,6 +18,7 @@ _func0:                                 ; @func0
 	stur	x3, [x29, #-32]
 	mov	w8, #-1000
 	stur	w8, [x29, #-36]
+                                        ; kill: def $x8 killed $xzr
 	str	xzr, [sp, #48]
 	str	wzr, [sp, #44]
 	b	LBB0_1
@@ -114,11 +115,8 @@ LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_16:
 	ldur	x0, [x29, #-32]
-	ldur	x10, [x29, #-8]
-	ldr	x8, [sp, #48]
-	mov	x9, sp
-	str	x10, [x9]
-	str	x8, [x9, #8]
+	ldur	x4, [x29, #-8]
+	ldr	x5, [sp, #48]
 	mov	w1, #0
 	mov	x2, #-1
 	adrp	x3, l_.str@PAGE

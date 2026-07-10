@@ -19,50 +19,50 @@ _func0:                                 ; @func0
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-24]
-	str	w0, [sp, #20]
-	add	x0, sp, #24
+	str	w0, [sp, #12]
+	add	x0, sp, #16
 	mov	w1, #0
-	mov	x2, #400
+	mov	w2, #400
 	bl	_memset
-	str	wzr, [sp, #28]
+	str	wzr, [sp, #20]
 	mov	w8, #1
-	str	w8, [sp, #32]
+	str	w8, [sp, #24]
 	mov	w8, #3
-	str	w8, [sp, #16]
+	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #20]
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #12]
 	subs	w8, w8, w9
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	subs	w8, w8, #1
-	add	x9, sp, #24
-	ldr	w8, [x9, w8, sxtw #2]
-	ldr	w10, [sp, #16]
+	ldr	w8, [sp, #8]
+	subs	w9, w8, #1
+	add	x8, sp, #16
+	ldr	w9, [x8, w9, sxtw #2]
+	ldr	w10, [sp, #8]
 	subs	w10, w10, #2
-	ldr	w10, [x9, w10, sxtw #2]
-	add	w8, w8, w10
-	ldr	w10, [sp, #16]
+	ldr	w10, [x8, w10, sxtw #2]
+	add	w9, w9, w10
+	ldr	w10, [sp, #8]
 	subs	w10, w10, #3
-	ldr	w10, [x9, w10, sxtw #2]
-	add	w8, w8, w10
-	ldrsw	x10, [sp, #16]
-	str	w8, [x9, x10, lsl #2]
+	ldr	w10, [x8, w10, sxtw #2]
+	add	w9, w9, w10
+	ldrsw	x10, [sp, #8]
+	str	w9, [sp, #16]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
+	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	str	w8, [sp, #16]
+	str	w8, [sp, #8]
 	b	LBB0_1
 LBB0_4:
-	ldrsw	x9, [sp, #20]
-	add	x8, sp, #24
+	ldrsw	x9, [sp, #12]
+	add	x8, sp, #16
 	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	ldur	x9, [x29, #-24]
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
@@ -74,7 +74,7 @@ LBB0_4:
 LBB0_5:
 	bl	___stack_chk_fail
 LBB0_6:
-	ldr	w0, [sp, #12]                   ; 4-byte Folded Reload
+	ldr	w0, [sp, #4]                    ; 4-byte Folded Reload
 	ldp	x29, x30, [sp, #432]            ; 16-byte Folded Reload
 	ldp	x28, x27, [sp, #416]            ; 16-byte Folded Reload
 	add	sp, sp, #448
