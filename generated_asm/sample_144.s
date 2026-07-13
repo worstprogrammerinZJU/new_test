@@ -1,85 +1,153 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	x0, [sp, #16]
-	ldr	x0, [sp, #16]
-	bl	_strlen
-	subs	x8, x0, #3
-	cset	w8, hs
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	sturb	wzr, [x29, #-1]
-	b	LBB0_10
-LBB0_2:
-	mov	w8, #2
-	str	w8, [sp, #12]
-	b	LBB0_3
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldrsw	x8, [sp, #12]
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldr	x0, [sp, #16]
-	bl	_strlen
-	ldr	x8, [sp]                        ; 8-byte Folded Reload
-	subs	x8, x8, x0
-	cset	w8, hs
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #12]
-	ldrsb	w8, [x8, x9]
-	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #1
-	ldrsb	w9, [x9, w10, sxtw]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #12]
-	ldrsb	w8, [x8, x9]
-	ldr	x9, [sp, #16]
-	ldr	w10, [sp, #12]
-	subs	w10, w10, #2
-	ldrsb	w9, [x9, w10, sxtw]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_6
-LBB0_6:
-	sturb	wzr, [x29, #-1]
-	b	LBB0_10
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_3
+.section	__TEXT,__text,reg,pure_instructions
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+str	x0, [x29, -16]
+ldr	x0, [x29, -16]
+bl	x19
+cmp	x0, 3
+bhi	LBB0_2
+strb	wzr, [x29, -1]
+b	.L8
+adrp	x0, .LANCHOR0+4
+ldr	w1, [x29, -20]
+ldr	x0, [x0,
+str	w1, [x29, -20]
+bl	x19
+cmp	x0, 3
+ble	.L10
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+beq	LBB0_6
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_8
+ldr	w0, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L8
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_9
+strb	wzr, [x29, -1]
+b	.L8
+mov	w0, 1
+strb	w0, [x29, -1]
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
+sub	sp, sp,
+mov	w0, 0
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+retq
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
 LBB0_9:
-	mov	w8, #1
-	sturb	w8, [x29, #-1]
-	b	LBB0_10
+mov	w0, 1
+strb	w0, [x29, -1]
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
 LBB0_10:
-	ldurb	w8, [x29, #-1]
-	and	w0, w8, #0x1
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+mov	w0, 1
+strb	w0, [x29, -1]
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
+LBB0_8:
+mov	w0, 1
+strb	w0, [x29, -1]
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
+LBB0_2:
+mov	w0, 1
+strb	w0, [x29, -1]
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -20]
+ldr	x2, [x29, -32]
+ldrb	w1, [x0, x1]
+ldr	x0, [x29, -16]
+sub	w1, w1,
+ldrb	w2, [x2, w1, sxtw]
+cmp	w2, w1
+bne	LBB0_7
+strb	wzr, [x29, -1]
+b	.L8
+LBB0_3:

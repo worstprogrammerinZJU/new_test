@@ -1,67 +1,176 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	str	x2, [sp, #24]
-	ldursw	x8, [x29, #-12]
-	lsl	x0, x8, #2
-	bl	_malloc
-	str	x0, [sp, #16]
-	ldr	x8, [sp, #24]
-	str	wzr, [x8]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
-	fcmp	s0, #0.0
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #16]
-	ldr	x11, [sp, #24]
-	ldrsw	x10, [x11]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [x11]
-	str	s0, [x8, x10, lsl #2]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_6:
-	ldr	x0, [sp, #16]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.section	__TEXT,__text,reg,pure_instructions
+	.build_version macos, 13, 0
+	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+stp	x29, x30, [sp, -48]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+str	x0, [x29, 40]
+ldrsw	x0, [x29, -12]
+str	w1, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x0, [x29, -32]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 48]
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -12]
+str	wzr, [x0]
+str	wzr, [x29, -36]
+ldrsw	x0, [x29, -12]
+bl	x19
+str	x0, [x29, 40]
+ldr	x

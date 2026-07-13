@@ -1,85 +1,226 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	str	x0, [sp, #32]
-	str	w1, [sp, #28]
-	str	wzr, [sp, #20]
-	str	wzr, [sp, #24]
-	mov	w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #16]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #32]
-	ldr	w9, [sp, #16]
-	subs	w9, w9, #1
-	ldr	s1, [x8, w9, sxtw #2]
-	fcmp	s0, s1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	mov	w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #16]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	x8, [sp, #32]
-	ldr	w9, [sp, #16]
-	subs	w9, w9, #1
-	ldr	s1, [x8, w9, sxtw #2]
-	fcmp	s0, s1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	mov	w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_1
-LBB0_8:
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #20]
-	add	w8, w8, w9
-	subs	w8, w8, #2
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-	strb	wzr, [sp, #47]
-	b	LBB0_11
-LBB0_10:
-	mov	w8, #1
-	strb	w8, [sp, #47]
-	b	LBB0_11
-LBB0_11:
-	ldrb	w8, [sp, #47]
-	and	w0, w8, #0x1
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.section	__TEXT,__text,reg,pure_instructions
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+mov	w20, w1
+str	x0, [sp, 24]
+mov	w0, 1
+str	w0, [sp, 8]
+str	wzr, [sp, 12]
+str	wzr, [sp, 20]
+str	w0, [sp, 28]
+bls	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 20]
+cmp	w0, w1
+bge	.L1
+ldp	x1, x0, [sp, 24]
+ldr	w2, [sp, 8]
+ldr	w1, [x1, w2, sxtw 2]
+ldr	w0, [x0, w2, sxtw 2]
+fsub	w0, w0, w1
+sxtw	x0, w0
+fcmp	s0, s1
+bgt	.L10
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 20]
+cmp	w0, w1
+ble	.L1
+ldr	x0, [sp, 24]
+ldr	w2, [sp, 8]
+ldr	w1, [sp, 20]
+ldr	w0, [x0, w2, sxtw 2]
+ldr	w1, [x1, w2, sxtw 2]
+fsub	w0, w0, w1
+sxtw	x0, w0
+fcmp	s0, s1
+bgt	.L11
+ldr	w0, [sp, 8]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 28]
+cmp	w0, w1
+bne	.L13
+strb	wzr, [x29, -1]
+b	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	.L1
+ldr	w0, [sp, 8]
+ldr	w1, [sp, 28]
+add	w0, w0, 1
+str	w0, [sp, 8]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x29, -1]
+b	.L1
+sub	w0, w0,
+strb	wzr, [x

@@ -1,111 +1,181 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.section	__TEXT,__text,reg,pure_instructions
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	x1, [x29, #-16]
-	str	xzr, [sp, #24]
-	str	wzr, [sp, #20]
-	str	wzr, [sp, #16]
-	str	wzr, [sp, #12]
-	str	wzr, [sp, #8]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #12]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	strb	w8, [sp, #7]
-	ldrsb	w8, [sp, #7]
-	subs	w8, w8, #40
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #16]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	str	w8, [sp, #16]
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_11
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldrsb	w8, [sp, #7]
-	subs	w8, w8, #41
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #1
-	str	w8, [sp, #20]
-	ldr	w8, [sp, #20]
-	subs	w9, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #24]
-	ldrsw	x8, [sp, #8]
-	add	x8, x8, #1
-	lsl	x8, x8, #2
-	bl	_realloc
-	str	x0, [sp, #24]
-	ldr	w8, [sp, #16]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #8]
-	str	w8, [x9, x10, lsl #2]
-	str	wzr, [sp, #16]
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_1
-LBB0_13:
-	ldr	w8, [sp, #8]
-	ldur	x9, [x29, #-16]
-	str	w8, [x9]
-	ldr	x0, [sp, #24]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+stp	x29, x30, [sp, -48]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+str	x0, [x29, -16]
+str	x1, [x29, -8]
+str	wzr, [x29, -28]
+str	xzr, [x29, -32]
+str	wzr, [x29, -24]
+str	wzr, [x29, -36]
+str	wzr, [x29, -40]
+str	x1, [x29, -48]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cset	w0, eq
+bl	__attribute__((csel))
+str	x19, [x29, -8]
+str	xzr, [x29, -24]
+str	wzr, [x29, -32]
+str	wzr, [x29, -40]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+ble	.LBB0_1
+ldr	x0, [x29, -16]
+ldrsw	x1, [x29, -36]
+ldrb	w0, [x0, x1]
+cbnz	w0, .LBB0_13
+ldr	w0, [x29, -28]
+add	w0, w0, 1
+str	w0, [x29, -28]
+ldr	w0, [x29, -28]
+cmp	w0, w0
+ble	LBB0_5
+ldr	w0, [x29, -28]
+str	w0, [x29, -32]
+b	.LBB0_11
+ldr	w0, [x29, -28]
+cmp	w0, 40
+beq	.LBB0_13
+ldr	w0, [x29, -28]
+add	w0, w0, 1
+str	w0, [x29, -28]
+ldr	w0, [x29, -28]
+cmp	w0, w0
+bgt	LBB0_12
+ldr	x0, [x29, -24]
+ldr	w1, [x29, -40]
+add	w1, w1, 1
+sxtw	x1, w1
+lsl	x1, x1, 2
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_11
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_11
+ldr	x0, [x29, -48]
+ldr	w1, [x29, -36]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	x0, [x29, -16]
+ldr	w1, [x29, -40]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	x0, [x29, -48]
+ldr	w1, [x29, -36]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	x0, [x29, -16]
+ldr	w1, [x29, -40]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	x0, [x29, -48]
+ldr	w1, [x29, -36]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29, -32]
+ldr	x0, [x29, -24]
+add	w1, w1, 1
+str	w1, [x29, -32]
+ldr	w1, [x29, -40]
+str	w1, [x0, w1, sxtw 2]
+str	wzr, [x29, -36]
+bl	__attribute__((gencfi)))
+mov	x19, x0
+cmp	w0, 0
+bgt	.LBB0_10
+ldr	w0, [x29, -28]
+str	w0, [x29, -36]
+b	.LBB0_10
+ldr	x0, [x29, -16]
+ldr	w1, [x29, -40]
+add	w1, w1, 1
+str	w1, [x29, -36]
+bl	xrealloc
+str	x0, [x29, -24]
+ldr	w1, [x29,

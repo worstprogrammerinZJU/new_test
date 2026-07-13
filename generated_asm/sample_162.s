@@ -1,37 +1,32 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	w0, [x29, #-4]
-	stur	w1, [x29, #-8]
-	ldur	w0, [x29, #-4]
-	bl	_abs
-	mov	w9, #10
-	str	w9, [sp, #16]                   ; 4-byte Folded Spill
-	sdiv	w8, w0, w9
-	mul	w8, w8, w9
-	subs	w0, w0, w8
-	stur	w0, [x29, #-12]                 ; 4-byte Folded Spill
-	ldur	w0, [x29, #-8]
-	bl	_abs
-	ldr	w9, [sp, #16]                   ; 4-byte Folded Reload
-	sdiv	w8, w0, w9
-	mul	w0, w8, w9
-	ldur	w8, [x29, #-12]                 ; 4-byte Folded Reload
-	add	x1, x0, w8, uxtw
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
+	.build_version macos, 13, 0
+	sdk_version 13, 3
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+str	w0, [x29, -4]
+mov	w0, w1
+bl	x19
+sdiv	w1, w0, 10
+msub	w1, w1, w10, w0
+ldr	w0, [x29, -8]
+str	w1, [x29, -12]
+bl	x19
+sdiv	w1, w0, 10
+msub	w1, w1, w10, w0
+ldr	w0, [x29, -12]
+mul	w0, w1, w0
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+retq
+.cfi_startproc
+.cfi_def_cfa_offset 16
+.cfi_offset x20, -16
+mov	x20, sp
+b	.L2
+.cfi_endproc
 .subsections_via_symbols

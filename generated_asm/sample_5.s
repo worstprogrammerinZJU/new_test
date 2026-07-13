@@ -1,68 +1,61 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	w0, [sp, #8]
-	str	w1, [sp, #4]
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	mov	w8, #-1
-	str	w8, [sp, #12]
-	b	LBB0_8
-LBB0_2:
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_3
-LBB0_3:
-	ldr	w8, [sp, #4]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_4
-LBB0_4:
-	mov	w8, #-1
-	str	w8, [sp, #12]
-	b	LBB0_8
+.func0:
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+mov	w20, w0
+ldr	w0, [sp, 28]
+cmp	w0, w20
+bge	LBB0_2
+mov	w0, -1
+str	w0, [x29, -4]
+b	.L4
+ldr	w0, [x29, -4]
+ldr	w1, [x29, -16]
+cmp	w1, w0
+bne	LBB0_5
+ldr	w0, [x29, -12]
+mov	w2, 2
+sdiv	w1, w0, w2
+msub	w1, w1, w2, w0
+cmp	w1, 1
+bne	LBB0_5
+mov	w0, -1
+str	w0, [x29, -4]
+b	.L4
+ldr	w0, [x29, -12]
+mov	w2, 2
+sdiv	w1, w0, w2
+msub	w1, w1, w2, w0
+cmp	w1, 1
+bne	LBB0_7
+ldr	w0, [x29, -12]
+sub	w0, w0,
+str	w0, [x29, -4]
+b	.L4
+ldr	w0, [x29, -12]
+mov	w2, -1
+str	w2, [x29, -4]
+b	.L4
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+retq
+.LBB0_2:
+mov	w0, -1
+str	w0, [x29, -4]
+b	.L4
 LBB0_5:
-	ldr	w8, [sp, #4]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_6
-LBB0_6:
-	ldr	w8, [sp, #4]
-	subs	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_8
-LBB0_7:
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #12]
-	b	LBB0_8
+mov	w0, -1
+str	w0, [x29, -4]
+b	.L4
 LBB0_8:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ldr	w0, [x29, -4]
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+retq
+LBB0_7:
+ldr	w0, [x29, -12]
+sub	w0, w0,
+str	w0, [x29, -4]
+b	.L4
+.subsections_via_symbols:

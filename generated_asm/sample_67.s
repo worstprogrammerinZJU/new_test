@@ -1,128 +1,361 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	w0, [x29, #-12]
-	mov	w8, #2
-	stur	w8, [x29, #-16]
-	mov	w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	w8, [x29, #-20]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w9, [x29, #-20]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x9, #0
-	str	x9, [sp]                        ; 8-byte Folded Spill
-	str	x8, [sp, #8]
-	mov	w8, #0
-	str	w8, [sp, #16]                   ; 4-byte Folded Spill
-	subs	x0, x8, #1
-	mov	x1, #0
-	mov	x2, x1
-	adrp	x4, l_.str@PAGE
-	add	x4, x4, l_.str@PAGEOFF
-	bl	___snprintf_chk
-	ldr	w8, [sp, #16]                   ; 4-byte Folded Reload
-	add	w8, w8, w0
-	stur	w8, [x29, #-16]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-20]
-	add	w8, w8, #1
-	stur	w8, [x29, #-20]
-	b	LBB0_1
-LBB0_4:
-	ldursw	x0, [x29, #-16]
-	bl	_malloc
-	str	x0, [sp, #16]
-	ldr	x8, [sp, #16]
-	subs	x8, x8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-                                        ; kill: def $x8 killed $xzr
-	stur	xzr, [x29, #-8]
-	b	LBB0_11
-LBB0_6:
-	ldr	x8, [sp, #16]
-	str	x8, [sp, #8]
-	ldr	x0, [sp, #8]
-	mov	x8, #-1
-	mov	x9, sp
-	str	x8, [x9]
-	adrp	x3, l_.str.1@PAGE
-	add	x3, x3, l_.str.1@PAGEOFF
-	bl	___sprintf_chk
-	ldr	x8, [sp, #8]
-	add	x8, x8, w0, sxtw
-	str	x8, [sp, #8]
-	mov	w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_7
-LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	x0, [sp, #8]
-	ldr	w9, [sp, #4]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	mov	x9, sp
-	str	x8, [x9]
-	mov	w8, #-1
-	mov	x9, sp
-	str	x8, [x9]
-	adrp	x3, l_.str@PAGE
-	add	x3, x3, l_.str@PAGEOFF
-	bl	___sprintf_chk
-	ldr	x8, [sp, #8]
-	add	x8, x8, w0, sxtw
-	str	x8, [sp, #8]
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_7
-LBB0_10:
-	ldr	x8, [sp, #16]
-	stur	x8, [x29, #-8]
-	b	LBB0_11
-LBB0_11:
-	ldur	x0, [x29, #-8]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	" %d"
-
-l_.str.1:                               ; @.str.1
-	.asciz	"0"
-
-.subsections_via_symbols
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	4, 0x90
+_func0:                                 ## @func0
+stp	x29, x30, [sp, -48]!
+mov	w3, 2
+mov	w2, 1
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+mov	w19, w0
+str	w3, [x29, -16]
+str	w2, [x29, -20]
+adrp	x20, .LANCHOR0
+str	x21, [sp, 32]
+add	x21, x20, :lo12:.LANCHOR0
+str	x22, [sp, 48]
+bls	.L2
+ldr	w0, [x29, -16]
+cmp	w0, w2
+bgt	.L17
+ldr	w0, [x29, -20]
+add	x4, x20, :lo12:.LANCHOR0
+add	w0, w0, 1
+str	w0, [x29, -20]
+ldr	x22, [sp, 32]
+ldr	x21, [sp, 48]
+str	w0, [x29, -16]
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 48
+ret
+mov	x0, 0
+mov	w1, 0
+mov	x3, -1
+mov	x2, 0
+ldr	w5, [x29, -20]
+mov	x0, x0
+add	x4, x20, :lo12:.LANCHOR0
+mov	x3, x3
+mov	x2, x2
+mov	x0, x0
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	xzr
+bl	x

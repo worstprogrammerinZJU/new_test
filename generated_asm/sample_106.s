@@ -1,87 +1,200 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #480
-	.cfi_def_cfa_offset 480
-	stp	x28, x27, [sp, #448]            ; 16-byte Folded Spill
-	stp	x29, x30, [sp, #464]            ; 16-byte Folded Spill
-	add	x29, sp, #464
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	.cfi_offset w27, -24
-	.cfi_offset w28, -32
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-24]
-	str	w0, [sp, #20]
-	str	wzr, [sp, #24]
-	str	wzr, [sp, #28]
-	mov	w8, #2
-	str	w8, [sp, #16]
-	str	wzr, [sp, #12]
-	mov	w8, #4
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	subs	w9, w8, #1
-	add	x8, sp, #24
-	ldr	w8, [x8, w9, sxtw #2]
-	ldr	w9, [sp, #8]
-	subs	w9, w9, #2
-	add	x8, x8, w9, sxtw #2
-	ldr	w9, [x8]
-	add	w8, w8, w9
-	ldr	w9, [sp, #8]
-	subs	w9, w9, #3
-	add	x8, x8, w9, sxtw #2
-	ldr	w9, [x8]
-	add	w8, w8, w9
-	ldr	w9, [sp, #8]
-	subs	w9, w9, #4
-	add	x8, x8, w9, sxtw #2
-	ldrsw	x9, [sp, #8]
-	str	w8, [x9]
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
+stp	x29, x30, [sp, -32]!
+mov	w1, 2
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+mov	w19, w0
+mov	w20, 4
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+str	x21, [sp, 32]
+ldr	x21, [x0]
+str	x21, [x29, -8]
+add	x21, sp, 8
+str	wzr, [x29, -12]
+str	wzr, [x29, -16]
+str	w1, [x29, -20]
+str	wzr, [x29, -24]
+bls	.L1
+ldr	w0, [x29, -20]
+cmp	w0, w19
+bgt	.L17
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x2, [x29, -8]
+ldr	x1, [x0]
+subs	x2, x2, x1
+mov	x1, 0
+bne	L18
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+ldr	w0, [x29, -20]
+sub	w0, w0,
+sxtw	x0, w0
+ldr	w1, [x29, -24]
+ldr	w2, [x29, -20]
+ldr	w3, [x29, -28]
+sub	w1, w1,
+sxtw	x0, w0
+ldr	w4, [x29, -24]
+add	x0, x0, 1
+ldr	w5, [x29, -28]
+sub	w4, w4,
+sxtw	x0, w0
+add	x0, x0, 1
+ldr	w1, [x29, -28]
+sub	w1, w1,
+sxtw	x0, w0
+add	x0, x0, 1
+ldr	w2, [x29, -28]
+sub	w2, w2,
+sxtw	x0, w0
+add	x0, x0, 1
+str	w2, [x29, -28]
+str	w4, [x29, -24]
+str	w3, [x29, -20]
+str	w1, [x29, -16]
+str	w0, [x29, -8]
+b	.L2
+ldrsw	x0, [x29, -20]
+add	x0, x0, 1
+ldr	w1, [x29, -24]
+ldr	w2, [x29, -28]
+sub	w1, w1,
+sxtw	x0, w0
+ldr	w3, [x29, -28]
+add	x0, x0, 1
+ldr	w4, [x29, -24]
+sub	w3, w3,
+sxtw	x0, w0
+add	x0, x0, 1
+ldr	w2, [x29, -28]
+sub	w2, w2,
+sxtw	x0, w0
+add	x0, x0, 1
+str	w2, [x29, -28]
+str	w3, [x29, -24]
+str	w4, [x29, -20]
+str	w1, [x29, -16]
+str	w0, [x29, -8]
+b	.L2
+bl	___stack_chk_fail
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L19
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+LBB0_1:
 LBB0_4:
-	ldrsw	x9, [sp, #20]
-	add	x8, sp, #24
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
-	ldur	x9, [x29, #-24]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-	bl	___stack_chk_fail
 LBB0_6:
-	ldr	w0, [sp, #4]                    ; 4-byte Folded Reload
-	ldp	x29, x30, [sp, #464]            ; 16-byte Folded Reload
-	ldp	x28, x27, [sp, #448]            ; 16-byte Folded Reload
-	add	sp, sp, #480
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ud2
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L20
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L21
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L22
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L23
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L24
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x3, [x29, -8]
+ldr	x2, [x0]
+subs	x3, x3, x2
+mov	x2, 0
+bne	L25
+mov	sp, x29
+mov	w0, w19
+ldp	x19, x20, [sp, 16]
+ldr	x21, [sp, 32]
+ldp	x29, x30, [sp], 32
+ret
+bl	x21
+sub	w1, w19,
+adrp	x0, :got:___stack

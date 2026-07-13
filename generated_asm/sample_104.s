@@ -1,92 +1,332 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.section	__TEXT,__text,reg,pure_instructions
+	.build_version macos, 13, 0
+	.globl	_func0                          ## -- Begin function func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #96
-	.cfi_def_cfa_offset 96
-	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
-	add	x29, sp, #80
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	w0, [sp, #28]
-	str	w1, [sp, #24]
-	str	x2, [sp, #16]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #24]
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldrsw	x10, [sp, #12]
-	mov	x9, x10
-	add	w9, w9, #1
-	str	w9, [sp, #12]
-	add	x9, x8, w9, sxtw
-	strb	w9, [x9]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #24]
-	sdiv	w8, w8, w9
-	str	w8, [sp, #28]
-	b	LBB0_1
-LBB0_3:
-	str	wzr, [sp, #8]
-	b	LBB0_4
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #1
-	str	w8, [sp, #12]
-	add	x8, sp, #16
-	add	x9, x8, w9, sxtw
-	ldrb	w8, [x9]
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #8]
-	strb	w8, [x9, x10]
-	b	LBB0_4
+stp	x29, x30, [sp, -48]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+adrp	x20, .LANCHOR0
+add	x19, x20, :lo12:.LANCHOR0
+str	x21, [sp, 32]
+sub	sp, sp,
+ldr	x3, [x20,
+str	w0, [x29, -4]
+str	x3, [x29, -8]
+str	wzr, [x29, -12]
+str	x2, [x29, -24]
+bl	def_cfa_offset
+mov	x21, sp
+ldr	w0, [x29, -4]
+cmp	w0, 0
+ble	LBB0_1
+ldr	w0, [x29, -4]
+sdiv	w1, w0, w1
+msub	w1, w1, w1, w0
+add	w1, w1, 48
+str	w1, [x29, -12]
+sxtw	x1, w1
+add	x1, x1, x21
+strb	w1, [x21, x21]
+ldr	w0, [x29, -4]
+ldr	w1, [x29, -12]
+sdiv	w0, w0, w1
+str	w0, [x29, -4]
+b	.L2
+str	wzr, [x29, -16]
+ldr	w0, [x29, -12]
+cmp	w0, 0
+ble	LBB0_3
+ldr	w0, [x29, -4]
+sdiv	w1, w0, w1
+msub	w1, w1, w1, w0
+add	w1, w1, 48
+str	w1, [x29, -12]
+sxtw	x1, w1
+add	x1, x1, x21
+strb	w1, [x21, x21]
+ldr	w0, [x29, -4]
+ldr	w1, [x29, -12]
+sdiv	w0, w0, w1
+str	w0, [x29, -4]
+b	.L2
+ldr	x0, [x29, -24]
+ldrsw	x1, [x29, -16]
+strb	wzr, [x0, x1]
+adrp	x0, :got:___stack_chk_guard
+ldr	x0, [x0, :got_lo12:___stack_chk_guard]
+ldr	x2, [x29, -8]
+ldr	x1, [x0]
+subs	x2, x2, x1
+mov	x1, 0
+bne	LBB0_8
+ldp	x29, x30, [sp], 48
+retq
+bl	x21
+b	.L4
+LBB0_4:
 LBB0_6:
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	bl	___stack_chk_fail
 LBB0_8:
-	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
-	add	sp, sp, #96
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+ud2:
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl	x21
+b	.L4
+bl

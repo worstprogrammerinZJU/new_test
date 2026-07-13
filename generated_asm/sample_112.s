@@ -1,63 +1,69 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	adrp	x8, l_.str@PAGE
-	add	x8, x8, l_.str@PAGEOFF
-	str	x8, [sp, #16]
-	ldur	x8, [x29, #-8]
-	str	x8, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #16]
-	ldur	x8, [x29, #-8]
-	ldrsb	w1, [x8]
-	bl	_strchr
-	subs	x8, x0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrb	w8, [x8]
-	ldr	x9, [sp, #8]
-	add	x10, x9, #1
-	str	x10, [sp, #8]
-	strb	w8, [x9]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	add	x8, x8, #1
-	stur	x8, [x29, #-8]
-	b	LBB0_1
+	.build_version macos, 13, 0
+__version	2020
+_func0:                                 ## @func0
+adrp	x1, .LANCHOR0
+add	x1, x1, :lo12:.LANCHOR0
+stp	x29, x30, [sp, -32]!
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+sub	sp, sp,
+ldr	x2, [x1, -8]
+str	x0, [x29, -8]
+adrp	x0, .LC0
+add	x0, x0, :lo12:.LC0
+str	x0, [x29, -16]
+ldr	x0, [x29, -8]
+str	x2, [x29, -24]
+adrp	x20, .LANCHOR1
+add	x20, x20, :lo12:.LANCHOR1
+bl	def_cfa_offset
+mov	x19, x0
+bl	def_cfa_register
+sub	x19, x19,
+str	x19, [sp]
+bl	_func0
+cbz	x0, .L2
+ldr	x0, [x29, -8]
+ldrb	w0, [x0]
+cbnz	w0, .L17
+ldr	x0, [x29, -8]
+ldr	x1, [x29, -24]
+ldrb	w2, [x0]
+strb	w2, [x1]
+add	x1, x1, 1
+str	x1, [x29, -24]
+bl	_func0
+cbnz	x0, .L18
+ldr	x0, [x29, -24]
+strb	wzr, [x0]
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+ret
+ldr	x0, [x29, -16]
+ldr	x1, [x29, -8]
+ldrb	w2, [x0]
+ldr	x0, [x29, -24]
+add	x1, x1, 1
+strb	w2, [x0]
+str	x1, [x29, -24]
+bl	_func0
+cbz	x0, .L3
+ldr	x0, [x29, -16]
+ldr	x1, [x29, -8]
+ldrb	w2, [x0]
+ldr	x0, [x29, -24]
+add	x1, x1, 1
+strb	w2, [x0]
+str	x1, [x29, -24]
+bl	_func0
+cbz	x0, .L4
+ldr	x0, [x29, -24]
+strb	wzr, [x0]
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+ret
+L_.str:
+LBB0_1:
+LBB0_4:
 LBB0_5:
-	ldr	x8, [sp, #8]
-	strb	wzr, [x8]
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"AEIOUaeiou"
-
-.subsections_via_symbols

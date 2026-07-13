@@ -1,85 +1,206 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                        ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	s0, [sp, #8]
-	str	s1, [sp, #4]
-	str	s2, [sp]
-	ldr	s0, [sp, #8]
-	fabs	s0, s0
-	movi.2s	v1, #-0.00000000
-	fcmp	s0, v1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_2:
-	ldr	s0, [sp, #4]
-	fabs	s0, s0
-	movi.2s	v1, #-0.00000000
-	fcmp	s0, v1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_4:
-	ldr	s0, [sp]
-	fabs	s0, s0
-	movi.2s	v1, #-0.00000000
-	fcmp	s0, v1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_5
-LBB0_5:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_6:
-	ldr	s0, [sp, #8]
-	ldr	s1, [sp, #4]
-	fadd	s0, s0, s1
-	ldr	s1, [sp]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	ldr	s0, [sp, #8]
-	ldr	s1, [sp]
-	fadd	s0, s0, s1
-	ldr	s1, [sp, #4]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:
-	ldr	s0, [sp, #4]
-	ldr	s1, [sp]
-	fadd	s0, s0, s1
-	ldr	s1, [sp, #8]
-	fcmp	s0, s1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_11
-LBB0_10:
-	str	wzr, [sp, #12]
-	b	LBB0_11
-LBB0_11:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.c2k	.L0
+mov	w0, 11276
+fmov	s0, w0
+mov	w0, 11276
+fmov	s1, w0
+mov	w0, 11276
+fmov	s2, w0
+mov	w0, 11276
+fmov	s3, w0
+b	.L1
+movi	v0.2s,
+stp	x29, x30, [sp, -32]!
+adrp	x1, .LANCHOR0
+add	x2, x1, :lo12:.LANCHOR0
+mov	x29, sp
+stp	x19, x20, [sp, 16]
+adrp	x20, .LANCHOR1
+add	x19, x20, :lo12:.LANCHOR1
+ldr	q1, [x1,
+str	d8, [sp, 24]
+fmov	s8, s0
+ldr	q0, [x2, 4]
+fadd	s0, s1, s1
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+beq	.L11
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L12
+ldr	d8, [x20,
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+beq	.L13
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L14
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L15
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+beq	.L16
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L17
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L18
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L19
+ldr	d8, [sp, 24]
+ldr	w0, [x20,
+ldp	x19, x20, [sp, 16]
+str	wzr, [x20,
+ldp	x29, x30, [sp], 32
+retq
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+beq	.L20
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L21
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L22
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L23
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L24
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L25
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L26
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L27
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L28
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L29
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L30
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L31
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L32
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L33
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L34
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd	s0, s2, s2
+ldr	q2, [x20,
+frintm	s0, s0
+fcmp	s0, s8
+bne	.L35
+ldr	q1, [x19, 4]
+ldr	q0, [x19, 12]
+fadd
