@@ -1,417 +1,88 @@
 .section	__TEXT,__text,regular,pure_instructions
-.L21
-.L22
-.L23
-.L24
-.L25
-.L26
-.L27
-.L28
-.L29
-.L30
-.L31
-.L32
-.L33
-.L34
-.L35
-.L36
-.L37
-.L38
-.L39
-.L40
-.L41
-.L42
-.L43
-.L44
-.L45
-.L46
-.L47
-.L48
-.L49
-.L50
-.L51
-.L52
-.L53
-.L54
-.L55
-.L56
-.L57
-.L58
-.L59
-.L60
-.L510
-.L511
-.L512
-.L513
-.L514
-.L515
-.L516
-.L517
-.L518
-.L519
-.L520
-.L521
-.L522
-.L523
-.L524
-.L525
-.L526
-.L527
-.L528
-.L529
-.L530
-.L531
-.L532
-.L533
-.L534
-.L535
-.L536
-.L537
-.L538
-.L539
-.L540
-.L541
-.L542
-.L543
-.L544
-.L545
-.L546
-.L547
-.L548
-.L549
-.L550
-.L551
-.L552
-.L553
-.L554
-.L555
-.L556
-.L557
-.L558
-.L559
-.L560
-.L561
-.L562
-.L563
-.L564
-.L565
-.L566
-.L567
-.L568
-.L569
-.L570
-.L571
-.L572
-.L573
-.L574
-.L575
-.L576
-.L577
-.L578
-.L579
-.L580
-.L581
-.L582
-.L583
-.L584
-.L585
-.L586
-.L587
-.L588
-.L589
-.L590
-.L591
-.L592
-.L593
-.L594
-.L595
-.L596
-.L597
-.L598
-.L599
-.L600
-.L601
-.L602
-.L603
-.L604
-.L605
-.L606
-.L607
-.L608
-.L609
-.L610
-.L611
-.L612
-.L613
-.L614
-.L615
-.L616
-.L617
-.L618
-.L619
-.L620
-.L621
-.L622
-.L623
-.L624
-.L625
-.L626
-.L627
-.L628
-.L629
-.L630
-.L631
-.L632
-.L633
-.L634
-.L635
-.L636
-.L637
-.L638
-.L639
-.L640
-.L641
-.L642
-.L643
-.L644
-.L645
-.L646
-.L647
-.L648
-.L649
-.L650
-.L651
-.L652
-.L653
-.L654
-.L655
-.L656
-.L657
-.L658
-.L659
-.L660
-.L661
-.L662
-.L663
-.L664
-.L665
-.L666
-.L667
-.L668
-.L669
-.L670
-.L671
-.L672
-.L673
-.L674
-.L675
-.L676
-.L677
-.L678
-.L679
-.L680
-.L681
-.L682
-.L683
-.L684
-.L685
-.L686
-.L687
-.L688
-.L689
-.L690
-.L691
-.L692
-.L693
-.L694
-.L695
-.L696
-.L697
-.L698
-.L699
-.L700
-.L701
-.L702
-.L703
-.L704
-.L705
-.L706
-.L707
-.L708
-.L709
-.L710
-.L711
-.L712
-.L713
-.L714
-.L715
-.L716
-.L717
-.L718
-.L719
-.L720
-.L721
-.L722
-.L723
-.L724
-.L725
-.L726
-.L727
-.L728
-.L729
-.L730
-.L731
-.L732
-.L733
-.L734
-.L735
-.L736
-.L737
-.L738
-.L739
-.L740
-.L741
-.L742
-.L743
-.L744
-.L745
-.L746
-.L747
-.L748
-.L749
-.L750
-.L751
-.L752
-.L753
-.L754
-.L755
-.L756
-.L757
-.L758
-.L759
-.L760
-.L761
-.L762
-.L763
-.L764
-.L765
-.L766
-.L767
-.L768
-.L769
-.L770
-.L771
-.L772
-.L773
-.L774
-.L775
-.L776
-.L777
-.L778
-.L779
-.L780
-.L781
-.L782
-.L783
-.L784
-.L785
-.L786
-.L787
-.L788
-.L789
-.L790
-.L791
-.L792
-.L793
-.L794
-.L795
-.L796
-.L797
-.L798
-.L799
-.L800
-.L801
-.L802
-.L803
-.L804
-.L805
-.L806
-.L807
-.L808
-.L809
-.L810
-.L811
-.L812
-.L813
-.L814
-.L815
-.L816
-.L817
-.L818
-.L819
-.L820
-.L821
-.L822
-.L823
-.L824
-.L825
-.L826
-.L827
-.L828
-.L829
-.L830
-.L831
-.L832
-.L833
-.L834
-.L835
-.L836
-.L837
-.L838
-.L839
-.L840
-.L841
-.L842
-.L843
-.L844
-.L845
-.L846
-.L847
-.L848
-.L849
-.L850
-.L851
-.L852
-.L853
-.L854
-.L855
-.L856
-.L857
-.L858
-.L859
-.L860
-.L861
-.L862
-.L863
-.L864
-.L865
-.L866
-.L867
-.L868
-.L869
-.L870
-.L871
-.L872
-.L873
-.L874
-.L875
-.L876
-.L877
-.L878
-.L879
-.L880
-.L881
-.L882
-.L883
-.L884
-.L
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.section	__TEXT,__literal16,16byte_literals
+	.p2align	3                               ; -- Begin function func0
+lCPI0_0:
+	.quad	0x7fffffffffffffff              ; double NaN
+	.quad	0x7fffffffffffffff              ; double NaN
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	str	s0, [sp, #8]
+	str	wzr, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp]
+	ldr	s1, [x8, x9, lsl #2]
+	fsub	s0, s0, s1
+	fcvt	d1, s0
+	adrp	x8, lCPI0_0@PAGE
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	fand	d1, d0, d1
+	ldr	s0, [sp, #8]
+	fcvt	d0, s0
+	fcmp	d0, d1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	mov	w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_11
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_10:
+	mov	w8, #10
+	str	w8, [sp, #28]
+	b	LBB0_11
+LBB0_11:
+	ldr	w0, [sp, #28]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

@@ -1,209 +1,99 @@
-.section	__TEXT,__text,reg,pure_instructions
-	.build_version macos, 13, 0
-	.globl	_func0                          ## -- Begin function func0
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -32]!
-mov	x29, sp
-stp	x19, x20, [sp, 16]
-sub	sp, sp,
-mov	w20, w1
-ldr	x1, [x0]
-mov	w2, 1
-str	x0, [x0, 8]
-ldr	s0, [x1]
-str	s0, [x0, 16]
-ldr	s0, [x0, 8]
-str	s0, [x0, 24]
-ldr	s0, [x1]
-str	s0, [x0, 32]
-bls	.L16
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 8]
-fcmp	s1, s0
-bgt	.L17
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-ble	.L18
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L19
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L20
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L21
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L22
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L23
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L24
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L25
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L26
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L27
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L28
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L29
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L30
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L31
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L32
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L33
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L34
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L35
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L36
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L37
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L38
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L39
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L40
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L41
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L42
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L43
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L44
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L45
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L46
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L47
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L48
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L49
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L50
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L51
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L52
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L53
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L54
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L55
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L56
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L57
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L58
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L59
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L60
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L61
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24]
-fcmp	s1, s0
-bge	.L62
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 32]
-fcmp	s1, s0
-bgt	.L63
-ldr	s0, [x0, 16]
-ldr	s1, [x0, 24
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	ldr	x8, [sp, #24]
+	ldr	s0, [x8]
+	str	s0, [sp, #16]
+	ldr	x8, [sp, #24]
+	ldr	s0, [x8]
+	str	s0, [sp, #12]
+	mov	w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #8]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	s1, [sp, #16]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #8]
+	ldr	s0, [x8, x9, lsl #2]
+	str	s0, [sp, #16]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #8]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	s1, [sp, #12]
+	fcmp	s0, s1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #8]
+	ldr	s0, [x8, x9, lsl #2]
+	str	s0, [sp, #12]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_8:
+	str	wzr, [sp, #4]
+	b	LBB0_9
+LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s0, [x8, x9, lsl #2]
+	ldr	s1, [sp, #16]
+	fsub	s0, s0, s1
+	ldr	s1, [sp, #12]
+	ldr	s2, [sp, #16]
+	fsub	s1, s1, s2
+	fdiv	s0, s0, s1
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	str	s0, [x8, x9, lsl #2]
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_9
+LBB0_12:
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

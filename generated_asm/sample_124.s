@@ -1,40 +1,45 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0
-_func0:                                 ## @func0
-## c2s.s
-mov	w3, w1
-c2s.w	x1, w3, 12
-stp	x29, x30, [sp, -32]!
-mov	x29, sp
-stp	x19, x20, [sp, 16]
-sub	sp, sp,
-str	x0, [x29, -16]
-str	w3, [x29, -28]
-str	x2, [x29, -32]
-bl	def_cfa_offset
-mov	x20, x0
-ldr	w0, [x29, -28]
-cmp	w0, w1
-bge	LBB0_4
-ldr	w0, [x29, -28]
-ldr	x1, [x29, -32]
-scvtf	s0, w0
-ldr	w0, [x29, -28]
-ldr	x2, [x29, -16]
-mul	s0, s0, s1
-ldrsw	x1, [x29, -28]
-sub	w1, w1,
-str	s0, [x2, x1, lsl 2]
-b	.L2
-ldr	w0, [x29, -28]
-add	w0, w0, 1
-str	w0, [x29, -28]
-b	.L1
-ldp	x19, x20, [sp, 16]
-ldp	x29, x30, [sp], 32
-retq
-.cfi_startproc
-.cfi_def_cfa_offset
-.cfi_offset
-.LBB0_1:
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	x2, [sp, #8]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	s0, [sp, #4]
+	scvtf	s0, s0
+	ldr	x8, [sp, #24]
+	ldrsw	x9, [sp, #4]
+	ldr	s1, [x8, x9, lsl #2]
+	fmul	s0, s0, s1
+	ldr	x8, [sp, #8]
+	ldr	w9, [sp, #4]
+	subs	w9, w9, #1
+	str	s0, [x8, w9, sxtw #2]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
 LBB0_4:
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

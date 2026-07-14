@@ -1,150 +1,129 @@
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0
-	.globl	_func0                          ## -- Begin function func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -48]!
-mov	x29, sp
-stp	x19, x20, [sp, 16]
-sub	sp, sp,
-str	x0, [x29, -16]
-ldrsw	x0, [x29, -16]
-str	w1, [x29, -20]
-add	x19, sp, 24
-lsl	x0, x0, 3
-bl	x20
-str	x0, [x29, -32]
-str	wzr, [x29, -28]
-cmp	w0, w19
-bge	LBB0_12
-adrp	x0, .LANCHOR0
-ldr	w1, [x29, -28]
-ldr	w0, [x0,
-cmp	w1, w0
-bge	LBB0_13
-adrp	x0, .LC0
-add	x0, x0, :lo12:.LC0
-str	wzr, [x29, -20]
-str	d8, [sp, 32]
-fmov	w8, s0
-str	d8, [sp, 24]
-str	d8, [sp, 16]
-str	d8, [x29, -8]
-str	d8, [x29, -40]
-str	d8, [x29, -24]
-str	d8, [x29, -16]
-str	d8, [x29, -32]
-str	d8, [x29, -48]
-str	d8, [x29, -64]
-str	d8, [x29, -80]
-str	d8, [x29, -96]
-str	d8, [x29, -112]
-str	d8, [x29, -128]
-str	d8, [x29, -144]
-str	d8, [x29, -160]
-str	d8, [x29, -176]
-str	d8, [x29, -208]
-str	d8, [x29, -224]
-str	d8, [x29, -240]
-str	d8, [x29, -256]
-str	d8, [x29, -272]
-str	d8, [x29, -288]
-str	d8, [x29, -304]
-str	d8, [x29, -320]
-str	d8, [x29, -336]
-str	d8, [x29, -352]
-str	d8, [x29, -368]
-str	d8, [x29, -384]
-str	d8, [x29, -400]
-str	d8, [x29, -416]
-str	d8, [x29, -432]
-str	d8, [x29, -448]
-str	d8, [x29, -464]
-str	d8, [x29, -480]
-str	d8, [x29, -504]
-str	d8, [x29, -520]
-str	d8, [x29, -536]
-str	d8, [x29, -552]
-str	d8, [x29, -568]
-str	d8, [x29, -584]
-str	d8, [x29, -600]
-str	d8, [x29, -616]
-str	d8, [x29, -632]
-str	d8, [x29, -648]
-str	d8, [x29, -664]
-str	d8, [x29, -680]
-str	d8, [x29, -704]
-str	d8, [x29, -720]
-str	d8, [x29, -736]
-str	d8, [x29, -752]
-str	d8, [x29, -768]
-str	d8, [x29, -784]
-str	d8, [x29, -800]
-str	d8, [x29, -816]
-str	d8, [x29, -832]
-str	d8, [x29, -848]
-str	d8, [x29, -864]
-str	d8, [x29, -880]
-str	d8, [x29, -904]
-str	d8, [x29, -920]
-str	d8, [x29, -936]
-str	d8, [x29, -952]
-str	d8, [x29, -968]
-str	d8, [x29, -984]
-str	d8, [x29, -1000]
-str	d8, [x29, -1016]
-str	d8, [x29, -1032]
-str	d8, [x29, -1048]
-str	d8, [x29, -1064]
-str	d8, [x29, -1072]
-str	d8, [x29, -1088]
-str	d8, [x29, -1104]
-str	d8, [x29, -1120]
-str	d8, [x29, -1136]
-str	d8, [x29, -1152]
-str	d8, [x29, -1168]
-str	d8, [x29, -1184]
-str	d8, [x29, -1200]
-str	d8, [x29, -1216]
-str	d8, [x29, -1232]
-str	d8, [x29, -1248]
-str	d8, [x29, -1264]
-str	d8, [x29, -1272]
-str	d8, [x29, -1288]
-str	d8, [x29, -1304]
-str	d8, [x29, -1320]
-str	d8, [x29, -1336]
-str	d8, [x29, -1352]
-str	d8, [x29, -1368]
-str	d8, [x29, -1384]
-str	d8, [x29, -1400]
-str	d8, [x29, -1416]
-str	d8, [x29, -1432]
-str	d8, [x29, -1448]
-str	d8, [x29, -1464]
-str	d8, [x29, -1480]
-str	d8, [x29, -1504]
-str	d8, [x29, -1520]
-str	d8, [x29, -1536]
-str	d8, [x29, -1552]
-str	d8, [x29, -1568]
-str	d8, [x29, -1584]
-str	d8, [x29, -1600]
-str	d8, [x29, -1616]
-str	d8, [x29, -1632]
-str	d8, [x29, -1648]
-str	d8, [x29, -1664]
-str	d8, [x29, -1680]
-str	d8, [x29, -1704]
-str	d8, [x29, -1720]
-str	d8, [x29, -1736]
-str	d8, [x29, -1744]
-str	d8, [x29, -1760]
-str	d8, [x29, -1776]
-str	d8, [x29, -1784]
-str	d8, [x29, -1800]
-str	d8, [x29, -1816]
-str	d8, [x29, -1832]
-str	d8, [x29, -1848]
-str	d8, [x29, -1864]
-str	d8, [x29, -1880]
-str	d8, [x2
+; %bb.0:
+	sub	sp, sp, #80
+	.cfi_def_cfa_offset 80
+	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #3
+	bl	_malloc
+	stur	x0, [x29, #-24]
+	stur	wzr, [x29, #-28]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	ldur	w8, [x29, #-28]
+	ldur	w9, [x29, #-12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #32]
+	str	wzr, [sp, #28]
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #48
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #57
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldur	x8, [x29, #-8]
+	ldursw	x9, [x29, #-28]
+	ldr	x8, [x8, x9, lsl #3]
+	ldrsw	x9, [sp, #28]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #48
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #28]
+	add	w8, w8, #1
+	str	w8, [sp, #28]
+	b	LBB0_3
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	mov	x0, #100
+	bl	_malloc
+	ldur	x8, [x29, #-24]
+	ldursw	x9, [x29, #-28]
+	str	x0, [x8, x9, lsl #3]
+	ldur	x8, [x29, #-24]
+	ldursw	x9, [x29, #-28]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	w4, [sp, #32]
+	ldr	w5, [sp, #32]
+	ldr	w6, [sp, #32]
+	mov	x9, sp
+	mov	x8, #-1
+	str	x8, [x9]
+	adrp	x3, l_.str@PAGE
+	add	x3, x3, l_.str@PAGEOFF
+	mov	w1, #0
+	bl	___sprintf_chk
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldur	w8, [x29, #-28]
+	add	w8, w8, #1
+	stur	w8, [x29, #-28]
+	b	LBB0_1
+LBB0_12:
+	ldur	x0, [x29, #-24]
+	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
+	add	sp, sp, #80
+	ret
+	.cfi_endproc
+                                        ; -- End function
+	.section	__TEXT,__cstring,cstring_literals
+l_.str:                                 ; @.str
+	.asciz	"the number of odd elements %d in the string %d of the %d input."
+
+.subsections_via_symbols
