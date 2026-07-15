@@ -70,7 +70,7 @@ LBB0_5:
 	adrp	x9, _func0.out@PAGE
 	add	x9, x9, _func0.out@PAGEOFF
 	strb	w8, [x9]
-	stur	x8, [x29, #-8]
+	stur	x9, [x29, #-8]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_7

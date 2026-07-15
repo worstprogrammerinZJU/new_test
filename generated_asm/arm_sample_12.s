@@ -17,8 +17,9 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	stur	w8, [x29, #-20]
-	ldur	w8, [x29, #-20]
-	lsl	w8, w8, #1
+	ldur	w9, [x29, #-20]
+	mov	w8, #2
+	mul	w8, w8, w9
 	add	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9

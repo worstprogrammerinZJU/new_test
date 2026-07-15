@@ -17,7 +17,9 @@ _func0:                                 ; @func0
 LBB0_1:
 	mov	w8, #1
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
+	and	w8, w8, #0xff
+	and	w8, w8, #0xffff
+	and	w8, w8, #0xffff
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_2:
@@ -34,7 +36,8 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #8]
 	subs	w10, w10, #1
@@ -44,9 +47,10 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #0
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
+	and	w8, w8, #0xff
+	and	w8, w8, #0xffff
+	and	w8, w8, #0xffff
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
@@ -58,7 +62,8 @@ LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #8]
 	subs	w10, w10, #1
@@ -70,7 +75,8 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #8]
 	subs	w10, w10, #2
@@ -80,9 +86,10 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:
-	mov	w8, #0
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
+	and	w8, w8, #0xff
+	and	w8, w8, #0xffff
+	and	w8, w8, #0xffff
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
@@ -95,7 +102,8 @@ LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=1
 LBB0_12:
 	mov	w8, #1
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
+	and	w8, w8, #0xffff
+	and	w8, w8, #0xffff
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_13:

@@ -56,28 +56,28 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #24]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	ldr	w9, [sp, #28]
-	add	w10, w9, #1
-	str	w10, [sp, #28]
-	sub	x10, x29, #18
-	add	x9, x10, w8, sxtw
-                                        ; kill: def $w8 killed $w8 killed $x8
-	sturb	w8, [x29, #-18]
+	add	x9, x8, x9
+	ldrb	w8, [x9]
+	ldrsw	x10, [sp, #28]
+	mov	x9, x10
+	add	w9, w9, #1
+	str	w9, [sp, #28]
+	sub	x9, x29, #18
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_6
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #24]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	ldr	w9, [sp, #28]
-	add	w10, w9, #1
-	str	w10, [sp, #28]
-	sub	x10, x29, #28
-	add	x9, x10, w8, sxtw
-                                        ; kill: def $w8 killed $w8 killed $x8
-	sturb	w8, [x29, #-28]
+	add	x9, x8, x9
+	ldrb	w8, [x9]
+	ldrsw	x10, [sp, #28]
+	mov	x9, x10
+	add	w9, w9, #1
+	str	w9, [sp, #28]
+	sub	x9, x29, #28
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_11

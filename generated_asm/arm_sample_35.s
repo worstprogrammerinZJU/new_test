@@ -188,8 +188,9 @@ LBB0_22:
 	ldur	w8, [x29, #-16]
 	ldur	x9, [x29, #-24]
 	str	w8, [x9]
-	ldrsw	x8, [sp, #24]
-	lsl	x0, x8, #2
+	ldrsw	x9, [sp, #24]
+	mov	x8, #4
+	mul	x0, x8, x9
 	bl	_malloc
 	str	x0, [sp, #8]
 	stur	wzr, [x29, #-28]

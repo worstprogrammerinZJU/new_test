@@ -44,7 +44,6 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
-	mov	w8, #0
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	strb	w8, [sp, #31]
@@ -80,7 +79,6 @@ LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:
-	mov	w8, #0
 	and	w8, w8, #0x1
 	and	w8, w8, #0x1
 	strb	w8, [sp, #31]

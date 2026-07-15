@@ -15,9 +15,8 @@ _func0:                                 ; @func0
 	stur	x0, [x29, #-8]
 	stur	w1, [x29, #-12]
 	stur	x2, [x29, #-24]
-	ldursw	x9, [x29, #-12]
-	mov	x8, #4
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #32]
 	str	wzr, [sp, #24]
@@ -46,12 +45,10 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #20]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #32]
 	ldrsw	x10, [sp, #16]
-	lsl	x10, x10, #2
-	ldr	w9, [x9, x10]
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
@@ -76,8 +73,7 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
 	ldrsw	x9, [sp, #20]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #32]
 	ldrsw	x10, [sp, #24]
 	mov	x11, x10
@@ -120,12 +116,10 @@ LBB0_15:                                ;   Parent Loop BB0_13 Depth=1
 LBB0_16:                                ;   in Loop: Header=BB0_15 Depth=2
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #32]
 	ldrsw	x10, [sp, #16]
-	lsl	x10, x10, #2
-	ldr	w9, [x9, x10]
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, le
 	tbnz	w8, #0, LBB0_18
@@ -133,13 +127,11 @@ LBB0_16:                                ;   in Loop: Header=BB0_15 Depth=2
 LBB0_17:                                ;   in Loop: Header=BB0_15 Depth=2
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	str	w8, [sp, #12]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #16]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #32]
 	ldrsw	x10, [sp, #20]
 	str	w8, [x9, x10, lsl #2]

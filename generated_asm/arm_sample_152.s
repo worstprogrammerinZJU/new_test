@@ -26,7 +26,6 @@ _func0:                                 ; @func0
 	b	LBB0_1
 LBB0_1:
 	ldur	x8, [x29, #-24]
-                                        ; kill: def $x9 killed $xzr
 	str	xzr, [x8]
 	b	LBB0_23
 LBB0_2:

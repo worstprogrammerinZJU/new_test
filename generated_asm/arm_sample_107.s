@@ -45,7 +45,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #4]
 	ldr	s1, [x8, x9, lsl #2]
 	fcmp	s0, s1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -107,9 +107,10 @@ LBB0_12:
 	sdiv	w9, w9, w10
 	subs	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
-	fcvt	d1, s0
+	fadd	s0, s0, s1
+	fcvt	d0, s0
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	ldr	d1, [x8, lCPI0_0@PAGEOFF]
 	fmul	d0, d0, d1
 	fcvt	s0, d0
 	str	s0, [sp, #28]

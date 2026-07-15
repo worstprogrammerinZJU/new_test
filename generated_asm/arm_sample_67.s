@@ -26,21 +26,12 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w9, [x29, #-20]
-                                        ; implicit-def: $x10
-	mov	x10, x9
+	ldur	w5, [x29, #-20]
+	mov	x10, #0
+	mov	x8, x10
 	mov	x9, sp
-	str	x10, [x9]
-	mov	x8, #0
-	str	x8, [x9, #8]
-	str	xzr, [x9, #16]
-	str	xzr, [x9, #24]
-	str	xzr, [x9, #32]
-	str	xzr, [x9, #40]
-	str	xzr, [x9, #48]
-	mov	x1, x8
-	mov	x2, #0
-	str	x2, [x9, #16]
+	str	x8, [x9]
+	mov	x3, #-1
 	adrp	x4, l_.str@PAGE
 	add	x4, x4, l_.str@PAGEOFF
 	bl	___snprintf_chk
@@ -71,7 +62,9 @@ LBB0_6:
 	str	x8, [sp, #24]
 	ldr	x0, [sp, #24]
 	mov	w1, #0
-	mov	x2, #-1
+	mov	x8, #-1
+	mov	x9, sp
+	str	x8, [x9]
 	adrp	x3, l_.str.1@PAGE
 	add	x3, x3, l_.str.1@PAGEOFF
 	bl	___sprintf_chk
@@ -90,13 +83,11 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	x0, [sp, #24]
-	ldr	w9, [sp, #20]
-                                        ; implicit-def: $x8
-	mov	x8, x9
+	ldr	w8, [sp, #20]
 	mov	x9, sp
 	str	x8, [x9]
-	mov	x1, #0
-	mov	x2, #-1
+	mov	x8, #-1
+	str	x8, [x9, #8]
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk

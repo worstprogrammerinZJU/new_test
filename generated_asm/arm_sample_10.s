@@ -46,15 +46,14 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w9, [sp, #24]
-	mov	w8, #10
-	mul	w9, w8, w9
-	ldr	w11, [sp, #16]
-	sdiv	w10, w11, w8
-	mul	w10, w10, w11
-	subs	w10, w10, w9
-	str	w10, [sp, #24]
-	ldr	w9, [sp, #16]
+	ldr	w8, [sp, #24]
+	mov	w9, #10
+	mul	w8, w8, w9
+	ldr	w10, [sp, #16]
+	sdiv	w8, w8, w10
+	add	w8, w8, w9, sxtw
+	str	w8, [sp, #24]
+	ldr	w8, [sp, #16]
 	sdiv	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_3

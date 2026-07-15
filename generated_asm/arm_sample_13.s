@@ -85,10 +85,7 @@ LBB0_11:
 	strb	w8, [sp, #31]
 	b	LBB0_13
 LBB0_12:
-	mov	w8, #0
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
+	strb	wzr, [sp, #31]
 	b	LBB0_13
 LBB0_13:
 	ldrb	w8, [sp, #31]

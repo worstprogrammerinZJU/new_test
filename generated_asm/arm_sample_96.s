@@ -18,7 +18,10 @@ _func0:                                 ; @func0
 	ldur	w8, [x29, #-12]
 	mov	w9, #2
 	sdiv	w8, w8, w9
-	add	w8, w8, #1
+	add	w9, w8, #1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
 	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #32]
@@ -83,7 +86,7 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=2
 	add	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
 	fcmp	s0, s1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=2

@@ -13,17 +13,18 @@ _func0:                                 ; @func0
 	str	wzr, [sp, #12]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w9, [sp, #12]
-	ldr	w8, [sp, #20]
-	subs	w8, w8, w9, lsl #1
+	ldr	w8, [sp, #12]
+	lsl	w8, w8, #1
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
-	ldr	w10, [sp, #12]
-	lsl	w10, w10, #1
-	ldr	w8, [x8, w10, sxtw #2]
+	ldr	w9, [sp, #12]
+	lsl	w9, w9, #1
+	ldr	w8, [x8, w9, sxtw #2]
 	mov	w10, #2
 	sdiv	w9, w8, w10
 	mul	w9, w9, w10
@@ -34,9 +35,9 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
-	ldr	w10, [sp, #12]
-	lsl	w10, w10, #1
-	ldr	w9, [x8, w10, sxtw #2]
+	ldr	w9, [sp, #12]
+	lsl	w9, w9, #1
+	ldr	w9, [x8, w9, sxtw #2]
 	ldr	w8, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]

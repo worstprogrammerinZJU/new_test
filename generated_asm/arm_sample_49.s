@@ -32,14 +32,12 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #12]
-	lsl	x10, x10, #2
-	ldr	w9, [x9, x10]
-	mul	w9, w8, w9
-	ldr	w8, [sp, #16]
+	ldr	w9, [x9, x10, lsl #2]
+	mul	w9, w9, w10
+	ldr	w10, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_8
@@ -56,27 +54,23 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
+	ldr	w8, [x8, x9, lsl #2]
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #12]
-	lsl	x10, x10, #2
-	ldr	w9, [x9, x10]
+	ldr	w9, [x9, x10, lsl #2]
 	mul	w8, w8, w9
 	ldr	x9, [sp, #24]
 	ldrsw	x10, [sp, #12]
-	lsl	x10, x10, #2
-	ldr	w9, [x9, x10]
-	mul	w9, w8, w9
-	ldr	w8, [sp, #16]
+	ldr	w9, [x9, x10, lsl #2]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]
 	b	LBB0_7
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	lsl	x9, x9, #2
-	ldr	w9, [x8, x9]
+	ldr	w9, [x8, x9, lsl #2]
 	ldr	w8, [sp, #16]
 	add	w8, w8, w9
 	str	w8, [sp, #16]

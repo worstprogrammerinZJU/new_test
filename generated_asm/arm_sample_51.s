@@ -37,7 +37,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	x8, x8, x9
 	ldrb	w8, [x8]
 	ldrsw	x10, [sp, #12]
-	add	x9, sp, #168
+	add	x9, sp, #160
 	strb	w8, [x9, x10]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -47,11 +47,11 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_4:
 	ldrsw	x9, [sp, #12]
-	add	x0, sp, #168
-	add	x8, x0, x9
-	strb	wzr, [x8]
+	add	x0, sp, #160
+	add	x9, x0, x9
+	strb	wzr, [x9]
 	bl	_atoi
-	str	w0, [sp, #28]
+	str	w0, [sp, #24]
 	str	wzr, [sp, #8]
 	ldr	w8, [sp, #12]
 	add	w8, w8, #1
@@ -85,10 +85,10 @@ LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
 LBB0_8:
 	ldrsw	x9, [sp, #8]
 	add	x0, sp, #56
-	add	x8, x0, x9
-	strb	wzr, [x8]
+	add	x9, x0, x9
+	strb	wzr, [x9]
 	bl	_atoi
-	str	w0, [sp, #24]
+	str	w0, [sp, #20]
 	str	wzr, [sp, #12]
 	b	LBB0_9
 LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
@@ -105,7 +105,7 @@ LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
 	add	x8, x8, x9
 	ldrb	w8, [x8]
 	ldrsw	x10, [sp, #8]
-	add	x9, sp, #168
+	add	x9, sp, #56
 	strb	w8, [x9, x10]
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
@@ -114,12 +114,12 @@ LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
 	str	w8, [sp, #12]
 	b	LBB0_9
 LBB0_12:
-	ldrsw	x9, [sp, #8]
-	add	x0, sp, #168
-	add	x8, x0, x9
-	strb	wzr, [x8]
+	ldrsw	x10, [sp, #12]
+	add	x0, sp, #56
+	add	x9, x0, x10
+	strb	wzr, [x9]
 	bl	_atoi
-	str	w0, [sp, #20]
+	str	w0, [sp, #28]
 	str	wzr, [sp, #8]
 	ldr	w8, [sp, #12]
 	add	w8, w8, #1
@@ -151,17 +151,17 @@ LBB0_15:                                ;   in Loop: Header=BB0_13 Depth=1
 	str	w8, [sp, #8]
 	b	LBB0_13
 LBB0_16:
-	ldrsw	x9, [sp, #8]
+	ldrsw	x10, [sp, #8]
 	add	x0, sp, #56
-	add	x8, x0, x9
-	strb	wzr, [x8]
+	add	x9, x0, x10
+	strb	wzr, [x9]
 	bl	_atoi
-	str	w0, [sp, #16]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #20]
+	str	w0, [sp, #24]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #28]
 	mul	w8, w8, w9
-	ldr	w9, [sp, #24]
-	ldr	w10, [sp, #16]
+	ldr	w9, [sp, #20]
+	ldr	w10, [sp, #24]
 	mul	w9, w9, w10
 	sdiv	w8, w8, w9
 	subs	w8, w8, #0

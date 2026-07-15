@@ -20,7 +20,7 @@ _func0:                                 ; @func0
 	str	w1, [sp, #36]
 	str	x2, [sp, #24]
 	str	x3, [sp, #16]
-	add	x0, sp, #52
+	add	x0, sp, #48
 	adrp	x1, l___const.func0.names@PAGE
 	add	x1, x1, l___const.func0.names@PAGEOFF
 	mov	x2, #80
@@ -138,9 +138,8 @@ LBB0_16:                                ;   in Loop: Header=BB0_11 Depth=1
 	b	LBB0_11
 LBB0_17:
 	ldr	x8, [sp, #16]
-	ldrsw	x9, [x8]
-	mov	x8, #8
-	mul	x0, x8, x9
+	ldrsw	x8, [x8]
+	lsl	x0, x8, #3
 	bl	_malloc
 	ldr	x8, [sp, #24]
 	str	x0, [x8]
@@ -154,7 +153,7 @@ LBB0_18:                                ; =>This Inner Loop Header: Depth=1
 	subs	w8, w8, #0
 	cset	w8, lt
 	mov	w9, #0
-	str	w9, [sp]                        ; 4-byte Folded Spill
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_20
 	b	LBB0_19
 LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=1
@@ -163,10 +162,10 @@ LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=1
 	ldr	w9, [x9]
 	subs	w8, w8, w9
 	cset	w8, lt
-	str	w8, [sp]                        ; 4-byte Folded Spill
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_20
 LBB0_20:                                ;   in Loop: Header=BB0_18 Depth=1
-	ldr	w8, [sp]                        ; 4-byte Folded Reload
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
 	tbz	w8, #0, LBB0_26
 	b	LBB0_21
 LBB0_21:                                ;   in Loop: Header=BB0_18 Depth=1
@@ -189,7 +188,7 @@ LBB0_23:                                ;   in Loop: Header=BB0_18 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #12]
 	ldrsw	x9, [x8, x9, lsl #2]
-	add	x8, sp, #52
+	add	x8, sp, #48
 	ldr	x8, [x8, x9, lsl #3]
 	ldr	x9, [sp, #24]
 	ldr	x9, [x9]

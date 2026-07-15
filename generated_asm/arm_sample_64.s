@@ -44,10 +44,9 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	ldr	w8, [sp, #36]
-	add	x9, sp, #40
 	ldrsw	x10, [sp, #20]
-	add	x9, x9, x10, lsl #2
-	ldr	w9, [x9]
+	add	x9, sp, #40
+	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, lt
 	tbnz	w8, #0, LBB0_5

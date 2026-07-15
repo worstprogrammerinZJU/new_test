@@ -30,7 +30,6 @@ LBB0_2:
 	ldur	w9, [x29, #-12]
 	add	w8, w8, w9
 	mov	w9, #2
-	str	w9, [sp, #12]                   ; 4-byte Folded Spill
 	sdiv	w8, w8, w9
 	stur	w8, [x29, #-20]
 	mov	x0, #33
@@ -41,26 +40,25 @@ LBB0_2:
 	mov	w8, #32
 	str	w8, [sp, #12]
 	ldr	x8, [sp, #16]
-	ldrsw	x10, [sp, #12]
-	mov	x9, x10
-	subs	w9, w9, #1
-	str	w9, [sp, #12]
-	add	x8, x8, x10
+	ldrsw	x9, [sp, #12]
+	mov	x10, x9
+	subs	w10, w10, #1
+	str	w10, [sp, #12]
+	add	x8, x8, x9
 	strb	wzr, [x8]
 	b	LBB0_3
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w9, [sp, #12]                   ; 4-byte Folded Reload
 	ldur	w8, [x29, #-20]
+	mov	w9, #2
 	sdiv	w10, w8, w9
 	mul	w10, w10, w9
 	subs	w8, w8, w10
-	add	w8, w8, #48
-	ldr	x10, [sp, #16]
-	ldrsw	x12, [sp, #12]
-	mov	x11, x12
-	subs	w11, w11, #1
-	str	w11, [sp, #12]
-	add	x10, x10, x12
+	ldr	x11, [sp, #16]
+	ldrsw	x10, [sp, #12]
+	mov	x10, x10
+	subs	w10, w10, #1
+	str	w10, [sp, #12]
+	add	x10, x11, x10
 	strb	w8, [x10]
 	ldur	w8, [x29, #-20]
 	sdiv	w8, w8, w9

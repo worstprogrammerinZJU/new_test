@@ -18,14 +18,15 @@ _func0:                                 ; @func0
 	stur	w3, [x29, #-24]
 	ldursw	x9, [x29, #-24]
 	mov	x8, #4
-	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	str	x8, [sp, #16]                   ; 8-byte Folded Spill
 	mul	x0, x8, x9
 	bl	_malloc
-	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
+	ldr	x8, [sp, #16]                   ; 8-byte Folded Reload
 	stur	x0, [x29, #-32]
 	ldursw	x9, [x29, #-24]
 	mul	x0, x8, x9
 	bl	_malloc
+	ldr	x8, [sp, #16]                   ; 8-byte Folded Reload
 	str	x0, [sp, #40]
 	str	wzr, [sp, #36]
 	b	LBB0_1
@@ -148,14 +149,14 @@ LBB0_13:                                ;   in Loop: Header=BB0_5 Depth=1
 	ldr	w10, [sp, #32]
 	add	w10, w10, #1
 	ldrsw	x9, [x9, w10, sxtw #2]
-	ldr	s1, [x8, x9, lsl #2]
+	ldr	s2, [x8, x9, lsl #2]
                                         ; implicit-def: $d1
-	fmov	s1, s1
+	fmov	s1, s2
 	sshll.2d	v1, v1, #0
                                         ; kill: def $d1 killed $d1 killed $q1
 	scvtf	d1, d1
 	bl	_pow
-	fcvtzs	w8, d0
+	fcvtzu	w8, d0
 	ldur	x9, [x29, #-32]
 	ldr	x10, [sp, #40]
 	ldrsw	x11, [sp, #32]
@@ -208,7 +209,7 @@ LBB0_19:                                ;   in Loop: Header=BB0_17 Depth=1
 	bl	_strcmp
 	subs	w8, w0, #0
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_30
+	tbnz	w8, #0, LBB0_46
 	b	LBB0_20
 LBB0_20:                                ;   in Loop: Header=BB0_17 Depth=1
 	b	LBB0_21
@@ -224,9 +225,9 @@ LBB0_21:                                ;   Parent Loop BB0_17 Depth=1
 	ldr	w9, [x9, x10, lsl #2]
 	subs	w8, w8, w9
 	cset	w8, eq
-	tbnz	w8, #0, LBB0_33
+	tbnz	w8, #0, LBB0_39
 	b	LBB0_22
-LBB0_22:                                ;   in Loop: Header=BB0_21 Depth=2
+LBB0_22:                                ;   in Loop: Header=BB0_37 Depth=2
 	ldr	x8, [sp, #40]
 	ldr	x9, [sp, #40]
 	ldrsw	x10, [sp, #28]
@@ -235,10 +236,10 @@ LBB0_22:                                ;   in Loop: Header=BB0_21 Depth=2
 	ldr	x9, [sp, #40]
 	ldrsw	x10, [sp, #28]
 	str	w8, [x9, x10, lsl #2]
-	b	LBB0_21
-LBB0_23:                                ;   in Loop: Header=BB0_17 Depth=1
-	b	LBB0_24
-LBB0_24:                                ;   Parent Loop BB0_17 Depth=1
+	b	LBB0_37
+LBB0_23:                                ;   in Loop: Header=BB0_33 Depth=1
+	b	LBB0_40
+LBB0_24:                                ;   Parent Loop BB0_33 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
 	ldr	x8, [sp, #40]
 	ldr	x9, [sp, #40]
@@ -275,7 +276,7 @@ LBB0_26:                                ;   in Loop: Header=BB0_33 Depth=1
 	bl	_strcmp
 	subs	w8, w0, #0
 	cset	w8, ne
-	tbnz	w8, #0, LBB0_28
+	tbnz	w8, #0, LBB0_44
 	b	LBB0_27
 LBB0_27:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldur	x8, [x29, #-32]
@@ -289,10 +290,10 @@ LBB0_27:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldrsw	x11, [sp, #28]
 	ldrsw	x10, [x10, x11, lsl #2]
 	add	x9, x9, x10
-	ldr	w9, [x9]
-	mul	w8, w8, w9
+	ldr	w10, [x9]
+	add	w8, w8, w10
 	str	w8, [x9]
-	b	LBB0_29
+	b	LBB0_45
 LBB0_28:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldur	x8, [x29, #-32]
 	ldr	x9, [sp, #40]
@@ -308,7 +309,7 @@ LBB0_28:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldr	w9, [x9]
 	subs	w8, w8, w9
 	str	w8, [x9]
-	b	LBB0_29
+	b	LBB0_45
 LBB0_29:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #28]
@@ -438,8 +439,8 @@ LBB0_43:                                ;   in Loop: Header=BB0_33 Depth=1
 	ldrsw	x11, [sp, #24]
 	ldrsw	x10, [x10, x11, lsl #2]
 	add	x9, x9, x10
-	ldr	w9, [x9]
-	mul	w8, w8, w9
+	ldr	w10, [x9]
+	add	w8, w8, w10
 	str	w8, [x9]
 	b	LBB0_45
 LBB0_44:                                ;   in Loop: Header=BB0_33 Depth=1

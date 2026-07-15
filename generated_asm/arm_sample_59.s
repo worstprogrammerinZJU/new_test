@@ -3,7 +3,7 @@
 	.section	__TEXT,__literal8,8byte_literals
 	.p2align	3                               ; -- Begin function func0
 lCPI0_0:
-	.quad	0x3fdfffffffffffff              ; double 0.49999999999999994
+	.quad	0x3f1a36e2eb1c432d              ; double 1.0E-4
 	.section	__TEXT,__text,regular,pure_instructions
 	.globl	_func0
 	.p2align	2
@@ -33,16 +33,19 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
-	fabs	d0, d0
+	movi	d3, #-0.0000000000000000
+	fabs	d2, d2
+	ucvtf	d2, d2
+	ucvtf	d2, d2
+	mov	d1, d1
+	fmov	d3, #0.49999999999999994
+	fadd	d2, d2, d3
+	frintpd	v1, v1
+	fsub	d1, d1, d2
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fadd	d2, d0, d3
-	fcvtpu	v1, d2
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fmov	d2, v3
-	fcmp	d0, d2
-	cset	w8, le
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	fcmp	d0, d1
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -50,23 +53,25 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcmp	s0, #0.0
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fabs	d0, d0
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fadd	d2, d0, d3
-	fcvtpu	v1, d2
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fmov	d2, v3
-	fcmp	d0, d2
+	fcvt	d1, s0
+	movi	d2, #-0.0000000000000000
+	fabs	d2, d2
+	fmov	d3, #4.9999999999999994
+	fpor	d2, d2, d3
+	ucvtp	d1, d1
+	ucvtf	d2, d2
+	mov	w8, #2
+	sdiv	w9, w8, w2
+	mul	w9, w9, w8
+	subs	w9, w9, #1
+	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
@@ -74,24 +79,23 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fabs	d0, d0
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fadd	d2, d0, d3
-	fcvtpu	v1, d2
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d3, #-0.0000000000000000
+	fpor	d2, d2, d3
+	ucvtp	d1, d1
+	ucvtf	d2, d2
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
 	fabs	d0, d0
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d3, [x8, lCPI0_0@PAGEOFF]
-	fadd	d2, d0, d3
-	fcvtpu	v1, d2
-	fmul	w8, w0, w8
-	ldr	x9, [sp, #8]
-	add	x8, x8, x9
+	fmov	d2, #-0.0000000000000000
+	fpor	d2, d2, d3
+	ucvtf	d2, d2
+	fmul	d9, d1, d2
+	ldr	x8, [sp, #8]
+	add	x8, x8, d9, sxtw
 	str	x8, [sp, #8]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1

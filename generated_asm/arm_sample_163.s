@@ -30,9 +30,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_3
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w9, [sp, #24]
-	mov	w8, #2
-	mul	w9, w8, w9
+	ldr	w8, [sp, #24]
+	lsl	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9
 	sxtw	x8, w8
@@ -51,8 +50,9 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x0, [x29, #-16]
 	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #24]
-	lsl	w9, w9, #1
+	ldr	w10, [sp, #24]
+	mov	w9, #2
+	mul	w9, w9, w10
 	ldrsb	w1, [x8, w9, sxtw]
 	bl	_strchr
 	subs	x8, x0, #0

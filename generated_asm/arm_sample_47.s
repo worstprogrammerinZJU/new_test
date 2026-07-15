@@ -77,8 +77,8 @@ LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
 	mov	x11, x10
 	add	w11, w11, #1
 	str	w11, [sp, #24]
-	add	x10, x9, x10
-	strb	w8, [x10]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-20]
@@ -107,8 +107,8 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	mov	x11, x10
 	add	w11, w11, #1
 	str	w11, [sp, #24]
-	add	x10, x9, x10
-	strb	w8, [x10]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_11
 LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_12
@@ -153,8 +153,8 @@ LBB0_16:
 	mov	x11, x10
 	add	w11, w11, #1
 	str	w11, [sp, #24]
-	add	x10, x9, x10
-	strb	w8, [x10]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_17
 LBB0_17:
 	ldur	w8, [x29, #-20]

@@ -18,7 +18,6 @@ _func0:                                 ; @func0
 	adrp	x8, l_.str@PAGE
 	add	x8, x8, l_.str@PAGEOFF
 	stur	x8, [x29, #-32]
-                                        ; kill: def $x8 killed $xzr
 	str	xzr, [sp, #40]
 	str	wzr, [sp, #36]
 	str	wzr, [sp, #32]

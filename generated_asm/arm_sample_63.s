@@ -48,8 +48,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-4]
-	mov	w9, #10
-	sdiv	w8, w8, w9
+	mov	w10, #10
+	sdiv	w8, w8, w10
 	stur	w8, [x29, #-4]
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1

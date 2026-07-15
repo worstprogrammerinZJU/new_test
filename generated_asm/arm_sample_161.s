@@ -14,8 +14,9 @@ _func0:                                 ; @func0
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
 	stur	x1, [x29, #-16]
-	ldursw	x8, [x29, #-4]
-	lsl	x0, x8, #2
+	ldursw	x9, [x29, #-4]
+	mov	x8, #4
+	mul	x0, x8, x9
 	bl	_malloc
 	str	x0, [sp, #24]
 	ldur	x8, [x29, #-16]
@@ -48,7 +49,8 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #16]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	str	w8, [sp, #8]
 	ldr	w8, [sp, #8]
 	ldr	w9, [sp, #8]

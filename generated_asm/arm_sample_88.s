@@ -20,9 +20,8 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	str	w8, [sp, #12]
-	ldursw	x9, [x29, #-12]
-	mov	x8, #8
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-12]
+	lsl	x0, x8, #3
 	bl	_malloc
 	ldr	x8, [sp, #16]
 	str	x0, [x8]

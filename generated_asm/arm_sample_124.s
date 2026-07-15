@@ -21,12 +21,11 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	s1, [sp, #4]
-	scvtf	s0, s1
+	ldr	s0, [sp, #4]
+	scvtf	s0, s0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
-	lsl	x9, x9, #2
-	ldr	s1, [x8, x9]
+	ldr	s1, [x8, x9, lsl #2]
 	fmul	s0, s0, s1
 	ldr	x8, [sp, #8]
 	ldr	w9, [sp, #4]

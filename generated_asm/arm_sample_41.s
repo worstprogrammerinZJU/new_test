@@ -24,7 +24,8 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #12]
-	ldr	w8, [x8, x9, lsl #2]
+	lsl	x9, x9, #2
+	ldr	w8, [x8, x9]
 	ldr	x9, [sp, #24]
 	ldr	w10, [sp, #12]
 	subs	w10, w10, #1

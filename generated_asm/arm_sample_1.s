@@ -24,9 +24,8 @@ LBB0_1:
 	stur	xzr, [x29, #-8]
 	b	LBB0_11
 LBB0_2:
-	ldursw	x9, [x29, #-20]
-	mov	x8, #4
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-20]
+	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldr	x8, [sp, #16]

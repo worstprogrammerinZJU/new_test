@@ -12,11 +12,11 @@ _func0:                                 ; @func0
 	str	s2, [sp]
 	ldr	s0, [sp, #8]
 	fabs	s0, s0
-	fmov	s2, #-0.00000000
-	fmov	s1, #4.99999970
-	fmul	s1, s1, s2
+	fmov	s1, #-0.0E+0
+	fpor	s1, s0, s1
+	mov	w8, #11
 	fadd	s0, s0, s1
-	frint	s0, s0
+	fcvtzu	s0, s0
 	ldr	s1, [sp, #8]
 	fcmp	s0, s1
 	cset	w8, ne
@@ -28,10 +28,11 @@ LBB0_1:
 LBB0_2:
 	ldr	s0, [sp, #4]
 	fabs	s0, s0
-	fmov	s2, #-0.00000000
-	fmov	s1, #4.99999970
-	fmadd	s0, s0, s1, s2
-	frint	s0, s0
+	fmov	s1, #-0.0E+0
+	fpor	s1, s0, s1
+	mov	w8, #11
+	fadd	s0, s0, s1
+	fcvtzu	s0, s0
 	ldr	s1, [sp, #4]
 	fcmp	s0, s1
 	cset	w8, ne
@@ -43,10 +44,11 @@ LBB0_3:
 LBB0_4:
 	ldr	s0, [sp]
 	fabs	s0, s0
-	fmov	s2, #-0.00000000
-	fmov	s1, #4.99999970
-	fmadd	s0, s0, s1, s2
-	frint	s0, s0
+	fmov	s1, #-0.0E+0
+	fpor	s1, s0, s1
+	mov	w8, #11
+	fadd	s0, s0, s1
+	fcvtzu	s0, s0
 	ldr	s1, [sp]
 	fcmp	s0, s1
 	cset	w8, ne

@@ -74,7 +74,6 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x0, [sp, #24]
 	ldr	w8, [sp, #8]
 	add	w8, w8, #1
-	add	x8, x8, #1
                                         ; implicit-def: $x9
 	mov	x9, x8
 	sxtw	x9, w9

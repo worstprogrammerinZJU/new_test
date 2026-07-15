@@ -13,15 +13,12 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
-	ldur	w9, [x29, #-4]
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sub	x0, x29, #10
-	str	x8, [sp, #16]                   ; 8-byte Folded Spill
+	ldur	w4, [x29, #-4]
 	mov	x9, sp
+	sub	x8, x29, #10
 	str	x8, [x9]
 	mov	w1, #0
-	mov	w2, #6
+	mov	x2, #6
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
@@ -51,7 +48,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	stur	w8, [x29, #-20]
 	b	LBB0_1
 LBB0_4:
-	mov	x0, #33
+	mov	w0, #33
 	bl	_malloc
 	str	x0, [sp, #32]
 	str	wzr, [sp, #28]
@@ -80,20 +77,19 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldur	w8, [x29, #-16]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
+	mov	w9, #2
+	sdiv	w10, w8, w9
+	mul	w10, w10, w9
+	subs	w8, w8, w10
 	add	w8, w8, #48
-	ldr	x9, [sp, #32]
-	ldrsw	x10, [sp, #28]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #28]
-	add	x9, x9, x10
-	strb	w8, [x9]
+	ldr	x10, [sp, #32]
+	ldrsw	x11, [sp, #28]
+	mov	x12, x11
+	add	w12, w12, #1
+	str	w12, [sp, #28]
+	strb	w8, [x10, x11]
 	ldur	w8, [x29, #-16]
-	sdiv	w8, w8, w10
+	sdiv	w8, w8, w9
 	stur	w8, [x29, #-16]
 	b	LBB0_7
 LBB0_9:
