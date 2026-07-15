@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -13,12 +13,16 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
-	ldur	w4, [x29, #-4]
-	mov	x9, sp
+	ldur	w8, [x29, #-4]
+                                        ; implicit-def: $x10
+	mov	x10, x8
 	sub	x8, x29, #10
-	str	x8, [x9]
+	str	x8, [sp, #16]                   ; 8-byte Folded Spill
+	mov	x9, sp
+	str	x10, [x9]
 	mov	w1, #0
-	mov	x2, #6
+	mov	x8, #6
+	str	x8, [x9, #8]
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
@@ -77,19 +81,20 @@ LBB0_7:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldur	w8, [x29, #-16]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	add	w8, w8, #48
-	ldr	x10, [sp, #32]
-	ldrsw	x11, [sp, #28]
-	mov	x12, x11
-	add	w12, w12, #1
-	str	w12, [sp, #28]
-	strb	w8, [x10, x11]
+	ldr	x9, [sp, #32]
+	ldrsw	x10, [sp, #28]
+	mov	x11, x10
+	add	w11, w11, #1
+	str	w11, [sp, #28]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	ldur	w8, [x29, #-16]
-	sdiv	w8, w8, w9
+	sdiv	w8, w8, w10
 	stur	w8, [x29, #-16]
 	b	LBB0_7
 LBB0_9:

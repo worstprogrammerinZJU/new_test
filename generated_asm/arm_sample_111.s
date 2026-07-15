@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -17,10 +17,11 @@ _func0:                                 ; @func0
 	ldur	w8, [x29, #-12]
 	subs	w8, w8, #0
 	cset	w8, ne
-	and	w9, w8, #0x1
-	mov	w8, #21
-	ands	w9, w9, #0x1
-	csinc	w8, w8, wzr, eq
+	and	w10, w8, #0x1
+	mov	w9, #21
+	mov	w8, #5
+	ands	w10, w10, #0x1
+	csel	w8, w8, w9, ne
 	stur	w8, [x29, #-16]
 	ldur	x0, [x29, #-8]
 	bl	_strlen
@@ -50,7 +51,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	w8, [sp, #12]
 	ldur	x9, [x29, #-8]
 	ldr	x10, [sp, #16]
-	strb	w8, [x9, x10]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #16]

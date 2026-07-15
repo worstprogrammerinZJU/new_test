@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -13,9 +13,8 @@ _func0:                                 ; @func0
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
 	stur	w0, [x29, #-4]
-	ldursw	x9, [x29, #-4]
-	mov	x8, #4
-	mul	x0, x8, x9
+	ldursw	x8, [x29, #-4]
+	lsl	x0, x8, #2
 	bl	_malloc
 	str	x0, [sp, #16]
 	str	wzr, [sp, #12]

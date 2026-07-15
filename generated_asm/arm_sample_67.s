@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -26,12 +26,16 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w5, [x29, #-20]
-	mov	x10, #0
-	mov	x8, x10
+	ldur	w8, [x29, #-20]
 	mov	x9, sp
 	str	x8, [x9]
-	mov	x3, #-1
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	str	x8, [x9, #8]
+	mov	x10, #0
+	str	x10, [x9, #16]
+	mov	x8, #-1
+	str	x8, [x9, #24]
 	adrp	x4, l_.str@PAGE
 	add	x4, x4, l_.str@PAGEOFF
 	bl	___snprintf_chk
@@ -62,9 +66,12 @@ LBB0_6:
 	str	x8, [sp, #24]
 	ldr	x0, [sp, #24]
 	mov	w1, #0
-	mov	x8, #-1
 	mov	x9, sp
-	str	x8, [x9]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	str	x8, [x9, #8]
+	mov	x8, #-1
+	str	x8, [x9, #16]
 	adrp	x3, l_.str.1@PAGE
 	add	x3, x3, l_.str.1@PAGEOFF
 	bl	___sprintf_chk
@@ -86,8 +93,12 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=1
 	ldr	w8, [sp, #20]
 	mov	x9, sp
 	str	x8, [x9]
-	mov	x8, #-1
+                                        ; implicit-def: $x8
+	mov	x8, x9
 	str	x8, [x9, #8]
+	mov	x1, #0
+	mov	x8, #-1
+	str	x8, [x9, #16]
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk

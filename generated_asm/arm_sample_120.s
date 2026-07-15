@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -36,8 +36,9 @@ LBB0_3:
 	ldr	x9, [sp, #24]
 	str	w8, [x9]
 	ldr	x8, [sp, #24]
-	ldrsw	x8, [x8]
-	lsl	x0, x8, #2
+	ldrsw	x9, [x8]
+	mov	x8, #4
+	mul	x0, x8, x9
 	bl	_malloc
 	str	x0, [sp, #16]
 	ldur	w8, [x29, #-12]

@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -56,16 +56,16 @@ LBB0_5:                                 ;   Parent Loop BB0_1 Depth=1
 	subs	w8, w8, #0
 	cset	w8, le
 	mov	w9, #0
-	str	w9, [sp, #8]                    ; 4-byte Folded Spill
+	str	w9, [sp, #4]                    ; 4-byte Folded Spill
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
 	ldrb	w8, [sp, #23]
 	eor	w8, w8, #0x1
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	str	w8, [sp, #4]                    ; 4-byte Folded Spill
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
 	tbz	w8, #0, LBB0_11
 	b	LBB0_8
 LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=2
@@ -84,8 +84,8 @@ LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=2
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_5 Depth=2
 	ldr	w8, [sp, #24]
-	mov	w9, #10
-	sdiv	w8, w8, w9
+	mov	w10, #10
+	sdiv	w8, w8, w10
 	str	w8, [sp, #24]
 	b	LBB0_5
 LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1

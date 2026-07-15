@@ -1,11 +1,6 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.section	__TEXT,__literal4,4byte_literals
-	.p2align	2                               ; -- Begin function func0
-lCPI0_0:
-	.quad	0x7fffffffffffffff              ; double NaN
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_func0
+	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -63,7 +58,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldr	s0, [sp, #8]
 	ldr	s1, [sp, #20]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2

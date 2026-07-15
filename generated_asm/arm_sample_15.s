@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -24,7 +24,7 @@ _func0:                                 ; @func0
 	mov	w1, #0
 	mov	x2, #104
 	bl	_memset
-	str	wzr, [sp, #32]
+	str	wzr, [sp, #36]
 	ldr	x8, [sp, #64]
 	str	x8, [sp, #24]
 	str	wzr, [sp, #20]
@@ -55,8 +55,10 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w8, w8, #1
 	str	w8, [x9]
 	ldrsw	x9, [sp, #16]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #32]
+	add	x8, sp, #72
+	add	x9, x8, x9, lsl #2
+	ldr	w8, [x9]
+	ldr	w9, [sp, #36]
 	subs	w8, w8, w9
 	cset	w8, le
 	tbnz	w8, #0, LBB0_5
@@ -65,7 +67,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #16]
 	add	x8, sp, #72
 	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #32]
+	str	w8, [sp, #36]
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_6
@@ -93,7 +95,7 @@ LBB0_9:                                 ;   in Loop: Header=BB0_8 Depth=1
 	ldrsw	x9, [sp, #12]
 	add	x8, sp, #72
 	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #32]
+	ldr	w9, [sp, #36]
 	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_11
@@ -116,7 +118,7 @@ LBB0_12:                                ;   in Loop: Header=BB0_8 Depth=1
 	str	w8, [sp, #12]
 	b	LBB0_8
 LBB0_13:
-	ldr	w8, [sp, #32]
+	ldr	w8, [sp, #36]
 	ldr	x9, [sp, #48]
 	str	w8, [x9]
 	ldr	x8, [sp, #40]

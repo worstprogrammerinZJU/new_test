@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.section	__TEXT,__literal8,8byte_literals
 	.p2align	3                               ; -- Begin function func0
@@ -33,17 +33,13 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d0, s0
-	movi	d3, #-0.0000000000000000
-	fabs	d2, d2
-	ucvtf	d2, d2
-	ucvtf	d2, d2
-	mov	d1, d1
+	movi	d2, #1.00000000
+	fabs	d1, d1
 	fmov	d3, #0.49999999999999994
-	fadd	d2, d2, d3
-	frintpd	v1, v1
-	fsub	d1, d1, d2
-	adrp	x8, lCPI0_0@PAGE
-	ldr	d0, [x8, lCPI0_0@PAGEOFF]
+	fpor	d1, d1, d3
+	fadd	d0, d0, d1
+	fcvtf	d0, d0
+	fmov	d1, #1.00000000
 	fcmp	d0, d1
 	cset	w8, pl
 	tbnz	w8, #0, LBB0_7
@@ -61,17 +57,17 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d1, s0
-	movi	d2, #-0.0000000000000000
+	movi	d2, #-0.00000000
 	fabs	d2, d2
-	fmov	d3, #4.9999999999999994
-	fpor	d2, d2, d3
-	ucvtp	d1, d1
-	ucvtf	d2, d2
+	fmov	d3, #1.00000000
+	fpor	d1, d1, d3
+	fadd	d0, d0, d1
+	fcvtf	d0, d0
 	mov	w8, #2
-	sdiv	w9, w8, w2
+	sdiv	w9, w0, w8
 	mul	w9, w9, w8
-	subs	w9, w9, #1
-	subs	w8, w8, w9
+	subs	w8, w0, w9
+	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
@@ -80,22 +76,25 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
 	fcvt	d1, s0
-	fabs	d1, d1
-	fmov	d3, #-0.0000000000000000
-	fpor	d2, d2, d3
-	ucvtp	d1, d1
-	ucvtf	d2, d2
+	movi	d2, #-0.00000000
+	fabs	d2, d2
+	fmov	d3, #1.00000000
+	fpor	d1, d1, d3
+	fadd	d0, d0, d1
+	fcvtf	d0, d0
 	ldr	x8, [sp, #24]
 	ldrsw	x9, [sp, #4]
 	ldr	s0, [x8, x9, lsl #2]
-	fcvt	d0, s0
-	fabs	d0, d0
-	fmov	d2, #-0.0000000000000000
+	fcvt	d1, s0
+	fabs	d1, d1
+	fmov	d2, d1
+	movi	d3, #0.49999999999999994
 	fpor	d2, d2, d3
-	ucvtf	d2, d2
-	fmul	d9, d1, d2
+	fadd	d0, d0, d2
+	fcvtf	d0, d0
+	mul	w9, w0, w8
 	ldr	x8, [sp, #8]
-	add	x8, x8, d9, sxtw
+	add	x8, x8, w9, sxtw
 	str	x8, [sp, #8]
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1

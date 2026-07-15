@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -98,11 +98,13 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=3
 LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=3
 	ldrsw	x9, [sp, #24]
 	add	x8, sp, #64
-	ldrb	w8, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	strb	w8, [sp, #19]
 	ldrsw	x9, [sp, #20]
 	add	x8, sp, #64
-	ldrb	w8, [x8, x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	ldrsw	x10, [sp, #24]
 	add	x9, x8, x10
 	strb	w8, [x9]
@@ -142,18 +144,18 @@ LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
 	strb	w8, [x9]
 	b	LBB0_16
 LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #8]
+	str	wzr, [sp, #12]
 	b	LBB0_17
 LBB0_17:                                ;   Parent Loop BB0_1 Depth=1
                                         ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #12]
 	ldr	w9, [sp, #32]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_20
 	b	LBB0_18
 LBB0_18:                                ;   in Loop: Header=BB0_17 Depth=2
-	ldrsw	x9, [sp, #8]
+	ldrsw	x9, [sp, #12]
 	add	x8, sp, #64
 	ldrb	w8, [x8, x9]
 	ldr	x9, [sp, #40]
@@ -164,9 +166,9 @@ LBB0_18:                                ;   in Loop: Header=BB0_17 Depth=2
 	strb	w8, [x9, x10]
 	b	LBB0_19
 LBB0_19:                                ;   in Loop: Header=BB0_17 Depth=2
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #12]
 	add	w8, w8, #1
-	str	w8, [sp, #8]
+	str	w8, [sp, #12]
 	b	LBB0_17
 LBB0_20:                                ;   in Loop: Header=BB0_1 Depth=1
 	str	wzr, [sp, #32]
@@ -174,21 +176,19 @@ LBB0_20:                                ;   in Loop: Header=BB0_1 Depth=1
 LBB0_21:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #56]
 	ldrsw	x9, [sp, #28]
-	add	x9, x8, x9
-	ldrb	w8, [x9]
-	ldr	w10, [sp, #32]
-	mov	x9, x10
-	add	w9, w9, #1
-	str	w9, [sp, #32]
-	add	x9, x8, x9
+	ldrb	w8, [x8, x9]
+	ldr	w9, [sp, #32]
+	add	w10, w9, #1
+	str	w10, [sp, #32]
+	add	x9, x8, w9, sxtw
 	strb	w8, [x9]
 	b	LBB0_22
 LBB0_22:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_23
 LBB0_23:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #28]
+	ldr	w8, [sp, #24]
 	add	w8, w8, #1
-	str	w8, [sp, #28]
+	str	w8, [sp, #24]
 	b	LBB0_1
 LBB0_24:
 	ldr	x8, [sp, #40]

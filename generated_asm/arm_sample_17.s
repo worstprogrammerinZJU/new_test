@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -101,13 +101,13 @@ LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
 	ldursw	x9, [x29, #-28]
 	ldr	x0, [x8, x9, lsl #3]
 	ldr	w4, [sp, #32]
-	ldr	w8, [sp, #32]
-                                        ; implicit-def: $x10
-	mov	x10, x8
-	ldr	w8, [sp, #32]
-	mov	x9, sp
-	str	x10, [x9]
-	str	x8, [x9, #8]
+	ldr	w9, [sp, #32]
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	ldr	w9, [sp, #32]
+	mov	x10, sp
+	str	x8, [x10]
+	str	w9, [x10, #8]
 	mov	w1, #0
 	mov	x2, #-1
 	adrp	x3, l_.str@PAGE

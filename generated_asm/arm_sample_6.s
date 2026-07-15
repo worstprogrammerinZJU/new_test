@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -41,9 +41,8 @@ LBB0_2:
 	str	w8, [sp, #12]
 	ldr	x8, [sp, #16]
 	ldrsw	x9, [sp, #12]
-	mov	x10, x9
-	subs	w10, w10, #1
-	str	w10, [sp, #12]
+	subs	x9, x9, #1
+	str	w9, [sp, #12]
 	add	x8, x8, x9
 	strb	wzr, [x8]
 	b	LBB0_3
@@ -52,13 +51,14 @@ LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
 	mov	w9, #2
 	sdiv	w10, w8, w9
 	mul	w10, w10, w9
-	subs	w8, w8, w10
-	ldr	x11, [sp, #16]
-	ldrsw	x10, [sp, #12]
-	mov	x10, x10
-	subs	w10, w10, #1
-	str	w10, [sp, #12]
-	add	x10, x11, x10
+	subs	w10, w8, w10
+	mov	w8, #48
+	add	w8, w8, w10
+	ldr	x10, [sp, #16]
+	ldrsw	x11, [sp, #12]
+	subs	x11, x11, #1
+	str	w11, [sp, #12]
+	add	x10, x10, x11
 	strb	w8, [x10]
 	ldur	w8, [x29, #-20]
 	sdiv	w8, w8, w9

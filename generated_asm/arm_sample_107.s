@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.section	__TEXT,__literal8,8byte_literals
 	.p2align	3                               ; -- Begin function func0
@@ -45,7 +45,7 @@ LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
 	ldrsw	x9, [sp, #4]
 	ldr	s1, [x8, x9, lsl #2]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
@@ -99,18 +99,17 @@ LBB0_11:
 LBB0_12:
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
-	mov	w10, #2
-	sdiv	w9, w9, w10
+	mov	w11, #2
+	sdiv	w9, w9, w11
 	ldr	s0, [x8, w9, sxtw #2]
 	ldr	x8, [sp, #16]
 	ldr	w9, [sp, #12]
-	sdiv	w9, w9, w10
+	sdiv	w9, w9, w11
 	subs	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
-	fadd	s0, s0, s1
-	fcvt	d0, s0
+	fcvt	d1, s0
 	adrp	x8, lCPI0_0@PAGE
-	ldr	d1, [x8, lCPI0_0@PAGEOFF]
+	ldr	d0, [x8, lCPI0_0@PAGEOFF]
 	fmul	d0, d0, d1
 	fcvt	s0, d0
 	str	s0, [sp, #28]

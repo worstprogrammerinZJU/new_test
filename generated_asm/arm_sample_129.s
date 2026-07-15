@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -20,10 +20,10 @@ _func0:                                 ; @func0
 	str	w1, [sp, #36]
 	sub	x0, x29, #18
 	mov	w1, #0
-	str	w1, [sp, #12]                   ; 4-byte Folded Spill
+	str	w1, [sp, #28]                   ; 4-byte Folded Spill
 	mov	x2, #10
 	bl	_memset
-	ldr	w1, [sp, #12]                   ; 4-byte Folded Reload
+	ldr	w1, [sp, #28]                   ; 4-byte Folded Reload
 	sub	x0, x29, #28
 	bl	_memset
 	str	wzr, [sp, #32]
@@ -56,8 +56,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #24]
-	add	x9, x8, x9
-	ldrb	w8, [x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	ldrsw	x10, [sp, #28]
 	mov	x9, x10
 	add	w9, w9, #1
@@ -69,8 +69,8 @@ LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	x8, [sp, #40]
 	ldrsw	x9, [sp, #24]
-	add	x9, x8, x9
-	ldrb	w8, [x9]
+	add	x8, x8, x9
+	ldrb	w8, [x8]
 	ldrsw	x10, [sp, #28]
 	mov	x9, x10
 	add	w9, w9, #1
@@ -109,10 +109,10 @@ LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_1
 LBB0_13:
 	ldr	w8, [sp, #36]
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
 	sub	x0, x29, #18
 	bl	_atoi
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
+	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
 	subs	w8, w8, w0
 	str	w8, [sp, #16]                   ; 4-byte Folded Spill
 	sub	x0, x29, #28

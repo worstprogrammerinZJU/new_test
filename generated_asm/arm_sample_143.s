@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -37,13 +37,12 @@ LBB0_2:
 	b	LBB0_3
 LBB0_3:
 	ldr	x8, [sp, #24]
-	ldrsw	x10, [sp, #20]
-	mov	x9, x10
-	subs	w9, w9, #1
+	ldrsw	x9, [sp, #20]
+	subs	x9, x9, #1
 	str	w9, [sp, #20]
-	add	x9, x8, x10
-	mov	w8, #48
-	strb	w8, [x9]
+	add	x8, x8, x9
+	mov	w9, #48
+	strb	w9, [x8]
 	b	LBB0_8
 LBB0_4:
 	b	LBB0_5
@@ -55,40 +54,39 @@ LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_6
 LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
 	ldur	w8, [x29, #-12]
-	mov	w9, #2
-	sdiv	w10, w8, w9
-	mul	w10, w10, w9
-	subs	w8, w8, w10
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	add	w8, w8, #48
-	ldr	x10, [sp, #24]
-	ldrsw	x11, [sp, #20]
-	subs	w11, w11, #1
-	str	w11, [sp, #20]
-	add	x9, x10, x11
-	mov	w10, #48
-	strb	w10, [x9]
+                                        ; kill: def $w8 killed $w8 killed $x8
+	ldr	x9, [sp, #24]
+	ldrsw	x10, [sp, #20]
+	subs	x10, x10, #1
+	str	w10, [sp, #20]
+	add	x9, x9, x10
+	strb	w8, [x9]
 	ldur	w8, [x29, #-12]
-	sdiv	w8, w8, w9
+	sdiv	w8, w8, w10
 	stur	w8, [x29, #-12]
 	b	LBB0_5
 LBB0_7:
 	b	LBB0_8
 LBB0_8:
 	ldr	x8, [sp, #24]
-	ldrsw	x10, [sp, #20]
-	mov	x9, x10
-	subs	w9, w9, #1
+	ldrsw	x9, [sp, #20]
+	subs	x9, x9, #1
 	str	w9, [sp, #20]
-	add	x9, x8, x10
+	add	x9, x8, x9
 	mov	w8, #98
 	strb	w8, [x9]
 	ldr	x8, [sp, #24]
-	ldrsw	x10, [sp, #20]
-	subs	w11, w10, #1
-	str	w11, [sp, #20]
-	add	x10, x8, x10
+	ldrsw	x9, [sp, #20]
+	subs	x9, x9, #1
+	str	w9, [sp, #20]
+	add	x9, x8, x9
 	mov	w8, #100
-	strb	w8, [x10]
+	strb	w8, [x9]
 	ldr	w8, [sp, #20]
 	add	w8, w8, #1
 	str	w8, [sp, #16]
@@ -99,7 +97,7 @@ LBB0_8:
 	ldr	w8, [sp, #12]
 	add	w9, w8, #3
                                         ; implicit-def: $x8
-	mov	x8, x9
+	mov	x8, w9
 	sxtw	x0, w8
 	bl	_malloc
 	str	x0, [sp]

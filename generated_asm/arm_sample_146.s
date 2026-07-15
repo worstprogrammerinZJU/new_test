@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -67,12 +67,10 @@ LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
 LBB0_8:
 	mov	w8, #1
 	and	w8, w8, #0x1
-	and	w8, w8, #0x1
 	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_9:
-	ldurb	w8, [x29, #-1]
-	and	w0, w8, #0x1
+	ldurb	w0, [x29, #-1]
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
 	ret

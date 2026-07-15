@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -17,9 +17,8 @@ _func0:                                 ; @func0
 	bl	_strlen
 	mov	x8, x0
 	stur	w8, [x29, #-20]
-	ldur	w9, [x29, #-20]
-	mov	w8, #2
-	mul	w8, w8, w9
+	ldur	w8, [x29, #-20]
+	lsl	w8, w8, #1
 	add	w9, w8, #1
                                         ; implicit-def: $x8
 	mov	x8, x9

@@ -1,6 +1,6 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
+	.globl	_func0                         ; -- Begin function func0
 	.p2align	2
 _func0:                                 ; @func0
 	.cfi_startproc
@@ -11,14 +11,15 @@ _func0:                                 ; @func0
 	str	s1, [sp, #4]
 	str	s2, [sp]
 	ldr	s0, [sp, #8]
-	fabs	s0, s0
-	fmov	s1, #-0.0E+0
-	fpor	s1, s0, s1
-	mov	w8, #11
-	fadd	s0, s0, s1
-	fcvtzu	s0, s0
-	ldr	s1, [sp, #8]
-	fcmp	s0, s1
+	fabs	s1, s0
+	fmov	s2, #-0.0E+0
+	fcvtas	w8, s2
+	movi	d0, #11.00000000
+	fmul	d0, d0, d0
+	fadd	d0, d0, d1
+	fcvtms	w8, d0
+	ldr	s0, [sp, #8]
+	fcmp	s0, w8
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
@@ -27,14 +28,15 @@ LBB0_1:
 	b	LBB0_11
 LBB0_2:
 	ldr	s0, [sp, #4]
-	fabs	s0, s0
-	fmov	s1, #-0.0E+0
-	fpor	s1, s0, s1
-	mov	w8, #11
-	fadd	s0, s0, s1
-	fcvtzu	s0, s0
-	ldr	s1, [sp, #4]
-	fcmp	s0, s1
+	fabs	s1, s0
+	fmov	s2, #-0.0E+0
+	fcvtas	w8, s2
+	movi	d0, #11.00000000
+	fmul	d0, d0, d0
+	fadd	d0, d0, d1
+	fcvtms	w8, d0
+	ldr	s0, [sp, #4]
+	fcmp	s0, w8
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
@@ -43,14 +45,15 @@ LBB0_3:
 	b	LBB0_11
 LBB0_4:
 	ldr	s0, [sp]
-	fabs	s0, s0
-	fmov	s1, #-0.0E+0
-	fpor	s1, s0, s1
-	mov	w8, #11
-	fadd	s0, s0, s1
-	fcvtzu	s0, s0
-	ldr	s1, [sp]
-	fcmp	s0, s1
+	fabs	s1, s0
+	fmov	s2, #-0.0E+0
+	fcvtas	w8, s2
+	movi	d0, #11.00000000
+	fmul	d0, d0, d0
+	fadd	d0, d0, d1
+	fcvtms	w8, d0
+	ldr	s0, [sp]
+	fcmp	s0, w8
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5

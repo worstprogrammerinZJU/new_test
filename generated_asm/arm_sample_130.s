@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -10,7 +10,7 @@ _func0:                                 ; @func0
 	str	x0, [sp, #32]
 	str	w1, [sp, #28]
 	str	x2, [sp, #16]
-	mov	w8, #-2147483648
+	mov	w8, #2147483647
 	str	w8, [sp, #12]
 	mov	w8, #-1
 	str	w8, [sp, #8]

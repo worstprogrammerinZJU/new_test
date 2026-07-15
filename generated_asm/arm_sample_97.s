@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -49,8 +49,8 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	w8, [x29, #-16]
-	ldr	w10, [sp, #20]
-	mov	w9, #3
+	ldr	w9, [sp, #20]
+	mov	w10, #3
 	mul	w9, w9, w10
 	subs	w8, w8, w9
 	str	w8, [sp, #8]                    ; 4-byte Folded Spill
@@ -68,7 +68,8 @@ LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
 	bl	___strncpy_chk
 	ldrsw	x9, [sp, #16]
 	add	x8, sp, #24
-	strb	wzr, [x8, x9]
+	add	x8, x8, x9
+	strb	wzr, [x8]
 	ldr	w8, [sp, #16]
 	subs	w8, w8, #3
 	cset	w8, ne
@@ -96,9 +97,9 @@ LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldurb	w8, [x29, #-23]
 	strb	w8, [sp, #24]
 	ldurb	w8, [x29, #-22]
-	strb	w8, [sp, #24]
+	sturb	w8, [x29, #-23]
 	ldrb	w8, [sp, #14]
-	strb	w8, [sp, #24]
+	sturb	w8, [x29, #-22]
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_10

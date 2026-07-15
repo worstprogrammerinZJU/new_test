@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                        ; -- Begin function func0
 	.p2align	2
@@ -39,8 +39,8 @@ LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	d1, [sp, #40]
-	ldr	d0, [sp, #16]
+	ldr	d0, [sp, #40]
+	ldr	d1, [sp, #16]
 	fmul	d0, d0, d1
 	str	d0, [sp, #16]
 	b	LBB0_5
@@ -74,7 +74,7 @@ LBB0_9:                                 ; =>This Loop Header: Depth=1
 	fabs	d0, d0
 	fmov	d1, #1.00000000
 	fcmp	d0, d1
-	cset	w8, le
+	cset	w8, pl
 	tbnz	w8, #0, LBB0_27
 	b	LBB0_10
 LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
@@ -108,8 +108,8 @@ LBB0_13:                                ;   Parent Loop BB0_9 Depth=1
 	tbnz	w8, #0, LBB0_16
 	b	LBB0_14
 LBB0_14:                                ;   in Loop: Header=BB0_13 Depth=3
-	ldr	d1, [sp, #40]
-	ldr	d0, [sp, #16]
+	ldr	d0, [sp, #40]
+	ldr	d1, [sp, #16]
 	fmul	d0, d0, d1
 	str	d0, [sp, #16]
 	b	LBB0_15
@@ -130,7 +130,8 @@ LBB0_16:                                ;   in Loop: Header=BB0_11 Depth=2
 	ldr	d1, [x8, x9, lsl #3]
 	fmul	d0, d0, d1
 	ldr	d1, [sp, #16]
-	fsub	d0, d0, d1
+	ldr	d2, [sp, #24]
+	fmadd	d0, d0, d1, d2
 	str	d0, [sp, #24]
 	b	LBB0_17
 LBB0_17:                                ;   in Loop: Header=BB0_11 Depth=2
@@ -175,8 +176,8 @@ LBB0_21:                                ;   Parent Loop BB0_9 Depth=1
 	tbnz	w8, #0, LBB0_24
 	b	LBB0_22
 LBB0_22:                                ;   in Loop: Header=BB0_21 Depth=3
-	ldr	d1, [sp, #40]
-	ldr	d0, [sp, #16]
+	ldr	d0, [sp, #40]
+	ldr	d1, [sp, #16]
 	fmul	d0, d0, d1
 	str	d0, [sp, #16]
 	b	LBB0_23

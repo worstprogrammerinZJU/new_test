@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -18,11 +18,11 @@ _func0:                                 ; @func0
 	ldur	w8, [x29, #-12]
 	mov	w9, #2
 	sdiv	w8, w8, w9
-	add	w9, w8, #1
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	lsl	x0, x8, #2
+	add	w8, w8, #1
+                                        ; implicit-def: $x9
+	mov	x9, x8
+	sxtw	x9, w9
+	lsl	x0, x9, #2
 	bl	_malloc
 	str	x0, [sp, #32]
 	str	wzr, [sp, #20]
@@ -41,9 +41,8 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldr	s0, [x8, x9, lsl #2]
 	ldr	x8, [sp, #32]
 	ldrsw	x9, [sp, #20]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #20]
+	add	x9, x9, #1
+	str	w9, [sp, #20]
 	str	s0, [x8, x9, lsl #2]
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
@@ -86,7 +85,7 @@ LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=2
 	add	w9, w9, #1
 	ldr	s1, [x8, w9, sxtw #2]
 	fcmp	s0, s1
-	cset	w8, pl
+	cset	w8, le
 	tbnz	w8, #0, LBB0_10
 	b	LBB0_9
 LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=2

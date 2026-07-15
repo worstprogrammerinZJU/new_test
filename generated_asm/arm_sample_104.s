@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -38,10 +38,7 @@ LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	add	w10, w9, #1
 	str	w10, [sp, #12]
 	add	x9, sp, #32
-                                        ; implicit-def: $w8
-	mov	w8, w8
-	add	x8, x9, w8, sxtw
-	strb	w8, [x8]
+	strb	w8, [x9, w10, sxtw]
 	ldr	w8, [sp, #28]
 	ldr	w9, [sp, #24]
 	sdiv	w8, w8, w9
@@ -58,17 +55,16 @@ LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
 	ldr	w8, [sp, #12]
-	subs	w8, w8, #1
-	str	w8, [sp, #12]
+	subs	w9, w8, #1
+	str	w9, [sp, #12]
 	add	x9, sp, #32
-	ldrb	w8, [x9, w8, sxtw]
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #8]
-	add	x9, x9, x10
-	strb	w8, [x9]
+	ldrsb	w8, [x9, w10, sxtw]
+	ldr	x10, [sp, #16]
+	ldrsw	x11, [sp, #8]
+	mov	x12, x11
+	add	w12, w12, #1
+	str	w12, [sp, #8]
+	strb	w8, [x10, x11]
 	b	LBB0_4
 LBB0_6:
 	ldr	x8, [sp, #16]

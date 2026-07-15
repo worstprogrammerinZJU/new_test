@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -16,35 +16,38 @@ _func0:                                 ; @func0
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
 	ldr	x8, [x8]
 	stur	x8, [x29, #-8]
-	str	w0, [sp, #48]
-	str	w1, [sp, #44]
-	ldr	w4, [sp, #48]
+	str	w0, [sp, #52]
+	str	w1, [sp, #48]
+	ldr	w8, [sp, #52]
 	mov	x9, sp
+	str	x8, [x9]
 	adrp	x8, _func0.xs@PAGE
 	add	x8, x8, _func0.xs@PAGEOFF
-	str	x8, [sp, #16]                   ; 8-byte Folded Spill
-	str	x8, [x9]
+	str	x8, [sp, #24]                   ; 8-byte Folded Spill
 	mov	w1, #0
 	mov	x2, #50
+	str	x2, [sp, #32]                   ; 8-byte Folded Spill
 	adrp	x3, l_.str@PAGE
 	add	x3, x3, l_.str@PAGEOFF
 	bl	___sprintf_chk
-	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
+	ldr	x0, [sp, #24]                   ; 8-byte Folded Reload
 	bl	_strlen
 	mov	x8, x0
-	str	w8, [sp, #40]
-	ldr	w8, [sp, #40]
-	ldr	w9, [sp, #44]
+	ldr	x0, [sp, #32]                   ; 8-byte Folded Reload
+	mov	x9, x8
+	str	w9, [sp, #44]
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #48]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_1
 LBB0_1:
-	str	wzr, [sp, #36]
+	str	wzr, [sp, #40]
 	b	LBB0_2
 LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #36]
-	ldr	w9, [sp, #40]
+	ldr	w8, [sp, #40]
+	ldr	w9, [sp, #44]
 	mov	w10, #2
 	sdiv	w9, w9, w10
 	subs	w8, w8, w9
@@ -52,59 +55,64 @@ LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	x9, [sp, #16]                   ; 8-byte Folded Reload
-	ldrsw	x10, [sp, #36]
-	add	x8, x9, x10
-	ldrb	w10, [x8]
-	strb	w10, [sp, #37]
-	ldr	w8, [sp, #40]
-	subs	w8, w8, #1
-	ldr	w10, [sp, #36]
-	subs	w10, w8, w10
-	add	x8, x9, w10, sxtw
-	ldrb	w8, [x8]
-	ldrsw	x10, [sp, #36]
-	add	x9, x9, x10
-	strb	w8, [x9]
-	ldrb	w8, [sp, #37]
-	ldr	w9, [sp, #40]
+	ldr	x8, [sp, #24]                   ; 8-byte Folded Reload
+	ldrsw	x9, [sp, #40]
+	add	x9, x8, x9
+	ldrb	w9, [x9]
+	strb	w9, [sp, #39]
+	ldr	w9, [sp, #44]
 	subs	w9, w9, #1
-	ldr	w10, [sp, #36]
-	subs	w9, w9, w10
-	add	x8, x8, w9, sxtw
-	strb	w8, [x9]
+	ldr	w11, [sp, #40]
+	subs	w9, w9, w11
+	add	x9, x8, w9, sxtw
+	ldrb	w9, [x9]
+	ldrsw	x11, [sp, #40]
+	add	x10, x8, x11
+	strb	w9, [x10]
+	ldrb	w9, [sp, #39]
+	ldr	w10, [sp, #44]
+	subs	w10, w10, #1
+	ldr	w11, [sp, #40]
+	subs	w10, w10, w11
+	add	x10, x8, w10, sxtw
+	strb	w9, [x10]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	w8, [sp, #36]
+	ldr	w8, [sp, #40]
 	add	w8, w8, #1
-	str	w8, [sp, #36]
+	str	w8, [sp, #40]
 	b	LBB0_2
 LBB0_5:
 	b	LBB0_7
 LBB0_6:
-	ldrsw	x8, [sp, #40]
-	add	x8, x8, _func0.xs@PAGEOFF
 	ldrsw	x9, [sp, #44]
-	ldur	x10, [x29, #-8]
-	mov	x9, #0
-	subs	x1, x9, x10
-	mov	w2, #50
-	str	w2, [sp, #24]                   ; 4-byte Folded Spill
+	add	x8, sp, #56
+	str	x8, [sp, #16]                   ; 8-byte Folded Spill
+	ldrsw	x10, [sp, #48]
+	adrp	x11, _func0.xs@PAGE
+	add	x11, x11, _func0.xs@PAGEOFF
+	str	x11, [sp, #8]                   ; 8-byte Folded Spill
+	add	x1, x11, x10
+	mov	x2, #50
+	str	x2, [sp]                        ; 8-byte Folded Spill
 	bl	___strcpy_chk
-	ldr	w3, [sp, #24]                   ; 4-byte Folded Reload
-	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
-	ldrsw	x9, [sp, #44]
-	add	x8, sp, #48
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldr	w8, [sp, #40]
-	ldr	w9, [sp, #44]
-	subs	w8, w8, w9
-	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
+	ldr	x1, [sp, #8]                    ; 8-byte Folded Reload
+	ldr	x3, [sp]                        ; 8-byte Folded Reload
+	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
+	ldrsw	x9, [sp, #48]
+	add	x9, x8, x9
+	strb	wzr, [x9]
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #48]
+	subs	w9, w8, w9
+                                        ; implicit-def: $x8
+	mov	x8, x9
+	sxtw	x8, w8
+	mov	x2, x8
 	bl	___strncat_chk
-	ldr	w2, [sp, #24]                   ; 4-byte Folded Reload
+	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
 	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
-	add	x1, sp, #48
+	ldr	x2, [sp]                        ; 8-byte Folded Reload
 	bl	___strcpy_chk
 	b	LBB0_7
 LBB0_7:
@@ -119,10 +127,10 @@ LBB0_7:
 LBB0_8:
 	bl	___stack_chk_fail
 LBB0_9:
-	adrp	x0, _func0.xs@PAGE
-	add	x0, x0, _func0.xs@PAGEOFF
-	ldp	x29, x30, [sp, #112]            ; 16-byte Folded Reload
+	adrp	x8, _func0.xs@PAGE
+	add	x8, x8, _func0.xs@PAGEOFF
 	add	sp, sp, #128
+	ldp	x29, x30, [sp, #112]            ; 16-byte Folded Reload
 	ret
 	.cfi_endproc
                                         ; -- End function

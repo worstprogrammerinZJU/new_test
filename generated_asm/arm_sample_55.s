@@ -1,4 +1,4 @@
-	.section	__TEXT,__text,regular,pure_instructions
+.section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
 	.globl	_func0                          ; -- Begin function func0
 	.p2align	2
@@ -19,7 +19,7 @@ _func0:                                 ; @func0
 	str	x0, [sp, #56]
 	str	x1, [sp, #48]
 	str	x2, [sp, #40]
-	add	x0, sp, #64
+	add	x0, sp, #72
 	adrp	x1, l___const.func0.planets@PAGE
 	add	x1, x1, l___const.func0.planets@PAGEOFF
 	mov	x2, #64
@@ -37,7 +37,7 @@ LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #28]
-	add	x8, sp, #64
+	add	x8, sp, #72
 	ldr	x0, [x8, x9, lsl #3]
 	ldr	x1, [sp, #56]
 	bl	_strcmp
@@ -51,7 +51,7 @@ LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldrsw	x9, [sp, #28]
-	add	x8, sp, #64
+	add	x8, sp, #72
 	ldr	x0, [x8, x9, lsl #3]
 	ldr	x1, [sp, #48]
 	bl	_strcmp
@@ -92,7 +92,7 @@ LBB0_10:
 LBB0_11:
 	ldr	x8, [sp, #40]
 	str	wzr, [x8]
-	str	xzr, [sp, #56]
+	str	xzr, [sp, #64]
 	b	LBB0_21
 LBB0_12:
 	ldr	w8, [sp, #36]
@@ -125,7 +125,7 @@ LBB0_14:
 LBB0_15:
 	ldr	x8, [sp, #40]
 	str	wzr, [x8]
-	str	xzr, [sp, #56]
+	str	xzr, [sp, #64]
 	b	LBB0_21
 LBB0_16:
 	ldr	x8, [sp, #40]
@@ -146,7 +146,7 @@ LBB0_17:                                ; =>This Inner Loop Header: Depth=1
 	b	LBB0_18
 LBB0_18:                                ;   in Loop: Header=BB0_17 Depth=1
 	ldrsw	x9, [sp, #28]
-	add	x8, sp, #64
+	add	x8, sp, #72
 	ldr	x8, [x8, x9, lsl #3]
 	ldr	x9, [sp, #16]
 	ldr	w10, [sp, #28]
@@ -162,11 +162,11 @@ LBB0_19:                                ;   in Loop: Header=BB0_17 Depth=1
 	b	LBB0_17
 LBB0_20:
 	ldr	x8, [sp, #16]
-	str	x8, [sp, #56]
+	str	x8, [sp, #64]
 	b	LBB0_21
 LBB0_21:
-	ldr	x8, [sp, #56]
-	str	x8, [sp]                        ; 8-byte Folded Spill
+	ldr	x8, [sp, #64]
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
 	ldur	x9, [x29, #-8]
 	adrp	x8, ___stack_chk_guard@GOTPAGE
 	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
@@ -178,7 +178,7 @@ LBB0_21:
 LBB0_22:
 	bl	___stack_chk_fail
 LBB0_23:
-	ldr	x0, [sp]                        ; 8-byte Folded Reload
+	ldr	x0, [sp, #8]                    ; 8-byte Folded Reload
 	ldp	x29, x30, [sp, #144]            ; 16-byte Folded Reload
 	add	sp, sp, #160
 	ret
