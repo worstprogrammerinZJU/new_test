@@ -1,79 +1,203 @@
+.arch armv8-a
+.file	__TEXT,__text,regular,pure_instructions
+.align	2
+.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+.file	__TEXT,__text,regular,pure_instructions
+.align	2
+.text
+.word	(.LC0,.LC1)
+.text
+.align	2
+.LC0:
+.word	.LCI
+.text
+.align	2
+.LC1:
+.word	.LCB
+.text
+.global	_func0
+.bss
+.align	3
+.set	.LCB,. + 8
+.type	_func0, %function
+.size	_func0, -32
+.func	_func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	w0, [sp, #28]
-	str	w1, [sp, #24]
-	str	x2, [sp, #16]
-	str	x3, [sp, #8]
-	ldr	x8, [sp, #8]
-	str	wzr, [x8]
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	ldr	w8, [sp, #28]
-	str	w8, [sp, #4]
-	ldr	w8, [sp, #24]
-	str	w8, [sp, #28]
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #24]
-	b	LBB0_2
-LBB0_2:
-	ldr	w8, [sp, #28]
-	str	w8, [sp]
-	b	LBB0_3
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	ldr	x9, [sp, #16]
-	ldr	x11, [sp, #8]
-	ldrsw	x10, [x11]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [x10]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_3
-LBB0_9:
-	add	sp, sp, #32
-	ret
+stp	x29, x30, [sp, -48]!
+.cfi_def_cfa_offset 48
+.cfi_offset 29, -48
+.cfi_offset 30, -40
+mov	x29, sp
+.cfi_def_cfa_register x29
+str	w0, [x29, -4]
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -32
+.cfi_offset 20, -24
+mov	x20, x2
+add	x19, x29, 16
+.cfi_offset 19, -32
+.cfi_offset 20, -24
+ldr	w0, [x29, -8]
+str	x3, [x19, -8]
+str	x20, [x29, -16]
+str	w1, [x29, -24]
+ldr	w1, [x29, -4]
+cmp	w1, w0
+bge	.L6
+str	wzr, [x19]
+.L7:
+ldp	w0, w1, [x29, -4]
+str	w1, [x29, -8]
+str	w0, [x29, -16]
+cmp	w0, w1
+blt	.L9
+.L6:
+ldr	w0, [x29, -4]
+str	w0, [x19, -12]
+cmp	w0, 10
+blt	.L7
+ldr	w1, [x29, -12]
+sdiv	w0, w1, 2
+msub	w0, w0, wzr, w1
+cbnz	w0, .L7
+ldr	w0, [x29, -12]
+mov	w1, 1
+str	w0, [x19, -16]
+.L8:
+add	w0, w0, w1
+str	w0, [x29, -12]
+b	.L7
+.L9:
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 48
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_restore 20
+.cfi_def_cfa_offset 0
+ret
+.L10:
+mov	w0, w1
+b	.L8
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	sub	sp, sp,
+.cfi_def_cfa_offset 48
+.cfi_offset 19, -32
+.cfi_offset 20, -24
+.cfi_offset 29, -48
+.cfi_offset 30, -40
+adrp	x1, .LANCHOR0+8
+add	x1, x1, :lo12:.LANCHOR0+8
+mov	w0, 1
+stp	x21, x22, [sp, 32]
+.cfi_offset 22, -8
+.cfi_offset 21, -16
+ldr	w1, [x1]
+ldr	w21, [x19]
+cmp	w21, w1
+beq	.L5
+ldr	w0, [x19]
+str	w0, [x29, -8]
+str	w1, [x29, -16]
+.L7:
+ldp	w0, w1, [x29, -8]
+cmp	w0, w1
+blt	.L9
+.L5:
+ldr	w0, [x29, -8]
+cmp	w0, 10
+bge	.L10
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -8]
+str	w0, [x19]
+sdiv	w0, w1, 2
+msub	w0, w0, wzr, w1
+cbz	w0, .L5
+b	.L7
+.cfi_restore 21
+.cfi_restore 22
+.L11:
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 48
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_restore 20
+.cfi_def_cfa_offset 0
+ret
+.cfi_endproc
+.text
+.global	_func0
+.bss
+.align	3
+.set	.LANCHOR0,. + 8
+.type	_func0, %function
+.size	_func0, -32
+.func	_func0
+	.cfi_startproc
+stp	x21, x22, [sp, 32]
+.cfi_offset 22, -8
+.cfi_offset 21, -16
+adrp	x1, .LANCHOR0
+add	x1, x1, :lo12:.LANCHOR0
+mov	w0, 1
+ldr	w22, [x19]
+ldr	w1, [x1]
+cmp	w22, w1
+beq	.L4
+ldr	w0, [x19]
+str	w0, [x29, -8]
+str	w1, [x29, -16]
+b	.L7
+.L4:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -8]
+str	w0, [x19]
+sdiv	w0, w1, 2
+msub	w0, w0, wzr, w1
+cbnz	w0, .L7
+b	.L4
+.L10:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -8]
+str	w0, [x19]
+sdiv	w0, w1, 2
+msub	w0, w0, wzr, w1
+cbnz	w0, .L7
+b	.L10
+.cfi_endproc
+.text
+.global	_func0
+.bss
+.align	3
+.set	.LANCHOR0,. + 8
+.type	_func0, %function
+.size	_func0, -32
+.func	_func0
+	.cfi_startproc
+stp	x21, x22, [sp, 32]
+.cfi_offset 22, -8
+.cfi_offset 21, -16
+adrp	x1, .LANCHOR0
+add	x1, x1, :lo12:.LANCHOR0
+mov	w0, 1
+ldr	w21, [x19]
+ldr	w1, [x1]
+cmp	w21, w1
+beq	.L11
+ldr	w0, [x19]
+str	w0, [x29, -8]
+str	w1, [x29, -16]
+b	.L7
+.L11:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -8]
+str	w0, [x19]
+sdiv	w0, w1, 2
+msub	w0, w0, wzr, w1
+cbz	w0, .L11
+b	.L7
+.cfi_endproc

@@ -1,20 +1,18 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	s0, [sp, #12]
-	ldr	s0, [sp, #12]
-	ldr	s1, [sp, #12]
-	fcvtzs	w8, s1
-	fcvt	s1, w8
-	fsub	s0, s0, s1
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
+.arch armv8-a
+.file     <path_to_your_file>
+.align	2
+.p2align 4,,11
+.global	_func0                          ## -- Begin function func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .build_version macos, 13, 0	sdk_version 13, 3
+    .globl	_func0                          ## -- Begin function func0
+    .ppalign 3,,7
+_func0:                                 ## @func0
+    cset	w0, si
+    fmov	s0, s0
+    scvtf	s1, w0
+    fsub	s0, s0, s1
+    ret
+    .cfi_endproc
+                                        ## -- End function
 .subsections_via_symbols

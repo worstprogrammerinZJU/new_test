@@ -1,90 +1,100 @@
+.arch armv8-a
+.file     "__TEXT,__text,regular,pure_instructions"
+.align	2
+.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.globl	_func0                          ## -- Begin function func0
+	.p2align	2,,3
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #96
-	.cfi_def_cfa_offset 96
-	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
-	add	x29, sp, #80
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	w0, [sp, #28]
-	str	w1, [sp, #24]
-	str	x2, [sp, #16]
-	str	wzr, [sp, #12]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #28]
-	ldr	w10, [sp, #24]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	add	w8, w8, #48
-	ldr	w9, [sp, #12]
-	add	w10, w9, #1
-	str	w10, [sp, #12]
-	add	x9, sp, #32
-	strb	w8, [x9, w10, sxtw]
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #24]
-	sdiv	w8, w8, w9
-	str	w8, [sp, #28]
-	b	LBB0_1
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	x19, [sp, 16]
+sub	sp, sp,
+.cfi_offset 19, -80
+adrp	x4, :got:__stack_chk_guard
+ldr	x4, [x4, :got_lo12:__stack_chk_guard]
+str	w0, [x29, -52]
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x2
+add	x22, sp, 96
+ldr	x2, [x4]
+str	x2, [x29, -8]
+str	w1, [x29, -40]
+str	x21, [x29, -16]
+str	wzr, [x29, -24]
+.LBB0_1:
+ldr	w0, [x29, -52]
+cmp	w0, 0
+ble	LBB0_3
+ldp	w3, w0, [x29, -40]
+sdiv	w1, w0, w3
+msub	w1, w1, w3, w0
+add	w1, w1, 48
+str	w1, [x29, -24]
+add	x1, x29, w1, sxtw
+sdiv	w2, w3, w0
+msub	w2, w2, w0, w3
+str	w2, [x29, -40]
+add	w2, w2, 1
+str	w2, [x29, -24]
+ldp	w0, w1, [x29, -52]
+sdiv	w2, w0, w1
+msub	w2, w2, w1, w0
+add	x2, x29, w2, sxtw
+str	w2, [x2, 8]
+b	LBB0_1
 LBB0_3:
-	str	wzr, [sp, #8]
-	b	LBB0_4
-LBB0_4:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_4 Depth=1
-	ldr	w8, [sp, #12]
-	subs	w9, w8, #1
-	str	w9, [sp, #12]
-	add	x9, sp, #32
-	ldrsb	w8, [x9, w10, sxtw]
-	ldr	x10, [sp, #16]
-	ldrsw	x11, [sp, #8]
-	mov	x12, x11
-	add	w12, w12, #1
-	str	w12, [sp, #8]
-	strb	w8, [x10, x11]
-	b	LBB0_4
+str	wzr, [x29, -32]
+.LBB0_4:
+ldr	w0, [x29, -24]
+cmp	w0, 0
+ble	LBB0_6
+ldp	w2, w3, [x29, -40]
+sub	w2, w2,
+sdiv	w0, w2, w3
+msub	w0, w0, w3, w2
+add	w0, w0, 1
+str	w0, [x29, -24]
+add	x2, x29, w0, sxtw
+ldr	w1, [x29, -32]
+strb	w1, [x29, -48]
+mov	w1, w3
+ldr	x2, [x21, 8]
+sxtw	x3, w1
+ldr	w0, [x29, -40]
+strb	w1, [x2, x3]
+b	LBB0_4
 LBB0_6:
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	bl	___stack_chk_fail
+ldr	x1, [x29, -16]
+ldrsw	x0, [x29, -32]
+strb	wzr, [x1, x0]
+adrp	x0, :got:__stack_chk_guard
+ldr	x0, [x0, :got_lo12:__stack_chk_guard]
+ldr	x2, [x29, -8]
+ldr	x1, [x0]
+cmp	x1, x2
+bne	LBB0_8
+ldp	x21, x22, [sp, 32]
+ldr	x19, [sp, 16]
+add	sp, sp, 96
+.cfi_remember_state
+.cfi_restore 19
+.cfi_restore 21
+.cfi_restore 22
+.cfi_def_cfa_offset 0
+ret
 LBB0_8:
-	ldp	x29, x30, [sp, #80]             ; 16-byte Folded Reload
-	add	sp, sp, #96
-	ret
+.cfi_restore_state
+bl	x19
+brk
 	.cfi_endproc
-                                        ; -- End function
+                                        ## -- End function
 .subsections_via_symbols

@@ -1,58 +1,59 @@
+.arch armv8-a
+.file	__TEXT,__text,regular,pure_instructions
+.align	2
+.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+	.global	_func0
+	.align	2
+._func0:                                ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	w0, [sp, #8]
-	mov	w8, #2
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #4]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #8]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w10, [sp, #4]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	ldr	w8, [sp, #8]
-	ldr	w10, [sp, #4]
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	str	w8, [sp, #12]
-	b	LBB0_7
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_6:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_7
-LBB0_7:
-	ldr	w0, [sp, #12]
-	add	sp, sp, #16
-	ret
+stp	x29, x30, [sp, -32]!
+.cfi_def_cfa_offset 32
+.cfi_offset 29, -32
+.cfi_offset 30, -24
+mov	w2, 2
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	w0, [x29, -16]
+str	w2, [x29, -20]
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -16
+.cfi_offset 20, -8
+mov	x20, x29
+ldp	w0, w1, [x29, -20]
+mul	w0, w0, w1
+cmp	w0, w1
+bgt	LBB0_6
+.L5:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -20]
+sdiv	w2, w0, w1
+msub	w2, w2, w1, w0
+cbnz	w2, .L13
+.L7:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -20]
+udiv	w0, w0, w1
+msub	w0, w0, w1, w2
+str	w0, [x29, -8]
+.L1:
+ldp	x19, x20, [sp, 16]
+ldp	x29, x30, [sp], 32
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_restore 20
+.cfi_def_cfa_offset 0
+ret
+.L13:
+.cfi_restore_state
+b	L5
+.L6:
+mov	w0, 1
+str	w0, [x29, -8]
+b	.L7
 	.cfi_endproc
-                                        ; -- End function
+                                        ## -- End function
 .subsections_via_symbols

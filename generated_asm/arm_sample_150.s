@@ -1,217 +1,2704 @@
+.arch armv8-a
+.file
+.align 2
+.sp 144
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #144
-	.cfi_def_cfa_offset 144
-	stp	x29, x30, [sp, #128]            ; 16-byte Folded Spill
-	add	x29, sp, #128
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	x0, [sp, #56]
-	ldr	x0, [sp, #56]
-	bl	_strlen
-	mov	x8, x0
-	str	w8, [sp, #52]
-	ldr	w8, [sp, #52]
-	add	w9, w8, #2
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x0, w8
-	bl	_malloc
-	str	x0, [sp, #40]
-	str	wzr, [sp, #36]
-	str	wzr, [sp, #32]
-	str	wzr, [sp, #28]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_5 Depth 2
-                                        ;       Child Loop BB0_7 Depth 3
-                                        ;     Child Loop BB0_17 Depth 2
-	ldr	w8, [sp, #28]
-	ldr	w9, [sp, #52]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_24
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #56]
-	ldrsw	x9, [sp, #28]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #32
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #56]
-	ldrsw	x9, [sp, #28]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_21
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #24]
-	b	LBB0_5
-LBB0_5:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Loop Header: Depth=2
-                                        ;       Child Loop BB0_7 Depth 3
-	ldr	w8, [sp, #24]
-	ldr	w9, [sp, #32]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_7
-LBB0_7:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ;     Parent Loop BB0_5 Depth=2
-                                        ; =>    This Inner Loop Header: Depth=3
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #32]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_8
-LBB0_8:                                 ;   in Loop: Header=BB0_7 Depth=3
-	ldrsw	x9, [sp, #24]
-	add	x8, sp, #64
-	ldrsb	w8, [x8, x9]
-	ldrsw	x10, [sp, #20]
-	ldrsb	w9, [x8, x10]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_7 Depth=3
-	ldrsw	x9, [sp, #24]
-	add	x8, sp, #64
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	strb	w8, [sp, #19]
-	ldrsw	x9, [sp, #20]
-	add	x8, sp, #64
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	ldrsw	x10, [sp, #24]
-	add	x9, x8, x10
-	strb	w8, [x9]
-	ldrb	w8, [sp, #19]
-	ldrsw	x10, [sp, #20]
-	add	x9, x8, x10
-	strb	w8, [x9]
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_7 Depth=3
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_7 Depth=3
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_7
-LBB0_12:                                ;   in Loop: Header=BB0_5 Depth=2
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_5 Depth=2
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_5
-LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #36]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_16
-	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #36]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #36]
-	add	x9, x8, x9
-	mov	w8, #32
-	strb	w8, [x9]
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #12]
-	b	LBB0_17
-LBB0_17:                                ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #12]
-	ldr	w9, [sp, #32]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_18
-LBB0_18:                                ;   in Loop: Header=BB0_17 Depth=2
-	ldrsw	x9, [sp, #12]
-	add	x8, sp, #64
-	ldrb	w8, [x8, x9]
-	ldr	x9, [sp, #40]
-	ldrsw	x10, [sp, #36]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #36]
-	strb	w8, [x9, x10]
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_17 Depth=2
-	ldr	w8, [sp, #12]
-	add	w8, w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_17
-LBB0_20:                                ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #32]
-	b	LBB0_22
-LBB0_21:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #56]
-	ldrsw	x9, [sp, #28]
-	ldrb	w8, [x8, x9]
-	ldr	w9, [sp, #32]
-	add	w10, w9, #1
-	str	w10, [sp, #32]
-	add	x9, x8, w9, sxtw
-	strb	w8, [x9]
-	b	LBB0_22
-LBB0_22:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_23
-LBB0_23:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_1
-LBB0_24:
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #36]
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	ldr	x8, [sp, #40]
-	str	x8, [sp]                        ; 8-byte Folded Spill
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_26
-	b	LBB0_25
-LBB0_25:
-	bl	___stack_chk_fail
-LBB0_26:
-	ldr	x0, [sp]                        ; 8-byte Folded Reload
-	ldp	x29, x30, [sp, #128]            ; 16-byte Folded Reload
-	add	sp, sp, #144
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.align	2
+.p2align 4,,11
+_func0:                             ## @func0
+    .cfi_startproc
+## %bb.0:
+stp	x29, x30, [sp, -144]!
+.cfi_def_cfa_offset 144
+.cfi_offset 29, -144
+.cfi_offset 30, -136
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	x19, [sp, 128]
+sub	sp, sp,
+adrp	x1, :got:__stack_chk_guard
+ldr	x1, [x1, :got_lo12:__stack_chk_guard]
+.cfi_offset 19, -128
+str	x0, [x29, -40]
+str	xzr, [x29, -32]
+ldr	x0, [x1]
+str	x0, [x29, -48]
+mov	x0, x29
+bl	xstrlen
+str	w0, [x29, -36]
+add	w0, w0, 2
+sxtw	x0, w0
+bl	xmalloc
+mov	x19, x0
+str	wzr, [x29, -44]
+str	wzr, [x29, -40]
+str	wzr, [x29, -36]
+.LB17_0:
+ldp	w0, w1, [x29, -40]
+cmp	w1, w0
+bgt	.LB22
+ldr	x0, [x29, -40]
+ldrsw	x1, [x29, -44]
+ldrb	w0, [x0, x1]
+cmp	w0, 32
+beq	.LB23
+.L8:
+ldr	x0, [x29, -40]
+ldrsw	x1, [x29, -44]
+ldrb	w0, [x0, x1]
+cbnz	w0, .L20
+.L25:
+str	wzr, [x29, -52]
+.L24:
+.L27:
+ldr	w0, [x29, -52]
+sub	w1, w0,
+cmp	w0, w1
+bge	.L19
+.L19:
+ldr	x0, [x29, -40]
+ldrsw	x2, [x29, -52]
+add	w2, w2, 1
+str	w2, [x29, -56]
+.L26:
+.L28:
+ldr	w0, [x29, -56]
+cmp	w0, w1
+ble	.L30
+.L10:
+ldrsw	x0, [x29, -52]
+add	x1, x29, 64
+ldrsw	x2, [x29, -56]
+add	x0, x29, x0
+add	w2, w2, 1
+strb	w2, [x1, -4]
+ldrsh	x2, [x0, -4]
+add	w2, w2, 1
+strb	w2, [x0, -4]
+.L31:
+.L30:
+ldr	x0, [x29, -40]
+ldrsw	x2, [x29, -52]
+add	w2, w2, 1
+str	w2, [x29, -52]
+b	.L27
+.L32:
+ldr	x0, [x29, -40]
+ldrsw	x2, [x29, -52]
+add	w2, w2, 1
+str	w2, [x29, -52]
+b	.L26
+.L20:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldrb	w0, [x0, x1]
+strb	w0, [x2, x1]
+cbnz	w0, .L32
+.L23:
+str	wzr, [x29, -52]
+b	.L24
+.L17:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x2, x1]
+cbnz	x0, .L31
+b	.L8
+.L22:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x2, x1]
+cbz	x0, .L25
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x2, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L31
+.L16:
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbz	x0, .L8
+b	.L31
+.L8:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbz	x0, .L27
+b	.L31
+.L26:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbz	x0, .L28
+b	.L31
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+ldr	x0, [x0, x1]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+b	.L27
+.L29:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L27
+.L30:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+strb	w0, [x29, -32]
+ldr	x0, [x0, x1]
+ldr	x1, [x29, -40]
+ldr	x0, [x0, x1]
+strb	w0, [x29, -32]
+b	.L30
+.L33:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L31
+.L34:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L8
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L8
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L8:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L31
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+strb	w0, [x29, -32]
+ldr	x0, [x0, x1]
+ldr	x1, [x29, -40]
+ldr	x0, [x0, x1]
+strb	w0, [x29, -32]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+strb	w0, [x29, -32]
+ldr	x0, [x0, x1]
+ldr	x1, [x29, -40]
+ldr	x0, [x0, x1]
+strb	w0, [x29, -32]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L8
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L8:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L31
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L29
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L30:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+cbnz	x0, .L31
+b	.L29
+.L29:
+ldr	x0, [x29, -40]
+str	wzr, [x29, -32]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L31:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L32:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L28:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0, [x29, x1]
+ldr	x0, [x29, -40]
+ldr	x1, [x29, -44]
+ldr	x0, [x0, x1]
+strb	w0, [x29, x1]
+b	.L30
+.L27:
+ldr	x0, [x29, -40]
+ldr	x2, [x29, -44]
+ldrsw	x1, [x29, -44]
+add	x0, x29, x0
+ldr	x1, [x0, -4]
+add	w0, w0, 1
+strb	w0,

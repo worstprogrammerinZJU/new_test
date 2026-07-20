@@ -1,99 +1,125 @@
+.arch armv8-a
+.file "convert_to_arm_v8_a.s"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #24]
-	str	w1, [sp, #20]
-	ldr	x8, [sp, #24]
-	ldr	s0, [x8]
-	str	s0, [sp, #16]
-	ldr	x8, [sp, #24]
-	ldr	s0, [x8]
-	str	s0, [sp, #12]
-	mov	w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	s1, [sp, #16]
-	fcmp	s0, s1
-	cset	w8, pl
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
-	str	s0, [sp, #16]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	s1, [sp, #12]
-	fcmp	s0, s1
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #8]
-	ldr	s0, [x8, x9, lsl #2]
-	str	s0, [sp, #12]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_8:
-	str	wzr, [sp, #4]
-	b	LBB0_9
-LBB0_9:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	ldr	s0, [x8, x9, lsl #2]
-	ldr	s1, [sp, #16]
-	fsub	s0, s0, s1
-	ldr	s1, [sp, #12]
-	ldr	s2, [sp, #16]
-	fsub	s1, s1, s2
-	fdiv	s0, s0, s1
-	ldr	x8, [sp, #24]
-	ldrsw	x9, [sp, #4]
-	str	s0, [x8, x9, lsl #2]
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_9 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_9
-LBB0_12:
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.align	2
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .align	2
+._func0:
+    cset	w0, eq
+    ret
+    /* end .func0 */
+    // convert this x86 assembly to armv8-a/arm architecture
+    .section	__TEXT,__text,regular,pure_instructions
+    .align	2
+.func0:
+    mov	w3, w1
+    st1       [sp]
+    st1       [x0, 8]
+    mov	w1, 1
+    str	w3, [sp, 8]
+.LB1:
+ldr	s0, [x0]
+str	w1, [sp, 16]
+stp	s0, s0, [x0]
+mov	x1, x0
+ldr	s0, [x0]
+str	s0, [x0, 16]
+ldr	s0, [x1]
+cmp	w3, w0
+bge	.L6
+.L2:
+ldr	x1, [sp]
+sxtw	x3, w3
+ldr	s0, [x1, x3, lsl 2]
+fcmp	s0,
+bmi	.L3
+ldr	x1, [sp]
+sxtw	x3, w3
+ldr	s2, [x1, x3, lsl 2]
+fmov	s1, s2
+.L3:
+ldr	s0, [x0]
+ldr	s2, [x0, 16]
+fcvt	s0, s0
+fadd	s0, s0, s2
+fdiv	s0, s0, s2
+str	s0, [x1, x3, lsl 2]
+ldr	x1, [sp]
+sxtw	x3, w3
+ldr	s0, [x1, x3, lsl 2]
+cmp	s0, s2
+bls	.L2
+ret
+.L6:
+str	wzr, [sp, 24]
+ret
+.L7:
+ldr	x1, [sp]
+sxtw	x3, w3
+ldr	s0, [x1, x3, lsl 2]
+fsub	s0, s0, s2
+fsub	s0, s0, s1
+fdiv	s0, s0, s1
+str	s0, [x1, x3, lsl 2]
+ldr	x1, [sp]
+sxtw	x3, w3
+ldr	s0, [x1, x3, lsl 2]
+cmp	s0, s1
+bhi	.L7
+ret
+// convert this x86 assembly to armv8-a/arm architecture
+.cfi_endproc
+.section	__TEXT,__text,regular,pure_instructions
+.global	_func0
+.align	2
+.func0:
+    cset	w0, eq
+    ret
+    /* end .func0 */
+    // convert this x86 assembly to armv8-a/arm architecture
+    .section	__TEXT,__text,regular,pure_instructions
+    .align	2
+.func0:
+    mov	w3, w1
+    str	w3, [sp]
+    str	s0, [x0]
+    b	.L1
+    // end .func0
+    // convert this x86 assembly to armv8-a/arm architecture
+    .section	__TEXT,__text,regular,pure_instructions
+    .align	2
+._func0:
+    cmp	w3, w0
+bge	.L5
+.L2:
+ldr	x1, [sp]
+sxtw	x0, w0
+ldr	s2, [x1, x0, lsl 2]
+fcmp	s2,
+bls	.L5
+.L3:
+ldr	s1, [x0]
+ldr	s0, [x0, 16]
+fcvt	s1, s1
+fadd	s1, s1, s0
+fdiv	s1, s1, s0
+str	s1, [x0, x0, lsl 2]
+ldr	x1, [sp]
+sxtw	x0, w0
+ldr	s0, [x1, x0, lsl 2]
+cmp	s0, s1
+bhi	.L3
+.L5:
+ldr	w0, [sp, 24]
+ldr	w1, [sp]
+cmp	w1, w0
+ble	.L1
+ret
+.L1:
+mov	w0, 0
+ret
+// convert this x86 assembly to armv8-a/arm architecture
+.cfi_endproc

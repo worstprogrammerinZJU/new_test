@@ -1,81 +1,80 @@
+.arch armv8-a
+.file "convert_to_arm.s"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
-	add	x29, sp, #32
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	str	x0, [sp, #16]
-	ldr	x0, [sp, #16]
-	bl	_strlen
-	mov	x8, x0
-	str	w8, [sp, #12]
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	stur	wzr, [x29, #-4]
-	b	LBB0_9
-LBB0_2:
-	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	subs	w9, w9, #1
-	add	x8, x8, w9, sxtw
-	ldrb	w8, [x8]
-	strb	w8, [sp, #11]
-	ldrb	w0, [sp, #11]
-	bl	_isalpha
-	subs	w8, w0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	stur	wzr, [x29, #-4]
-	b	LBB0_9
-LBB0_4:
-	ldr	w8, [sp, #12]
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:
-	mov	w8, #1
-	stur	w8, [x29, #-4]
-	b	LBB0_9
-LBB0_6:
-	ldr	x8, [sp, #16]
-	ldr	w9, [sp, #12]
-	subs	w9, w9, #2
-	add	x8, x8, w9, sxtw
-	ldrb	w8, [x8]
-	strb	w8, [sp, #10]
-	ldrb	w0, [sp, #10]
-	bl	_isalpha
-	subs	w8, w0, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	stur	wzr, [x29, #-4]
-	b	LBB0_9
-LBB0_8:
-	mov	w8, #1
-	stur	w8, [x29, #-4]
-	b	LBB0_9
-LBB0_9:
-	ldur	w0, [x29, #-4]
-	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
+.global	_func0
+.align	2
+.p2align 4,,11
+_func0:                               ## @func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .build_version macos, 13, 0	sdk_version 13, 3
+    .globl	_func0                          ## -- Begin function func0
+    .p2align 2,,3
+_func0:                                 ## @func0
+    cfi_startproc
+stp	x29, x30, [sp, -32]!
+.cfi_def_cfa_offset 32
+.cfi_offset 29, -32
+.cfi_offset 30, -24
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	x19, [sp, 16]
+sub	sp, sp,
+.cfi_offset 19, -16
+str	x0, [x29, -8]
+ldr	x0, [x29, -8]
+bl	xstrlen
+str	w0, [x29, -12]
+ldr	w0, [x29, -12]
+cbnz	w0, .L6
+str	wzr, [x29, -12]
+.L3:
+ldr	w0, [x29, -12]
+ldr	x19, [sp, 16]
+ldp	x29, x30, [sp], 32
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_def_cfa_offset 0
+ret
+.p2align 2,,3
+.L6:
+.cfi_restore_state
+ldr	x0, [x29, -8]
+sub	w1, w0,
+ldr	w0, [x29, -12]
+sxtw	x1, w1
+ldrb	w1, [x0, x1]
+strb	w1, [x29, -13]
+ldrb	w0, [x29, -13]
+bl	xisalpha
+cbnz	w0, .L4
+str	wzr, [x29, -12]
+b	.L3
+.p2align 2,,3
+.L4:
+ldr	w0, [x29, -12]
+cmp	w0, 1
+beq	.L10
+ldr	x0, [x29, -8]
+sub	w1, w0,
+ldr	w0, [x29, -12]
+sxtw	x1, w1
+ldrb	w1, [x0, x1]
+strb	w1, [x29, -14]
+ldrb	w0, [x29, -14]
+bl	xisalpha
+cbz	w0, .L5
+str	wzr, [x29, -12]
+b	.L3
+.p2align 2,,3
+.L10:
+mov	w0, 1
+str	w0, [x29, -12]
+b	.L3
+.L5:
+mov	w0, 1
+str	w0, [x29, -12]
+b	.L3
+    .cfi_endproc
 .subsections_via_symbols

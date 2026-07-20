@@ -1,146 +1,284 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+.file	.__TEXT,__text,regular,pure_instructions
+.global	_func0                          ## -- Begin function func0
+.align	2
+.p2align	4,,11
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	str	x0, [sp, #40]
-	str	w1, [sp, #36]
-	str	x2, [sp, #24]
-	str	wzr, [sp, #20]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #36]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #36]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #20]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #40]
-	ldrsw	x10, [sp, #16]
-	ldr	w9, [x9, x10, lsl #2]
-	subs	w8, w8, w9
-	cset	w8, le
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #20]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #12]
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #16]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #40]
-	ldrsw	x10, [sp, #20]
-	str	w8, [x9, x10, lsl #2]
-	ldr	w8, [sp, #12]
-	ldr	x9, [sp, #40]
-	ldrsw	x10, [sp, #16]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_1
-LBB0_10:
-	str	wzr, [sp, #8]
-	ldr	w8, [sp, #36]
-	subs	w8, w8, #1
-	str	w8, [sp, #4]
-	str	wzr, [sp]
-	b	LBB0_11
-LBB0_11:                                ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #4]
-	subs	w8, w8, w9
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_16
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #4]
-	subs	w8, w8, w9
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #8]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_15
-LBB0_14:                                ;   in Loop: Header=BB0_11 Depth=1
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #8]
-	mov	x10, x9
-	add	w10, w10, #1
-	str	w10, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp]
-	str	w8, [x9, x10, lsl #2]
-	ldr	x8, [sp, #40]
-	ldrsw	x9, [sp, #4]
-	mov	x10, x9
-	subs	w10, w10, #1
-	str	w10, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #24]
-	ldrsw	x10, [sp]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_11 Depth=1
-	b	LBB0_11
-LBB0_16:
-	add	sp, sp, #48
-	ret
+stp	x29, x30, [sp, -32]!
+.cfi_def_cfa_offset 32
+.cfi_offset 29, -32
+.cfi_offset 30, -24
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -16
+.cfi_offset 20, -8
+mov	x20, x0
+mov	w0, 0
+str	x21, [sp, 32]
+.cfi_offset 21, -16
+mov	x21, x2
+str	w1, [x29, -12]
+str	x20, [x29, -8]
+str	wzr, [x29, -28]
+.LBB0_1:
+ldr	w0, [x29, -28]
+ldr	w2, [x29, -12]
+sub	w2, w2,
+cmp	w0, w2
+bge	LBB0_10
+.L17:
+ldr	w0, [x29, -28]
+add	w0, w0, 1
+str	w0, [x29, -32]
+.L6:
+ldp	w1, w0, [x29, -12]
+sxtw	x0, w0
+cmp	w1, w0
+blt	.L11
+.L5:
+ldr	x0, [x29, -8]
+ldrsw	x1, [x29, -32]
+ldr	x0, [x0, x1, lsl 2]
+ldr	w1, [x29, -28]
+ldr	x0, [x29, -8]
+ldr	w0, [x0, x1, lsl 2]
+cmp	w0, w1
+ble	.L6
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	x0, [x0, x2, lsl 2]
+ldr	w2, [x29, -28]
+ldr	x0, [x29, -8]
+ldr	w1, [x0, x2, lsl 2]
+sxtw	x2, w2
+str	w1, [x29, -36]
+ldrsw	x2, [x29, -28]
+str	w2, [x29, -28]
+sxtw	x1, w1
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -32]
+ldr	w1, [x0, x2, lsl 2]
+str	w1, [x0, x2, lsl 2]
+.L6:
+ldr	w0, [x29, -32]
+add	w0, w0, 1
+str	w0, [x29, -32]
+b	.L5
+.L11:
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	w0, [x0, x2, lsl 2]
+ldr	x2, [x29, -24]
+ldr	w1, [x29, -28]
+ldr	w2, [x2, x2, lsl 2]
+cmp	w0, w2
+bgt	.L12
+b	.L6
+.L12:
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	w0, [x0, x2, lsl 2]
+ldr	w2, [x29, -28]
+ldr	w1, [x29, -40]
+ldr	w2, [x29, -44]
+sxtw	x2, w2
+str	w2, [x29, -36]
+ldr	x0, [x29, -8]
+ldr	w2, [x0, x2, lsl 2]
+str	w2, [x0, x2, lsl 2]
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -28]
+ldr	w1, [x29, -40]
+ldr	w2, [x29, -44]
+sxtw	x2, w2
+str	w1, [x29, -36]
+ldr	x0, [x29, -8]
+ldr	w1, [x0, x2, lsl 2]
+str	w1, [x0, x2, lsl 2]
+b	.L6
+.L10:
+str	wzr, [x29, -40]
+str	wzr, [x29, -48]
+sub	w1, w2,
+ldr	w0, [x29, -12]
+sub	w0, w0,
+str	w0, [x29, -44]
+.L13:
+ldr	w0, [x29, -40]
+ldr	w1, [x29, -44]
+cmp	w0, w1
+bgt	.L14
+b	.L6
+.L14:
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -40]
+ldr	w1, [x29, -44]
+ldrsw	x0, [x29, -28]
+sxtw	x2, w2
+add	w2, w2, 1
+str	w2, [x29, -40]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -48]
+ldr	w1, [x0, x2, lsl 2]
+add	w1, w1, 1
+str	w1, [x29, -48]
+ldrsw	x2, [x29, -28]
+sxtw	x2, w2
+str	w2, [x0, x2, lsl 2]
+b	.L6
+.L15:
+ret
 	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+	file	.__TEXT,__text,regular,pure_instructions
+.global	_func0                          ## -- Begin function func0
+.align	2
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -48]!
+.cfi_def_cfa_offset 48
+.cfi_offset 29, -48
+.cfi_offset 30, -40
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -32
+.cfi_offset 20, -24
+mov	x20, x0
+mov	w0, 0
+str	x21, [sp, 32]
+.cfi_offset 21, -16
+mov	x21, x2
+str	w1, [x29, -12]
+str	x20, [x29, -8]
+str	wzr, [x29, -28]
+.LBB0_1:
+ldr	w0, [x29, -28]
+ldr	w2, [x29, -12]
+sub	w2, w2,
+cmp	w0, w2
+bge	LBB0_10
+.L17:
+ldr	w0, [x29, -28]
+add	w0, w0, 1
+str	w0, [x29, -32]
+.L6:
+ldp	w1, w0, [x29, -12]
+sxtw	x0, w0
+cmp	w1, w0
+blt	.L11
+.L5:
+ldr	x0, [x29, -8]
+ldrsw	x1, [x29, -32]
+ldr	x0, [x0, x1, lsl 2]
+ldr	w1, [x29, -28]
+ldr	x0, [x29, -8]
+ldr	w0, [x0, x1, lsl 2]
+cmp	w0, w1
+ble	.L6
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	x0, [x0, x2, lsl 2]
+ldr	w2, [x29, -28]
+ldr	x0, [x29, -8]
+ldr	w1, [x0, x2, lsl 2]
+sxtw	x2, w2
+str	w1, [x29, -36]
+ldrsw	x2, [x29, -28]
+str	w2, [x29, -28]
+sxtw	x1, w1
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -32]
+ldr	w1, [x0, x2, lsl 2]
+str	w1, [x0, x2, lsl 2]
+.L6:
+ldr	w0, [x29, -32]
+add	w0, w0, 1
+str	w0, [x29, -32]
+b	.L5
+.L11:
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	w0, [x0, x2, lsl 2]
+ldr	x2, [x29, -24]
+ldr	w1, [x29, -28]
+ldr	w2, [x2, x2, lsl 2]
+cmp	w0, w2
+bgt	.L12
+b	.L6
+.L12:
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	w0, [x0, x2, lsl 2]
+ldr	w2, [x29, -40]
+ldr	w1, [x29, -44]
+ldr	w2, [x29, -48]
+sxtw	x2, w2
+str	w2, [x29, -36]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -40]
+str	w2, [x29, -28]
+sxtw	x2, w2
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -44]
+ldr	w1, [x0, x2, lsl 2]
+str	w2, [x0, x2, lsl 2]
+ldr	w2, [x29, -48]
+add	w1, w2, 1
+str	w1, [x29, -48]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -40]
+ldr	w1, [x0, x2, lsl 2]
+add	w2, w1, 1
+str	w2, [x0, x2, lsl 2]
+b	.L6
+.L10:
+str	wzr, [x29, -40]
+str	wzr, [x29, -48]
+sub	w1, w2,
+ldr	w0, [x29, -12]
+sub	w0, w0,
+str	w0, [x29, -44]
+.L13:
+ldr	w0, [x29, -40]
+ldr	w1, [x29, -44]
+cmp	w0, w1
+bgt	.L14
+b	.L6
+.L14:
+ldr	x0, [x29, -8]
+ldrsw	x2, [x29, -32]
+ldr	w1, [x29, -44]
+ldr	w2, [x29, -40]
+ldr	x0, [x29, -8]
+ldr	w2, [x0, x2, lsl 2]
+add	w2, w2, 1
+str	w2, [x29, -44]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -48]
+ldr	w1, [x0, x2, lsl 2]
+add	w1, w1, 1
+str	w1, [x29, -48]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -40]
+ldr	w1, [x0, x2, lsl 2]
+str	w2, [x0, x2, lsl 2]
+ldr	w2, [x29, -48]
+add	w1, w2, 1
+str	w1, [x29, -48]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -40]
+ldr	w1, [x0, x2, lsl 2]
+add	w2, w1, -1
+str	w2, [x29, -40]
+ldr	x0, [x29, -8]
+ldr	w2, [x29, -44]
+ldr	w1, [x0, x2, lsl 2]
+add	w2, w1, 1
+str	w2, [x0, x2, lsl 2]
+b	.L6
+.L15:
+ret
+	.cfi_endproc

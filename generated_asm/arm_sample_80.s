@@ -1,160 +1,3669 @@
+.arch armv8-a
+.file "x86_to_armv8.s"
+.align 2
+.sp 80
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	x1, [x29, #-16]
-	stur	wzr, [x29, #-20]
-	ldur	x8, [x29, #-8]
-	str	x8, [sp, #16]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-                                        ;     Child Loop BB0_15 Depth 2
-	ldr	x8, [sp, #16]
-	ldrb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_21
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #16]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	mov	w9, #0
-	str	w9, [sp, #4]                    ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #16]
-	ldrsb	w0, [x8]
-	bl	_isdigit
-	subs	w8, w0, #0
-	cset	w8, ne
-	mov	w9, #0
-	str	w9, [sp, #4]                    ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #16]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #45
-	cset	w8, ne
-	str	w8, [sp, #4]                    ; 4-byte Folded Spill
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #4]                    ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #16]
-	add	x8, x8, #1
-	str	x8, [sp, #16]
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #16]
-	ldrb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-	b	LBB0_21
-LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #16]
-	add	x1, sp, #8
-	mov	w2, #10
-	bl	_strtol
-	mov	x8, x0
-	str	w8, [sp, #4]
-	ldr	x8, [sp, #16]
-	ldr	x9, [sp, #8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #44
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldrsw	x10, [sp, #4]
-	ldursw	x9, [x29, #-20]
-	mov	x8, x9
-	add	w8, w8, #1
-	stur	w8, [x29, #-20]
-	adrp	x9, _func0.out@PAGE
-	add	x9, x9, _func0.out@PAGEOFF
-	str	w10, [x9, x10, lsl #2]
-	b	LBB0_20
-LBB0_14:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_15
-LBB0_15:                                ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #8]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	mov	w9, #0
-	str	w9, [sp]                        ; 4-byte Folded Spill
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_16
-LBB0_16:                                ;   in Loop: Header=BB0_15 Depth=2
-	ldr	x8, [sp, #8]
-	ldrsb	w8, [x8]
-	subs	w8, w8, #44
-	cset	w8, ne
-	str	w8, [sp]                        ; 4-byte Folded Spill
-	b	LBB0_17
-LBB0_17:                                ;   in Loop: Header=BB0_15 Depth=2
-	ldr	w8, [sp]                        ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_19
-	b	LBB0_18
-LBB0_18:                                ;   in Loop: Header=BB0_15 Depth=2
-	ldr	x8, [sp, #8]
-	add	x8, x8, #1
-	str	x8, [sp, #8]
-	b	LBB0_15
-LBB0_19:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_20
-LBB0_20:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	str	x8, [sp, #16]
-	b	LBB0_1
-LBB0_21:
-	ldur	w8, [x29, #-20]
-	ldur	x9, [x29, #-16]
-	str	w8, [x9]
-	adrp	x0, _func0.out@PAGE
-	add	x0, x0, _func0.out@PAGEOFF
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.zerofill __DATA,__bss,_func0.out,1024,0 ; @func0.out
-.subsections_via_symbols
+.global	_func0                          ## -- Begin function func0
+.align	2
+.p2align 4,,11
+_func0:                                 ## @func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .align	2
+.p2align 4,,11
+_LBB0:                                  ## == Loop 0 ==
+.LC0:
+adrp	x2, .LANCHOR0
+add	x2, x2, :lo12:.LANCHOR0
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+str	x19, [sp, 16]
+.cfi_offset 19, -80
+str	x0, [x2,-8]
+str	wzr, [x2,-16]
+str	x1, [x2,-24]
+ldr	x0, [x2,-8]
+str	x0, [x2,-32]
+.LB1:
+mov	x19, x2
+str	x1, [x2,-8]
+cbnz	x0, .L10
+.L1:
+ldp	x29, x30, [sp], 96
+ldr	x19, [sp, 16]
+ret
+.p2align 2,,3
+.LB10:
+.cfi_def_cfa_offset 0
+.cfi_restore 19
+.cfi_restore 29
+.cfi_restore 30
+.cfi_def_cfa_register 19
+mov	w0, 0
+b	.LC0
+.L11:
+.cfi_def_cfa_offset 96
+.cfi_offset 19, -80
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L5
+.L12:
+ldrb	w0, [x19]
+bl	qisdigit
+eor	w1, w0, w1
+beq	.L5
+.L13:
+ldrb	w0, [x19]
+cmp	w0, 45
+cset	w0, ne
+.L5:
+strb	w0, [x19]
+tst	w0, 1
+bne	.L6
+b	.L1
+.p2align 2,,3
+.L6:
+ldr	x0, [x19, -32]
+add	x0, x0, 1
+str	x0, [x19, -32]
+b	.L1
+.L10:
+ldr	x0, [x2,-32]
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L12
+.L11:
+ldr	x0, [x19, -32]
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L12
+.L12:
+ldr	x0, [x19, -32]
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L13
+.L13:
+ldr	x0, [x19, -32]
+add	x0, x0, 1
+str	x0, [x19, -32]
+b	.L1
+.L11:
+ldr	x0, [x19, -32]
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L14
+b	.L12
+.L14:
+ldr	x0, [x19, -32]
+sub	x1, x2,
+mov	w2, 10
+bl	strtol
+ldr	x1, [x2, -8]
+str	w0, [x19, -20]
+ldr	x0, [x19, -16]
+cmp	x1, x0
+csel	x1, x0, x1, eq
+strb	w1, [x19, -24]
+b	.L1
+.L15:
+ldr	x0, [x19, -16]
+ldrb	w1, [x19]
+eor	w0, w0, w1
+beq	.L16
+.L17:
+ldr	x0, [x19, -16]
+ldrb	w1, [x19]
+cmp	w1, 44
+ccmp	w1, 0, 4, ne
+beq	.L18
+.L16:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L1
+.L18:
+ldr	w1, [x19, -20]
+add	x3, x2, :lo12:.LANCHOR0
+ldr	w2, [x19, -44]
+add	x3, x3, 16
+sxtw	x0, w1
+add	w1, w2, 1
+str	w1, [x19, -20]
+str	w2, [x3, x0, lsl 2]
+b	.L1
+.L16:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L15
+.L18:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L17
+.L17:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L16
+.L15:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L17
+.L16:
+ldr	x0, [x19, -16]
+add	x0, x0, 1
+str	x0, [x19, -16]
+b	.L18
+.L11:
+ldr	x0, [x19, -16]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L14
+b	.L16
+.L14:
+ldr	x0, [x19, -16]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -16]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -16]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L17
+.L13:
+ldr	x0, [x19, -16]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L16
+.L10:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16
+.L13:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L10
+b	.L17
+.L16:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L11
+b	.L17
+.L11:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L15
+b	.L16
+.L15:
+ldr	x0, [x19, -24]
+ldr	w1, [x19]
+eor	w0, w0, w1
+beq	.L13
+b	.L16

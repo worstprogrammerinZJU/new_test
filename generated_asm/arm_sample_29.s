@@ -1,212 +1,536 @@
+.arch armv8-a
+.file     .rodata.str1.8"S\n(.LC0"
+.text
+.align	2
+.LC0:
+.word	(.LC0)
+.word	(.LC1)
+.text
+.global	_func0
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-16]
-	ldur	x0, [x29, #-16]
-	bl	_strlen
-	subs	x8, x0, #10
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_1
-LBB0_1:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_2:
-	str	wzr, [sp, #16]
-	b	LBB0_3
-LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_15
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #16]
-	subs	w8, w8, #2
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #16]
-	subs	w8, w8, #5
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #16]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #45
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_13
-LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #16]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #48
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_11
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldur	x8, [x29, #-16]
-	ldrsw	x9, [sp, #16]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #57
-	cset	w8, le
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_12:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_3 Depth=1
-	b	LBB0_14
-LBB0_14:                                ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_3
-LBB0_15:
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8]
-	add	x0, sp, #15
-	strb	w8, [sp, #15]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #1]
-	strb	w8, [sp, #16]
-	strb	wzr, [sp, #17]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #3]
-	strb	w8, [sp, #19]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #4]
-	strb	w8, [sp, #20]
-	strb	wzr, [sp, #21]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #6]
-	strb	w8, [sp, #27]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #7]
-	strb	w8, [sp, #28]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #8]
-	strb	w8, [sp, #29]
-	ldur	x8, [x29, #-16]
-	ldrb	w8, [x8, #9]
-	strb	w8, [sp, #30]
-	strb	wzr, [sp, #31]
-	bl	_atoi
-	stur	w0, [x29, #-20]
-	add	x0, sp, #19
-	bl	_atoi
-	str	w0, [sp, #24]
-	add	x0, sp, #27
-	bl	_atoi
-	str	w0, [sp, #20]
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #1
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_16
-LBB0_16:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #12
-	cset	w8, le
-	tbnz	w8, #0, LBB0_18
-	b	LBB0_17
-LBB0_17:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_18:
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #1
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_20
-	b	LBB0_19
-LBB0_19:
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #31
-	cset	w8, le
-	tbnz	w8, #0, LBB0_21
-	b	LBB0_20
-LBB0_20:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_21:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #4
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_22
-LBB0_22:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #6
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_23
-LBB0_23:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_24
-LBB0_24:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #11
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_27
-	b	LBB0_25
-LBB0_25:
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #31
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_27
-	b	LBB0_26
-LBB0_26:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_27:
-	ldur	w8, [x29, #-20]
-	subs	w8, w8, #2
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_30
-	b	LBB0_28
-LBB0_28:
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #29
-	cset	w8, le
-	tbnz	w8, #0, LBB0_30
-	b	LBB0_29
-LBB0_29:
-	stur	wzr, [x29, #-4]
-	b	LBB0_31
-LBB0_30:
-	mov	w8, #1
-	stur	w8, [x29, #-4]
-	b	LBB0_31
-LBB0_31:
-	ldur	w0, [x29, #-4]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.align	2
+.p2align	4,,11
+.func0:                                   ## @func0
+    .cfi_startproc
+stp	x29, x30, [sp, -64]!
+.cfi_def_cfa_offset 64
+.cfi_offset 29, -64
+.cfi_offset 30, -56
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	x0, [x29, -8]
+ldr	x0, [x29, -8]
+bl	qstr
+cmp	x0, 10
+beq	.LB11
+str	wzr, [x29, -16]
+b	.L3
+.LB11:
+str	wzr, [x29, -24]
+.L3:
+ldr	w0, [x29, -24]
+cmp	w0, 10
+ble	.L3
+ldr	w0, [x29, -24]
+cmp	w0, 2
+beq	.L12
+.L4:
+ldr	w0, [x29, -24]
+cmp	w0, 5
+bne	.L14
+.L13:
+ldr	x0, [x29, -8]
+ldrsw	x1, [x29, -24]
+ldrb	w0, [x0, x1]
+cmp	w0, 45
+beq	.L15
+str	wzr, [x29, -16]
+b	.L3
+.L15:
+b	.L16
+.L14:
+ldr	x0, [x29, -8]
+ldrsw	x1, [x29, -24]
+ldrb	w0, [x0, x1]
+cmp	w0, 48
+blt	.L11
+.L12:
+ldr	x0, [x29, -8]
+ldrsw	x1, [x29, -24]
+ldrb	w0, [x0, x1]
+cmp	w0, 57
+bgt	.L17
+.L11:
+ldr	x0, [x29, -8]
+str	wzr, [x29, -16]
+ldrb	w1, [x0, x2]
+add	x2, x0, 4
+strb	w1, [x29, -12]
+ldrb	w1, [x2, 1]
+strb	w1, [x29, -10]
+ldrb	w1, [x0, 4]
+strb	w1, [x29, -9]
+ldrb	w1, [x2, 3]
+strb	w1, [x29, -7]
+ldrb	w1, [x0, 7]
+strb	w1, [x29, -5]
+ldrb	w1, [x2, 6]
+strb	w1, [x29, -3]
+ldrb	w1, [x0, 8]
+strb	w1, [x29, -1]
+ldrb	w1, [x2, 4]
+strb	w1, [x29, -4]
+ldrb	w1, [x0, 1]
+strb	w1, [x29, -2]
+sub	x0, x29,
+strb	wzr, [x29, -1]
+bl	xatoi
+str	w0, [x29, -20]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -24]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -28]
+ldr	w0, [x29, -20]
+cmp	w0, 1
+blt	.L18
+ldr	w0, [x29, -20]
+cmp	w0, 12
+ble	.L19
+.L20:
+str	wzr, [x29, -16]
+b	.L3
+.L18:
+ldr	w0, [x29, -20]
+cmp	w0, 1
+ble	.L21
+.L22:
+str	wzr, [x29, -16]
+b	.L3
+.L21:
+ldr	w0, [x29, -24]
+cmp	w0, 31
+ble	.L22
+.L23:
+str	wzr, [x29, -16]
+b	.L3
+.L22:
+ldr	w0, [x29, -20]
+cmp	w0, 4
+beq	.L26
+b	.L27
+.L24:
+ldr	w0, [x29, -20]
+cmp	w0, 9
+beq	.L26
+b	.L28
+.L26:
+ldr	w0, [x29, -20]
+cmp	w0, 6
+beq	.L29
+b	.L3
+.L27:
+ldr	w0, [x29, -20]
+cmp	w0, 2
+bne	.L25
+b	.L29
+.L29:
+ldr	x0, [x29, -8]
+mov	w1, 31
+ldrb	w0, [x0]
+strb	w0, [x29, -16]
+mov	x0, x29
+bl	xatoi
+str	w0, [x29, -20]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -24]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -28]
+ldr	w0, [x29, -20]
+cmp	w0, 1
+bge	.L20
+b	.L23
+.L25:
+ldr	w0, [x29, -20]
+cmp	w0, 3
+ble	.L24
+b	.L23
+.L28:
+ldr	w0, [x29, -20]
+cmp	w0, 11
+bne	.L27
+b	.L29
+.L23:
+ldr	w0, [x29, -20]
+cbnz	w0, .L22
+.L3:
+ldr	w0, [x29, -16]
+ldr	w1, [x29, -4]
+str	w1, [x29, -20]
+ldp	x29, x30, [sp], 64
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_def_cfa_offset 0
+ret
+.L24:
+.cfi_restore_state
+ldr	w0, [x29, -24]
+cmp	w0, 3
+ble	.L25
+b	.L22
+.L25:
+ldr	w0, [x29, -24]
+cmp	w0, 2
+ble	.L23
+b	.L22
+.L27:
+ldr	w0, [x29, -20]
+cbnz	w0, .L24
+b	.L29
+.L26:
+ldr	w0, [x29, -20]
+cmp	w0, 1
+ble	.L28
+b	.L22
+.L28:
+ldr	w0, [x29, -20]
+cmp	w0, 2
+ble	.L29
+b	.L3
+.L29:
+ldr	x0, [x29, -8]
+mov	w1, 29
+ldrb	w0, [x0]
+strb	w0, [x29, -16]
+mov	x0, x29
+bl	xatoi
+str	w0, [x29, -20]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -24]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -28]
+ldr	w0, [x29, -20]
+cmp	w0, 1
+ble	.L3
+b	.L20
+.L19:
+ldr	w0, [x29, -24]
+cmp	w0, 1
+ble	.L21
+b	.L22
+.L21:
+ldr	w0, [x29, -24]
+cmp	w0, 12
+ble	.L25
+b	.L22
+.L22:
+ldr	w0, [x29, -20]
+cmp	w0, 31
+bgt	.L26
+b	.L29
+.L25:
+ldr	w0, [x29, -20]
+cmp	w0, 4
+ble	.L23
+b	.L22
+.L23:
+ldr	w0, [x29, -20]
+cmp	w0, 6
+ble	.L24
+b	.L22
+.L24:
+ldr	w0, [x29, -20]
+cmp	w0, 9
+bne	.L27
+b	.L29
+.L17:
+ldr	x0, [x29, -8]
+str	wzr, [x29, -16]
+ldrb	w1, [x0, x2]
+add	x2, x0, 4
+strb	w1, [x29, -12]
+ldrb	w1, [x2, 1]
+strb	w1, [x29, -10]
+ldrb	w1, [x0, 4]
+strb	w1, [x29, -9]
+ldrb	w1, [x2, 3]
+strb	w1, [x29, -7]
+ldrb	w1, [x0, 7]
+strb	w1, [x29, -5]
+ldrb	w1, [x2, 6]
+strb	w1, [x29, -3]
+ldrb	w1, [x0, 8]
+strb	w1, [x29, -1]
+ldrb	w1, [x2, 4]
+strb	w1, [x29, -4]
+ldrb	w1, [x0, 1]
+strb	w1, [x29, -2]
+sub	x0, x29,
+strb	wzr, [x29, -1]
+bl	xatoi
+str	w0, [x29, -20]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -24]
+sub	x0, x29,
+bl	xatoi
+str	w0, [x29, -28]
+ldr	w0, [x29, -20]
+cmp	w0, 1
+bgt	.L22
+b	.L3
+.cfi_endproc
+.sect	.rodata.str1.8"S\n(.LC1"
+.text
+.global	_func0
+.align	2
+.LC1:
+.word	(".LC1")
+.word	(".LC0")
+.text
+.global	__floatditf
+.global	__divtf3
+.global	__fixtfdi
+.global	__fixtdi
+.bss
+.align	3
+.set	.__floatitf,-1
+.global	__floatdif3
+.global	__floatdifdi
+.global	__floatditf3
+.global	__floatditfdi
+.global	__floatdif2d
+.global	__floatdif2di
+.global	__floatdif2e
+.global	__floatdif2ei
+.global	__floatdif2ef3
+.global	__floatdif2edi
+.global	__floatdif2efi3
+.global	__floatdif2ei3
+.global	__floatdif2ei2d
+.global	__floatdif2ei2di
+.global	__floatdif2ei2e
+.global	__floatdif2ei2ei
+.global	__floatdif2ei2ef3
+.global	__floatdif2ei2ei3
+.global	__floatdif2ei2ei2d
+.global	__floatdif2ei2ei2di
+.global	__floatdif2ei2ei2e
+.global	__floatdif2ei2ei2ef3
+.global	__floatdif2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2di
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ef3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei3
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei22e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2d
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2e
+.global	__floatdif2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2ei2

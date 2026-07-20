@@ -1,99 +1,94 @@
+.arch armv8-a
+.file "convert_to_arm.asm"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	str	x0, [sp, #32]
-	str	w1, [sp, #28]
-	str	w2, [sp, #24]
-	str	wzr, [sp, #20]
-	str	wzr, [sp, #16]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #16]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
-	ldr	x9, [sp, #32]
-	ldr	w10, [sp, #28]
-	subs	w10, w10, #1
-	ldr	w11, [sp, #16]
-	subs	w10, w10, w11
-	ldr	w9, [x9, w10, sxtw #2]
-	subs	w8, w8, w9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:
-	strb	wzr, [sp, #47]
-	b	LBB0_9
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #16]
-	lsl	x9, x9, #2
-	ldr	w8, [x8, x9]
-	ldr	x9, [sp, #32]
-	ldr	w10, [sp, #28]
-	subs	w10, w10, #1
-	ldr	w11, [sp, #16]
-	subs	w10, w10, w11
-	ldr	w9, [x9, w10, sxtw #2]
-	add	w9, w8, w9
-	ldr	w8, [sp, #20]
-	add	w8, w8, w9
-	str	w8, [sp, #20]
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	b	LBB0_1
-LBB0_6:
-	ldr	w8, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	ldr	x8, [sp, #32]
-	ldr	w9, [sp, #28]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	ldr	w9, [x8, w9, sxtw #2]
-	ldr	w8, [sp, #20]
-	add	w8, w8, w9
-	str	w8, [sp, #20]
-	b	LBB0_8
-LBB0_8:
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #24]
-	subs	w8, w8, w9
-	cset	w8, le
-	and	w8, w8, #0x1
-	strb	w8, [sp, #47]
-	b	LBB0_9
-LBB0_9:
-	ldrb	w8, [sp, #47]
-	and	w0, w8, #0x1
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.align	2
+.p2align 4,,11
+_func0:                                ## @func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .build_version macos, 13, 0	sdk_version 13, 3
+    .globl	_func0
+    .pp2align 3,,7
+_func0:                                 ## @func0
+    cset	w5, eq
+    cset	w4, ne
+stp	x29, x30, [sp, -48]!
+.cfi_def_cfa_offset 48
+.cfi_offset 29, -48
+.cfi_offset 30, -40
+mov	w6, w1
+mov	w1, w2
+mov	x29, sp
+str	w5, [sp, 44]
+str	x19, [sp, 16]
+.cfi_offset 19, -32
+mov	x19, x0
+str	w4, [sp, 48]
+add	x0, sp, 44
+str	w6, [x19, -40]
+str	w2, [x19, -36]
+str	wzr, [x0, 8]
+str	wzr, [x0, 12]
+.LB1:
+ldr	w4, [x19, 40]
+sdiv	w5, w6, w4
+msub	w4, w5, w4, w6
+cmp	w4, w5
+ble	.L6
+.L3:
+ldr	x5, [x19, -40]
+ldrsw	x4, [x19, 40]
+sub	w6, w6,
+ldr	w2, [x19, 44]
+ldr	x3, [x19, -40]
+ldr	w4, [x5, x4, lsl 2]
+sub	w2, w2, w6
+sxtw	x2, w2
+ldr	w3, [x3, x2, lsl 2]
+cmp	w4, w3
+beq	.L4
+strb	wzr, [x0], 8
+b	.L8
+.L4:
+ldr	x5, [x19, -40]
+ldrsw	x4, [x19, 40]
+ldr	w2, [x19, 44]
+ldr	x3, [x19, -40]
+ldr	w4, [x5, x4, lsl 2]
+sub	w2, w2,
+ldr	w3, [x3, x2, lsl 2]
+add	w4, w4, w2
+add	w4, w4, w6
+str	w4, [x19, 40]
+.L6:
+sdiv	w4, w6, w4
+msub	w4, w4, w6, w6
+cmp	w4, 1
+bne	.L7
+ldr	x5, [x19, -40]
+sdiv	w4, w6, w5
+msub	w5, w4, w5, w6
+sxtw	x4, w4
+ldr	x0, [x19, -40]
+ldr	w1, [x19, 40]
+ldr	w0, [x0, x4, lsl 2]
+add	w0, w0, w1
+str	w0, [x19, 40]
+.L7:
+ldp	w1, w0, [x19, 40]
+cmp	w0, w1
+cset	w0, le
+strb	w0, [x19, -1]
+.L8:
+ldr	x19, [sp, 16]
+and	w0, w1, 1
+ldr	w1, [x19, -1]
+strb	w0, [x19, -1]
+ldp	x29, x30, [sp], 48
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_def_cfa_offset 0
+ret
+    .cfi_endproc
+    .subsection_via_symbols "__TEXT,__text,regular,pure_instructions" 0 ".."

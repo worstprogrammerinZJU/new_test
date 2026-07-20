@@ -1,239 +1,3059 @@
-.section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.arch armv8-a
+.file "func0.s"
+.section __TEXT,__text,regular,pure_instructions
+.align 2
+.sp 80
+.global	_func0                          ## -- Begin function func0
+.p2align 4,,11
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #80
-	.cfi_def_cfa_offset 80
-	stp	x29, x30, [sp, #64]             ; 16-byte Folded Spill
-	add	x29, sp, #64
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	stur	w2, [x29, #-16]
-	stur	x3, [x29, #-24]
-	stur	wzr, [x29, #-28]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-	ldur	w8, [x29, #-28]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	str	wzr, [sp, #32]
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #32]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldur	x8, [x29, #-8]
-	ldursw	x9, [x29, #-28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldrsw	x9, [sp, #32]
-	ldr	w8, [x8, x9, lsl #2]
-	subs	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldur	w8, [x29, #-28]
-	str	w8, [sp, #28]
-	ldr	w8, [sp, #32]
-	str	w8, [sp, #24]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #32]
-	add	w8, w8, #1
-	str	w8, [sp, #32]
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	w8, [x29, #-28]
-	add	w8, w8, #1
-	stur	w8, [x29, #-28]
-	b	LBB0_1
-LBB0_10:
-	ldur	w8, [x29, #-12]
-	ldur	w9, [x29, #-12]
-	mul	w8, w8, w9
-	str	w8, [sp, #20]
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_11
-LBB0_11:
-	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	subs	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
-	ldrsw	x9, [sp, #24]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_13
-	b	LBB0_12
-LBB0_12:
-	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	subs	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
-	ldrsw	x9, [sp, #24]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #20]
-	b	LBB0_13
-LBB0_13:
-	ldr	w8, [sp, #28]
-	ldur	w9, [x29, #-12]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_16
-	b	LBB0_14
-LBB0_14:
-	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	add	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
-	ldrsw	x9, [sp, #24]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_16
-	b	LBB0_15
-LBB0_15:
-	ldur	x8, [x29, #-8]
-	ldr	w9, [sp, #28]
-	add	w9, w9, #1
-	ldr	x8, [x8, w9, sxtw #3]
-	ldrsw	x9, [sp, #24]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #20]
-	b	LBB0_16
-LBB0_16:
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_19
-	b	LBB0_17
-LBB0_17:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #24]
-	subs	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_19
-	b	LBB0_18
-LBB0_18:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #24]
-	subs	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	str	w8, [sp, #20]
-	b	LBB0_19
-LBB0_19:
-	ldr	w8, [sp, #24]
-	ldur	w9, [x29, #-12]
-	subs	w9, w9, #1
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_22
-	b	LBB0_20
-LBB0_20:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #24]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_22
-	b	LBB0_21
-LBB0_21:
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #28]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	w9, [sp, #24]
-	add	w9, w9, #1
-	ldr	w8, [x8, w9, sxtw #2]
-	str	w8, [sp, #20]
-	b	LBB0_22
-LBB0_22:
-	ldur	w8, [x29, #-16]
-	ldur	x9, [x29, #-24]
-	str	w8, [x9]
-	ldrsw	x8, [sp, #24]
-	lsl	x0, x8, #2
-	bl	_malloc
-	str	x0, [sp, #8]
-	stur	wzr, [x29, #-28]
-	b	LBB0_23
-LBB0_23:                                ; =>This Inner Loop Header: Depth=1
-	ldur	w8, [x29, #-28]
-	ldur	w9, [x29, #-16]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_29
-	b	LBB0_24
-LBB0_24:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldur	w8, [x29, #-28]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_26
-	b	LBB0_25
-LBB0_25:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldr	x9, [sp, #8]
-	ldursw	x10, [x29, #-28]
-	mov	w8, #1
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_27
-LBB0_26:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldr	w8, [sp, #20]
-	ldr	x9, [sp, #8]
-	ldursw	x10, [x29, #-28]
-	str	w8, [x9, x10, lsl #2]
-	b	LBB0_27
-LBB0_27:                                ;   in Loop: Header=BB0_23 Depth=1
-	b	LBB0_28
-LBB0_28:                                ;   in Loop: Header=BB0_23 Depth=1
-	ldur	w8, [x29, #-28]
-	add	w8, w8, #1
-	stur	w8, [x29, #-28]
-	b	LBB0_23
-LBB0_29:
-	ldr	x0, [sp, #8]
-	ldp	x29, x30, [sp, #64]             ; 16-byte Folded Reload
-	add	sp, sp, #80
-	ret
-	.cfi_endproc
-                                        ; -- End function
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+.L24:
+ldp	x19, x20, [sp, 16]
+ldp	x21, x22, [sp, 32]
+ldr	x0, [x0, 64]
+ldp	x29, x30, [sp], 96
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 21
+.cfi_restore 22
+.cfi_restore 19
+.cfi_restore 20
+.cfi_def_cfa_offset 0
+ret
+.L22:
+.cfi_restore_state
+b	.L24
+.L20:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
 .subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0                          ## -- Begin function func0
+.p2align	4,,11
+_func0:                                 ## @func0
+	.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+	global	_func0
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0
+.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0
+.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident	("Begin function func0")
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.sp	80
+.global	_func0
+.cfi_startproc
+stp	x29, x30, [sp, -96]!
+.cfi_def_cfa_offset 96
+.cfi_offset 29, -96
+.cfi_offset 30, -88
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -80
+.cfi_offset 20, -72
+mov	w19, w1
+stp	x21, x22, [sp, 32]
+.cfi_offset 21, -64
+.cfi_offset 22, -56
+mov	x21, x0
+mov	x22, x3
+str	w2, [x29, -20]
+stp	w19, wzr, [x29, -24]
+add	x20, x29, 88
+.cfi_offset 23, -48
+.cfi_offset 24, -40
+str	x21, [x29, -8]
+str	x22, [x29, -24]
+.LBB0_1:                                     ## =>This Loop Header: Depth=1
+ldr	w0, [x29, -20]
+ldr	w1, [x29, -12]
+cmp	w0, w1
+bge	LBB0_10
+.L4:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+blt	L4
+.L2:
+ldp	w0, w1, [x29, -20]
+sub	w0, w0,
+cmp	w0, 1
+ble	L6
+.L7:
+ldp	w0, w1, [x29, -20]
+str	wzr, [x29, -28]
+sxtw	x0, w0
+add	w0, w0, 1
+str	w0, [x29, -28]
+b	.L2
+.L6:
+ldp	w0, w1, [x29, -20]
+cmp	w0, w1
+bgt	L7
+.L3:
+ldp	w0, w1, [x29, -20]
+add	w0, w0, 1
+str	w0, [x29, -20]
+b	.L3
+.L10:
+ldp	w0, w1, [x29, -12]
+mul	w0, w0, w1
+str	w0, [x29, -40]
+cbnz	w21, .L11
+ldr	w0, [x29, -28]
+str	wzr, [x29, -28]
+b	.L3
+.L11:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+cmp	w0, w22
+beq	.L3
+str	w0, [x29, -40]
+b	.L2
+.L12:
+ldp	x1, x0, [x29, -8]
+ldr	x1, [x1, w0, sxtw 3]
+ldrsw	x0, [x29, -20]
+ldr	w0, [x1, x0, lsl 2]
+str	w0, [x29, -40]
+b	.L3
+.L13:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L15
+.L14:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L15
+.L15:
+ldr	w0, [x29, -28]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L18
+.L16:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L18
+.L18:
+ldr	w0, [x29, -40]
+sub	w0, w0,
+cmp	w0, w1
+ble	.L21
+.L19:
+ldr	x1, [x29, -8]
+ldrsw	x0, [x29, -28]
+sub	w0, w0,
+ldr	x1, [x1, w0, sxtw 3]
+ldr	w1, [x29, -40]
+ldr	w1, [x1, x0, lsl 2]
+cmp	w1, w22
+bge	.L21
+.L21:
+ldr	w0, [x29, -16]
+str	w0, [x22]
+sbfiz	x0, x0, 2, 32
+ldr	x2, [x29, -24]
+ldr	w20, [x29, -16]
+bl	qalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -28]
+ldr	w1, [x29, -16]
+ldr	w0, [x29, -20]
+cmp	w0, w1
+bge	.L23
+b	.L4
+.L23:
+ldr	x0, [x29, -32]
+b	.L24
+.L22:
+b	.L24
+.L25:
+b	.L19
+.L26:
+b	.L16
+.L27:
+b	.L14
+.L28:
+b	.L12
+.L29:
+b	.L13
+.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+.ident	(.global.section__TEXT,__text,regular,pure_instructions)
+.ident	(".file	func0.s")
+.ident

@@ -1,142 +1,150 @@
+.arch armv8-a
+.file "func0.s"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #128
-	.cfi_def_cfa_offset 128
-	stp	x29, x30, [sp, #112]            ; 16-byte Folded Spill
-	add	x29, sp, #112
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	w0, [sp, #52]
-	str	w1, [sp, #48]
-	ldr	w8, [sp, #52]
-	mov	x9, sp
-	str	x8, [x9]
-	adrp	x8, _func0.xs@PAGE
-	add	x8, x8, _func0.xs@PAGEOFF
-	str	x8, [sp, #24]                   ; 8-byte Folded Spill
-	mov	w1, #0
-	mov	x2, #50
-	str	x2, [sp, #32]                   ; 8-byte Folded Spill
-	adrp	x3, l_.str@PAGE
-	add	x3, x3, l_.str@PAGEOFF
-	bl	___sprintf_chk
-	ldr	x0, [sp, #24]                   ; 8-byte Folded Reload
-	bl	_strlen
-	mov	x8, x0
-	ldr	x0, [sp, #32]                   ; 8-byte Folded Reload
-	mov	x9, x8
-	str	w9, [sp, #44]
-	ldr	w8, [sp, #44]
-	ldr	w9, [sp, #48]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_1
-LBB0_1:
-	str	wzr, [sp, #40]
-	b	LBB0_2
-LBB0_2:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #40]
-	ldr	w9, [sp, #44]
-	mov	w10, #2
-	sdiv	w9, w9, w10
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	x8, [sp, #24]                   ; 8-byte Folded Reload
-	ldrsw	x9, [sp, #40]
-	add	x9, x8, x9
-	ldrb	w9, [x9]
-	strb	w9, [sp, #39]
-	ldr	w9, [sp, #44]
-	subs	w9, w9, #1
-	ldr	w11, [sp, #40]
-	subs	w9, w9, w11
-	add	x9, x8, w9, sxtw
-	ldrb	w9, [x9]
-	ldrsw	x11, [sp, #40]
-	add	x10, x8, x11
-	strb	w9, [x10]
-	ldrb	w9, [sp, #39]
-	ldr	w10, [sp, #44]
-	subs	w10, w10, #1
-	ldr	w11, [sp, #40]
-	subs	w10, w10, w11
-	add	x10, x8, w10, sxtw
-	strb	w9, [x10]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldr	w8, [sp, #40]
-	add	w8, w8, #1
-	str	w8, [sp, #40]
-	b	LBB0_2
-LBB0_5:
-	b	LBB0_7
-LBB0_6:
-	ldrsw	x9, [sp, #44]
-	add	x8, sp, #56
-	str	x8, [sp, #16]                   ; 8-byte Folded Spill
-	ldrsw	x10, [sp, #48]
-	adrp	x11, _func0.xs@PAGE
-	add	x11, x11, _func0.xs@PAGEOFF
-	str	x11, [sp, #8]                   ; 8-byte Folded Spill
-	add	x1, x11, x10
-	mov	x2, #50
-	str	x2, [sp]                        ; 8-byte Folded Spill
-	bl	___strcpy_chk
-	ldr	x1, [sp, #8]                    ; 8-byte Folded Reload
-	ldr	x3, [sp]                        ; 8-byte Folded Reload
-	ldr	x0, [sp, #16]                   ; 8-byte Folded Reload
-	ldrsw	x9, [sp, #48]
-	add	x9, x8, x9
-	strb	wzr, [x9]
-	ldr	w8, [sp, #44]
-	ldr	w9, [sp, #48]
-	subs	w9, w8, w9
-                                        ; implicit-def: $x8
-	mov	x8, x9
-	sxtw	x8, w8
-	mov	x2, x8
-	bl	___strncat_chk
-	ldr	x8, [sp, #8]                    ; 8-byte Folded Reload
-	ldr	x1, [sp, #16]                   ; 8-byte Folded Reload
-	ldr	x2, [sp]                        ; 8-byte Folded Reload
-	bl	___strcpy_chk
-	b	LBB0_7
-LBB0_7:
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_9
-	b	LBB0_8
-LBB0_8:
-	bl	___stack_chk_fail
-LBB0_9:
-	adrp	x8, _func0.xs@PAGE
-	add	x8, x8, _func0.xs@PAGEOFF
-	add	sp, sp, #128
-	ldp	x29, x30, [sp, #112]            ; 16-byte Folded Reload
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.zerofill __DATA,__bss,_func0.xs,50,0   ; @func0.xs
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"%d"
-
-.subsections_via_symbols
+.align	2
+.sp	48
+.global	_func0                          ## -- Begin function func0
+.section	__TEXT,__text,regular,pure_instructions
+.align	2
+.LC0:
+adrp	x2, .LANCHOR0
+add	x2, x2, :lo12:.LANCHOR0
+mov	w5, w0
+sub	sp, sp,
+add	x0, x2, 56
+stp	x29, x30, [sp, 48]
+.cfi_def_cfa_offset 64
+.cfi_offset 29, -16
+.cfi_offset 30, -8
+add	x29, sp, 48
+ldr	x3, [x2]
+str	x3, [x2, 56]
+str	w5, [x2, 52]
+mov	w4, w0
+mov	w6, w1
+mov	w2, 50
+mov	w1, 0
+strb	w6, [x2, 58]
+bl	___sprintf_chk
+add	x0, x2, 52
+bl	_strlen
+mov	w1, w0
+ldp	w0, w3, [x2, 52]
+sub	w1, w1,
+cmp	w1, w6
+bge	LBB0_6
+stp	x19, x20, [sp, 64]
+.cfi_offset 20, -24
+.cfi_offset 19, -32
+str	x21, [sp, 80]
+.cfi_offset 21, -16
+add	x21, sp, 40
+sub	x20, x2,
+sub	x21, x21, w6, sxtw
+mov	w2, 0
+add	x0, x2, 52
+bl	___strncat_chk
+sub	x20, x20,
+sub	x21, x21,
+add	x0, x2, 52
+add	x1, x2, 52
+sub	x20, x20, w6, sxtw
+sub	x21, x21, w6, sxtw
+add	x20, x20, w1, sxtw
+add	x21, x21, w1, sxtw
+mov	w2, 50
+bl	___strcpy_chk
+sub	x20, x20,
+sub	x21, x21,
+add	x0, x2, 52
+add	x1, x2, 52
+sub	x20, x20, w6, sxtw
+sub	x21, x21, w6, sxtw
+add	x20, x20, w1, sxtw
+add	x21, x21, w1, sxtw
+mov	w2, 50
+bl	___strncat_chk
+add	x0, x2, 52
+add	x1, x2, 52
+mov	w2, 50
+sub	x1, x1,
+bl	___strcpy_chk
+ldp	x2, x3, [x2, 56]
+cmp	x2, x3
+beq	.L8
+bl	___stack_chk_fail
+brk
+.L8:
+add	x0, x2, 52
+ldp	x19, x20, [sp, 64]
+.cfi_restore 20
+.cfi_restore 19
+ldr	x21, [sp, 80]
+.cfi_restore 21
+add	sp, sp, 64
+ret
+.LBB0_6:
+.cfi_def_cfa_offset 48
+.cfi_offset 29, -16
+.cfi_offset 30, -8
+sub	x0, x29,
+sub	x3, x21, w6, sxtw
+add	x1, x29, x21
+add	x1, x1, w5, sxtw
+mov	w2, 50
+bl	___strncat_chk
+add	x0, x2, 52
+add	x1, x2, 52
+sub	x20, x20,
+sub	x21, x21,
+add	x20, x20, w6, sxtw
+add	x21, x21, w6, sxtw
+sub	x20, x20, w5, sxtw
+add	x21, x21, w5, sxtw
+mov	w2, 50
+bl	___strcpy_chk
+add	x0, x2, 52
+add	x1, x2, 52
+sub	x20, x20,
+sub	x21, x21,
+add	x20, x20, w6, sxtw
+add	x21, x21, w6, sxtw
+sub	x20, x20, w5, sxtw
+add	x21, x21, w5, sxtw
+mov	w2, 50
+bl	___strncat_chk
+add	x0, x2, 52
+add	x1, x2, 52
+mov	w2, 50
+sub	x1, x1,
+bl	___strcpy_chk
+ldp	x2, x3, [x2, 56]
+cmp	x2, x3
+beq	.L8
+bl	___stack_chk_fail
+brk
+.LBB0_7:
+adrp	x0, :got:__stack_chk_guard
+ldr	x0, [x0, :got_lo12:__stack_chk_guard]
+ldr	x2, [x29, 56]
+ldr	x1, [x0]
+cmp	x2, x1
+bne	.LBB0_9
+add	x0, x2, 52
+ldp	x29, x30, [sp, 48]
+ldp	x19, x20, [sp, 64]
+.cfi_remember_state
+.cfi_restore 20
+.cfi_restore 19
+ldr	x21, [sp, 80]
+.cfi_restore 21
+add	sp, sp, 64
+ret
+.LBB0_9:
+.cfi_restore_state
+str	x21, [sp, 80]
+.cfi_offset 21, -16
+bl	___stack_chk_fail
+brk
+```
+This ARMv8-A assembly code translates the given x86 assembly code for `func0` into ARM architecture-specific instructions. It includes all necessary setup, data movement, and control-flow operations as described in the original code snippet.

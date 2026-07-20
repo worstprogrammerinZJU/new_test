@@ -1,305 +1,2800 @@
+.arch armv8-a
+.file	__TEXT,__text,regular,pure_instructions
+.align	2
+.p2align	4,,11
+.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.align	2
+.p2align	4,,11
+_func0:                                 ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #176
-	.cfi_def_cfa_offset 176
-	stp	x29, x30, [sp, #160]            ; 16-byte Folded Spill
-	add	x29, sp, #160
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	stur	x8, [x29, #-8]
-	str	x0, [sp, #32]
-	sub	x0, x29, #44
-	mov	w1, #0
-	mov	x2, #40
-	bl	_memset
-	add	x0, sp, #40
-	adrp	x1, l___const.func0.numto@PAGE
-	add	x1, x1, l___const.func0.numto@PAGEOFF
-	mov	x2, #80
-	bl	_memcpy
-	str	wzr, [sp, #28]
-	ldr	x8, [sp, #32]
-	ldrb	w8, [x8]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_17
-	b	LBB0_1
-LBB0_1:
-	b	LBB0_2
-LBB0_2:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-                                        ;     Child Loop BB0_9 Depth 2
-	str	wzr, [sp, #24]
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_2 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
-	ldrsb	w9, [x8, x9]
-	subs	w9, w9, #32
-	cset	w9, eq
-	mov	w8, #0
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	tbnz	w9, #0, LBB0_5
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, ne
-	str	w8, [sp, #8]                    ; 4-byte Folded Spill
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #8]                    ; 4-byte Folded Reload
-	tbz	w8, #0, LBB0_8
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #24]
-	add	x8, x8, x9
-	ldrb	w8, [x8]
-	ldrsw	x10, [sp, #24]
-	add	x9, sp, #25
-	add	x9, x9, x10
-	strb	w8, [x9]
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_3
-LBB0_8:                                 ;   in Loop: Header=BB0_2 Depth=1
-	ldrsw	x9, [sp, #24]
-	add	x8, sp, #25
-	add	x8, x8, x9
-	strb	wzr, [x8]
-	str	wzr, [sp, #20]
-	b	LBB0_9
-LBB0_9:                                 ;   Parent Loop BB0_2 Depth=1
-                                        ; =>  This Inner Loop Header: Depth=2
-	ldr	w8, [sp, #20]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_10
-LBB0_10:                                ;   in Loop: Header=BB0_9 Depth=2
-	ldrsw	x9, [sp, #20]
-	add	x8, sp, #25
-	ldr	x1, [x8, x9, lsl #3]
-	bl	_strcmp
-	subs	w8, w0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_2 Depth=1
-	ldrsw	x9, [sp, #20]
-	sub	x8, x29, #44
-	add	x9, x8, x9, lsl #2
-	ldr	w8, [x9]
-	add	w10, w8, #1
-	add	x9, x8, w10, sxtw #2
-	str	w9, [x8, w10, sxtw #2]
-	b	LBB0_14
-LBB0_12:                                ;   in Loop: Header=BB0_9 Depth=2
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_9 Depth=2
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_9
-LBB0_14:                                ;   in Loop: Header=BB0_2 Depth=1
-	ldr	w8, [sp, #24]
-	add	w9, w8, #1
-	ldr	x8, [sp, #32]
-	add	x8, x8, w9, sxtw
-	str	x8, [sp, #32]
-	b	LBB0_15
-LBB0_15:                                ;   in Loop: Header=BB0_2 Depth=1
-	ldr	x8, [sp, #32]
-	ldrb	w8, [x8, #-1]
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_2
-	b	LBB0_16
-LBB0_16:
-	b	LBB0_17
-LBB0_17:
-	str	wzr, [sp, #24]
-	b	LBB0_18
-LBB0_18:                                ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_20 Depth 2
-                                        ;       Child Loop BB0_22 Depth 3
-	ldr	w8, [sp, #24]
-	subs	w8, w8, #10
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_29
-	b	LBB0_19
-LBB0_19:                                ;   in Loop: Header=BB0_18 Depth=1
-	str	wzr, [sp, #20]
-	b	LBB0_20
-LBB0_20:                                ;   Parent Loop BB0_18 Depth=1
-                                        ; =>  This Loop Header: Depth=2
-                                        ;       Child Loop BB0_22 Depth 3
-	ldr	w8, [sp, #20]
-	ldrsw	x10, [sp, #24]
-	add	x9, sp, #40
-	ldr	w9, [x9, x10, lsl #2]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_27
-	b	LBB0_21
-LBB0_21:                                ;   in Loop: Header=BB0_20 Depth=2
-	str	wzr, [sp, #16]
-	b	LBB0_22
-LBB0_22:                                ;   Parent Loop BB0_18 Depth=1
-                                        ;     Parent Loop BB0_20 Depth=2
-                                        ; =>    This Inner Loop Header: Depth=3
-	ldrsw	x9, [sp, #24]
-	add	x8, sp, #40
-	add	x8, x8, x9, lsl #3
-	ldr	x8, [x8]
-	ldrsw	x9, [sp, #16]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_25
-	b	LBB0_23
-LBB0_23:                                ;   in Loop: Header=BB0_22 Depth=3
-	ldrsw	x9, [sp, #24]
-	add	x8, sp, #40
-	add	x8, x8, x9, lsl #3
-	ldr	x8, [x8]
-	ldrsw	x10, [sp, #16]
-	add	x9, sp, #12
-	add	x9, x9, x10
-	ldrb	w9, [x8, x9]
-	ldrsw	x10, [sp, #28]
-	add	x8, x8, x10
-	adrp	x9, _func0.out@PAGE
-	add	x9, x9, _func0.out@PAGEOFF
-	strb	w9, [x8, x9]
-	b	LBB0_24
-LBB0_24:                                ;   in Loop: Header=BB0_22 Depth=3
-	ldr	w8, [sp, #16]
-	add	w8, w8, #1
-	str	w8, [sp, #16]
-	ldr	w8, [sp, #28]
-	add	w8, w8, #1
-	str	w8, [sp, #28]
-	b	LBB0_22
-LBB0_25:                                ;   in Loop: Header=BB0_20 Depth=2
-	ldr	w8, [sp, #28]
-	add	w9, w8, #1
-	add	x9, sp, #12
-	add	x9, x9, w9, sxtw
-	adrp	x8, _func0.out@PAGE
-	add	x8, x8, _func0.out@PAGEOFF
-	mov	w10, #32
-	strb	w10, [x8, x9]
-	b	LBB0_26
-LBB0_26:                                ;   in Loop: Header=BB0_20 Depth=2
-	ldr	w8, [sp, #20]
-	add	w8, w8, #1
-	str	w8, [sp, #20]
-	b	LBB0_20
-LBB0_27:                                ;   in Loop: Header=BB0_18 Depth=1
-	b	LBB0_28
-LBB0_28:                                ;   in Loop: Header=BB0_18 Depth=1
-	ldr	w8, [sp, #24]
-	add	w8, w8, #1
-	str	w8, [sp, #24]
-	b	LBB0_18
-LBB0_29:
-	ldr	w8, [sp, #28]
-	subs	w8, w8, #0
-	cset	w8, le
-	tbnz	w8, #0, LBB0_31
-	b	LBB0_30
-LBB0_30:
-	ldr	w8, [sp, #28]
-	subs	w9, w8, #1
-	adrp	x8, _func0.out@PAGE
-	add	x8, x8, _func0.out@PAGEOFF
-	add	x8, x8, w9, sxtw
-	strb	w8, [x8]
-	b	LBB0_32
-LBB0_31:
-	adrp	x8, _func0.out@PAGE
-	strb	wzr, [x8, _func0.out@PAGEOFF]
-	b	LBB0_32
-LBB0_32:
-	ldur	x9, [x29, #-8]
-	adrp	x8, ___stack_chk_guard@GOTPAGE
-	ldr	x8, [x8, ___stack_chk_guard@GOTPAGEOFF]
-	ldr	x8, [x8]
-	subs	x8, x8, x9
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_34
-	b	LBB0_33
-LBB0_33:
-	bl	___stack_chk_fail
-LBB0_34:
-	adrp	x0, _func0.out@PAGE
-	add	x0, x0, _func0.out@PAGEOFF
-	ldp	x29, x30, [sp, #160]            ; 16-byte Folded Reload
-	add	sp, sp, #176
-	ret
-	.cfi_endproc
-                                        ; -- End function
-	.section	__TEXT,__cstring,cstring_literals
-l_.str:                                 ; @.str
-	.asciz	"zero"
-
-l_.str.1:                               ; @.str.1
-	.asciz	"one"
-
-l_.str.2:                               ; @.str.2
-	.asciz	"two"
-
-l_.str.3:                               ; @.str.3
-	.asciz	"three"
-
-l_.str.4:                               ; @.str.4
-	.asciz	"four"
-
-l_.str.5:                               ; @.str.5
-	.asciz	"five"
-
-l_.str.6:                               ; @.str.6
-	.asciz	"six"
-
-l_.str.7:                               ; @.str.7
-	.asciz	"seven"
-
-l_.str.8:                               ; @.str.8
-	.asciz	"eight"
-
-l_.str.9:                               ; @.str.9
-	.asciz	"nine"
-
-	.section	__DATA,__const
-	.p2align	3                               ; @__const.func0.numto
-l___const.func0.numto:
-	.quad	l_.str
-	.quad	l_.str.1
-	.quad	l_.str.2
-	.quad	l_.str.3
-	.quad	l_.str.4
-	.quad	l_.str.5
-	.quad	l_.str.6
-	.quad	l_.str.7
-	.quad	l_.str.8
-	.quad	l_.str.9
-
-.zerofill __DATA,__bss,_func0.out,1000,0 ; @func0.out
-.subsections_via_symbols
+stp	x29, x30, [sp, -160]!
+.cfi_def_cfa_offset 160
+.cfi_offset 29, -160
+.cfi_offset 30, -152
+mov	w2, 40
+mov	x29, sp
+.cfi_def_cfa_register 29
+sub	sp, sp,
+adrp	x1, :got:__stack_chk_guard
+ldr	x1, [x1, :got_lo12:__stack_chk_guard]
+str	x19, [sp, 16]
+.cfi_offset 19, -144
+sub	x19, x29,
+ldr	x3, [x1]
+str	x3, [x19, -8]
+mov	x1, 0
+stp	x21, x22, [sp, 48]
+mov	x22, x0
+.cfi_offset 21, -112
+.cfi_offset 22, -104
+add	x21, sp, 8
+stp	x23, x24, [sp, 64]
+stp	x25, x26, [sp, 80]
+str	x27, [sp, 96]
+.cfi_offset 23, -96
+.cfi_offset 24, -88
+.cfi_offset 25, -80
+.cfi_offset 26, -72
+.cfi_offset 27, -64
+str	d8, [sp, 128]
+sub	x0, x19,
+str	x20, [sp, 8]
+.cfi_offset 20, -128
+.cfi_offset 72, -32
+adrp	x20, .LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+bl	_memset
+sub	x0, x19,
+mov	w2, 80
+mov	x1, x20
+bl	_memcpy
+str	wzr, [x19, -28]
+ldrb	w0, [x22]
+cbnz	w0, .L2
+.L1:
+ldr	x0, [x19, -28]
+ldrsw	x1, [x19, -28]
+ldrb	w0, [x0, x1]
+cmp	w0, 32
+beq	.L14
+.L2:
+mov	w0, 0
+.L3:
+add	x0, x19, -28
+ldrsw	x1, [x19, -28]
+ldrb	w1, [x0, x1]
+cmp	w1, 0
+cset	w1, ne
+strb	w1, [x19, -28]
+cbnz	w1, .L2
+.L12:
+add	x0, x19, -28
+strb	wzr, [x0, w1, sxtw]
+.L5:
+ldrsw	x0, [x19, -28]
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+bge	.L15
+ldr	x0, [x19, -24]
+sxtw	x2, w0
+ldr	x1, [x0, x2, lsl 3]
+cmp	x1, x2
+bge	.L16
+.L13:
+ldr	x0, [x19, -24]
+sxtw	x2, w0
+ldr	x1, [x0, x2, lsl 3]
+cmp	x1, 0
+csel	w1, w1, wzr, ge
+strb	w1, [x19, -28]
+.L6:
+ldrsw	x0, [x19, -28]
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L12
+.L15:
+add	x0, x19, -28
+strb	wzr, [x0, w2, sxtw]
+b	.L5
+.L16:
+add	x0, x19, -28
+add	x24, x20, :lo12:.LANCHOR0
+strb	wzr, [x0, w2, sxtw]
+add	x0, x20, :lo12:.LANCHOR0
+ldr	x2, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x2, x1
+bne	.L17
+b	.L1
+.L17:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x0, w2, sxtw]
+add	x20, x20, :lo12:.LANCHOR0
+strb	w0, [x2, w2, sxtw]
+add	x0, x20, :lo12:.LANCHOR0
+ldr	x2, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x2, x1
+beq	.L1
+.L18:
+add	x0, x19, -28
+ldrsw	x1, [x19, -28]
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+bgt	.L15
+.L14:
+add	x0, x19, -28
+strb	wzr, [x0, w2, sxtw]
+b	.L5
+.L19:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L20
+b	.L1
+.L20:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L21
+.L21:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+bgt	.L14
+b	.L12
+.L22:
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x0, w2, sxtw]
+add	x20, x20, :lo12:.LANCHOR0
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	x2, x1
+beq	.L1
+.L23:
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x0, w2, sxtw]
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L22
+.L12:
+add	x0, x19, -28
+add	x24, x20, :lo12:.LANCHOR0
+strb	wzr, [x0, w2, sxtw]
+add	x0, x20, :lo12:.LANCHOR0
+ldr	x2, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x2, x1
+bne	.L24
+b	.L1
+.L24:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L25
+.L25:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L12
+b	.L14
+.L26:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+bgt	.L26
+.L13:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L13
+b	.L14
+.L21:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L27
+b	.L21
+.L27:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L28
+b	.L21
+.L28:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L12
+b	.L14
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	w0, w0, 1
+str	w0, [x19, -28]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+bgt	.L23
+b	.L12
+.L20:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+beq	.L1
+b	.L24
+.L25:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L26
+b	.L25
+.L26:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+bne	.L27
+b	.L26
+.L27:
+add	x2, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x2, 8]
+cmp	x1, x0
+beq	.L21
+b	.L28
+.L11:
+mov	x0, 0
+b	.L1
+.L10:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+ldr	x1, [x0, 8]
+ldr	x0, [x19, -28]
+ldr	x1, [x1, x20]
+cmp	x0, x1
+bne	.L7
+b	.L1
+.L7:
+add	x20, x20, :lo12:.LANCHOR0
+ldr	x1, [x19, -28]
+ldr	x2, [x20, 8]
+ldr	x1, [x1, x20]
+cmp	x1, 0
+ccmp	x0, x2, 0, ne
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+strb	wzr, [x0, w2, sxtw]
+b	.L5
+.L5:
+add	x0, x19, -28
+strb	wzr, [x0, w2, sxtw]
+ldr	x2, [x19, -28]
+cmp	w2, 10
+ble	.L12
+b	.L14
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+strb	wzr, [x0, w2, sxtw]
+add	x0, x20, :lo12:.LANCHOR0
+ldr	x2, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x2, x1
+bne	.L2
+b	.L1
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 8
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L9
+b	.L28
+.L9:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L21:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L11
+b	.L21
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L22:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L22
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+bne	.L12
+b	.L10
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+bne	.L10
+b	.L14
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L9
+b	.L26
+.L7:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L7
+.L6:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L6
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L19:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L19
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L13:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L13
+b	.L14
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L24:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L24
+.L18:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L18
+.L28:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L28
+.L15:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L15
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L20:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L20
+.L25:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L25
+.L17:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L17
+.L11:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L11
+.L12:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L12
+.L10:
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x19, -28
+ldr	x1, [x19, -28]
+ldr	x1, [x20, 8]
+cmp	x1, x0
+beq	.L10
+b	.L11
+.L14:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+ble	.L14
+b	.L12
+.L26:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L26
+.L21:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L21
+.L23:
+add	x0, x19, -28
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L23
+.L16:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L16
+.L27:
+add	x0, x20, :lo12:.LANCHOR0
+add	x20, x20, :lo12:.LANCHOR0
+add	x0, x0, 16
+ldr	x1, [x19, -28]
+ldr	x1, [x0, 8]
+cmp	x1, x0
+bne	.L10
+b	.L27
+.L14:
+add	x0, x

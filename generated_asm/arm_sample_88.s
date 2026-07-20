@@ -1,76 +1,59 @@
+.arch armv8-a
+.file     /home/xiongyiduo/Downloads/huabaneyJq.txt
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #64
-	.cfi_def_cfa_offset 64
-	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
-	add	x29, sp, #48
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	stur	w1, [x29, #-12]
-	str	x2, [sp, #24]
-	str	x3, [sp, #16]
-	ldr	x0, [sp, #24]
-	bl	_strlen
-	mov	x8, x0
-	str	w8, [sp, #12]
-	ldursw	x9, [x29, #-12]
-	mov	x8, #8
-	mul	x0, x8, x9
-	bl	_malloc
-	ldr	x8, [sp, #16]
-	str	x0, [x8]
-	str	wzr, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldur	w9, [x29, #-12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	x0, [x8, x9, lsl #3]
-	ldr	x1, [sp, #24]
-	ldrsw	x2, [sp, #12]
-	bl	_strncmp
-	subs	w8, w0, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_4
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #4]
-	ldr	x8, [x8, x9, lsl #3]
-	ldr	x9, [sp, #16]
-	ldr	x9, [x9]
-	ldrsw	x10, [sp, #8]
-	mov	x11, x10
-	add	w11, w11, #1
-	str	w11, [sp, #8]
-	str	x8, [x9, x10, lsl #3]
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_6:
-	ldr	w0, [sp, #8]
-	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
-	add	sp, sp, #64
-	ret
-	.cfi_endproc
-                                        ; -- End function
+.global	_func0
+.align	2
+.p2align 4,,11
+_func0:                                ## @func0
+    .cfi_startproc
+stp	x29, x30, [sp, -48]!
+.cfi_def_cfa_offset 48
+.cfi_offset 29, -48
+.cfi_offset 30, -40
+mov	x29, sp
+.cfi_def_cfa_register 29
+str	x0, [x29, -16]
+str	w1, [x29, -24]
+str	x2, [x29, -32]
+str	xzr, [x29, -8]
+bl	xstrlen
+ldrsw	x1, [x29, -24]
+str	w0, [x29, -28]
+lsl	x0, x1, 3
+sub	x1, x29,
+bl	xmalloc
+str	x0, [x29, -32]
+str	wzr, [x29, -24]
+str	wzr, [x29, -16]
+ldr	x2, [x29, -32]
+ldr	w1, [x29, -24]
+cmp	w1, w0
+bgt	.L5
+.L1:
+ldp	x29, x30, [sp], 48
+.cfi_remember_state
+.cfi_restore 30
+.cfi_restore 29
+.cfi_def_cfa_offset 0
+ret
+.p2align 2,,3
+.L5:
+.cfi_restore_state
+sxtw	x1, w1
+sxtw	x0, w0
+ldr	x0, [x29, -32]
+ldr	x2, [x29, -16]
+ldr	x0, [x0, x1, lsl 3]
+bl	xstrncmp
+cbnz	w0, .L1
+ldr	x0, [x29, -32]
+ldr	w2, [x29, -24]
+ldr	x1, [x29, -16]
+ldr	x0, [x0]
+str	x0, [x1, w2, sxtw 3]
+add	w1, w2, 1
+str	w1, [x29, -24]
+b	.L1
+.cfi_endproc
+                                        ## -- End function
 .subsections_via_symbols

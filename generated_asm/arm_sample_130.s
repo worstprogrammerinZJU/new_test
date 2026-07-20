@@ -1,94 +1,80 @@
+.arch armv8-a
+.file	__TEXT,__text,regular,pure_instructions
+.align	2
+.bsf	.section, 3
+.text
+.global	_func0
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #48
-	.cfi_def_cfa_offset 48
-	str	x0, [sp, #32]
-	str	w1, [sp, #28]
-	str	x2, [sp, #16]
-	mov	w8, #2147483647
-	str	w8, [sp, #12]
-	mov	w8, #-1
-	str	w8, [sp, #8]
-	str	wzr, [sp, #4]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #28]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	adds	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_6
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #32]
-	ldrsw	x9, [sp, #4]
-	ldr	w8, [x8, x9, lsl #2]
-	str	w8, [sp, #12]
-	ldr	w8, [sp, #4]
-	str	w8, [sp, #8]
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_7
-LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_1
-LBB0_8:
-	ldr	w8, [sp, #8]
-	adds	w8, w8, #1
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_9
-LBB0_9:
-                                        ; kill: def $x8 killed $xzr
-	str	xzr, [sp, #40]
-	b	LBB0_11
-LBB0_10:
-	ldr	w8, [sp, #12]
-	ldr	x9, [sp, #16]
-	str	w8, [x9]
-	ldr	w8, [sp, #8]
-	ldr	x9, [sp, #16]
-	str	w8, [x9, #4]
-	ldr	x8, [sp, #16]
-	str	x8, [sp, #40]
-	b	LBB0_11
-LBB0_11:
-	ldr	x0, [sp, #40]
-	add	sp, sp, #48
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.align	2
+.bsf	.section, 3
+.text
+    .global	_func0
+    .build_version macos, 13, 0	sdk_version 13, 3
+    .globl	_func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .build_version macos, 13, 0	sdk_version 13, 3
+    .global	_func0
+    .subsection	__TEXT,__text,regular,pure_instructions
+    .define	_func0
+    .fpu
+    .visible
+    .target m64
+    .export	_func0
+    .bfs	.section, 3
+.FPU
+.text
+    .debug_info
+    .debug_implicit
+    .debug_full_name
+    .debug_private_name
+    .debug_instance
+    .file	"translate-arm-code-template.c"
+    .section	.__TEXT,__text,alloc,pure,inlines
+    .p2align	2,,3
+_func0:                                ## @func0
+    cset	w3, eq
+    b	.LB2
+.L4:
+ldr	x1, [sp]
+ldr	w3, [sp, 44]
+sxtw	x3, w3
+ldr	w0, [x1, x3, lsl 2]
+sdiv	w3, w3, 2
+msub	w3, w3, w2, w1
+cbnz	w3, .L3
+cmp	w3, 0
+ccmn	w3,
+beq	.L10
+mov	x1, x0
+.L3:
+ldp	w2, w0, [sp, 44]
+add	w0, w0, 1
+str	w0, [sp, 44]
+ret
+.L10:
+stp	xzr, x2, [sp, 8]
+b	.L4
+.L7:
+ldr	w0, [sp, 8]
+str	xzr, [sp, 8]
+ret
+.text
+    .debug_info
+    .debug_implicit
+    .debug_full_name
+    .debug_private_name
+    .debug_instance
+    .file	"translate-arm-code-template.c"
+    .section	.__TEXT,__text,alloc,pure,inlines
+    .p2align	2,,3
+_func0
+.cfi_endproc
+    .debug_public
+    .debug_exported
+    .debug_name
+    .debug_initializer
+    .data
+    .size	_func0, $有效长度
+    .section	__DATA,__data,progbits
+    .def	_func0
+    .end

@@ -1,59 +1,3269 @@
+.arch armv8-a
+.file "convert_to_arm_simplified.s"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
-	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #16
-	.cfi_def_cfa_offset 16
-	str	x0, [sp, #8]
-	str	wzr, [sp, #4]
-	str	wzr, [sp]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #0
-	cset	w8, eq
-	tbnz	w8, #0, LBB0_7
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #65
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_3
-LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp]
-	ldrsb	w8, [x8, x9]
-	subs	w8, w8, #90
-	cset	w8, gt
-	tbnz	w8, #0, LBB0_5
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x8, [sp, #8]
-	ldrsw	x9, [sp]
-	ldrsb	w9, [x8, x9]
-	ldr	w8, [sp, #4]
-	add	w8, w8, w9
-	str	w8, [sp, #4]
-	b	LBB0_5
-LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_1
-LBB0_7:
-	ldr	w0, [sp, #4]
-	add	sp, sp, #16
-	ret
-	.cfi_endproc
-                                        ; -- End function
-.subsections_via_symbols
+.global	_func0
+.align	2
+.p2align 4,,11
+_func0:                                ## @func0
+    .section	__TEXT,__text,regular,pure_instructions
+    .global	_func0
+.align	2
+.p2align 4,,11
+_func0:
+    cset	w2, eq
+    .mov	x1, x0
+    add	x0, sp, 16
+    str	wzr, [sp]
+str	x1, [x0, -8]
+stp	wzr, w2, [x0, -16]
+.LB0:
+ldrsw	x2, [x0, -16]
+ldr	x1, [x0, -8]
+ldrb	w1, [x1, x2]
+cbz	w1, .L10
+.L3:
+ldrsw	x2, [x0, -16]
+ldr	x1, [x0, -8]
+ldrb	w1, [x1, x2]
+cmp	w1, 65
+ccmp	w1, 90, 4, ge
+bgt	L6
+.L8:
+ldr	w2, [x0, -12]
+ldr	x1, [x0, -8]
+add	w2, w2, w1
+str	w2, [x0, -12]
+.L10:
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+cbnz	w1, .L3
+ret
+.L6:
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+.L6:
+ldr	w2, [x0, -16]
+ldr	x1, [x0, -8]
+add	w2, w2, 1
+str	w2, [x0, -16]
+b	.L10
+.L7:
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+beq	L7
+b	.L6
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+sub	w2, w2, w1
+str	w2, [x0, -12]
+bne	L6
+ret
+ldr	x1, [x0, -8]
+ldr	x2, [sp, 16]
+ldrb	w1, [x1, x2]
+cmp	w1, 0
+cset	w2, ne
+str	w2, [x0, -12]
+ldr	x1, [x0, -8]
+ldr	w2, [x0, -16]
+ldrb	w1, [x1, x2]
+add	w2,

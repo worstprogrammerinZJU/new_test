@@ -1,101 +1,125 @@
+.arch armv8-a
+.file "convert_x86_to_arm.s"
 .section	__TEXT,__text,regular,pure_instructions
-	.build_version macos, 13, 0	sdk_version 13, 3
-	.globl	_func0                          ; -- Begin function func0
-	.p2align	2
-_func0:                                 ; @func0
+.align	2
+.sp 32
+.global	_func0
+.p2align 4,,11
+_func0:                                  ## @func0
 	.cfi_startproc
-; %bb.0:
-	sub	sp, sp, #32
-	.cfi_def_cfa_offset 32
-	str	x0, [sp, #16]
-	str	w1, [sp, #12]
-	str	wzr, [sp, #8]
-	b	LBB0_1
-LBB0_1:                                 ; =>This Loop Header: Depth=1
-                                        ;     Child Loop BB0_3 Depth 2
-                                        ;       Child Loop BB0_5 Depth 3
-	ldr	w8, [sp, #8]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_14
-	b	LBB0_2
-LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_3
-LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ; =>  This Loop Header: Depth=2
-                                        ;       Child Loop BB0_5 Depth 3
-	ldr	w8, [sp, #4]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_12
-	b	LBB0_4
-LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_5
-LBB0_5:                                 ;   Parent Loop BB0_1 Depth=1
-                                        ;     Parent Loop BB0_3 Depth=2
-                                        ; =>    This Inner Loop Header: Depth=3
-	ldr	w8, [sp]
-	ldr	w9, [sp, #12]
-	subs	w8, w8, w9
-	cset	w8, ge
-	tbnz	w8, #0, LBB0_10
-	b	LBB0_6
-LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=3
-	ldr	x8, [sp, #16]
-	ldrsw	x9, [sp, #8]
-	ldr	w8, [x8, x9, lsl #2]
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp, #4]
-	ldr	w9, [x9, x10, lsl #2]
-	add	w8, w8, w9
-	ldr	x9, [sp, #16]
-	ldrsw	x10, [sp]
-	ldr	w9, [x9, x10, lsl #2]
-	add	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_8
-	b	LBB0_7
-LBB0_7:
-	mov	w8, #1
-	and	w8, w8, #0x1
-	and	w8, w8, #0x1
-	strb	w8, [sp, #31]
-	b	LBB0_15
-LBB0_8:                                 ;   in Loop: Header=BB0_5 Depth=3
-	b	LBB0_9
-LBB0_9:                                 ;   in Loop: Header=BB0_5 Depth=3
-	ldr	w8, [sp]
-	add	w8, w8, #1
-	str	w8, [sp]
-	b	LBB0_5
-LBB0_10:                                ;   in Loop: Header=BB0_3 Depth=2
-	b	LBB0_11
-LBB0_11:                                ;   in Loop: Header=BB0_3 Depth=2
-	ldr	w8, [sp, #4]
-	add	w8, w8, #1
-	str	w8, [sp, #4]
-	b	LBB0_3
-LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
-	b	LBB0_13
-LBB0_13:                                ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #8]
-	add	w8, w8, #1
-	str	w8, [sp, #8]
-	b	LBB0_1
-LBB0_14:
-	and	w8, w8, #0x1
-	and	w0, w8, #0x1
-	add	sp, sp, #32
-	ret
-	.cfi_endproc
-                                        ; -- End function
+stp	x29, x30, [sp, -32]!
+.cfi_def_cfa_offset 32
+.cfi_offset 29, -32
+.cfi_offset 30, -24
+mov	x29, sp
+.cfi_def_cfa_register 29
+stp	x19, x20, [sp, 16]
+.cfi_offset 19, -16
+.cfi_offset 20, -8
+mov	x20, x0
+mov	w0, w1
+str	wzr, [x29, -8]
+str	w1, [x29, -12]
+str	x20, [x29, -16]
+.LBB0_1:
+ldp	w1, w2, [x29, -12]
+cmp	w1, w2
+bge	LBB0_14
+.L6:
+ldr	w2, [x29, -8]
+add	w2, w2, 1
+str	w2, [x29, -16]
+.L16:
+ldr	w1, [x29, -16]
+cmp	w2, w1
+bge	LBB0_12
+.L17:
+ldr	w1, [x29, -16]
+add	w1, w1, 1
+str	w1, [x29, -20]
+.L18:
+ldr	w1, [x29, -20]
+cmp	w1, w2
+ble	LBB0_15
+.L19:
+ldr	x1, [x29, -16]
+sxtw	x0, w2
+ldrsw	x2, [x29, -16]
+ldr	x3, [x29, -20]
+ldr	w1, [x1, x0, lsl 2]
+ldr	w2, [x29, -20]
+ldr	w0, [x3, x2, lsl 2]
+add	w1, w1, w0
+add	w1, w1, w2
+cbnz	w1, .L2
+mov	w1, 1
+strb	w1, [x29, -1]
+b	.L16
+.L15:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L16
+.L14:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L17
+.L13:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L18
+.L12:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L19
+.L11:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L16
+.L10:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L17
+.L9:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L16
+.L8:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L15
+.L7:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L16
+.L6:
+mov	w1, 0
+strb	w1, [x29, -1]
+b	.L18
+.L16:
+ldr	x1, [x29, -16]
+ldr	x0, [x29, -16]
+ldrsw	x2, [x29, -16]
+ldr	w1, [x1, x0, lsl 2]
+ldr	w0, [x29, -16]
+ldrsw	x3, [x29, -20]
+ldr	w0, [x0, x2, lsl 2]
+add	w0, w1, w0
+add	w0, w0, w3
+cmp	w0, 0
+csel	w0, w0, wzr, eq
+strb	w0, [x29, -1]
+and	w0, w0, 1
+.L1:
+mov	x0, x1
+ldp	x19, x20, [sp, 16]
+and	w0, w0, 255
+ldp	x29, x30, [sp], 32
+.cfi_restore 30
+.cfi_restore 29
+.cfi_restore 19
+.cfi_restore 20
+.cfi_def_cfa 32
+ret
+.cfi_endproc
+                                        ## -- End function
 .subsections_via_symbols
