@@ -12,62 +12,61 @@ _func0:                                 ; @func0
 	.cfi_def_cfa w29, 16
 	.cfi_offset w30, -8
 	.cfi_offset w29, -16
-	stur	x0, [x29, #-8]
-	str	w1, [sp, #12]
-	str	x2, [sp, #8]
-	str	x3, [sp, #4]
-	str	xzr, [sp, #24]
-	str	wzr, [sp, #20]
-	str	wzr, [sp, #16]
+	str	x0, [sp, #16]
+	str	w1, [sp, #8]
+	str	x2, [sp, #12]
+	str	x3, [sp]
+	str	xzr, [sp, #8]
+	str	xzr, [sp, #40]
+	str	wzr, [sp, #36]
 	b	LBB0_1
 LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #16]
-	ldr	w9, [sp, #12]
+	ldr	w8, [sp, #36]
+	ldr	w9, [sp, #8]
 	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_2
 LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
 	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #16]
+	ldrsw	x9, [sp, #36]
 	ldr	x0, [x8, x9, lsl #3]
-	ldr	x1, [sp, #8]
+	ldr	x1, [x29, #12]
 	bl	_strstr
 	subs	x8, x0, #0
 	cset	w8, eq
 	tbnz	w8, #0, LBB0_4
 	b	LBB0_3
 LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	x0, [sp, #24]
-	ldr	w8, [sp, #16]
+	ldr	x0, [sp, #8]
+	ldr	w8, [sp, #36]
 	add	w8, w8, #1
-	lsrw	x8, w8, #3
+	str	w8, [sp, #36]
 	bl	_realloc
-	str	x0, [sp, #24]
+	str	x0, [sp, #8]
 	ldur	x8, [x29, #-8]
-	ldrsw	x9, [sp, #16]
+	ldrsw	x9, [sp, #36]
 	ldr	x1, [x8, x9, lsl #3]
-	ldr	x2, [sp, #24]
-	ldrsw	x3, [sp, #16]
-	ldr	x8, [x2, x3, lsl #3]
-	str	x8, [x1]
-	ldr	w8, [sp, #16]
+	ldr	x2, [sp, #8]
+	str	x2, [x1]
+	ldr	w8, [sp, #36]
 	add	w8, w8, #1
-	str	w8, [sp, #16]
+	str	w8, [sp, #36]
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
 	b	LBB0_5
 LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
-	ldr	w8, [sp, #16]
+	ldr	w8, [sp, #36]
 	add	w8, w8, #1
-	str	w8, [sp, #16]
+	str	w8, [sp, #36]
 	b	LBB0_1
 LBB0_6:
-	ldr	w8, [sp, #16]
-	ldr	x9, [sp, #4]
+	ldr	w8, [sp, #36]
+	ldr	x9, [sp, #12]
 	str	w8, [x9]
-	ldr	x9, [sp, #24]
-	add	x8, sp, #48
+	ldr	x8, [sp, #8]
+	ldr	w9, [sp, #36]
+	add	x8, x8, #48
 	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
 	add	sp, sp, #64
 	ret

@@ -15,55 +15,56 @@ _func0:                                 ; @func0
 	str	x0, [sp]
 	ldr	x0, [sp]
 	bl	_strlen
-                                        ; kill: def $eax killed $eax killed $r0
+                                        ; kill: def $x8 killed $x8 killed $rsi
 	stur	w0, [x29, #-20]
-	ldr	w8, [sp]
+	ldur	w8, [x29, #-20]
 	subs	w8, w8, #2
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	mov	w8, #0
-	sturb	w8, [x29, #-1]
-	b	LBB0_9
-LBB0_2:
 	mov	w8, #2
-	str	w8, [sp, #8]
+	sturb	w8, [x29, #-24]
 	b	LBB0_3
+LBB0_2:
+	b	LBB0_9
 LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
-	ldr	w8, [sp, #8]
-	ldur	w9, [sp]
-	mul	w8, w8, w9
-	ldr	w9, [sp, #20]
-	subs	w8, w8, w9
+	ldr	w8, [sp, #24]
+	mul	w8, w8, [sp, #24]
+	ldr	w8, [sp, #20]
+	subs	w8, w8, w8
 	cset	w8, gt
 	tbnz	w8, #0, LBB0_8
 	b	LBB0_4
 LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #20]
-	ldr	w9, [sp, #8]
-	mul	w8, w8, w9
+	ldur	w8, [x29, #-20]
+	mov	x9, sp
+	str	x8, [x9]
+	ldur	w9, [x9, #-24]
+	adrp	x8, _ZNSt8basic_stringIcStcollC1EPKcE+8
+	ldr	x8, [x8, lsl #2]
+	ldr	w9, [x9, #24]
 	sdiv	w8, w8, w9
-	subs	w8, w8, #0
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_6
 	b	LBB0_5
 LBB0_5:
+	mov	w8, #0
 	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
 	b	LBB0_7
 LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #24]
 	add	w8, w8, #1
-	str	w8, [sp, #8]
+	str	w8, [sp, #24]
 	b	LBB0_3
 LBB0_8:
 	mov	w8, #1
 	sturb	w8, [x29, #-1]
 	b	LBB0_9
 LBB0_9:
-	ldrb	w0, [x29, #-1]
+	ldub	w0, [x29, #-1]
 	and	w0, w0, #0x1
 	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
 	add	sp, sp, #48
