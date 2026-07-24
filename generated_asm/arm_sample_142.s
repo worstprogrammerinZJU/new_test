@@ -1,115 +1,76 @@
-.arch armv8-a
-.file	__TEXT,__text,regular,pure_instructions
-.align	2
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.set	.__TEXT,__text
-.bss
-.align	3
-.section	__TEXT,__text,read写,ext_data
-.global	_func0
-.func	_func0
-    .cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	x29, sp
-.cfi_def_cfa_register x29
-stp	x19, x20, [sp, 16]
-.cfi_offset 19, -32
-.cfi_offset 20, -24
-mov	w19, w1
-mov	x20, x0
-.cfi_offset 21, -16
-mov	x21, x2
-stp	x22, x23, [sp, 32]
-.cfi_offset 22, -8
-.cfi_offset 23, -7
-mov	x23, x3
-sub	sp, sp,
-str	wzr, [x29, -8]
-str	xzr, [x29, -16]
-str	xzr, [x29, -24]
-str	w19, [x29, -40]
-str	w19, [x29, -48]
-ldr	w0, [x29, -8]
-cmp	w0, w19
-bge	LBB0_6
-.L6:
-ldr	w1, [x29, -12]
-ldr	x0, [x29, -8]
-sbfiz	x22, x0, 3, 32
-add	x0, x0, x22
-ldr	x0, [x29, -24]
-ldr	x0, [x0, x22]
-bl	_strstr
-cbnz	x0, .L3
-ldr	w0, [x29, -40]
-.L3:
-ldr	w1, [x29, -44]
-mov	x0, x23
-add	w1, w1, 1
-sxtw	x22, w1
-lsr	x22, x22, 3
-bl	_realloc
-ldr	w1, [x29, -48]
-str	x0, [x29, -24]
-ldr	x2, [x29, -8]
-sxtw	x22, w1
-ldr	x2, [x29, -8]
-add	w1, w1, 1
-sxtw	x22, w1
-str	x2, [x2, x22, lsl 3]
-ldr	w1, [x29, -44]
-str	w1, [x29, -44]
-ldr	w1, [x29, -40]
-add	w1, w1, 1
-str	w1, [x29, -44]
-ldp	x19, x20, [sp, 16]
-ldp	x21, x22, [sp, 32]
-ldp	x29, x30, [sp], 48
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 23
-.cfi_restore 22
-.cfi_restore 21
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ret
-.L2:
-.cfi_def_cfa_offset 48
-.cfi_offset 19, -32
-.cfi_offset 20, -24
-.cfi_offset 21, -16
-.cfi_offset 22, -8
-.cfi_offset 23, -7
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-ldr	w1, [x29, -40]
-b	L6
-.L0:
-.cfi_restore 21
-.cfi_restore 22
-.cfi_restore 23
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ldr	w1, [x29, -44]
-ldp	x19, x20, [sp, 16]
-ldp	x21, x22, [sp, 32]
-ldp	x29, x30, [sp], 48
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 23
-.cfi_restore 22
-.cfi_restore 21
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ret
-.cfi_endproc
-                                ## -- End function
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #48]             ; 16-byte Folded Spill
+	add	x29, sp, #48
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	str	w1, [sp, #12]
+	str	x2, [sp, #8]
+	str	x3, [sp, #4]
+	str	xzr, [sp, #24]
+	str	wzr, [sp, #20]
+	str	wzr, [sp, #16]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #16]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	x1, [sp, #8]
+	bl	_strstr
+	subs	x8, x0, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x0, [sp, #24]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	lsrw	x8, w8, #3
+	bl	_realloc
+	str	x0, [sp, #24]
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #16]
+	ldr	x1, [x8, x9, lsl #3]
+	ldr	x2, [sp, #24]
+	ldrsw	x3, [sp, #16]
+	ldr	x8, [x2, x3, lsl #3]
+	str	x8, [x1]
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_1
+LBB0_6:
+	ldr	w8, [sp, #16]
+	ldr	x9, [sp, #4]
+	str	w8, [x9]
+	ldr	x9, [sp, #24]
+	add	x8, sp, #48
+	ldp	x29, x30, [sp, #48]             ; 16-byte Folded Reload
+	add	sp, sp, #64
+	ret
+	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols

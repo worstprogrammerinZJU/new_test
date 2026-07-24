@@ -1,366 +1,458 @@
-.arch armv8-a
-.file     .rodata.str1.8
-.align    1
-.LC0:
-.string	"%b"
-.text
-.global	_func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	x19, [sp, 16]
-sub	sp, sp,
-adrp	x1, :got:__stack_chk_guard
-ldr	x1, [x1, :got_lo12:__stack_chk_guard]
-str	xzr, [sp, 1024]
-add	x0, x29, 4744
-.cfi_offset 19, -32
-ldr	x3, [x1]
-str	x3, [x29, -8]
-mov	x3, 0
-mov	w19, w0
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w2, 2
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w2, [x29, -4024]
-cmp	w19, w1
-bgt	.L5
-.L3:
-ldp	w2, w0, [x29, -4024]
-add	w2, w2, 1
-sub	w0, w0,
-sxtw	x2, w2
-str	w2, [x29, -4024]
-ldr	w1, [x29, -4016]
-add	x0, x0, 4
-ldr	x3, [x29, -8]
-ldr	x0, [x1]
-cmp	x3, x0
-beq	.L3
-adrp	x0, :got:__stack_chk_guard
-ldr	x0, [x0, :got_lo12:__stack_chk_guard]
-ldr	w2, [x29, -4028]
-ldr	x1, [x0]
-str	w2, [x29, -4028]
-bl	xstack_chk_fail
-brk
-.L5:
-ldrsw	x0, [x29, -4020]
-add	x0, x0, 4
-ldr	x3, [x29, -8]
-ldr	x0, [x0, -8]
-cmp	x3, x0
-bne	.L6
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L6:
-.cfi_restore_state
-bl	xstack_chk_fail
-brk
-.cfi_endproc
-.type	_func0, %function
-.output_file	"out.txt"
-.section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	xzr, [sp, 1024]
-sub	x0, x29,
-add	x1, x29, 4752
-mov	w19, w0
-adrp	x2, :got:__stack_chk_guard
-ldr	x2, [x2, :got_lo12:__stack_chk_guard]
-str	x2, [x29, -8]
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w1, [x29, -4024]
-cmp	w19, w1
-ble	.L3
-ldr	w0, [x29, -4024]
-ldr	w2, [x29, -4016]
-add	w0, w0, 1
-sub	w2, w2,
-sxtw	x0, w0
-str	w0, [x29, -4024]
-ldr	x3, [x29, -8]
-add	x0, x3, x0, lsl 2
-ldr	x0, [x0, -8]
-cmp	x3, x0
-beq	.L3
-ldr	x0, [x2]
-ldr	w1, [x29, -4028]
-ldr	x2, [x0]
-str	w1, [x29, -4028]
-bl	xstack_chk_fail
-brk
-.L3:
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.cfi_endproc
-.type	_func0, %function
-.section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	xzr, [sp, 1024]
-sub	x0, x29,
-add	x1, x29, 4744
-mov	w19, w0
-adrp	x2, :got:__stack_chk_guard
-ldr	x2, [x2, :got_lo12:__stack_chk_guard]
-str	x2, [x29, -8]
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w2, 2
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w2, [x29, -4024]
-cmp	w19, w1
-bgt	.L5
-b	.L3
-.L5:
-ldrsw	x0, [x29, -4020]
-add	x0, x0, 4
-ldr	x3, [x29, -8]
-ldr	x0, [x0, -8]
-cmp	x3, x0
-bne	.L6
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L6:
-.cfi_restore_state
-bl	xstack_chk_fail
-brk
-.cfi_endproc
-.type	_func0, %function
-.section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	xzr, [sp, 1024]
-sub	x0, x29,
-add	x1, x29, 4744
-mov	w19, w0
-adrp	x2, :got:__stack_chk_guard
-ldr	x2, [x2, :got_lo12:__stack_chk_guard]
-str	x2, [x29, -8]
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w2, 2
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w2, [x29, -4024]
-cmp	w19, w1
-ble	.L3
-ldr	w0, [x29, -4024]
-ldr	w2, [x29, -4016]
-add	w0, w0, 1
-sub	w2, w2,
-sxtw	x0, w0
-str	w0, [x29, -4024]
-ldr	x3, [x29, -8]
-add	x0, x3, x0, lsl 2
-ldr	x0, [x0, -8]
-cmp	x3, x0
-bne	.L7
-.L3:
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L7:
-.cfi_restore_state
-ldr	x0, [x2]
-ldr	w1, [x29, -4028]
-ldr	x2, [x0]
-str	w1, [x29, -4028]
-bl	xstack_chk_fail
-brk
-.cfi_endproc
-.type	_func0, %function
-.section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	xzr, [sp, 1024]
-sub	x0, x29,
-add	x1, x29, 4744
-mov	w19, w0
-adrp	x2, :got:__stack_chk_guard
-ldr	x2, [x2, :got_lo12:__stack_chk_guard]
-str	x2, [x29, -8]
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w2, 2
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w2, [x29, -4024]
-cmp	w19, w1
-bgt	.L5
-b	.L3
-.L5:
-ldrsw	x0, [x29, -4020]
-add	x0, x0, 4
-ldr	x3, [x29, -8]
-ldr	x0, [x0, -8]
-cmp	x3, x0
-ble	.L3
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L3:
-.cfi_restore_state
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.cfi_endproc
-.type	_func0, %function
-.section	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	1024
-.type	_func0, %function
-.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w2, 4000
-mov	w1, 0
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	xzr, [sp, 1024]
-sub	x0, x29,
-add	x1, x29, 4744
-mov	w19, w0
-adrp	x2, :got:__stack_chk_guard
-ldr	x2, [x2, :got_lo12:__stack_chk_guard]
-str	x2, [x29, -8]
-bl	xmemset
-str	wzr, [x29, -4016]
-mov	w0, 1
-mov	w2, 2
-mov	w1, 0
-str	w0, [x29, -4012]
-str	w2, [x29, -4024]
-cmp	w19, w1
-ble	.L3
-ldr	w0, [x29, -4024]
-ldr	w2, [x29, -4016]
-add	w0, w0, 1
-sub	w2, w2,
-sxtw	x0, w0
-str	w0, [x29, -4024]
-ldr	x3, [x29, -8]
-add	x0, x3, x0, lsl 2
-ldr	x0, [x0, -8]
-cmp	x3, x0
-bne	.L7
-.L3:
-ldr	w0, [x29, -4028]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 48
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L7:
-.cfi_restore_state
-ldr	x0, [x2]
-ldr	w1, [x29, -4028]
-ldr	x2, [x0]
-str	w1, [x29, -4028]
-bl	xstack_chk_fail
-brk
-.cfi_endproc
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #7224
+	.cfi_def_cfa_offset 7224
+	stp	x29, x30, [sp, #7208]            ; 16-byte Folded Spill
+	add	x29, sp, #7208
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	bl	_memset
+	str	wzr, [sp, #40]
+	mov	x10, #1
+	mov	x9, #-4016
+	bl	_sub_1e2c
+	bx	lbzc	x0, [x9], #4              ; get rid of implicit def for $x8
+                                        ; kill: x8
+                                        ; kill: x9
+                                        ; kill: x10
+                                        ; kill: x11
+                                        ; kill: x12
+                                        ; kill: x13
+                                        ; kill: x14
+                                        ; kill: x15
+                                        ; kill: x16
+                                        ; kill: x17
+                                        ; kill: x18
+                                        ; kill: x19
+                                        ; kill: x20
+                                        ; kill: x21
+                                        ; kill: x22
+                                        ; kill: x23
+                                        ; kill: x24
+                                        ; kill: x25
+                                        ; kill: x26
+                                        ; kill: x27
+                                        ; kill: x28
+                                        ; kill: x29
+                                        ; kill: x30
+                                        ; kill: x31
+                                        ; kill: x32
+                                        ; kill: x33
+                                        ; kill: x34
+                                        ; kill: x35
+                                        ; kill: x36
+                                        ; kill: x37
+                                        ; kill: x38
+                                        ; kill: x39
+                                        ; kill: x40
+                                        ; kill: x41
+                                        ; kill: x42
+                                        ; kill: x43
+                                        ; kill: x44
+                                        ; kill: x45
+                                        ; kill: x46
+                                        ; kill: x47
+                                        ; kill: x48
+                                        ; kill: x49
+                                        ; kill: x50
+                                        ; kill: x51
+                                        ; kill: x52
+                                        ; kill: x53
+                                        ; kill: x54
+                                        ; kill: x55
+                                        ; kill: x56
+                                        ; kill: x57
+                                        ; kill: x58
+                                        ; kill: x59
+                                        ; kill: x60
+                                        ; kill: x61
+                                        ; kill: x62
+                                        ; kill: x63
+                                        ; kill: x64
+                                        ; kill: x65
+                                        ; kill: x66
+                                        ; kill: x67
+                                        ; kill: x68
+                                        ; kill: x69
+                                        ; kill: x70
+                                        ; kill: x71
+                                        ; kill: x72
+                                        ; kill: x73
+                                        ; kill: x74
+                                        ; kill: x75
+                                        ; kill: x76
+                                        ; kill: x77
+                                        ; kill: x78
+                                        ; kill: x79
+                                        ; kill: x80
+                                        ; kill: x81
+                                        ; kill: x82
+                                        ; kill: x83
+                                        ; kill: x84
+                                        ; kill: x85
+                                        ; kill: x86
+                                        ; kill: x87
+                                        ; kill: x88
+                                        ; kill: x89
+                                        ; kill: x90
+                                        ; kill: x91
+                                        ; kill: x92
+                                        ; kill: x93
+                                        ; kill: x94
+                                        ; kill: x95
+                                        ; kill: x96
+                                        ; kill: x97
+                                        ; kill: x98
+                                        ; kill: x99
+                                        ; kill: x100
+                                        ; kill: x101
+                                        ; kill: x102
+                                        ; kill: x103
+                                        ; kill: x104
+                                        ; kill: x105
+                                        ; kill: x106
+                                        ; kill: x107
+                                        ; kill: x108
+                                        ; kill: x109
+                                        ; kill: x110
+                                        ; kill: x111
+                                        ; kill: x112
+                                        ; kill: x113
+                                        ; kill: x114
+                                        ; kill: x115
+                                        ; kill: x116
+                                        ; kill: x117
+                                        ; kill: x118
+                                        ; kill: x119
+                                        ; kill: x120
+                                        ; kill: x121
+                                        ; kill: x122
+                                        ; kill: x123
+                                        ; kill: x124
+                                        ; kill: x125
+                                        ; kill: x126
+                                        ; kill: x127
+                                        ; kill: x128
+                                        ; kill: x129
+                                        ; kill: x130
+                                        ; kill: x131
+                                        ; kill: x132
+                                        ; kill: x133
+                                        ; kill: x134
+                                        ; kill: x135
+                                        ; kill: x136
+                                        ; kill: x137
+                                        ; kill: x138
+                                        ; kill: x139
+                                        ; kill: x140
+                                        ; kill: x141
+                                        ; kill: x142
+                                        ; kill: x143
+                                        ; kill: x144
+                                        ; kill: x145
+                                        ; kill: x146
+                                        ; kill: x147
+                                        ; kill: x148
+                                        ; kill: x149
+                                        ; kill: x150
+                                        ; kill: x151
+                                        ; kill: x152
+                                        ; kill: x153
+                                        ; kill: x154
+                                        ; kill: x155
+                                        ; kill: x156
+                                        ; kill: x157
+                                        ; kill: x158
+                                        ; kill: x159
+                                        ; kill: x160
+                                        ; kill: x161
+                                        ; kill: x162
+                                        ; kill: x163
+                                        ; kill: x164
+                                        ; kill: x165
+                                        ; kill: x166
+                                        ; kill: x167
+                                        ; kill: x168
+                                        ; kill: x169
+                                        ; kill: x170
+                                        ; kill: x171
+                                        ; kill: x172
+                                        ; kill: x173
+                                        ; kill: x174
+                                        ; kill: x175
+                                        ; kill: x176
+                                        ; kill: x177
+                                        ; kill: x178
+                                        ; kill: x179
+                                        ; kill: x180
+                                        ; kill: x181
+                                        ; kill: x182
+                                        ; kill: x183
+                                        ; kill: x184
+                                        ; kill: x185
+                                        ; kill: x186
+                                        ; kill: x187
+                                        ; kill: x188
+                                        ; kill: x189
+                                        ; kill: x190
+                                        ; kill: x191
+                                        ; kill: x192
+                                        ; kill: x193
+                                        ; kill: x194
+                                        ; kill: x195
+                                        ; kill: x196
+                                        ; kill: x197
+                                        ; kill: x198
+                                        ; kill: x199
+                                        ; kill: x200
+                                        ; kill: x201
+                                        ; kill: x202
+                                        ; kill: x203
+                                        ; kill: x204
+                                        ; kill: x205
+                                        ; kill: x206
+                                        ; kill: x207
+                                        ; kill: x208
+                                        ; kill: x209
+                                        ; kill: x210
+                                        ; kill: x211
+                                        ; kill: x212
+                                        ; kill: x213
+                                        ; kill: x214
+                                        ; kill: x215
+                                        ; kill: x216
+                                        ; kill: x217
+                                        ; kill: x218
+                                        ; kill: x219
+                                        ; kill: x220
+                                        ; kill: x221
+                                        ; kill: x222
+                                        ; kill: x223
+                                        ; kill: x224
+                                        ; kill: x225
+                                        ; kill: x226
+                                        ; kill: x227
+                                        ; kill: x228
+                                        ; kill: x229
+                                        ; kill: x230
+                                        ; kill: x231
+                                        ; kill: x232
+                                        ; kill: x233
+                                        ; kill: x234
+                                        ; kill: x235
+                                        ; kill: x236
+                                        ; kill: x237
+                                        ; kill: x238
+                                        ; kill: x239
+                                        ; kill: x240
+                                        ; kill: x241
+                                        ; kill: x242
+                                        ; kill: x243
+                                        ; kill: x244
+                                        ; kill: x245
+                                        ; kill: x246
+                                        ; kill: x247
+                                        ; kill: x248
+                                        ; kill: x249
+                                        ; kill: x250
+                                        ; kill: x251
+                                        ; kill: x252
+                                        ; kill: x253
+                                        ; kill: x254
+                                        ; kill: x255
+                                        ; kill: x256
+                                        ; kill: x257
+                                        ; kill: x258
+                                        ; kill: x259
+                                        ; kill: x260
+                                        ; kill: x261
+                                        ; kill: x262
+                                        ; kill: x263
+                                        ; kill: x264
+                                        ; kill: x265
+                                        ; kill: x266
+                                        ; kill: x267
+                                        ; kill: x268
+                                        ; kill: x269
+                                        ; kill: x270
+                                        ; kill: x271
+                                        ; kill: x272
+                                        ; kill: x273
+                                        ; kill: x274
+                                        ; kill: x275
+                                        ; kill: x276
+                                        ; kill: x277
+                                        ; kill: x278
+                                        ; kill: x279
+                                        ; kill: x280
+                                        ; kill: x281
+                                        ; kill: x282
+                                        ; kill: x283
+                                        ; kill: x284
+                                        ; kill: x285
+                                        ; kill: x286
+                                        ; kill: x287
+                                        ; kill: x288
+                                        ; kill: x289
+                                        ; kill: x290
+                                        ; kill: x291
+                                        ; kill: x292
+                                        ; kill: x293
+                                        ; kill: x294
+                                        ; kill: x295
+                                        ; kill: x296
+                                        ; kill: x297
+                                        ; kill: x298
+                                        ; kill: x299
+                                        ; kill: x300
+                                        ; kill: x301
+                                        ; kill: x302
+                                        ; kill: x303
+                                        ; kill: x304
+                                        ; kill: x305
+                                        ; kill: x306
+                                        ; kill: x307
+                                        ; kill: x308
+                                        ; kill: x309
+                                        ; kill: x310
+                                        ; kill: x311
+                                        ; kill: x312
+                                        ; kill: x313
+                                        ; kill: x314
+                                        ; kill: x315
+                                        ; kill: x316
+                                        ; kill: x317
+                                        ; kill: x318
+                                        ; kill: x319
+                                        ; kill: x320
+                                        ; kill: x321
+                                        ; kill: x322
+                                        ; kill: x323
+                                        ; kill: x324
+                                        ; kill: x325
+                                        ; kill: x326
+                                        ; kill: x327
+                                        ; kill: x328
+                                        ; kill: x329
+                                        ; kill: x330
+                                        ; kill: x331
+                                        ; kill: x332
+                                        ; kill: x333
+                                        ; kill: x334
+                                        ; kill: x335
+                                        ; kill: x336
+                                        ; kill: x337
+                                        ; kill: x338
+                                        ; kill: x339
+                                        ; kill: x340
+                                        ; kill: x341
+                                        ; kill: x342
+                                        ; kill: x343
+                                        ; kill: x344
+                                        ; kill: x345
+                                        ; kill: x346
+                                        ; kill: x347
+                                        ; kill: x348
+                                        ; kill: x349
+                                        ; kill: x350
+                                        ; kill: x351
+                                        ; kill: x352
+                                        ; kill: x353
+                                        ; kill: x354
+                                        ; kill: x355
+                                        ; kill: x356
+                                        ; kill: x357
+                                        ; kill: x358
+                                        ; kill: x359
+                                        ; kill: x360
+                                        ; kill: x361
+                                        ; kill: x362
+                                        ; kill: x363
+                                        ; kill: x364
+                                        ; kill: x365
+                                        ; kill: x366
+                                        ; kill: x367
+                                        ; kill: x368
+                                        ; kill: x369
+                                        ; kill: x370
+                                        ; kill: x371
+                                        ; kill: x372
+                                        ; kill: x373
+                                        ; kill: x374
+                                        ; kill: x375
+                                        ; kill: x376
+                                        ; kill: x377
+                                        ; kill: x378
+                                        ; kill: x379
+                                        ; kill: x380
+                                        ; kill: x381
+                                        ; kill: x382
+                                        ; kill: x383
+                                        ; kill: x384
+                                        ; kill: x385
+                                        ; kill: x386
+                                        ; kill: x387
+                                        ; kill: x388
+                                        ; kill: x389
+                                        ; kill: x390
+                                        ; kill: x391
+                                        ; kill: x392
+                                        ; kill: x393
+                                        ; kill: x394
+                                        ; kill: x395
+                                        ; kill: x396
+                                        ; kill: x397
+                                        ; kill: x398
+                                        ; kill: x399
+                                        ; kill: x400
+                                        ; kill: x401
+                                        ; kill: x402
+                                        ; kill: x403
+                                        ; kill: x404
+                                        ; kill: x405
+                                        ; kill: x406
+                                        ; kill: x407
+                                        ; kill: x408
+                                        ; kill: x409
+                                        ; kill: x410
+                                        ; kill: x411
+                                        ; kill: x412
+                                        ; kill: x413
+                                        ; kill: x414
+                                        ; kill: x415
+                                        ; kill: x416
+                                        ; kill: x417
+                                        ; kill: x418
+                                        ; kill: x419
+                                        ; kill: x420
+                                        ; kill: x421
+                                        ; kill: x422
+                                        ; kill: x423
+                                        ; kill: x424
+                                        ; kill: x425
+                                        ; kill: x426
+                                        ; kill: x427
+                                        ; kill: x428
+                                        ; kill: x429
+                                        ; kill: x430
+                                        ; kill: x431
+                                        ; kill: x432
+                                        ; kill: x433
+                                        ; kill: x434
+                                        ; kill: x435
+                                        ; kill: x436
+                                        ; kill: x437
+                                        ; kill: x438
+                                        ; kill: x439
+                                        ; kill: x440
+                                        ; kill: x441
+                                        ; kill: x442
+                                        ; kill: x443
+                                        ; kill: x444
+                                        ; kill: x4

@@ -1,63 +1,73 @@
-.arch armv8-a
-.file	.__TEXT,__text,regular,pure_instructions
-.align	2
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.p2align	4,,11
-_func0:                                 ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-.cfi_def_cfa_register x29
-str	w0, [x29, -16]
-str	w1, [x29, -20]
-ldp	w0, w2, [x29, -16]
-cmp	w0, w2
-bge	LBB0_2
-mov	w1, -1
-str	w1, [x29, -12]
-b	LBB0_8
+; %bb.0:
+	stp	x29, x30, [sp, #-16]!           ; 16-byte Folded Spill
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	sub	sp, sp, #32
+	.cfi_def_cfa w29, 16
+	adrp	x8, _strbuf@PAGE
+	add	x8, x8, _strbuf@PAGEOFF
+	str	x8, [sp, #8]
+	stur	w0, [x29, #-8]
+	stur	w1, [x29, #-12]
+	ldur	w8, [x29, #-12]
+	ldur	w9, [x29, #-8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	stur	w8, [x29, #-4]
+	b	LBB0_8
 LBB0_2:
-ldp	w0, w2, [x29, -20]
-cmp	w0, w2
-bne	LBB0_5
-ldr	w0, [x29, -20]
-mov	w1, 2
-sdiv	w2, w0, w1
-msub	w0, w2, w1, w0
-cmp	w0, 1
-bne	LBB0_5
-.L3:
-mov	w0, -1
-str	w0, [x29, -12]
-.L6:
-ldr	w0, [x29, -12]
-.L7:
-ldp	x29, x30, [sp], 32
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_def_cfa_offset 0
-ret
+	ldr	w8, [sp, #8]
+	ldur	w9, [x29, #-8]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:
+	ldr	w8, [sp, #8]
+	mov	w9, #2
+	lsl	w8, w8, w9
+	idiv	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:
+	stur	w8, [x29, #-4]
+	b	LBB0_8
 LBB0_5:
-.cfi_restore_state
-ldr	w0, [x29, -20]
-mov	w1, 2
-sdiv	w2, w0, w1
-msub	w0, w2, w1, w0
-cmp	w0, 1
-bne	LBB0_7
-sub	w0, w0,
-str	w0, [x29, -12]
-b	.L6
+	ldr	w8, [sp, #8]
+	mov	w9, #2
+	lsl	w8, w8, w9
+	idiv	w8, w8, w9
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #1
+	stur	w8, [x29, #-4]
+	b	LBB0_8
 LBB0_7:
-ldr	w0, [x29, -20]
-str	w0, [x29, -12]
-b	.L7
-        cfi_endproc
-                                    ## -- End function
+	ldr	w8, [sp, #8]
+	stur	w8, [x29, #-4]
+	b	LBB0_8
+LBB0_8:
+	ldur	w0, [x29, #-4]
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols

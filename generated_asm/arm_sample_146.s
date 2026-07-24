@@ -1,54 +1,73 @@
-.arch armv8-a
-.file "convert_to_armv8_a.asm"
 .section	__TEXT,__text,regular,pure_instructions
-.global	_func0
-.align	2
-.p2align 4,,11
-_func0:                             ## @func0
-    .section	__TEXT,__text,regular,pure_instructions
-    .build_version macos, 13, 0	sdk_version 13, 3
-    .globl	_func0
-    .p2align 2,,3
-_func0:                             ## @func0
-    cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	x0, [x29, -16]
-ldr	x0, [x29, -16]
-bl	_strlen
-str	w0, [x29, -20]
-ldr	w0, [x29, -20]
-cmp	w0, 2
-bge	.L6
-strb	wzr, [x29, -1]
-b	.L4
-.p2align 2,,3
-.L6:
-mov	w0, 2
-str	w0, [x29, -24]
-.L4:
-ldp	w1, w0, [x29, -24]
-mul	w1, w1, w0
-cmp	w1, w0
-bgt	.L5
-ldr	w0, [x29, -20]
-sdiv	w1, w0, w1
-msub	w1, w1, w0, w0
-cbnz	w1, .L2
-strb	wzr, [x29, -1]
-b	.L4
-.L2:
-add	w0, w1, 1
-strb	w0, [x29, -24]
-b	.L4
-.L5:
-mov	w0, 1
-strb	w0, [x29, -1]
-b	.L4
-cfi_endproc
-                                        ## -- End function
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp]
+	ldr	x0, [sp]
+	bl	_strlen
+                                        ; kill: def $eax killed $eax killed $r0
+	stur	w0, [x29, #-20]
+	ldr	w8, [sp]
+	subs	w8, w8, #2
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #0
+	sturb	w8, [x29, #-1]
+	b	LBB0_9
+LBB0_2:
+	mov	w8, #2
+	str	w8, [sp, #8]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldur	w9, [sp]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #8]
+	mul	w8, w8, w9
+	sdiv	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:
+	sturb	w8, [x29, #-1]
+	b	LBB0_9
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_3
+LBB0_8:
+	mov	w8, #1
+	sturb	w8, [x29, #-1]
+	b	LBB0_9
+LBB0_9:
+	ldrb	w0, [x29, #-1]
+	and	w0, w0, #0x1
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols

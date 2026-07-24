@@ -1,43 +1,46 @@
-.arch armv8-a
-.file "convert_x86_to_arm.asm"
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.bullet_point 0
-.global	_func0                          ## -- Begin function func0
-    .p2align    4,,11
-_func0:                                 ## @func0
-    cset	w4, eq
-    mov	x5, x3
-    bne	.L7
-ret
-.p2align 2,,3
-.L7:
-mov	w6, w1
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-str	x19, [sp, 16]
-.cfi_offset 19, -16
-ldr	w19, [x4]
-str	w0, [x29, -4]
-str	w2, [x29, -12]
-str	w6, [x29, -8]
-add	x3, x29, 24
-cmp	w19, w6
-ble	.L3
-ldp	w2, w0, [x29, -12]
-add	w2, w19, w2
-str	w2, [x3]
-str	wzr, [x3, 4]
-.L3:
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 32
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-end
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #28]
+	str	w1, [sp, #24]
+	str	w2, [sp, #20]
+	str	x0, [sp, #8]
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #20]
+	subs	w8, w8, w9
+	cset	w8, le
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #20]
+	add	w8, w8, w9
+	ldr	x8, [sp, #8]
+	str	w8, [x8]
+	ldr	x8, [sp, #8]
+	blt	w8, #0, LBB0_3
+	b	LBB0_2
+LBB0_2:
+	ldr	w8, [sp, #28]
+	ldr	w9, [sp, #24]
+	add	w8, w8, w9
+	ldr	x8, [sp, #8]
+	str	w8, [x8]
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	ldr	x8, [sp, #8]
+	str	w8, [x8, #4]
+	b	LBB0_3
+LBB0_3:
+	add	sp, sp, #32
+	ret
+	.cfi_endproc
+                                        ; -- End function
 .subsections_via_symbols

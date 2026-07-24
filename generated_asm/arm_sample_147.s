@@ -1,46 +1,62 @@
-.arch armv8-a
-.file	__TEXT,__text,regular,pure_instructions
-.align	2
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0
-	.align	2
-._func0:                                ## @func0
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-.cfi_def_cfa_register x29
-str	w0, [x29, -16]
-cmp	w0, 1
-bge	.LB2
-str	wzr, [x29, -12]
-b	.L3
-.LB2:
-ldr	w0, [x29, -16]
-cmp	w0, 1
-beq	.L3
-sub	w2, w0,
-sub	w1, w2, w1
-ldp	x29, x30, [sp], 32
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_def_cfa_offset 0
-cmp	w1, 1
-csel	w0, w1, wzr, ne
-ret
-.L3:
-.cfi_restore_state
-sub	w0, w2, w0
-str	w0, [x29, -12]
-ldp	x29, x30, [sp], 32
-.cfi_restore 30
-.cfi_restore 29
-.cfi_def_cfa_offset 0
-ret
-        .cset	w0, eq
-        .size	_func0, .LANCHOR0
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #0
+	stur	w8, [sp, #8]
+	b	LBB0_9
+LBB0_2:
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #1
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	mov	w8, #1
+	stur	w8, [sp, #8]
+	b	LBB0_9
+LBB0_4:
+	mov	w8, #18
+	str	w8, [sp, #12]
+	mov	w8, #2
+	str	w8, [sp, #16]
+	b	LBB0_5
+LBB0_5:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=1
+	mul	w8, w0, w9
+	str	w8, [sp, #8]
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_5 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_5
+LBB0_8:
+	ldr	w8, [sp, #8]
+	str	w8, [sp, #12]
+	b	LBB0_9
+LBB0_9:
+	ldr	w0, [sp, #12]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

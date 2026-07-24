@@ -1,94 +1,103 @@
-.arch armv8-a
-.file "convert_to_arm.asm"
 .section	__TEXT,__text,regular,pure_instructions
-.global	_func0
-.align	2
-.p2align 4,,11
-_func0:                                ## @func0
-    .section	__TEXT,__text,regular,pure_instructions
-    .build_version macos, 13, 0	sdk_version 13, 3
-    .globl	_func0
-    .pp2align 3,,7
-_func0:                                 ## @func0
-    cset	w5, eq
-    cset	w4, ne
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	w6, w1
-mov	w1, w2
-mov	x29, sp
-str	w5, [sp, 44]
-str	x19, [sp, 16]
-.cfi_offset 19, -32
-mov	x19, x0
-str	w4, [sp, 48]
-add	x0, sp, 44
-str	w6, [x19, -40]
-str	w2, [x19, -36]
-str	wzr, [x0, 8]
-str	wzr, [x0, 12]
-.LB1:
-ldr	w4, [x19, 40]
-sdiv	w5, w6, w4
-msub	w4, w5, w4, w6
-cmp	w4, w5
-ble	.L6
-.L3:
-ldr	x5, [x19, -40]
-ldrsw	x4, [x19, 40]
-sub	w6, w6,
-ldr	w2, [x19, 44]
-ldr	x3, [x19, -40]
-ldr	w4, [x5, x4, lsl 2]
-sub	w2, w2, w6
-sxtw	x2, w2
-ldr	w3, [x3, x2, lsl 2]
-cmp	w4, w3
-beq	.L4
-strb	wzr, [x0], 8
-b	.L8
-.L4:
-ldr	x5, [x19, -40]
-ldrsw	x4, [x19, 40]
-ldr	w2, [x19, 44]
-ldr	x3, [x19, -40]
-ldr	w4, [x5, x4, lsl 2]
-sub	w2, w2,
-ldr	w3, [x3, x2, lsl 2]
-add	w4, w4, w2
-add	w4, w4, w6
-str	w4, [x19, 40]
-.L6:
-sdiv	w4, w6, w4
-msub	w4, w4, w6, w6
-cmp	w4, 1
-bne	.L7
-ldr	x5, [x19, -40]
-sdiv	w4, w6, w5
-msub	w5, w4, w5, w6
-sxtw	x4, w4
-ldr	x0, [x19, -40]
-ldr	w1, [x19, 40]
-ldr	w0, [x0, x4, lsl 2]
-add	w0, w0, w1
-str	w0, [x19, 40]
-.L7:
-ldp	w1, w0, [x19, 40]
-cmp	w0, w1
-cset	w0, le
-strb	w0, [x19, -1]
-.L8:
-ldr	x19, [sp, 16]
-and	w0, w1, 1
-ldr	w1, [x19, -1]
-strb	w0, [x19, -1]
-ldp	x29, x30, [sp], 48
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-    .cfi_endproc
-    .subsection_via_symbols "__TEXT,__text,regular,pure_instructions" 0 ".."
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	str	w2, [sp, #8]
+	str	wzr, [sp, #4]
+	str	wzr, [sp, #0]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #4]
+	str	w8, [sp, #12]                   ; 4-byte Folded Spill
+	ldr	w8, [sp, #12]
+	mov	w9, #2
+	div	w8, w9, w0
+                                        ; implicit-def: $w8
+	mov	w9, w8
+	ldr	w8, [sp, #12]                   ; 4-byte Folded Reload
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #4]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #12]
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
+	ldr	w10, [sp, #4]
+	subs	w10, w10, w10, lsl #3
+	ldrsw	x11, [x10, w10, sxtw #2]
+	subs	w8, w8, w11
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:
+	stb	wzr, [x0, #-1]
+	b	LBB0_9
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #4]
+	ldr	w8, [x8, x9, lsl #2]
+	ldr	x9, [sp, #16]
+	ldr	w10, [sp, #12]
+	ldr	w10, [sp, #8]
+	subs	w10, w10, #1
+	ldr	x11, [sp, #4]
+	ldrsw	x11, [x10, w11, sxtw #2]
+	add	w8, w8, w11
+	ldr	w9, [sp, #4]
+	add	w8, w8, w9
+	str	w8, [sp, #4]
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_1
+LBB0_6:
+	ldr	w8, [sp, #12]
+	mov	w9, #2
+	div	w8, w9, w0
+                                        ; implicit-def: $w8
+	subs	w9, w8, #1
+	cset	w9, ne
+	tbnz	w9, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:
+	ldr	x8, [sp, #16]
+	str	x8, [sp, #8]                    ; 8-byte Folded Spill
+	ldr	w8, [sp, #12]
+	mov	w9, #2
+	div	w8, w9, w0
+                                        ; implicit-def: $w8
+	ldrsw	x9, [sp, #8]
+	ldr	w8, [x9, w8, sxtw #2]
+	subs	w8, w8, w12
+	str	w8, [sp, #4]
+	b	LBB0_8
+LBB0_8:
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, lt
+	and	w8, w8, #0x1
+	stb	w8, [x0, #-1]
+	b	LBB0_9
+LBB0_9:
+	ldrb	w8, [x0, #-1]
+	and	w0, w8, #0x1
+	add	w0, w0, #0
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

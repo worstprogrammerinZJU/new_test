@@ -1,64 +1,58 @@
-.arch armv8-a
-.file	.include
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0
-	.align	2
-._func0:                                 ## @func0
-    .cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	x19, [sp, 16]
-.cfi_offset 19, -16
-str	wzr, [x29, -20]
-mov	x19, x0
-stp	x1, x0, [x29, -16]
-.LBB0_1:
-ldr	x3, [x29, -16]
-ldrsw	x2, [x29, -20]
-ldrb	w3, [x3, x2]
-cbz	w3, .L2
-add	x2, x29, :lo12:[x29, -16]
-mov	w0, 26
-ldr	x3, [x29, -16]
-sub	w2, w2,
-ldrsw	x4, [x29, -20]
-mov	w1, 97
-add	w2, w2, 4
-udiv	w0, w2, w0
-msub	w2, w0, w0, w2
-str	w2, [x29, -24]
-strb	w1, [x3, x4]
-add	w1, w1, 97
-ldr	x0, [x29, -16]
-sxtw	x4, w1
-sdiv	w1, w2, w0
-msub	w1, w1, w0, w2
-strb	w1, [x0, x4]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 32
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L2:
-.cfi_restore_state
-ldr	x0, [x29, -16]
-strb	wzr, [x0, x2]
-ldr	x19, [sp, 16]
-ldp	x29, x30, [sp], 32
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	stp	x29, x30, [sp, #-16]!           ; 16-byte Folded Spill
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	adrp	x8, _func0@PAGE
+	lpm	w0, [x8, _func0@PAGEOFF]
+	str	w0, [sp, #8]
+	stur	x0, [x29, #-8]
+	str	x1, [sp, #16]
+	str	wzr, [sp, #12]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldursw	x8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #12]
+	ldursw	x8, [x8, x9]
+	subs	w8, w8, #97
+	add	w9, w8, #4
+	sdiv	w8, w8, w9
+	add	w8, w8, #97
+	str	w8, [sp, #20]
+	ldr	w8, [sp, #20]
+	ldursw	x9, [x29, #-20]
+	ldr	w9, [sp, #12]
+	strb	w9, [x9]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #12]
+	add	w8, w8, #1
+	str	w8, [sp, #12]
+	b	LBB0_1
+LBB0_4:
+	ldur	x8, [x29, #-16]
+	ldrsw	x9, [sp, #12]
+	strb	wzr, [x8, x9]
+	add	x0, x29, #0
+	mov	w9, #0
+	stur	w9, [x29, #-20]
+	br	LR
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 .subsections_via_symbols

@@ -1,88 +1,90 @@
-.arch armv8-a
-.file	__TEXT,__text,regular,pure_instructions
-.align	2
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.func0:                                 ## @func0
-    .cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	w1, [x29, -24]
-stp	x19, x20, [sp, 16]
-sub	sp, sp,
-.cfi_offset 19, -16
-.cfi_offset 20, -8
-str	x0, [x29, -24]
-ldr	w0, [x29, -24]
-cbnz	w0, .L2
-str	wzr, [x29, -20]
-mov	w0, 1
-str	w0, [x29, -16]
-str	wzr, [x29, -8]
-b	.L4
-.L2:
-str	wzr, [x29, -20]
-mov	w0, -32768
-str	w0, [x29, -8]
-str	wzr, [x29, -20]
-.L4:
-ldr	w0, [x29, -20]
-add	x19, x29, 16
-ldr	w1, [x19, -24]
-cmp	w1, w0
-blt	.L5
-.L7:
-ldp	w0, w1, [x29, -8]
-mul	w0, w0, w1
-str	w0, [x29, -8]
-.L5:
-ldr	w1, [x29, -20]
-ldr	x0, [x29, -24]
-sxtw	x1, w1
-ldr	w0, [x0, x1, lsl 2]
-bl	_abs
-ldr	w1, [x29, -20]
-ldr	x0, [x29, -24]
-ldrsw	x1, [x29, -24]
-add	w2, w0, w1
-str	w2, [x29, -20]
-ldr	w0, [x0, x1, lsl 2]
-cbnz	w0, .L6
-str	wzr, [x29, -16]
-.L8:
-ldr	x0, [x29, -24]
-ldrsw	x1, [x29, -24]
-ldr	w0, [x0, x1, lsl 2]
-cbz	w0, .L10
-.L6:
-ldr	w0, [x29, -16]
-str	wzr, [x29, -12]
-ldrsw	x1, [x29, -24]
-ldr	w0, [x0, x1, lsl 2]
-cmp	w0, 0
-bge	.L8
-.L10:
-ldr	w0, [x29, -12]
-sub	w0, w0, w1
-str	w0, [x29, -12]
-b	.L7
-.L11:
-ldr	w0, [x29, -8]
-ldp	x19, x20, [sp, 16]
-add	w0, w0, 1
-str	w0, [x29, -8]
-ldp	x29, x30, [sp], 32
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ret
-end
-```
-This translates the given x86 assembly code into ARM assembly, maintaining the original functionality of calculating absolute values and handling different conditions within loops.
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #16]
+	str	w1, [sp, #12]
+	ldr	w8, [sp, #12]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #-4096
+	str	w8, [sp]                        ; 4-byte Folded Spill
+	b	LBB0_11
+LBB0_2:
+	str	wzr, [sp, #8]
+	mov	w8, #1
+	str	w8, [sp, #4]
+	str	wzr, [sp, #16]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldur	x8, [x29, #16]
+	ldrsw	x9, [sp, #16]
+	ldr	w0, [x8, x9, lsl #2]
+	bl	_abs
+	ldr	w8, [sp, #8]
+	add	w8, w8, w0
+	str	w8, [sp, #8]
+	ldr	x8, [x29, #16]
+	ldrsw	x9, [sp, #16]
+	ldr	w0, [x8, x9, lsl #2]
+	subs	w8, w0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_3 Depth=1
+	str	wzr, [sp, #4]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldur	x8, [x29, #16]
+	ldrsw	x9, [sp, #16]
+	ldr	w8, [x8, x9, lsl #2]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	mov	w8, #0
+	subs	w8, w8, w1
+	str	w8, [sp, #4]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_10:
+	ldr	w8, [sp, #8]
+	ldr	w9, [sp, #4]
+	mul	w8, w8, w9
+	str	w8, [sp, #12]
+	b	LBB0_11
+LBB0_11:
+	ldr	w0, [sp, #12]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

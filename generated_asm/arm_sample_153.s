@@ -1,67 +1,54 @@
-.arch armv8-a
-.file	"convert_x86_to_arm.asm"
 .section	__TEXT,__text,regular,pure_instructions
-.global	_func0
-.align	2
-.p2align	4,,11
-.func0:                                ## @func0
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	w4, w1
-mov	w3, 1
-mov	x29, sp
-.cfi_def_cfa_register 29
-stp	x19, x20, [sp, 16]
-.cfi_offset 19, -16
-.cfi_offset 20, -8
-mov	x19, x0
-mov	x20, x2
-str	wzr, [x0, 16]
-str	x1, [x0, 8]
-str	w4, [x0, 20]
-str	wzr, [x0, 24]
-str	w3, [x0, 28]
-.LBB0_1:
-ldr	w3, [x0, 16]
-ldr	w0, [x0, 20]
-cmp	w3, w0
-bge	LBB0_4
-ldp	x0, x3, [x29, -32]
-sxtw	x2, w3
-ldr	w1, [x29, -36]
-add	w0, w0, w1
-str	w0, [x29, -36]
-ldrsw	x0, [x29, -36]
-ldr	w2, [x29, -28]
-ldr	w3, [x2, 4]!
-madd	w1, w3, w2, w1
-str	w1, [x29, -28]
-ldp	x19, x20, [sp, 16]
-ldp	x29, x30, [sp], 32
-.cfi_remember_state
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-b	.LBB0_1
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	x0, [sp, #24]
+	str	w1, [sp, #20]
+	str	x2, [sp, #16]
+	str	wzr, [sp, #8]
+	str	w1, [sp]                        ; 8-byte foldable
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #8]
+	ldrh	w9, [sp, #16]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x9, [sp, #24]
+	ldrsw	x8, [sp, #8]
+	add	x8, x8, x9, lsl #2
+	ldr	w8, [x8]
+	ldr	w9, [sp, #8]
+	add	w8, w8, w9, sxtw #16
+	str	w8, [sp, #8]
+	ldr	x9, [sp, #24]
+	ldrsw	x8, [sp, #8]
+	add	x8, x8, x9, lsl #2
+	mul	w8, w8, [sp]
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	add	w8, w8, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
 LBB0_4:
-.cfi_restore_state
-ldr	w1, [x29, -36]
-str	w1, [x20]
-ldr	w1, [x29, -28]
-str	w1, [x20, 4]
-ldp	x19, x20, [sp, 16]
-ldp	x29, x30, [sp], 32
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ret
+	ldr	w9, [sp, #8]
+	ldr	x8, [sp, #16]
+	str	w9, [x8]
+	ldr	w8, [sp, #8]
+	ldr	x9, [sp, #16]
+	add	x8, x8, #4
+	str	w8, [x9, x8]
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 .subsections_via_symbols

@@ -1,134 +1,102 @@
-.arch armv8-a
-.file "func0.s"
-.section __TEXT,__text,regular,pure_instructions
-.global	_func0
-.align	2
-.p2align 4,,11
-_func0:                              ## @func0
-.cfi_startproc
-stp	x29, x30, [sp, -32]!
-.cfi_def_cfa_offset 32
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-mov	w1, 2
-mov	x29, sp
-.cfi_def_cfa_register 29
-stp	x19, x20, [sp, 16]
-.cfi_offset 19, -16
-.cfi_offset 20, -8
-mov	w20, 1
-str	w0, [x29, -16]
-str	w2, [x29, -8]
-str	w1, [x29, -4]
-ldr	w0, [x29, -16]
-ldr	w1, [x29, -8]
-cmp	w0, w1
-bge	.L10
-.L3:
-ldp	w1, w0, [x29, -16]
-add	w1, w1, w0
-str	w1, [x29, -16]
-ldr	w0, [x29, -4]
-str	w0, [x29, -8]
-str	w1, [x29, -12]
-ldr	w0, [x29, -4]
-str	w0, [x29, -12]
-str	w20, [x29, -28]
-str	w1, [x29, -32]
-.L11:
-mul	w0, w0, w0
-cmp	w0, w20
-blt	.L3
-.L4:
-ldr	w1, [x29, -28]
-cbz	w1, .L11
-ldr	w1, [x29, -12]
-sdiv	w0, w1, w20
-msub	w0, w0, w20, w1
-cbnz	w0, .L2
-str	wzr, [x29, -28]
-b	.L4
-.L2:
-ldr	w0, [x29, -4]
-add	w0, w0, 1
-str	w0, [x29, -4]
-b	.L4
-.L10:
-str	wzr, [x29, -4]
-ret
-.L11:
-ldr	w0, [x29, -12]
-str	w0, [x29, -12]
-ret
+.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	str	w0, [sp, #24]
+	str	w1, [sp, #20]
+	str	w2, [sp, #16]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_3 Depth 2
+	lsl	w8, w0, #16
+	ldr	w9, [sp, #24]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #20]
+	ldr	w9, [sp, #16]
+	add	w8, w8, w9
+	str	w8, [sp, #20]
+	ldr	w8, [sp, #20]
+	str	w8, [sp, #12]
+	ldr	w8, [sp, #16]
+	str	w8, [sp, #20]
+	ldr	w8, [sp, #12]
+	str	w8, [sp, #16]
+	mul	w8, w8, w2
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_3
+LBB0_3:                                 ;   Parent Loop BB0_1 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp, #16]
+	ldr	w9, [sp, #16]
+	mul	w8, w8, w9
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #20]
+	fadd	w8, w8, wzero
+	ldur	w8, [sp, #16]
+	sdiv	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	str	wzr, [sp, #16]
+	b	LBB0_8
+LBB0_6:                                 ;   in Loop: Header=BB0_3 Depth=2
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=2
+	ldr	w8, [sp, #16]
+	add	w8, w8, #1
+	str	w8, [sp, #16]
+	b	LBB0_3
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	add	w8, w8, #1
+	str	w8, [sp, #24]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #24]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_12
+	b	LBB0_11
+LBB0_11:
+	ldr	w8, [sp, #20]
+	str	w8, [sp, #4]
+	b	LBB0_14
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_1
+LBB0_13:
+	str	wzr, [sp, #4]
+	b	LBB0_14
+LBB0_14:
+	ldr	w0, [sp, #4]
+	add	sp, sp, #32
+	ret
 	.cfi_endproc
-	file_magic 0
-.section __TEXT,__data,text.auto_const.auto_vtable,VMA,data
-.align	2
-.L3:
-.data
-.L12:
-adrp	x0, .LC0
-ldr	d0, [x0,
-fmov	w1, s0
-fcmpe	d0,
-fcsel	w20, w20, wzr, ne
-b	.L4
-.L13:
-ldr	w0, [x29, -24]
-add	w0, w0, 1
-str	w0, [x29, -24]
-b	.L4
-.L14:
-ldr	w0, [x29, -8]
-ldr	w1, [x29, -12]
-cmp	w0, w1
-beq	.L15
-b	.L3
-.L15:
-ldr	w0, [x29, -12]
-str	w0, [x29, -4]
-b	.L14
-	.text
-.section __TEXT,__text,regular,pure_instructions
-.global	_func0
-.data
-.LC0:
-.word 0
-.word 2
-.word 0
-.word 1
-.bss
-.align	3
-._func0:
-.size	_func0, .LANCHOR0
-.cfi_offset 19, -16
-.cfi_offset 20, -8
-.cfi_offset 29, -32
-.cfi_offset 30, -24
-section __TEXT,__text,public,function
-.func	_func0
-    mov	w19, 2
-    b	.L11
-.L12:
-mov	w20, 1
-b	.L12
-.L13:
-mov	w20, 2
-b	.L12
-.L14:
-ldr	w0, [x29, -4]
-str	w0, [x29, -4]
-ret
-.L11:
-ldr	w0, [x29, -8]
-ldr	w1, [x29, -12]
-cmp	w0, w1
-bne	.L13
-ldr	w0, [x29, -12]
-str	w0, [x29, -4]
-ret
-.L15:
-ldr	w0, [x29, -12]
-str	w0, [x29, -4]
-ret
-	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

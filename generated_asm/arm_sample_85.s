@@ -1,106 +1,93 @@
-.arch armv8-a
-.file     .rodata.str1.8
-.align    1
-.LC0:
-.string	"!@#$%^&*()_+{}|"
-.text
-.global	_func0
 .section	__TEXT,__text,regular,pure_instructions
 	.build_version macos, 13, 0	sdk_version 13, 3
-	.global	_func0
-	.align	2
-._func0:
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
 	.cfi_startproc
-stp	x29, x30, [sp, -48]!
-.cfi_def_cfa_offset 48
-.cfi_offset 29, -48
-.cfi_offset 30, -40
-mov	x29, sp
-.cfi_def_cfa_register 29
-str	x19, [sp, 16]
-sub	sp, sp,
-.cfi_offset 19, -32
-ldr	x19, [x0]
-str	x21, [sp, 32]
-str	xzr, [x0, 8]
-str	x1, [x29, -8]
-str	xzr, [x29, -16]
-.cfi_offset 21, -16
-bl	strlen
-mov	w21, w0
-ldp	w0, w1, [x29, -16]
-cmp	w1, w0
-bge	.L9
-.L2:
-ldr	x0, [x29, -8]
-ldrsw	x1, [x29, -16]
-ldrb	w0, [x0, x1]
-strb	w0, [x29, -25]
-ldrb	w0, [x29, -25]
-cmp	w0, 122
-ccmp	w0, 65, 0, gt
-beq	.L4
-cmp	w0, 90
-bcc	.L5
-cmp	w0, 68
-bhi	.L4
-cmp	w0, 91
-bne	.L4
-add	w0, w0, 32
-strb	w0, [x29, -25]
-b	.L4
-.L9:
-ldr	x0, [x29, -8]
-strb	wzr, [x0, w21, sxtw]
-ldr	x19, [sp, 16]
-ldr	x21, [sp, 32]
-add	sp, sp, 48
-.cfi_remember_state
-.cfi_restore 29
-.cfi_restore 30
-.cfi_restore 21
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L5:
-.cfi_restore_state
-cmp	w0, 122
-ccmp	w0, 90, 4, le
-beq	.L4
-cmp	w0, 68
-bhi	.L4
-cmp	w0, 92
-bne	.L4
-add	w0, w0, 32
-strb	w0, [x29, -25]
-.L4:
-ldr	x0, [x29, -16]
-ldrsw	x1, [x29, -16]
-strb	wzr, [x0, x1]
-ldr	x19, [sp, 16]
-ldr	x21, [sp, 32]
-add	sp, sp, 48
-.cfi_remember_state
-.cfi_restore 29
-.cfi_restore 30
-.cfi_restore 21
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
-.L6:
-.cfi_restore_state
-ldr	x0, [x29, -8]
-ldrsw	x1, [x29, -16]
-strb	wzr, [x0, x1]
-ldr	x19, [sp, 16]
-ldr	x21, [sp, 32]
-add	sp, sp, 48
-.cfi_restore 29
-.cfi_restore 30
-.cfi_restore 21
-.cfi_restore 19
-.cfi_def_cfa_offset 0
-ret
+; %bb.0:
+	sub	sp, sp, #48
+	.cfi_def_cfa_offset 48
+	stp	x29, x30, [sp, #32]             ; 16-byte Folded Spill
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	str	x0, [sp, #8]
+	str	x1, [sp, #16]
+	ldr	x0, [sp, #8]
+	bl	_strlen
+                                        ; kill: def $x8 killed $x8 killed $x9
+	str	w0, [sp, #12]
+	str	wzr, [sp, #8]
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #8]
+	ldrsw	x9, [sp, #12]
+	ldrb	w8, [x8, x9]
+	strb	w8, [sp, #7]
+	ldrb	w8, [sp, #7]
+	subs	w8, w8, #97
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #7]
+	subs	w8, w8, #122
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_5
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #7]
+	subs	w8, w8, #32
+                                        ; kill: def $w8 killed $w8 killed $x8
+	strb	w8, [sp, #7]
+	b	LBB0_9
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #7]
+	subs	w8, w8, #65
+	cset	w8, lt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #7]
+	subs	w8, w8, #90
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_8
+	b	LBB0_7
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldrb	w8, [sp, #7]
+	add	w8, w8, #32
+                                        ; kill: def $w8 killed $w8 killed $x8
+	strb	w8, [sp, #7]
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	wd0, [sp, #7]
+	ldr	x8, [sp, #16]
+	ldrsb	w9, [sp, #12]
+	ldr	wa0, [sp, #8]
+	strb	wd0, [x8, wa0]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w9, [sp, #8]
+	add	w8, w9, #1
+	str	w8, [sp, #8]
+	b	LBB0_1
+LBB0_11:
+	ldr	x8, [sp, #16]
+	ldrsw	x9, [sp, #12]
+	strb	wzr, [x8, x9]
+	ldp	x29, x30, [sp, #32]             ; 16-byte Folded Reload
+	add	sp, sp, #48
+	ret
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 .subsections_via_symbols

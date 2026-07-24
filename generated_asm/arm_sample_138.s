@@ -1,100 +1,87 @@
-.arch armv8-a
-.file	.dump_sections
-.global	_func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.bss
-.sect	__TEXT,__text,regular,pure_instructions
-.align	2
-._func0
-    .section	__TEXT,__text,regular,pure_instructions
-    .build_version macos, 13, 0	sdk_version 13, 3
-    .globl	_func0
-    .ppalign	3,,7
-_func0:                                ## @func0
-    cset	w3, eq
-    mov	x2, x0
-    add	x0, sp, 16
-    str	w3, [sp, 12]
-    b	.LB2
-.LC0:
-mov	w3, 2
-cmp	w2, w3
-beq	.L3
-str	wzr, [sp, 8]
-.L2:
-ldp	w3, w2, [x0]
-mul	w3, w3, w2
-cmp	w3, w2
-bgt	.L4
-ldr	w2, [sp, 12]
-mov	w1, 1
-str	w1, [sp, 16]
-sdiv	w1, w2, w3
-msub	w1, w1, w3, w2
-cbnz	w1, .L5
-.L6:
-ldp	w3, w2, [x0]
-sdiv	w1, w2, w3
-msub	w1, w1, w3, w2
-add	w2, w2, 1
-str	w1, [x0], 16
-cbz	w1, .L6
-.L4:
-ldr	w1, [sp, 16]
-.L8:
-ldr	w0, [sp, 8]
-sub	w1, w1,
-str	w1, [sp, 8]
-cmp	w0, 3
-cset	w1, eq
-and	w1, w1, 1
-str	w1, [x0], 16
-b	.L2
-.L3:
-str	w3, [sp, 20]
-b	.L8
-.L5:
-ldr	w1, [x0], 16
-cmp	w1, 1
-ble	.L9
-ldr	w1, [sp, 8]
-add	w1, w1, 1
-str	w1, [sp, 8]
-.L9:
-ldr	w0, [sp, 12]
-cmp	w0, 3
-cset	w1, eq
-and	w1, w1, 1
-str	w1, [x0], 16
-b	.L2
-.L4:
-ldr	w0, [sp, 8]
-sub	w1, w1,
-str	w1, [sp, 8]
-cmp	w0, 3
-cset	w1, eq
-and	w1, w1, 1
-str	w1, [x0], 16
-b	.L2
-.cfi_endproc
-.sect	__TEXT,__rodata,@progbits,1
-.align	3
-.LC1:
-.word	0
-.word	1
-.word	2
-.word	3
-.text
-.global	_func0
-.bss
-.sect	__TEXT,__text,regular,pure_instructions
-.align	2
-.func	_func0
-    .section	__TEXT,__text,regular,pure_instructions
-    .build_version macos, 13, 0	sdk_version 13, 3
-    .globl	_func0
-    .ppalign	3,,7
-_func0:                                ## @func0
-ret
-.cfi_endproc
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16
+	.cfi_def_cfa_offset 16
+	str	w0, [sp, #8]
+	ldr	w8, [sp, #8]
+	subs	w8, w8, #2
+	cset	w8, ge
+	tbnz	w8, #0, LBB0_2
+	b	LBB0_1
+LBB0_1:
+	mov	w8, #0
+	stur	w8, [sp, #4]
+	b	LBB0_12
+LBB0_2:
+	mov	w8, #0
+	str	w8, [sp, #12]
+	mov	w8, #2
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_3:                                 ; =>This Loop Header: Depth=1
+                                        ;     Child Loop BB0_5 Depth 2
+	ldr	w8, [sp]
+	ldursw	w9, [sp], #4
+	mul	w8, w8, w9
+	subs	w8, w8, w9
+	cset	w8, gt
+	tbnz	w8, #0, LBB0_9
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_5
+LBB0_5:                                 ;   Parent Loop BB0_3 Depth=1
+                                        ; =>  This Inner Loop Header: Depth=2
+	ldr	w8, [sp]
+	ldursw	w9, [sp], #4
+	movs	w8, w8, lsl #3
+	div	w8, w8, w9
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_5 Depth=2
+	ldr	w8, [sp]
+	ldursw	w9, [sp], #4
+	movs	w8, w8, lsl #3
+	div	w8, w8, w9
+	str	w0, [sp, #8]
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_5
+LBB0_7:                                 ;   in Loop: Header=BB0_3 Depth=1
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_3 Depth=1
+	ldr	w8, [sp]
+	add	w8, w8, #1
+	str	w8, [sp]
+	b	LBB0_3
+LBB0_9:
+	ldr	w8, [sp]
+	subs	w8, w8, #1
+	cset	w8, le
+	tbnz	w8, #0, LBB0_11
+	b	LBB0_10
+LBB0_10:
+	ldr	w8, [sp, #4]
+	add	w8, w8, #1
+	str	w8, [sp, #4]
+	b	LBB0_11
+LBB0_11:
+	ldr	w8, [sp, #4]
+	subs	w8, w8, #3
+	cset	w8, eq
+	and	w8, w8, #0x1
+	blr
+LBB0_12:
+	ldr	w0, [sp, #8]
+	add	sp, sp, #16
+	ret
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols

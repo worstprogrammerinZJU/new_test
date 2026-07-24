@@ -1,153 +1,186 @@
-.arch armv8-a
-.file	__TEXT,__text,regular,pure_instructions
-.align	2
-.sp	32
-.global	_func0                          ## -- Begin function func0
 .section	__TEXT,__text,regular,pure_instructions
-.align	2
-.startproc
-stp	x29, x30, [sp, -80]!
-.cfi_def_cfa_offset 80
-.cfi_offset 29, -80
-.cfi_offset 30, -72
-mov	x29, sp
-.cfi_def_cfa_register 29
-stp	x19, x20, [sp, 16]
-.cfi_offset 19, -64
-.cfi_offset 20, -56
-adrp	x19, .LANCHOR0
-add	x19, x19, :lo12:.LANCHOR0
-stp	x21, x22, [sp, 32]
-.cfi_offset 21, -48
-.cfi_offset 22, -40
-mov	x21, x0
-sub	x22, x0,
-.cfi_offset 23, -32
-str	w1, [x29, -20]
-mov	x23, x2
-add	x0, x19, 8
-ldr	x1, [x29, -8]
-str	x0, [x29, -32]
-str	xzr, [x29, -40]
-str	wzr, [x29, -44]
-str	wzr, [x29, -48]
-str	wzr, [x29, -52]
-str	x1, [x29, -64]
-bl	strlen
-mov	x1, x0
-str	x1, [x29, -72]
-add	x0, x1, 1
-bl	_malloc
-mov	x20, x0
-str	wzr, [x29, -76]
-.LB10_1:
-ldr	x0, [x29, -72]
-ldrsw	x2, [x29, -76]
-cmp	x0, x2
-bhi	.L9
-b	.L2
-.L2:
-ldr	x0, [x29, -8]
-ldrb	w0, [x0, x2]
-bl	_isspace
-cbnz	w0, .L10
-.L4:
-ldr	x0, [x29, -8]
-ldrsw	x1, [x29, -76]
-ldrb	w1, [x0, x1]
-cbnz	w1, .L11
-.L9:
-ldr	w0, [x29, -20]
-cmp	w0, w23
-bne	.L12
-.L13:
-ldr	x0, [x29, -72]
-ldr	w1, [x29, -52]
-ldr	w2, [x29, -44]
-sub	w1, w1, w2
-ldr	w3, [x29, -48]
-strb	wzr, [x0, w1, sxtw]
-add	w2, w2, 1
-sbfiz	x1, x2, 3, 32
-ldr	x0, [x29, -40]
-bl	_realloc
-mov	x20, x0
-ldr	x1, [x29, -72]
-mov	x0, x20
-bl	_strlen
-add	x0, x0, 1
-bl	_malloc
-mov	x1, x0
-ldr	x0, [x29, -40]
-ldrsw	x2, [x29, -48]
-str	x1, [x0, x2, lsl 3]
-ldr	x0, [x29, -40]
-ldr	x1, [x29, -72]
-ldr	x0, [x0, x2, lsl 3]
-mov	x2, -1
-bl	___strcpy_chk
-ldr	w0, [x29, -48]
-add	w0, w0, 1
-str	w0, [x29, -48]
-.L12:
-ldr	w0, [x29, -76]
-add	w0, w0, 1
-str	wzr, [x29, -44]
-str	w0, [x29, -52]
-b	.L10
-.L10:
-ldr	w0, [x29, -44]
-cmp	w0, w23
-beq	.L13
-.L11:
-ldr	x1, [x29, -8]
-ldr	x0, [x29, -72]
-ldrsw	x2, [x29, -76]
-ldrb	w2, [x1, x2]
-strb	w2, [x0, w1, sxtw]
-ldr	x1, [x29, -8]
-ldr	x0, [x29, -24]
-ldr	x1, [x1, x2]
-bl	_strchr
-cbnz	x0, .L10
-ldr	x0, [x29, -8]
-ldrb	w0, [x0, x2]
-bl	_isalpha
-cbz	w0, .L10
-add	w0, w23, 1
-str	w0, [x29, -44]
-b	.L10
-.L13:
-ldr	x0, [x29, -72]
-ldr	w1, [x29, -48]
-ldr	x2, [x29, -64]
-add	w1, w1, 1
-str	wzr, [x29, -44]
-str	w1, [x29, -52]
-b	.L10
-.L14:
-mov	x0, x20
-bl	_free
-ldr	w1, [x29, -48]
-ldr	x0, [x29, -32]
-ldr	x2, [x29, -40]
-str	w1, [x2]
-ldp	x19, x20, [sp, 16]
-ldp	x21, x22, [sp, 32]
-ldp	x29, x30, [sp], 80
-.cfi_restore 30
-.cfi_restore 29
-.cfi_restore 23
-.cfi_restore 21
-.cfi_restore 22
-.cfi_restore 19
-.cfi_restore 20
-.cfi_def_cfa_offset 0
-ret
+	.build_version macos, 13, 0	sdk_version 13, 3
+	.globl	_func0                          ; -- Begin function func0
+	.p2align	2
+_func0:                                 ; @func0
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #96
+	.cfi_def_cfa_offset 96
+	stp	x29, x30, [sp, #80]             ; 16-byte Folded Spill
+	add	x29, sp, #80
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	stur	x0, [x29, #-8]
+	str	w1, [sp, #12]
+	str	x2, [sp, #8]
+	str	xzr, [sp, #40]
+	str	wzr, [sp, #44]
+	str	wzr, [sp, #48]
+	str	wzr, [sp, #52]
+	ldur	x0, [x29, #-8]
+	bl	_strlen
+	str	x0, [sp, #48]
+	ldr	x0, [sp, #48]
+	add	x0, x0, #1
+	bl	_malloc
+	str	x0, [sp, #32]
+                                        ; kill: def $xzr killed $xzr
+	b	LBB0_1
+LBB0_1:                                 ; =>This Inner Loop Header: Depth=1
+	ldrsw	x8, [sp, #32]
+	ldr	x9, [sp, #48]
+	subs	x8, x8, x9
+	cset	w8, hs
+	tbnz	w8, #0, LBB0_13
+	b	LBB0_2
+LBB0_2:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldrsb	w8, [x8, x9]
+	bl	_isspace
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_4
+	b	LBB0_3
+LBB0_3:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldrsb	w8, [x8, x9]
+	subs	w8, w8, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_7
+	b	LBB0_4
+LBB0_4:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #44]
+	ldr	w9, [sp, #12]
+	subs	w8, w8, w9
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_6
+	b	LBB0_5
+LBB0_5:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	x8, [sp, #32]
+	ldr	w9, [sp, #32]
+	subs	w8, w8, w9
+	ldrsw	x9, [sp, #44]
+	strb	wzr, [x8, x9]
+	ldr	x0, [sp, #40]
+	ldr	w8, [sp, #48]
+	add	w9, w8, #1
+	ldursw	x8, [sp, #48], #8
+	mov	x9, x8
+	and	x8, x8, #0xfffffffffffffff0
+	add	x8, x8, x9, lsl #3
+	bl	_realloc
+	str	x0, [sp, #40]
+	ldr	x0, [sp, #32]
+	bl	_strlen
+	add	x0, x0, #1
+	bl	_malloc
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #48]
+	str	x8, [x8, x9, lsl #3]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #48]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	x1, [sp, #32]
+	mov	x2, #-1
+	bl	___strcpy_chk
+	ldr	w8, [sp, #48]
+	add	w8, w8, #1
+	str	w8, [sp, #48]
+	b	LBB0_6
+LBB0_6:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #52]
+	mov	w8, #0
+	str	w8, [sp, #44]
+	b	LBB0_11
+LBB0_7:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	ldrb	w8, [x8, x9]
+	ldr	x8, [sp, #32]
+	ldr	w9, [sp, #32]
+	subs	w8, w8, w9
+	ldursw	x9, [sp, #44]
+	strb	w8, [x8, x9]
+	adrp	x0, l_.str@PAGE
+	add	x0, x0, l_.str@PAGEOFF
+	bl	_strchr
+	subs	x8, x0, #0
+	cset	w8, ne
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_8
+LBB0_8:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldur	x8, [x29, #-8]
+	ldrsw	x9, [sp, #32]
+	movzbl	(x8)[x9], w0
+	bl	_isalpha
+	subs	w8, w8, #0
+	cset	w8, eq
+	tbnz	w8, #0, LBB0_10
+	b	LBB0_9
+LBB0_9:                                 ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #44]
+	add	w8, w8, #1
+	str	w8, [sp, #44]
+	b	LBB0_10
+LBB0_10:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_11
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_12
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	ldr	w8, [sp, #32]
+	add	w8, w8, #1
+	str	w8, [sp, #32]
+	b	LBB0_1
+LBB0_13:
+	ldr	x0, [sp, #32]
+	bl	_free
+	ldr	w8, [sp, #48]
+	ldr	x8, [sp, #8]
+	str	w8, [x8]
+	ldr	x8, [sp, #40]
+	mov	sp, sp, lsl #2
+	add	x0, sp, #80
+	add	x9, sp, #80
+	bl	_strlen
+	mov	x9, x0
+	add	x0, sp, #80
+	add	x8, sp, #80
+	mov	x2, x0
+	str	x2, [x8]
+	mov	x0, x9
+	mov	x1, x8
+	str	x1, [sp]
+	mov	x0, x8
+	add	x8, sp, #80
+	add	x1, sp, #80
+	bl	_malloc
+	ldr	x8, [sp, #40]
+	ldrsw	x9, [sp, #48]
+	str	x0, [x8, x9, lsl #3]
+	ldr	x8, [sp, #32]
+	ldrsw	x9, [sp, #48]
+	ldr	x0, [x8, x9, lsl #3]
+	ldr	x1, [sp, #32]
+	mov	x2, #-1
+	bl	___strcpy_chk
+	ldr	w8, [sp, #48]
+	add	w8, w8, #1
+	str	w8, [sp, #48]
+	b	LBB0_6
+LBB0_11:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_1
+LBB0_12:                                ;   in Loop: Header=BB0_1 Depth=1
+	b	LBB0_13
 	.cfi_endproc
-                                        ## -- End function
+                                        ; -- End function
 	.section	__TEXT,__cstring,cstring_literals
-.L_.str:
-.asciz	"aeiouAEIOU"
+l_.str:                                 ; @.str
+	.asciz	"aeiouAEIOU"
+
 .subsections_via_symbols
-```
