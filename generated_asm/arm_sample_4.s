@@ -5,65 +5,62 @@
 _func0:                                 ; @func0
 	.cfi_startproc
 ; %bb.0:
-	stp	x29, x30, [sp, #-16]!           ; 16-byte Folded Spill
+	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	mov	x29, sp
-	.cfi_def_cfa w29, 16
-	.cfi_offset w30, -8
-	.cfi_offset w29, -16
-	adrp	x8, _func0@plt
-	add	x8, x8, _func0@plt
-	ldr	w0, [x8]
-	stur	w0, [x29, #-8]
-	str	w1, [sp, #8]
-	ldr	w8, [sp, #8]
-	ldur	w9, [x29, #-8]
-	subs	w9, w9, w8
+	str	w0, [sp, #8]
+	str	w1, [sp, #4]
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
 	cset	w8, ge
 	tbnz	w8, #0, LBB0_2
 	b	LBB0_1
 LBB0_1:
-	stur	wzr, [x29, #-4]
+	mov	w8, #-1
+	str	w8, [sp, #12]
 	b	LBB0_8
 LBB0_2:
-	ldr	w8, [sp, #8]
-	ldur	w9, [x29, #-8]
-	subs	w9, w9, w8
+	ldr	w8, [sp, #4]
+	ldr	w9, [sp, #8]
+	subs	w8, w8, w9
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_3
 LBB0_3:
-	ldr	w8, [sp, #8]
-	mov	w9, #2
-	mul	w8, w8, w9
-	sdiv	w9, w8, w9
+	ldr	w8, [sp, #4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_5
 	b	LBB0_4
 LBB0_4:
-	stur	wzr, [x29, #-4]
+	mov	w8, #-1
+	str	w8, [sp, #12]
 	b	LBB0_8
 LBB0_5:
-	ldr	w8, [sp, #8]
-	mov	w9, #2
-	mul	w8, w8, w9
-	sdiv	w9, w8, w9
+	ldr	w8, [sp, #4]
+	mov	w10, #2
+	sdiv	w9, w8, w10
+	mul	w9, w9, w10
+	subs	w8, w8, w9
 	subs	w8, w8, #1
 	cset	w8, ne
 	tbnz	w8, #0, LBB0_7
 	b	LBB0_6
 LBB0_6:
-	ldr	w8, [sp, #8]
+	ldr	w8, [sp, #4]
 	subs	w8, w8, #1
-	stur	w8, [x29, #-4]
+	str	w8, [sp, #12]
 	b	LBB0_8
 LBB0_7:
-	ldr	w8, [sp, #8]
-	stur	w8, [x29, #-4]
+	ldr	w8, [sp, #4]
+	str	w8, [sp, #12]
 	b	LBB0_8
 LBB0_8:
-	ldur	w0, [x29, #-4]
+	ldr	w0, [sp, #12]
 	add	sp, sp, #16
 	ret
 	.cfi_endproc

@@ -7,31 +7,13 @@ _func0:                                 ; @func0
 ; %bb.0:
 	sub	sp, sp, #16
 	.cfi_def_cfa_offset 16
-	str	w0, [sp, #8]
-	ldr	w8, [sp, #8]
-	mov	w10, #2
-	sdiv	w9, w8, w10
-	mul	w9, w9, w10
-	subs	w8, w8, w9
-	subs	w8, w8, #0
-	cset	w8, ne
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_1
-LBB0_1:
-	ldr	w8, [sp, #8]
-	subs	w8, w8, #8
-	cset	w8, lt
-	tbnz	w8, #0, LBB0_3
-	b	LBB0_2
-LBB0_2:
-	mov	w8, #1
-	str	w8, [sp, #12]
-	b	LBB0_4
-LBB0_3:
-	str	wzr, [sp, #12]
-	b	LBB0_4
-LBB0_4:
-	ldr	w0, [sp, #12]
+	str	w0, [sp, #12]
+	ldr	w8, [sp, #12]
+	ldr	w9, [sp, #12]
+	add	w9, w9, #1
+	mul	w8, w8, w9
+	mov	w9, #2
+	sdiv	w0, w8, w9
 	add	sp, sp, #16
 	ret
 	.cfi_endproc
